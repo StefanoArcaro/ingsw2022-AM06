@@ -1,4 +1,8 @@
 package it.polimi.ingsw;
 
-public class Student {
+public class Student extends Creature{
+    public Student(CreatureColor color) {
+        super(color);
+    }
+
 }
