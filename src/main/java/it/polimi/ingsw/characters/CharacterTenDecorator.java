@@ -1,3 +1,4 @@
+     * @param entraceStudent student from entrance
 package it.polimi.ingsw.characters;
 
 public class CharacterTenDecorator extends CharacterDecorator {

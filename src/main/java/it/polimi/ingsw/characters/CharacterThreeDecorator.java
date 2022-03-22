@@ -1,3 +1,4 @@
+
 package it.polimi.ingsw.characters;
 
 public class CharacterThreeDecorator extends CharacterDecorator {
