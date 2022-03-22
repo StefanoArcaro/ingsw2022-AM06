@@ -8,9 +8,9 @@ public class MotherNature {
         this.islandGroup = islandGroup;
     }
 
-    public static synchronized MotherNature getMotherNature(){
+    public static MotherNature getMotherNature(){
         if(motherNature == null){
-            motherNature = new MotherNature();
+            motherNature = new MotherNature(null);
         }
         return motherNature;
     }

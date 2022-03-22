@@ -1,4 +1,4 @@
-package it.polimi.ingsw.characters;
+package it.polimi.ingsw;
 
 /**
  * Basic character class that can be decorated

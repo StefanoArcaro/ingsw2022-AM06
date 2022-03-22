@@ -1,5 +1,4 @@
-     * @param entraceStudent student from entrance
-package it.polimi.ingsw.characters;
+package it.polimi.ingsw;
 
 public class CharacterTenDecorator extends CharacterDecorator {
 

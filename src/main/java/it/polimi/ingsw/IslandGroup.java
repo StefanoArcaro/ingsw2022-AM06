@@ -6,9 +6,9 @@ public class IslandGroup {
     private ArrayList<Island> islands;
     private BanCard banCard;
 
-    public int calculateInfluence(Player player){}
+    public int calculateInfluence(Player player){return 0;}
     public void addIsland (Island island){}
-    public IslandGroup connectIslandGroup(IslandGroup islandGroup){}
+    public IslandGroup connectIslandGroup(IslandGroup islandGroup){return null;}
     private void checkNumberOfIslandGroups(){}
     public void addBanCard(BanCard banCard){}
 

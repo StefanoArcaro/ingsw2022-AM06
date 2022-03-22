@@ -9,15 +9,19 @@ public class Bag {
         this.students = students;
     }
 
-    public static synchronized Bag getBag(){
+    public static Bag getBag(){
         if(bag == null){
-            bag = new Bag();
+            bag = new Bag(null);
         }
         return bag;
     }
 
     public void addStudent(Student student){}
-    public Student drawStudent(){}
-    public boolean isEmpty(){}
+    public Student drawStudent(){
+        return null;
+    }
+    public boolean isEmpty(){
+        return false;
+    }
     public void Shuffle(){}
 }

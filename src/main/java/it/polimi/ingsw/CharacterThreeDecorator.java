@@ -1,5 +1,5 @@
 
-package it.polimi.ingsw.characters;
+package it.polimi.ingsw;
 
 public class CharacterThreeDecorator extends CharacterDecorator {
 

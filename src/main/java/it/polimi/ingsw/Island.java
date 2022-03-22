@@ -7,7 +7,7 @@ public class Island {
     private ArrayList<Student> students;
     private Tower tower = null;
 
-    public int calculateInfluence(Player player){}
+    public int calculateInfluence(Player player){return 0;}
     public void addStudent(Student student){}
     public void addTower(Tower tower){}
     public void replaceTower(Tower tower){}

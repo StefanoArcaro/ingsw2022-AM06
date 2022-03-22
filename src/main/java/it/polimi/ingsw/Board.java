@@ -16,7 +16,9 @@ public class Board {
     public void removeStudentFromHall(CreatureColor color){}
     private void winProfessor(Professor professor){}
     private void loseProfessor(Professor professor){}
-    private Set<Professor> updateProfessors(){}
+    private Set<Professor> updateProfessors(){
+        return null;
+    }
     public void addTower(TowerColor color){}
     public void moveTower(Island island){}
     private void checkIfNoTowers(){}

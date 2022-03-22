@@ -1,4 +1,6 @@
-package it.polimi.ingsw.characters;
+package it.polimi.ingsw;
+
+import java.util.ArrayList;
 
 public class CharacterSevenDecorator extends CharacterDecorator {
 

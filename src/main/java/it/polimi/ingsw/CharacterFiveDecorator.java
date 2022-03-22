@@ -1,6 +1,4 @@
-package it.polimi.ingsw.characters;
-
-import it.polimi.ingsw.BanCard;
+package it.polimi.ingsw;
 
 import java.util.ArrayList;
 

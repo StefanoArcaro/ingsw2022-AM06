@@ -1,7 +1,6 @@
 package it.polimi.ingsw;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class Table {
     private CreatureColor color;
@@ -12,6 +11,8 @@ public class Table {
         this.students = students;
     }
 
-    public void addStudent{}
-    public int getLenght{}
+    public void addStudent(){}
+    public int getLenght(){
+        return 0;
+    }
 }

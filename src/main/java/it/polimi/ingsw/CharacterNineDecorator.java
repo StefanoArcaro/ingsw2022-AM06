@@ -1,5 +1,4 @@
-     * @return CreatureColor a student color
-package it.polimi.ingsw.characters;
+package it.polimi.ingsw;
 
 public class CharacterNineDecorator extends CharacterDecorator {
 
