@@ -1,11 +1,10 @@
 package it.polimi.ingsw;
 
-public class BanCard {
+public class Coin {
 
     /**
      * Default constructor
      */
-    public BanCard() {
-
+    public Coin() {
     }
 }
