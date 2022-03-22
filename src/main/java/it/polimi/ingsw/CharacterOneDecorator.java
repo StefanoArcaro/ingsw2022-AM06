@@ -1,11 +1,11 @@
-package it.polimi.ingsw.characters;
+package it.polimi.ingsw;
 
 import java.util.ArrayList;
 
 public class CharacterOneDecorator extends CharacterDecorator{
 
     protected final int characterID = 1;
-    protected final String name = "Personaggio1";
+    protected final String name = "Character1";
     protected final int cost = 1;
 
     private ArrayList<Student> students;
@@ -35,7 +35,8 @@ public class CharacterOneDecorator extends CharacterDecorator{
      * @return ArrayList<Student> students on the card
      */
     public ArrayList<Student> getStudents() {
-        return students;
+        // TODO
+        return null;
     }
 
     /**

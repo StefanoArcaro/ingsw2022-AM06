@@ -1,9 +1,8 @@
-package it.polimi.ingsw.characters;
+package it.polimi.ingsw;
 
 /**
  * Abstract class used to implement the Decorator Pattern for character cards.
  */
-
 public abstract class Character {
     protected int characterID;
     protected String name;

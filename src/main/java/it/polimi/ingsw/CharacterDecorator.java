@@ -1,10 +1,10 @@
-package it.polimi.ingsw.characters;
+package it.polimi.ingsw;
 
 /**
  * Abstract class used to add custom effects to a BaseCharacter.
  */
 
-public abstract class CharacterDecorator extends Character{
+public abstract class CharacterDecorator extends Character {
 
     /**
      * Reference to the Character object.

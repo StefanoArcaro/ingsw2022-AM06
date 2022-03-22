@@ -1,9 +1,11 @@
-package it.polimi.ingsw.characters;
+package it.polimi.ingsw;
 
-public class CharacterSevenDecorator extends CharacterDecorator{
+import java.util.ArrayList;
+
+public class CharacterSevenDecorator extends CharacterDecorator {
 
     protected final int characterID = 7;
-    protected final String name = "Personaggio7";
+    protected final String name = "Character7";
     protected final int cost = 1;
 
     private ArrayList<Student> students;
@@ -11,7 +13,7 @@ public class CharacterSevenDecorator extends CharacterDecorator{
     /**
      * draws students to place on the card
      */
-    private void addStudent(){
+    private void addStudent() {
 
     }
 
@@ -25,7 +27,8 @@ public class CharacterSevenDecorator extends CharacterDecorator{
      * @return ArrayList<Student> students on the card
      */
     public ArrayList<Student> getStudents() {
-        return students;
+        // TODO
+        return null;
     }
 
     /**
@@ -38,9 +41,9 @@ public class CharacterSevenDecorator extends CharacterDecorator{
     /**
      * Swaps one student at a time between card and entrance.
      * @param characterStudent student from card
-     * @param entraceStudent student from entrance
+     * @param entranceStudent student from entrance
      */
-    private void swapStudent(Student characterStudent, Student entraceStudent){
+    private void swapStudent(Student characterStudent, Student entranceStudent) {
 
     }
 
