@@ -52,6 +52,13 @@ public abstract class Character {
     }
 
     /**
+     * The character has been used.
+     */
+    public void setUsed(){
+        used = true;
+    }
+
+    /**
      * Return the cost of the character, increased by one in case of use
      * @return int which represents the cost for using the character
      */

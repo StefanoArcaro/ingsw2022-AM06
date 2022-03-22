@@ -1,5 +1,7 @@
 package it.polimi.ingsw.characters;
 
+import java.util.ArrayList;
+
 public class CharacterOneDecorator extends CharacterDecorator{
 
     protected final int characterID = 1;
@@ -11,7 +13,7 @@ public class CharacterOneDecorator extends CharacterDecorator{
     /**
      * Draws students to place on the card.
      */
-    private void addStudent(){
+    private boolean addStudent(){
 
     }
 
@@ -19,7 +21,7 @@ public class CharacterOneDecorator extends CharacterDecorator{
      * Remove a student from the card
      * @param student that has been moved to an island
      */
-    private void removeStudent(Student student){
+    private boolean removeStudent(Student student){
 
     }
 
