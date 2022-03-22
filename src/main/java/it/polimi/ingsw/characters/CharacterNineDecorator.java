@@ -1,9 +1,9 @@
 package it.polimi.ingsw.characters;
 
-public class CharacterNineDecorator extends CharacterDecorator{
+public class CharacterNineDecorator extends CharacterDecorator {
 
     protected final int characterID = 9;
-    protected final String name = "Personaggio9";
+    protected final String name = "Character9";
     protected final int cost = 3;
 
     private CreatureColor color;
