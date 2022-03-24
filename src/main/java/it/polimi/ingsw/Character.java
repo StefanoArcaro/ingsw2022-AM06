@@ -1,25 +1,25 @@
 package it.polimi.ingsw;
 
+import java.util.ArrayList;
+
 /**
- * Abstract class used to implement the Decorator Pattern for character cards.
+ * Defines the interface of the object to be created by the factory
  */
 public abstract class Character {
     protected int characterID;
-    protected String name;
     protected int cost;
     protected boolean used;
+    protected int numberOfStudents;
+    protected int numberOfBanCards;
 
-    /**
-     * Default constructor.
-     */
-    public Character (){
-        used = false;
-    }
+    protected ArrayList<Student> students;
 
     /**
      * Modify the game setup in order to use this character.
      */
-    public abstract void initialPreparation();
+    public void initialPreparation(){
+        // do nothing
+    };
 
     /**
      * Implements the character effect.
@@ -32,14 +32,6 @@ public abstract class Character {
      */
     public int getCharacterID() {
         return characterID;
-    }
-
-    /**
-     * Return the character name
-     * @return String which represents the name of the character
-     */
-    public String getName() {
-        return name;
     }
 
     /**

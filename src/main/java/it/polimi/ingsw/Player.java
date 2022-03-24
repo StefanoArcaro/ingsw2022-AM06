@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public class Player {
 
     private String nickname;
-    private TowerColor color;
+    private PlayerColor color;
     private Board board;
     private Wizard wizard;
-    private ArrayList<Coin> coins;
+    private int coins;
 
     /**
      * Default constructor

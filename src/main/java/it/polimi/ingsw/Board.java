@@ -6,7 +6,7 @@ public class Board {
     private ArrayList<Student> entrance;
     private ArrayList<Table> hall;
     private Set<Professor> professors;
-    private ArrayList<Tower> towers;
+    private int towers;
     private Player player;
 
     public void addStudentToEntrance(Student student){}
@@ -19,11 +19,13 @@ public class Board {
     private Set<Professor> updateProfessors(){
         return null;
     }
-    public void addTower(TowerColor color){}
-    public void moveTower(Island island){}
-    private void checkIfNoTowers(){}
-    private void recoverTower(Tower tower){}
 
+    public void moveTower(int numberOfTowers){}
+    private void checkIfNoTowers(){}
+    private void recoverTower(int numberOfTowers){}
+
+    //DA RIFARE I METODI!!!!!
+    /*
     public Board(ArrayList<Student> entrance, ArrayList<Table> hall, Set<Professor> professors, ArrayList<Tower> towers, Player player) {
         this.entrance = entrance;
         this.hall = hall;
@@ -47,6 +49,7 @@ public class Board {
     public ArrayList<Tower> getTowers() {
         return towers;
     }
+    */
 
     public Player getPlayer() {
         return player;

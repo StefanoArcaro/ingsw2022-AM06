@@ -17,10 +17,9 @@ public class Game {
     private ArrayList<Cloud> clouds;
     private Set<Professor> professors;
     private CircularList<IslandGroup> islandGroups;
-    private Set<Character> characters; // TODO change to our Character class
     private ArrayList<Character> drawnCharacters; // TODO this as well
     private ArrayList<Character> activatedCharacters;
-    private ArrayList<Coin> treasury;
+    private int treasury;
 
     /**
      * Private constructor
@@ -138,12 +137,16 @@ public class Game {
         return null;
     }
 
+    public void activateCharacter(int characterID) {
+        // TODO
+    }
+
     /**
      * @return a copy of the list of coins available on the "board"
      */
-    public ArrayList<Coin> getTreasury() {
+    public int getTreasury() {
         // TODO
-        return null;
+        return 0;
     }
 
     /**
