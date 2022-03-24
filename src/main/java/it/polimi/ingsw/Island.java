@@ -12,17 +12,21 @@ public class Island {
      * @param islandID ID of the island
      */
     public Island(int islandID) {
-        this.islandID = islandID;
-        this.students = new ArrayList<>();
-        this.tower = null;
+        if(islandID > 0 && islandID <13) {
+            this.islandID = islandID;
+            this.students = new ArrayList<>();
+            this.tower = null;
+        }
     }
 
     /**
      * @return students on the island
      */
     public ArrayList<Student> getStudents() {
-        // TO DO
-        return null;
+
+        ArrayList<Student> result = new ArrayList<Student>(students);
+
+        return result;
     }
 
     /**
@@ -30,7 +34,7 @@ public class Island {
      * @param student to add
      */
     public void addStudent(Student student){
-        // TO DO
+        students.add(student);
     }
 
     /**
@@ -48,28 +52,27 @@ public class Island {
     }
 
     /**
-     * Set the color of the player who conquered the island
-     * @param tower color of the player who conquered the island
-     */
-    public void setTower(PlayerColor tower) {
-        this.tower = tower;
-    }
-
-    /**
-     * add a tower on the island
+     * Add a tower on the island
      * @param tower represents the player who conquered the island
      */
-    public void addTower(PlayerColor tower){
-        // TO DO
+    public boolean addTower(PlayerColor tower){
+        if(this.tower == null) {
+            this.tower = tower;
+            return true;
+        }
+        return false;
     }
 
-    // REPLACE TOWER QUI O IN ISLAND GROUP
+    // REPLACE TOWER HO TOLTO IL PARAMETRO INT TOWER E CAMBIATO NOME
     /**
-     * Removes the towers from the island: it has been conquered
-     * @param tower number of towers to be removed
+     * Removes the tower from the island: it has been conquered
      */
-    public void replaceTower(int tower){
-        // TO DO
+    public boolean removeTower(){
+        if(this.tower != null){
+            this.tower = null;
+            return true;
+        }
+        return false;
     }
 
     /**

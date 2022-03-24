@@ -35,47 +35,113 @@ public class IslandGroup {
      * @return the islands that make up the island group
      */
     public ArrayList<Island> getIslands() {
-        // TO DO
-        return null;
+        ArrayList<Island> result = new ArrayList<Island>(islands);
+        return result;
     }
 
     /**
      * @return the number of islands which make up the group
      */
     public int getNumberOfIsland() {
-        // TO DO
-        return 0;
+        return getIslands().size();
     }
 
     /**
      * Add an island in the isalnd group
      * @param island to add to the island group
      */
-    public void addIsland (Island island){
+    public boolean addIsland (Island island){
+        int IDIslandToAdd;
 
+
+        if(island == null)
+            return false;
+
+        IDIslandToAdd = island.getIslandID();
+
+        if(this.getNumberOfIsland() == 0){
+            islands.add(island);
+            return true;
+        }
+
+        for (int i=0; i<this.getNumberOfIsland(); i++){
+            if((this.getIslands().get(i).getIslandID()%12) + 1 == IDIslandToAdd){
+                if(this.getIslands().get(i).getIslandID()<IDIslandToAdd) {
+                    islands.add(i + 1, island);
+                }else{
+                    islands.add(i, island);
+                }
+                return true;
+            }else
+                if(this.getIslands().get(i).getIslandID() - 1 == IDIslandToAdd%12){
+                    if(this.getIslands().get(i).getIslandID()<IDIslandToAdd) {
+                        islands.add(i + this.getNumberOfIsland(), island);
+                    }else{
+                        islands.add(i, island);
+                    }
+
+
+                    return true;
+                }
+        }
+
+        return false;
     }
 
     /**
      * @return wether the ban card is present
      */
     public boolean isBanCardPresent() {
-        // TO DO
-        return false;
+        return banCardPresent;
     }
 
     /**
      * Due to character effect: a ban card is added to the island group
      */
-    public void addBanCard(){
-
+    public boolean addBanCard(){
+        if(!banCardPresent){
+            banCardPresent = true;
+            return true;
+        }
+        return false;
     }
 
     /**
      * Merge island groups together
      * @param islandGroup to join this.island group
      */
-    public void connectIslandGroup(IslandGroup islandGroup) {
+    public boolean connectIslandGroup(IslandGroup islandGroup) {
+        ArrayList<Island> islandsInGroupToAdd = islandGroup.getIslands();
+        int lenGroupToAdd = islandGroup.getNumberOfIsland();
+        int islandAdded = 0;
 
+        for (int j=0; j<lenGroupToAdd; j++) {
+            for (int i=0; i<this.getNumberOfIsland(); i++) {
+                if(this.getIslands().get(i).getIslandID() + 1 == islandsInGroupToAdd.get(j).getIslandID()){
+                    this.addIsland(islandsInGroupToAdd.get(j));
+                    islandAdded ++;
+                    break;
+                }
+            }
+        }
+
+        if (islandAdded == lenGroupToAdd) {return true;}
+
+        for (int j=lenGroupToAdd-1; j>=0; j--) {
+            for (int i=0; i<this.getNumberOfIsland(); i++) {
+                if(this.getIslands().get(i).getIslandID() - 1 == (islandsInGroupToAdd.get(j).getIslandID()%12)){
+                    this.addIsland(islandsInGroupToAdd.get(j));
+                    islandAdded ++;
+                    break;
+                }
+            }
+        }
+
+        if (islandAdded == lenGroupToAdd) {return true;}
+
+        if(islandAdded >= 0 ) {return false;}
+
+        return false;
     }
 
     // IL METODO CHECK VA MESSO NEL GAME, NON QUI (?)
