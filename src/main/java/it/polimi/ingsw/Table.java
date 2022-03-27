@@ -1,18 +1,27 @@
 package it.polimi.ingsw;
 
-import java.util.ArrayList;
-
 public class Table {
     private CreatureColor color;
-    private ArrayList<Student> students;
+    private int index;
 
-    public Table(CreatureColor color, ArrayList<Student> students) {
+    public Table(CreatureColor color) {
         this.color = color;
-        this.students = students;
+        this.index = 0;
     }
 
-    public void addStudent(){}
+    public CreatureColor getColor() {
+        return color;
+    }
+
+    public boolean addStudent(){
+        if(index < 10){
+            index = index+1;
+            return true;
+        }
+        return false;
+    }
+
     public int getLenght(){
-        return 0;
+        return index;
     }
 }

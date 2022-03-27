@@ -8,6 +8,7 @@ public class CharacterInfluenceCalculator extends Character{
         this.used = false;
         this.numberOfStudents = 0;
         this.numberOfBanCards = 0;
+        this.moreSteps = 0;
     }
 
     @Override

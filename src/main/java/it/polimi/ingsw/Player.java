@@ -13,8 +13,17 @@ public class Player {
     /**
      * Default constructor
      */
-    public Player() {
+    public Player(String nickname, PlayerColor color) {
+        this.nickname = nickname;
+        this.color = color;
+        this.board = new Board(this);
+        /*if(gameMode == GameMode.EXPERT){
+            coins = 20;
+        }*/
+    }
 
+    public void setWizard(Wizard wizard) {
+        this.wizard = wizard;
     }
 
     /**
@@ -36,6 +45,20 @@ public class Player {
      */
     public void chooseWizard() {
 
+    }
+
+    /**
+     * @return player's color
+     */
+    public PlayerColor getColor() {
+        return color;
+    }
+
+    /**
+     * @return player's board
+     */
+    public Board getBoard() {
+        return board;
     }
 
     /**

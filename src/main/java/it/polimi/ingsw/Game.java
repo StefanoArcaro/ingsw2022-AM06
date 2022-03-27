@@ -11,7 +11,7 @@ public class Game {
     private NumberOfPlayers chosenNumberOfPlayers;
     private GameMode chosenGameMode;
     private GameState gameState;
-    private Round currentRound;
+    private static Round currentRound; //static attribute to be accessed via class
     private Player firstPlayer;
     private ArrayList<Player> players;
     private ArrayList<Cloud> clouds;
@@ -68,9 +68,9 @@ public class Game {
     /**
      * @return a reference to the current round
      */
-    public Round getCurrentRound() {
+    public static Round getCurrentRound() {
         return currentRound;
-    }
+    } //static method to be able to call it through the class
 
     /**
      * @return the player that played first during the previous round

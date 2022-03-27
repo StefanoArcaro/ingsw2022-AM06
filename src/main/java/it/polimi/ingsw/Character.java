@@ -11,6 +11,7 @@ public abstract class Character {
     protected boolean used;
     protected int numberOfStudents;
     protected int numberOfBanCards;
+    protected int moreSteps;
 
     protected ArrayList<Student> students;
 
@@ -56,5 +57,17 @@ public abstract class Character {
     public int getCost() {
         if (isUsed()) {return cost+1;}
         return cost;
+    }
+
+    public int getMoreSteps() {
+        return moreSteps;
+    }
+
+    public int getNumberOfBanCards() {
+        return numberOfBanCards;
+    }
+
+    public int getNumberOfStudents() {
+        return numberOfStudents;
     }
 }

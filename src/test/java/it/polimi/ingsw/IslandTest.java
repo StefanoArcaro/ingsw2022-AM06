@@ -27,7 +27,6 @@ class IslandTest {
 
         ArrayList<Student> expectedStudents = new ArrayList<Student> ();
 
-        System.out.println("Test con 0 studenti");
         assertEquals(expectedStudents, island.getStudents());
 
         Student s1 = new Student(CreatureColor.BLUE);
@@ -48,7 +47,6 @@ class IslandTest {
         expectedStudents.add(s4);
         expectedStudents.add(s5);
 
-        System.out.println("Test con 5 studenti");
         assertEquals(expectedStudents, island.getStudents());
     }
 
@@ -70,21 +68,21 @@ class IslandTest {
 
     @Test
     void removeTower() {
-        assertEquals(false, island.removeTower());
+        assertFalse(island.removeTower());
 
         island.addTower(PlayerColor.BLACK);
 
-        assertEquals(true, island.removeTower());
+        assertTrue(island.removeTower());
     }
 
     @Test
     void addTower(){
-        assertEquals(true, island.addTower(PlayerColor.BLACK));
+        assertTrue(island.addTower(PlayerColor.BLACK));
 
-        assertEquals(false, island.addTower(PlayerColor.GRAY));
+        assertFalse(island.addTower(PlayerColor.GRAY));
     }
 
-    @Test
-    void calculateInfluence() {
-    }
+
+    // the methods on the calculation of the influence are tested in islandGroupTest
+
 }

@@ -12,10 +12,11 @@ public class CharacterProfessorUpdater extends Character{
         this.used = false;
         this.numberOfStudents = 0;
         this.numberOfBanCards = 0;
+        this.moreSteps = 0;
     }
 
     @Override
     public void effect() {
-        // TO DO
+        // TODO
     }
 }

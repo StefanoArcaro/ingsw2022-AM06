@@ -8,6 +8,7 @@ public class CharacterStepsAdder extends Character{
         this.used = false;
         this.numberOfStudents = 0;
         this.numberOfBanCards = 0;
+        this.moreSteps = 2;
     }
 
     @Override

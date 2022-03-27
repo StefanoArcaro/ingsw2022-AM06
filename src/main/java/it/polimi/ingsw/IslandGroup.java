@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class IslandGroup {
     private ArrayList<Island> islands;
-    private boolean banCardPresent;
+    private int numberOfBanCardPresent;
     private PlayerColor conquerorColor;
 
     /**
@@ -12,7 +12,7 @@ public class IslandGroup {
      */
     public IslandGroup() {
         this.islands = new ArrayList<Island>();
-        this.banCardPresent = false;
+        this.numberOfBanCardPresent = 0;
         this.conquerorColor = null;
     }
 
@@ -32,11 +32,32 @@ public class IslandGroup {
     }
 
     /**
+     * @return the number of ban card present
+     */
+    public int getNumberOfBanCardPresent() {
+        return numberOfBanCardPresent;
+    }
+
+    /**
+     * Due to character effect: a ban card is added to the island group
+     */
+    public void addBanCard(){
+        this.numberOfBanCardPresent ++;
+    }
+
+    public boolean removeBanCard(){
+        if(numberOfBanCardPresent>0){
+            numberOfBanCardPresent --;
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * @return the islands that make up the island group
      */
     public ArrayList<Island> getIslands() {
-        ArrayList<Island> result = new ArrayList<Island>(islands);
-        return result;
+        return new ArrayList<Island>(islands);
     }
 
     /**
@@ -50,18 +71,25 @@ public class IslandGroup {
      * Add an island in the isalnd group
      * @param island to add to the island group
      */
-    public boolean addIsland (Island island){
+    public boolean addIsland (Island island) throws NullPointerException{
         int IDIslandToAdd;
+        PlayerColor playerColorIslandToAdd;
 
-
-        if(island == null)
+        try {
+            IDIslandToAdd = island.getIslandID();
+            playerColorIslandToAdd = island.getTower();
+        } catch (NullPointerException e) {
             return false;
-
-        IDIslandToAdd = island.getIslandID();
+        }
 
         if(this.getNumberOfIsland() == 0){
             islands.add(island);
+            this.conquerorColor = playerColorIslandToAdd;
             return true;
+        }
+
+        if(playerColorIslandToAdd != this.conquerorColor){
+            return false;
         }
 
         for (int i=0; i<this.getNumberOfIsland(); i++){
@@ -79,8 +107,6 @@ public class IslandGroup {
                     }else{
                         islands.add(i, island);
                     }
-
-
                     return true;
                 }
         }
@@ -89,31 +115,26 @@ public class IslandGroup {
     }
 
     /**
-     * @return wether the ban card is present
-     */
-    public boolean isBanCardPresent() {
-        return banCardPresent;
-    }
-
-    /**
-     * Due to character effect: a ban card is added to the island group
-     */
-    public boolean addBanCard(){
-        if(!banCardPresent){
-            banCardPresent = true;
-            return true;
-        }
-        return false;
-    }
-
-    /**
      * Merge island groups together
      * @param islandGroup to join this.island group
      */
-    public boolean connectIslandGroup(IslandGroup islandGroup) {
-        ArrayList<Island> islandsInGroupToAdd = islandGroup.getIslands();
-        int lenGroupToAdd = islandGroup.getNumberOfIsland();
+    public boolean connectIslandGroup(IslandGroup islandGroup) throws NullPointerException {
+        ArrayList<Island> islandsInGroupToAdd;
+        int lenGroupToAdd;
+        PlayerColor playerColorIslandGroupToAdd;
         int islandAdded = 0;
+
+        try {
+            islandsInGroupToAdd = islandGroup.getIslands();
+            lenGroupToAdd = islandGroup.getNumberOfIsland();
+            playerColorIslandGroupToAdd = islandGroup.getConquerorColor();
+        } catch (NullPointerException e){
+            return false;
+        }
+
+        if(this.conquerorColor!=playerColorIslandGroupToAdd){
+            return false;
+        }
 
         for (int j=0; j<lenGroupToAdd; j++) {
             for (int i=0; i<this.getNumberOfIsland(); i++) {
@@ -144,24 +165,46 @@ public class IslandGroup {
         return false;
     }
 
-    // IL METODO CHECK VA MESSO NEL GAME, NON QUI (?)
     /**
-     * Chech the number of island group: if 3 the game ends
+     * Calculates the influence of the island group as the
+     * sum of the influences of the islands that are part of it
+     * @param player i'm calculating the influence for
+     * @return the influence for the player on the island group
      */
-    private void checkNumberOfIslandGroups(){
+    public int calculateInfluence (Player player){
+        int influence = 0;
 
+        for (Island island : islands){
+            influence = influence + island.calculateInfluence(player);
+        }
+
+        return influence;
     }
 
     /**
      * Calculates the influence of the island group as the
      * sum of the influences of the islands that are part of it
-     * @param nickname of the player i'm calculating the influence for
-     * @return the influence for the player (represented by its nickname) on the isalnd group
+     * Overloading of calculateInfluence with character
+     * @param player i'm calculating the influence for
+     * @param activatedCharacter active character which modifies influence
+     * @return the influence for the player on the island group
      */
-    public int calculateInfluence(String nickname) {
-        // TO DO
-        return 0;
+    public int calculateInfluence(Player player, CharacterInfluenceModifier activatedCharacter) {
+        int influence = 0;
+        int extraPoints = 0;
+
+        for (Island island : islands){
+            influence = influence + island.calculateInfluence(player, activatedCharacter);
+        }
+
+        if(Game.getCurrentRound().getCurrentPlayer().equals(player)){
+            extraPoints = activatedCharacter.getExtraPoints();
+        }
+
+        return influence + extraPoints;
     }
+
+
 }
 
 

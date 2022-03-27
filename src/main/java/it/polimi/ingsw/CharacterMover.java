@@ -9,6 +9,7 @@ public class CharacterMover extends Character{
         this.used = false;
         this.numberOfBanCards = 0;
         this.students = new ArrayList<Student>();
+        this.moreSteps = 0;
         switch (characterID){
             case 1:
                 this.cost = 1;
@@ -35,7 +36,7 @@ public class CharacterMover extends Character{
 
     @Override
     public void initialPreparation() {
-        // TO DO
+        // TODO
     }
 
     @Override
