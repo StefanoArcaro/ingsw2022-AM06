@@ -18,5 +18,6 @@ class CharacterInfluenceCalculatorTest {
 
     @Test
     void effect() {
+        //TODO
     }
 }

@@ -21,6 +21,15 @@ public class Table {
         return false;
     }
 
+    public boolean removeStudent(){
+        if(index > 0){
+            index = index-1;
+            return true;
+        }
+        return false;
+    }
+
+
     public int getLenght(){
         return index;
     }

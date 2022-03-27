@@ -39,7 +39,7 @@ public abstract class Character {
      * Return a boolean that specifies whether the character has been used during the game
      * @return boolean which is true only if the character has been used
      */
-    public boolean isUsed() {
+    private boolean isUsed() {
         return used;
     }
 

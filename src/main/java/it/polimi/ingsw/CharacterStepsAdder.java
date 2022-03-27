@@ -13,6 +13,11 @@ public class CharacterStepsAdder extends Character{
 
     @Override
     public void effect() {
-
+        // do nothing messo in asssistant
+        /* non serve
+        Player currentPlayer = Game.getCurrentRound().getCurrentPlayer();
+        int maxSteps = Game.getCurrentRound().getPlayerPriority().get(currentPlayer).getMaxSteps();
+        Game.getCurrentRound().getPlayerPriority().get(currentPlayer).setMaxSteps(maxSteps + moreSteps);
+        */
     }
 }

@@ -1,20 +1,23 @@
 package it.polimi.ingsw;
 
 import java.lang.management.PlatformLoggingMXBean;
-import java.util.ArrayList;
-import java.util.Map;
+import java.util.*;
 
 public class Round {
 
     private Player currentPlayer;
     private ArrayList<Player> playingOrder;
-    private Map<Player, Assistant> playerPriority;
+    private HashMap<Player, Assistant> playerPriority;
 
     /**
      * Default constructor
      */
     public Round() {
 
+    }
+
+    public HashMap<Player, Assistant> getPlayerPriority() {
+        return new HashMap<>(playerPriority);
     }
 
     /**

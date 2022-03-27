@@ -52,7 +52,9 @@ public class Board {
         return null;
     }
 
-    public void addStudentToEntrance(Student student){}
+    public void addStudentToEntrance(CreatureColor color){}
+
+    public void removeStudentFromEntrance (CreatureColor color){}
 
 
     public boolean addStudentToHall(CreatureColor color){
@@ -67,9 +69,26 @@ public class Board {
         }
         return false;
     }
+
+    public boolean removeStudentFromHall(CreatureColor color){
+        Table tableToRemove;
+
+        tableToRemove = getTableByColor(color);
+
+        if (tableToRemove != null) {
+            return tableToRemove.removeStudent();
+        }
+        return false;
+    }
+
+    public boolean studentInTable (CreatureColor color){
+        Table table = getTableByColor(color);
+        return table.getLenght() > 0;
+    }
+
     public void moveStudentToHall(CreatureColor color){}
     public void moveStudentToIsland(CreatureColor color, Island island){}
-    public void removeStudentFromHall(CreatureColor color){}
+
 
 
     //LI METTO PUBBLICI SOLO PER FARE I TEST (SI DEVE IMPLEMENTARE UPDATEPROFESSORS)

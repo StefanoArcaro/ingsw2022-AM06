@@ -1,7 +1,7 @@
 package it.polimi.ingsw;
 
 import java.util.ArrayList;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Game {
 
@@ -15,8 +15,8 @@ public class Game {
     private Player firstPlayer;
     private ArrayList<Player> players;
     private ArrayList<Cloud> clouds;
-    private Set<Professor> professors;
-    private CircularList<IslandGroup> islandGroups;
+    private ArrayList<Professor> professors;
+    private ArrayList<IslandGroup> islandGroups;
     private ArrayList<Character> drawnCharacters; // TODO this as well
     private ArrayList<Character> activatedCharacters;
     private int treasury;
@@ -42,6 +42,21 @@ public class Game {
      */
     public static int getRoundNumber() {
         return roundNumber;
+    }
+
+
+    public Island getIslandByID (int islandID){
+        ArrayList<Island> temp;
+
+        for (IslandGroup islandGroup : islandGroups){
+                temp = islandGroup.getIslands();
+                for (Island island : temp) {
+                    if (island.getIslandID() == islandID) {
+                        return island;
+                    }
+                }
+        }
+        return null;
     }
 
     /**
@@ -98,7 +113,7 @@ public class Game {
     /**
      * @return a copy of the professors' set
      */
-    public Set<Professor> getProfessors() {
+    public ArrayList<Professor> getProfessors() {
         // TODO
         return null;
     }
@@ -106,7 +121,7 @@ public class Game {
     /**
      * @return a copy of the island groups' circular list
      */
-    public CircularList<IslandGroup> getIslandGroups() {
+    public ArrayList<IslandGroup> getIslandGroups() {
         // TODO
         return null;
     }
@@ -114,7 +129,7 @@ public class Game {
     /**
      * @return a copy of the characters' set
      */
-    public Set<Character> getCharacters() {
+    public ArrayList<Character> getCharacters() {
         // TODO
         return null;
     }
@@ -211,6 +226,16 @@ public class Game {
      * the one where Mother Nature was placed and the one on the opposite side
      */
     private void placeInitialStudents() {
+
+    }
+
+
+
+    public void calculateInfluence(int islandGroupIndex){
+
+    }
+
+    public void calculateInfluence(int islandGroupIndex, CharacterInfluenceModifier activatedCharacter){
 
     }
 }

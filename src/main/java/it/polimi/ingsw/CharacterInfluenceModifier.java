@@ -38,7 +38,7 @@ public class CharacterInfluenceModifier extends Character{
 
     @Override
     public void effect() {
-
+        //do nothing
     }
 
     public int getExtraPoints() {

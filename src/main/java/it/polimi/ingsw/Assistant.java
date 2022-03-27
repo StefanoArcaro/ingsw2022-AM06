@@ -37,6 +37,15 @@ public class Assistant {
     }
 
     /**
+     * overloading
+     * @param activatedCharacter character of class CharacterStepsAdder which is active
+     * @return the maximum number of steps Mother Nature will be allowed to take
+     */
+    public int getMaxSteps(CharacterStepsAdder activatedCharacter){
+        return maxSteps+activatedCharacter.getMoreSteps();
+    }
+
+    /**
      * @return the Wizard whose Assistant this is
      */
     public Wizard getWizard() {
