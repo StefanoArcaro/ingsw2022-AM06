@@ -1,0 +1,19 @@
+package it.polimi.ingsw.model.characters;
+
+public enum CharacterID {
+
+    CHARACTER_NONE,
+    CHARACTER_ONE,
+    CHARACTER_TWO,
+    CHARACTER_THREE,
+    CHARACTER_FOUR,
+    CHARACTER_FIVE,
+    CHARACTER_SIX,
+    CHARACTER_SEVEN,
+    CHARACTER_EIGHT,
+    CHARACTER_NINE,
+    CHARACTER_TEN,
+    CHARACTER_ELEVEN,
+    CHARACTER_TWELVE;
+
+}
