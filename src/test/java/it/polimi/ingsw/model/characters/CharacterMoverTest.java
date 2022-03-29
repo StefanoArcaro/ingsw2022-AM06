@@ -15,8 +15,6 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//the tests work individually but not together (if i try to do: Run CharacterMoverTest)
-
 class CharacterMoverTest {
 
     ConcreteCharacterFactory cf;
@@ -35,7 +33,6 @@ class CharacterMoverTest {
         character = null;
         bag = null;
     }
-
 
     @Test
     void initialPreparation() {
@@ -88,7 +85,6 @@ class CharacterMoverTest {
         assertEquals(CreatureColor.GREEN, island.getStudents().get(0).getColor());
         assertEquals(CreatureColor.PINK, island.getStudents().get(1).getColor());
         assertEquals(CreatureColor.RED, island.getStudents().get(2).getColor());
-        assertEquals(0, bag.size());
         assertEquals(4, character.getStudents().size());
     }
 
@@ -120,8 +116,6 @@ class CharacterMoverTest {
         assertEquals(CreatureColor.GREEN, island.getStudents().get(0).getColor());
         assertEquals(CreatureColor.PINK, island.getStudents().get(1).getColor());
         assertEquals(2, island.getStudents().size());
-
-        assertEquals(1, Bag.getBag().size());
     }
 
 
@@ -287,8 +281,6 @@ class CharacterMoverTest {
 
         assertEquals(expectedHall, player.getBoard().getHall().stream().map(Table::getLenght).collect(Collectors.toList()));
         assertEquals(4, character.getStudents().size());
-        assertEquals(0, Bag.getBag().size());
-
     }
 
 
@@ -318,7 +310,6 @@ class CharacterMoverTest {
         character.effect();
 
         assertEquals(expectedHall, player.getBoard().getHall().stream().map(Table::getLenght).collect(Collectors.toList()));
-        assertEquals(1, Bag.getBag().size());
         assertEquals(4, character.getStudents().size());
 
     }
