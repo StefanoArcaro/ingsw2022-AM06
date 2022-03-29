@@ -13,7 +13,6 @@ public class CharacterInfluenceCalculator extends Character{
         this.numberOfStudents = 0;
         this.numberOfBanCards = 0;
         this.toDoNow = 1;
-        this.moreSteps = 0;
     }
 
     /**

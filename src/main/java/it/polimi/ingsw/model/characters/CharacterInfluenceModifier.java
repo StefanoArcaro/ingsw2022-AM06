@@ -16,7 +16,6 @@ public class CharacterInfluenceModifier extends Character{
         this.towerCounter = true;
         this.extraPoints = 0;
         this.toDoNow = 0;
-        this.moreSteps = 0;
 
         CharacterID character = CharacterID.values()[characterID];
 

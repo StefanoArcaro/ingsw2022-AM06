@@ -5,6 +5,8 @@ import it.polimi.ingsw.model.Player;
 
 public class CharacterStepsAdder extends Character{
 
+    int moreSteps;
+
     public CharacterStepsAdder (int characterID){
         this.characterID = characterID;
         this.cost = 1;
@@ -18,5 +20,12 @@ public class CharacterStepsAdder extends Character{
     @Override
     public void effect() {
         // do nothing
+    }
+
+    /**
+     * @return number of steps added
+     */
+    public int getMoreSteps() {
+        return moreSteps;
     }
 }

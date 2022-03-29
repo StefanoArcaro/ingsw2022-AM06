@@ -4,7 +4,6 @@ import it.polimi.ingsw.model.characters.CharacterStepsAdder;
 
 public class Assistant {
 
-    private boolean playable;
     private int priority;
     private int maxSteps;
     private Wizard wizard;
@@ -12,15 +11,9 @@ public class Assistant {
     /**
      * Default constructor
      */
-    public Assistant() {
-        this.playable = true;
-    }
-
-    /**
-     * @return whether this Assistant card is playable or not
-     */
-    public boolean isPlayable() {
-        return playable;
+    public Assistant(int priority, int maxSteps) {
+        this.priority = priority;
+        this.maxSteps = maxSteps;
     }
 
     /**
@@ -39,7 +32,7 @@ public class Assistant {
     }
 
     /**
-     * overloading
+     * Overloading
      * @param activatedCharacter character of class CharacterStepsAdder which is active
      * @return the maximum number of steps Mother Nature will be allowed to take
      */
@@ -54,7 +47,5 @@ public class Assistant {
         return wizard;
     }
 
-    public void setMaxSteps(int maxSteps) {
-        this.maxSteps = maxSteps;
-    }
+
 }

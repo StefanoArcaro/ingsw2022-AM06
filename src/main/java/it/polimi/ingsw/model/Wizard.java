@@ -11,8 +11,13 @@ public class Wizard {
     /**
      * Default constructor
      */
-    public Wizard() {
-
+    public Wizard(Player player, WizardName name) {
+        this.player = player;
+        this.name = name;
+        assistants = new ArrayList<Assistant>();
+        for(int i=1; i<11; i++){
+            assistants.add(new Assistant(i, (i+1)/2));
+        }
     }
 
     /**
@@ -33,7 +38,20 @@ public class Wizard {
      * @return a copy of assistants' list
      */
     public ArrayList<Assistant> getAssistants() {
-        // TODO
+        return new ArrayList<Assistant>(assistants);
+    }
+
+    /**
+     * Returns the assistant in the deck that has a given priority
+     * @param priority to search the assistant
+     * @return assistant with the given priority
+     */
+    private Assistant getAssistantByPriority(int priority){
+        for(Assistant assistant : assistants){
+            if(assistant.getPriority()==priority){
+                return assistant;
+            }
+        }
         return null;
     }
 
@@ -43,19 +61,28 @@ public class Wizard {
      * @return the Assistant that corresponds to the priority inputted
      */
     public Assistant playAssistant(int priority) {
-        // TODO
-        return null;
+        return getAssistantByPriority(priority);
     }
 
-    // TODO do we need this?
-    public void removeAssistant(int priority) {
-
+    /**
+     * Removes assistant from the deck
+     * @param priority identifies the assistant to remove
+     * @return true if everything went well
+     */
+    public boolean removeAssistant(int priority) {
+        Assistant assistantToRemove = getAssistantByPriority(priority);
+        if(assistants.contains(assistantToRemove)){
+            assistants.remove(assistantToRemove);
+            return true;
+        }
+        return false;
     }
 
     /**
      * Checks if no Assistants to be played remain
+     * @return true if no assistants
      */
-    private void checkIfNoAssistants() {
-
+    public boolean checkIfNoAssistants() {
+        return assistants.size() <= 0;
     }
 }

@@ -17,7 +17,6 @@ public class CharacterMover extends Character{
         this.characterID = characterID;
         this.used = false;
         this.numberOfBanCards = 0;
-        this.moreSteps = 0;
         this.students = new ArrayList<Student>();
 
         CharacterID character = CharacterID.values()[characterID];
