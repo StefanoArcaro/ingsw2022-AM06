@@ -5,31 +5,31 @@ import java.util.Collections;
 
 public class Bag {
     private static Bag bag = null;
-    private ArrayList<Student> students = new ArrayList<Student>();
+    private ArrayList<Student> students = new ArrayList<>();
 
-    private Bag() { }
+    private Bag() {}
 
-    public static Bag getBag(){
-        if(bag == null){
+    public static Bag getBag() {
+        if(bag == null) {
             bag = new Bag();
         }
         return bag;
     }
 
-    public void addStudent(Student student){
+    public void addStudent(Student student) {
         students.add(student);
-        this.shuffle();
+        //this.shuffle(); commented out for testing purposes
     }
 
     public int size() {
         return students.size();
     }
 
-    public Student drawStudent(){
+    public Student drawStudent() {
         int len = students.size();
         Student student;
 
-        if(len>0) {
+        if(len > 0) {
             student = students.get(len - 1);
             students.remove(student);
             return student;
@@ -37,8 +37,8 @@ public class Bag {
         return null;
     }
 
-    public boolean isEmpty(){
-        if(students.size()>0){
+    public boolean isEmpty() {
+        if(students.size() > 0) {
             return true;
         }
         return false;

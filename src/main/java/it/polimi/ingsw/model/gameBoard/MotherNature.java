@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.gameBoard;
 
 public class MotherNature {
+
     private static MotherNature motherNature = null;
     private IslandGroup islandGroup;
 
@@ -8,8 +9,8 @@ public class MotherNature {
         this.islandGroup = islandGroup;
     }
 
-    public static MotherNature getMotherNature(){
-        if(motherNature == null){
+    public static MotherNature getMotherNature() {
+        if(motherNature == null) {
             motherNature = new MotherNature(null);
         }
         return motherNature;

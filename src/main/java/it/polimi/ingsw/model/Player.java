@@ -24,28 +24,26 @@ public class Player {
         }*/
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
+    public int getCoins() {
+        return coins;
+    }
+
+    public Wizard getWizard() {
+        return wizard;
+    }
+
     public void setWizard(Wizard wizard) {
         this.wizard = wizard;
     }
 
     /**
-     * Lets player select the number of players for the game
-     */
-    public void chooseNumberOfPlayers() {
-
-    }
-
-    /**
-     * Lets player select the game mode
-     */
-    public void chooseGameMode() {
-
-    }
-
-    /**
      * Lets player choose one of the available wizards
      */
-    public void chooseWizard() {
+    public void receiveWizard() {
 
     }
 
@@ -68,7 +66,7 @@ public class Player {
      * (student or professor)
      * @return the color chosen by the player
      */
-    public CreatureColor chooseColor() {
+    public CreatureColor receiveColor() {
         // TODO
         return null;
     }
@@ -78,7 +76,7 @@ public class Player {
      * (the hall or an island)
      * @return the destination chosen by the player
      */
-    public String chooseStudentDestination() {
+    public String receiveStudentDestination() {
         // TODO
         return null;
     }
@@ -87,10 +85,16 @@ public class Player {
      * Lets player select one of the islands
      * @return the island selected by the player
      */
-    public Island chooseIsland() {
+    public Island receiveIsland() {
         // TODO
         return null;
     }
 
+    public void receiveCoin() {
 
+    }
+
+    public void spendCoins(int numberOfCoins) {
+
+    }
 }

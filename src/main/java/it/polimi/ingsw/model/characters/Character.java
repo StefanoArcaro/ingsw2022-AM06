@@ -20,9 +20,7 @@ public abstract class Character {
     /**
      * Modify the game setup in order to use this character.
      */
-    public void initialPreparation(){
-        // do nothing
-    };
+    public void initialPreparation() {}
 
     public abstract void effect();
 
@@ -58,7 +56,7 @@ public abstract class Character {
      * @return int which represents the cost for using the character
      */
     public int getCost() {
-        if (isUsed()) {return cost+1;}
+        if (isUsed()) { return cost + 1; }
         return cost;
     }
 
