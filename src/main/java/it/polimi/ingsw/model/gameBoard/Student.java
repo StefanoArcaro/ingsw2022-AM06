@@ -10,4 +10,5 @@ public class Student extends Creature {
         super(color);
     }
 
+
 }
