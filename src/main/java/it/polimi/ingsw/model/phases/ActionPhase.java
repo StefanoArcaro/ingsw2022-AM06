@@ -7,7 +7,6 @@ import it.polimi.ingsw.model.characters.CharacterID;
 public abstract class ActionPhase extends Phase {
 
     protected Player currentPlayer;
-    protected Character activatedCharacter;
 
     public void playCharacter(CharacterID characterID) {
         // TODO

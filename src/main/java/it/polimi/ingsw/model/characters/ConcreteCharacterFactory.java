@@ -14,6 +14,8 @@ public class ConcreteCharacterFactory extends CharacterFactory {
         CharacterID character = CharacterID.values()[characterID];
 
         switch(character) {
+            case CHARACTER_NONE:
+                return null;
             case CHARACTER_ONE:
             case CHARACTER_SEVEN:
             case CHARACTER_TEN:

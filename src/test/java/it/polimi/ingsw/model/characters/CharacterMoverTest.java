@@ -71,21 +71,20 @@ class CharacterMoverTest {
         character.students.add(new Student(CreatureColor.GREEN));
         character.students.add(new Student(CreatureColor.BLUE));
 
-        Island island = new Island(1);
-        IslandGroup islandGroup = new IslandGroup();
-        islandGroup.addIsland(island);
-        Game.getGame().addIslandGroup(islandGroup);
+        Game game = Game.getGame();
+        game.getIslandByID(1).addStudent(new Student(CreatureColor.GREEN));
+        game.getIslandByID(1).addStudent(new Student(CreatureColor.PINK));
 
-        island.addStudent(new Student(CreatureColor.GREEN));
-        island.addStudent(new Student(CreatureColor.PINK));
 
         ((CharacterMover) character).setFromColor(CreatureColor.RED);
         ((CharacterMover) character).setIslandID(1);
         character.effect();
         assertEquals(4, character.getStudents().size());
-        assertEquals(CreatureColor.GREEN, island.getStudents().get(0).getColor());
-        assertEquals(CreatureColor.PINK, island.getStudents().get(1).getColor());
-        assertEquals(CreatureColor.RED, island.getStudents().get(2).getColor());
+
+        assertEquals(CreatureColor.GREEN, game.getIslandByID(1).getStudents().get(0).getColor());
+        assertEquals(CreatureColor.PINK, game.getIslandByID(1).getStudents().get(1).getColor());
+        assertEquals(CreatureColor.RED, game.getIslandByID(1).getStudents().get(2).getColor());
+
         assertEquals(4, character.getStudents().size());
     }
 
@@ -154,8 +153,8 @@ class CharacterMoverTest {
 
         assertEquals(6, character.getStudents().size());
         assertEquals(expectedStudents, character.students.stream().map(Creature::getColor).collect(Collectors.toList()));
-        assertEquals(2, player.getBoard().getEntrance().size());
-        assertEquals(expectedEntrance, player.getBoard().getEntrance().stream().map(Creature::getColor).collect(Collectors.toList()));
+        assertEquals(2, player.getBoard().getEntrance().getStudents().size());
+        assertEquals(expectedEntrance, player.getBoard().getEntrance().getStudents().stream().map(Creature::getColor).collect(Collectors.toList()));
     }
 
 
@@ -192,8 +191,8 @@ class CharacterMoverTest {
 
         assertEquals(6, character.getStudents().size());
         assertEquals(expectedStudents, character.getStudents().stream().map(Creature::getColor).collect(Collectors.toList()));
-        assertEquals(2, player.getBoard().getEntrance().size());
-        assertEquals(expectedEntrance, player.getBoard().getEntrance().stream().map(Creature::getColor).collect(Collectors.toList()));
+        assertEquals(2, player.getBoard().getEntrance().getStudents().size());
+        assertEquals(expectedEntrance, player.getBoard().getEntrance().getStudents().stream().map(Creature::getColor).collect(Collectors.toList()));
 
     }
 
@@ -223,9 +222,9 @@ class CharacterMoverTest {
 
         character.effect();
 
-        assertEquals(expectedEntrance, player.getBoard().getEntrance().stream().map(Creature::getColor).collect(Collectors.toList()));
+        assertEquals(expectedEntrance, player.getBoard().getEntrance().getStudents().stream().map(Creature::getColor).collect(Collectors.toList()));
 
-        assertEquals(expectedHall, player.getBoard().getHall().stream().map(Table::getLength).collect(Collectors.toList()));
+        assertEquals(expectedHall, player.getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
 
     }
 
@@ -255,9 +254,9 @@ class CharacterMoverTest {
 
         character.effect();
 
-        assertEquals(expectedEntrance, player.getBoard().getEntrance().stream().map(Creature::getColor).collect(Collectors.toList()));
+        assertEquals(expectedEntrance, player.getBoard().getEntrance().getStudents().stream().map(Creature::getColor).collect(Collectors.toList()));
 
-        assertEquals(expectedHall, player.getBoard().getHall().stream().map(Table::getLength).collect(Collectors.toList()));
+        assertEquals(expectedHall, player.getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
 
 
     }
@@ -290,7 +289,7 @@ class CharacterMoverTest {
 
         character.effect();
 
-        assertEquals(expectedHall, player.getBoard().getHall().stream().map(Table::getLength).collect(Collectors.toList()));
+        assertEquals(expectedHall, player.getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
         assertEquals(4, character.getStudents().size());
 
     }
@@ -323,24 +322,77 @@ class CharacterMoverTest {
 
         character.effect();
 
-        assertEquals(expectedHall, player.getBoard().getHall().stream().map(Table::getLength).collect(Collectors.toList()));
+        assertEquals(expectedHall, player.getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
         assertEquals(4, character.getStudents().size());
 
     }
 
 
-    /*
-    //need game to be implemented (players methods)
+
+
     @Test
     void effect12_OK() {
+        Game game = Game.getGame();
+        Player p1 = new Player("X", PlayerColor.WHITE);
+        Player p2 = new Player("Y", PlayerColor.BLACK);
+        game.addPlayer(p1);
+        game.addPlayer(p2);
+        Round round = new Round(game.getPlayers(), 0);
+        Game.getGame().setCurrentRound(round);
 
+        character = cf.createCharacter(12);
+
+        p1.getBoard().addStudentToHall(CreatureColor.RED);
+        p1.getBoard().addStudentToHall(CreatureColor.RED);
+        p1.getBoard().addStudentToHall(CreatureColor.RED);
+
+        ArrayList expectedHall1 = new ArrayList(Arrays.asList(0, 0, 0, 0, 0));
+
+        p2.getBoard().addStudentToHall(CreatureColor.RED);
+        p2.getBoard().addStudentToHall(CreatureColor.RED);
+        p2.getBoard().addStudentToHall(CreatureColor.RED);
+        p2.getBoard().addStudentToHall(CreatureColor.RED);
+
+        ArrayList expectedHall2 = new ArrayList(Arrays.asList(0, 1, 0, 0, 0));
+
+        ((CharacterMover)character).setColorToRemove(CreatureColor.RED);
+        character.effect();
+
+        assertEquals(expectedHall1, p1.getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
+        assertEquals(expectedHall2, p2.getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
     }
 
-    //need game to be implemented (players methods)
     @Test
     void effect12_KO() {
+        Game game = Game.getGame();
+        Player p1 = new Player("X", PlayerColor.WHITE);
+        Player p2 = new Player("Y", PlayerColor.BLACK);
+        game.addPlayer(p1);
+        game.addPlayer(p2);
+        Round round = new Round(game.getPlayers(), 0);
+        Game.getGame().setCurrentRound(round);
+
+        character = cf.createCharacter(12);
+
+        p1.getBoard().addStudentToHall(CreatureColor.RED);
+        p1.getBoard().addStudentToHall(CreatureColor.RED);
+        p1.getBoard().addStudentToHall(CreatureColor.GREEN);
+        p1.getBoard().addStudentToHall(CreatureColor.PINK);
+
+        ArrayList expectedHall1 = new ArrayList(Arrays.asList(1, 0, 0, 1, 0));
+
+
+        p2.getBoard().addStudentToHall(CreatureColor.GREEN);
+        p2.getBoard().addStudentToHall(CreatureColor.GREEN);
+
+        ArrayList expectedHall2 = new ArrayList(Arrays.asList(2, 0, 0, 0, 0));
+
+        ((CharacterMover)character).setColorToRemove(CreatureColor.RED);
+        character.effect();
+
+        assertEquals(expectedHall1, p1.getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
+        assertEquals(expectedHall2, p2.getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
 
     }
-    */
 
 }

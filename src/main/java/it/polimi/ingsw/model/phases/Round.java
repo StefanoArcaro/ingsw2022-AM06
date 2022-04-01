@@ -232,7 +232,7 @@ public class Round {
         for(int i = 0; i < playingOrder.size(); i++) {
             if(playingOrder.get(i).getBoard().containsProfessor(color)) {
                 owner = playingOrder.get(i);
-                oldOwnerInfluence = owner.getBoard().getTableByColor(color).getLength();
+                oldOwnerInfluence = owner.getBoard().getHall().getTableByColor(color).getLength();
                 maxInfluence = oldOwnerInfluence;
                 maxInfluenceIndex = i;
                 break;
@@ -240,7 +240,7 @@ public class Round {
         }
 
         for(int i = 0; i < playingOrder.size(); i++) {
-            int tempInfluence = playingOrder.get(i).getBoard().getTableByColor(color).getLength();
+            int tempInfluence = playingOrder.get(i).getBoard().getHall().getTableByColor(color).getLength();
             boolean characterEffectForCurrentPlayer = false;
             if(activatedCharacter != null) {
                 characterEffectForCurrentPlayer =
