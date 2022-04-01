@@ -2,7 +2,7 @@ package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.model.Game;
 
-public class CharacterInfluenceCalculator extends Character{
+public class CharacterInfluenceCalculator extends Character {
 
     private int islandGroupIndex;
 

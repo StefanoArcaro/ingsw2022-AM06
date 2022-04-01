@@ -13,12 +13,12 @@ public class Board {
 
     public Board(Player player) {
         this.player = player;
-        this.entrance = new ArrayList<Student>();
-        this.hall = new ArrayList<Table>();
-        for(CreatureColor color : CreatureColor.values()){
+        this.entrance = new ArrayList<>();
+        this.hall = new ArrayList<>();
+        for(CreatureColor color : CreatureColor.values()) {
             hall.add(new Table(color));
         }
-        this.professors = new ArrayList<Professor>();
+        this.professors = new ArrayList<>();
     }
 
 
@@ -46,80 +46,105 @@ public class Board {
         return player;
     }
 
-    private Table getTableByColor (CreatureColor color){
-        for (Table table : hall){
-            if (table.getColor().equals(color)){
-                return table;
-            }
-        }
-        return null;
+    public Table getTableByColor(CreatureColor color) {
+        return hall.get(color.getIndex());
     }
 
-    public void addStudentToEntrance(CreatureColor color){
+    public void addStudentToEntrance(CreatureColor color) {
         entrance.add(new Student(color));
     }
 
-    public void removeStudentFromEntrance (CreatureColor color){
-        for (Student student : entrance){
-            if (student.getColor().equals(color)){
+    public void removeStudentFromEntrance(CreatureColor color) {
+        for(Student student : entrance) {
+            if(student.getColor().equals(color)) {
                 entrance.remove(student);
                 return;
             }
         }
-
     }
 
-
-    public boolean addStudentToHall(CreatureColor color){
+    public boolean addStudentToHall(CreatureColor color) {
         Table tableToAdd;
         boolean success;
 
         tableToAdd = getTableByColor(color);
 
-        if (tableToAdd != null) {
+        if(tableToAdd != null) {
             success = tableToAdd.addStudent();
             return success;
         }
         return false;
     }
 
-    public boolean removeStudentFromHall(CreatureColor color){
+    public boolean removeStudentFromHall(CreatureColor color) {
         Table tableToRemove;
 
         tableToRemove = getTableByColor(color);
 
-        if (tableToRemove != null) {
+        if(tableToRemove != null) {
             return tableToRemove.removeStudent();
         }
         return false;
     }
 
-    public boolean studentInTable (CreatureColor color){
+    public boolean studentInTable(CreatureColor color) {
         Table table = getTableByColor(color);
-        return table.getLenght() > 0;
+        return table.getLength() > 0;
     }
 
-    public void moveStudentToHall(CreatureColor color){}
-    public void moveStudentToIsland(CreatureColor color, Island island){}
+    public void moveStudentToHall(CreatureColor color) {}
+    public void moveStudentToIsland(CreatureColor color, Island island) {}
 
-
-    public void winProfessor(Professor professor){
-        if (!(professors.contains(professor))){
+    public void winProfessor(Professor professor) {
+        if(!professors.contains(professor)) {
             professors.add(professor);
         }
     }
-    public void loseProfessor(Professor professor){
-        if(professors.contains(professor)){
+
+    public void loseProfessor(Professor professor) {
+        if(professors.contains(professor)) {
             professors.remove(professor);
         }
     }
 
+    // TODO check
+    public Professor loseProfessorByColor(CreatureColor color) {
+        if(containsProfessor(color)) {
+            Professor result = getProfessorByColor(color);
+            professors.remove(result);
+            return result;
+        }
+
+        return null;
+    }
+
+    // TODO check if correct
+    public boolean containsProfessor(CreatureColor color) {
+        for(int i = 0; i < professors.size(); i++) {
+            if(color.equals(professors.get(i).getColor())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Professor getProfessorByColor(CreatureColor color) {
+        if(containsProfessor(color)) {
+            for(Professor professor : professors) {
+                if(professor.getColor().equals(color)) {
+                    return professor;
+                }
+            }
+        }
+
+        return null;
+    }
 
     private ArrayList<Professor> updateProfessors(){
         return null;
     }
 
-    public void moveTower(int numberOfTowers){}
-    private void checkIfNoTowers(){}
-    private void recoverTower(int numberOfTowers){}
+    public void moveTower(int numberOfTowers) {}
+    private void checkIfNoTowers() {}
+    private void recoverTower(int numberOfTowers) {}
 }

@@ -4,6 +4,7 @@ package it.polimi.ingsw.model;
  * Enumeration for the possible game modes
  */
 public enum GameMode {
+
     EASY (0),
     EXPERT (1);
 

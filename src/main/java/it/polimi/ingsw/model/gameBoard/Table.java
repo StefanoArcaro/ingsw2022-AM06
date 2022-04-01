@@ -1,7 +1,8 @@
 package it.polimi.ingsw.model.gameBoard;
 
 public class Table {
-    private CreatureColor color;
+
+    private final CreatureColor color;
     private int index;
 
     public Table(CreatureColor color) {
@@ -13,24 +14,24 @@ public class Table {
         return color;
     }
 
-    public boolean addStudent(){
-        if(index < 10){
-            index = index+1;
+    public boolean addStudent() {
+        if(index < 10) {
+            index = index + 1;
             return true;
         }
         return false;
     }
 
-    public boolean removeStudent(){
-        if(index > 0){
-            index = index-1;
+    public boolean removeStudent() {
+        if(index > 0) {
+            index = index - 1;
             return true;
         }
         return false;
     }
 
 
-    public int getLenght(){
+    public int getLength(){
         return index;
     }
 }

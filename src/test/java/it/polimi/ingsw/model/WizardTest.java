@@ -41,7 +41,7 @@ class WizardTest {
     @Test
     void playAssistant_KO() {
         wizard.removeAssistant(5);
-        assertEquals(null, wizard.playAssistant(5));
+        assertNull(wizard.playAssistant(5));
     }
 
     @Test
@@ -51,7 +51,7 @@ class WizardTest {
     }
 
     @Test
-    void chechIfNoAssistant(){
+    void checkIfNoAssistant(){
         for(int i=1; i<11; i++){
             assertFalse(wizard.checkIfNoAssistants());
             wizard.removeAssistant(i);

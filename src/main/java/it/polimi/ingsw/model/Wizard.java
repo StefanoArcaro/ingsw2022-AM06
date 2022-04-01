@@ -14,9 +14,9 @@ public class Wizard {
     public Wizard(Player player, WizardName name) {
         this.player = player;
         this.name = name;
-        assistants = new ArrayList<Assistant>();
-        for(int i=1; i<11; i++){
-            assistants.add(new Assistant(i, (i+1)/2));
+        assistants = new ArrayList<>();
+        for(int i = 1; i < 11; i++) {
+            assistants.add(new Assistant(i, (i + 1) / 2));
         }
     }
 
@@ -38,7 +38,7 @@ public class Wizard {
      * @return a copy of assistants' list
      */
     public ArrayList<Assistant> getAssistants() {
-        return new ArrayList<Assistant>(assistants);
+        return new ArrayList<>(assistants);
     }
 
     /**
@@ -46,9 +46,9 @@ public class Wizard {
      * @param priority to search the assistant
      * @return assistant with the given priority
      */
-    private Assistant getAssistantByPriority(int priority){
-        for(Assistant assistant : assistants){
-            if(assistant.getPriority()==priority){
+    private Assistant getAssistantByPriority(int priority) {
+        for(Assistant assistant : assistants) {
+            if(assistant.getPriority() == priority) {
                 return assistant;
             }
         }
@@ -71,7 +71,7 @@ public class Wizard {
      */
     public boolean removeAssistant(int priority) {
         Assistant assistantToRemove = getAssistantByPriority(priority);
-        if(assistants.contains(assistantToRemove)){
+        if(assistants.contains(assistantToRemove)) {
             assistants.remove(assistantToRemove);
             return true;
         }

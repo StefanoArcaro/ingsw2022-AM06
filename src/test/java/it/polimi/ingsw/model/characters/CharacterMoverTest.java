@@ -34,6 +34,7 @@ class CharacterMoverTest {
         bag = null;
     }
 
+
     @Test
     void initialPreparation() {
         bag.addStudent(new Student(CreatureColor.GREEN));
@@ -123,10 +124,12 @@ class CharacterMoverTest {
     void effect7_OK() {
         character = cf.createCharacter(7);
 
-        Player player = new Player("Chiara", PlayerColor.WHITE);
-        Round round = new Round();
+        ArrayList<Player> players = new ArrayList<>();
+        players.add(new Player("Chiara", PlayerColor.WHITE));
+        Round round = new Round(players, 0);
         Game.getGame().setCurrentRound(round);
-        round.setCurrentPlayer(player);
+
+        Player player = round.getCurrentPlayer();
 
         character.students.add(new Student(CreatureColor.RED));
         character.students.add(new Student(CreatureColor.RED));
@@ -160,10 +163,12 @@ class CharacterMoverTest {
     void effect7_KO() {
         character = cf.createCharacter(7);
 
-        Player player = new Player("Chiara", PlayerColor.WHITE);
-        Round round = new Round();
+        ArrayList<Player> players = new ArrayList<>();
+        players.add(new Player("Chiara", PlayerColor.WHITE));
+        Round round = new Round(players, 0);
         Game.getGame().setCurrentRound(round);
-        round.setCurrentPlayer(player);
+
+        Player player = round.getCurrentPlayer();
 
         character.students.add(new Student(CreatureColor.RED));
         character.students.add(new Student(CreatureColor.RED));
@@ -196,10 +201,12 @@ class CharacterMoverTest {
     void effect10_OK() {
         character = cf.createCharacter(10);
 
-        Player player = new Player("Chiara", PlayerColor.WHITE);
-        Round round = new Round();
+        ArrayList<Player> players = new ArrayList<>();
+        players.add(new Player("Chiara", PlayerColor.WHITE));
+        Round round = new Round(players, 0);
         Game.getGame().setCurrentRound(round);
-        round.setCurrentPlayer(player);
+
+        Player player = round.getCurrentPlayer();
 
         player.getBoard().addStudentToEntrance(CreatureColor.BLUE);
         player.getBoard().addStudentToEntrance(CreatureColor.PINK);
@@ -218,7 +225,7 @@ class CharacterMoverTest {
 
         assertEquals(expectedEntrance, player.getBoard().getEntrance().stream().map(Creature::getColor).collect(Collectors.toList()));
 
-        assertEquals(expectedHall, player.getBoard().getHall().stream().map(Table::getLenght).collect(Collectors.toList()));
+        assertEquals(expectedHall, player.getBoard().getHall().stream().map(Table::getLength).collect(Collectors.toList()));
 
     }
 
@@ -226,10 +233,12 @@ class CharacterMoverTest {
     void effect10_KO() {
         character = cf.createCharacter(10);
 
-        Player player = new Player("Chiara", PlayerColor.WHITE);
-        Round round = new Round();
+        ArrayList<Player> players = new ArrayList<>();
+        players.add(new Player("Chiara", PlayerColor.WHITE));
+        Round round = new Round(players, 0);
         Game.getGame().setCurrentRound(round);
-        round.setCurrentPlayer(player);
+
+        Player player = round.getCurrentPlayer();
 
         player.getBoard().addStudentToEntrance(CreatureColor.BLUE);
         player.getBoard().addStudentToEntrance(CreatureColor.PINK);
@@ -248,7 +257,7 @@ class CharacterMoverTest {
 
         assertEquals(expectedEntrance, player.getBoard().getEntrance().stream().map(Creature::getColor).collect(Collectors.toList()));
 
-        assertEquals(expectedHall, player.getBoard().getHall().stream().map(Table::getLenght).collect(Collectors.toList()));
+        assertEquals(expectedHall, player.getBoard().getHall().stream().map(Table::getLength).collect(Collectors.toList()));
 
 
     }
@@ -260,10 +269,12 @@ class CharacterMoverTest {
 
         Bag.getBag().addStudent(new Student(CreatureColor.RED));
 
-        Player player = new Player("Chiara", PlayerColor.WHITE);
-        Round round = new Round();
+        ArrayList<Player> players = new ArrayList<>();
+        players.add(new Player("Chiara", PlayerColor.WHITE));
+        Round round = new Round(players, 0);
         Game.getGame().setCurrentRound(round);
-        round.setCurrentPlayer(player);
+
+        Player player = round.getCurrentPlayer();
 
         character.students.add(new Student(CreatureColor.RED));
         character.students.add(new Student(CreatureColor.RED));
@@ -279,8 +290,9 @@ class CharacterMoverTest {
 
         character.effect();
 
-        assertEquals(expectedHall, player.getBoard().getHall().stream().map(Table::getLenght).collect(Collectors.toList()));
+        assertEquals(expectedHall, player.getBoard().getHall().stream().map(Table::getLength).collect(Collectors.toList()));
         assertEquals(4, character.getStudents().size());
+
     }
 
 
@@ -290,10 +302,12 @@ class CharacterMoverTest {
 
         Bag.getBag().addStudent(new Student(CreatureColor.RED));
 
-        Player player = new Player("Chiara", PlayerColor.WHITE);
-        Round round = new Round();
+        ArrayList<Player> players = new ArrayList<>();
+        players.add(new Player("Chiara", PlayerColor.WHITE));
+        Round round = new Round(players, 0);
         Game.getGame().setCurrentRound(round);
-        round.setCurrentPlayer(player);
+
+        Player player = round.getCurrentPlayer();
 
         character.students.add(new Student(CreatureColor.RED));
         character.students.add(new Student(CreatureColor.RED));
@@ -309,7 +323,7 @@ class CharacterMoverTest {
 
         character.effect();
 
-        assertEquals(expectedHall, player.getBoard().getHall().stream().map(Table::getLenght).collect(Collectors.toList()));
+        assertEquals(expectedHall, player.getBoard().getHall().stream().map(Table::getLength).collect(Collectors.toList()));
         assertEquals(4, character.getStudents().size());
 
     }

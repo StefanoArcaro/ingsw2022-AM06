@@ -4,15 +4,29 @@ import java.util.ArrayList;
 
 public class Cloud {
 
-    private boolean isEmpty;
-    private ArrayList<Student> students;
+    private final int cloudID;
+    private final ArrayList<Student> students;
 
     /**
      * Default constructor
      */
-    public Cloud() {
-        isEmpty = true;
-        // TODO initialize arraylist to an empty one
+    public Cloud(int cloudID) {
+        this.cloudID = cloudID;
+        students = new ArrayList<>();
+    }
+
+    /**
+     * @return the cloud card's ID
+     */
+    public int getCloudID() {
+        return cloudID;
+    }
+
+    /**
+     * @return the students on the clout card
+     */
+    public ArrayList<Student> getStudents() {
+        return new ArrayList<>(students);
     }
 
     /**
@@ -20,8 +34,10 @@ public class Cloud {
      * based on the chosen number of players for the game
      * @param bag that contains all the students that have yet to be drawn
      */
-    public void fill(Bag bag) {
-
+    public void fill(Bag bag, int numberOfStudents) {
+        for(int i = 0; i < numberOfStudents + 1; i++) {
+            students.add(bag.drawStudent());
+        }
     }
 
     /**
@@ -29,7 +45,8 @@ public class Cloud {
      * @return the ArrayList of the students that were on the cloud card
      */
     public ArrayList<Student> empty() {
-        // TODO
-        return null;
+        ArrayList<Student> result = new ArrayList<>(students);
+        students.clear();
+        return result;
     }
 }
