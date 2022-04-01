@@ -17,7 +17,7 @@ public class Island {
      * @param islandID ID of the island
      */
     public Island(int islandID) {
-        if(islandID > 0 && islandID <13) {
+        if(islandID > 0 && islandID < 13) {
             this.islandID = islandID;
             this.students = new ArrayList<>();
             this.tower = null;
@@ -57,7 +57,7 @@ public class Island {
      * Add a tower on the island
      * @param tower represents the player who conquered the island
      */
-    public boolean addTower(PlayerColor tower){
+    public boolean addTower(PlayerColor tower) {
         if(this.tower == null) {
             this.tower = tower;
             return true;
@@ -68,8 +68,8 @@ public class Island {
     /**
      * Removes the tower from the island: it has been conquered
      */
-    public boolean removeTower(){
-        if(this.tower != null){
+    public boolean removeTower() {
+        if(this.tower != null) {
             this.tower = null;
             return true;
         }
@@ -82,10 +82,10 @@ public class Island {
      * @param player whose influence is being calculated
      * @return the player's influence on the island due to the towers
      */
-    private int towerInfluence (Player player) {
+    private int towerInfluence(Player player) {
         PlayerColor playerColor = player.getColor();
 
-        if(playerColor == this.tower){
+        if(playerColor == this.tower) {
             return 1;
         }
 
@@ -97,7 +97,7 @@ public class Island {
      * @param player whose influence is being calculated
      * @return the player's influence on the island due to the students
      */
-    private int studentInfluence (Player player) {
+    private int studentInfluence(Player player) {
         int influenceByStudent = 0;
         ArrayList<Professor> playerProfessors = player.getBoard().getProfessors();
         ArrayList<CreatureColor> playerProfessorsColor;
@@ -106,8 +106,8 @@ public class Island {
         playerProfessorsColorList = playerProfessors.stream().map(Creature::getColor).collect(Collectors.toList());
         playerProfessorsColor = new ArrayList<>(playerProfessorsColorList);
 
-        for (Student student : students){
-            if(playerProfessorsColor.contains(student.getColor())){
+        for (Student student : students) {
+            if(playerProfessorsColor.contains(student.getColor())) {
                 influenceByStudent++;
             }
         }
@@ -120,7 +120,7 @@ public class Island {
      * @param player whose influence is being calculated
      * @return the influence of the player on the island
      */
-    public int calculateInfluence(Player player){
+    public int calculateInfluence(Player player) {
         int influence = 0;
 
         influence = influence + towerInfluence(player) + studentInfluence(player);
@@ -137,15 +137,15 @@ public class Island {
      * @param activatedCharacter active character
      * @return the player's influence on the island due to the towers
      */
-    private int towerInfluence (Player player, CharacterInfluenceModifier activatedCharacter) {
+    private int towerInfluence(Player player, CharacterInfluenceModifier activatedCharacter) {
         PlayerColor playerColor = player.getColor();
 
         //Automatically applied character effect 6
-        if(!activatedCharacter.getTowerCounter()){
+        if(!activatedCharacter.getTowerCounter()) {
             return 0;
         }
 
-        if(playerColor == this.tower){
+        if(playerColor == this.tower) {
             return 1;
         }
 
@@ -159,7 +159,7 @@ public class Island {
      * @param activatedCharacter active character
      * @return the player's influence on the island due to the students
      */
-    private int studentInfluence (Player player, CharacterInfluenceModifier activatedCharacter) {
+    private int studentInfluence(Player player, CharacterInfluenceModifier activatedCharacter) {
         int influenceByStudent = 0;
         ArrayList<Professor> playerProfessors = player.getBoard().getProfessors();
         ArrayList<CreatureColor> playerProfessorsColor;
@@ -188,16 +188,11 @@ public class Island {
      * @param activatedCharacter active character
      * @return the influence of the player on the island
      */
-    public int calculateInfluence(Player player, CharacterInfluenceModifier activatedCharacter){
+    public int calculateInfluence(Player player, CharacterInfluenceModifier activatedCharacter) {
         int influence = 0;
 
         influence = influence + towerInfluence(player, activatedCharacter)
                               + studentInfluence(player, activatedCharacter);
         return influence;
     }
-
-
-
-
-
 }

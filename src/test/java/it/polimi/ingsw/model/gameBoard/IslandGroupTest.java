@@ -1,11 +1,12 @@
 package it.polimi.ingsw.model.gameBoard;
 
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.PlayerColor;
+import it.polimi.ingsw.model.Round;
 import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.characters.CharacterInfluenceModifier;
 import it.polimi.ingsw.model.characters.ConcreteCharacterFactory;
-import it.polimi.ingsw.model.gameBoard.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,7 +35,7 @@ class IslandGroupTest {
 
     @Test
     void getIslands() {
-        ArrayList<Island> expectedIslands = new ArrayList<Island>();
+        ArrayList<Island> expectedIslands = new ArrayList<>();
         island1 = new Island(1);
         island2 = new Island(2);
 
@@ -337,7 +338,12 @@ class IslandGroupTest {
         island3.addStudent(new Student(CreatureColor.BLUE));
         island3.addStudent(new Student(CreatureColor.RED));
 
-        Player player = new Player("chiara", PlayerColor.BLACK);
+        ArrayList<Player> players = new ArrayList<>();
+        players.add(new Player("Chiara", PlayerColor.BLACK));
+        Round round = new Round(players, 0);
+        Game.getGame().setCurrentRound(round);
+        Player player = round.getCurrentPlayer();
+
         player.getBoard().winProfessor(new Professor(CreatureColor.RED));
         player.getBoard().winProfessor(new Professor(CreatureColor.YELLOW));
 
@@ -350,7 +356,6 @@ class IslandGroupTest {
         assertEquals(4, islandGroup.calculateInfluence(player, (CharacterInfluenceModifier) character));
     }
 
-    /* need game and round to be implemented
     @Test
     void calculateInfluenceCharacter8() {
         island1 = new Island(1);
@@ -367,7 +372,12 @@ class IslandGroupTest {
         island3.addStudent(new Student(CreatureColor.BLUE));
         island3.addStudent(new Student(CreatureColor.RED));
 
-        Player player = new Player("chiara", PlayerColor.BLACK);
+        ArrayList<Player> players = new ArrayList<>();
+        players.add(new Player("Chiara", PlayerColor.BLACK));
+        Round round = new Round(players, 0);
+        Game.getGame().setCurrentRound(round);
+        Player player = round.getCurrentPlayer();
+
         player.getBoard().winProfessor(new Professor(CreatureColor.RED));
         player.getBoard().winProfessor(new Professor(CreatureColor.YELLOW));
 
@@ -379,7 +389,6 @@ class IslandGroupTest {
         Character character1 = cf.createCharacter(8);
         assertEquals(9, islandGroup.calculateInfluence(player, (CharacterInfluenceModifier) character1));
     }
-    */
 
     @Test
     void calculateInfluenceCharacter9() {
@@ -397,7 +406,12 @@ class IslandGroupTest {
         island3.addStudent(new Student(CreatureColor.BLUE));
         island3.addStudent(new Student(CreatureColor.RED));
 
-        Player player = new Player("chiara", PlayerColor.BLACK);
+        ArrayList<Player> players = new ArrayList<>();
+        players.add(new Player("Chiara", PlayerColor.BLACK));
+        Round round = new Round(players, 0);
+        Game.getGame().setCurrentRound(round);
+        Player player = round.getCurrentPlayer();
+
         player.getBoard().winProfessor(new Professor(CreatureColor.RED));
         player.getBoard().winProfessor(new Professor(CreatureColor.YELLOW));
 

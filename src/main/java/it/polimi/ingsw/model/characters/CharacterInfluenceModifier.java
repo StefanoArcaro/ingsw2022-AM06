@@ -2,13 +2,13 @@ package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.model.gameBoard.CreatureColor;
 
-public class CharacterInfluenceModifier extends Character{
+public class CharacterInfluenceModifier extends Character {
 
     private CreatureColor colorNoPoints;
     private boolean towerCounter;
     private int extraPoints;
 
-    public CharacterInfluenceModifier(int characterID){
+    public CharacterInfluenceModifier(int characterID) {
         this.characterID = characterID;
         this.used = false;
         this.numberOfStudents = 0;
@@ -19,7 +19,7 @@ public class CharacterInfluenceModifier extends Character{
 
         CharacterID character = CharacterID.values()[characterID];
 
-        switch (character) {
+        switch(character) {
             case CHARACTER_FIVE:
                 this.cost = 2;
                 this.numberOfBanCards = 4;
@@ -56,7 +56,7 @@ public class CharacterInfluenceModifier extends Character{
     /**
      * @return whether the towers affect the influence calculation or not
      */
-    public boolean getTowerCounter (){
+    public boolean getTowerCounter(){
         return towerCounter;
     }
 

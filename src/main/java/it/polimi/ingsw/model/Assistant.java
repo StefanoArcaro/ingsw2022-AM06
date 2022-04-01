@@ -2,7 +2,7 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.characters.CharacterStepsAdder;
 
-public class Assistant {
+public class Assistant implements Comparable<Assistant> {
 
     private int priority;
     private int maxSteps;
@@ -36,8 +36,8 @@ public class Assistant {
      * @param activatedCharacter character of class CharacterStepsAdder which is active
      * @return the maximum number of steps Mother Nature will be allowed to take
      */
-    public int getMaxSteps(CharacterStepsAdder activatedCharacter){
-        return maxSteps+activatedCharacter.getMoreSteps();
+    public int getMaxSteps(CharacterStepsAdder activatedCharacter) {
+        return maxSteps + activatedCharacter.getMoreSteps();
     }
 
     /**
@@ -48,4 +48,9 @@ public class Assistant {
     }
 
 
+    // TODO check if correct
+    @Override
+    public int compareTo(Assistant assistant) {
+        return (int)(this.priority - assistant.priority);
+    }
 }

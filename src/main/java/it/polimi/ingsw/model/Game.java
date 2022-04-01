@@ -2,10 +2,7 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.characters.CharacterInfluenceModifier;
-import it.polimi.ingsw.model.gameBoard.Cloud;
-import it.polimi.ingsw.model.gameBoard.Island;
-import it.polimi.ingsw.model.gameBoard.IslandGroup;
-import it.polimi.ingsw.model.gameBoard.Professor;
+import it.polimi.ingsw.model.gameBoard.*;
 
 import java.util.ArrayList;
 
@@ -24,18 +21,25 @@ public class Game {
     private ArrayList<Professor> professors;
     private ArrayList<IslandGroup> islandGroups;
     private ArrayList<Character> drawnCharacters; // TODO this as well
-    private ArrayList<Character> activatedCharacters;
+    private ArrayList<Character> activatedCharacters; // TODO check if needed
     private int treasury;
 
     /**
      * Private constructor
      */
     private Game() {
-        islandGroups = new ArrayList<IslandGroup>();
+        players = new ArrayList<>();
+        clouds = new ArrayList<>();
+        professors = new ArrayList<>();
+        for(CreatureColor color : CreatureColor.values()) {
+            professors.add(new Professor(color));
+        }
+        islandGroups = new ArrayList<>();
+        drawnCharacters = new ArrayList<>();
     }
 
     /**
-     * Singleton pattern for the Game class
+     * Game is a Singleton
      * @return singleton instance of the game
      */
     public static Game getGame() {
@@ -58,16 +62,16 @@ public class Game {
         islandGroups.add(islandGroup);
     }
 
-    public Island getIslandByID (int islandID){
+    public Island getIslandByID(int islandID) {
         ArrayList<Island> temp;
 
-        for (IslandGroup islandGroup : islandGroups){
-                temp = islandGroup.getIslands();
-                for (Island island : temp) {
-                    if (island.getIslandID() == islandID) {
-                        return island;
-                    }
+        for(IslandGroup islandGroup : islandGroups) {
+            temp = islandGroup.getIslands();
+            for(Island island : temp) {
+                if(island.getIslandID() == islandID) {
+                    return island;
                 }
+            }
         }
         return null;
     }
@@ -131,7 +135,17 @@ public class Game {
      * @return a copy of the professors' set
      */
     public ArrayList<Professor> getProfessors() {
-        // TODO
+        return new ArrayList<>(professors);
+    }
+
+    // TODO check
+    public Professor removeProfessor(CreatureColor color) {
+        for(Professor professor : professors) {
+            if(professor.getColor().equals(color)) {
+                professors.remove(professor);
+                return professor;
+            }
+        }
         return null;
     }
 
@@ -246,13 +260,11 @@ public class Game {
 
     }
 
-
-
-    public void calculateInfluence(int islandGroupIndex){
+    public void calculateInfluence(int islandGroupIndex) {
 
     }
 
-    public void calculateInfluence(int islandGroupIndex, CharacterInfluenceModifier activatedCharacter){
+    public void calculateInfluence(int islandGroupIndex, CharacterInfluenceModifier activatedCharacter) {
 
     }
 }

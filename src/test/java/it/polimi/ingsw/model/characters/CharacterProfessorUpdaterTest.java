@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.characters;
 
+import it.polimi.ingsw.model.Game;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,8 +24,9 @@ class CharacterProfessorUpdaterTest {
     }
 
 
-    //need the professorUpdate method to be implemented in Round
+    // TODO need the professorUpdate method to be implemented in Round
     @Test
     void effect() {
+        //Game.getCurrentRound().updateProfessors();
     }
 }

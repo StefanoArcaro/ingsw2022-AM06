@@ -4,6 +4,7 @@ package it.polimi.ingsw.model;
  * Enumeration to keep track of the current state of the game
  */
 public enum GameState {
+
     ONGOING (0),
     ENDED_TOWER (1),
     ENDED_ISLAND (2),

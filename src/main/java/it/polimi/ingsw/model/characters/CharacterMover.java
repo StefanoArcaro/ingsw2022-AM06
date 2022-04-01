@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.gameBoard.*;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class CharacterMover extends Character{
+public class CharacterMover extends Character {
 
     CreatureColor fromColor;
     CreatureColor toColor;
@@ -17,11 +17,11 @@ public class CharacterMover extends Character{
         this.characterID = characterID;
         this.used = false;
         this.numberOfBanCards = 0;
-        this.students = new ArrayList<Student>();
+        this.students = new ArrayList<>();
 
         CharacterID character = CharacterID.values()[characterID];
 
-        switch (character){
+        switch(character) {
             case CHARACTER_ONE:
                 this.cost = 1;
                 this.numberOfStudents = 4;
@@ -54,7 +54,7 @@ public class CharacterMover extends Character{
     public void initialPreparation() {
         Bag bag = Bag.getBag();
 
-        for (int i=0; i<numberOfStudents; i++){
+        for(int i = 0; i < numberOfStudents; i++) {
             students.add(bag.drawStudent());
         }
     }
@@ -78,10 +78,10 @@ public class CharacterMover extends Character{
 
 
     @Override
-    public void effect(){
+    public void effect() {
         CharacterID character = CharacterID.values()[this.characterID];
 
-        switch (character){
+        switch(character) {
             case CHARACTER_ONE:
                 effect_one(fromColor, islandID);
                 break;
@@ -89,7 +89,7 @@ public class CharacterMover extends Character{
                 effect_seven(fromColor, toColor);    //how to handle iteration? (till 3 students)
                 break;
             case CHARACTER_TEN:
-                effect_ten(fromColor, toColor);      ////how to handle iteration? (till 2 students)
+                effect_ten(fromColor, toColor);      //how to handle iteration? (till 2 students)
                 break;
             case CHARACTER_ELEVEN:
                 effect_eleven(fromColor);
@@ -106,8 +106,8 @@ public class CharacterMover extends Character{
      * @param islandID island where to move the student
      * @return whether everything went well
      */
-    private boolean effect_one (CreatureColor studentColor, int islandID){
-        if(this.getStudents().stream().map(Creature::getColor).collect(Collectors.toList()).contains(studentColor)){
+    private boolean effect_one(CreatureColor studentColor, int islandID) {
+        if(this.getStudents().stream().map(Creature::getColor).collect(Collectors.toList()).contains(studentColor)) {
             Island island = Game.getGame().getIslandByID(islandID);
             island.addStudent(new Student(studentColor));
             students.remove(getStudentByColor(students, studentColor));
@@ -120,10 +120,10 @@ public class CharacterMover extends Character{
     /**
      * Swaps a student present on the card with a student present in the entrance to the player board
      * @param cardColor color of the student on the card
-     * @param entranceColor colore of the student in the player's entrance
+     * @param entranceColor color of the student in the player's entrance
      * @return whether everything went well
      */
-    private boolean effect_seven (CreatureColor cardColor, CreatureColor entranceColor){
+    private boolean effect_seven(CreatureColor cardColor, CreatureColor entranceColor) {
         Board playerBoard = Game.getCurrentRound().getCurrentPlayer().getBoard();
         Student studentEntrance = getStudentByColor(playerBoard.getEntrance(), entranceColor);
         Student studentCard = getStudentByColor(students, cardColor);
@@ -148,11 +148,11 @@ public class CharacterMover extends Character{
      * @param entranceColor colore of the student in player's entrance
      * @return whether everything went well
      */
-    private boolean effect_ten (CreatureColor hallColor, CreatureColor entranceColor){
+    private boolean effect_ten(CreatureColor hallColor, CreatureColor entranceColor) {
         Board playerBoard = Game.getCurrentRound().getCurrentPlayer().getBoard();
         Student studentEntrance = getStudentByColor(playerBoard.getEntrance(), entranceColor);
 
-        if(studentEntrance != null && playerBoard.studentInTable(hallColor)){
+        if(studentEntrance != null && playerBoard.studentInTable(hallColor)) {
             playerBoard.removeStudentFromEntrance(entranceColor);
             playerBoard.removeStudentFromHall(hallColor);
 
@@ -169,32 +169,33 @@ public class CharacterMover extends Character{
      * @param cardColor color of the student on the card chosen
      * @return whether everything went well
      */
-    private boolean effect_eleven (CreatureColor cardColor) {
+    private boolean effect_eleven(CreatureColor cardColor) {
         Board boardPlayer = Game.getCurrentRound().getCurrentPlayer().getBoard();
         Student cardStudent = getStudentByColor(students, cardColor);
 
-        if(cardStudent != null){
+        if(cardStudent != null) {
             students.remove(cardStudent);
             boardPlayer.addStudentToHall(cardColor);
             students.add(Bag.getBag().drawStudent());
             return true;
         }
+
         return false;
     }
 
     /**
-     * Remove three student of a color from every players' hall
+     * Remove three student of a color from every player's hall
      * @param colorToBeRemoved color chosen to be removed
-     * @return wheter everything went well
+     * @return whether everything went well
      */
-    private boolean effect_twelve (CreatureColor colorToBeRemoved){
+    private boolean effect_twelve(CreatureColor colorToBeRemoved) {
         ArrayList<Player> players = Game.getGame().getPlayers();
 
         for(Player player : players) {
             int removed = 0;
             boolean haveStudent = true;
 
-            while (removed < 3 && haveStudent) {
+            while(removed < 3 && haveStudent) {
                 haveStudent = player.getBoard().removeStudentFromHall(colorToBeRemoved);
                 removed++;
             }
@@ -208,13 +209,12 @@ public class CharacterMover extends Character{
      * @param studentColor color of the student chosen
      * @return the student with the color given
      */
-    private Student getStudentByColor(ArrayList<Student> students, CreatureColor studentColor){
-        for (Student student : students){
-            if (student.getColor().equals(studentColor)){
+    private Student getStudentByColor(ArrayList<Student> students, CreatureColor studentColor) {
+        for(Student student : students) {
+            if(student.getColor().equals(studentColor)) {
                 return student;
             }
         }
         return null;
     }
-
 }

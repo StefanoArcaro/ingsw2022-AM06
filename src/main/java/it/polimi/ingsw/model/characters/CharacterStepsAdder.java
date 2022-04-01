@@ -3,11 +3,11 @@ package it.polimi.ingsw.model.characters;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 
-public class CharacterStepsAdder extends Character{
+public class CharacterStepsAdder extends Character {
 
     int moreSteps;
 
-    public CharacterStepsAdder (int characterID){
+    public CharacterStepsAdder(int characterID) {
         this.characterID = characterID;
         this.cost = 1;
         this.used = false;

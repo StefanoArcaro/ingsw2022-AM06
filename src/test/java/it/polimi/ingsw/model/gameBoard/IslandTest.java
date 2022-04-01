@@ -1,9 +1,6 @@
 package it.polimi.ingsw.model.gameBoard;
 
 import it.polimi.ingsw.model.PlayerColor;
-import it.polimi.ingsw.model.gameBoard.CreatureColor;
-import it.polimi.ingsw.model.gameBoard.Island;
-import it.polimi.ingsw.model.gameBoard.Student;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,7 +26,7 @@ class IslandTest {
     @Test
     void getStudents() {
 
-        ArrayList<Student> expectedStudents = new ArrayList<Student> ();
+        ArrayList<Student> expectedStudents = new ArrayList<> ();
 
         assertEquals(expectedStudents, island.getStudents());
 
@@ -59,7 +56,7 @@ class IslandTest {
 
         Student studentToAdd = new Student(CreatureColor.GREEN);
         Student studentToAdd2 = new Student(CreatureColor.GREEN);
-        ArrayList<Student> expectedStudents = new ArrayList<Student> ();
+        ArrayList<Student> expectedStudents = new ArrayList<> ();
 
         island.addStudent(studentToAdd);
         island.addStudent(studentToAdd2);

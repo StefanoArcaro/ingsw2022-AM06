@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 public enum WizardName {
+
     DRUID (0),
     KING (1),
     WITCH (2),

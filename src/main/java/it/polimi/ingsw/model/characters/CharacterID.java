@@ -2,18 +2,28 @@ package it.polimi.ingsw.model.characters;
 
 public enum CharacterID {
 
-    CHARACTER_NONE,
-    CHARACTER_ONE,
-    CHARACTER_TWO,
-    CHARACTER_THREE,
-    CHARACTER_FOUR,
-    CHARACTER_FIVE,
-    CHARACTER_SIX,
-    CHARACTER_SEVEN,
-    CHARACTER_EIGHT,
-    CHARACTER_NINE,
-    CHARACTER_TEN,
-    CHARACTER_ELEVEN,
-    CHARACTER_TWELVE;
+    CHARACTER_NONE(0),
+    CHARACTER_ONE(1),
+    CHARACTER_TWO(2),
+    CHARACTER_THREE(3),
+    CHARACTER_FOUR(4),
+    CHARACTER_FIVE(5),
+    CHARACTER_SIX(6),
+    CHARACTER_SEVEN(7),
+    CHARACTER_EIGHT(8),
+    CHARACTER_NINE(9),
+    CHARACTER_TEN(10),
+    CHARACTER_ELEVEN(11),
+    CHARACTER_TWELVE(12);
+
+    private final int id;
+
+    CharacterID(int id) {
+        this.id = id;
+    }
+
+    public int getID() {
+        return id;
+    }
 
 }
