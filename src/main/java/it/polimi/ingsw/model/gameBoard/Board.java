@@ -11,6 +11,11 @@ public class Board {
     private int towers;
     private Player player;
 
+    /* TODO
+    private Entrance entrance;
+    private Hall hall;
+     */
+
     public Board(Player player) {
         this.player = player;
         this.entrance = new ArrayList<>();

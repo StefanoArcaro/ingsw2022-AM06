@@ -3,6 +3,7 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.characters.CharacterInfluenceModifier;
 import it.polimi.ingsw.model.gameBoard.*;
+import it.polimi.ingsw.model.phases.Round;
 
 import java.util.ArrayList;
 

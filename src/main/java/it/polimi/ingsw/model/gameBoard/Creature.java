@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.gameBoard;
 
-public class Creature {
+public abstract class Creature {
+
     private CreatureColor color;
 
     /**

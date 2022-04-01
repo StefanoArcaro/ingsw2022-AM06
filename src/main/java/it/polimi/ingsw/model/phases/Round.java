@@ -1,5 +1,8 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.phases;
 
+import it.polimi.ingsw.model.Assistant;
+import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.characters.CharacterID;
 import it.polimi.ingsw.model.characters.ConcreteCharacterFactory;
@@ -105,8 +108,7 @@ public class Round {
      * Manages the round's execution
      */
     public void play() {
-        planning();
-        action();
+        // TODO
     }
 
     /**
@@ -252,7 +254,6 @@ public class Round {
             }
         }
 
-        // TODO check if owner == null; if so, take professor from game set of profs
         if(owner != null) {
             if(!playingOrder.get(maxInfluenceIndex).equals(owner)) {
                 Professor professorToUpdate = owner.getBoard().loseProfessorByColor(color);
