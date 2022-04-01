@@ -1,5 +1,6 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.phases;
 
+import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.characters.CharacterID;
 import it.polimi.ingsw.model.characters.ConcreteCharacterFactory;

@@ -5,11 +5,16 @@ package it.polimi.ingsw.model;
  */
 public enum GameState {
 
-    ONGOING (0),
-    ENDED_TOWER (1),
-    ENDED_ISLAND (2),
-    ENDED_STUDENTS (3),
-    ENDED_ASSISTANTS (4);
+    LOBBY_PHASE(0),
+    PREPARE_PHASE(1),
+    PLANNING_PHASE(2),
+    MOVE_STUDENT_PHASE(3),
+    MOVE_MOTHER_NATURE_PHASE(4),
+    PICK_CLOUD_PHASE(5),
+    ENDED_TOWER(6),
+    ENDED_ISLAND(7),
+    ENDED_STUDENTS(8),
+    ENDED_ASSISTANTS(9);
 
     private final int code;
 
