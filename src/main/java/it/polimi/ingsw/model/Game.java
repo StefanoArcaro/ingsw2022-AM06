@@ -35,6 +35,12 @@ public class Game {
             professors.add(new Professor(color));
         }
         islandGroups = new ArrayList<>();
+        for(int i=1; i<=12; i++) {
+            Island island = new Island(i);
+            IslandGroup islandGroup = new IslandGroup();
+            islandGroup.addIsland(island);
+            islandGroups.add(islandGroup);
+        }
         drawnCharacters = new ArrayList<>();
     }
 
@@ -119,8 +125,12 @@ public class Game {
      * @return a copy of the players' list
      */
     public ArrayList<Player> getPlayers() {
-        // TODO
-        return null;
+        return new ArrayList<>(players);
+    }
+
+    public void addPlayer (Player player){
+        //CHECK IF NICKNAME TAKEN....
+        players.add(player);
     }
 
     /**
