@@ -1,13 +1,13 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model.gameBoard;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class IslandTest {
+class BagTest {
 
     @Test
-    void calculateInfluence() {
+    void getBag() {
     }
 
     @Test
@@ -15,22 +15,18 @@ class IslandTest {
     }
 
     @Test
-    void addTower() {
+    void size() {
     }
 
     @Test
-    void replaceTower() {
+    void drawStudent() {
     }
 
     @Test
-    void getIslandID() {
+    void isEmpty() {
     }
 
     @Test
-    void getStudents() {
-    }
-
-    @Test
-    void getTower() {
+    void shuffle() {
     }
 }

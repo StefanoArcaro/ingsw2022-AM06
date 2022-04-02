@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model.gameBoard;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,5 +8,9 @@ class MotherNatureTest {
 
     @Test
     void getMotherNature() {
+    }
+
+    @Test
+    void setCurrentIslandGroup() {
     }
 }
