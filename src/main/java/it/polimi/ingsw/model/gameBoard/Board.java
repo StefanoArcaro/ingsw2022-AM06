@@ -53,13 +53,30 @@ public class Board {
         entrance.add(new Student(color));
     }
 
-    public void removeStudentFromEntrance(CreatureColor color) {
-        for(Student student : entrance) {
-            if(student.getColor().equals(color)) {
-                entrance.remove(student);
-                return;
+    public boolean removeStudentFromEntrance(CreatureColor color) {
+        if(isThereColorInEntrance(color)){
+            for(Student student : entrance){
+                if(student.getColor().equals(color)) {
+                    entrance.remove(student);
+                    return true;
+                }
             }
         }
+        return false;
+
+
+    }
+
+    /**
+     * it checks if there's in entrance at least ONE student of the given color
+     */
+    public boolean isThereColorInEntrance(CreatureColor color){
+        for(Student student : entrance){
+            if(student.getColor().equals(color)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean addStudentToHall(CreatureColor color) {
@@ -86,13 +103,25 @@ public class Board {
         return false;
     }
 
+    /**
+     * returns true if there is at least one student in table
+     */
     public boolean studentInTable(CreatureColor color) {
         Table table = getTableByColor(color);
         return table.getLength() > 0;
     }
 
-    public void moveStudentToHall(CreatureColor color) {}
-    public void moveStudentToIsland(CreatureColor color, Island island) {}
+    /**
+     * it moves a student from the entrance to a known island
+     */
+    public boolean moveStudentToIsland(CreatureColor color,Island island) {
+        if(isThereColorInEntrance(color)){
+            removeStudentFromEntrance(color);
+            island.getStudents().add(new Student(color));
+            }
+        return false;
+    }
+
 
     public void winProfessor(Professor professor) {
         if(!professors.contains(professor)) {
@@ -139,11 +168,26 @@ public class Board {
         return null;
     }
 
-    private ArrayList<Professor> updateProfessors(){
-        return null;
+    private void addTowers(int numberOfTowers) {
+        this.towers = this.towers + numberOfTowers;
     }
 
-    public void moveTower(int numberOfTowers) {}
-    private void checkIfNoTowers() {}
-    private void recoverTower(int numberOfTowers) {}
+    public boolean removeTower(){
+        if(this.towers>0) {
+            this.towers--;
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isThereNoTowers() {
+        if (this.towers == 0)
+            return true;
+        else return false;
+
+    }
+
+
 }
+
+

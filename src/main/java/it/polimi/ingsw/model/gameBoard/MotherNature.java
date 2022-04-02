@@ -3,10 +3,14 @@ package it.polimi.ingsw.model.gameBoard;
 public class MotherNature {
 
     private static MotherNature motherNature = null;
-    private IslandGroup islandGroup;
+    private IslandGroup currentIslandGroup;
 
+    /**
+     * private constructor used in getMotherNature
+     * @param islandGroup
+     */
     private MotherNature(IslandGroup islandGroup) {
-        this.islandGroup = islandGroup;
+        this.currentIslandGroup = islandGroup;
     }
 
     public static MotherNature getMotherNature() {
@@ -15,6 +19,14 @@ public class MotherNature {
         }
         return motherNature;
     }
+
+    /**
+     * changes the current island group MotherNature refers to
+     * @param islandGroup
+     */
+   public void setCurrentIslandGroup(IslandGroup islandGroup){
+        this.currentIslandGroup=islandGroup;
+   }
 
 
 }

@@ -24,11 +24,8 @@ public class Island {
         }
     }
 
-    /**
-     * @return students on the island
-     */
     public ArrayList<Student> getStudents() {
-        return new ArrayList<Student>(students);
+        return students;
     }
 
     /**
@@ -195,4 +192,5 @@ public class Island {
                               + studentInfluence(player, activatedCharacter);
         return influence;
     }
+
 }
