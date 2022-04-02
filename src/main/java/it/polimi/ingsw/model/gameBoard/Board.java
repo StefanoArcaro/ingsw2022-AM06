@@ -31,15 +31,15 @@ public class Board {
     }
 
     public ArrayList<Student> getEntrance() {
-        return new ArrayList<Student>(entrance);
+        return entrance;
     }
 
     public ArrayList<Table> getHall() {
-        return new ArrayList<Table>(hall);
+        return hall;
     }
 
     public ArrayList<Professor> getProfessors() {
-        return new ArrayList<>(professors);
+        return professors;
     }
 
     public int getTowers() {
@@ -59,30 +59,16 @@ public class Board {
     }
 
     public boolean removeStudentFromEntrance(CreatureColor color) {
-        if(isThereColorInEntrance(color)){
-            for(Student student : entrance){
-                if(student.getColor().equals(color)) {
-                    entrance.remove(student);
-                    return true;
-                }
-            }
-        }
-        return false;
-
-
-    }
-
-    /**
-     * it checks if there's in entrance at least ONE student of the given color
-     */
-    public boolean isThereColorInEntrance(CreatureColor color){
         for(Student student : entrance){
             if(student.getColor().equals(color)){
+                entrance.remove(student);
                 return true;
             }
         }
         return false;
+
     }
+
 
     public boolean addStudentToHall(CreatureColor color) {
         Table tableToAdd;
@@ -120,11 +106,12 @@ public class Board {
      * it moves a student from the entrance to a known island
      */
     public boolean moveStudentToIsland(CreatureColor color,Island island) {
-        if(isThereColorInEntrance(color)){
-            removeStudentFromEntrance(color);
-            island.getStudents().add(new Student(color));
-            }
-        return false;
+       if(removeStudentFromEntrance(color)){
+           island.addStudent(new Student(color));
+           return true;
+       }
+       return false;
+
     }
 
 
@@ -139,7 +126,7 @@ public class Board {
             professors.remove(professor);
         }
     }
-
+    // it eliminates the professor of the given color, and returns that specific professor
     // TODO check
     public Professor loseProfessorByColor(CreatureColor color) {
         if(containsProfessor(color)) {
@@ -169,7 +156,6 @@ public class Board {
                 }
             }
         }
-
         return null;
     }
 
