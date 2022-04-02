@@ -28,5 +28,7 @@ public class MotherNature {
         this.currentIslandGroup=islandGroup;
    }
 
-
+    public IslandGroup getCurrentIslandGroup() {
+        return currentIslandGroup;
+    }
 }

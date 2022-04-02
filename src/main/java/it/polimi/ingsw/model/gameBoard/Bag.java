@@ -16,6 +16,10 @@ public class Bag {
         return bag;
     }
 
+    public ArrayList<Student> getStudents() {
+        return students;
+    }
+
     public void addStudent(Student student) {
         students.add(student);
         this.shuffle();
