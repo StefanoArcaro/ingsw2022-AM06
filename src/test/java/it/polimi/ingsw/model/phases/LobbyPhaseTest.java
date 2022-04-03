@@ -10,17 +10,19 @@ import static org.junit.jupiter.api.Assertions.*;
 class LobbyPhaseTest {
 
     Game game;
+    PhaseFactory phaseFactory;
     Phase phase;
 
     @Test
     void play() {
         game = Game.getGame();
         game.setNumberOfPlayers(3);
-        game.startGame();
+
+        phaseFactory = new PhaseFactory();
+        phase = phaseFactory.createPhase(GameState.LOBBY_PHASE);
 
         assertEquals(GameState.LOBBY_PHASE, game.getGameState());
 
-        phase = game.getCurrentPhase();
         phase.play();
 
         assertEquals("Stefano", game.getPlayers().get(0).getNickname());
@@ -30,5 +32,7 @@ class LobbyPhaseTest {
         assertEquals(PlayerColor.BLACK, game.getPlayers().get(0).getColor());
         assertEquals(PlayerColor.WHITE, game.getPlayers().get(1).getColor());
         assertEquals(PlayerColor.GRAY, game.getPlayers().get(2).getColor());
+
+        assertEquals(GameState.PREPARE_PHASE, game.getGameState());
     }
 }

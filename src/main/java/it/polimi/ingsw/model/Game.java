@@ -12,45 +12,57 @@ import java.util.ArrayList;
 
 public class Game {
 
-    static int roundNumber = 1;
+    static int roundNumber = 1; // TODO remove after removing Round class
 
     private static Game game = null;
     private NumberOfPlayers numberOfPlayers;
     private GameMode gameMode;
     private GameState gameState;
-    private static Round currentRound; //static attribute to be accessed via class
-    private PhaseFactory phaseFactory;
+    private final PhaseFactory phaseFactory;
     private Phase currentPhase;
+    private final ArrayList<Player> players;
     private Player firstPlayer;
-    private ArrayList<Player> players;
     private Player currentPlayer;
-    private ArrayList<Cloud> clouds;
-    private ArrayList<Professor> professors;
-    private ArrayList<IslandGroup> islandGroups;
-    private ArrayList<Character> drawnCharacters; // TODO this as well
-    private ArrayList<Character> activatedCharacters; // TODO check if needed
+    private final MotherNature motherNature;
+    private final ArrayList<IslandGroup> islandGroups;
+    private final ArrayList<Cloud> clouds;
+    private final ArrayList<Professor> professors;
+    private final ArrayList<Character> drawnCharacters;
     private int treasury;
+
+    // TODO check if needed
+    private ArrayList<Character> activatedCharacters;
+
+    // TODO remove after removing Round class
+    private static Round currentRound; //static attribute to be accessed via class
 
     /**
      * Private constructor
      */
     private Game() {
+        phaseFactory = new PhaseFactory();
         players = new ArrayList<>();
+        motherNature = MotherNature.getMotherNature();
+        islandGroups = new ArrayList<>();
         clouds = new ArrayList<>();
         professors = new ArrayList<>();
+        drawnCharacters = new ArrayList<>();
+
+        // Game begins waiting for players in the Lobby phase
+        gameState = GameState.LOBBY_PHASE;
+
+        // TODO remove after fixing tests: this is done in the PreparePhase class
+        /*
         for(CreatureColor color : CreatureColor.values()) {
             professors.add(new Professor(color));
         }
-        islandGroups = new ArrayList<>();
         for(int i=1; i<=12; i++) {
             Island island = new Island(i);
             IslandGroup islandGroup = new IslandGroup();
             islandGroup.addIsland(island);
             islandGroups.add(islandGroup);
         }
-        drawnCharacters = new ArrayList<>();
-        phaseFactory = new PhaseFactory();
-        gameState = GameState.LOBBY_PHASE;
+        */
     }
 
     /**
@@ -64,48 +76,12 @@ public class Game {
         return game;
     }
 
-
-
     /**
-     * @return the number of the current round
+     * Manages the game
      */
-    public static int getRoundNumber() {
-        return roundNumber;
-    }
-
-    /**
-     * @return the current phase
-     */
-    public Phase getCurrentPhase() {
-        return currentPhase;
-    }
-
-
-    /**
-     * @return the current player
-     */
-    public Player getCurrentPlayer() {
-        return currentPlayer;
-    }
-
-    //TEMPORARY PUBLIC JUST FOR DOING CHARACTERMOVERTEST,
-    //when the game methods are implemented this method will be private
-    public void addIslandGroup(IslandGroup islandGroup){
-        islandGroups.add(islandGroup);
-    }
-
-    public Island getIslandByID(int islandID) {
-        ArrayList<Island> temp;
-
-        for(IslandGroup islandGroup : islandGroups) {
-            temp = islandGroup.getIslands();
-            for(Island island : temp) {
-                if(island.getIslandID() == islandID) {
-                    return island;
-                }
-            }
-        }
-        return null;
+    public void startGame() {
+        // Phase set before
+        currentPhase = phaseFactory.createPhase(gameState);
     }
 
     /**
@@ -115,6 +91,10 @@ public class Game {
         return numberOfPlayers;
     }
 
+    /**
+     * Sets the number of players for the game to the chosen number, either 2 or 3
+     * @param numberOfPlayers to be set
+     */
     public void setNumberOfPlayers(int numberOfPlayers) {
         if(numberOfPlayers == NumberOfPlayers.TWO_PLAYERS.getNum()) {
             this.numberOfPlayers = NumberOfPlayers.TWO_PLAYERS;
@@ -131,195 +111,130 @@ public class Game {
     }
 
     /**
+     * Sets the game mode to the chosen one
+     * @param gameMode mode chosen
+     */
+    public void setGameMode(GameMode gameMode) {
+        this.gameMode = gameMode;
+    }
+
+    /**
      * @return the current state of the game
      */
     public GameState getGameState() {
         return gameState;
     }
 
+    /**
+     * Sets the game state to the inputted one
+     * @param gameState to set the game's attribute to
+     */
     public void setGameState(GameState gameState) {
         this.gameState = gameState;
     }
 
     /**
-     * @return a reference to the current round
+     * @return the current phase
      */
-    public static Round getCurrentRound() {
-        return currentRound;
-    } //static method to be able to call it through the class
+    public Phase getCurrentPhase() {
+        return currentPhase;
+    }
 
-    public static void setCurrentRound(Round currentRound) {
-        Game.currentRound = currentRound;
+    // Used for testing purposes
+    public void setCurrentPhase(Phase phase) {
+        this.currentPhase = phase;
     }
 
     /**
-     * @return the player that played first during the previous round
+     * @return the list of players
+     */
+    public ArrayList<Player> getPlayers() {
+        return new ArrayList<>(players);
+    }
+
+    /**
+     * Adds a player to the game.
+     * Nickname check is done in the LobbyPhase class
+     * @param player to be added
+     */
+    public void addPlayer (Player player) {
+        players.add(player);
+    }
+
+    /**
+     * @return the player that went first during the previous phase
      */
     public Player getFirstPlayer() {
         return firstPlayer;
     }
 
     /**
-     * @return a copy of the players' list
+     * Sets the first player who will go first during the next phase
+     * @param firstPlayer player to be set
      */
-    public ArrayList<Player> getPlayers() {
-        return new ArrayList<>(players);
-    }
-
-    public void addPlayer (Player player){
-        //CHECK IF NICKNAME TAKEN....
-        players.add(player);
+    public void setFirstPlayer(Player firstPlayer) {
+        this.firstPlayer = firstPlayer;
     }
 
     /**
-     * @return a copy of the cloud cards' list
+     * @return the current player
+     */
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    // TODO check if we need a setCurrentPlayer() method
+
+    /**
+     * @return the Mother Nature attribute
+     */
+    public MotherNature getMotherNature() {
+        return motherNature;
+    }
+
+    /**
+     * @return the list of island groups
+     */
+    public ArrayList<IslandGroup> getIslandGroups() {
+        return new ArrayList<>(islandGroups);
+    }
+
+    /**
+     * Adds an island group to the islandGroups list
+     * @param islandGroup to be added
+     */
+    public void addIslandGroup(IslandGroup islandGroup){
+        islandGroups.add(islandGroup);
+    }
+
+    /**
+     * @return the list of cloud cards
      */
     public ArrayList<Cloud> getClouds() {
-        // TODO
-        return null;
+        return new ArrayList<>(clouds);
     }
 
     /**
-     * @return a copy of the professors' set
+     * Adds a cloud card to the clouds list
+     * @param cloud cloud card to be added
+     */
+    public void addCloud(Cloud cloud) {
+        this.clouds.add(cloud);
+    }
+
+    /**
+     * @return the list of professors
      */
     public ArrayList<Professor> getProfessors() {
         return new ArrayList<>(professors);
     }
 
-    // TODO check
-    public Professor removeProfessor(CreatureColor color) {
-        for(Professor professor : professors) {
-            if(professor.getColor().equals(color)) {
-                professors.remove(professor);
-                return professor;
-            }
-        }
-        return null;
-    }
-
     /**
-     * @return a copy of the island groups' circular list
+     * Adds a professor to the professors list
+     * @param professor to be added
      */
-    public ArrayList<IslandGroup> getIslandGroups() {
-        // TODO
-        return null;
-    }
-
-    /**
-     * @return a copy of the characters' set
-     */
-    public ArrayList<Character> getCharacters() {
-        // TODO
-        return null;
-    }
-
-    /**
-     * @return a copy of the list of characters drawn for the game
-     */
-    public ArrayList<Character> getDrawnCharacters() {
-        // TODO
-        return null;
-    }
-
-    /**
-     * Used to keep track of activated characters whose effect can be
-     * delayed within the active player's turn
-     * @return a copy of the activated characters' list
-     */
-    public ArrayList<Character> getActivatedCharacters() {
-        // TODO
-        return null;
-    }
-
-    public void activateCharacter(int characterID) {
-        // TODO
-    }
-
-    /**
-     * @return a copy of the list of coins available on the "board"
-     */
-    public int getTreasury() {
-        // TODO
-        return 0;
-    }
-
-    /**
-     * Prepares the "game board" before the actual game begins
-     */
-    public void prepareGame() {
-
-    }
-
-    /**
-     * Manages the game
-     */
-    public void startGame() {
-        // LobbyPhase
-        currentPhase = phaseFactory.createPhase(gameState);
-    }
-
-    /**
-     * Ends the game based on the ending code defined in gameState
-     */
-    public void endGame() {
-
-    }
-
-    /**
-     * Determines if a certain nickname has already been chosen by another player
-     * @param nickname to check
-     * @return whether the nickname has alreasy been chosen
-     */
-    public boolean isNickNameTaken(String nickname) {
-        // TODO
-        return false;
-    }
-
-    /**
-     * Returns the player having the inputted nickname
-     * @param nickname to check
-     * @return the player whose nickname matches the parameter passed
-     */
-    public Player getPlayerByNickname(String nickname) {
-        for(Player player : players) {
-            if(player.getNickname().equals(nickname)) {
-                return player;
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * Initializes and sets up the island groups on the "board"
-     */
-    private void initializeIslandGroups() {
-
-    }
-
-    /**
-     * Randomly places Mother Nature on one of the initial island groups
-     * @return the initial position of Mother Nature
-     */
-    private int placeMotherNature() {
-        // TODO
-        return 0;
-    }
-
-    /**
-     * Place 2 students of each color (10 total) on the islands, except for
-     * the one where Mother Nature was placed and the one on the opposite side
-     */
-    private void placeInitialStudents() {
-
-    }
-
-    public void calculateInfluence(int islandGroupIndex) {
-
-    }
-
-    public void calculateInfluence(int islandGroupIndex, CharacterInfluenceModifier activatedCharacter) {
-
+    public void addProfessor(Professor professor) {
+        this.professors.add(professor);
     }
 
     /**
@@ -352,7 +267,7 @@ public class Game {
         for(int i = 0; i < players.size(); i++) {
             int tempInfluence = players.get(i).getBoard().getHall().getTableByColor(color).getLength();
             boolean characterEffectForCurrentPlayer = false;
-            if(!currentPhase.getActivatedCharacter().equals(CharacterID.CHARACTER_NONE)) {
+            if(currentPhase.getActivatedCharacter().getCharacterID() != CharacterID.CHARACTER_NONE.getID()) {
                 characterEffectForCurrentPlayer =
                         players.get(i).equals(currentPlayer) &&
                         currentPhase.getActivatedCharacter().getCharacterID() == CharacterID.CHARACTER_TWO.getID();
@@ -364,15 +279,180 @@ public class Game {
             }
         }
 
-        if(owner != null) {
-            if(!players.get(maxInfluenceIndex).equals(owner)) {
-                Professor professorToUpdate = owner.getBoard().loseProfessorByColor(color);
+        if(maxInfluence > 0) {
+            if(owner != null) {
+                if(!players.get(maxInfluenceIndex).equals(owner)) {
+                    Professor professorToUpdate = owner.getBoard().loseProfessorByColor(color);
+                    players.get(maxInfluenceIndex).getBoard().winProfessor(professorToUpdate);
+                }
+            } else if(maxInfluenceIndex != -1) {
+                // This should be replaced with the code below
+                //Game.getGame().getProfessors();
+                //Professor professorToUpdate = Game.getGame().removeProfessor(color);
+                //players.get(maxInfluenceIndex).getBoard().winProfessor(professorToUpdate);
+
+                Professor professorToUpdate = removeProfessor(color);
                 players.get(maxInfluenceIndex).getBoard().winProfessor(professorToUpdate);
             }
-        } else if(maxInfluenceIndex != -1) {
-            Game.getGame().getProfessors();
-            Professor professorToUpdate = Game.getGame().removeProfessor(color);
-            players.get(maxInfluenceIndex).getBoard().winProfessor(professorToUpdate);
         }
+    }
+
+    /**
+     * Removes a professor from the list: called when a player wins such professor
+     * @param color of the professor to remove
+     * @return the professor removed
+     */
+    public Professor removeProfessor(CreatureColor color) {
+        // TODO check
+        for(Professor professor : professors) {
+            if(professor.getColor().equals(color)) {
+                professors.remove(professor);
+                return professor;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * @return the list of characters drawn for the game
+     */
+    public ArrayList<Character> getDrawnCharacters() {
+        return new ArrayList<>(drawnCharacters);
+    }
+
+    /**
+     * Adds a character to the drawnCharacters list
+     * @param drawnCharacter character to be added
+     */
+    public void addDrawnCharacter(Character drawnCharacter) {
+        this.drawnCharacters.add(drawnCharacter);
+    }
+
+    /**
+     * Activates the character passed as a parameter
+     * @param characterID ID of the character to activate
+     */
+    public void activateCharacter(int characterID) {
+        // TODO
+    }
+
+    /**
+     * @return the number of coins in the treasury
+     */
+    public int getTreasury() {
+        return treasury;
+    }
+
+    /**
+     * Sets the number of coins in the treasury
+     * @param numberOfCoins to be put in the treasury
+     */
+    public void setTreasury(int numberOfCoins) {
+        this.treasury = numberOfCoins;
+    }
+
+
+
+
+
+    public Island getIslandByID(int islandID) {
+        for(IslandGroup islandGroup : islandGroups) {
+            for(Island island : islandGroup.getIslands()) {
+                if(island.getIslandID() == islandID) {
+                    return island;
+                }
+            }
+        }
+        return null;
+    }
+
+    public void calculateInfluence(int islandGroupIndex) {
+
+    }
+
+    public void calculateInfluence(int islandGroupIndex, CharacterInfluenceModifier activatedCharacter) {
+
+    }
+
+
+
+
+
+
+
+    // TODO remove after removing Round
+    /**
+     * @return a reference to the current round
+     */
+    public static Round getCurrentRound() {
+        return currentRound;
+    } //static method to be able to call it through the class
+
+    public static void setCurrentRound(Round currentRound) {
+        Game.currentRound = currentRound;
+    }
+
+    /**
+     * @return a copy of the characters' set
+     */
+    public ArrayList<Character> getCharacters() {
+        // TODO check if needed (should be useless)
+        return null;
+    }
+
+    /**
+     * Used to keep track of activated characters whose effect can be
+     * delayed within the active player's turn
+     * @return a copy of the activated characters' list
+     */
+    public ArrayList<Character> getActivatedCharacters() {
+        // TODO check if needed (it shouldn't be)
+        return null;
+    }
+
+    /**
+     * Prepares the "game board" before the actual game begins
+     */
+    public void prepareGame() {
+        // TODO check if needed (PreparePhase's job)
+    }
+
+    /**
+     * Ends the game based on the ending code defined in gameState
+     */
+    public void endGame() {
+        // TODO check if needed (should be EndgamePhase's job)
+    }
+
+    /**
+     * Initializes and sets up the island groups on the "board"
+     */
+    private void initializeIslandGroups() {
+        // TODO check if needed (already in PreparePhase)
+    }
+
+    /**
+     * Randomly places Mother Nature on one of the initial island groups
+     * @return the initial position of Mother Nature
+     */
+    private int placeMotherNature() {
+        // TODO check if needed (already in PreparePhase)
+        return 0;
+    }
+
+    /**
+     * Place 2 students of each color (10 total) on the islands, except for
+     * the one where Mother Nature was placed and the one on the opposite side
+     */
+    private void placeInitialStudents() {
+        // TODO check if needed (already in PreparePhase)
+    }
+
+    // TODO remove after removing Round
+    /**
+     * @return the number of the current round
+     */
+    public static int getRoundNumber() {
+        return roundNumber;
     }
 }

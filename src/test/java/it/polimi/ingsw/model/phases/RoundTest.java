@@ -139,13 +139,13 @@ class RoundTest {
         assertEquals(0, round.getPlayerPriority().size());
 
         player = players.get(0);
-        player.setWizard(new Wizard(player, WizardName.DRUID));
+        player.setWizard(WizardName.DRUID);
         assistant = player.getWizard().playAssistant(7);
         round.addPlayerPriorityEntry(player, assistant);
         assertEquals(1, round.getPlayerPriority().size());
 
         player = players.get(1);
-        player.setWizard(new Wizard(player, WizardName.DRUID));
+        player.setWizard(WizardName.DRUID);
         assistant = player.getWizard().playAssistant(4);
         round.addPlayerPriorityEntry(player, assistant);
         assertEquals(2, round.getPlayerPriority().size());
@@ -174,19 +174,19 @@ class RoundTest {
         assertEquals(0, round.getPlayerPriority().size());
 
         player = players.get(0);
-        player.setWizard(new Wizard(player, WizardName.SENSEI));
+        player.setWizard(WizardName.SENSEI);
         assistant = player.getWizard().playAssistant(7);
         round.addPlayerPriorityEntry(player, assistant);
         assertEquals(1, round.getPlayerPriority().size());
 
         player = players.get(1);
-        player.setWizard(new Wizard(player, WizardName.KING));
+        player.setWizard(WizardName.KING);
         assistant = player.getWizard().playAssistant(4);
         round.addPlayerPriorityEntry(player, assistant);
         assertEquals(2, round.getPlayerPriority().size());
 
         player = players.get(2);
-        player.setWizard(new Wizard(player, WizardName.WITCH));
+        player.setWizard(WizardName.WITCH);
         assistant = player.getWizard().playAssistant(5);
         round.addPlayerPriorityEntry(player, assistant);
         assertEquals(3, round.getPlayerPriority().size());
@@ -395,7 +395,7 @@ class RoundTest {
         round = new Round(players, firstPlayerIndex);
 
         player = players.get(0);
-        player.setWizard(new Wizard(player, WizardName.SENSEI));
+        player.setWizard(WizardName.SENSEI);
         assertFalse(round.checkAssistantPlayed(7));
         assistant = player.getWizard().playAssistant(7);
         player.getWizard().removeAssistant(7);
@@ -403,7 +403,7 @@ class RoundTest {
 
         player = players.get(1);
         round.setCurrentPlayer(player);
-        player.setWizard(new Wizard(player, WizardName.KING));
+        player.setWizard(WizardName.KING);
         assertTrue(round.checkAssistantPlayed(7));
         assertFalse(round.checkAssistantPlayed(4));
         assistant = player.getWizard().playAssistant(4);
@@ -418,7 +418,7 @@ class RoundTest {
         round = new Round(players, firstPlayerIndex);
 
         player = players.get(0);
-        player.setWizard(new Wizard(player, WizardName.SENSEI));
+        player.setWizard(WizardName.SENSEI);
         assertFalse(round.checkAssistantPlayed(7));
         assistant = player.getWizard().playAssistant(7);
         player.getWizard().removeAssistant(7);
@@ -426,7 +426,7 @@ class RoundTest {
 
         player = players.get(1);
         round.setCurrentPlayer(player);
-        player.setWizard(new Wizard(player, WizardName.KING));
+        player.setWizard(WizardName.KING);
 
         player.getWizard().removeAssistant(1);
         player.getWizard().removeAssistant(2);
@@ -453,7 +453,7 @@ class RoundTest {
         round = new Round(players, firstPlayerIndex);
 
         player = players.get(0);
-        player.setWizard(new Wizard(player, WizardName.SENSEI));
+        player.setWizard(WizardName.SENSEI);
         assertFalse(round.checkAssistantPlayed(7));
         assistant = player.getWizard().playAssistant(7);
         player.getWizard().removeAssistant(7);
@@ -461,7 +461,7 @@ class RoundTest {
 
         player = players.get(1);
         round.setCurrentPlayer(player);
-        player.setWizard(new Wizard(player, WizardName.KING));
+        player.setWizard(WizardName.KING);
         assertTrue(round.checkAssistantPlayed(7));
         assertFalse(round.checkAssistantPlayed(4));
         assistant = player.getWizard().playAssistant(4);
@@ -471,7 +471,7 @@ class RoundTest {
 
         player = players.get(2);
         round.setCurrentPlayer(player);
-        player.setWizard(new Wizard(player, WizardName.WITCH));
+        player.setWizard(WizardName.WITCH);
         assertTrue(round.checkAssistantPlayed(7));
         assertTrue(round.checkAssistantPlayed(4));
         assertFalse(round.checkAssistantPlayed(5));
@@ -489,7 +489,7 @@ class RoundTest {
         round = new Round(players, firstPlayerIndex);
 
         player = players.get(0);
-        player.setWizard(new Wizard(player, WizardName.SENSEI));
+        player.setWizard(WizardName.SENSEI);
         assertFalse(round.checkAssistantPlayed(7));
         assistant = player.getWizard().playAssistant(7);
         player.getWizard().removeAssistant(7);
@@ -497,7 +497,7 @@ class RoundTest {
 
         player = players.get(1);
         round.setCurrentPlayer(player);
-        player.setWizard(new Wizard(player, WizardName.KING));
+        player.setWizard(WizardName.KING);
 
         player.getWizard().removeAssistant(1);
         player.getWizard().removeAssistant(2);
@@ -517,7 +517,7 @@ class RoundTest {
 
         player = players.get(2);
         round.setCurrentPlayer(player);
-        player.setWizard(new Wizard(player, WizardName.WITCH));
+        player.setWizard(WizardName.WITCH);
 
         player.getWizard().removeAssistant(1);
         player.getWizard().removeAssistant(2);

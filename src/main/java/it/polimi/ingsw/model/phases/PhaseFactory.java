@@ -5,8 +5,7 @@ import it.polimi.ingsw.model.GameState;
 
 public class PhaseFactory {
 
-    public Phase createPhase(GameState gameState){
-
+    public Phase createPhase(GameState gameState) {
         Game game = Game.getGame();
 
         switch(gameState) {
