@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.characters;
 
+import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.gameBoard.CreatureColor;
 import it.polimi.ingsw.model.gameBoard.Student;
 
 import java.util.ArrayList;
@@ -9,6 +11,7 @@ import java.util.ArrayList;
  */
 public abstract class Character {
     protected int characterID;
+    protected Game game;
     protected int cost;
     protected boolean used;
     protected int numberOfStudents;
@@ -16,6 +19,10 @@ public abstract class Character {
     protected int toDoNow;
 
     protected ArrayList<Student> students;
+
+    protected CreatureColor colorNoPoints;
+    protected boolean towerCounter;
+    protected int extraPoints;
 
     /**
      * Modify the game setup in order to use this character.
@@ -70,5 +77,31 @@ public abstract class Character {
 
     public int getNumberOfStudents() {
         return numberOfStudents;
+    }
+
+    /**
+     * @return extra points given by the character effect
+     */
+    public int getExtraPoints() {
+        return extraPoints;
+    }
+
+    /**
+     * @return whether the towers affect the influence calculation or not
+     */
+    public boolean getTowerCounter(){
+        return towerCounter;
+    }
+
+    /**
+     * Set a color that will not be considered for the influence calculation
+     * @param colorNoPoints the color to ignore
+     */
+    public void setColorNoPoints(CreatureColor colorNoPoints) {
+        this.colorNoPoints = colorNoPoints;
+    }
+
+    public CreatureColor getColorNoPoints() {
+        return colorNoPoints;
     }
 }

@@ -5,7 +5,7 @@ import java.util.Collections;
 
 public class Bag {
     private static Bag bag = null;
-    private ArrayList<Student> students = new ArrayList<>();
+    private ArrayList<Student> students = new ArrayList<Student>();
 
     private Bag() {}
 
@@ -16,9 +16,13 @@ public class Bag {
         return bag;
     }
 
+    public ArrayList<Student> getStudents() {
+        return students;
+    }
+
     public void addStudent(Student student) {
         students.add(student);
-        //this.shuffle(); commented out for testing purposes
+        //this.shuffle();
     }
 
     public int size() {
@@ -28,7 +32,6 @@ public class Bag {
     public Student drawStudent() {
         int len = students.size();
         Student student;
-
         if(len > 0) {
             student = students.get(len - 1);
             students.remove(student);
@@ -39,9 +42,9 @@ public class Bag {
 
     public boolean isEmpty() {
         if(students.size() > 0) {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     public void shuffle(){

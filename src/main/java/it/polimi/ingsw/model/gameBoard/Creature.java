@@ -19,4 +19,5 @@ public abstract class Creature {
         return color;
     }
 
+
 }

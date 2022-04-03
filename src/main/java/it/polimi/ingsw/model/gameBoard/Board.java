@@ -1,11 +1,9 @@
 package it.polimi.ingsw.model.gameBoard;
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.model.characters.Character;
 
 import java.util.ArrayList;
 
 public class Board {
-
     private Player player;
     private Entrance entrance;
     private Hall hall;
@@ -13,17 +11,13 @@ public class Board {
     private int towers;
 
 
-    /* TODO
-    private Entrance entrance;
-    private Hall hall;
-     */
-
     public Board(Player player) {
         this.player = player;
         this.entrance = new Entrance(this);
         this.hall = new Hall(this);
         this.professors = new ArrayList<>();
     }
+
 
     public void setTowers(int towers) {
         this.towers = towers;
@@ -49,14 +43,12 @@ public class Board {
         return player;
     }
 
-
-
     public void addStudentToEntrance(CreatureColor color) {
         entrance.addStudent(color);
     }
 
-    public void removeStudentFromEntrance(CreatureColor color){
-        entrance.removeStudent(color);
+    public boolean removeStudentFromEntrance(CreatureColor color){
+        return entrance.removeStudent(color);
     }
 
     public boolean addStudentToHall(CreatureColor color) {
@@ -67,10 +59,17 @@ public class Board {
         return hall.removeStudent(color);
     }
 
+    /**
+     * it moves a student from the entrance to a known island
+     */
+    public boolean moveStudentToIsland(CreatureColor color,Island island) {
+       if(removeStudentFromEntrance(color)){
+           island.addStudent(new Student(color));
+           return true;
+       }
+       return false;
 
-
-    public void moveStudentToHall(CreatureColor color) {}
-    public void moveStudentToIsland(CreatureColor color, Island island) {}
+    }
 
     public void winProfessor(Professor professor) {
         if(!professors.contains(professor)) {
@@ -84,7 +83,9 @@ public class Board {
         }
     }
 
-    // TODO check
+    /**
+     * it eliminates the professor of the given color, and returns that specific professor
+      */
     public Professor loseProfessorByColor(CreatureColor color) {
         if(containsProfessor(color)) {
             Professor result = getProfessorByColor(color);
@@ -95,7 +96,6 @@ public class Board {
         return null;
     }
 
-    // TODO check if correct
     public boolean containsProfessor(CreatureColor color) {
         for(int i = 0; i < professors.size(); i++) {
             if(color.equals(professors.get(i).getColor())) {
@@ -113,11 +113,29 @@ public class Board {
                 }
             }
         }
-
         return null;
     }
 
-    public void moveTower(int numberOfTowers) {}
-    private void checkIfNoTowers() {}
-    private void recoverTower(int numberOfTowers) {}
+    public void addTowers(int numberOfTowers) {
+        this.towers = this.towers + numberOfTowers;
+    }
+
+    public boolean removeTowers(int numberOfTowers){
+        if(this.towers>=numberOfTowers) {
+            this.towers = towers-numberOfTowers;
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isThereNoTowers() {
+        if (this.towers == 0)
+            return true;
+        else return false;
+
+    }
+
+
 }
+
+

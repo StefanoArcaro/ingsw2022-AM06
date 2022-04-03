@@ -18,6 +18,9 @@ public class CharacterMover extends Character {
         this.used = false;
         this.numberOfBanCards = 0;
         this.students = new ArrayList<>();
+        this.colorNoPoints = null;
+        this.extraPoints = 0;
+        this.towerCounter = true;
 
         CharacterID character = CharacterID.values()[characterID];
 
@@ -86,10 +89,10 @@ public class CharacterMover extends Character {
                 effect_one(fromColor, islandID);
                 break;
             case CHARACTER_SEVEN:
-                effect_seven(fromColor, toColor);    //how to handle iteration? (till 3 students)
+                effect_seven(fromColor, toColor);    //TODO how to handle iteration? (till 3 students)
                 break;
             case CHARACTER_TEN:
-                effect_ten(fromColor, toColor);      //how to handle iteration? (till 2 students)
+                effect_ten(fromColor, toColor);      //TODO how to handle iteration? (till 2 students)
                 break;
             case CHARACTER_ELEVEN:
                 effect_eleven(fromColor);

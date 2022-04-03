@@ -8,11 +8,15 @@ public class CharacterInfluenceCalculator extends Character {
 
     public CharacterInfluenceCalculator(int characterID) {
         this.characterID = characterID;
+        this.game = Game.getGame();
         this.cost = 3;
         this.used = false;
         this.numberOfStudents = 0;
         this.numberOfBanCards = 0;
         this.toDoNow = 1;
+        this.colorNoPoints = null;
+        this.extraPoints = 0;
+        this.towerCounter = true;
     }
 
     /**
@@ -34,6 +38,6 @@ public class CharacterInfluenceCalculator extends Character {
      * Calculates the influence on the island group chosen
      */
     public void effect() {
-        Game.getGame().calculateInfluence(this.islandGroupIndex);
+        game.calculateInfluence(this.islandGroupIndex, this);
     }
 }

@@ -17,4 +17,5 @@ public enum CreatureColor {
     public int getIndex() {
         return index;
     }
+
 }

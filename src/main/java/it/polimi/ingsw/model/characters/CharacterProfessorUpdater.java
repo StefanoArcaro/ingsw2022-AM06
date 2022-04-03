@@ -10,15 +10,19 @@ public class CharacterProfessorUpdater extends Character {
      */
     public CharacterProfessorUpdater(int characterID) {
         this.characterID = characterID;
+        this.game = Game.getGame();
         this.cost = 2;
         this.used = false;
         this.numberOfStudents = 0;
         this.numberOfBanCards = 0;
         this.toDoNow = 1;
+        this.colorNoPoints = null;
+        this.extraPoints = 0;
+        this.towerCounter = true;
     }
 
     @Override
     public void effect() {
-        Game.getCurrentRound().updateProfessors();
+        game.updateProfessors();
     }
 }

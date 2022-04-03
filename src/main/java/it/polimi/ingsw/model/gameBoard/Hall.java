@@ -47,6 +47,9 @@ public class Hall {
         return false;
     }
 
+    /**
+     * returns true if there is at least one student in table
+     */
     public boolean studentInTable(CreatureColor color) {
         Table table = getTableByColor(color);
         return table.getLength() > 0;

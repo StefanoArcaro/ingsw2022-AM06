@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.characters.CharacterInfluenceModifier;
 import it.polimi.ingsw.model.gameBoard.*;
 import it.polimi.ingsw.model.phases.Phase;
 import it.polimi.ingsw.model.phases.PhaseFactory;
+import it.polimi.ingsw.model.phases.Phase;
 import it.polimi.ingsw.model.phases.Round;
 
 import java.util.ArrayList;
@@ -74,6 +75,11 @@ public class Game {
             game = new Game();
         }
         return game;
+    }
+
+    //for testing: problem due to singleton
+    public void removeIslandGroups(){
+        islandGroups=new ArrayList<>();
     }
 
     /**
@@ -161,6 +167,11 @@ public class Game {
         players.add(player);
     }
 
+    //for testing
+    public void removePlayer (int indexPlayerToRemove){
+        players.remove(indexPlayerToRemove);
+    }
+
     /**
      * @return the player that went first during the previous phase
      */
@@ -182,6 +193,8 @@ public class Game {
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
+
+    public void setCurrentPlayer (Player player) {this.currentPlayer = player;}
 
     // TODO check if we need a setCurrentPlayer() method
 
@@ -454,5 +467,92 @@ public class Game {
      */
     public static int getRoundNumber() {
         return roundNumber;
+    }
+
+    public Player getPlayerByColor(PlayerColor color) {
+        for (Player player : players){
+            if(player.getColor().equals(color)){
+                return player;
+            }
+        }
+        return null;
+    }
+
+
+    /**
+     *
+     * @param islandGroupIndex
+     * @param activatedCharacter
+     */
+    public void calculateInfluence(int islandGroupIndex, Character activatedCharacter) {
+        int influence;
+        int maxInfluence = -1;
+        boolean draw = false;
+        IslandGroup islandGroup = getIslandGroupByIndex(islandGroupIndex);
+        Player playerMaxInfluence = null;
+        PlayerColor towerColorOnIslandGroup = islandGroup.getConquerorColor();
+        Player playerOlderConquerorIslandGroup = null;
+
+        if(islandGroup.getNumberOfBanCardPresent()>0){
+            islandGroup.removeBanCard();
+            return;
+        }
+
+        if(towerColorOnIslandGroup!=null){
+            playerOlderConquerorIslandGroup = getPlayerByColor(towerColorOnIslandGroup);
+        }
+
+
+        for (Player player : players){
+            influence = islandGroup.calculateInfluence(player, activatedCharacter);
+
+            if(influence > maxInfluence){
+                maxInfluence = influence;
+                playerMaxInfluence = player;
+            }else if(influence == maxInfluence) {
+                if(!player.equals(playerOlderConquerorIslandGroup)) {
+                    draw = true;
+                }else{
+                    playerMaxInfluence = player;
+                }
+
+            }
+        }
+
+
+        if(!draw && !playerMaxInfluence.equals(playerOlderConquerorIslandGroup)){
+            int numberOfIsland = islandGroup.getNumberOfIsland();
+            if(playerOlderConquerorIslandGroup!=null){
+                for(Island island : getIslandGroupByIndex(islandGroupIndex).getIslands()){
+                    island.removeTower();
+                }
+            }
+
+            for(Island island : getIslandGroupByIndex(islandGroupIndex).getIslands()){
+                island.addTower(playerMaxInfluence.getColor());
+            }
+            islandGroups.get(islandGroupIndex).setConquerorColor(playerMaxInfluence.getColor());
+
+            int numberOfIslandGroups = islandGroups.size();
+
+            int indexPreviousIslandGroup = (islandGroupIndex-1)<0 ? numberOfIslandGroups-1 : islandGroupIndex-1;
+            int indexNextIslandGroup = (islandGroupIndex+1)%numberOfIslandGroups;
+
+            connectIslandGroups(islandGroupIndex, indexPreviousIslandGroup);
+            connectIslandGroups(islandGroupIndex, indexNextIslandGroup);
+        }
+    }
+
+    public void connectIslandGroups (int indexPresentIslandGroup, int indexIslandGroupToAdd){
+        IslandGroup presentIslandGroup = getIslandGroupByIndex(indexPresentIslandGroup);
+        IslandGroup islandGroupToAdd = getIslandGroupByIndex(indexIslandGroupToAdd);
+
+        if(presentIslandGroup.connectIslandGroup(islandGroupToAdd)){
+            islandGroups.remove(indexIslandGroupToAdd);
+        }
+    }
+
+    private IslandGroup getIslandGroupByIndex (int index) {
+        return islandGroups.get(index);
     }
 }

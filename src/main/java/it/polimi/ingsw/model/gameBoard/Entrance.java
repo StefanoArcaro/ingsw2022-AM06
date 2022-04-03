@@ -20,12 +20,13 @@ public class Entrance {
         students.add(new Student(color));
     }
 
-    public void removeStudent(CreatureColor color) {
+    public boolean removeStudent(CreatureColor color) {
         for(Student student : students) {
             if(student.getColor().equals(color)) {
                 students.remove(student);
-                return;
+                return true;
             }
         }
+        return false;
     }
 }
