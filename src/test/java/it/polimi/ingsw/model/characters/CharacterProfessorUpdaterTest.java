@@ -3,7 +3,7 @@ package it.polimi.ingsw.model.characters;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.PlayerColor;
-import it.polimi.ingsw.model.Round;
+import it.polimi.ingsw.model.phases.Round;
 import it.polimi.ingsw.model.gameBoard.Creature;
 import it.polimi.ingsw.model.gameBoard.CreatureColor;
 import it.polimi.ingsw.model.gameBoard.Professor;

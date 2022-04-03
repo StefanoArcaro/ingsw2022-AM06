@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.gameBoard;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.PlayerColor;
+import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.characters.CharacterInfluenceModifier;
 
 import java.util.ArrayList;
@@ -198,7 +199,7 @@ public class IslandGroup {
      * @param activatedCharacter active character which modifies influence
      * @return the influence for the player on the island group
      */
-    public int calculateInfluence(Player player, CharacterInfluenceModifier activatedCharacter) {
+    public int calculateInfluence(Player player, Character activatedCharacter) {
         int influence = 0;
         int extraPoints = 0;
 
@@ -206,7 +207,9 @@ public class IslandGroup {
             influence = influence + island.calculateInfluence(player, activatedCharacter);
         }
 
-        if(Game.getCurrentRound().getCurrentPlayer().equals(player)) {
+        Player currentPlayer = Game.getGame().getCurrentPlayer();
+
+        if(currentPlayer.equals(player) && activatedCharacter!=null) {
             extraPoints = activatedCharacter.getExtraPoints();
         }
 

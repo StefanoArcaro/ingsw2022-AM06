@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.phases;
 import it.polimi.ingsw.model.Assistant;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.characters.ConcreteCharacterFactory;
 import it.polimi.ingsw.model.gameBoard.Bag;
 import it.polimi.ingsw.model.gameBoard.Cloud;
 
@@ -25,6 +26,7 @@ public class PlanningPhase extends Phase {
         this.playingOrder = new ArrayList<>();
         playerPriority = new HashMap<>();
         bag = Bag.getBag();
+        this.activatedCharacter = new ConcreteCharacterFactory().createCharacter(0);
     }
 
     public ArrayList<Player> getPlayingOrder() {

@@ -1,15 +1,13 @@
 package it.polimi.ingsw.model.characters;
 
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.gameBoard.CreatureColor;
 
 public class CharacterInfluenceModifier extends Character {
 
-    private CreatureColor colorNoPoints;
-    private boolean towerCounter;
-    private int extraPoints;
-
     public CharacterInfluenceModifier(int characterID) {
         this.characterID = characterID;
+        this.game = Game.getGame();
         this.used = false;
         this.numberOfStudents = 0;
         this.colorNoPoints = null;
@@ -46,29 +44,4 @@ public class CharacterInfluenceModifier extends Character {
         // do nothing;
     }
 
-    /**
-     * @return extra points given by the character effect
-     */
-    public int getExtraPoints() {
-        return extraPoints;
-    }
-
-    /**
-     * @return whether the towers affect the influence calculation or not
-     */
-    public boolean getTowerCounter(){
-        return towerCounter;
-    }
-
-    /**
-     * Set a color that will not be considered for the influence calculation
-     * @param colorNoPoints the color to ignore
-     */
-    public void setColorNoPoints(CreatureColor colorNoPoints) {
-        this.colorNoPoints = colorNoPoints;
-    }
-
-    public CreatureColor getColorNoPoints() {
-        return colorNoPoints;
-    }
 }

@@ -153,8 +153,8 @@ class CharacterMoverTest {
 
         assertEquals(6, character.getStudents().size());
         assertEquals(expectedStudents, character.students.stream().map(Creature::getColor).collect(Collectors.toList()));
-        assertEquals(2, player.getBoard().getEntrance().size());
-        assertEquals(expectedEntrance, player.getBoard().getEntrance().stream().map(Creature::getColor).collect(Collectors.toList()));
+        assertEquals(2, player.getBoard().getEntrance().getStudents().size());
+        assertEquals(expectedEntrance, player.getBoard().getEntrance().getStudents().stream().map(Creature::getColor).collect(Collectors.toList()));
     }
 
 
@@ -191,8 +191,8 @@ class CharacterMoverTest {
 
         assertEquals(6, character.getStudents().size());
         assertEquals(expectedStudents, character.getStudents().stream().map(Creature::getColor).collect(Collectors.toList()));
-        assertEquals(2, player.getBoard().getEntrance().size());
-        assertEquals(expectedEntrance, player.getBoard().getEntrance().stream().map(Creature::getColor).collect(Collectors.toList()));
+        assertEquals(2, player.getBoard().getEntrance().getStudents().size());
+        assertEquals(expectedEntrance, player.getBoard().getEntrance().getStudents().stream().map(Creature::getColor).collect(Collectors.toList()));
 
     }
 
@@ -222,9 +222,9 @@ class CharacterMoverTest {
 
         character.effect();
 
-        assertEquals(expectedEntrance, player.getBoard().getEntrance().stream().map(Creature::getColor).collect(Collectors.toList()));
+        assertEquals(expectedEntrance, player.getBoard().getEntrance().getStudents().stream().map(Creature::getColor).collect(Collectors.toList()));
 
-        assertEquals(expectedHall, player.getBoard().getHall().stream().map(Table::getLength).collect(Collectors.toList()));
+        assertEquals(expectedHall, player.getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
 
     }
 
@@ -254,9 +254,9 @@ class CharacterMoverTest {
 
         character.effect();
 
-        assertEquals(expectedEntrance, player.getBoard().getEntrance().stream().map(Creature::getColor).collect(Collectors.toList()));
+        assertEquals(expectedEntrance, player.getBoard().getEntrance().getStudents().stream().map(Creature::getColor).collect(Collectors.toList()));
 
-        assertEquals(expectedHall, player.getBoard().getHall().stream().map(Table::getLength).collect(Collectors.toList()));
+        assertEquals(expectedHall, player.getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
 
 
     }
@@ -289,7 +289,7 @@ class CharacterMoverTest {
 
         character.effect();
 
-        assertEquals(expectedHall, player.getBoard().getHall().stream().map(Table::getLength).collect(Collectors.toList()));
+        assertEquals(expectedHall, player.getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
         assertEquals(4, character.getStudents().size());
 
     }
@@ -322,7 +322,7 @@ class CharacterMoverTest {
 
         character.effect();
 
-        assertEquals(expectedHall, player.getBoard().getHall().stream().map(Table::getLength).collect(Collectors.toList()));
+        assertEquals(expectedHall, player.getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
         assertEquals(4, character.getStudents().size());
 
     }
@@ -358,8 +358,8 @@ class CharacterMoverTest {
         ((CharacterMover)character).setColorToRemove(CreatureColor.RED);
         character.effect();
 
-        assertEquals(expectedHall1, p1.getBoard().getHall().stream().map(Table::getLength).collect(Collectors.toList()));
-        assertEquals(expectedHall2, p2.getBoard().getHall().stream().map(Table::getLength).collect(Collectors.toList()));
+        assertEquals(expectedHall1, p1.getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
+        assertEquals(expectedHall2, p2.getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
     }
 
     @Test
@@ -390,8 +390,8 @@ class CharacterMoverTest {
         ((CharacterMover)character).setColorToRemove(CreatureColor.RED);
         character.effect();
 
-        assertEquals(expectedHall1, p1.getBoard().getHall().stream().map(Table::getLength).collect(Collectors.toList()));
-        assertEquals(expectedHall2, p2.getBoard().getHall().stream().map(Table::getLength).collect(Collectors.toList()));
+        assertEquals(expectedHall1, p1.getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
+        assertEquals(expectedHall2, p2.getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
 
     }
 

@@ -15,6 +15,9 @@ public class CharacterStepsAdder extends Character {
         this.numberOfBanCards = 0;
         this.moreSteps = 2;
         this.toDoNow = 0;
+        this.colorNoPoints = null;
+        this.extraPoints = 0;
+        this.towerCounter = true;
     }
 
     @Override

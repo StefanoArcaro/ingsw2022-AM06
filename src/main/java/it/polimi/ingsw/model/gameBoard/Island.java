@@ -1,7 +1,8 @@
 package it.polimi.ingsw.model.gameBoard;
 
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.model.characters.CharacterInfluenceModifier;
+import it.polimi.ingsw.model.characters.Character;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +61,8 @@ public class Island {
     public boolean addTower(PlayerColor tower) {
         if(this.tower == null) {
             this.tower = tower;
+            Player player = Game.getGame().getPlayerByColor(tower);
+            player.getBoard().moveTowers(1);
             return true;
         }
         return false;
@@ -137,11 +140,11 @@ public class Island {
      * @param activatedCharacter active character
      * @return the player's influence on the island due to the towers
      */
-    private int towerInfluence(Player player, CharacterInfluenceModifier activatedCharacter) {
+    private int towerInfluence(Player player, Character activatedCharacter) {
         PlayerColor playerColor = player.getColor();
 
         //Automatically applied character effect 6
-        if(!activatedCharacter.getTowerCounter()) {
+        if(activatedCharacter!= null && !activatedCharacter.getTowerCounter()) {
             return 0;
         }
 
@@ -159,16 +162,16 @@ public class Island {
      * @param activatedCharacter active character
      * @return the player's influence on the island due to the students
      */
-    private int studentInfluence(Player player, CharacterInfluenceModifier activatedCharacter) {
+    private int studentInfluence(Player player, Character activatedCharacter) {
         int influenceByStudent = 0;
         ArrayList<Professor> playerProfessors = player.getBoard().getProfessors();
         ArrayList<CreatureColor> playerProfessorsColor;
         List<CreatureColor> playerProfessorsColorList;
-        CreatureColor colorNoPoints = activatedCharacter.getColorNoPoints();
+        CreatureColor colorNoPoints = (activatedCharacter != null) ? activatedCharacter.getColorNoPoints() : null;
 
         // Automatically applied character effect 9
         playerProfessorsColorList = playerProfessors.stream().map(Creature::getColor)
-                                        .filter(x->x!=colorNoPoints).collect(Collectors.toList());
+                                        .filter(x->!x.equals(colorNoPoints)).collect(Collectors.toList());
         playerProfessorsColor = new ArrayList<>(playerProfessorsColorList);
 
         for (Student student : students){
@@ -188,7 +191,7 @@ public class Island {
      * @param activatedCharacter active character
      * @return the influence of the player on the island
      */
-    public int calculateInfluence(Player player, CharacterInfluenceModifier activatedCharacter) {
+    public int calculateInfluence(Player player, Character activatedCharacter) {
         int influence = 0;
 
         influence = influence + towerInfluence(player, activatedCharacter)

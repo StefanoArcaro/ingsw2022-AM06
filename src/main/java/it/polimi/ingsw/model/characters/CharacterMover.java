@@ -18,6 +18,9 @@ public class CharacterMover extends Character {
         this.used = false;
         this.numberOfBanCards = 0;
         this.students = new ArrayList<>();
+        this.colorNoPoints = null;
+        this.extraPoints = 0;
+        this.towerCounter = true;
 
         CharacterID character = CharacterID.values()[characterID];
 
@@ -125,7 +128,7 @@ public class CharacterMover extends Character {
      */
     private boolean effect_seven(CreatureColor cardColor, CreatureColor entranceColor) {
         Board playerBoard = Game.getCurrentRound().getCurrentPlayer().getBoard();
-        Student studentEntrance = getStudentByColor(playerBoard.getEntrance(), entranceColor);
+        Student studentEntrance = getStudentByColor(playerBoard.getEntrance().getStudents(), entranceColor);
         Student studentCard = getStudentByColor(students, cardColor);
 
         if(studentEntrance != null && studentCard != null) {
@@ -150,9 +153,9 @@ public class CharacterMover extends Character {
      */
     private boolean effect_ten(CreatureColor hallColor, CreatureColor entranceColor) {
         Board playerBoard = Game.getCurrentRound().getCurrentPlayer().getBoard();
-        Student studentEntrance = getStudentByColor(playerBoard.getEntrance(), entranceColor);
+        Student studentEntrance = getStudentByColor(playerBoard.getEntrance().getStudents(), entranceColor);
 
-        if(studentEntrance != null && playerBoard.studentInTable(hallColor)) {
+        if(studentEntrance != null && playerBoard.getHall().studentInTable(hallColor)) {
             playerBoard.removeStudentFromEntrance(entranceColor);
             playerBoard.removeStudentFromHall(hallColor);
 

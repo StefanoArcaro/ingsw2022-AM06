@@ -1,8 +1,10 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.characters.Character;
+import it.polimi.ingsw.model.characters.CharacterID;
 import it.polimi.ingsw.model.characters.CharacterInfluenceModifier;
 import it.polimi.ingsw.model.gameBoard.*;
+import it.polimi.ingsw.model.phases.Phase;
 import it.polimi.ingsw.model.phases.Round;
 
 import java.util.ArrayList;
@@ -12,12 +14,14 @@ public class Game {
     static int roundNumber = 1;
 
     private static Game game = null;
-    private NumberOfPlayers chosenNumberOfPlayers;
-    private GameMode chosenGameMode;
+    private NumberOfPlayers numberOfPlayers;
+    private GameMode gameMode;
     private GameState gameState;
     private static Round currentRound; //static attribute to be accessed via class
+    private Phase currentPhase;
     private Player firstPlayer;
     private ArrayList<Player> players;
+    private Player currentPlayer;
     private ArrayList<Cloud> clouds;
     private ArrayList<Professor> professors;
     private ArrayList<IslandGroup> islandGroups;
@@ -56,11 +60,28 @@ public class Game {
         return game;
     }
 
+
+
     /**
      * @return the number of the current round
      */
     public static int getRoundNumber() {
         return roundNumber;
+    }
+
+    /**
+     * @return the current phase
+     */
+    public Phase getCurrentPhase() {
+        return currentPhase;
+    }
+
+
+    /**
+     * @return the current player
+     */
+    public Player getCurrentPlayer() {
+        return currentPlayer;
     }
 
     //TEMPORARY PUBLIC JUST FOR DOING CHARACTERMOVERTEST,
@@ -87,14 +108,14 @@ public class Game {
      * @return the chosen number of players for the game
      */
     public NumberOfPlayers getNumberOfPlayers() {
-        return chosenNumberOfPlayers;
+        return numberOfPlayers;
     }
 
     /**
      * @return the chosen mode for the game
      */
     public GameMode getGameMode() {
-        return chosenGameMode;
+        return gameMode;
     }
 
     /**
@@ -102,6 +123,10 @@ public class Game {
      */
     public GameState getGameState() {
         return gameState;
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
     }
 
     /**
@@ -114,6 +139,8 @@ public class Game {
     public static void setCurrentRound(Round currentRound) {
         Game.currentRound = currentRound;
     }
+
+    public void setCurrentPlayer (Player player) {this.currentPlayer = player;}
 
     /**
      * @return the player that played first during the previous round
@@ -164,8 +191,11 @@ public class Game {
      * @return a copy of the island groups' circular list
      */
     public ArrayList<IslandGroup> getIslandGroups() {
-        // TODO
-        return null;
+        return new ArrayList<>(islandGroups);
+    }
+
+    private IslandGroup getIslandGroupByIndex (int index) {
+        return islandGroups.get(index);
     }
 
     /**
@@ -271,11 +301,137 @@ public class Game {
 
     }
 
-    public void calculateInfluence(int islandGroupIndex) {
-
+    public Player getPlayerByColor(PlayerColor color) {
+        for (Player player : players){
+            if(player.getColor().equals(color)){
+                return player;
+            }
+        }
+        return null;
     }
 
-    public void calculateInfluence(int islandGroupIndex, CharacterInfluenceModifier activatedCharacter) {
 
+    /**
+     *
+     * @param islandGroupIndex
+     * @param activatedCharacter
+     */
+    public void calculateInfluence(int islandGroupIndex, Character activatedCharacter) {
+        int influence;
+        int maxInfluence = -1;
+        boolean draw = false;
+        IslandGroup islandGroup = getIslandGroupByIndex(islandGroupIndex);
+        Player playerMaxInfluence = null;
+        PlayerColor towerColorOnIslandGroup = islandGroup.getConquerorColor();
+        Player playerOlderConquerorIslandGroup = null;
+
+        if(islandGroup.getNumberOfBanCardPresent()>0){
+            islandGroup.removeBanCard();
+            return;
+        }
+
+        if(towerColorOnIslandGroup!=null){
+            playerOlderConquerorIslandGroup = getPlayerByColor(towerColorOnIslandGroup);
+        }
+
+
+        for (Player player : players){
+            influence = islandGroup.calculateInfluence(player, activatedCharacter);
+
+            if(influence > maxInfluence){
+                maxInfluence = influence;
+                playerMaxInfluence = player;
+            }else if(influence == maxInfluence) {
+                if(!player.equals(playerOlderConquerorIslandGroup)) {
+                    draw = true;
+                }else{
+                    playerMaxInfluence = player;
+                }
+
+            }
+        }
+
+
+        if(!draw && !playerMaxInfluence.equals(playerOlderConquerorIslandGroup)){
+            int numberOfIsland = islandGroup.getNumberOfIsland();
+            if(playerOlderConquerorIslandGroup!=null){
+                playerOlderConquerorIslandGroup.getBoard().recoverTowers(numberOfIsland);
+            }
+            playerMaxInfluence.getBoard().moveTowers(numberOfIsland);
+            islandGroups.get(islandGroupIndex).setConquerorColor(playerMaxInfluence.getColor());
+
+            int numberOfIslandGroups = islandGroups.size();
+
+            int indexPreviousIslandGroup = (islandGroupIndex-1)<0 ? numberOfIslandGroups-1 : islandGroupIndex-1;
+            int indexNextIslandGroup = (islandGroupIndex+1)%numberOfIslandGroups;
+
+            connectIslandGroups(islandGroupIndex, indexPreviousIslandGroup);
+            connectIslandGroups(islandGroupIndex, indexNextIslandGroup);
+        }
+    }
+
+    public void connectIslandGroups (int indexPresentIslandGroup, int indexIslandGroupToAdd){
+        IslandGroup presentIslandGroup = getIslandGroupByIndex(indexPresentIslandGroup);
+        IslandGroup islandGroupToAdd = getIslandGroupByIndex(indexIslandGroupToAdd);
+
+        if(presentIslandGroup.connectIslandGroup(islandGroupToAdd)){
+            islandGroups.remove(indexIslandGroupToAdd);
+        }
+    }
+
+
+
+    /**
+     * Updates the owner of each professor
+     */
+    public void updateProfessors() {
+        for(CreatureColor color: CreatureColor.values()) {
+            updateProfessor(color);
+        }
+    }
+
+    /**
+     * Updates the owner of a certain professor
+     * @param color of the professor whose owner might be in need of an update
+     */
+    public void updateProfessor(CreatureColor color) {
+        int oldOwnerInfluence, maxInfluence = 0, maxInfluenceIndex = -1;
+        Player owner = null;
+
+        for(int i = 0; i < players.size(); i++) {
+            if(players.get(i).getBoard().containsProfessor(color)) {
+                owner = players.get(i);
+                oldOwnerInfluence = owner.getBoard().getHall().getTableByColor(color).getLength();
+                maxInfluence = oldOwnerInfluence;
+                maxInfluenceIndex = i;
+                break;
+            }
+        }
+
+        for(int i = 0; i < players.size(); i++) {
+            int tempInfluence = players.get(i).getBoard().getHall().getTableByColor(color).getLength();
+            boolean characterEffectForCurrentPlayer = false;
+            if(!currentPhase.getActivatedCharacter().equals(CharacterID.CHARACTER_NONE)) {
+                characterEffectForCurrentPlayer =
+                        players.get(i).equals(currentPlayer) &&
+                                currentPhase.getActivatedCharacter().getCharacterID() == CharacterID.CHARACTER_TWO.getID();
+            }
+
+            if(tempInfluence > maxInfluence || (characterEffectForCurrentPlayer && tempInfluence >= maxInfluence)) {
+                maxInfluence = tempInfluence;
+                maxInfluenceIndex = i;
+            }
+        }
+
+        if(owner != null) {
+            if(!players.get(maxInfluenceIndex).equals(owner)) {
+                Professor professorToUpdate = owner.getBoard().loseProfessorByColor(color);
+                players.get(maxInfluenceIndex).getBoard().winProfessor(professorToUpdate);
+            }
+        } else if(maxInfluenceIndex != -1) {
+            Game.getGame().getProfessors();
+            Professor professorToUpdate = Game.getGame().removeProfessor(color);
+            players.get(maxInfluenceIndex).getBoard().winProfessor(professorToUpdate);
+        }
     }
 }
