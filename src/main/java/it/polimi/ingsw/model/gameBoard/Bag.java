@@ -22,7 +22,7 @@ public class Bag {
 
     public void addStudent(Student student) {
         students.add(student);
-        this.shuffle();
+        //this.shuffle();
     }
 
     public int size() {

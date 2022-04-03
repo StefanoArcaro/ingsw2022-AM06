@@ -9,10 +9,10 @@ class TableTest {
     @Test
     void addStudent() {
         Table table = new Table(CreatureColor.RED);
-        assertEquals(table.getLength(),0);
+        assertEquals(0, table.getLength());
         for(int i=0;i<10; i++)
             table.addStudent();
-        assertEquals(table.getLength(),10);
+        assertEquals(10, table.getLength());
         assertFalse(table.addStudent());
 
     }

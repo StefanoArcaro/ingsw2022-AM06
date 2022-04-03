@@ -60,7 +60,10 @@ public class Game {
         return game;
     }
 
-
+    //for testing: problem due to singleton
+    public void removeIslandGroups(){
+        islandGroups=new ArrayList<>();
+    }
 
     /**
      * @return the number of the current round
@@ -76,6 +79,9 @@ public class Game {
         return currentPhase;
     }
 
+    public void setCurrentPhase(Phase currentPhase) {
+        this.currentPhase = currentPhase;
+    }
 
     /**
      * @return the current player
@@ -159,6 +165,11 @@ public class Game {
     public void addPlayer (Player player){
         //CHECK IF NICKNAME TAKEN....
         players.add(player);
+    }
+
+    //for testing
+    public void removePlayer (int indexPlayerToRemove){
+        players.remove(indexPlayerToRemove);
     }
 
     /**
@@ -355,9 +366,14 @@ public class Game {
         if(!draw && !playerMaxInfluence.equals(playerOlderConquerorIslandGroup)){
             int numberOfIsland = islandGroup.getNumberOfIsland();
             if(playerOlderConquerorIslandGroup!=null){
-                playerOlderConquerorIslandGroup.getBoard().recoverTowers(numberOfIsland);
+                for(Island island : getIslandGroupByIndex(islandGroupIndex).getIslands()){
+                    island.removeTower();
+                }
             }
-            playerMaxInfluence.getBoard().moveTowers(numberOfIsland);
+
+            for(Island island : getIslandGroupByIndex(islandGroupIndex).getIslands()){
+                island.addTower(playerMaxInfluence.getColor());
+            }
             islandGroups.get(islandGroupIndex).setConquerorColor(playerMaxInfluence.getColor());
 
             int numberOfIslandGroups = islandGroups.size();
@@ -423,15 +439,17 @@ public class Game {
             }
         }
 
-        if(owner != null) {
-            if(!players.get(maxInfluenceIndex).equals(owner)) {
-                Professor professorToUpdate = owner.getBoard().loseProfessorByColor(color);
+        if(maxInfluence>0) {
+            if (owner != null) {
+                if (!players.get(maxInfluenceIndex).equals(owner)) {
+                    Professor professorToUpdate = owner.getBoard().loseProfessorByColor(color);
+                    players.get(maxInfluenceIndex).getBoard().winProfessor(professorToUpdate);
+                }
+            } else if (maxInfluenceIndex != -1) {
+                Game.getGame().getProfessors();
+                Professor professorToUpdate = Game.getGame().removeProfessor(color);
                 players.get(maxInfluenceIndex).getBoard().winProfessor(professorToUpdate);
             }
-        } else if(maxInfluenceIndex != -1) {
-            Game.getGame().getProfessors();
-            Professor professorToUpdate = Game.getGame().removeProfessor(color);
-            players.get(maxInfluenceIndex).getBoard().winProfessor(professorToUpdate);
         }
     }
 }

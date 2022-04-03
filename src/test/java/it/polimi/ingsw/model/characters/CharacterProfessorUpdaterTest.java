@@ -1,8 +1,11 @@
 package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.PlayerColor;
+import it.polimi.ingsw.model.gameBoard.Table;
+import it.polimi.ingsw.model.phases.PhaseFactory;
 import it.polimi.ingsw.model.phases.Round;
 import it.polimi.ingsw.model.gameBoard.Creature;
 import it.polimi.ingsw.model.gameBoard.CreatureColor;
@@ -26,6 +29,10 @@ class CharacterProfessorUpdaterTest {
     @BeforeEach
     void setUp() {
         cf = new ConcreteCharacterFactory();
+        int numberOfPlayer = Game.getGame().getPlayers().size();
+        for(int i=0; i<numberOfPlayer; i++){
+            Game.getGame().removePlayer(0);
+        }
     }
 
     @AfterEach
@@ -42,8 +49,11 @@ class CharacterProfessorUpdaterTest {
         Player p2 = new Player("Y", PlayerColor.BLACK);
         game.addPlayer(p1);
         game.addPlayer(p2);
-        Round round = new Round(game.getPlayers(), 1);
-        Game.getGame().setCurrentRound(round);
+        game.setCurrentPlayer(p2);
+        game.setCurrentPhase(new PhaseFactory().createPhase(GameState.MOVE_MOTHER_NATURE_PHASE));
+
+        character = cf.createCharacter(2);
+        game.getCurrentPhase().setActivatedCharacter(character);
 
         Professor prof1 = new Professor(CreatureColor.RED);
         Professor prof2 = new Professor(CreatureColor.YELLOW);
@@ -57,21 +67,23 @@ class CharacterProfessorUpdaterTest {
         p1.getBoard().addStudentToHall(CreatureColor.PINK);
         p1.getBoard().winProfessor(prof3);
 
+
         p2.getBoard().addStudentToHall(CreatureColor.RED);
         p2.getBoard().addStudentToHall(CreatureColor.RED);
         p2.getBoard().addStudentToHall(CreatureColor.GREEN);
         p2.getBoard().addStudentToHall(CreatureColor.GREEN);
         p2.getBoard().winProfessor(prof4);
 
-        character = cf.createCharacter(2);
 
         ArrayList<CreatureColor> expectedProf1 =
-                new ArrayList<CreatureColor>(Arrays.asList(CreatureColor.RED,CreatureColor.PINK));
+                new ArrayList<CreatureColor>(Arrays.asList(CreatureColor.PINK));
 
         ArrayList<CreatureColor> expectedProf2 =
-                new ArrayList<CreatureColor>(Arrays.asList(CreatureColor.GREEN));
+                new ArrayList<CreatureColor>(Arrays.asList(CreatureColor.GREEN, CreatureColor.RED));
+
 
         character.effect();
+
 
         assertEquals(expectedProf1, p1.getBoard().getProfessors().stream()
                                             .map(Creature::getColor).collect(Collectors.toList()));

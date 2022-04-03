@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.gameBoard;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -7,6 +8,15 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BagTest {
+
+    @BeforeEach
+    void setUp() {
+        Bag bag = Bag.getBag();
+        int bagSize = bag.size();
+        for (int i=0; i<bagSize; i++){
+            bag.drawStudent();
+        }
+    }
 
     @Test
     void getBag() {
@@ -26,7 +36,12 @@ class BagTest {
         bag.addStudent(new Student(CreatureColor.PINK));
         bag.addStudent(new Student(CreatureColor.BLUE));
 
-        assertEquals(5,bag.getStudents().size());
+        assertEquals(5,bag.size());
+
+        int bagSize = bag.size();
+        for (int i=0; i<bagSize; i++){
+            bag.drawStudent();
+        }
 
     }
 
@@ -53,8 +68,10 @@ class BagTest {
         assertEquals(0,bag.size());
         assertNull(bag.drawStudent());
 
-
-
+        int bagSize = bag.size();
+        for (int i=0; i<bagSize; i++){
+            bag.drawStudent();
+        }
 
     }
 
@@ -65,6 +82,11 @@ class BagTest {
         assertFalse(bag.isEmpty());
         bag.drawStudent();
         assertTrue(bag.isEmpty());
+
+        int bagSize = bag.size();
+        for (int i=0; i<bagSize; i++){
+            bag.drawStudent();
+        }
 
     }
 

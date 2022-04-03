@@ -169,10 +169,7 @@ public class IslandGroup {
 
         return false;
 
-        /* IDE says these two lines can be collapsed into 'return false'
-        if(islandAdded >= 0 ) { return false; }
-        return false;
-        * */
+
     }
 
     /**

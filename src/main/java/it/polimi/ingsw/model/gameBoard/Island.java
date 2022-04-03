@@ -56,11 +56,13 @@ public class Island {
      * @param tower represents the player who conquered the island
      */
     public boolean addTower(PlayerColor tower) {
-        if(this.tower == null) {
-            this.tower = tower;
-            Player player = Game.getGame().getPlayerByColor(tower);
-            player.getBoard().moveTowers(1);
-            return true;
+        Player player = Game.getGame().getPlayerByColor(tower);
+        int numberOfTowers = player!=null ?player.getBoard().getTowers() :0;
+        if(this.tower == null && numberOfTowers>0 && player!=null) {
+            if (player.getBoard().removeTowers(1)) {
+                this.tower = tower;
+                return true;
+            }
         }
         return false;
     }
@@ -69,7 +71,9 @@ public class Island {
      * Removes the tower from the island: it has been conquered
      */
     public boolean removeTower() {
-        if(this.tower != null) {
+        Player player = Game.getGame().getPlayerByColor(tower);
+        if(this.tower != null && player!=null) {
+            player.getBoard().addTowers(1);
             this.tower = null;
             return true;
         }

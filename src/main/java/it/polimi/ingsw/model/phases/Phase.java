@@ -16,4 +16,8 @@ public abstract class Phase {
     public Character getActivatedCharacter() {
         return activatedCharacter;
     }
+
+    public void setActivatedCharacter(Character activatedCharacter) {
+        this.activatedCharacter = activatedCharacter;
+    }
 }

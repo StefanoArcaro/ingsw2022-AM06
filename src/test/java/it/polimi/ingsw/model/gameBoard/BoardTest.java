@@ -10,28 +10,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
 
-    @Test
-    void getTableByColor() {
-        Player player = new Player("nick", PlayerColor.BLACK);
-        Board board = new Board(player);
-        assertEquals(board.getTableByColor(CreatureColor.GREEN),board.getHall().get(0) );
-
-    }
-
 
     @Test
     void removeStudentFromEntrance() {
         Player player = new Player("nick", PlayerColor.BLACK);
         Board board = new Board(player);
-        ArrayList<Student> entrance=board.getEntrance();
-        assertEquals(entrance.size(), 0);
+        assertEquals(0, board.getEntrance().getStudents().size());
         board.addStudentToEntrance(CreatureColor.BLUE);
-        assertEquals(entrance.size(),1);
+        assertEquals(1, board.getEntrance().getStudents().size());
         board.removeStudentFromEntrance(CreatureColor.BLUE);
-        assertEquals(entrance.size(), 0);
+        assertEquals(0, board.getEntrance().getStudents().size());
         assertFalse(board.removeStudentFromEntrance(CreatureColor.BLUE));
-
-
     }
 
 
@@ -39,13 +28,13 @@ class BoardTest {
     void removeStudentFromHall() {
         Player player = new Player("nick", PlayerColor.BLACK);
         Board board = new Board(player);
-        Table tablePink= board.getTableByColor(CreatureColor.PINK);
-        Table tableRed= board.getTableByColor(CreatureColor.RED);
+        Table tablePink= board.getHall().getTableByColor(CreatureColor.PINK);
+        Table tableRed= board.getHall().getTableByColor(CreatureColor.RED);
         board.addStudentToHall(CreatureColor.PINK);
-        assertEquals(tablePink.getLength(), 1);
-        assertEquals(tableRed.getLength(),0);
+        assertEquals(1, tablePink.getLength());
+        assertEquals(0, tableRed.getLength());
         board.removeStudentFromHall(CreatureColor.PINK);
-        assertEquals(tablePink.getLength(), 0);
+        assertEquals(0, tablePink.getLength());
         assertFalse(board.removeStudentFromHall(CreatureColor.PINK));
 
     }
@@ -59,7 +48,7 @@ class BoardTest {
         board.winProfessor(professor);
         assertFalse(board.getProfessors().isEmpty());
         board.winProfessor(professor);
-        assertEquals(board.getProfessors().size(),1);
+        assertEquals(1, board.getProfessors().size());
 
     }
 
@@ -77,7 +66,6 @@ class BoardTest {
         assertFalse(board.getProfessors().isEmpty());
         board.loseProfessor(professorRed);
         assertTrue(board.getProfessors().isEmpty());
-
     }
 
     @Test
@@ -90,7 +78,6 @@ class BoardTest {
         board.winProfessor(professorRed);
         assertEquals(professorRed, board.loseProfessorByColor(CreatureColor.RED));
         assertNull(board.loseProfessorByColor(CreatureColor.RED));
-
     }
 
     @Test
@@ -106,5 +93,6 @@ class BoardTest {
         assertTrue(board.containsProfessor(CreatureColor.PINK));
         assertTrue(board.containsProfessor(CreatureColor.YELLOW));
     }
+
 
 }
