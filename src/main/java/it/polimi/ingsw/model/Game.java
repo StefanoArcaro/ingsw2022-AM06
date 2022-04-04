@@ -2,11 +2,9 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.characters.CharacterID;
-import it.polimi.ingsw.model.characters.CharacterInfluenceModifier;
 import it.polimi.ingsw.model.gameBoard.*;
 import it.polimi.ingsw.model.phases.Phase;
 import it.polimi.ingsw.model.phases.PhaseFactory;
-import it.polimi.ingsw.model.phases.Phase;
 import it.polimi.ingsw.model.phases.Round;
 
 import java.util.ArrayList;
@@ -22,10 +20,11 @@ public class Game {
     private final PhaseFactory phaseFactory;
     private Phase currentPhase;
     private final ArrayList<Player> players;
-    private Player firstPlayer;
+    private ArrayList<Player> playingOrder;
     private Player currentPlayer;
+    private int firstPlayerIndex;
     private final MotherNature motherNature;
-    private final ArrayList<IslandGroup> islandGroups;
+    private ArrayList<IslandGroup> islandGroups;
     private final ArrayList<Cloud> clouds;
     private final ArrayList<Professor> professors;
     private final ArrayList<Character> drawnCharacters;
@@ -43,6 +42,7 @@ public class Game {
     private Game() {
         phaseFactory = new PhaseFactory();
         players = new ArrayList<>();
+        playingOrder = new ArrayList<>();
         motherNature = MotherNature.getMotherNature();
         islandGroups = new ArrayList<>();
         clouds = new ArrayList<>();
@@ -75,11 +75,6 @@ public class Game {
             game = new Game();
         }
         return game;
-    }
-
-    //for testing: problem due to singleton
-    public void removeIslandGroups(){
-        islandGroups=new ArrayList<>();
     }
 
     /**
@@ -167,24 +162,36 @@ public class Game {
         players.add(player);
     }
 
-    //for testing
+    // Used for testing purposes
     public void removePlayer (int indexPlayerToRemove){
         players.remove(indexPlayerToRemove);
+    }
+
+    public ArrayList<Player> getPlayingOrder() {
+        return playingOrder;
+    }
+
+    /**
+     * Sets the playing order to the specified one
+     * @param playingOrder to set
+     */
+    public void setPlayingOrder(ArrayList<Player> playingOrder) {
+        this.playingOrder = playingOrder;
     }
 
     /**
      * @return the player that went first during the previous phase
      */
-    public Player getFirstPlayer() {
-        return firstPlayer;
+    public int getFirstPlayerIndex() {
+        return firstPlayerIndex;
     }
 
     /**
      * Sets the first player who will go first during the next phase
-     * @param firstPlayer player to be set
+     * @param firstPlayerIndex index to set
      */
-    public void setFirstPlayer(Player firstPlayer) {
-        this.firstPlayer = firstPlayer;
+    public void setFirstPlayerIndex(int firstPlayerIndex) {
+        this.firstPlayerIndex = firstPlayerIndex;
     }
 
     /**
@@ -194,9 +201,27 @@ public class Game {
         return currentPlayer;
     }
 
-    public void setCurrentPlayer (Player player) {this.currentPlayer = player;}
+    /**
+     * Sets the current player to the one passed as a parameter
+     * @param player new current player
+     */
+    public void setCurrentPlayer (Player player) {
+        this.currentPlayer = player;
+    }
 
-    // TODO check if we need a setCurrentPlayer() method
+    /**
+     * The player corresponding to a certain PlayerColor
+     * @param color of the player to return
+     * @return player whose color matches with the inputted one
+     */
+    public Player getPlayerByColor(PlayerColor color) {
+        for(Player player : players) {
+            if(player.getColor().equals(color)) {
+                return player;
+            }
+        }
+        return null;
+    }
 
     /**
      * @return the Mother Nature attribute
@@ -216,8 +241,115 @@ public class Game {
      * Adds an island group to the islandGroups list
      * @param islandGroup to be added
      */
-    public void addIslandGroup(IslandGroup islandGroup){
+    public void addIslandGroup(IslandGroup islandGroup) {
         islandGroups.add(islandGroup);
+    }
+
+    /**
+     * Connects the specified island groups in case they need to be connected.
+     * If tehy get connected, the second island group is removed from the island groups list
+     * @param indexPresentIslandGroup island group that eventually incorporates the other one
+     * @param indexIslandGroupToAdd island group that eventually gets incorporated into the first one
+     */
+    public void connectIslandGroups(int indexPresentIslandGroup, int indexIslandGroupToAdd) {
+        IslandGroup presentIslandGroup = getIslandGroupByIndex(indexPresentIslandGroup);
+        IslandGroup islandGroupToAdd = getIslandGroupByIndex(indexIslandGroupToAdd);
+
+        if(presentIslandGroup.connectIslandGroup(islandGroupToAdd)) {
+            islandGroups.remove(indexIslandGroupToAdd);
+        }
+    }
+
+    /**
+     * Returns the island group corresponding to the inputted index
+     * @param index of the island group to return
+     * @return the island group whose index matches the specified one
+     */
+    private IslandGroup getIslandGroupByIndex(int index) {
+        return islandGroups.get(index);
+    }
+
+    // Used for testing purposes: problem due to singleton
+    public void removeIslandGroups() {
+        islandGroups = new ArrayList<>();
+    }
+
+    /**
+     * Returns the island that matches the ID passed as a parameter
+     * @param islandID ID of the island to return
+     * @return the island that matches the inputted ID
+     */
+    public Island getIslandByID(int islandID) {
+        for(IslandGroup islandGroup : islandGroups) {
+            for(Island island : islandGroup.getIslands()) {
+                if(island.getIslandID() == islandID) {
+                    return island;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Calculates the influence of all the players on the specified island group.
+     * If changes need to be made after calculating it, they are taken care of
+     * @param islandGroupIndex index of the island group to calculate the influence for
+     * @param activatedCharacter character that eventually modifies the influence calculations
+     */
+    public void calculateInfluence(int islandGroupIndex, Character activatedCharacter) {
+        int influence;
+        int maxInfluence = -1;
+        boolean draw = false;
+        IslandGroup islandGroup = getIslandGroupByIndex(islandGroupIndex);
+        Player playerMaxInfluence = null;
+        PlayerColor towerColorOnIslandGroup = islandGroup.getConquerorColor();
+        Player playerOlderConquerorIslandGroup = null;
+
+        if(islandGroup.getNumberOfBanCardPresent() > 0) {
+            islandGroup.removeBanCard();
+            return;
+        }
+
+        if(towerColorOnIslandGroup != null) {
+            playerOlderConquerorIslandGroup = getPlayerByColor(towerColorOnIslandGroup);
+        }
+
+        for(Player player : players) {
+            influence = islandGroup.calculateInfluence(player, activatedCharacter);
+
+            if(influence > maxInfluence) {
+                maxInfluence = influence;
+                playerMaxInfluence = player;
+            } else if(influence == maxInfluence) {
+                if(!player.equals(playerOlderConquerorIslandGroup)) {
+                    draw = true;
+                } else {
+                    playerMaxInfluence = player;
+                }
+            }
+        }
+
+        if(!draw && playerMaxInfluence != null && !playerMaxInfluence.equals(playerOlderConquerorIslandGroup)) {
+            if(playerOlderConquerorIslandGroup != null){
+                for(Island island : getIslandGroupByIndex(islandGroupIndex).getIslands()) {
+                    island.removeTower();
+                }
+            }
+
+            for(Island island : getIslandGroupByIndex(islandGroupIndex).getIslands()) {
+                island.addTower(playerMaxInfluence.getColor());
+            }
+
+            islandGroups.get(islandGroupIndex).setConquerorColor(playerMaxInfluence.getColor());
+
+            int numberOfIslandGroups = islandGroups.size();
+
+            int indexPreviousIslandGroup = (islandGroupIndex - 1) < 0 ? numberOfIslandGroups - 1 : islandGroupIndex - 1;
+            int indexNextIslandGroup = (islandGroupIndex + 1) % numberOfIslandGroups;
+
+            connectIslandGroups(islandGroupIndex, indexPreviousIslandGroup);
+            connectIslandGroups(islandGroupIndex, indexNextIslandGroup);
+        }
     }
 
     /**
@@ -299,11 +431,6 @@ public class Game {
                     players.get(maxInfluenceIndex).getBoard().winProfessor(professorToUpdate);
                 }
             } else if(maxInfluenceIndex != -1) {
-                // This should be replaced with the code below
-                //Game.getGame().getProfessors();
-                //Professor professorToUpdate = Game.getGame().removeProfessor(color);
-                //players.get(maxInfluenceIndex).getBoard().winProfessor(professorToUpdate);
-
                 Professor professorToUpdate = removeProfessor(color);
                 players.get(maxInfluenceIndex).getBoard().winProfessor(professorToUpdate);
             }
@@ -316,7 +443,6 @@ public class Game {
      * @return the professor removed
      */
     public Professor removeProfessor(CreatureColor color) {
-        // TODO check
         for(Professor professor : professors) {
             if(professor.getColor().equals(color)) {
                 professors.remove(professor);
@@ -368,31 +494,6 @@ public class Game {
 
 
 
-    public Island getIslandByID(int islandID) {
-        for(IslandGroup islandGroup : islandGroups) {
-            for(Island island : islandGroup.getIslands()) {
-                if(island.getIslandID() == islandID) {
-                    return island;
-                }
-            }
-        }
-        return null;
-    }
-
-    public void calculateInfluence(int islandGroupIndex) {
-
-    }
-
-    public void calculateInfluence(int islandGroupIndex, CharacterInfluenceModifier activatedCharacter) {
-
-    }
-
-
-
-
-
-
-
     // TODO remove after removing Round
     /**
      * @return a reference to the current round
@@ -404,155 +505,10 @@ public class Game {
     public static void setCurrentRound(Round currentRound) {
         Game.currentRound = currentRound;
     }
-
-    /**
-     * @return a copy of the characters' set
-     */
-    public ArrayList<Character> getCharacters() {
-        // TODO check if needed (should be useless)
-        return null;
-    }
-
-    /**
-     * Used to keep track of activated characters whose effect can be
-     * delayed within the active player's turn
-     * @return a copy of the activated characters' list
-     */
-    public ArrayList<Character> getActivatedCharacters() {
-        // TODO check if needed (it shouldn't be)
-        return null;
-    }
-
-    /**
-     * Prepares the "game board" before the actual game begins
-     */
-    public void prepareGame() {
-        // TODO check if needed (PreparePhase's job)
-    }
-
-    /**
-     * Ends the game based on the ending code defined in gameState
-     */
-    public void endGame() {
-        // TODO check if needed (should be EndgamePhase's job)
-    }
-
-    /**
-     * Initializes and sets up the island groups on the "board"
-     */
-    private void initializeIslandGroups() {
-        // TODO check if needed (already in PreparePhase)
-    }
-
-    /**
-     * Randomly places Mother Nature on one of the initial island groups
-     * @return the initial position of Mother Nature
-     */
-    private int placeMotherNature() {
-        // TODO check if needed (already in PreparePhase)
-        return 0;
-    }
-
-    /**
-     * Place 2 students of each color (10 total) on the islands, except for
-     * the one where Mother Nature was placed and the one on the opposite side
-     */
-    private void placeInitialStudents() {
-        // TODO check if needed (already in PreparePhase)
-    }
-
-    // TODO remove after removing Round
     /**
      * @return the number of the current round
      */
     public static int getRoundNumber() {
         return roundNumber;
-    }
-
-    public Player getPlayerByColor(PlayerColor color) {
-        for (Player player : players){
-            if(player.getColor().equals(color)){
-                return player;
-            }
-        }
-        return null;
-    }
-
-
-    /**
-     *
-     * @param islandGroupIndex
-     * @param activatedCharacter
-     */
-    public void calculateInfluence(int islandGroupIndex, Character activatedCharacter) {
-        int influence;
-        int maxInfluence = -1;
-        boolean draw = false;
-        IslandGroup islandGroup = getIslandGroupByIndex(islandGroupIndex);
-        Player playerMaxInfluence = null;
-        PlayerColor towerColorOnIslandGroup = islandGroup.getConquerorColor();
-        Player playerOlderConquerorIslandGroup = null;
-
-        if(islandGroup.getNumberOfBanCardPresent()>0){
-            islandGroup.removeBanCard();
-            return;
-        }
-
-        if(towerColorOnIslandGroup!=null){
-            playerOlderConquerorIslandGroup = getPlayerByColor(towerColorOnIslandGroup);
-        }
-
-
-        for (Player player : players){
-            influence = islandGroup.calculateInfluence(player, activatedCharacter);
-
-            if(influence > maxInfluence){
-                maxInfluence = influence;
-                playerMaxInfluence = player;
-            }else if(influence == maxInfluence) {
-                if(!player.equals(playerOlderConquerorIslandGroup)) {
-                    draw = true;
-                }else{
-                    playerMaxInfluence = player;
-                }
-
-            }
-        }
-
-
-        if(!draw && !playerMaxInfluence.equals(playerOlderConquerorIslandGroup)){
-            int numberOfIsland = islandGroup.getNumberOfIsland();
-            if(playerOlderConquerorIslandGroup!=null){
-                for(Island island : getIslandGroupByIndex(islandGroupIndex).getIslands()){
-                    island.removeTower();
-                }
-            }
-
-            for(Island island : getIslandGroupByIndex(islandGroupIndex).getIslands()){
-                island.addTower(playerMaxInfluence.getColor());
-            }
-            islandGroups.get(islandGroupIndex).setConquerorColor(playerMaxInfluence.getColor());
-
-            int numberOfIslandGroups = islandGroups.size();
-
-            int indexPreviousIslandGroup = (islandGroupIndex-1)<0 ? numberOfIslandGroups-1 : islandGroupIndex-1;
-            int indexNextIslandGroup = (islandGroupIndex+1)%numberOfIslandGroups;
-
-            connectIslandGroups(islandGroupIndex, indexPreviousIslandGroup);
-            connectIslandGroups(islandGroupIndex, indexNextIslandGroup);
-        }
-    }
-
-    public void connectIslandGroups (int indexPresentIslandGroup, int indexIslandGroupToAdd){
-        IslandGroup presentIslandGroup = getIslandGroupByIndex(indexPresentIslandGroup);
-        IslandGroup islandGroupToAdd = getIslandGroupByIndex(indexIslandGroupToAdd);
-
-        if(presentIslandGroup.connectIslandGroup(islandGroupToAdd)){
-            islandGroups.remove(indexIslandGroupToAdd);
-        }
-    }
-
-    private IslandGroup getIslandGroupByIndex (int index) {
-        return islandGroups.get(index);
     }
 }

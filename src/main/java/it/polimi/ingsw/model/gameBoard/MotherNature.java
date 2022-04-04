@@ -24,21 +24,15 @@ public class MotherNature {
     /**
      * @return the island group Mother Nature is currently on
      */
+    public IslandGroup getCurrentIslandGroup() {
+        return currentIslandGroup;
+    }
 
     /**
      * Sets the island group Mother Nature ends up at
      * @param islandGroup to be set
      */
-
-    /**
-     * changes the current island group MotherNature refers to
-     * @param islandGroup
-     */
-   public void setCurrentIslandGroup(IslandGroup islandGroup){
-        this.currentIslandGroup=islandGroup;
-   }
-
-    public IslandGroup getCurrentIslandGroup() {
-        return currentIslandGroup;
+    public void setCurrentIslandGroup(IslandGroup islandGroup) {
+        this.currentIslandGroup = islandGroup;
     }
 }

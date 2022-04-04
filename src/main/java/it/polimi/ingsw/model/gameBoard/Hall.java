@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 public class Hall {
 
-    private Board board;
-    private ArrayList<Table> students;
+    private final ArrayList<Table> students;
 
-    public Hall (Board board){
-        this.board = board;
+    /**
+     * Default constructor
+     */
+    public Hall() {
         this.students = new ArrayList<>();
         for(CreatureColor color : CreatureColor.values()) {
             students.add(new Table(color));
@@ -23,23 +24,17 @@ public class Hall {
         return students.get(color.getIndex());
     }
 
-    public boolean addStudent(CreatureColor color){
-        Table tableToAdd;
-        boolean success;
-
-        tableToAdd = getTableByColor(color);
+    public boolean addStudent(CreatureColor color) {
+        Table tableToAdd = getTableByColor(color);
 
         if(tableToAdd != null) {
-            success = tableToAdd.addStudent();
-            return success;
+            return tableToAdd.addStudent();
         }
         return false;
     }
 
-    public boolean removeStudent(CreatureColor color){
-        Table tableToRemove;
-
-        tableToRemove = getTableByColor(color);
+    public boolean removeStudent(CreatureColor color) {
+        Table tableToRemove = getTableByColor(color);
 
         if(tableToRemove != null) {
             return tableToRemove.removeStudent();
@@ -54,5 +49,4 @@ public class Hall {
         Table table = getTableByColor(color);
         return table.getLength() > 0;
     }
-
 }

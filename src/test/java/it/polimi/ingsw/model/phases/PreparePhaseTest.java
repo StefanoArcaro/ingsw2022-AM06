@@ -18,11 +18,10 @@ class PreparePhaseTest {
         game.setNumberOfPlayers(3);
         game.setGameMode(GameMode.EXPERT);
 
-        phaseFactory = new PhaseFactory();
-        phase = phaseFactory.createPhase(GameState.LOBBY_PHASE);
-
         assertEquals(GameState.LOBBY_PHASE, game.getGameState());
 
+        phaseFactory = new PhaseFactory();
+        phase = phaseFactory.createPhase(GameState.LOBBY_PHASE);
         phase.play();
 
         assertEquals(GameState.PREPARE_PHASE, game.getGameState());
@@ -38,7 +37,7 @@ class PreparePhaseTest {
         }
 
         // Mother Nature and initial student placement
-        int motherNaturePosition = game.getMotherNature().getIslandGroup().getIslands().get(0).getIslandID() - 1;
+        int motherNaturePosition = game.getMotherNature().getCurrentIslandGroup().getIslands().get(0).getIslandID() - 1;
 
         assertEquals(0, game.getIslandGroups().get(motherNaturePosition).getIslands().get(0).getStudents().size());
         assertEquals(1, game.getIslandGroups().get((motherNaturePosition + 1) % 12).getIslands().get(0).getStudents().size());
@@ -76,9 +75,6 @@ class PreparePhaseTest {
 
         // Bag check (again)
         assertEquals(93, Bag.getBag().size());
-
-        // Check if first player was selected
-        assertTrue(game.getPlayers().contains(game.getFirstPlayer()));
 
         // Check drawn characters
         assertEquals(3, game.getDrawnCharacters().size());

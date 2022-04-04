@@ -2,12 +2,15 @@ package it.polimi.ingsw.model.gameBoard;
 
 public class Table {
 
+    private static final int MIN_INDEX = 0;
+    private static final int MAX_INDEX = 10;
+
     private final CreatureColor color;
     private int index;
 
     public Table(CreatureColor color) {
         this.color = color;
-        this.index = 0;
+        this.index = MIN_INDEX;
     }
 
     public CreatureColor getColor() {
@@ -15,7 +18,7 @@ public class Table {
     }
 
     public boolean addStudent() {
-        if(index < 10) {
+        if(index < MAX_INDEX) {
             index = index + 1;
             return true;
         }
@@ -23,13 +26,12 @@ public class Table {
     }
 
     public boolean removeStudent() {
-        if(index > 0) {
+        if(index > MIN_INDEX) {
             index = index - 1;
             return true;
         }
         return false;
     }
-
 
     public int getLength(){
         return index;

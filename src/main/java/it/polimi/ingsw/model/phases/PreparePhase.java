@@ -94,7 +94,7 @@ public class PreparePhase extends Phase {
         int randomIndex = rand.nextInt(LAST_ISLAND_ID);
 
         IslandGroup initialIslandGroup = game.getIslandGroups().get(randomIndex);
-        game.getMotherNature().setIslandGroup(initialIslandGroup);
+        game.getMotherNature().setCurrentIslandGroup(initialIslandGroup);
 
         return randomIndex;
     }
@@ -234,7 +234,7 @@ public class PreparePhase extends Phase {
     private void drawFirstPlayer() {
         Random random = new Random();
         int firstPlayerIndex = random.nextInt(game.getNumberOfPlayers().getNum());
-        game.setFirstPlayer(game.getPlayers().get(firstPlayerIndex));
+        game.setFirstPlayerIndex(firstPlayerIndex);
     }
 
     /**

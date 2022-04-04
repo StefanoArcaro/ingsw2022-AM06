@@ -3,8 +3,6 @@ package it.polimi.ingsw.model.gameBoard;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.PlayerColor;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -33,14 +31,13 @@ class IslandTest {
         assertEquals(5, player.getBoard().getTowers());
 
         int numberOfPlayers = game.getPlayers().size();
-        for(int i=0; i<numberOfPlayers; i++){
+        for(int i = 0; i < numberOfPlayers; i++) {
             Game.getGame().removePlayer(i);
         }
-
     }
 
     @Test
-    void addTower(){
+    void addTower() {
         Game game = Game.getGame();
         Player player = new Player("Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
@@ -56,18 +53,16 @@ class IslandTest {
         assertEquals(5, player.getBoard().getTowers());
 
         int numberOfPlayers = game.getPlayers().size();
-        for(int i=0; i<numberOfPlayers; i++){
+        for(int i = 0; i < numberOfPlayers; i++) {
             Game.getGame().removePlayer(i);
         }
     }
 
-
     @Test
     void getStudents() {
-
         Island island = new Island(1);
 
-        ArrayList<Student> expectedStudents = new ArrayList<> ();
+        ArrayList<Student> expectedStudents = new ArrayList<>();
 
         assertEquals(expectedStudents, island.getStudents());
 
@@ -98,7 +93,7 @@ class IslandTest {
 
         Student studentToAdd = new Student(CreatureColor.GREEN);
         Student studentToAdd2 = new Student(CreatureColor.GREEN);
-        ArrayList<Student> expectedStudents = new ArrayList<> ();
+        ArrayList<Student> expectedStudents = new ArrayList<>();
 
         island.addStudent(studentToAdd);
         island.addStudent(studentToAdd2);
@@ -109,9 +104,5 @@ class IslandTest {
         assertEquals(expectedStudents, island.getStudents());
     }
 
-
-
-
     // the methods on the calculation of the influence are tested in islandGroupTest
-
 }

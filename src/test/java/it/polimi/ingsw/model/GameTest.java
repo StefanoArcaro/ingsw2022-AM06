@@ -95,7 +95,7 @@ class GameTest {
 
         assertEquals(10, game.getIslandGroups().size());
         assertEquals(PlayerColor.BLACK, game.getIslandGroups().get(1).getConquerorColor());
-        assertEquals(3, game.getIslandGroups().get(1).getNumberOfIsland());
+        assertEquals(3, game.getIslandGroups().get(1).getNumberOfIslands());
         assertEquals(2, player1.getBoard().getTowers());
         assertEquals(4, player2.getBoard().getTowers());
 
@@ -141,7 +141,7 @@ class GameTest {
 
         assertEquals(12, game.getIslandGroups().size());
         assertEquals(PlayerColor.WHITE, game.getIslandGroups().get(1).getConquerorColor());
-        assertEquals(1, game.getIslandGroups().get(1).getNumberOfIsland());
+        assertEquals(1, game.getIslandGroups().get(1).getNumberOfIslands());
         assertEquals(5, player1.getBoard().getTowers());
         assertEquals(4, player2.getBoard().getTowers());
 

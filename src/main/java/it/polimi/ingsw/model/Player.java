@@ -82,46 +82,4 @@ public class Player {
             this.coins -= coinsToSpend;
         }
     }
-
-
-
-
-
-
-
-    /**
-     * Lets player choose one of the available wizards
-     */
-    public void receiveWizard() {
-        // TODO check if needed here (should probably stay in Game)
-    }
-
-    /**
-     * Lets player choose the color of a creature
-     * (student or professor)
-     * @return the color chosen by the player
-     */
-    public CreatureColor receiveColor() {
-        // TODO check if needed here (should probably stay in Game)
-        return null;
-    }
-
-    /**
-     * Lets player choose the destination of a student
-     * (the hall or an island)
-     * @return the destination chosen by the player
-     */
-    public String receiveStudentDestination() {
-        // TODO check if needed here (should probably stay in Game)
-        return null;
-    }
-
-    /**
-     * Lets player select one of the islands
-     * @return the island selected by the player
-     */
-    public Island receiveIsland() {
-        // TODO check if needed here (should probably stay in Game)
-        return null;
-    }
 }

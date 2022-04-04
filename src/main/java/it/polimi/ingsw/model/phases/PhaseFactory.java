@@ -14,7 +14,7 @@ public class PhaseFactory {
             case PREPARE_PHASE:
                 return new PreparePhase(game);
             case PLANNING_PHASE:
-                int firstPlayerIndex = game.getPlayers().indexOf(game.getFirstPlayer());
+                int firstPlayerIndex = game.getFirstPlayerIndex();
                 return new PlanningPhase(game, game.getPlayers(), firstPlayerIndex);
             case MOVE_STUDENT_PHASE:
                 return new MoveStudentPhase(game, game.getCurrentPlayer());

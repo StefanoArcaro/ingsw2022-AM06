@@ -4,9 +4,8 @@ import it.polimi.ingsw.model.characters.CharacterStepsAdder;
 
 public class Assistant implements Comparable<Assistant> {
 
-    private int priority;
-    private int maxSteps;
-    private Wizard wizard;
+    private final int priority;
+    private final int maxSteps;
 
     /**
      * Default constructor
@@ -40,17 +39,8 @@ public class Assistant implements Comparable<Assistant> {
         return maxSteps + activatedCharacter.getMoreSteps();
     }
 
-    /**
-     * @return the Wizard whose Assistant this is
-     */
-    public Wizard getWizard() {
-        return wizard;
-    }
-
-
-    // TODO check if correct
     @Override
     public int compareTo(Assistant assistant) {
-        return (int)(this.priority - assistant.priority);
+        return (this.priority - assistant.priority);
     }
 }

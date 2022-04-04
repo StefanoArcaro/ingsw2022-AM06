@@ -20,7 +20,9 @@ public abstract class Phase {
         return activatedCharacter;
     }
 
-    public void setActivatedCharacter(Character activatedCharacter) {
+    public void activateCharacter(Character activatedCharacter) {
         this.activatedCharacter = activatedCharacter;
+        activatedCharacter.effect();
+        // TODO parameters and iterations
     }
 }

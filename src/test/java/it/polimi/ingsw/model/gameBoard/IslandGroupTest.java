@@ -3,9 +3,7 @@ package it.polimi.ingsw.model.gameBoard;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.PlayerColor;
-import it.polimi.ingsw.model.phases.Round;
 import it.polimi.ingsw.model.characters.Character;
-import it.polimi.ingsw.model.characters.CharacterInfluenceModifier;
 import it.polimi.ingsw.model.characters.ConcreteCharacterFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -54,7 +52,7 @@ class IslandGroupTest {
 
     @Test
     void getNumberOfIsland() {
-        assertEquals(0, islandGroup.getNumberOfIsland());
+        assertEquals(0, islandGroup.getNumberOfIslands());
 
         island1 = new Island(1);
         island2 = new Island(2);
@@ -62,7 +60,7 @@ class IslandGroupTest {
         islandGroup.addIsland(island1);
         islandGroup.addIsland(island2);
 
-        assertEquals(2, islandGroup.getNumberOfIsland());
+        assertEquals(2, islandGroup.getNumberOfIslands());
     }
 
     @Test
@@ -90,7 +88,7 @@ class IslandGroupTest {
         assertFalse(islandGroup.addIsland(island1));
 
         int numberOfPlayers = game.getPlayers().size();
-        for(int i=0; i<numberOfPlayers; i++){
+        for(int i = 0; i < numberOfPlayers; i++) {
             Game.getGame().removePlayer(0);
         }
     }
@@ -122,10 +120,9 @@ class IslandGroupTest {
         assertFalse(islandGroup.addIsland(islandToAdd2));
 
         int numberOfPlayers = game.getPlayers().size();
-        for(int i=0; i<numberOfPlayers; i++){
+        for(int i = 0; i < numberOfPlayers; i++) {
             Game.getGame().removePlayer(0);
         }
-
     }
 
     @Test
@@ -152,10 +149,9 @@ class IslandGroupTest {
         assertTrue(islandGroup.addIsland(islandToAdd2));
 
         int numberOfPlayers = game.getPlayers().size();
-        for(int i=0; i<numberOfPlayers; i++){
+        for(int i = 0; i < numberOfPlayers; i++) {
             Game.getGame().removePlayer(0);
         }
-
     }
 
     @Test
@@ -185,10 +181,10 @@ class IslandGroupTest {
         assertEquals(2, islandGroup.getIslands().get(1).getIslandID());
         assertEquals(11, islandGroup.getIslands().get(2).getIslandID());
         assertEquals(12, islandGroup.getIslands().get(3).getIslandID());
-        assertEquals(4, islandGroup.getNumberOfIsland());
+        assertEquals(4, islandGroup.getNumberOfIslands());
 
         int numberOfPlayers = game.getPlayers().size();
-        for(int i=0; i<numberOfPlayers; i++){
+        for(int i = 0; i < numberOfPlayers; i++) {
             Game.getGame().removePlayer(0);
         }
     }
@@ -221,7 +217,7 @@ class IslandGroupTest {
         assertEquals(12, islandGroup.getIslands().get(3).getIslandID());
 
         int numberOfPlayers = game.getPlayers().size();
-        for(int i=0; i<numberOfPlayers; i++){
+        for(int i = 0; i < numberOfPlayers; i++) {
             Game.getGame().removePlayer(0);
         }
     }
@@ -268,17 +264,16 @@ class IslandGroupTest {
         islandGroup.addIsland(island1);
         islandGroup.addIsland(island2);
 
-
         assertTrue(islandGroup.connectIslandGroup(islandGroupToAdd));
 
         assertEquals(1, islandGroup.getIslands().get(0).getIslandID());
         assertEquals(2, islandGroup.getIslands().get(1).getIslandID());
         assertEquals(3, islandGroup.getIslands().get(2).getIslandID());
         assertEquals(4, islandGroup.getIslands().get(3).getIslandID());
-        assertEquals(4, islandGroup.getNumberOfIsland());
+        assertEquals(4, islandGroup.getNumberOfIslands());
 
         int numberOfPlayers = game.getPlayers().size();
-        for(int i=0; i<numberOfPlayers; i++){
+        for(int i = 0; i < numberOfPlayers; i++) {
             Game.getGame().removePlayer(0);
         }
     }
@@ -312,10 +307,10 @@ class IslandGroupTest {
         assertEquals(2, islandGroup.getIslands().get(1).getIslandID());
         assertEquals(3, islandGroup.getIslands().get(2).getIslandID());
         assertEquals(4, islandGroup.getIslands().get(3).getIslandID());
-        assertEquals(4, islandGroup.getNumberOfIsland());
+        assertEquals(4, islandGroup.getNumberOfIslands());
 
         int numberOfPlayers = game.getPlayers().size();
-        for(int i=0; i<numberOfPlayers; i++){
+        for(int i = 0; i < numberOfPlayers; i++) {
             Game.getGame().removePlayer(0);
         }
     }
@@ -342,10 +337,10 @@ class IslandGroupTest {
 
         assertFalse(islandGroup.connectIslandGroup(islandGroupToAdd));
         assertEquals(4, islandGroup.getIslands().get(0).getIslandID());
-        assertEquals(1, islandGroup.getNumberOfIsland());
+        assertEquals(1, islandGroup.getNumberOfIslands());
 
         int numberOfPlayers = game.getPlayers().size();
-        for(int i=0; i<numberOfPlayers; i++){
+        for(int i = 0; i < numberOfPlayers; i++) {
             Game.getGame().removePlayer(0);
         }
     }
@@ -375,10 +370,10 @@ class IslandGroupTest {
 
         assertFalse(islandGroup.connectIslandGroup(islandGroupToAdd));
         assertEquals(4, islandGroup.getIslands().get(0).getIslandID());
-        assertEquals(1, islandGroup.getNumberOfIsland());
+        assertEquals(1, islandGroup.getNumberOfIslands());
 
         int numberOfPlayers = game.getPlayers().size();
-        for(int i=0; i<numberOfPlayers; i++){
+        for(int i = 0; i < numberOfPlayers; i++) {
             Game.getGame().removePlayer(0);
         }
     }
@@ -410,10 +405,10 @@ class IslandGroupTest {
         assertEquals(2, islandGroup.getIslands().get(1).getIslandID());
         assertEquals(3, islandGroup.getIslands().get(2).getIslandID());
         assertEquals(12, islandGroup.getIslands().get(3).getIslandID());
-        assertEquals(4, islandGroup.getNumberOfIsland());
+        assertEquals(4, islandGroup.getNumberOfIslands());
 
         int numberOfPlayers = game.getPlayers().size();
-        for(int i=0; i<numberOfPlayers; i++){
+        for(int i = 0; i < numberOfPlayers; i++) {
             Game.getGame().removePlayer(0);
         }
     }
@@ -449,7 +444,7 @@ class IslandGroupTest {
         assertEquals(7, islandGroup.calculateInfluence(player));
 
         int numberOfPlayers = game.getPlayers().size();
-        for(int i=0; i<numberOfPlayers; i++){
+        for(int i = 0; i < numberOfPlayers; i++) {
             Game.getGame().removePlayer(0);
         }
 
@@ -490,7 +485,7 @@ class IslandGroupTest {
         assertEquals(4, islandGroup.calculateInfluence(player, character));
 
         int numberOfPlayers = game.getPlayers().size();
-        for(int i=0; i<numberOfPlayers; i++){
+        for(int i = 0; i < numberOfPlayers; i++) {
             Game.getGame().removePlayer(0);
         }
     }
@@ -529,7 +524,7 @@ class IslandGroupTest {
         assertEquals(9, islandGroup.calculateInfluence(player, character1));
 
         int numberOfPlayers = game.getPlayers().size();
-        for(int i=0; i<numberOfPlayers; i++){
+        for(int i = 0; i < numberOfPlayers; i++) {
             Game.getGame().removePlayer(0);
         }
     }
@@ -569,9 +564,8 @@ class IslandGroupTest {
         assertEquals(4, islandGroup.calculateInfluence(player, character2));
 
         int numberOfPlayers = game.getPlayers().size();
-        for(int i=0; i<numberOfPlayers; i++){
+        for(int i = 0; i < numberOfPlayers; i++) {
             Game.getGame().removePlayer(0);
         }
-
     }
 }

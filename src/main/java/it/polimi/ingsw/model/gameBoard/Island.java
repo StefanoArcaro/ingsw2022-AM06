@@ -9,6 +9,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Island {
+
+    private static final int ISLAND_ID_MIN = 1;
+    private static final int ISLAND_ID_MAX = 12;
+
     private int islandID;
     private ArrayList<Student> students;
     private PlayerColor tower;
@@ -18,7 +22,7 @@ public class Island {
      * @param islandID ID of the island
      */
     public Island(int islandID) {
-        if(islandID > 0 && islandID < 13) {
+        if(islandID >= ISLAND_ID_MIN && islandID <= ISLAND_ID_MAX) {
             this.islandID = islandID;
             this.students = new ArrayList<>();
             this.tower = null;
@@ -57,9 +61,9 @@ public class Island {
      */
     public boolean addTower(PlayerColor tower) {
         Player player = Game.getGame().getPlayerByColor(tower);
-        int numberOfTowers = player!=null ?player.getBoard().getTowers() :0;
+        int numberOfTowers = player != null ? player.getBoard().getTowers() : 0;
         if(this.tower == null && numberOfTowers>0 && player!=null) {
-            if (player.getBoard().removeTowers(1)) {
+            if(player.getBoard().removeTower()) {
                 this.tower = tower;
                 return true;
             }

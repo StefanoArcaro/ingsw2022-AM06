@@ -4,8 +4,6 @@ import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.PlayerColor;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
@@ -28,15 +26,14 @@ class BoardTest {
     void removeStudentFromHall() {
         Player player = new Player("nick", PlayerColor.BLACK);
         Board board = new Board(player);
-        Table tablePink= board.getHall().getTableByColor(CreatureColor.PINK);
-        Table tableRed= board.getHall().getTableByColor(CreatureColor.RED);
+        Table tablePink = board.getHall().getTableByColor(CreatureColor.PINK);
+        Table tableRed = board.getHall().getTableByColor(CreatureColor.RED);
         board.addStudentToHall(CreatureColor.PINK);
         assertEquals(1, tablePink.getLength());
         assertEquals(0, tableRed.getLength());
         board.removeStudentFromHall(CreatureColor.PINK);
         assertEquals(0, tablePink.getLength());
         assertFalse(board.removeStudentFromHall(CreatureColor.PINK));
-
     }
 
     @Test
@@ -49,7 +46,6 @@ class BoardTest {
         assertFalse(board.getProfessors().isEmpty());
         board.winProfessor(professor);
         assertEquals(1, board.getProfessors().size());
-
     }
 
     @Test
@@ -85,14 +81,14 @@ class BoardTest {
         Player player = new Player("nick", PlayerColor.BLACK);
         Board board = new Board(player);
 
-        for (CreatureColor color : CreatureColor.values())
+        for(CreatureColor color : CreatureColor.values()) {
             board.winProfessor(new Professor(color));
+        }
+
         assertTrue(board.containsProfessor(CreatureColor.RED));
         assertTrue(board.containsProfessor(CreatureColor.GREEN));
         assertTrue(board.containsProfessor(CreatureColor.BLUE));
         assertTrue(board.containsProfessor(CreatureColor.PINK));
         assertTrue(board.containsProfessor(CreatureColor.YELLOW));
     }
-
-
 }

@@ -53,7 +53,7 @@ class CharacterProfessorUpdaterTest {
         game.setCurrentPhase(new PhaseFactory().createPhase(GameState.MOVE_MOTHER_NATURE_PHASE));
 
         character = cf.createCharacter(2);
-        game.getCurrentPhase().setActivatedCharacter(character);
+        game.getCurrentPhase().activateCharacter(character);
 
         Professor prof1 = new Professor(CreatureColor.RED);
         Professor prof2 = new Professor(CreatureColor.YELLOW);
