@@ -1,8 +1,5 @@
 package it.polimi.ingsw.model.characters;
 
-import it.polimi.ingsw.model.characters.*;
-import it.polimi.ingsw.model.characters.Character;
-
 /**
  * Overrides the factory method in order to return the object implementation
  */

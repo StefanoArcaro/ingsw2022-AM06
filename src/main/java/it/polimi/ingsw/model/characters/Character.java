@@ -55,7 +55,7 @@ public abstract class Character {
     }
 
     public ArrayList<Student> getStudents() {
-        return new ArrayList<Student>(students);
+        return new ArrayList<>(students);
     }
 
     /**

@@ -23,11 +23,9 @@ public class Board {
         this.professors = new ArrayList<>();
     }
 
-    /**
-     * @return the player that owns the board
-     */
-    public Player getPlayer() {
-        return player;
+
+    public void setTowers(int towers) {
+        this.towers = towers;
     }
 
     /**
@@ -38,59 +36,10 @@ public class Board {
     }
 
     /**
-     * Adds a student of the inputted color to the board's entrance
-     * @param color of the student to add to the entrance
-     */
-    public void addStudentToEntrance(CreatureColor color) {
-        entrance.addStudent(color);
-    }
-
-    /**
-     * Removes a student of the specified color from the board's entrance
-     * @param color of the student to remove
-     * @return whether the student was removed
-     */
-    public boolean removeStudentFromEntrance(CreatureColor color){
-        return entrance.removeStudent(color);
-    }
-
-    /**
-     * Moves a student of the specified color to the inputted island
-     * @param color of the student to move
-     * @param island to move the student to
-     * @return whether the student was moved or not
-     */
-    public boolean moveStudentToIsland(CreatureColor color, Island island) {
-        if(removeStudentFromEntrance(color)) {
-            island.addStudent(new Student(color));
-            return true;
-        }
-        return false;
-    }
-
-    /**
      * @return the Hall component of the board
      */
     public Hall getHall() {
         return this.hall;
-    }
-
-    /**
-     * Adds a student of the specified color to the board's hall
-     * @param color of the student to add
-     * @return whether the student was added or not
-     */
-    public boolean addStudentToHall(CreatureColor color) {
-        return hall.addStudent(color);
-    }
-
-    /**
-     * Removes a student of the specified color from the board's hall
-     * @param color of the student to remove
-     * @return whether the student was removed or not
-     */
-    public boolean removeStudentFromHall(CreatureColor color) {
-        return hall.removeStudent(color);
     }
 
     /**
@@ -100,12 +49,65 @@ public class Board {
         return new ArrayList<>(professors);
     }
 
-    public void setTowers(int towers) {
-        this.towers = towers;
-    }
-
     public int getTowers() {
         return towers;
+    }
+
+    /**
+     * @return the player that owns the board
+     */
+    public Player getPlayer() {
+        return player;
+    }
+
+    /**
+     * Adds a student of the inputted color to the board's entrance
+     * @param color of the student to add to the entrance
+     */
+    public void addStudentToEntrance(CreatureColor color) {
+        entrance.receiveStudent(color);
+    }
+
+    /**
+     * Removes a student of the specified color from the board's entrance
+     * @param color of the student to remove
+     * @return whether the student was removed
+     */
+    public boolean removeStudentFromEntrance(CreatureColor color){
+        return entrance.sendStudent(color);
+    }
+
+    /**
+     * Adds a student of the specified color to the board's hall
+     * @param color of the student to add
+     * @return whether the student was added or not
+     */
+    public boolean addStudentToHall(CreatureColor color) {
+        return hall.receiveStudent(color);
+    }
+
+    /**
+     * Removes a student of the specified color from the board's hall
+     * @param color of the student to remove
+     * @return whether the student was removed or not
+     */
+    public boolean removeStudentFromHall(CreatureColor color) {
+        return hall.sendStudent(color);
+    }
+
+    /**
+     * Moves a student of the specified color to the inputted island
+     * @param color of the student to move
+     * @param island to move the student to
+     * @return whether the student was moved or not
+     */
+    public boolean moveStudentToIsland(CreatureColor color,Island island) {
+       if(removeStudentFromEntrance(color)){
+           island.receiveStudent(color);
+           return true;
+       }
+       return false;
+
     }
 
     /**
@@ -123,7 +125,6 @@ public class Board {
      * @param professor to remove
      */
     public void loseProfessor(Professor professor) {
-        // TODO check if necessary (probably not)
         professors.remove(professor);
     }
 
@@ -138,6 +139,7 @@ public class Board {
             professors.remove(result);
             return result;
         }
+
         return null;
     }
 
@@ -147,8 +149,8 @@ public class Board {
      * @return whether the professor is on the board or not
      */
     public boolean containsProfessor(CreatureColor color) {
-        for(Professor professor : professors) {
-            if(color.equals(professor.getColor())) {
+        for (Professor professor : professors) {
+            if (color.equals(professor.getColor())) {
                 return true;
             }
         }
@@ -184,11 +186,15 @@ public class Board {
      * @return if there are no more towers
      */
     public boolean removeTower() {
-        this.towers -= 1;
-        return isThereNoTowers();
+        if(towers > 0) {
+            this.towers -= 1;
+            return true;
+        }
+        return false;
     }
 
-    private boolean isThereNoTowers() {
+    //TODO check
+    public boolean isThereNoTowers() {
         return this.towers <= 0;
     }
 }

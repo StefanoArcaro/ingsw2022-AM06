@@ -422,17 +422,17 @@ class IslandGroupTest {
 
         island1 = new Island(1);
         island1.addTower(PlayerColor.BLACK);
-        island1.addStudent(new Student(CreatureColor.RED));
+        island1.receiveStudent(CreatureColor.RED);
 
         island2 = new Island(2);
         island2.addTower(PlayerColor.BLACK);
-        island2.addStudent(new Student(CreatureColor.RED));
-        island2.addStudent(new Student(CreatureColor.YELLOW));
+        island2.receiveStudent(CreatureColor.RED);
+        island2.receiveStudent(CreatureColor.YELLOW);
 
         island3 = new Island(3);
         island3.addTower(PlayerColor.BLACK);
-        island3.addStudent(new Student(CreatureColor.BLUE));
-        island3.addStudent(new Student(CreatureColor.RED));
+        island3.receiveStudent(CreatureColor.BLUE);
+        island3.receiveStudent(CreatureColor.RED);
 
         player.getBoard().winProfessor(new Professor(CreatureColor.RED));
         player.getBoard().winProfessor(new Professor(CreatureColor.YELLOW));
@@ -461,17 +461,17 @@ class IslandGroupTest {
 
         island1 = new Island(1);
         island1.addTower(player.getColor());
-        island1.addStudent(new Student(CreatureColor.RED));
+        island1.receiveStudent(CreatureColor.RED);
 
         island2 = new Island(2);
         island2.addTower(player.getColor());
-        island2.addStudent(new Student(CreatureColor.RED));
-        island2.addStudent(new Student(CreatureColor.YELLOW));
+        island2.receiveStudent(CreatureColor.RED);
+        island2.receiveStudent(CreatureColor.YELLOW);
 
         island3 = new Island(3);
         island3.addTower(player.getColor());
-        island3.addStudent(new Student(CreatureColor.BLUE));
-        island3.addStudent(new Student(CreatureColor.RED));
+        island3.receiveStudent(CreatureColor.BLUE);
+        island3.receiveStudent(CreatureColor.RED);
 
         player.getBoard().winProfessor(new Professor(CreatureColor.RED));
         player.getBoard().winProfessor(new Professor(CreatureColor.YELLOW));
@@ -500,17 +500,17 @@ class IslandGroupTest {
 
         island1 = new Island(1);
         island1.addTower(PlayerColor.BLACK);
-        island1.addStudent(new Student(CreatureColor.RED));
+        island1.receiveStudent(CreatureColor.RED);
 
         island2 = new Island(2);
         island2.addTower(PlayerColor.BLACK);
-        island2.addStudent(new Student(CreatureColor.RED));
-        island2.addStudent(new Student(CreatureColor.YELLOW));
+        island2.receiveStudent(CreatureColor.RED);
+        island2.receiveStudent(CreatureColor.YELLOW);
 
         island3 = new Island(3);
         island3.addTower(PlayerColor.BLACK);
-        island3.addStudent(new Student(CreatureColor.BLUE));
-        island3.addStudent(new Student(CreatureColor.RED));
+        island3.receiveStudent(CreatureColor.BLUE);
+        island3.receiveStudent(CreatureColor.RED);
 
         player.getBoard().winProfessor(new Professor(CreatureColor.RED));
         player.getBoard().winProfessor(new Professor(CreatureColor.YELLOW));
@@ -539,17 +539,17 @@ class IslandGroupTest {
 
         island1 = new Island(1);
         island1.addTower(PlayerColor.BLACK);
-        island1.addStudent(new Student(CreatureColor.RED));
+        island1.receiveStudent(CreatureColor.RED);
 
         island2 = new Island(2);
         island2.addTower(PlayerColor.BLACK);
-        island2.addStudent(new Student(CreatureColor.RED));
-        island2.addStudent(new Student(CreatureColor.YELLOW));
+        island2.receiveStudent(CreatureColor.RED);
+        island2.receiveStudent(CreatureColor.YELLOW);
 
         island3 = new Island(3);
         island3.addTower(PlayerColor.BLACK);
-        island3.addStudent(new Student(CreatureColor.BLUE));
-        island3.addStudent(new Student(CreatureColor.RED));
+        island3.receiveStudent(CreatureColor.BLUE);
+        island3.receiveStudent(CreatureColor.RED);
 
         player.getBoard().winProfessor(new Professor(CreatureColor.RED));
         player.getBoard().winProfessor(new Professor(CreatureColor.YELLOW));

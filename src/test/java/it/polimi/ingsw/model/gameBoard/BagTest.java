@@ -27,11 +27,11 @@ class BagTest {
     void addStudent() {
         Bag bag = Bag.getBag();
 
-        bag.addStudent(new Student(CreatureColor.GREEN));
-        bag.addStudent(new Student(CreatureColor.RED));
-        bag.addStudent(new Student(CreatureColor.YELLOW));
-        bag.addStudent(new Student(CreatureColor.PINK));
-        bag.addStudent(new Student(CreatureColor.BLUE));
+        bag.receiveStudent(CreatureColor.GREEN);
+        bag.receiveStudent(CreatureColor.RED);
+        bag.receiveStudent(CreatureColor.YELLOW);
+        bag.receiveStudent(CreatureColor.PINK);
+        bag.receiveStudent(CreatureColor.BLUE);
 
         assertEquals(5,bag.size());
 
@@ -46,11 +46,11 @@ class BagTest {
     void drawStudent() {
         Bag bag = Bag.getBag();
 
-        bag.addStudent(new Student(CreatureColor.GREEN));
-        bag.addStudent(new Student(CreatureColor.RED));
-        bag.addStudent(new Student(CreatureColor.YELLOW));
-        bag.addStudent(new Student(CreatureColor.PINK));
-        bag.addStudent(new Student(CreatureColor.BLUE));
+        bag.receiveStudent(CreatureColor.GREEN);
+        bag.receiveStudent(CreatureColor.RED);
+        bag.receiveStudent(CreatureColor.YELLOW);
+        bag.receiveStudent(CreatureColor.PINK);
+        bag.receiveStudent(CreatureColor.BLUE);
 
         bag.drawStudent();
         assertEquals(4,bag.size());
@@ -73,7 +73,7 @@ class BagTest {
     @Test
     void isEmpty() {
         Bag bag = Bag.getBag();
-        bag.addStudent(new Student(CreatureColor.GREEN));
+        bag.receiveStudent(CreatureColor.GREEN);
         assertFalse(bag.isEmpty());
         bag.drawStudent();
         assertTrue(bag.isEmpty());

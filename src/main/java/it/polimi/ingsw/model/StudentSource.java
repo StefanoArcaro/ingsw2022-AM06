@@ -4,6 +4,6 @@ import it.polimi.ingsw.model.gameBoard.CreatureColor;
 
 public interface StudentSource {
 
-    void sendStudent(CreatureColor color);
+    boolean sendStudent(CreatureColor color);
 
 }

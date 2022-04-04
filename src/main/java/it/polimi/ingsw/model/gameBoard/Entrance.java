@@ -1,8 +1,11 @@
 package it.polimi.ingsw.model.gameBoard;
 
+import it.polimi.ingsw.model.StudentDestination;
+import it.polimi.ingsw.model.StudentSource;
+
 import java.util.ArrayList;
 
-public class Entrance {
+public class Entrance implements StudentSource, StudentDestination {
 
     private final ArrayList<Student> students;
 
@@ -24,8 +27,8 @@ public class Entrance {
      * Adds a student of the specified color to the entrance
      * @param color of the student to add
      */
-    public void addStudent(CreatureColor color) {
-        students.add(new Student(color));
+    public boolean receiveStudent(CreatureColor color){
+        return students.add(new Student(color));
     }
 
     /**
@@ -33,7 +36,7 @@ public class Entrance {
      * @param color of the student to remove
      * @return whether the student was removed or not
      */
-    public boolean removeStudent(CreatureColor color) {
+    public boolean sendStudent(CreatureColor color) {
         for(Student student : students) {
             if(student.getColor().equals(color)) {
                 students.remove(student);

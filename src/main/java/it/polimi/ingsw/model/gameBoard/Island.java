@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Island {
+public class Island implements StudentDestination{
 
     private static final int ISLAND_ID_MIN = 1;
     private static final int ISLAND_ID_MAX = 12;
@@ -30,15 +30,15 @@ public class Island {
     }
 
     public ArrayList<Student> getStudents() {
-        return students;
+        return new ArrayList<>(students);
     }
 
     /**
      * Add student on the island
-     * @param student to add
+     * @param color of the student to add
      */
-    public void addStudent(Student student){
-        students.add(student);
+    public boolean receiveStudent(CreatureColor color){
+        return students.add(new Student(color));
     }
 
     /**
@@ -61,9 +61,12 @@ public class Island {
      */
     public boolean addTower(PlayerColor tower) {
         Player player = Game.getGame().getPlayerByColor(tower);
-        int numberOfTowers = player != null ? player.getBoard().getTowers() : 0;
-        if(this.tower == null && numberOfTowers>0 && player!=null) {
-            if(player.getBoard().removeTower()) {
+
+
+
+        int numberOfTowers = player!=null ?player.getBoard().getTowers() :0;
+        if(this.tower == null && numberOfTowers>0) {
+            if (player.getBoard().removeTower()) {
                 this.tower = tower;
                 return true;
             }

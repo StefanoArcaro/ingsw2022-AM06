@@ -1,15 +1,18 @@
 package it.polimi.ingsw.model.gameBoard;
 
+import it.polimi.ingsw.model.StudentDestination;
+import it.polimi.ingsw.model.StudentSource;
+
 import java.util.ArrayList;
 
-public class Hall {
+public class Hall implements StudentSource, StudentDestination {
 
     private final ArrayList<Table> students;
 
     /**
      * Default constructor
      */
-    public Hall() {
+    public Hall (){
         this.students = new ArrayList<>();
         for(CreatureColor color : CreatureColor.values()) {
             students.add(new Table(color));
@@ -24,8 +27,11 @@ public class Hall {
         return students.get(color.getIndex());
     }
 
-    public boolean addStudent(CreatureColor color) {
-        Table tableToAdd = getTableByColor(color);
+    public boolean receiveStudent(CreatureColor color){
+        Table tableToAdd;
+        boolean success;
+
+        tableToAdd = getTableByColor(color);
 
         if(tableToAdd != null) {
             return tableToAdd.addStudent();
@@ -33,8 +39,10 @@ public class Hall {
         return false;
     }
 
-    public boolean removeStudent(CreatureColor color) {
-        Table tableToRemove = getTableByColor(color);
+    public boolean sendStudent(CreatureColor color){
+        Table tableToRemove;
+
+        tableToRemove = getTableByColor(color);
 
         if(tableToRemove != null) {
             return tableToRemove.removeStudent();
