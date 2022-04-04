@@ -24,6 +24,12 @@ public class PlanningPhase extends Phase {
     private ArrayList<Player> playingOrder;
     private final Map<Player, Assistant> playerPriority;
 
+    /**
+     * Default constructor
+     * @param game referemce to the game
+     * @param players list of the players
+     * @param firstPlayerIndex index of the player going first
+     */
     public PlanningPhase(Game game, ArrayList<Player> players, int firstPlayerIndex) {
         this.game = game;
         this.activatedCharacter = new ConcreteCharacterFactory().createCharacter(NULL_CHARACTER_ID);
@@ -32,6 +38,13 @@ public class PlanningPhase extends Phase {
         this.playerPriority = new HashMap<>();
     }
 
+    /**
+     * Planning phase of the game.
+     * The cloud cards are filled with the correct number of students and
+     * each player plays an assistant card.
+     * The assistant cards then serve as a way to determine the action phase's
+     * playing order.
+     */
     @Override
     public void play() {
         fillClouds();
@@ -43,12 +56,18 @@ public class PlanningPhase extends Phase {
         game.setGameState(GameState.MOVE_STUDENT_PHASE);
     }
 
+    /**
+     * Fills the cloud cards
+     */
     private void fillClouds() {
         for(Cloud cloud : game.getClouds()) {
             cloud.fill(Bag.getBag(), playingOrder.size());
         }
     }
 
+    /**
+     * Each player chooses an assistant card to play
+     */
     private void playAssistants() {
         int priority;
         Assistant assistant;
@@ -91,6 +110,9 @@ public class PlanningPhase extends Phase {
         return false;
     }
 
+    /**
+     * Calculates the new playing order based on the assistant cards played
+     */
     private void calculatePlayingOrder() {
         playingOrder = playerPriority.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue())
