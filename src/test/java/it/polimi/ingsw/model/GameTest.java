@@ -60,33 +60,33 @@ class GameTest {
         IslandGroup islandGroup3 = game.getIslandGroups().get(3);
         IslandGroup islandGroup4 = game.getIslandGroups().get(4);
 
-        islandGroup1.getIslands().get(0).addStudent(new Student(CreatureColor.RED));
-        islandGroup1.getIslands().get(0).addStudent(new Student(CreatureColor.RED));
-        islandGroup1.getIslands().get(0).addStudent(new Student(CreatureColor.RED));
+        islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.RED);
+        islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.RED);
+        islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.RED);
         islandGroup1.getIslands().get(0).addTower(player1.getColor());
         islandGroup1.setConquerorColor(player1.getColor());
 
-        islandGroup2.getIslands().get(0).addStudent(new Student(CreatureColor.GREEN));
-        islandGroup2.getIslands().get(0).addStudent(new Student(CreatureColor.GREEN));
-        islandGroup2.getIslands().get(0).addStudent(new Student(CreatureColor.GREEN));
+        islandGroup2.getIslands().get(0).receiveStudent(CreatureColor.GREEN);
+        islandGroup2.getIslands().get(0).receiveStudent(CreatureColor.GREEN);
+        islandGroup2.getIslands().get(0).receiveStudent(CreatureColor.GREEN);
         islandGroup2.getIslands().get(0).addTower(player1.getColor());
         islandGroup2.setConquerorColor(player1.getColor());
 
         game.connectIslandGroups(1, 2);
 
-        islandGroup3.getIslands().get(0).addStudent(new Student(CreatureColor.YELLOW));
-        islandGroup3.getIslands().get(0).addStudent(new Student(CreatureColor.YELLOW));
-        islandGroup3.getIslands().get(0).addStudent(new Student(CreatureColor.YELLOW));
-        islandGroup3.getIslands().get(0).addStudent(new Student(CreatureColor.YELLOW));
-        islandGroup3.getIslands().get(0).addStudent(new Student(CreatureColor.PINK));
-        islandGroup3.getIslands().get(0).addStudent(new Student(CreatureColor.PINK));
+        islandGroup3.getIslands().get(0).receiveStudent(CreatureColor.YELLOW);
+        islandGroup3.getIslands().get(0).receiveStudent(CreatureColor.YELLOW);
+        islandGroup3.getIslands().get(0).receiveStudent(CreatureColor.YELLOW);
+        islandGroup3.getIslands().get(0).receiveStudent(CreatureColor.YELLOW);
+        islandGroup3.getIslands().get(0).receiveStudent(CreatureColor.PINK);
+        islandGroup3.getIslands().get(0).receiveStudent(CreatureColor.PINK);
         islandGroup3.getIslands().get(0).addTower(player2.getColor());
         islandGroup3.setConquerorColor(player2.getColor());
 
 
-        islandGroup4.getIslands().get(0).addStudent(new Student(CreatureColor.PINK));
-        islandGroup4.getIslands().get(0).addStudent(new Student(CreatureColor.PINK));
-        islandGroup4.getIslands().get(0).addStudent(new Student(CreatureColor.PINK));
+        islandGroup4.getIslands().get(0).receiveStudent(CreatureColor.PINK);
+        islandGroup4.getIslands().get(0).receiveStudent(CreatureColor.PINK);
+        islandGroup4.getIslands().get(0).receiveStudent(CreatureColor.PINK);
         islandGroup4.getIslands().get(0).addTower(player2.getColor());
         islandGroup4.setConquerorColor(player2.getColor());
 
@@ -125,16 +125,16 @@ class GameTest {
 
         IslandGroup islandGroup1 = game.getIslandGroups().get(1);
 
-        islandGroup1.getIslands().get(0).addStudent(new Student(CreatureColor.RED));
-        islandGroup1.getIslands().get(0).addStudent(new Student(CreatureColor.RED));
-        islandGroup1.getIslands().get(0).addStudent(new Student(CreatureColor.RED));
+        islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.RED);
+        islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.RED);
+        islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.RED);
         islandGroup1.getIslands().get(0).addTower(player1.getColor());
         islandGroup1.setConquerorColor(player1.getColor());
 
-        islandGroup1.getIslands().get(0).addStudent(new Student(CreatureColor.PINK));
-        islandGroup1.getIslands().get(0).addStudent(new Student(CreatureColor.PINK));
-        islandGroup1.getIslands().get(0).addStudent(new Student(CreatureColor.PINK));
-        islandGroup1.getIslands().get(0).addStudent(new Student(CreatureColor.PINK));
+        islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.PINK);
+        islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.PINK);
+        islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.PINK);
+        islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.PINK);
 
 
         game.calculateInfluence(1, character);

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Wizard {
 
-    private Player player;
-    private WizardName name;
+    private final Player player;
+    private final WizardName name;
     private ArrayList<Assistant> assistants;
 
     /**

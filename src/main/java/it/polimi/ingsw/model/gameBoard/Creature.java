@@ -2,7 +2,7 @@ package it.polimi.ingsw.model.gameBoard;
 
 public abstract class Creature {
 
-    private CreatureColor color;
+    private final CreatureColor color;
 
     /**
      * Default constructor

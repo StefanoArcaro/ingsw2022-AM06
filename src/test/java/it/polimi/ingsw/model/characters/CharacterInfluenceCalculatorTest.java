@@ -3,10 +3,7 @@ package it.polimi.ingsw.model.characters;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.PlayerColor;
-import it.polimi.ingsw.model.gameBoard.CreatureColor;
-import it.polimi.ingsw.model.gameBoard.Island;
-import it.polimi.ingsw.model.gameBoard.Professor;
-import it.polimi.ingsw.model.gameBoard.Student;
+import it.polimi.ingsw.model.gameBoard.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,8 +27,6 @@ class CharacterInfluenceCalculatorTest {
         character = null;
     }
 
-    //need calculate influence in game to be implemented
-    /*
     @Test
     void effect(){
         Game game = Game.getGame();
@@ -39,8 +34,7 @@ class CharacterInfluenceCalculatorTest {
         Player p2 = new Player("Y", PlayerColor.BLACK);
         game.addPlayer(p1);
         game.addPlayer(p2);
-        Round round = new Round(game.getPlayers(), 0);
-        Game.getGame().setCurrentRound(round);
+        game.setCurrentPlayer(p1);
 
         character = cf.createCharacter(3);
 
@@ -60,26 +54,33 @@ class CharacterInfluenceCalculatorTest {
         p2.getBoard().addStudentToHall(CreatureColor.GREEN);
         p2.getBoard().winProfessor(new Professor(CreatureColor.GREEN));
 
-        Island island1 = new Island(1);
-        island1.addStudent(new Student(CreatureColor.RED));
-        island1.addStudent(new Student(CreatureColor.RED));
-        island1.addStudent(new Student(CreatureColor.GREEN));
-        island1.addTower(p2.getColor());
 
-        Island island2 = new Island(2);
-        island2.addStudent(new Student(CreatureColor.PINK));
-        island2.addStudent(new Student(CreatureColor.PINK));
-        island2.addTower(p1.getColor());
+        IslandGroup islandGroup1 = game.getIslandGroups().get(1);
+        IslandGroup islandGroup2 = game.getIslandGroups().get(2);
+
+
+        islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.RED);
+        islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.RED);
+        islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.RED);
+        islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.GREEN);
+        islandGroup1.getIslands().get(0).addTower(p2.getColor());
+        islandGroup1.setConquerorColor(p2.getColor());
+
+        islandGroup2.getIslands().get(0).receiveStudent(CreatureColor.PINK);
+        islandGroup2.getIslands().get(0).receiveStudent(CreatureColor.PINK);
+        islandGroup2.getIslands().get(0).addTower(p1.getColor());
+        islandGroup2.setConquerorColor(p1.getColor());
+
 
         ((CharacterInfluenceCalculator)character).setIslandGroupIndex(1);
         character.effect();
 
-        assertEquals(p1.getColor(), island1.getTower());
-        assertEquals(p1.getColor(), island2.getTower());
+        assertEquals(p1.getColor(), islandGroup1.getConquerorColor());
+        assertEquals(p1.getColor(), islandGroup2.getConquerorColor());
 
-        assertEquals(2, p1.getBoard().getTowers());
-        assertEquals(3, p2.getBoard().getTowers());
-    }*/
+        assertEquals(1, p1.getBoard().getTowers());
+        assertEquals(2, p2.getBoard().getTowers());
+    }
 
 
 }

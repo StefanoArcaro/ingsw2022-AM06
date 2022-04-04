@@ -3,7 +3,6 @@ package it.polimi.ingsw.model.characters;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.PlayerColor;
-import it.polimi.ingsw.model.phases.Round;
 import it.polimi.ingsw.model.gameBoard.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,18 +36,18 @@ class CharacterMoverTest {
 
     @Test
     void initialPreparation() {
-        bag.addStudent(new Student(CreatureColor.GREEN));
-        bag.addStudent(new Student(CreatureColor.RED));
-        bag.addStudent(new Student(CreatureColor.PINK));
-        bag.addStudent(new Student(CreatureColor.BLUE));
-        bag.addStudent(new Student(CreatureColor.YELLOW));
-        bag.addStudent(new Student(CreatureColor.RED));
-        bag.addStudent(new Student(CreatureColor.GREEN));
-        bag.addStudent(new Student(CreatureColor.RED));
-        bag.addStudent(new Student(CreatureColor.PINK));
-        bag.addStudent(new Student(CreatureColor.BLUE));
-        bag.addStudent(new Student(CreatureColor.YELLOW));
-        bag.addStudent(new Student(CreatureColor.RED));
+        bag.receiveStudent(CreatureColor.GREEN);
+        bag.receiveStudent(CreatureColor.RED);
+        bag.receiveStudent(CreatureColor.PINK);
+        bag.receiveStudent(CreatureColor.BLUE);
+        bag.receiveStudent(CreatureColor.YELLOW);
+        bag.receiveStudent(CreatureColor.RED);
+        bag.receiveStudent(CreatureColor.GREEN);
+        bag.receiveStudent(CreatureColor.RED);
+        bag.receiveStudent(CreatureColor.PINK);
+        bag.receiveStudent(CreatureColor.BLUE);
+        bag.receiveStudent(CreatureColor.YELLOW);
+        bag.receiveStudent(CreatureColor.RED);
 
         character = cf.createCharacter(1);
         character.initialPreparation();
@@ -64,7 +63,7 @@ class CharacterMoverTest {
     void effect1_OK() {
         character = cf.createCharacter(1);
 
-        bag.addStudent(new Student(CreatureColor.RED));
+        bag.receiveStudent(CreatureColor.RED);
 
         character.students.add(new Student(CreatureColor.RED));
         character.students.add(new Student(CreatureColor.RED));
@@ -72,8 +71,8 @@ class CharacterMoverTest {
         character.students.add(new Student(CreatureColor.BLUE));
 
         Game game = Game.getGame();
-        game.getIslandByID(1).addStudent(new Student(CreatureColor.GREEN));
-        game.getIslandByID(1).addStudent(new Student(CreatureColor.PINK));
+        game.getIslandByID(1).receiveStudent(CreatureColor.GREEN);
+        game.getIslandByID(1).receiveStudent(CreatureColor.PINK);
 
 
         ((CharacterMover) character).setFromColor(CreatureColor.RED);
@@ -93,7 +92,7 @@ class CharacterMoverTest {
     void effect1_KO() {
         character = cf.createCharacter(1);
 
-        Bag.getBag().addStudent(new Student(CreatureColor.RED));
+        Bag.getBag().receiveStudent(CreatureColor.RED);
 
         character.students.add(new Student(CreatureColor.RED));
         character.students.add(new Student(CreatureColor.RED));
@@ -101,8 +100,8 @@ class CharacterMoverTest {
         character.students.add(new Student(CreatureColor.BLUE));
 
         Island island = new Island(1);
-        island.addStudent(new Student(CreatureColor.GREEN));
-        island.addStudent(new Student(CreatureColor.PINK));
+        island.receiveStudent(CreatureColor.GREEN);
+        island.receiveStudent(CreatureColor.PINK);
 
         ((CharacterMover) character).setFromColor(CreatureColor.YELLOW);
         character.effect();
@@ -123,12 +122,11 @@ class CharacterMoverTest {
     void effect7_OK() {
         character = cf.createCharacter(7);
 
-        ArrayList<Player> players = new ArrayList<>();
-        players.add(new Player("Chiara", PlayerColor.WHITE));
-        Round round = new Round(players, 0);
-        Game.getGame().setCurrentRound(round);
-
-        Player player = round.getCurrentPlayer();
+        Game game = Game.getGame();
+        Player player = new Player("Chiara", PlayerColor.WHITE);
+        game.addPlayer(player);
+        player.getBoard().setTowers(5);
+        game.setCurrentPlayer(player);
 
         character.students.add(new Student(CreatureColor.RED));
         character.students.add(new Student(CreatureColor.RED));
@@ -162,12 +160,11 @@ class CharacterMoverTest {
     void effect7_KO() {
         character = cf.createCharacter(7);
 
-        ArrayList<Player> players = new ArrayList<>();
-        players.add(new Player("Chiara", PlayerColor.WHITE));
-        Round round = new Round(players, 0);
-        Game.getGame().setCurrentRound(round);
-
-        Player player = round.getCurrentPlayer();
+        Game game = Game.getGame();
+        Player player = new Player("Chiara", PlayerColor.WHITE);
+        game.addPlayer(player);
+        player.getBoard().setTowers(5);
+        game.setCurrentPlayer(player);
 
         character.students.add(new Student(CreatureColor.RED));
         character.students.add(new Student(CreatureColor.RED));
@@ -200,12 +197,11 @@ class CharacterMoverTest {
     void effect10_OK() {
         character = cf.createCharacter(10);
 
-        ArrayList<Player> players = new ArrayList<>();
-        players.add(new Player("Chiara", PlayerColor.WHITE));
-        Round round = new Round(players, 0);
-        Game.getGame().setCurrentRound(round);
-
-        Player player = round.getCurrentPlayer();
+        Game game = Game.getGame();
+        Player player = new Player("Chiara", PlayerColor.WHITE);
+        game.addPlayer(player);
+        player.getBoard().setTowers(5);
+        game.setCurrentPlayer(player);
 
         player.getBoard().addStudentToEntrance(CreatureColor.BLUE);
         player.getBoard().addStudentToEntrance(CreatureColor.PINK);
@@ -216,7 +212,7 @@ class CharacterMoverTest {
         ((CharacterMover) character).setFromColor(CreatureColor.PINK);
         ((CharacterMover) character).setToColor(CreatureColor.BLUE);
 
-        ArrayList expectedHall = new ArrayList<>(Arrays.asList(0,1,0,0,1));
+        ArrayList<Integer> expectedHall = new ArrayList<>(Arrays.asList(0,1,0,0,1));
 
         ArrayList<CreatureColor> expectedEntrance = new ArrayList<>(Arrays.asList(CreatureColor.PINK, CreatureColor.PINK));
 
@@ -232,12 +228,11 @@ class CharacterMoverTest {
     void effect10_KO() {
         character = cf.createCharacter(10);
 
-        ArrayList<Player> players = new ArrayList<>();
-        players.add(new Player("Chiara", PlayerColor.WHITE));
-        Round round = new Round(players, 0);
-        Game.getGame().setCurrentRound(round);
-
-        Player player = round.getCurrentPlayer();
+        Game game = Game.getGame();
+        Player player = new Player("Chiara", PlayerColor.WHITE);
+        game.addPlayer(player);
+        player.getBoard().setTowers(5);
+        game.setCurrentPlayer(player);
 
         player.getBoard().addStudentToEntrance(CreatureColor.BLUE);
         player.getBoard().addStudentToEntrance(CreatureColor.PINK);
@@ -248,7 +243,7 @@ class CharacterMoverTest {
         ((CharacterMover) character).setFromColor(CreatureColor.GREEN);
         ((CharacterMover) character).setToColor(CreatureColor.RED);
 
-        ArrayList expectedHall = new ArrayList<>(Arrays.asList(0,1,0,1,0));
+        ArrayList<Integer> expectedHall = new ArrayList<>(Arrays.asList(0,1,0,1,0));
 
         ArrayList<CreatureColor> expectedEntrance = new ArrayList<>(Arrays.asList(CreatureColor.BLUE, CreatureColor.PINK));
 
@@ -266,14 +261,13 @@ class CharacterMoverTest {
     void effect11_OK() {
         character = cf.createCharacter(11);
 
-        Bag.getBag().addStudent(new Student(CreatureColor.RED));
+        Bag.getBag().receiveStudent(CreatureColor.RED);
 
-        ArrayList<Player> players = new ArrayList<>();
-        players.add(new Player("Chiara", PlayerColor.WHITE));
-        Round round = new Round(players, 0);
-        Game.getGame().setCurrentRound(round);
-
-        Player player = round.getCurrentPlayer();
+        Game game = Game.getGame();
+        Player player = new Player("Chiara", PlayerColor.WHITE);
+        game.addPlayer(player);
+        player.getBoard().setTowers(5);
+        game.setCurrentPlayer(player);
 
         character.students.add(new Student(CreatureColor.RED));
         character.students.add(new Student(CreatureColor.RED));
@@ -285,7 +279,7 @@ class CharacterMoverTest {
 
         ((CharacterMover)character).setFromColor(CreatureColor.RED);
 
-        ArrayList expectedHall = new ArrayList(Arrays.asList(0, 2, 0, 1, 0));
+        ArrayList<Integer> expectedHall = new ArrayList<>(Arrays.asList(0, 2, 0, 1, 0));
 
         character.effect();
 
@@ -299,14 +293,13 @@ class CharacterMoverTest {
     void effect11_KO() {
         character = cf.createCharacter(11);
 
-        Bag.getBag().addStudent(new Student(CreatureColor.RED));
+        Bag.getBag().receiveStudent(CreatureColor.RED);
 
-        ArrayList<Player> players = new ArrayList<>();
-        players.add(new Player("Chiara", PlayerColor.WHITE));
-        Round round = new Round(players, 0);
-        Game.getGame().setCurrentRound(round);
-
-        Player player = round.getCurrentPlayer();
+        Game game = Game.getGame();
+        Player player = new Player("Chiara", PlayerColor.WHITE);
+        game.addPlayer(player);
+        player.getBoard().setTowers(5);
+        game.setCurrentPlayer(player);
 
         character.students.add(new Student(CreatureColor.RED));
         character.students.add(new Student(CreatureColor.RED));
@@ -318,7 +311,7 @@ class CharacterMoverTest {
 
         ((CharacterMover)character).setFromColor(CreatureColor.PINK);
 
-        ArrayList expectedHall = new ArrayList(Arrays.asList(0,1,0,1,0));
+        ArrayList<Integer> expectedHall = new ArrayList<>(Arrays.asList(0,1,0,1,0));
 
         character.effect();
 
@@ -337,8 +330,9 @@ class CharacterMoverTest {
         Player p2 = new Player("Y", PlayerColor.BLACK);
         game.addPlayer(p1);
         game.addPlayer(p2);
-        Round round = new Round(game.getPlayers(), 0);
-        Game.getGame().setCurrentRound(round);
+        p1.getBoard().setTowers(5);
+        p2.getBoard().setTowers(5);
+        game.setCurrentPlayer(p1);
 
         character = cf.createCharacter(12);
 
@@ -346,14 +340,14 @@ class CharacterMoverTest {
         p1.getBoard().addStudentToHall(CreatureColor.RED);
         p1.getBoard().addStudentToHall(CreatureColor.RED);
 
-        ArrayList expectedHall1 = new ArrayList(Arrays.asList(0, 0, 0, 0, 0));
+        ArrayList<Integer> expectedHall1 = new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0));
 
         p2.getBoard().addStudentToHall(CreatureColor.RED);
         p2.getBoard().addStudentToHall(CreatureColor.RED);
         p2.getBoard().addStudentToHall(CreatureColor.RED);
         p2.getBoard().addStudentToHall(CreatureColor.RED);
 
-        ArrayList expectedHall2 = new ArrayList(Arrays.asList(0, 1, 0, 0, 0));
+        ArrayList<Integer> expectedHall2 = new ArrayList<>(Arrays.asList(0, 1, 0, 0, 0));
 
         ((CharacterMover)character).setColorToRemove(CreatureColor.RED);
         character.effect();
@@ -369,8 +363,9 @@ class CharacterMoverTest {
         Player p2 = new Player("Y", PlayerColor.BLACK);
         game.addPlayer(p1);
         game.addPlayer(p2);
-        Round round = new Round(game.getPlayers(), 0);
-        Game.getGame().setCurrentRound(round);
+        p1.getBoard().setTowers(5);
+        p2.getBoard().setTowers(5);
+        game.setCurrentPlayer(p1);
 
         character = cf.createCharacter(12);
 
@@ -379,13 +374,13 @@ class CharacterMoverTest {
         p1.getBoard().addStudentToHall(CreatureColor.GREEN);
         p1.getBoard().addStudentToHall(CreatureColor.PINK);
 
-        ArrayList expectedHall1 = new ArrayList(Arrays.asList(1, 0, 0, 1, 0));
+        ArrayList<Integer> expectedHall1 = new ArrayList<>(Arrays.asList(1, 0, 0, 1, 0));
 
 
         p2.getBoard().addStudentToHall(CreatureColor.GREEN);
         p2.getBoard().addStudentToHall(CreatureColor.GREEN);
 
-        ArrayList expectedHall2 = new ArrayList(Arrays.asList(2, 0, 0, 0, 0));
+        ArrayList<Integer> expectedHall2 = new ArrayList<>(Arrays.asList(2, 0, 0, 0, 0));
 
         ((CharacterMover)character).setColorToRemove(CreatureColor.RED);
         character.effect();

@@ -7,7 +7,7 @@ public class MotherNature {
 
     /**
      * private constructor used in getMotherNature
-     * @param islandGroup
+     * @param islandGroup where mother nature is
      */
     private MotherNature(IslandGroup islandGroup) {
         this.currentIslandGroup = islandGroup;
@@ -22,7 +22,7 @@ public class MotherNature {
 
     /**
      * changes the current island group MotherNature refers to
-     * @param islandGroup
+     * @param islandGroup where to move mother nature
      */
    public void setCurrentIslandGroup(IslandGroup islandGroup){
         this.currentIslandGroup=islandGroup;

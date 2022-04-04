@@ -1,11 +1,13 @@
 package it.polimi.ingsw.model.gameBoard;
 
+import it.polimi.ingsw.model.StudentDestination;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Bag {
+public class Bag implements StudentDestination {
     private static Bag bag = null;
-    private ArrayList<Student> students = new ArrayList<Student>();
+    private ArrayList<Student> students = new ArrayList<>();
 
     private Bag() {}
 
@@ -20,9 +22,10 @@ public class Bag {
         return students;
     }
 
-    public void addStudent(Student student) {
-        students.add(student);
-        //this.shuffle();
+    public boolean receiveStudent(CreatureColor color) {
+        boolean done = students.add(new Student(color));
+        this.shuffle();
+        return done;
     }
 
     public int size() {
@@ -41,10 +44,7 @@ public class Bag {
     }
 
     public boolean isEmpty() {
-        if(students.size() > 0) {
-            return false;
-        }
-        return true;
+        return students.size() <= 0;
     }
 
     public void shuffle(){

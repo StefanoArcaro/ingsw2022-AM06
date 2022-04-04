@@ -1,8 +1,5 @@
 package it.polimi.ingsw.model.characters;
 
-import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.Player;
-
 public class CharacterStepsAdder extends Character {
 
     int moreSteps;

@@ -4,7 +4,6 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.PlayerColor;
 import it.polimi.ingsw.model.characters.Character;
-import it.polimi.ingsw.model.characters.CharacterInfluenceModifier;
 
 import java.util.ArrayList;
 
@@ -17,7 +16,7 @@ public class IslandGroup {
      * Default constructor.
      */
     public IslandGroup() {
-        this.islands = new ArrayList<Island>();
+        this.islands = new ArrayList<>();
         this.numberOfBanCardPresent = 0;
         this.conquerorColor = null;
     }
@@ -63,7 +62,7 @@ public class IslandGroup {
      * @return the islands that make up the island group
      */
     public ArrayList<Island> getIslands() {
-        return new ArrayList<Island>(islands);
+        return new ArrayList<>(islands);
     }
 
     /**
@@ -165,10 +164,7 @@ public class IslandGroup {
             }
         }
 
-        if(islandAdded == lenGroupToAdd) { return true; }
-
-        return false;
-
+        return islandAdded == lenGroupToAdd;
 
     }
 

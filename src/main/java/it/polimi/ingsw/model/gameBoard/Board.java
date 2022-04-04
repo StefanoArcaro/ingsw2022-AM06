@@ -4,17 +4,17 @@ import it.polimi.ingsw.model.*;
 import java.util.ArrayList;
 
 public class Board {
-    private Player player;
-    private Entrance entrance;
-    private Hall hall;
+    private final Player player;
+    private final Entrance entrance;
+    private final Hall hall;
     private ArrayList<Professor> professors;
     private int towers;
 
 
     public Board(Player player) {
         this.player = player;
-        this.entrance = new Entrance(this);
-        this.hall = new Hall(this);
+        this.entrance = new Entrance();
+        this.hall = new Hall();
         this.professors = new ArrayList<>();
     }
 
@@ -44,19 +44,19 @@ public class Board {
     }
 
     public void addStudentToEntrance(CreatureColor color) {
-        entrance.addStudent(color);
+        entrance.receiveStudent(color);
     }
 
     public boolean removeStudentFromEntrance(CreatureColor color){
-        return entrance.removeStudent(color);
+        return entrance.sendStudent(color);
     }
 
     public boolean addStudentToHall(CreatureColor color) {
-        return hall.addStudent(color);
+        return hall.receiveStudent(color);
     }
 
     public boolean removeStudentFromHall(CreatureColor color) {
-        return hall.removeStudent(color);
+        return hall.sendStudent(color);
     }
 
     /**
@@ -64,7 +64,7 @@ public class Board {
      */
     public boolean moveStudentToIsland(CreatureColor color,Island island) {
        if(removeStudentFromEntrance(color)){
-           island.addStudent(new Student(color));
+           island.receiveStudent(color);
            return true;
        }
        return false;
@@ -78,9 +78,7 @@ public class Board {
     }
 
     public void loseProfessor(Professor professor) {
-        if(professors.contains(professor)) {
-            professors.remove(professor);
-        }
+        professors.remove(professor);
     }
 
     /**
@@ -97,8 +95,8 @@ public class Board {
     }
 
     public boolean containsProfessor(CreatureColor color) {
-        for(int i = 0; i < professors.size(); i++) {
-            if(color.equals(professors.get(i).getColor())) {
+        for (Professor professor : professors) {
+            if (color.equals(professor.getColor())) {
                 return true;
             }
         }
@@ -120,19 +118,21 @@ public class Board {
         this.towers = this.towers + numberOfTowers;
     }
 
-    public boolean removeTowers(int numberOfTowers){
-        if(this.towers>=numberOfTowers) {
-            this.towers = towers-numberOfTowers;
+    /**
+     * Removes a certain amount of towers from the board
+     * @return if there are no more towers
+     */
+    public boolean removeTower() {
+        if(towers > 0) {
+            this.towers -= 1;
             return true;
         }
         return false;
     }
 
-    private boolean isThereNoTowers() {
-        if (this.towers == 0)
-            return true;
-        else return false;
-
+    //TODO check
+    public boolean isThereNoTowers() {
+        return this.towers <= 0;
     }
 
 

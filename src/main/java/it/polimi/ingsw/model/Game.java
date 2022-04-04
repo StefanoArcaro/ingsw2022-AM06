@@ -364,7 +364,6 @@ public class Game {
 
 
         if(!draw && !playerMaxInfluence.equals(playerOlderConquerorIslandGroup)){
-            int numberOfIsland = islandGroup.getNumberOfIsland();
             if(playerOlderConquerorIslandGroup!=null){
                 for(Island island : getIslandGroupByIndex(islandGroupIndex).getIslands()){
                     island.removeTower();

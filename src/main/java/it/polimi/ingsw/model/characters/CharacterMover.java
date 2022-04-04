@@ -89,10 +89,10 @@ public class CharacterMover extends Character {
                 effect_one(fromColor, islandID);
                 break;
             case CHARACTER_SEVEN:
-                effect_seven(fromColor, toColor);    //TODO how to handle iteration? (till 3 students)
+                effect_seven(fromColor, toColor);//TODO how to handle iteration? (till 3 students) -> command line 'end effect'
                 break;
             case CHARACTER_TEN:
-                effect_ten(fromColor, toColor);      //TODO how to handle iteration? (till 2 students)
+                effect_ten(fromColor, toColor); //TODO how to handle iteration? (till 2 students) -> command line 'end effect'
                 break;
             case CHARACTER_ELEVEN:
                 effect_eleven(fromColor);
@@ -107,27 +107,23 @@ public class CharacterMover extends Character {
      * Pick the student from this card and move it to an island
      * @param studentColor color of the student on the card chosen
      * @param islandID island where to move the student
-     * @return whether everything went well
      */
-    private boolean effect_one(CreatureColor studentColor, int islandID) {
+    private void effect_one(CreatureColor studentColor, int islandID) {
         if(this.getStudents().stream().map(Creature::getColor).collect(Collectors.toList()).contains(studentColor)) {
             Island island = Game.getGame().getIslandByID(islandID);
-            island.addStudent(new Student(studentColor));
+            island.receiveStudent(studentColor);
             students.remove(getStudentByColor(students, studentColor));
             students.add(Bag.getBag().drawStudent());
-            return true;
         }
-        return false;
     }
 
     /**
      * Swaps a student present on the card with a student present in the entrance to the player board
      * @param cardColor color of the student on the card
      * @param entranceColor color of the student in the player's entrance
-     * @return whether everything went well
      */
-    private boolean effect_seven(CreatureColor cardColor, CreatureColor entranceColor) {
-        Board playerBoard = Game.getCurrentRound().getCurrentPlayer().getBoard();
+    private void effect_seven(CreatureColor cardColor, CreatureColor entranceColor) {
+        Board playerBoard = Game.getGame().getCurrentPlayer().getBoard();
         Student studentEntrance = getStudentByColor(playerBoard.getEntrance().getStudents(), entranceColor);
         Student studentCard = getStudentByColor(students, cardColor);
 
@@ -137,10 +133,7 @@ public class CharacterMover extends Character {
 
             playerBoard.addStudentToEntrance(cardColor);
             students.add(studentEntrance);
-
-            return true;
         }
-        return false;
     }
 
 
@@ -148,11 +141,10 @@ public class CharacterMover extends Character {
      * Swaps a student present in the hall of the player board
      * with a student present in the entrance to the player board
      * @param hallColor color of the student in player's hall
-     * @param entranceColor colore of the student in player's entrance
-     * @return whether everything went well
+     * @param entranceColor color of the student in player's entrance
      */
-    private boolean effect_ten(CreatureColor hallColor, CreatureColor entranceColor) {
-        Board playerBoard = Game.getCurrentRound().getCurrentPlayer().getBoard();
+    private void effect_ten(CreatureColor hallColor, CreatureColor entranceColor) {
+        Board playerBoard = Game.getGame().getCurrentPlayer().getBoard();
         Student studentEntrance = getStudentByColor(playerBoard.getEntrance().getStudents(), entranceColor);
 
         if(studentEntrance != null && playerBoard.getHall().studentInTable(hallColor)) {
@@ -161,37 +153,29 @@ public class CharacterMover extends Character {
 
             playerBoard.addStudentToEntrance(hallColor);
             playerBoard.addStudentToHall(entranceColor);
-
-            return true;
         }
-        return false;
     }
 
     /**
      * Take a student from this card e move it to player's hall
      * @param cardColor color of the student on the card chosen
-     * @return whether everything went well
      */
-    private boolean effect_eleven(CreatureColor cardColor) {
-        Board boardPlayer = Game.getCurrentRound().getCurrentPlayer().getBoard();
+    private void effect_eleven(CreatureColor cardColor) {
+        Board boardPlayer = Game.getGame().getCurrentPlayer().getBoard();
         Student cardStudent = getStudentByColor(students, cardColor);
 
         if(cardStudent != null) {
             students.remove(cardStudent);
             boardPlayer.addStudentToHall(cardColor);
             students.add(Bag.getBag().drawStudent());
-            return true;
         }
-
-        return false;
     }
 
     /**
      * Remove three student of a color from every player's hall
      * @param colorToBeRemoved color chosen to be removed
-     * @return whether everything went well
      */
-    private boolean effect_twelve(CreatureColor colorToBeRemoved) {
+    private void effect_twelve(CreatureColor colorToBeRemoved) {
         ArrayList<Player> players = Game.getGame().getPlayers();
 
         for(Player player : players) {
@@ -203,7 +187,6 @@ public class CharacterMover extends Character {
                 removed++;
             }
         }
-        return false;
     }
 
     /**

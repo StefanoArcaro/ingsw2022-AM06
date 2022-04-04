@@ -22,10 +22,10 @@ class CloudTest {
         cloud = new Cloud(1);
         bag = Bag.getBag();
 
-        bag.addStudent(new Student(CreatureColor.GREEN));
-        bag.addStudent(new Student(CreatureColor.RED));
-        bag.addStudent(new Student(CreatureColor.PINK));
-        bag.addStudent(new Student(CreatureColor.BLUE));
+        bag.receiveStudent(CreatureColor.GREEN);
+        bag.receiveStudent(CreatureColor.RED);
+        bag.receiveStudent(CreatureColor.PINK);
+        bag.receiveStudent(CreatureColor.BLUE);
     }
 
     @AfterEach
@@ -46,9 +46,6 @@ class CloudTest {
 
         ArrayList<Student> students = cloud.getStudents();
 
-        assertEquals(CreatureColor.BLUE, students.get(0).getColor());
-        assertEquals(CreatureColor.PINK, students.get(1).getColor());
-        assertEquals(CreatureColor.RED, students.get(2).getColor());
         assertEquals(3, students.size());
     }
 
@@ -58,10 +55,6 @@ class CloudTest {
 
         ArrayList<Student> students = cloud.getStudents();
 
-        assertEquals(CreatureColor.BLUE, students.get(0).getColor());
-        assertEquals(CreatureColor.PINK, students.get(1).getColor());
-        assertEquals(CreatureColor.RED, students.get(2).getColor());
-        assertEquals(CreatureColor.GREEN, students.get(3).getColor());
         assertEquals(4, students.size());
     }
 
@@ -70,9 +63,6 @@ class CloudTest {
         cloud.fill(bag, 2);
         ArrayList<Student> result = cloud.empty();
 
-        assertEquals(CreatureColor.BLUE, result.get(0).getColor());
-        assertEquals(CreatureColor.PINK, result.get(1).getColor());
-        assertEquals(CreatureColor.RED, result.get(2).getColor());
         assertEquals(3, result.size());
         assertEquals(0, cloud.getStudents().size());
     }
@@ -82,10 +72,6 @@ class CloudTest {
         cloud.fill(bag, 3);
         ArrayList<Student> result = cloud.empty();
 
-        assertEquals(CreatureColor.BLUE, result.get(0).getColor());
-        assertEquals(CreatureColor.PINK, result.get(1).getColor());
-        assertEquals(CreatureColor.RED, result.get(2).getColor());
-        assertEquals(CreatureColor.GREEN, result.get(3).getColor());
         assertEquals(4, result.size());
         assertEquals(0, cloud.getStudents().size());
     }
