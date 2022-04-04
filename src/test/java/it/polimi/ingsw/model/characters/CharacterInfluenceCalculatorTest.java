@@ -19,6 +19,19 @@ class CharacterInfluenceCalculatorTest {
     void setUp() {
         cf = new ConcreteCharacterFactory();
         character = cf.createCharacter(3);
+        int numberOfPlayers = Game.getGame().getPlayers().size();
+        for(int i=0; i<numberOfPlayers; i++){
+            Game.getGame().removePlayer(0);
+        }
+
+        Game.getGame().removeIslandGroups();
+
+        for(int i=1; i<=12; i++) {
+            Island island = new Island(i);
+            IslandGroup islandGroup = new IslandGroup();
+            islandGroup.addIsland(island);
+            Game.getGame().addIslandGroup(islandGroup);
+        }
     }
 
     @AfterEach
