@@ -10,7 +10,7 @@ public class Bag implements StudentDestination {
     private static final int MIN_BAG_SIZE = 0;
 
     private static Bag bag = null;
-    private ArrayList<Student> students = new ArrayList<>();
+    private final ArrayList<Student> students = new ArrayList<>();
 
     /**
      * Private constructor
@@ -62,6 +62,15 @@ public class Bag implements StudentDestination {
             return student;
         }
         return null;
+    }
+
+    /**
+     * Empties the bag
+     */
+    public void empty() {
+        while(!isEmpty()) {
+            bag.drawStudent();
+        }
     }
 
     /**

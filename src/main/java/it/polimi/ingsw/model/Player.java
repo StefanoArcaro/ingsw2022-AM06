@@ -1,8 +1,6 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.gameBoard.Board;
-import it.polimi.ingsw.model.gameBoard.CreatureColor;
-import it.polimi.ingsw.model.gameBoard.Island;
 
 public class Player {
 

@@ -83,7 +83,7 @@ public class LobbyPhase extends Phase {
     /**
      * Checks whether a nickname has already been chosen
      * @param nickname to check
-     * @return whether or not the nickname has been chosen already
+     * @return whether the nickname has been chosen already
      */
     private boolean isNicknameTaken(String nickname) {
         return getPlayerByNickname(nickname) != null;

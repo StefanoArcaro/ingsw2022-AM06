@@ -18,6 +18,4 @@ public abstract class Creature {
     public CreatureColor getColor() {
         return color;
     }
-
-
 }

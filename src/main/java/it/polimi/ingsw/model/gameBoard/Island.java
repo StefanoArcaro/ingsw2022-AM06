@@ -179,7 +179,7 @@ public class Island implements StudentDestination{
 
         // Automatically applied character effect 9
         playerProfessorsColorList = playerProfessors.stream().map(Creature::getColor)
-                                        .filter(x->!x.equals(colorNoPoints)).collect(Collectors.toList());
+                .filter(x->!x.equals(colorNoPoints)).collect(Collectors.toList());
         playerProfessorsColor = new ArrayList<>(playerProfessorsColorList);
 
         for (Student student : students){
@@ -203,8 +203,7 @@ public class Island implements StudentDestination{
         int influence = 0;
 
         influence = influence + towerInfluence(player, activatedCharacter)
-                              + studentInfluence(player, activatedCharacter);
+                + studentInfluence(player, activatedCharacter);
         return influence;
     }
-
 }

@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CharacterInfluenceCalculatorTest {
 
+    Game game;
     ConcreteCharacterFactory cf;
     Character character;
 
@@ -19,12 +20,9 @@ class CharacterInfluenceCalculatorTest {
     void setUp() {
         cf = new ConcreteCharacterFactory();
         character = cf.createCharacter(3);
-        int numberOfPlayers = Game.getGame().getPlayers().size();
-        for(int i=0; i<numberOfPlayers; i++){
-            Game.getGame().removePlayer(0);
-        }
 
-        Game.getGame().removeIslandGroups();
+        Game.getGame().resetGame();
+        game = Game.getGame();
 
         for(int i=1; i<=12; i++) {
             Island island = new Island(i);
@@ -93,7 +91,8 @@ class CharacterInfluenceCalculatorTest {
 
         assertEquals(1, p1.getBoard().getTowers());
         assertEquals(2, p2.getBoard().getTowers());
+
+        assertEquals(1, p1.getBoard().getTowers());
+        assertEquals(2, p2.getBoard().getTowers());
     }
-
-
 }

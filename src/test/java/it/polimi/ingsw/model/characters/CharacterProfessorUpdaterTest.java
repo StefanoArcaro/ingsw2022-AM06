@@ -4,9 +4,7 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.PlayerColor;
-import it.polimi.ingsw.model.gameBoard.Table;
 import it.polimi.ingsw.model.phases.PhaseFactory;
-import it.polimi.ingsw.model.phases.Round;
 import it.polimi.ingsw.model.gameBoard.Creature;
 import it.polimi.ingsw.model.gameBoard.CreatureColor;
 import it.polimi.ingsw.model.gameBoard.Professor;
@@ -16,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,11 +26,9 @@ class CharacterProfessorUpdaterTest {
 
     @BeforeEach
     void setUp() {
+        Game.getGame().resetGame();
+
         cf = new ConcreteCharacterFactory();
-        int numberOfPlayer = Game.getGame().getPlayers().size();
-        for(int i=0; i<numberOfPlayer; i++){
-            Game.getGame().removePlayer(0);
-        }
     }
 
     @AfterEach
@@ -43,8 +39,8 @@ class CharacterProfessorUpdaterTest {
 
     @Test
     void effect() {
-
         Game game = Game.getGame();
+
         Player p1 = new Player("X", PlayerColor.WHITE);
         Player p2 = new Player("Y", PlayerColor.BLACK);
         game.addPlayer(p1);
@@ -56,10 +52,8 @@ class CharacterProfessorUpdaterTest {
         game.getCurrentPhase().activateCharacter(character);
 
         Professor prof1 = new Professor(CreatureColor.RED);
-        Professor prof2 = new Professor(CreatureColor.YELLOW);
         Professor prof3 = new Professor(CreatureColor.PINK);
         Professor prof4 = new Professor(CreatureColor.GREEN);
-        Professor prof5 = new Professor(CreatureColor.BLUE);
 
         p1.getBoard().addStudentToHall(CreatureColor.RED);
         p1.getBoard().addStudentToHall(CreatureColor.RED);
@@ -76,10 +70,10 @@ class CharacterProfessorUpdaterTest {
 
 
         ArrayList<CreatureColor> expectedProf1 =
-                new ArrayList<CreatureColor>(Arrays.asList(CreatureColor.PINK));
+                new ArrayList<>(Collections.singletonList(CreatureColor.PINK));
 
         ArrayList<CreatureColor> expectedProf2 =
-                new ArrayList<CreatureColor>(Arrays.asList(CreatureColor.GREEN, CreatureColor.RED));
+                new ArrayList<>(Arrays.asList(CreatureColor.GREEN, CreatureColor.RED));
 
 
         character.effect();

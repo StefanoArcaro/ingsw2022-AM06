@@ -34,6 +34,4 @@ class AssistantTest {
         Character character = cf.createCharacter(4);
         assertEquals(3, assistant.getMaxSteps((CharacterStepsAdder) character));
     }
-
-
 }

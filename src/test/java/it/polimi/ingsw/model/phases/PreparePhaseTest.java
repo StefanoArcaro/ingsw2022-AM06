@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.phases;
 
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.gameBoard.Bag;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,6 +12,13 @@ class PreparePhaseTest {
     Game game;
     PhaseFactory phaseFactory;
     Phase phase;
+
+    @BeforeEach
+    void setUp() {
+        Game.getGame().resetGame();
+        game = Game.getGame();
+        Bag.getBag().empty();
+    }
 
     @Test
     void play() {
@@ -72,9 +80,6 @@ class PreparePhaseTest {
         assertEquals(9, game.getPlayers().get(0).getBoard().getEntrance().getStudents().size());
         assertEquals(9, game.getPlayers().get(1).getBoard().getEntrance().getStudents().size());
         assertEquals(9, game.getPlayers().get(2).getBoard().getEntrance().getStudents().size());
-
-        // Bag check (again)
-        assertEquals(93, Bag.getBag().size());
 
         // Check drawn characters
         assertEquals(3, game.getDrawnCharacters().size());

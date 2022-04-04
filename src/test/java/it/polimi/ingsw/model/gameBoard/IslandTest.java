@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.gameBoard;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.PlayerColor;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -11,6 +12,11 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
 
 class IslandTest {
+
+    @BeforeEach
+    void setUp() {
+        Game.getGame().resetGame();
+    }
 
     @Test
     void removeTower() {
@@ -30,11 +36,6 @@ class IslandTest {
         assertEquals(4, player.getBoard().getTowers());
         assertTrue(island.removeTower());
         assertEquals(5, player.getBoard().getTowers());
-
-        int numberOfPlayers = game.getPlayers().size();
-        for(int i = 0; i < numberOfPlayers; i++) {
-            Game.getGame().removePlayer(i);
-        }
     }
 
     @Test
@@ -52,11 +53,6 @@ class IslandTest {
 
         assertFalse(island.addTower(PlayerColor.GRAY));
         assertEquals(5, player.getBoard().getTowers());
-
-        int numberOfPlayers = game.getPlayers().size();
-        for(int i = 0; i < numberOfPlayers; i++) {
-            Game.getGame().removePlayer(i);
-        }
     }
 
     @Test
@@ -64,8 +60,6 @@ class IslandTest {
         Island island = new Island(1);
 
         ArrayList<Student> expectedStudents = new ArrayList<>();
-
-        assertEquals(expectedStudents, island.getStudents().stream().map(Creature::getColor).collect(Collectors.toList()));
 
         island.receiveStudent(CreatureColor.BLUE);
         island.receiveStudent(CreatureColor.RED);

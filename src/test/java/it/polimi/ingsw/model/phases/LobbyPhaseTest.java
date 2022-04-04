@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.phases;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.PlayerColor;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,9 +14,14 @@ class LobbyPhaseTest {
     PhaseFactory phaseFactory;
     Phase phase;
 
+    @BeforeEach
+    void setUp() {
+        Game.getGame().resetGame();
+        game = Game.getGame();
+    }
+
     @Test
     void play() {
-        game = Game.getGame();
         game.setNumberOfPlayers(3);
 
         phaseFactory = new PhaseFactory();

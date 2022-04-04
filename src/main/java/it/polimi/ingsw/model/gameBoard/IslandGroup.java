@@ -207,7 +207,3 @@ public class IslandGroup {
         return influence + extraPoints;
     }
 }
-
-
-
-

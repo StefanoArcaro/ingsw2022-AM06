@@ -1,9 +1,5 @@
 package it.polimi.ingsw.model.gameBoard;
 
-import it.polimi.ingsw.model.gameBoard.Bag;
-import it.polimi.ingsw.model.gameBoard.Cloud;
-import it.polimi.ingsw.model.gameBoard.CreatureColor;
-import it.polimi.ingsw.model.gameBoard.Student;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

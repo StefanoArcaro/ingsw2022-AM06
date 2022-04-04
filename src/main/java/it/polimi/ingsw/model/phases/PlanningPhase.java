@@ -26,7 +26,7 @@ public class PlanningPhase extends Phase {
 
     /**
      * Default constructor
-     * @param game referemce to the game
+     * @param game reference to the game
      * @param players list of the players
      * @param firstPlayerIndex index of the player going first
      */

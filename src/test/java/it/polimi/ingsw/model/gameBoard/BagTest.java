@@ -71,6 +71,21 @@ class BagTest {
     }
 
     @Test
+    void empty() {
+        Bag bag = Bag.getBag();
+
+        bag.receiveStudent(CreatureColor.GREEN);
+        bag.receiveStudent(CreatureColor.RED);
+        bag.receiveStudent(CreatureColor.YELLOW);
+        bag.receiveStudent(CreatureColor.PINK);
+        bag.receiveStudent(CreatureColor.BLUE);
+
+        bag.empty();
+
+        assertEquals(0, bag.size());
+    }
+
+    @Test
     void isEmpty() {
         Bag bag = Bag.getBag();
         bag.receiveStudent(CreatureColor.GREEN);

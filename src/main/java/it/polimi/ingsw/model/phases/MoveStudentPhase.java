@@ -7,8 +7,6 @@ import it.polimi.ingsw.model.gameBoard.CreatureColor;
 
 public class MoveStudentPhase extends ActionPhase {
 
-    // private static final int
-
     private CreatureColor creatureColor;
     private StudentDestination studentDestination;
 
@@ -34,12 +32,20 @@ public class MoveStudentPhase extends ActionPhase {
 
     }
 
+    public CreatureColor getCreatureColor() {
+        return creatureColor;
+    }
+
     /**
      * Sets the color of the student to move
      * @param creatureColor to set
      */
     public void setCreatureColor(CreatureColor creatureColor) {
         this.creatureColor = creatureColor;
+    }
+
+    public StudentDestination getStudentDestination() {
+        return studentDestination;
     }
 
     /**

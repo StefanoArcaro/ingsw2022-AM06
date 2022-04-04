@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.GameMode;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.gameBoard.Cloud;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,9 +16,14 @@ class PlanningPhaseTest {
     PhaseFactory phaseFactory;
     Phase phase;
 
+    @BeforeEach
+    void setUp() {
+        Game.getGame().resetGame();
+        game = Game.getGame();
+    }
+
     @Test
     void play() {
-        game = Game.getGame();
         game.setNumberOfPlayers(3);
         game.setGameMode(GameMode.EXPERT);
 

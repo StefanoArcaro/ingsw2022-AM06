@@ -5,13 +5,10 @@ import it.polimi.ingsw.model.characters.CharacterID;
 import it.polimi.ingsw.model.gameBoard.*;
 import it.polimi.ingsw.model.phases.Phase;
 import it.polimi.ingsw.model.phases.PhaseFactory;
-import it.polimi.ingsw.model.phases.Round;
 
 import java.util.ArrayList;
 
 public class Game {
-
-    static int roundNumber = 1; // TODO remove after removing Round class
 
     private static Game game = null;
     private NumberOfPlayers numberOfPlayers;
@@ -30,12 +27,6 @@ public class Game {
     private final ArrayList<Character> drawnCharacters;
     private int treasury;
 
-    // TODO check if needed
-    private ArrayList<Character> activatedCharacters;
-
-    // TODO remove after removing Round class
-    private static Round currentRound; //static attribute to be accessed via class
-
     /**
      * Private constructor
      */
@@ -51,19 +42,6 @@ public class Game {
 
         // Game begins waiting for players in the Lobby phase
         gameState = GameState.LOBBY_PHASE;
-
-        // TODO remove after fixing tests: this is done in the PreparePhase class
-        /*
-        for(CreatureColor color : CreatureColor.values()) {
-            professors.add(new Professor(color));
-        }
-        for(int i=1; i<=12; i++) {
-            Island island = new Island(i);
-            IslandGroup islandGroup = new IslandGroup();
-            islandGroup.addIsland(island);
-            islandGroups.add(islandGroup);
-        }
-        */
     }
 
     /**
@@ -75,6 +53,11 @@ public class Game {
             game = new Game();
         }
         return game;
+    }
+
+    // Used for testing purposes
+    public void resetGame() {
+        game = null;
     }
 
     /**
@@ -247,7 +230,7 @@ public class Game {
 
     /**
      * Connects the specified island groups in case they need to be connected.
-     * If tehy get connected, the second island group is removed from the island groups list
+     * If they get connected, the second island group is removed from the island groups list
      * @param indexPresentIslandGroup island group that eventually incorporates the other one
      * @param indexIslandGroupToAdd island group that eventually gets incorporated into the first one
      */
@@ -488,27 +471,5 @@ public class Game {
      */
     public void setTreasury(int numberOfCoins) {
         this.treasury = numberOfCoins;
-    }
-
-
-
-
-
-    // TODO remove after removing Round
-    /**
-     * @return a reference to the current round
-     */
-    public static Round getCurrentRound() {
-        return currentRound;
-    } //static method to be able to call it through the class
-
-    public static void setCurrentRound(Round currentRound) {
-        Game.currentRound = currentRound;
-    }
-    /**
-     * @return the number of the current round
-     */
-    public static int getRoundNumber() {
-        return roundNumber;
     }
 }

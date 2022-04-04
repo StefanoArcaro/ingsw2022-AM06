@@ -6,7 +6,7 @@ public class Wizard {
 
     private final Player player;
     private final WizardName name;
-    private ArrayList<Assistant> assistants;
+    private final ArrayList<Assistant> assistants;
 
     /**
      * Default constructor

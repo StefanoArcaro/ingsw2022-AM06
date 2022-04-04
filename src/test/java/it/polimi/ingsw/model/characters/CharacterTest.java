@@ -36,7 +36,4 @@ class CharacterTest {
     void getCharacterID() {
         assertEquals(8, character.getCharacterID());
     }
-
-
-
 }

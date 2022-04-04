@@ -12,6 +12,10 @@ public class MoveMotherNaturePhase extends ActionPhase {
         this.currentPlayer = currentPlayer;
     }
 
+    public int getNumberOfSteps() {
+        return numberOfSteps;
+    }
+
     public void setNumberOfSteps(int numberOfSteps) {
         this.numberOfSteps = numberOfSteps;
     }

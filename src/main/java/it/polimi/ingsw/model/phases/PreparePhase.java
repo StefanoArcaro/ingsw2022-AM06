@@ -116,7 +116,7 @@ public class PreparePhase extends Phase {
 
         for(int i = 0; i < game.getIslandGroups().size(); i++) {
             if(i != motherNaturePosition && i != ((motherNaturePosition + ISLAND_OFFSET) % LAST_ISLAND_ID)) {
-                game.getIslandGroups().get(i).getIslands().get(0).addStudent(initialStudents.pop());
+                game.getIslandGroups().get(i).getIslands().get(0).receiveStudent(initialStudents.pop().getColor());
             }
         }
     }
@@ -127,7 +127,7 @@ public class PreparePhase extends Phase {
     private void initialBagFill() {
         for(CreatureColor color : CreatureColor.values()) {
             for(int i = 0; i < 24; i++) {
-                Bag.getBag().addStudent(new Student(color));
+                Bag.getBag().receiveStudent(color);
             }
         }
 
@@ -222,7 +222,7 @@ public class PreparePhase extends Phase {
 
             for(int i = 0; i < numberOfEntranceStudents; i++) {
                 Student studentToMove = Bag.getBag().drawStudent();
-                player.getBoard().getEntrance().addStudent(studentToMove.getColor());
+                player.getBoard().getEntrance().receiveStudent(studentToMove.getColor());
             }
         }
     }

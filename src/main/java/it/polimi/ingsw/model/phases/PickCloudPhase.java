@@ -12,6 +12,10 @@ public class PickCloudPhase extends ActionPhase {
         this.currentPlayer = currentPlayer;
     }
 
+    public int getCloudID() {
+        return cloudID;
+    }
+
     public void setCloudID(int cloudID) {
         this.cloudID = cloudID;
     }

@@ -21,7 +21,6 @@ class BoardTest {
         assertFalse(board.removeStudentFromEntrance(CreatureColor.BLUE));
     }
 
-
     @Test
     void removeStudentFromHall() {
         Player player = new Player("nick", PlayerColor.BLACK);

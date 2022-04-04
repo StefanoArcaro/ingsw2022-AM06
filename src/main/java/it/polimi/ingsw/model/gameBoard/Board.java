@@ -83,7 +83,19 @@ public class Board {
      * @return whether the student was added or not
      */
     public boolean addStudentToHall(CreatureColor color) {
-        return hall.receiveStudent(color);
+        // TODO test coin distribution
+        boolean studentReceived = hall.receiveStudent(color);
+
+        /*
+        if(studentReceived && Game.getGame().getGameMode().equals(GameMode.EXPERT)) {
+            if(hall.getTableByColor(color).getLength() % 3 == 0 && Game.getGame().getTreasury() > 0) {
+                Game.getGame().setTreasury(Game.getGame().getTreasury() - 1);
+                player.receiveCoin();
+            }
+        }
+        */
+
+        return studentReceived;
     }
 
     /**
@@ -198,5 +210,3 @@ public class Board {
         return this.towers <= 0;
     }
 }
-
-

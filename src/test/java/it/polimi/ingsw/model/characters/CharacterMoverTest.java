@@ -1,9 +1,9 @@
 package it.polimi.ingsw.model.characters;
 
-import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.PlayerColor;
+import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.gameBoard.*;
+import it.polimi.ingsw.model.phases.Phase;
+import it.polimi.ingsw.model.phases.PhaseFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,14 +16,27 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CharacterMoverTest {
 
+    Game game;
+    PhaseFactory phaseFactory;
+    Phase phase;
     ConcreteCharacterFactory cf;
     Character character;
     Bag bag;
 
     @BeforeEach
     void setUp() {
+        Game.getGame().resetGame();
+        game = Game.getGame();
+
         cf = new ConcreteCharacterFactory();
         bag = Bag.getBag();
+
+        for(int i=1; i<=12; i++) {
+            Island island = new Island(i);
+            IslandGroup islandGroup = new IslandGroup();
+            islandGroup.addIsland(island);
+            game.addIslandGroup(islandGroup);
+        }
     }
 
     @AfterEach
@@ -32,7 +45,6 @@ class CharacterMoverTest {
         character = null;
         bag = null;
     }
-
 
     @Test
     void initialPreparation() {
@@ -71,6 +83,16 @@ class CharacterMoverTest {
         character.students.add(new Student(CreatureColor.BLUE));
 
         Game game = Game.getGame();
+
+        game.setNumberOfPlayers(3);
+        game.setGameMode(GameMode.EXPERT);
+
+        phaseFactory = new PhaseFactory();
+
+        // TODO you can remove this and add the players to the game yourself
+        phase = phaseFactory.createPhase(GameState.LOBBY_PHASE);
+        phase.play();
+
         game.getIslandByID(1).receiveStudent(CreatureColor.GREEN);
         game.getIslandByID(1).receiveStudent(CreatureColor.PINK);
 
