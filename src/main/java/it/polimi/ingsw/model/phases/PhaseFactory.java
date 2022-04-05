@@ -5,8 +5,13 @@ import it.polimi.ingsw.model.GameState;
 
 public class PhaseFactory {
 
+    private Game game;
+
+    public PhaseFactory(Game game) {
+        this.game = game;
+    }
+
     public Phase createPhase(GameState gameState) {
-        Game game = Game.getGame();
 
         switch(gameState) {
             case LOBBY_PHASE:

@@ -2,28 +2,13 @@ package it.polimi.ingsw.model.gameBoard;
 
 public class MotherNature {
 
-    private static MotherNature motherNature = null;
     private IslandGroup currentIslandGroup;
 
     /**
-     * Private constructor
+     * Default constructor
      */
-    private MotherNature() {}
+    public MotherNature() {
 
-    /**
-     * Mother Nature is a Singleton
-     * @return singleton instance of Mother Nature
-     */
-    public static MotherNature getMotherNature() {
-        if(motherNature == null) {
-            motherNature = new MotherNature();
-        }
-        return motherNature;
-    }
-
-    // Used for testing purposes
-    public void resetMotherNature() {
-        motherNature = null;
     }
 
     /**

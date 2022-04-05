@@ -36,6 +36,7 @@ public class Island implements StudentDestination{
     /**
      * Add student on the island
      * @param color of the student to add
+     * @return whether the student was added
      */
     public boolean receiveStudent(CreatureColor color){
         return students.add(new Student(color));
@@ -59,14 +60,12 @@ public class Island implements StudentDestination{
      * Add a tower on the island
      * @param tower represents the player who conquered the island
      */
-    public boolean addTower(PlayerColor tower) {
-        Player player = Game.getGame().getPlayerByColor(tower);
+    public boolean addTower(Game game, PlayerColor tower) {
+        Player player = game.getPlayerByColor(tower);
 
-
-
-        int numberOfTowers = player!=null ?player.getBoard().getTowers() :0;
-        if(this.tower == null && numberOfTowers>0) {
-            if (player.getBoard().removeTower()) {
+        int numberOfTowers = player != null ? player.getBoard().getTowers() : 0;
+        if(this.tower == null && numberOfTowers > 0) {
+            if(player.getBoard().removeTower()) {
                 this.tower = tower;
                 return true;
             }
@@ -77,8 +76,8 @@ public class Island implements StudentDestination{
     /**
      * Removes the tower from the island: it has been conquered
      */
-    public boolean removeTower() {
-        Player player = Game.getGame().getPlayerByColor(tower);
+    public boolean removeTower(Game game) {
+        Player player = game.getPlayerByColor(tower);
         if(this.tower != null && player!=null) {
             player.getBoard().addTowers(1);
             this.tower = null;

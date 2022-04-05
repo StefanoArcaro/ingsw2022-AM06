@@ -13,7 +13,8 @@ public class CharacterMover extends Character {
     int islandID;
     CreatureColor colorToRemove;
 
-    public CharacterMover(int characterID) {
+    public CharacterMover(Game game, int characterID) {
+        this.game = game;
         this.characterID = characterID;
         this.used = false;
         this.numberOfBanCards = 0;
@@ -55,7 +56,7 @@ public class CharacterMover extends Character {
 
     @Override
     public void initialPreparation() {
-        Bag bag = Bag.getBag();
+        Bag bag = game.getBag();
 
         for(int i = 0; i < numberOfStudents; i++) {
             students.add(bag.drawStudent());
@@ -110,10 +111,10 @@ public class CharacterMover extends Character {
      */
     private void effect_one(CreatureColor studentColor, int islandID) {
         if(this.getStudents().stream().map(Creature::getColor).collect(Collectors.toList()).contains(studentColor)) {
-            Island island = Game.getGame().getIslandByID(islandID);
+            Island island = game.getIslandByID(islandID);
             island.receiveStudent(studentColor);
             students.remove(getStudentByColor(students, studentColor));
-            students.add(Bag.getBag().drawStudent());
+            students.add(game.getBag().drawStudent());
         }
     }
 
@@ -123,7 +124,7 @@ public class CharacterMover extends Character {
      * @param entranceColor color of the student in the player's entrance
      */
     private void effect_seven(CreatureColor cardColor, CreatureColor entranceColor) {
-        Board playerBoard = Game.getGame().getCurrentPlayer().getBoard();
+        Board playerBoard = game.getCurrentPlayer().getBoard();
         Student studentEntrance = getStudentByColor(playerBoard.getEntrance().getStudents(), entranceColor);
         Student studentCard = getStudentByColor(students, cardColor);
 
@@ -144,7 +145,7 @@ public class CharacterMover extends Character {
      * @param entranceColor color of the student in player's entrance
      */
     private void effect_ten(CreatureColor hallColor, CreatureColor entranceColor) {
-        Board playerBoard = Game.getGame().getCurrentPlayer().getBoard();
+        Board playerBoard = game.getCurrentPlayer().getBoard();
         Student studentEntrance = getStudentByColor(playerBoard.getEntrance().getStudents(), entranceColor);
 
         if(studentEntrance != null && playerBoard.getHall().studentInTable(hallColor)) {
@@ -161,13 +162,13 @@ public class CharacterMover extends Character {
      * @param cardColor color of the student on the card chosen
      */
     private void effect_eleven(CreatureColor cardColor) {
-        Board boardPlayer = Game.getGame().getCurrentPlayer().getBoard();
+        Board boardPlayer = game.getCurrentPlayer().getBoard();
         Student cardStudent = getStudentByColor(students, cardColor);
 
         if(cardStudent != null) {
             students.remove(cardStudent);
             boardPlayer.addStudentToHall(cardColor);
-            students.add(Bag.getBag().drawStudent());
+            students.add(game.getBag().drawStudent());
         }
     }
 
@@ -176,7 +177,7 @@ public class CharacterMover extends Character {
      * @param colorToBeRemoved color chosen to be removed
      */
     private void effect_twelve(CreatureColor colorToBeRemoved) {
-        ArrayList<Player> players = Game.getGame().getPlayers();
+        ArrayList<Player> players = game.getPlayers();
 
         for(Player player : players) {
             int removed = 0;

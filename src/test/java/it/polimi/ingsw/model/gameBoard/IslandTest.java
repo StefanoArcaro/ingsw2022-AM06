@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.gameBoard;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.PlayerColor;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,31 +14,36 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class IslandTest {
 
+    Game game;
+
     @BeforeEach
     void setUp() {
-        Game.getGame().resetGame();
+        game = new Game();
+    }
+
+    @AfterEach
+    void tearDown() {
+        game = null;
     }
 
     @Test
     void removeTower() {
-        Game game = Game.getGame();
         Player player = new Player("Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
 
         Island island = new Island(1);
 
-        assertFalse(island.removeTower());
+        assertFalse(island.removeTower(game));
 
-        assertTrue(island.addTower(player.getColor()));
+        assertTrue(island.addTower(game, player.getColor()));
         assertEquals(4, player.getBoard().getTowers());
-        assertTrue(island.removeTower());
+        assertTrue(island.removeTower(game));
         assertEquals(5, player.getBoard().getTowers());
     }
 
     @Test
     void addTower() {
-        Game game = Game.getGame();
         Player player = new Player("Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(6);
@@ -45,10 +51,10 @@ class IslandTest {
         Island island = new Island(1);
 
         assertEquals(6, player.getBoard().getTowers());
-        assertTrue(island.addTower(PlayerColor.BLACK));
+        assertTrue(island.addTower(game, PlayerColor.BLACK));
         assertEquals(5, player.getBoard().getTowers());
 
-        assertFalse(island.addTower(PlayerColor.GRAY));
+        assertFalse(island.addTower(game, PlayerColor.GRAY));
         assertEquals(5, player.getBoard().getTowers());
     }
 

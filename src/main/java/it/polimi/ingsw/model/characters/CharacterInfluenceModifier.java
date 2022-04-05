@@ -6,7 +6,6 @@ public class CharacterInfluenceModifier extends Character {
 
     public CharacterInfluenceModifier(int characterID) {
         this.characterID = characterID;
-        this.game = Game.getGame();
         this.used = false;
         this.numberOfStudents = 0;
         this.colorNoPoints = null;

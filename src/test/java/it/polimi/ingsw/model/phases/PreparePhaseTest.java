@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.phases;
 
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.gameBoard.Bag;
+import it.polimi.ingsw.model.gameBoard.CreatureColor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,20 +16,17 @@ class PreparePhaseTest {
 
     @BeforeEach
     void setUp() {
-        Game.getGame().resetGame();
-        game = Game.getGame();
-        Bag.getBag().empty();
+        game = new Game();
     }
 
     @Test
     void play() {
-        game = Game.getGame();
         game.setNumberOfPlayers(3);
         game.setGameMode(GameMode.EXPERT);
 
         assertEquals(GameState.LOBBY_PHASE, game.getGameState());
 
-        phaseFactory = new PhaseFactory();
+        phaseFactory = new PhaseFactory(game);
         phase = phaseFactory.createPhase(GameState.LOBBY_PHASE);
         phase.play();
 
@@ -80,6 +78,13 @@ class PreparePhaseTest {
         assertEquals(9, game.getPlayers().get(0).getBoard().getEntrance().getStudents().size());
         assertEquals(9, game.getPlayers().get(1).getBoard().getEntrance().getStudents().size());
         assertEquals(9, game.getPlayers().get(2).getBoard().getEntrance().getStudents().size());
+
+        // CHeck each Hall's table is empty
+        for(CreatureColor color : CreatureColor.values()) {
+            assertEquals(0, game.getPlayers().get(0).getBoard().getHall().getTableByColor(color).getLength());
+            assertEquals(0, game.getPlayers().get(1).getBoard().getHall().getTableByColor(color).getLength());
+            assertEquals(0, game.getPlayers().get(2).getBoard().getHall().getTableByColor(color).getLength());
+        }
 
         // Check drawn characters
         assertEquals(3, game.getDrawnCharacters().size());

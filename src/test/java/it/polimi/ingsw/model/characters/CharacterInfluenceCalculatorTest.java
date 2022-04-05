@@ -18,17 +18,15 @@ class CharacterInfluenceCalculatorTest {
 
     @BeforeEach
     void setUp() {
-        cf = new ConcreteCharacterFactory();
+        game = new Game();
+        cf = new ConcreteCharacterFactory(game);
         character = cf.createCharacter(3);
-
-        Game.getGame().resetGame();
-        game = Game.getGame();
 
         for(int i=1; i<=12; i++) {
             Island island = new Island(i);
             IslandGroup islandGroup = new IslandGroup();
             islandGroup.addIsland(island);
-            Game.getGame().addIslandGroup(islandGroup);
+            game.addIslandGroup(islandGroup);
         }
     }
 
@@ -40,7 +38,6 @@ class CharacterInfluenceCalculatorTest {
 
     @Test
     void effect(){
-        Game game = Game.getGame();
         Player p1 = new Player("X", PlayerColor.WHITE);
         Player p2 = new Player("Y", PlayerColor.BLACK);
         game.addPlayer(p1);
@@ -74,12 +71,12 @@ class CharacterInfluenceCalculatorTest {
         islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.RED);
         islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.RED);
         islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.GREEN);
-        islandGroup1.getIslands().get(0).addTower(p2.getColor());
+        islandGroup1.getIslands().get(0).addTower(game, p2.getColor());
         islandGroup1.setConquerorColor(p2.getColor());
 
         islandGroup2.getIslands().get(0).receiveStudent(CreatureColor.PINK);
         islandGroup2.getIslands().get(0).receiveStudent(CreatureColor.PINK);
-        islandGroup2.getIslands().get(0).addTower(p1.getColor());
+        islandGroup2.getIslands().get(0).addTower(game, p1.getColor());
         islandGroup2.setConquerorColor(p1.getColor());
 
 

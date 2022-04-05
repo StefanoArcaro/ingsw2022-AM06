@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class IslandGroupTest {
 
+    Game game;
     private IslandGroup islandGroup;
     private Island island1;
     private Island island2;
@@ -23,11 +24,13 @@ class IslandGroupTest {
 
     @BeforeEach
     void setUp() {
+        game = new Game();
         islandGroup = new IslandGroup();
     }
 
     @AfterEach
     void tearDown() {
+        game = null;
         islandGroup = null;
     }
 
@@ -65,20 +68,19 @@ class IslandGroupTest {
 
     @Test
     void addIsland_OK() {
-        Game game = Game.getGame();
         Player player = new Player("Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
 
         Island islandToAdd1 = new Island(4);
-        islandToAdd1.addTower(PlayerColor.BLACK);
+        islandToAdd1.addTower(game, PlayerColor.BLACK);
         Island islandToAdd2 = new Island(1);
-        islandToAdd2.addTower(PlayerColor.BLACK);
+        islandToAdd2.addTower(game, PlayerColor.BLACK);
 
         island2 = new Island(2);
-        island2.addTower(PlayerColor.BLACK);
+        island2.addTower(game, PlayerColor.BLACK);
         island3 = new Island(3);
-        island3.addTower(PlayerColor.BLACK);
+        island3.addTower(game, PlayerColor.BLACK);
 
         assertTrue(islandGroup.addIsland(island2));
         assertTrue(islandGroup.addIsland(island3));
@@ -86,16 +88,10 @@ class IslandGroupTest {
         assertTrue(islandGroup.addIsland(islandToAdd1));
         assertTrue(islandGroup.addIsland(islandToAdd2));
         assertFalse(islandGroup.addIsland(island1));
-
-        int numberOfPlayers = game.getPlayers().size();
-        for(int i = 0; i < numberOfPlayers; i++) {
-            Game.getGame().removePlayer(0);
-        }
     }
 
     @Test
     void addIsland_KO() {
-        Game game = Game.getGame();
         Player player = new Player("Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
@@ -104,59 +100,47 @@ class IslandGroupTest {
         player1.getBoard().setTowers(5);
 
         Island islandToAdd = new Island(2);
-        islandToAdd.addTower(PlayerColor.BLACK);
+        islandToAdd.addTower(game, PlayerColor.BLACK);
         Island islandToAdd2 = new Island(1);
-        islandToAdd2.addTower(PlayerColor.GRAY);
+        islandToAdd2.addTower(game, PlayerColor.GRAY);
 
         island4 = new Island(4);
-        island4.addTower(PlayerColor.GRAY);
+        island4.addTower(game, PlayerColor.GRAY);
         island3 = new Island(3);
-        island3.addTower(PlayerColor.GRAY);
+        island3.addTower(game, PlayerColor.GRAY);
 
         assertTrue(islandGroup.addIsland(island3));
         assertTrue(islandGroup.addIsland(island4));
 
         assertFalse(islandGroup.addIsland(islandToAdd));
         assertFalse(islandGroup.addIsland(islandToAdd2));
-
-        int numberOfPlayers = game.getPlayers().size();
-        for(int i = 0; i < numberOfPlayers; i++) {
-            Game.getGame().removePlayer(0);
-        }
     }
 
     @Test
     void addIsland_Boundary() {
-        Game game = Game.getGame();
         Player player = new Player("Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
 
         Island islandToAdd = new Island(12);
-        islandToAdd.addTower(PlayerColor.BLACK);
+        islandToAdd.addTower(game, PlayerColor.BLACK);
         Island islandToAdd2 = new Island(11);
-        islandToAdd2.addTower(PlayerColor.BLACK);
+        islandToAdd2.addTower(game, PlayerColor.BLACK);
 
         island1 = new Island(1);
-        island1.addTower(PlayerColor.BLACK);
+        island1.addTower(game, PlayerColor.BLACK);
         island2 = new Island(2);
-        island2.addTower(PlayerColor.BLACK);
+        island2.addTower(game, PlayerColor.BLACK);
 
         assertTrue(islandGroup.addIsland(island1));
         assertTrue(islandGroup.addIsland(island2));
 
         assertTrue(islandGroup.addIsland(islandToAdd));
         assertTrue(islandGroup.addIsland(islandToAdd2));
-
-        int numberOfPlayers = game.getPlayers().size();
-        for(int i = 0; i < numberOfPlayers; i++) {
-            Game.getGame().removePlayer(0);
-        }
     }
 
     @Test
     void addIsland_Boundary2() {
-        Game game = Game.getGame();
         Player player = new Player("Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
@@ -166,10 +150,10 @@ class IslandGroupTest {
         Island island12 = new Island(12);
         Island islandToAdd = new Island(11);
 
-        island1.addTower(PlayerColor.BLACK);
-        island2.addTower(PlayerColor.BLACK);
-        island12.addTower(PlayerColor.BLACK);
-        islandToAdd.addTower(PlayerColor.BLACK);
+        island1.addTower(game, PlayerColor.BLACK);
+        island2.addTower(game, PlayerColor.BLACK);
+        island12.addTower(game, PlayerColor.BLACK);
+        islandToAdd.addTower(game, PlayerColor.BLACK);
 
         assertTrue(islandGroup.addIsland(island1));
         assertTrue(islandGroup.addIsland(island2));
@@ -182,44 +166,33 @@ class IslandGroupTest {
         assertEquals(11, islandGroup.getIslands().get(2).getIslandID());
         assertEquals(12, islandGroup.getIslands().get(3).getIslandID());
         assertEquals(4, islandGroup.getNumberOfIslands());
-
-        int numberOfPlayers = game.getPlayers().size();
-        for(int i = 0; i < numberOfPlayers; i++) {
-            Game.getGame().removePlayer(0);
-        }
     }
 
     @Test
     void addIsland_Boundary3() {
-        Game game = Game.getGame();
         Player player = new Player("Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
 
         island1 = new Island(1);
-        island1.addTower(PlayerColor.BLACK);
+        island1.addTower(game, PlayerColor.BLACK);
         island2 = new Island(2);
-        island2.addTower(PlayerColor.BLACK);
+        island2.addTower(game, PlayerColor.BLACK);
         Island island12 = new Island(12);
-        island12.addTower(PlayerColor.BLACK);
+        island12.addTower(game, PlayerColor.BLACK);
 
         assertTrue(islandGroup.addIsland(island1));
         assertTrue(islandGroup.addIsland(island2));
         assertTrue(islandGroup.addIsland(island12));
 
         Island islandToAdd = new Island(3);
-        islandToAdd.addTower(PlayerColor.BLACK);
+        islandToAdd.addTower(game, PlayerColor.BLACK);
         assertTrue(islandGroup.addIsland(islandToAdd));
 
         assertEquals(1, islandGroup.getIslands().get(0).getIslandID());
         assertEquals(2, islandGroup.getIslands().get(1).getIslandID());
         assertEquals(3, islandGroup.getIslands().get(2).getIslandID());
         assertEquals(12, islandGroup.getIslands().get(3).getIslandID());
-
-        int numberOfPlayers = game.getPlayers().size();
-        for(int i = 0; i < numberOfPlayers; i++) {
-            Game.getGame().removePlayer(0);
-        }
     }
 
     @Test
@@ -243,20 +216,19 @@ class IslandGroupTest {
 
     @Test
     void connectIslandGroupOK() {
-        Game game = Game.getGame();
         Player player = new Player("Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(7);
 
         IslandGroup islandGroupToAdd = new IslandGroup();
         island1 = new Island(1);
-        island1.addTower(player.getColor());
+        island1.addTower(game, player.getColor());
         island2 = new Island(2);
-        island2.addTower(player.getColor());
+        island2.addTower(game, player.getColor());
         island3 = new Island(3);
-        island3.addTower(player.getColor());
+        island3.addTower(game, player.getColor());
         island4 = new Island(4);
-        island4.addTower(player.getColor());
+        island4.addTower(game, player.getColor());
 
         islandGroupToAdd.addIsland(island3);
         islandGroupToAdd.addIsland(island4);
@@ -271,29 +243,23 @@ class IslandGroupTest {
         assertEquals(3, islandGroup.getIslands().get(2).getIslandID());
         assertEquals(4, islandGroup.getIslands().get(3).getIslandID());
         assertEquals(4, islandGroup.getNumberOfIslands());
-
-        int numberOfPlayers = game.getPlayers().size();
-        for(int i = 0; i < numberOfPlayers; i++) {
-            Game.getGame().removePlayer(0);
-        }
     }
 
     @Test
     void connectIslandGroupOK2() {
-        Game game = Game.getGame();
         Player player = new Player("Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
 
         IslandGroup islandGroupToAdd = new IslandGroup();
         island1 = new Island(1);
-        island1.addTower(player.getColor());
+        island1.addTower(game, player.getColor());
         island2 = new Island(2);
-        island2.addTower(player.getColor());
+        island2.addTower(game, player.getColor());
         island3 = new Island(3);
-        island3.addTower(player.getColor());
+        island3.addTower(game, player.getColor());
         island4 = new Island(4);
-        island4.addTower(player.getColor());
+        island4.addTower(game, player.getColor());
 
         islandGroupToAdd.addIsland(island1);
         islandGroupToAdd.addIsland(island2);
@@ -308,27 +274,21 @@ class IslandGroupTest {
         assertEquals(3, islandGroup.getIslands().get(2).getIslandID());
         assertEquals(4, islandGroup.getIslands().get(3).getIslandID());
         assertEquals(4, islandGroup.getNumberOfIslands());
-
-        int numberOfPlayers = game.getPlayers().size();
-        for(int i = 0; i < numberOfPlayers; i++) {
-            Game.getGame().removePlayer(0);
-        }
     }
 
     @Test
     void connectIslandGroupKO() {
-        Game game = Game.getGame();
         Player player = new Player("Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
 
         IslandGroup islandGroupToAdd = new IslandGroup();
         island1 = new Island(1);
-        island1.addTower(player.getColor());
+        island1.addTower(game, player.getColor());
         island2 = new Island(2);
-        island2.addTower(player.getColor());
+        island2.addTower(game, player.getColor());
         island4 = new Island(4);
-        island4.addTower(player.getColor());
+        island4.addTower(game, player.getColor());
 
         islandGroupToAdd.addIsland(island1);
         islandGroupToAdd.addIsland(island2);
@@ -338,16 +298,10 @@ class IslandGroupTest {
         assertFalse(islandGroup.connectIslandGroup(islandGroupToAdd));
         assertEquals(4, islandGroup.getIslands().get(0).getIslandID());
         assertEquals(1, islandGroup.getNumberOfIslands());
-
-        int numberOfPlayers = game.getPlayers().size();
-        for(int i = 0; i < numberOfPlayers; i++) {
-            Game.getGame().removePlayer(0);
-        }
     }
 
     @Test
     void connectIslandGroupKO2() {
-        Game game = Game.getGame();
         Player player = new Player("Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
@@ -359,9 +313,9 @@ class IslandGroupTest {
         island2 = new Island(2);
         island4 = new Island(4);
 
-        island1.addTower(PlayerColor.BLACK);
-        island2.addTower(PlayerColor.BLACK);
-        island4.addTower(PlayerColor.GRAY);
+        island1.addTower(game, PlayerColor.BLACK);
+        island2.addTower(game, PlayerColor.BLACK);
+        island4.addTower(game, PlayerColor.GRAY);
 
         islandGroupToAdd.addIsland(island1);
         islandGroupToAdd.addIsland(island2);
@@ -371,32 +325,26 @@ class IslandGroupTest {
         assertFalse(islandGroup.connectIslandGroup(islandGroupToAdd));
         assertEquals(4, islandGroup.getIslands().get(0).getIslandID());
         assertEquals(1, islandGroup.getNumberOfIslands());
-
-        int numberOfPlayers = game.getPlayers().size();
-        for(int i = 0; i < numberOfPlayers; i++) {
-            Game.getGame().removePlayer(0);
-        }
     }
 
     @Test
     void connectIslandGroup_Boundary() {
-        Game game = Game.getGame();
         Player player = new Player("Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
 
         IslandGroup islandGroupToAdd = new IslandGroup();
         island2 = new Island(2);
-        island2.addTower(player.getColor());
+        island2.addTower(game, player.getColor());
         island3 = new Island(3);
-        island3.addTower(player.getColor());
+        island3.addTower(game, player.getColor());
         islandGroupToAdd.addIsland(island2);
         islandGroupToAdd.addIsland(island3);
 
         Island island12 = new Island(12);
-        island12.addTower(player.getColor());
+        island12.addTower(game, player.getColor());
         island1 = new Island(1);
-        island1.addTower(player.getColor());
+        island1.addTower(game, player.getColor());
         islandGroup.addIsland(island12);
         islandGroup.addIsland(island1);
 
@@ -406,31 +354,25 @@ class IslandGroupTest {
         assertEquals(3, islandGroup.getIslands().get(2).getIslandID());
         assertEquals(12, islandGroup.getIslands().get(3).getIslandID());
         assertEquals(4, islandGroup.getNumberOfIslands());
-
-        int numberOfPlayers = game.getPlayers().size();
-        for(int i = 0; i < numberOfPlayers; i++) {
-            Game.getGame().removePlayer(0);
-        }
     }
 
     @Test
     void calculateInfluenceNoCharacter() {
-        Game game = Game.getGame();
         Player player = new Player("Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
 
         island1 = new Island(1);
-        island1.addTower(PlayerColor.BLACK);
+        island1.addTower(game, PlayerColor.BLACK);
         island1.receiveStudent(CreatureColor.RED);
 
         island2 = new Island(2);
-        island2.addTower(PlayerColor.BLACK);
+        island2.addTower(game, PlayerColor.BLACK);
         island2.receiveStudent(CreatureColor.RED);
         island2.receiveStudent(CreatureColor.YELLOW);
 
         island3 = new Island(3);
-        island3.addTower(PlayerColor.BLACK);
+        island3.addTower(game, PlayerColor.BLACK);
         island3.receiveStudent(CreatureColor.BLUE);
         island3.receiveStudent(CreatureColor.RED);
 
@@ -442,17 +384,10 @@ class IslandGroupTest {
         islandGroup.addIsland(island3);
 
         assertEquals(7, islandGroup.calculateInfluence(player));
-
-        int numberOfPlayers = game.getPlayers().size();
-        for(int i = 0; i < numberOfPlayers; i++) {
-            Game.getGame().removePlayer(0);
-        }
-
     }
 
     @Test
     void calculateInfluenceCharacter6() {
-        Game game = Game.getGame();
         Player player = new Player("Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
@@ -460,16 +395,16 @@ class IslandGroupTest {
 
 
         island1 = new Island(1);
-        island1.addTower(player.getColor());
+        island1.addTower(game, player.getColor());
         island1.receiveStudent(CreatureColor.RED);
 
         island2 = new Island(2);
-        island2.addTower(player.getColor());
+        island2.addTower(game, player.getColor());
         island2.receiveStudent(CreatureColor.RED);
         island2.receiveStudent(CreatureColor.YELLOW);
 
         island3 = new Island(3);
-        island3.addTower(player.getColor());
+        island3.addTower(game, player.getColor());
         island3.receiveStudent(CreatureColor.BLUE);
         island3.receiveStudent(CreatureColor.RED);
 
@@ -480,35 +415,29 @@ class IslandGroupTest {
         islandGroup.addIsland(island2);
         islandGroup.addIsland(island3);
 
-        ConcreteCharacterFactory cf = new ConcreteCharacterFactory();
+        ConcreteCharacterFactory cf = new ConcreteCharacterFactory(game);
         Character character = cf.createCharacter(6);
-        assertEquals(4, islandGroup.calculateInfluence(player, character));
-
-        int numberOfPlayers = game.getPlayers().size();
-        for(int i = 0; i < numberOfPlayers; i++) {
-            Game.getGame().removePlayer(0);
-        }
+        assertEquals(4, islandGroup.calculateInfluence(game, player, character));
     }
 
     @Test
     void calculateInfluenceCharacter8() {
-        Game game = Game.getGame();
         Player player = new Player("Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
         game.setCurrentPlayer(player);
 
         island1 = new Island(1);
-        island1.addTower(PlayerColor.BLACK);
+        island1.addTower(game, PlayerColor.BLACK);
         island1.receiveStudent(CreatureColor.RED);
 
         island2 = new Island(2);
-        island2.addTower(PlayerColor.BLACK);
+        island2.addTower(game, PlayerColor.BLACK);
         island2.receiveStudent(CreatureColor.RED);
         island2.receiveStudent(CreatureColor.YELLOW);
 
         island3 = new Island(3);
-        island3.addTower(PlayerColor.BLACK);
+        island3.addTower(game, PlayerColor.BLACK);
         island3.receiveStudent(CreatureColor.BLUE);
         island3.receiveStudent(CreatureColor.RED);
 
@@ -519,35 +448,29 @@ class IslandGroupTest {
         islandGroup.addIsland(island2);
         islandGroup.addIsland(island3);
 
-        ConcreteCharacterFactory cf = new ConcreteCharacterFactory();
+        ConcreteCharacterFactory cf = new ConcreteCharacterFactory(game);
         Character character1 = cf.createCharacter(8);
-        assertEquals(9, islandGroup.calculateInfluence(player, character1));
-
-        int numberOfPlayers = game.getPlayers().size();
-        for(int i = 0; i < numberOfPlayers; i++) {
-            Game.getGame().removePlayer(0);
-        }
+        assertEquals(9, islandGroup.calculateInfluence(game, player, character1));
     }
 
     @Test
     void calculateInfluenceCharacter9() {
-        Game game = Game.getGame();
         Player player = new Player("Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
         game.setCurrentPlayer(player);
 
         island1 = new Island(1);
-        island1.addTower(PlayerColor.BLACK);
+        island1.addTower(game, PlayerColor.BLACK);
         island1.receiveStudent(CreatureColor.RED);
 
         island2 = new Island(2);
-        island2.addTower(PlayerColor.BLACK);
+        island2.addTower(game, PlayerColor.BLACK);
         island2.receiveStudent(CreatureColor.RED);
         island2.receiveStudent(CreatureColor.YELLOW);
 
         island3 = new Island(3);
-        island3.addTower(PlayerColor.BLACK);
+        island3.addTower(game, PlayerColor.BLACK);
         island3.receiveStudent(CreatureColor.BLUE);
         island3.receiveStudent(CreatureColor.RED);
 
@@ -558,14 +481,9 @@ class IslandGroupTest {
         islandGroup.addIsland(island2);
         islandGroup.addIsland(island3);
 
-        ConcreteCharacterFactory cf = new ConcreteCharacterFactory();
+        ConcreteCharacterFactory cf = new ConcreteCharacterFactory(game);
         Character character2 = cf.createCharacter(9);
         character2.setColorNoPoints(CreatureColor.RED);
-        assertEquals(4, islandGroup.calculateInfluence(player, character2));
-
-        int numberOfPlayers = game.getPlayers().size();
-        for(int i = 0; i < numberOfPlayers; i++) {
-            Game.getGame().removePlayer(0);
-        }
+        assertEquals(4, islandGroup.calculateInfluence(game, player, character2));
     }
 }

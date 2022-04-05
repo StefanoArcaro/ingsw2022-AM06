@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.characters;
 
+import it.polimi.ingsw.model.Game;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,12 +9,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CharacterTest {
 
+    Game game;
     ConcreteCharacterFactory cf;
     Character character;
 
     @BeforeEach
     void setUp() {
-        cf = new ConcreteCharacterFactory();
+        game = new Game();
+        cf = new ConcreteCharacterFactory(game);
         character = cf.createCharacter(8);
     }
 

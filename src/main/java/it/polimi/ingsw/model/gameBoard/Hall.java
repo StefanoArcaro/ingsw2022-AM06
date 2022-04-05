@@ -27,9 +27,8 @@ public class Hall implements StudentSource, StudentDestination {
         return students.get(color.getIndex());
     }
 
-    public boolean receiveStudent(CreatureColor color){
+    public boolean receiveStudent(CreatureColor color) {
         Table tableToAdd;
-        boolean success;
 
         tableToAdd = getTableByColor(color);
 
@@ -39,7 +38,7 @@ public class Hall implements StudentSource, StudentDestination {
         return false;
     }
 
-    public boolean sendStudent(CreatureColor color){
+    public boolean sendStudent(CreatureColor color) {
         Table tableToRemove;
 
         tableToRemove = getTableByColor(color);

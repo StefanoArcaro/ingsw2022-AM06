@@ -20,21 +20,23 @@ public class Game {
     private ArrayList<Player> playingOrder;
     private Player currentPlayer;
     private int firstPlayerIndex;
+    private final Bag bag;
     private final MotherNature motherNature;
-    private ArrayList<IslandGroup> islandGroups;
+    private final ArrayList<IslandGroup> islandGroups;
     private final ArrayList<Cloud> clouds;
     private final ArrayList<Professor> professors;
     private final ArrayList<Character> drawnCharacters;
     private int treasury;
 
     /**
-     * Private constructor
+     * Default constructor
      */
-    private Game() {
-        phaseFactory = new PhaseFactory();
+    public Game() {
+        phaseFactory = new PhaseFactory(this);
         players = new ArrayList<>();
         playingOrder = new ArrayList<>();
-        motherNature = MotherNature.getMotherNature();
+        bag = new Bag();
+        motherNature = new MotherNature();
         islandGroups = new ArrayList<>();
         clouds = new ArrayList<>();
         professors = new ArrayList<>();
@@ -42,22 +44,6 @@ public class Game {
 
         // Game begins waiting for players in the Lobby phase
         gameState = GameState.LOBBY_PHASE;
-    }
-
-    /**
-     * Game is a Singleton
-     * @return singleton instance of the game
-     */
-    public static Game getGame() {
-        if(game == null) {
-            game = new Game();
-        }
-        return game;
-    }
-
-    // Used for testing purposes
-    public void resetGame() {
-        game = null;
     }
 
     /**
@@ -145,11 +131,9 @@ public class Game {
         players.add(player);
     }
 
-    // Used for testing purposes
-    public void removePlayer (int indexPlayerToRemove){
-        players.remove(indexPlayerToRemove);
-    }
-
+    /**
+     * @return the current playing order
+     */
     public ArrayList<Player> getPlayingOrder() {
         return playingOrder;
     }
@@ -207,6 +191,13 @@ public class Game {
     }
 
     /**
+     * @return the bag
+     */
+    public Bag getBag() {
+        return bag;
+    }
+
+    /**
      * @return the Mother Nature attribute
      */
     public MotherNature getMotherNature() {
@@ -252,11 +243,6 @@ public class Game {
         return islandGroups.get(index);
     }
 
-    // Used for testing purposes: problem due to singleton
-    public void removeIslandGroups() {
-        islandGroups = new ArrayList<>();
-    }
-
     /**
      * Returns the island that matches the ID passed as a parameter
      * @param islandID ID of the island to return
@@ -298,7 +284,7 @@ public class Game {
         }
 
         for(Player player : players) {
-            influence = islandGroup.calculateInfluence(player, activatedCharacter);
+            influence = islandGroup.calculateInfluence(this, player, activatedCharacter);
 
             if(influence > maxInfluence) {
                 maxInfluence = influence;
@@ -315,12 +301,12 @@ public class Game {
         if(!draw && playerMaxInfluence != null && !playerMaxInfluence.equals(playerOlderConquerorIslandGroup)) {
             if(playerOlderConquerorIslandGroup != null){
                 for(Island island : getIslandGroupByIndex(islandGroupIndex).getIslands()) {
-                    island.removeTower();
+                    island.removeTower(this);
                 }
             }
 
             for(Island island : getIslandGroupByIndex(islandGroupIndex).getIslands()) {
-                island.addTower(playerMaxInfluence.getColor());
+                island.addTower(this, playerMaxInfluence.getColor());
             }
 
             islandGroups.get(islandGroupIndex).setConquerorColor(playerMaxInfluence.getColor());

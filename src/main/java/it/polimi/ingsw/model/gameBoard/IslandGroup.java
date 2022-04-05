@@ -190,7 +190,7 @@ public class IslandGroup {
      * @param activatedCharacter active character which modifies influence
      * @return the influence for the player on the island group
      */
-    public int calculateInfluence(Player player, Character activatedCharacter) {
+    public int calculateInfluence(Game game, Player player, Character activatedCharacter) {
         int influence = 0;
         int extraPoints = 0;
 
@@ -198,7 +198,7 @@ public class IslandGroup {
             influence = influence + island.calculateInfluence(player, activatedCharacter);
         }
 
-        Player currentPlayer = Game.getGame().getCurrentPlayer();
+        Player currentPlayer = game.getCurrentPlayer();
 
         if(currentPlayer.equals(player) && activatedCharacter!=null) {
             extraPoints = activatedCharacter.getExtraPoints();

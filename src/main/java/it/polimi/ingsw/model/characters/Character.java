@@ -10,6 +10,7 @@ import java.util.ArrayList;
  * Defines the interface of the object to be created by the factory
  */
 public abstract class Character {
+
     protected int characterID;
     protected Game game;
     protected int cost;

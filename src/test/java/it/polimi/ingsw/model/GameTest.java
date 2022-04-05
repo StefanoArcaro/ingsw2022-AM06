@@ -3,6 +3,7 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.characters.ConcreteCharacterFactory;
 import it.polimi.ingsw.model.gameBoard.*;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,20 +15,24 @@ class GameTest {
 
     @BeforeEach
     void setUp() {
-        Game.getGame().resetGame();
-        game = Game.getGame();
+        game = new Game();
 
         for(int i = 1; i <= 12; i++) {
             Island island = new Island(i);
             IslandGroup islandGroup = new IslandGroup();
             islandGroup.addIsland(island);
-            Game.getGame().addIslandGroup(islandGroup);
+            game.addIslandGroup(islandGroup);
         }
+    }
+
+    @AfterEach
+    void tearDown() {
+        game = null;
     }
 
     @Test
     void calculateInfluence_Conquer() {
-        ConcreteCharacterFactory cf = new ConcreteCharacterFactory();
+        ConcreteCharacterFactory cf = new ConcreteCharacterFactory(game);
         Character character = cf.createCharacter(0);
 
         Player player1 = new Player("X", PlayerColor.BLACK);
@@ -52,13 +57,13 @@ class GameTest {
         islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.RED);
         islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.RED);
         islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.RED);
-        islandGroup1.getIslands().get(0).addTower(player1.getColor());
+        islandGroup1.getIslands().get(0).addTower(game, player1.getColor());
         islandGroup1.setConquerorColor(player1.getColor());
 
         islandGroup2.getIslands().get(0).receiveStudent(CreatureColor.GREEN);
         islandGroup2.getIslands().get(0).receiveStudent(CreatureColor.GREEN);
         islandGroup2.getIslands().get(0).receiveStudent(CreatureColor.GREEN);
-        islandGroup2.getIslands().get(0).addTower(player1.getColor());
+        islandGroup2.getIslands().get(0).addTower(game, player1.getColor());
         islandGroup2.setConquerorColor(player1.getColor());
 
         game.connectIslandGroups(1, 2);
@@ -69,13 +74,13 @@ class GameTest {
         islandGroup3.getIslands().get(0).receiveStudent(CreatureColor.YELLOW);
         islandGroup3.getIslands().get(0).receiveStudent(CreatureColor.PINK);
         islandGroup3.getIslands().get(0).receiveStudent(CreatureColor.PINK);
-        islandGroup3.getIslands().get(0).addTower(player2.getColor());
+        islandGroup3.getIslands().get(0).addTower(game, player2.getColor());
         islandGroup3.setConquerorColor(player2.getColor());
 
         islandGroup4.getIslands().get(0).receiveStudent(CreatureColor.PINK);
         islandGroup4.getIslands().get(0).receiveStudent(CreatureColor.PINK);
         islandGroup4.getIslands().get(0).receiveStudent(CreatureColor.PINK);
-        islandGroup4.getIslands().get(0).addTower(player2.getColor());
+        islandGroup4.getIslands().get(0).addTower(game, player2.getColor());
         islandGroup4.setConquerorColor(player2.getColor());
 
         game.calculateInfluence(2, character);
@@ -89,7 +94,7 @@ class GameTest {
 
     @Test
     void calculateInfluence_WithCharacterNoTower() {
-        ConcreteCharacterFactory cf = new ConcreteCharacterFactory();
+        ConcreteCharacterFactory cf = new ConcreteCharacterFactory(game);
         Character character = cf.createCharacter(6);
 
         Player player1 = new Player("X", PlayerColor.BLACK);
@@ -111,7 +116,7 @@ class GameTest {
         islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.RED);
         islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.RED);
         islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.RED);
-        islandGroup1.getIslands().get(0).addTower(player1.getColor());
+        islandGroup1.getIslands().get(0).addTower(game, player1.getColor());
         islandGroup1.setConquerorColor(player1.getColor());
 
         islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.PINK);

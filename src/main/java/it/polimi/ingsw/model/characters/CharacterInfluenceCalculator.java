@@ -6,9 +6,9 @@ public class CharacterInfluenceCalculator extends Character {
 
     private int islandGroupIndex;
 
-    public CharacterInfluenceCalculator(int characterID) {
+    public CharacterInfluenceCalculator(Game game, int characterID) {
         this.characterID = characterID;
-        this.game = Game.getGame();
+        this.game = game;
         this.cost = 3;
         this.used = false;
         this.numberOfStudents = 0;

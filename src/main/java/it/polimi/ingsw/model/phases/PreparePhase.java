@@ -127,11 +127,11 @@ public class PreparePhase extends Phase {
     private void initialBagFill() {
         for(CreatureColor color : CreatureColor.values()) {
             for(int i = 0; i < 24; i++) {
-                Bag.getBag().receiveStudent(color);
+                game.getBag().receiveStudent(color);
             }
         }
 
-        Bag.getBag().shuffle();
+        game.getBag().shuffle();
     }
 
     /**
@@ -207,21 +207,13 @@ public class PreparePhase extends Phase {
      */
     private void initializeEntranceStudents() {
         for(Player player : game.getPlayers()) {
-            int numberOfEntranceStudents;
-
-            switch(game.getNumberOfPlayers()) {
-                case TWO_PLAYERS:
-                    numberOfEntranceStudents = TWO_PLAYERS_ENTRANCE_STUDENTS;
-                    break;
-                case THREE_PLAYERS:
-                    numberOfEntranceStudents = THREE_PLAYERS_ENTRANCE_STUDENTS;
-                    break;
-                default:
-                    numberOfEntranceStudents = 0;
-            }
+            int numberOfEntranceStudents = switch (game.getNumberOfPlayers()) {
+                case TWO_PLAYERS -> TWO_PLAYERS_ENTRANCE_STUDENTS;
+                case THREE_PLAYERS -> THREE_PLAYERS_ENTRANCE_STUDENTS;
+            };
 
             for(int i = 0; i < numberOfEntranceStudents; i++) {
-                Student studentToMove = Bag.getBag().drawStudent();
+                Student studentToMove = game.getBag().drawStudent();
                 player.getBoard().getEntrance().receiveStudent(studentToMove.getColor());
             }
         }
@@ -245,7 +237,7 @@ public class PreparePhase extends Phase {
      */
     private void drawCharacters() {
         Random random = new Random();
-        ConcreteCharacterFactory characterFactory = new ConcreteCharacterFactory();
+        ConcreteCharacterFactory characterFactory = new ConcreteCharacterFactory(game);
         int randomCharacterID;
 
         for(int i = 0; i < CHARACTERS_TO_DRAW; i++) {

@@ -32,7 +32,7 @@ public class PlanningPhase extends Phase {
      */
     public PlanningPhase(Game game, ArrayList<Player> players, int firstPlayerIndex) {
         this.game = game;
-        this.activatedCharacter = new ConcreteCharacterFactory().createCharacter(NULL_CHARACTER_ID);
+        this.activatedCharacter = new ConcreteCharacterFactory(game).createCharacter(NULL_CHARACTER_ID);
         this.firstPlayerIndex = firstPlayerIndex;
         this.playingOrder = new ArrayList<>(players);
         this.playerPriority = new HashMap<>();
@@ -61,7 +61,7 @@ public class PlanningPhase extends Phase {
      */
     private void fillClouds() {
         for(Cloud cloud : game.getClouds()) {
-            cloud.fill(Bag.getBag(), playingOrder.size());
+            cloud.fill(game.getBag(), playingOrder.size());
         }
     }
 

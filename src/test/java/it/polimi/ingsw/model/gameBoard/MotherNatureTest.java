@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.gameBoard;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,21 +12,18 @@ class MotherNatureTest {
 
     @BeforeEach
     void setUp() {
-        MotherNature.getMotherNature().resetMotherNature();
-        motherNature = MotherNature.getMotherNature();
+        motherNature = new MotherNature();
     }
 
-    @Test
-    void getMotherNature() {
-        MotherNature motherNature = MotherNature.getMotherNature();
-        assertNotNull(motherNature);
-        assertEquals(motherNature, MotherNature.getMotherNature());
+    @AfterEach
+    void tearDown() {
+        motherNature = null;
     }
 
     @Test
     void setCurrentIslandGroup() {
         assertNull(motherNature.getCurrentIslandGroup());
-        IslandGroup islandGroup=new IslandGroup();
+        IslandGroup islandGroup = new IslandGroup();
         motherNature.setCurrentIslandGroup(islandGroup);
         assertNotNull(motherNature.getCurrentIslandGroup());
     }

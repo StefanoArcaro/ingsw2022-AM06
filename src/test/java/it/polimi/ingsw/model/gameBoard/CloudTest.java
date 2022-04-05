@@ -16,7 +16,7 @@ class CloudTest {
     @BeforeEach
     void setUp() {
         cloud = new Cloud(1);
-        bag = Bag.getBag();
+        bag = new Bag();
 
         bag.receiveStudent(CreatureColor.GREEN);
         bag.receiveStudent(CreatureColor.RED);

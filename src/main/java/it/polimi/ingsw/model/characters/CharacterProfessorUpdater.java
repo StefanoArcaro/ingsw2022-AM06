@@ -8,9 +8,9 @@ public class CharacterProfessorUpdater extends Character {
      * Default constructor
      * @param characterID id of the character to create
      */
-    public CharacterProfessorUpdater(int characterID) {
+    public CharacterProfessorUpdater(Game game, int characterID) {
         this.characterID = characterID;
-        this.game = Game.getGame();
+        this.game = game;
         this.cost = 2;
         this.used = false;
         this.numberOfStudents = 0;

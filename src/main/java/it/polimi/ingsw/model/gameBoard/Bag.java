@@ -9,23 +9,13 @@ public class Bag implements StudentDestination {
 
     private static final int MIN_BAG_SIZE = 0;
 
-    private static Bag bag = null;
-    private final ArrayList<Student> students = new ArrayList<>();
+    private final ArrayList<Student> students;
 
     /**
-     * Private constructor
+     * Default constructor
      */
-    private Bag() {}
-
-    /**
-     * Bag is a Singleton
-     * @return singleton instance of the bag
-     */
-    public static Bag getBag() {
-        if(bag == null) {
-            bag = new Bag();
-        }
-        return bag;
+    public Bag() {
+        students = new ArrayList<>();
     }
 
     /**
@@ -35,6 +25,11 @@ public class Bag implements StudentDestination {
         return new ArrayList<>(students);
     }
 
+    /**
+     * Adds student of the specified color to the bag, then shuffles the bag
+     * @param color of the student to add
+     * @return whether the student was added
+     */
     public boolean receiveStudent(CreatureColor color) {
         boolean done = students.add(new Student(color));
         this.shuffle();
@@ -62,15 +57,6 @@ public class Bag implements StudentDestination {
             return student;
         }
         return null;
-    }
-
-    /**
-     * Empties the bag
-     */
-    public void empty() {
-        while(!isEmpty()) {
-            bag.drawStudent();
-        }
     }
 
     /**

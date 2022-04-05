@@ -16,15 +16,14 @@ class LobbyPhaseTest {
 
     @BeforeEach
     void setUp() {
-        Game.getGame().resetGame();
-        game = Game.getGame();
+        game = new Game();
     }
 
     @Test
     void play() {
         game.setNumberOfPlayers(3);
 
-        phaseFactory = new PhaseFactory();
+        phaseFactory = new PhaseFactory(game);
         phase = phaseFactory.createPhase(GameState.LOBBY_PHASE);
 
         assertEquals(GameState.LOBBY_PHASE, game.getGameState());

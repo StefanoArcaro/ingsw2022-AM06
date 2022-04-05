@@ -25,11 +25,10 @@ class CharacterMoverTest {
 
     @BeforeEach
     void setUp() {
-        Game.getGame().resetGame();
-        game = Game.getGame();
+        game = new Game();
 
-        cf = new ConcreteCharacterFactory();
-        bag = Bag.getBag();
+        cf = new ConcreteCharacterFactory(game);
+        bag = game.getBag();
 
         for(int i=1; i<=12; i++) {
             Island island = new Island(i);
@@ -82,14 +81,11 @@ class CharacterMoverTest {
         character.students.add(new Student(CreatureColor.GREEN));
         character.students.add(new Student(CreatureColor.BLUE));
 
-        Game game = Game.getGame();
-
         game.setNumberOfPlayers(3);
         game.setGameMode(GameMode.EXPERT);
 
-        phaseFactory = new PhaseFactory();
+        phaseFactory = new PhaseFactory(game);
 
-        // TODO you can remove this and add the players to the game yourself
         phase = phaseFactory.createPhase(GameState.LOBBY_PHASE);
         phase.play();
 
@@ -114,7 +110,7 @@ class CharacterMoverTest {
     void effect1_KO() {
         character = cf.createCharacter(1);
 
-        Bag.getBag().receiveStudent(CreatureColor.RED);
+        bag.receiveStudent(CreatureColor.RED);
 
         character.students.add(new Student(CreatureColor.RED));
         character.students.add(new Student(CreatureColor.RED));
@@ -144,7 +140,6 @@ class CharacterMoverTest {
     void effect7_OK() {
         character = cf.createCharacter(7);
 
-        Game game = Game.getGame();
         Player player = new Player("Chiara", PlayerColor.WHITE);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
@@ -182,7 +177,6 @@ class CharacterMoverTest {
     void effect7_KO() {
         character = cf.createCharacter(7);
 
-        Game game = Game.getGame();
         Player player = new Player("Chiara", PlayerColor.WHITE);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
@@ -219,7 +213,6 @@ class CharacterMoverTest {
     void effect10_OK() {
         character = cf.createCharacter(10);
 
-        Game game = Game.getGame();
         Player player = new Player("Chiara", PlayerColor.WHITE);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
@@ -250,7 +243,6 @@ class CharacterMoverTest {
     void effect10_KO() {
         character = cf.createCharacter(10);
 
-        Game game = Game.getGame();
         Player player = new Player("Chiara", PlayerColor.WHITE);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
@@ -283,9 +275,8 @@ class CharacterMoverTest {
     void effect11_OK() {
         character = cf.createCharacter(11);
 
-        Bag.getBag().receiveStudent(CreatureColor.RED);
+        bag.receiveStudent(CreatureColor.RED);
 
-        Game game = Game.getGame();
         Player player = new Player("Chiara", PlayerColor.WHITE);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
@@ -315,9 +306,8 @@ class CharacterMoverTest {
     void effect11_KO() {
         character = cf.createCharacter(11);
 
-        Bag.getBag().receiveStudent(CreatureColor.RED);
+        bag.receiveStudent(CreatureColor.RED);
 
-        Game game = Game.getGame();
         Player player = new Player("Chiara", PlayerColor.WHITE);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
@@ -347,7 +337,6 @@ class CharacterMoverTest {
 
     @Test
     void effect12_OK() {
-        Game game = Game.getGame();
         Player p1 = new Player("X", PlayerColor.WHITE);
         Player p2 = new Player("Y", PlayerColor.BLACK);
         game.addPlayer(p1);
@@ -380,7 +369,6 @@ class CharacterMoverTest {
 
     @Test
     void effect12_KO() {
-        Game game = Game.getGame();
         Player p1 = new Player("X", PlayerColor.WHITE);
         Player p2 = new Player("Y", PlayerColor.BLACK);
         game.addPlayer(p1);
@@ -409,7 +397,5 @@ class CharacterMoverTest {
 
         assertEquals(expectedHall1, p1.getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
         assertEquals(expectedHall2, p2.getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
-
     }
-
 }

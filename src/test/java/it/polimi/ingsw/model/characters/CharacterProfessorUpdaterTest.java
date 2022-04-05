@@ -21,14 +21,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CharacterProfessorUpdaterTest {
 
+    Game game;
     ConcreteCharacterFactory cf;
     Character character;
 
     @BeforeEach
     void setUp() {
-        Game.getGame().resetGame();
+        game = new Game();
 
-        cf = new ConcreteCharacterFactory();
+        cf = new ConcreteCharacterFactory(game);
     }
 
     @AfterEach
@@ -39,14 +40,12 @@ class CharacterProfessorUpdaterTest {
 
     @Test
     void effect() {
-        Game game = Game.getGame();
-
         Player p1 = new Player("X", PlayerColor.WHITE);
         Player p2 = new Player("Y", PlayerColor.BLACK);
         game.addPlayer(p1);
         game.addPlayer(p2);
         game.setCurrentPlayer(p2);
-        game.setCurrentPhase(new PhaseFactory().createPhase(GameState.MOVE_MOTHER_NATURE_PHASE));
+        game.setCurrentPhase(new PhaseFactory(game).createPhase(GameState.MOVE_MOTHER_NATURE_PHASE));
 
         character = cf.createCharacter(2);
         game.getCurrentPhase().activateCharacter(character);

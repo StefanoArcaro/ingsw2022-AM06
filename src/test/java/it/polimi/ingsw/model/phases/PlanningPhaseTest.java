@@ -18,8 +18,7 @@ class PlanningPhaseTest {
 
     @BeforeEach
     void setUp() {
-        Game.getGame().resetGame();
-        game = Game.getGame();
+        game = new Game();
     }
 
     @Test
@@ -29,7 +28,7 @@ class PlanningPhaseTest {
 
         assertEquals(GameState.LOBBY_PHASE, game.getGameState());
 
-        phaseFactory = new PhaseFactory();
+        phaseFactory = new PhaseFactory(game);
         phase = phaseFactory.createPhase(GameState.LOBBY_PHASE);
         phase.play();
 
