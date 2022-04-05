@@ -20,8 +20,6 @@ class IslandTest {
 
     @Test
     void removeTower() {
-        System.out.println("removeTower");
-
         Game game = Game.getGame();
         Player player = new Player("Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
@@ -32,7 +30,6 @@ class IslandTest {
         assertFalse(island.removeTower());
 
         assertTrue(island.addTower(player.getColor()));
-        System.out.println(player);
         assertEquals(4, player.getBoard().getTowers());
         assertTrue(island.removeTower());
         assertEquals(5, player.getBoard().getTowers());
