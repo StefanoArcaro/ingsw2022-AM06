@@ -1,17 +1,31 @@
 package it.polimi.ingsw.model.gameBoard;
 
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.PlayerColor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
 
+    Game game;
+
+    @BeforeEach
+    void setUp() {
+        game = new Game();
+    }
+
+    @AfterEach
+    void tearDown() {
+        game = null;
+    }
 
     @Test
     void removeStudentFromEntrance() {
-        Player player = new Player("nick", PlayerColor.BLACK);
+        Player player = new Player(game, "nick", PlayerColor.BLACK);
         Board board = new Board(player);
         assertEquals(0, board.getEntrance().getStudents().size());
         board.addStudentToEntrance(CreatureColor.BLUE);
@@ -23,7 +37,7 @@ class BoardTest {
 
     @Test
     void removeStudentFromHall() {
-        Player player = new Player("nick", PlayerColor.BLACK);
+        Player player = new Player(game, "nick", PlayerColor.BLACK);
         Board board = new Board(player);
         Table tablePink = board.getHall().getTableByColor(CreatureColor.PINK);
         Table tableRed = board.getHall().getTableByColor(CreatureColor.RED);
@@ -37,7 +51,7 @@ class BoardTest {
 
     @Test
     void winProfessor() {
-        Player player = new Player("nick", PlayerColor.BLACK);
+        Player player = new Player(game, "nick", PlayerColor.BLACK);
         Board board = new Board(player);
         assertTrue(board.getProfessors().isEmpty());
         Professor professor = new Professor(CreatureColor.RED);
@@ -49,7 +63,7 @@ class BoardTest {
 
     @Test
     void loseProfessor() {
-        Player player = new Player("nick", PlayerColor.BLACK);
+        Player player = new Player(game, "nick", PlayerColor.BLACK);
         Board board = new Board(player);
         assertTrue(board.getProfessors().isEmpty());
         Professor professorRed = new Professor(CreatureColor.RED);
@@ -65,7 +79,7 @@ class BoardTest {
 
     @Test
     void loseProfessorByColor() {
-        Player player = new Player("nick", PlayerColor.BLACK);
+        Player player = new Player(game, "nick", PlayerColor.BLACK);
         Board board = new Board(player);
         Professor professorRed = new Professor(CreatureColor.RED);
 
@@ -77,7 +91,7 @@ class BoardTest {
 
     @Test
     void containsProfessor() {
-        Player player = new Player("nick", PlayerColor.BLACK);
+        Player player = new Player(game, "nick", PlayerColor.BLACK);
         Board board = new Board(player);
 
         for(CreatureColor color : CreatureColor.values()) {

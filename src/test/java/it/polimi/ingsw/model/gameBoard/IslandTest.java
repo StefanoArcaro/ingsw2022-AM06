@@ -28,7 +28,7 @@ class IslandTest {
 
     @Test
     void removeTower() {
-        Player player = new Player("Chiara", PlayerColor.BLACK);
+        Player player = new Player(game, "Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
 
@@ -44,7 +44,7 @@ class IslandTest {
 
     @Test
     void addTower() {
-        Player player = new Player("Chiara", PlayerColor.BLACK);
+        Player player = new Player(game, "Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(6);
 

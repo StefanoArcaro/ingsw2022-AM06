@@ -82,7 +82,6 @@ class CharacterMoverTest {
         character.students.add(new Student(CreatureColor.BLUE));
 
         game.setNumberOfPlayers(3);
-        game.setGameMode(GameMode.EXPERT);
 
         phaseFactory = new PhaseFactory(game);
 
@@ -140,7 +139,7 @@ class CharacterMoverTest {
     void effect7_OK() {
         character = cf.createCharacter(7);
 
-        Player player = new Player("Chiara", PlayerColor.WHITE);
+        Player player = new Player(game, "Chiara", PlayerColor.WHITE);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
         game.setCurrentPlayer(player);
@@ -177,7 +176,7 @@ class CharacterMoverTest {
     void effect7_KO() {
         character = cf.createCharacter(7);
 
-        Player player = new Player("Chiara", PlayerColor.WHITE);
+        Player player = new Player(game, "Chiara", PlayerColor.WHITE);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
         game.setCurrentPlayer(player);
@@ -213,7 +212,7 @@ class CharacterMoverTest {
     void effect10_OK() {
         character = cf.createCharacter(10);
 
-        Player player = new Player("Chiara", PlayerColor.WHITE);
+        Player player = new Player(game, "Chiara", PlayerColor.WHITE);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
         game.setCurrentPlayer(player);
@@ -243,7 +242,7 @@ class CharacterMoverTest {
     void effect10_KO() {
         character = cf.createCharacter(10);
 
-        Player player = new Player("Chiara", PlayerColor.WHITE);
+        Player player = new Player(game, "Chiara", PlayerColor.WHITE);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
         game.setCurrentPlayer(player);
@@ -277,7 +276,7 @@ class CharacterMoverTest {
 
         bag.receiveStudent(CreatureColor.RED);
 
-        Player player = new Player("Chiara", PlayerColor.WHITE);
+        Player player = new Player(game, "Chiara", PlayerColor.WHITE);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
         game.setCurrentPlayer(player);
@@ -308,7 +307,7 @@ class CharacterMoverTest {
 
         bag.receiveStudent(CreatureColor.RED);
 
-        Player player = new Player("Chiara", PlayerColor.WHITE);
+        Player player = new Player(game, "Chiara", PlayerColor.WHITE);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
         game.setCurrentPlayer(player);
@@ -337,8 +336,8 @@ class CharacterMoverTest {
 
     @Test
     void effect12_OK() {
-        Player p1 = new Player("X", PlayerColor.WHITE);
-        Player p2 = new Player("Y", PlayerColor.BLACK);
+        Player p1 = new Player(game, "X", PlayerColor.WHITE);
+        Player p2 = new Player(game, "Y", PlayerColor.BLACK);
         game.addPlayer(p1);
         game.addPlayer(p2);
         p1.getBoard().setTowers(5);
@@ -369,8 +368,8 @@ class CharacterMoverTest {
 
     @Test
     void effect12_KO() {
-        Player p1 = new Player("X", PlayerColor.WHITE);
-        Player p2 = new Player("Y", PlayerColor.BLACK);
+        Player p1 = new Player(game, "X", PlayerColor.WHITE);
+        Player p2 = new Player(game, "Y", PlayerColor.BLACK);
         game.addPlayer(p1);
         game.addPlayer(p2);
         p1.getBoard().setTowers(5);

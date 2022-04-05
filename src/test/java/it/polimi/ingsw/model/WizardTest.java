@@ -8,17 +8,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class WizardTest {
 
+    Game game;
     Wizard wizard;
     Player player;
 
     @BeforeEach
     void setUp() {
-        player = new Player("Chiara", PlayerColor.BLACK);
+        game = new Game();
+        player = new Player(game, "Chiara", PlayerColor.BLACK);
         wizard = new Wizard(player, WizardName.DRUID);
     }
 
     @AfterEach
     void tearDown() {
+        game = null;
         player = null;
         wizard = null;
     }

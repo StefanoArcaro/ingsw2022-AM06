@@ -3,6 +3,7 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.characters.CharacterID;
 import it.polimi.ingsw.model.gameBoard.*;
+import it.polimi.ingsw.model.phases.ActionPhase;
 import it.polimi.ingsw.model.phases.Phase;
 import it.polimi.ingsw.model.phases.PhaseFactory;
 
@@ -10,7 +11,6 @@ import java.util.ArrayList;
 
 public class Game {
 
-    private static Game game = null;
     private NumberOfPlayers numberOfPlayers;
     private GameMode gameMode;
     private GameState gameState;
@@ -26,6 +26,7 @@ public class Game {
     private final ArrayList<Cloud> clouds;
     private final ArrayList<Professor> professors;
     private final ArrayList<Character> drawnCharacters;
+    private Character activatedCharacter;
     private int treasury;
 
     /**
@@ -41,6 +42,10 @@ public class Game {
         clouds = new ArrayList<>();
         professors = new ArrayList<>();
         drawnCharacters = new ArrayList<>();
+        activatedCharacter = null;
+
+        // Expert version of the game
+        gameMode = GameMode.EXPERT;
 
         // Game begins waiting for players in the Lobby phase
         gameState = GameState.LOBBY_PHASE;
@@ -437,11 +442,31 @@ public class Game {
     }
 
     /**
+     * @return the activated character
+     */
+    public Character getActivatedCharacter() {
+        return activatedCharacter;
+    }
+
+    /**
+     * Sets the active character to the specified one
+     * @param activatedCharacterIndex index of the character to activate in the drawn characters list
+     */
+    public void setActivatedCharacter(int activatedCharacterIndex) {
+        activatedCharacter = drawnCharacters.get(activatedCharacterIndex);
+        playCharacter(activatedCharacter.getCharacterID());
+    }
+
+    /**
      * Activates the character passed as a parameter
      * @param characterID ID of the character to activate
      */
-    public void activateCharacter(int characterID) {
-        // TODO
+    private void playCharacter(int characterID) {
+        // TODO fix this
+        // TODO implement without checking, cast and if failure then exception (not action phase)
+        if(gameState.getCode() > 2 && gameState.getCode() < 6) {
+            ((ActionPhase)currentPhase).playCharacter(activatedCharacter);
+        }
     }
 
     /**

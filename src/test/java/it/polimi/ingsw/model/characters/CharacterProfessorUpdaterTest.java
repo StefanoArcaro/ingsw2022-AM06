@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.PlayerColor;
+import it.polimi.ingsw.model.phases.ActionPhase;
 import it.polimi.ingsw.model.phases.PhaseFactory;
 import it.polimi.ingsw.model.gameBoard.Creature;
 import it.polimi.ingsw.model.gameBoard.CreatureColor;
@@ -40,15 +41,15 @@ class CharacterProfessorUpdaterTest {
 
     @Test
     void effect() {
-        Player p1 = new Player("X", PlayerColor.WHITE);
-        Player p2 = new Player("Y", PlayerColor.BLACK);
+        Player p1 = new Player(game, "X", PlayerColor.WHITE);
+        Player p2 = new Player(game, "Y", PlayerColor.BLACK);
         game.addPlayer(p1);
         game.addPlayer(p2);
         game.setCurrentPlayer(p2);
         game.setCurrentPhase(new PhaseFactory(game).createPhase(GameState.MOVE_MOTHER_NATURE_PHASE));
 
         character = cf.createCharacter(2);
-        game.getCurrentPhase().activateCharacter(character);
+        ((ActionPhase)game.getCurrentPhase()).playCharacter(character);
 
         Professor prof1 = new Professor(CreatureColor.RED);
         Professor prof3 = new Professor(CreatureColor.PINK);

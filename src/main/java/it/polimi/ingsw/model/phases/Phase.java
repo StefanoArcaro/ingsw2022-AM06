@@ -19,10 +19,4 @@ public abstract class Phase {
     public Character getActivatedCharacter() {
         return activatedCharacter;
     }
-
-    public void activateCharacter(Character activatedCharacter) {
-        this.activatedCharacter = activatedCharacter;
-        activatedCharacter.effect();
-        // TODO parameters and iterations
-    }
 }

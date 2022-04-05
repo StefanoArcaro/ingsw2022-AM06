@@ -86,14 +86,12 @@ public class Board {
         // TODO test coin distribution
         boolean studentReceived = hall.receiveStudent(color);
 
-        /*
-        if(studentReceived && Game.getGame().getGameMode().equals(GameMode.EXPERT)) {
-            if(hall.getTableByColor(color).getLength() % 3 == 0 && Game.getGame().getTreasury() > 0) {
-                Game.getGame().setTreasury(Game.getGame().getTreasury() - 1);
+        if(studentReceived && player.getGame().getGameMode().equals(GameMode.EXPERT)) {
+            if(hall.getTableByColor(color).getLength() % 3 == 0 && player.getGame().getTreasury() > 0) {
+                player.getGame().setTreasury(player.getGame().getTreasury() - 1);
                 player.receiveCoin();
             }
         }
-        */
 
         return studentReceived;
     }

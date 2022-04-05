@@ -1,23 +1,38 @@
 package it.polimi.ingsw.model.gameBoard;
 
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.PlayerColor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class HallTest {
 
+    Game game;
+
+    @BeforeEach
+    void setUp() {
+        game = new Game();
+    }
+
+    @AfterEach
+    void tearDown() {
+        game = null;
+    }
+
     @Test
     void getTableByColor() {
-        Player player = new Player("nick", PlayerColor.BLACK);
+        Player player = new Player(game, "nick", PlayerColor.BLACK);
         Board board = new Board(player);
         assertEquals(board.getHall().getTableByColor(CreatureColor.GREEN), board.getHall().getStudents().get(0));
     }
 
     @Test
     void studentInTable() {
-        Player player = new Player("Chiara", PlayerColor.BLACK);
+        Player player = new Player(game, "Chiara", PlayerColor.BLACK);
         Board board = new Board(player);
         board.addStudentToHall(CreatureColor.RED);
         board.addStudentToHall(CreatureColor.PINK);

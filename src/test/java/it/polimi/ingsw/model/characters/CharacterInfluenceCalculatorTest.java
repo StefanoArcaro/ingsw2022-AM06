@@ -38,8 +38,8 @@ class CharacterInfluenceCalculatorTest {
 
     @Test
     void effect(){
-        Player p1 = new Player("X", PlayerColor.WHITE);
-        Player p2 = new Player("Y", PlayerColor.BLACK);
+        Player p1 = new Player(game, "X", PlayerColor.WHITE);
+        Player p2 = new Player(game, "Y", PlayerColor.BLACK);
         game.addPlayer(p1);
         game.addPlayer(p2);
         game.setCurrentPlayer(p1);

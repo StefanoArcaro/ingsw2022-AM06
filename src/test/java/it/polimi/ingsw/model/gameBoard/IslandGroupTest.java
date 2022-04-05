@@ -68,7 +68,7 @@ class IslandGroupTest {
 
     @Test
     void addIsland_OK() {
-        Player player = new Player("Chiara", PlayerColor.BLACK);
+        Player player = new Player(game, "Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
 
@@ -92,10 +92,10 @@ class IslandGroupTest {
 
     @Test
     void addIsland_KO() {
-        Player player = new Player("Chiara", PlayerColor.BLACK);
+        Player player = new Player(game, "Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
-        Player player1 = new Player("X", PlayerColor.GRAY);
+        Player player1 = new Player(game, "X", PlayerColor.GRAY);
         game.addPlayer(player1);
         player1.getBoard().setTowers(5);
 
@@ -118,7 +118,7 @@ class IslandGroupTest {
 
     @Test
     void addIsland_Boundary() {
-        Player player = new Player("Chiara", PlayerColor.BLACK);
+        Player player = new Player(game, "Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
 
@@ -141,7 +141,7 @@ class IslandGroupTest {
 
     @Test
     void addIsland_Boundary2() {
-        Player player = new Player("Chiara", PlayerColor.BLACK);
+        Player player = new Player(game, "Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
 
@@ -170,7 +170,7 @@ class IslandGroupTest {
 
     @Test
     void addIsland_Boundary3() {
-        Player player = new Player("Chiara", PlayerColor.BLACK);
+        Player player = new Player(game, "Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
 
@@ -216,7 +216,7 @@ class IslandGroupTest {
 
     @Test
     void connectIslandGroupOK() {
-        Player player = new Player("Chiara", PlayerColor.BLACK);
+        Player player = new Player(game, "Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(7);
 
@@ -247,7 +247,7 @@ class IslandGroupTest {
 
     @Test
     void connectIslandGroupOK2() {
-        Player player = new Player("Chiara", PlayerColor.BLACK);
+        Player player = new Player(game, "Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
 
@@ -278,7 +278,7 @@ class IslandGroupTest {
 
     @Test
     void connectIslandGroupKO() {
-        Player player = new Player("Chiara", PlayerColor.BLACK);
+        Player player = new Player(game, "Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
 
@@ -302,10 +302,10 @@ class IslandGroupTest {
 
     @Test
     void connectIslandGroupKO2() {
-        Player player = new Player("Chiara", PlayerColor.BLACK);
+        Player player = new Player(game, "Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
-        Player player1 = new Player("X", PlayerColor.GRAY);
+        Player player1 = new Player(game, "X", PlayerColor.GRAY);
         player1.getBoard().setTowers(5);
 
         IslandGroup islandGroupToAdd = new IslandGroup();
@@ -329,7 +329,7 @@ class IslandGroupTest {
 
     @Test
     void connectIslandGroup_Boundary() {
-        Player player = new Player("Chiara", PlayerColor.BLACK);
+        Player player = new Player(game, "Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
 
@@ -358,7 +358,7 @@ class IslandGroupTest {
 
     @Test
     void calculateInfluenceNoCharacter() {
-        Player player = new Player("Chiara", PlayerColor.BLACK);
+        Player player = new Player(game, "Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
 
@@ -388,7 +388,7 @@ class IslandGroupTest {
 
     @Test
     void calculateInfluenceCharacter6() {
-        Player player = new Player("Chiara", PlayerColor.BLACK);
+        Player player = new Player(game, "Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
         game.setCurrentPlayer(player);
@@ -422,7 +422,7 @@ class IslandGroupTest {
 
     @Test
     void calculateInfluenceCharacter8() {
-        Player player = new Player("Chiara", PlayerColor.BLACK);
+        Player player = new Player(game, "Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
         game.setCurrentPlayer(player);
@@ -455,7 +455,7 @@ class IslandGroupTest {
 
     @Test
     void calculateInfluenceCharacter9() {
-        Player player = new Player("Chiara", PlayerColor.BLACK);
+        Player player = new Player(game, "Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
         player.getBoard().setTowers(5);
         game.setCurrentPlayer(player);

@@ -35,14 +35,14 @@ class GameTest {
         ConcreteCharacterFactory cf = new ConcreteCharacterFactory(game);
         Character character = cf.createCharacter(0);
 
-        Player player1 = new Player("X", PlayerColor.BLACK);
+        Player player1 = new Player(game, "X", PlayerColor.BLACK);
         game.addPlayer(player1);
         player1.getBoard().winProfessor(new Professor(CreatureColor.RED));
         player1.getBoard().winProfessor(new Professor(CreatureColor.GREEN));
         player1.getBoard().winProfessor(new Professor(CreatureColor.YELLOW));
         player1.getBoard().setTowers(5);
 
-        Player player2 = new Player("Y", PlayerColor.WHITE);
+        Player player2 = new Player(game, "Y", PlayerColor.WHITE);
         game.addPlayer(player2);
         player2.getBoard().winProfessor(new Professor(CreatureColor.PINK));
         player2.getBoard().setTowers(5);
@@ -97,14 +97,14 @@ class GameTest {
         ConcreteCharacterFactory cf = new ConcreteCharacterFactory(game);
         Character character = cf.createCharacter(6);
 
-        Player player1 = new Player("X", PlayerColor.BLACK);
+        Player player1 = new Player(game, "X", PlayerColor.BLACK);
         game.addPlayer(player1);
         player1.getBoard().winProfessor(new Professor(CreatureColor.RED));
         player1.getBoard().winProfessor(new Professor(CreatureColor.GREEN));
         player1.getBoard().winProfessor(new Professor(CreatureColor.YELLOW));
         player1.getBoard().setTowers(5);
 
-        Player player2 = new Player("Y", PlayerColor.WHITE);
+        Player player2 = new Player(game, "Y", PlayerColor.WHITE);
         game.addPlayer(player2);
         player2.getBoard().winProfessor(new Professor(CreatureColor.PINK));
         player2.getBoard().setTowers(5);

@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.gameBoard.Board;
 
 public class Player {
 
+    private final Game game;
     private final String nickname;
     private final PlayerColor color;
     private final Board board;
@@ -13,11 +14,19 @@ public class Player {
     /**
      * Default constructor
      */
-    public Player(String nickname, PlayerColor color) {
+    public Player(Game game, String nickname, PlayerColor color) {
+        this.game = game;
         this.nickname = nickname;
         this.color = color;
         this.board = new Board(this);
         this.coins = 0;
+    }
+
+    /**
+     * @return game the player is in
+     */
+    public Game getGame() {
+        return game;
     }
 
     /**

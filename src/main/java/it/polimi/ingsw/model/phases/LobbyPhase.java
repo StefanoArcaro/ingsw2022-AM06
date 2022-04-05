@@ -75,7 +75,7 @@ public class LobbyPhase extends Phase {
                     playerColor = PlayerColor.GRAY;
             }
 
-            Player player = new Player(nickname, playerColor);
+            Player player = new Player(game, nickname, playerColor);
             game.addPlayer(player);
         }
     }
