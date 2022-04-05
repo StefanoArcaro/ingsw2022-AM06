@@ -21,6 +21,11 @@ public class MotherNature {
         return motherNature;
     }
 
+    // Used for testing purposes
+    public void resetMotherNature() {
+        motherNature = null;
+    }
+
     /**
      * @return the island group Mother Nature is currently on
      */

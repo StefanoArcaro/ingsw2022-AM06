@@ -1,10 +1,19 @@
 package it.polimi.ingsw.model.gameBoard;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MotherNatureTest {
+
+    MotherNature motherNature;
+
+    @BeforeEach
+    void setUp() {
+        MotherNature.getMotherNature().resetMotherNature();
+        motherNature = MotherNature.getMotherNature();
+    }
 
     @Test
     void getMotherNature() {
@@ -15,7 +24,6 @@ class MotherNatureTest {
 
     @Test
     void setCurrentIslandGroup() {
-        MotherNature motherNature = MotherNature.getMotherNature();
         assertNull(motherNature.getCurrentIslandGroup());
         IslandGroup islandGroup=new IslandGroup();
         motherNature.setCurrentIslandGroup(islandGroup);
