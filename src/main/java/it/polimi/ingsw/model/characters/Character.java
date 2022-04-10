@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model.characters;
 
+import it.polimi.ingsw.exceptions.NoAvailableBanCardsException;
+import it.polimi.ingsw.exceptions.NoAvailableColorException;
+import it.polimi.ingsw.exceptions.OutOfBoundException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.gameBoard.CreatureColor;
 import it.polimi.ingsw.model.gameBoard.Student;
@@ -18,6 +21,7 @@ public abstract class Character {
     protected int numberOfStudents;
     protected int numberOfBanCards;
     protected int toDoNow;
+    protected int numberOfIterations;
 
     protected ArrayList<Student> students;
 
@@ -25,12 +29,17 @@ public abstract class Character {
     protected boolean towerCounter;
     protected int extraPoints;
 
+    protected int moreSteps;
+
     /**
      * Modify the game setup in order to use this character.
      */
     public void initialPreparation() {}
 
-    public abstract void effect();
+    /**
+     * Abstract method which represents the effect of the character
+     */
+    public abstract void effect() throws NoAvailableBanCardsException, OutOfBoundException, NoAvailableColorException;
 
     /**
      * Return the ID of the character.
@@ -68,18 +77,54 @@ public abstract class Character {
         return cost;
     }
 
-    public int getToDoNow() {
-        return toDoNow;
-    }
-
+    /**
+     * @return the number of ban cards on the card
+     */
     public int getNumberOfBanCards() {
         return numberOfBanCards;
     }
 
-    public int getNumberOfStudents() {
-        return numberOfStudents;
+    /**
+     * Increases number of ban cards
+     */
+    public void addBancCard() {
+        numberOfBanCards += 1;
     }
 
+    /**
+     * Decreases number of ban cards
+     */
+    public void removeBanCard() {
+        numberOfBanCards -=1;
+    }
+
+    /**
+     * @return the number of possible applications of the effect during a turn
+     */
+    public int getToDoNow() {
+        return toDoNow;
+    }
+
+    /**
+     * @return the number of times this card's effect was applied during the turn
+     */
+    public int getNumberOfIterations() {
+        return numberOfIterations;
+    }
+
+    /**
+     * Increases the number of times this card's effect was applied during the turn
+     */
+    public void increaseNumberOfIteration() {
+        numberOfIterations += 1;
+    }
+
+    /**
+     * @return number of steps added
+     */
+   public int getMoreSteps() {
+       return moreSteps;
+   }
     /**
      * @return extra points given by the character effect
      */
@@ -102,6 +147,9 @@ public abstract class Character {
         this.colorNoPoints = colorNoPoints;
     }
 
+    /**
+     * @return the color that will not be considered for the influence calculation
+     */
     public CreatureColor getColorNoPoints() {
         return colorNoPoints;
     }

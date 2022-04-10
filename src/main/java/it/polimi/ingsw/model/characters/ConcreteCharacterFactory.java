@@ -16,27 +16,15 @@ public class ConcreteCharacterFactory extends CharacterFactory {
 
         CharacterID character = CharacterID.values()[characterID];
 
-        switch(character) {
-            case CHARACTER_NONE:
-                return null;
-            case CHARACTER_ONE:
-            case CHARACTER_SEVEN:
-            case CHARACTER_TEN:
-            case CHARACTER_ELEVEN:
-            case CHARACTER_TWELVE:
-                return new CharacterMover(game, characterID);
-            case CHARACTER_TWO:
-                return new CharacterProfessorUpdater(game, characterID);
-            case CHARACTER_THREE:
-                return new CharacterInfluenceCalculator(game, characterID);
-            case CHARACTER_FOUR:
-                return new CharacterStepsAdder(characterID);
-            case CHARACTER_FIVE:
-            case CHARACTER_SIX:
-            case CHARACTER_EIGHT:
-            case CHARACTER_NINE:
-                return new CharacterInfluenceModifier(characterID);
-        }
-        return null;
+        return switch (character) {
+            case CHARACTER_NONE -> null;
+            case CHARACTER_ONE, CHARACTER_SEVEN, CHARACTER_TEN,
+                    CHARACTER_ELEVEN, CHARACTER_TWELVE -> new CharacterMover(game, characterID);
+            case CHARACTER_TWO -> new CharacterProfessorUpdater(game, characterID);
+            case CHARACTER_THREE -> new CharacterInfluenceCalculator(game, characterID);
+            case CHARACTER_FOUR -> new CharacterStepsAdder(characterID);
+            case CHARACTER_FIVE, CHARACTER_SIX,
+                    CHARACTER_EIGHT, CHARACTER_NINE -> new CharacterInfluenceModifier(game, characterID);
+        };
     }
 }

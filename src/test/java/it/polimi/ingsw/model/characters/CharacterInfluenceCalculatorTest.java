@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model.characters;
 
+import it.polimi.ingsw.exceptions.NoAvailableBanCardsException;
+import it.polimi.ingsw.exceptions.NoAvailableColorException;
+import it.polimi.ingsw.exceptions.OutOfBoundException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.PlayerColor;
@@ -62,10 +65,8 @@ class CharacterInfluenceCalculatorTest {
         p2.getBoard().addStudentToHall(CreatureColor.GREEN);
         p2.getBoard().winProfessor(new Professor(CreatureColor.GREEN));
 
-
         IslandGroup islandGroup1 = game.getIslandGroups().get(1);
         IslandGroup islandGroup2 = game.getIslandGroups().get(2);
-
 
         islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.RED);
         islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.RED);
@@ -79,9 +80,13 @@ class CharacterInfluenceCalculatorTest {
         islandGroup2.getIslands().get(0).addTower(game, p1.getColor());
         islandGroup2.setConquerorColor(p1.getColor());
 
-
         ((CharacterInfluenceCalculator)character).setIslandGroupIndex(1);
-        character.effect();
+
+        try {
+            character.effect();
+        } catch (NoAvailableBanCardsException | OutOfBoundException | NoAvailableColorException e) {
+            e.printStackTrace();
+        }
 
         assertEquals(p1.getColor(), islandGroup1.getConquerorColor());
         assertEquals(p1.getColor(), islandGroup2.getConquerorColor());

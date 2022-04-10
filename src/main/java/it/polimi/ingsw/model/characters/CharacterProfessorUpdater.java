@@ -6,6 +6,7 @@ public class CharacterProfessorUpdater extends Character {
 
     /**
      * Default constructor
+     * @param game game played
      * @param characterID id of the character to create
      */
     public CharacterProfessorUpdater(Game game, int characterID) {
@@ -16,9 +17,11 @@ public class CharacterProfessorUpdater extends Character {
         this.numberOfStudents = 0;
         this.numberOfBanCards = 0;
         this.toDoNow = 1;
+        this.numberOfIterations = 0;
         this.colorNoPoints = null;
         this.extraPoints = 0;
         this.towerCounter = true;
+        this.moreSteps = 0;
     }
 
     @Override
