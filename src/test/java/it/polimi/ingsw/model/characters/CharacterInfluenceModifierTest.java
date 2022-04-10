@@ -60,7 +60,9 @@ class CharacterInfluenceModifierTest {
         Player p2 = game.getPlayers().get(0);
 
         p1.receiveCoin();
-        p2.receiveCoin();
+        p1.receiveCoin();
+        p1.receiveCoin();
+        p1.receiveCoin();
 
         game.setCurrentPlayer(p1);
 
@@ -80,8 +82,21 @@ class CharacterInfluenceModifierTest {
             e.printStackTrace();
         }
 
-        assertEquals(0, p1.getCoins());
+        assertEquals(3, p1.getCoins());
         assertEquals(3, character.getNumberOfBanCards());
         assertEquals(1, game.getIslandGroupByIndex(1).getNumberOfBanCardPresent());
+
+        ((CharacterInfluenceModifier)character).setIslandGroupIndex(2);
+
+        try {
+            ((ActionPhase)game.getCurrentPhase()).playCharacter(character);
+        } catch (NoAvailableBanCardsException | OutOfBoundException | NoAvailableColorException | NotEnoughMoneyException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals(3, p1.getCoins());
+        assertEquals(3, character.getNumberOfBanCards());
+        assertEquals(0, game.getIslandGroupByIndex(2).getNumberOfBanCardPresent());
+
     }
 }
