@@ -53,6 +53,7 @@ public class PlanningPhase extends Phase {
 
         game.setPlayingOrder(playingOrder);
         game.setFirstPlayerIndex(game.getPlayers().indexOf(playingOrder.get(FIRST_PLAYER_INDEX)));
+        game.setPlayerPriority(playerPriority);
         game.setGameState(GameState.MOVE_STUDENT_PHASE);
     }
 
@@ -96,13 +97,11 @@ public class PlanningPhase extends Phase {
     private boolean checkAssistantPlayed(int priority) {
         List<Integer> priorities = playerPriority.values()
                 .stream()
-                .map(Assistant::getPriority)
-                .collect(Collectors.toList());
+                .map(Assistant::getPriority).toList();
 
         List<Integer> assistantsToPlay = currentPlayer.getWizard().getAssistants()
                 .stream()
-                .map(Assistant::getPriority)
-                .collect(Collectors.toList());
+                .map(Assistant::getPriority).toList();
 
         if(priorities.contains(priority)) {
             return !priorities.containsAll(assistantsToPlay);

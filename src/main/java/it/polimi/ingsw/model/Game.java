@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.characters.CharacterID;
 import it.polimi.ingsw.model.gameBoard.*;
@@ -8,6 +9,7 @@ import it.polimi.ingsw.model.phases.Phase;
 import it.polimi.ingsw.model.phases.PhaseFactory;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Game {
 
@@ -18,6 +20,7 @@ public class Game {
     private Phase currentPhase;
     private final ArrayList<Player> players;
     private ArrayList<Player> playingOrder;
+    private Map<Player, Assistant> playerPriority; //(a)
     private Player currentPlayer;
     private int firstPlayerIndex;
     private final Bag bag;
@@ -152,6 +155,23 @@ public class Game {
     }
 
     /**
+     * (a)
+     * @return the association of players' to their assistants played
+     */
+    public Map<Player, Assistant> getPlayerPriority() {
+        return playerPriority;
+    }
+
+    /**
+     * Sets the player priority (which associates the player to the assistant played)
+     * to the specified one
+     * @param playerPriority to set
+     */
+    public void setPlayerPriority(Map<Player, Assistant> playerPriority) {
+        this.playerPriority = playerPriority;
+    }
+
+    /**
      * @return the player that went first during the previous phase
      */
     public int getFirstPlayerIndex() {
@@ -244,8 +264,23 @@ public class Game {
      * @param index of the island group to return
      * @return the island group whose index matches the specified one
      */
-    private IslandGroup getIslandGroupByIndex(int index) {
+    public IslandGroup getIslandGroupByIndex(int index) {
         return islandGroups.get(index);
+    }
+
+
+    /**
+     * Return the index of an island group
+     * @param islandGroup for which the index is being searched
+     * @return the index of the inputted island group
+     */
+    public int getIndexOfIslandGroup(IslandGroup islandGroup) {
+        for (int i = 0; i<islandGroups.size(); i++) {
+            if(getIslandGroupByIndex(i).equals(islandGroup)){
+                return i;
+            }
+        }
+        return -1;
     }
 
     /**
@@ -281,6 +316,10 @@ public class Game {
 
         if(islandGroup.getNumberOfBanCardPresent() > 0) {
             islandGroup.removeBanCard();
+            Character character= getCharacterByID(5);
+            if(character != null) {
+                character.addBancCard();
+            }
             return;
         }
 
@@ -290,6 +329,62 @@ public class Game {
 
         for(Player player : players) {
             influence = islandGroup.calculateInfluence(this, player, activatedCharacter);
+
+            if(influence > maxInfluence) {
+                maxInfluence = influence;
+                playerMaxInfluence = player;
+            } else if(influence == maxInfluence) {
+                if(!player.equals(playerOlderConquerorIslandGroup)) {
+                    draw = true;
+                } else {
+                    playerMaxInfluence = player;
+                }
+            }
+        }
+
+        if(!draw && playerMaxInfluence != null && !playerMaxInfluence.equals(playerOlderConquerorIslandGroup)) {
+            if(playerOlderConquerorIslandGroup != null){
+                for(Island island : getIslandGroupByIndex(islandGroupIndex).getIslands()) {
+                    island.removeTower(this);
+                }
+            }
+
+            for(Island island : getIslandGroupByIndex(islandGroupIndex).getIslands()) {
+                island.addTower(this, playerMaxInfluence.getColor());
+            }
+
+            islandGroups.get(islandGroupIndex).setConquerorColor(playerMaxInfluence.getColor());
+
+            int numberOfIslandGroups = islandGroups.size();
+
+            int indexPreviousIslandGroup = (islandGroupIndex - 1) < 0 ? numberOfIslandGroups - 1 : islandGroupIndex - 1;
+            int indexNextIslandGroup = (islandGroupIndex + 1) % numberOfIslandGroups;
+
+            connectIslandGroups(islandGroupIndex, indexPreviousIslandGroup);
+            connectIslandGroups(islandGroupIndex, indexNextIslandGroup);
+        }
+    }
+
+    /**
+     * Overloading of @calculateInfluence(int, Character)
+     * Called if easy mode
+     * @param islandGroupIndex index of the island group to calculate the influence for
+     */
+    public void calculateInfluence(int islandGroupIndex) {
+        int influence;
+        int maxInfluence = -1;
+        boolean draw = false;
+        IslandGroup islandGroup = getIslandGroupByIndex(islandGroupIndex);
+        Player playerMaxInfluence = null;
+        PlayerColor towerColorOnIslandGroup = islandGroup.getConquerorColor();
+        Player playerOlderConquerorIslandGroup = null;
+
+        if(towerColorOnIslandGroup != null) {
+            playerOlderConquerorIslandGroup = getPlayerByColor(towerColorOnIslandGroup);
+        }
+
+        for(Player player : players) {
+            influence = islandGroup.calculateInfluence(player);
 
             if(influence > maxInfluence) {
                 maxInfluence = influence;
@@ -339,6 +434,28 @@ public class Game {
      */
     public void addCloud(Cloud cloud) {
         this.clouds.add(cloud);
+    }
+
+    /**
+     * Removes a cloud card from the clouds list
+     * @param cloud cloud card to be removed
+     */
+    public void removeCloud(Cloud cloud) {
+        this.clouds.remove(cloud);
+    }
+
+    /**
+     * Returns the cloud that matches the ID passed as a parameter
+     * @param idCloud ID of the cloud to return
+     * @return the cloud that matches the inputted ID
+     */
+    public Cloud getCloudByID(int idCloud) {
+        for (Cloud cloud : clouds) {
+            if(cloud.getCloudID() == idCloud) {
+                return cloud;
+            }
+        }
+        return null;
     }
 
     /**
@@ -448,25 +565,42 @@ public class Game {
         return activatedCharacter;
     }
 
+
     /**
      * Sets the active character to the specified one
-     * @param activatedCharacterIndex index of the character to activate in the drawn characters list
+     * @param characterID ID of the character to activate in the drawn characters list
      */
-    public void setActivatedCharacter(int activatedCharacterIndex) {
-        activatedCharacter = drawnCharacters.get(activatedCharacterIndex);
-        playCharacter(activatedCharacter.getCharacterID());
+    public void setActivatedCharacter(int characterID) {
+        activatedCharacter = getCharacterByID(characterID); // TODO: input
     }
 
     /**
      * Activates the character passed as a parameter
      * @param characterID ID of the character to activate
      */
-    private void playCharacter(int characterID) {
+    private void playCharacter(int characterID) throws NoAvailableBanCardsException, OutOfBoundException,
+            NoAvailableColorException, NotEnoughMoneyException, TooManyIterationsException {
+
         // TODO fix this
         // TODO implement without checking, cast and if failure then exception (not action phase)
-        if(gameState.getCode() > 2 && gameState.getCode() < 6) {
+
+        if(gameState.getCode() > 2 && gameState.getCode() < 6 && activatedCharacter != null) {
             ((ActionPhase)currentPhase).playCharacter(activatedCharacter);
         }
+    }
+
+    /**
+     * Return the character chosen by its ID if it was initially extracted
+     * @param characterID ID of the character to return
+     * @return the character corresponding to the id
+     */
+    private Character getCharacterByID(int characterID) {
+        for (Character character : drawnCharacters) {
+            if(character.getCharacterID() == characterID){
+                return character;
+            }
+        }
+        return null;
     }
 
     /**

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.phases;
 
+import it.polimi.ingsw.exceptions.ExceededStepsException;
+import it.polimi.ingsw.exceptions.NoAvailableCloudException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.PlayerColor;
@@ -28,7 +30,13 @@ class LobbyPhaseTest {
 
         assertEquals(GameState.LOBBY_PHASE, game.getGameState());
 
-        phase.play();
+        try {
+            phase.play();
+        } catch (ExceededStepsException e) {
+            e.printStackTrace();
+        } catch (NoAvailableCloudException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("Stefano", game.getPlayers().get(0).getNickname());
         assertEquals("Chiara", game.getPlayers().get(1).getNickname());

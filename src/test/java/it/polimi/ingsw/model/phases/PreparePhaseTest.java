@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.phases;
 
+import it.polimi.ingsw.exceptions.ExceededStepsException;
+import it.polimi.ingsw.exceptions.NoAvailableCloudException;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.gameBoard.Bag;
 import it.polimi.ingsw.model.gameBoard.CreatureColor;
@@ -28,12 +30,24 @@ class PreparePhaseTest {
 
         phaseFactory = new PhaseFactory(game);
         phase = phaseFactory.createPhase(GameState.LOBBY_PHASE);
-        phase.play();
+        try {
+            phase.play();
+        } catch (ExceededStepsException e) {
+            e.printStackTrace();
+        } catch (NoAvailableCloudException e) {
+            e.printStackTrace();
+        }
 
         assertEquals(GameState.PREPARE_PHASE, game.getGameState());
 
         phase = phaseFactory.createPhase(GameState.PREPARE_PHASE);
-        phase.play();
+        try {
+            phase.play();
+        } catch (ExceededStepsException e) {
+            e.printStackTrace();
+        } catch (NoAvailableCloudException e) {
+            e.printStackTrace();
+        }
 
         // Island groups and island numbers check
         assertEquals(12, game.getIslandGroups().size());
