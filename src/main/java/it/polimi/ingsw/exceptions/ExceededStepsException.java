@@ -7,7 +7,7 @@ package it.polimi.ingsw.exceptions;
 public class ExceededStepsException extends Exception{
 
     /**
-     * @return the message (type String) of this ExceededStespsException object.
+     * @return the message (type String) of this ExceededStepsException object.
      */
     @Override
     public String getMessage() {

@@ -78,7 +78,7 @@ class CharacterInfluenceModifierTest {
 
         try {
             ((ActionPhase)game.getCurrentPhase()).playCharacter(character);
-        } catch (NoAvailableBanCardsException | OutOfBoundException | NoAvailableColorException | NotEnoughMoneyException e) {
+        } catch (NoAvailableBanCardsException | OutOfBoundException | NoAvailableColorException | NotEnoughMoneyException | TooManyIterationsException e) {
             e.printStackTrace();
         }
 
@@ -90,7 +90,7 @@ class CharacterInfluenceModifierTest {
 
         try {
             ((ActionPhase)game.getCurrentPhase()).playCharacter(character);
-        } catch (NoAvailableBanCardsException | OutOfBoundException | NoAvailableColorException | NotEnoughMoneyException e) {
+        } catch (NoAvailableBanCardsException | OutOfBoundException | NoAvailableColorException | NotEnoughMoneyException | TooManyIterationsException e) {
             e.printStackTrace();
         }
 

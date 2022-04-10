@@ -83,7 +83,7 @@ class CharacterProfessorUpdaterTest {
         character = cf.createCharacter(2);
         try {
             ((ActionPhase)game.getCurrentPhase()).playCharacter(character);
-        } catch (NoAvailableBanCardsException | OutOfBoundException | NoAvailableColorException | NotEnoughMoneyException e) {
+        } catch (NoAvailableBanCardsException | OutOfBoundException | NoAvailableColorException | NotEnoughMoneyException | TooManyIterationsException e) {
             e.printStackTrace();
         }
 
