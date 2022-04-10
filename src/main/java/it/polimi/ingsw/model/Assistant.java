@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.characters.CharacterStepsAdder;
+import it.polimi.ingsw.model.characters.Character;
 
 public class Assistant implements Comparable<Assistant> {
 
@@ -35,7 +35,7 @@ public class Assistant implements Comparable<Assistant> {
      * @param activatedCharacter character of class CharacterStepsAdder which is active
      * @return the maximum number of steps Mother Nature will be allowed to take
      */
-    public int getMaxSteps(CharacterStepsAdder activatedCharacter) {
+    public int getMaxSteps(Character activatedCharacter) {
         return maxSteps + activatedCharacter.getMoreSteps();
     }
 
