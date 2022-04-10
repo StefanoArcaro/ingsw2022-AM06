@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Island implements StudentDestination{
+public class Island implements StudentDestination {
 
     private static final int ISLAND_ID_MIN = 1;
     private static final int ISLAND_ID_MAX = 12;

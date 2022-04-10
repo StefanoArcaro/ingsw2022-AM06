@@ -88,7 +88,7 @@ class CharacterMoverTest {
         phase = phaseFactory.createPhase(GameState.LOBBY_PHASE);
         try {
             phase.play();
-        } catch (ExceededStepsException | NoAvailableCloudException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

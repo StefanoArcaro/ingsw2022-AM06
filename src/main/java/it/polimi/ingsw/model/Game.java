@@ -52,13 +52,8 @@ public class Game {
 
         // Game begins waiting for players in the Lobby phase
         gameState = GameState.LOBBY_PHASE;
-    }
 
-    /**
-     * Manages the game
-     */
-    public void startGame() {
-        // Phase set before
+        // Initialize the first phase
         currentPhase = phaseFactory.createPhase(gameState);
     }
 
@@ -318,7 +313,7 @@ public class Game {
             islandGroup.removeBanCard();
             Character character= getCharacterByID(5);
             if(character != null) {
-                character.addBancCard();
+                character.addBanCard();
             }
             return;
         }

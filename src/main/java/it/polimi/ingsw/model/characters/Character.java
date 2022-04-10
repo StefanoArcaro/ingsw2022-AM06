@@ -87,7 +87,7 @@ public abstract class Character {
     /**
      * Increases number of ban cards
      */
-    public void addBancCard() {
+    public void addBanCard() {
         numberOfBanCards += 1;
     }
 

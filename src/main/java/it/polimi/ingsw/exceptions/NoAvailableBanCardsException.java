@@ -3,8 +3,7 @@ package it.polimi.ingsw.exceptions;
 /**
  * Class NoAvailableBanCardsException is thrown when more ban cards than the available are trying to be used.
  */
-
-public class NoAvailableBanCardsException extends Exception{
+public class NoAvailableBanCardsException extends Exception {
 
     /**
      * @return the message (type String) of this NoAvailableBanCardsException object.

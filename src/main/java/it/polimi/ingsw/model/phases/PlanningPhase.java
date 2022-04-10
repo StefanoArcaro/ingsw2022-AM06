@@ -5,7 +5,6 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.characters.ConcreteCharacterFactory;
-import it.polimi.ingsw.model.gameBoard.Bag;
 import it.polimi.ingsw.model.gameBoard.Cloud;
 
 import java.util.ArrayList;
@@ -47,12 +46,13 @@ public class PlanningPhase extends Phase {
      */
     @Override
     public void play() {
-        fillClouds();
         playAssistants();
+        fillClouds();
         calculatePlayingOrder();
 
         game.setPlayingOrder(playingOrder);
         game.setFirstPlayerIndex(game.getPlayers().indexOf(playingOrder.get(FIRST_PLAYER_INDEX)));
+        game.setCurrentPlayer(playingOrder.get(FIRST_PLAYER_INDEX));
         game.setPlayerPriority(playerPriority);
         game.setGameState(GameState.MOVE_STUDENT_PHASE);
     }

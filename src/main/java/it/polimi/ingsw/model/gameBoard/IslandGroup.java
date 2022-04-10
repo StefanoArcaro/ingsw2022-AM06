@@ -200,7 +200,7 @@ public class IslandGroup {
 
         Player currentPlayer = game.getCurrentPlayer();
 
-        if(currentPlayer.equals(player) && activatedCharacter!=null) {
+        if(currentPlayer.equals(player) && activatedCharacter != null) {
             extraPoints = activatedCharacter.getExtraPoints();
         }
 

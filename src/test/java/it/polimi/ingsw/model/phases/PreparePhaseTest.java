@@ -1,9 +1,6 @@
 package it.polimi.ingsw.model.phases;
 
-import it.polimi.ingsw.exceptions.ExceededStepsException;
-import it.polimi.ingsw.exceptions.NoAvailableCloudException;
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.model.gameBoard.Bag;
 import it.polimi.ingsw.model.gameBoard.CreatureColor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,9 +29,7 @@ class PreparePhaseTest {
         phase = phaseFactory.createPhase(GameState.LOBBY_PHASE);
         try {
             phase.play();
-        } catch (ExceededStepsException e) {
-            e.printStackTrace();
-        } catch (NoAvailableCloudException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -43,9 +38,7 @@ class PreparePhaseTest {
         phase = phaseFactory.createPhase(GameState.PREPARE_PHASE);
         try {
             phase.play();
-        } catch (ExceededStepsException e) {
-            e.printStackTrace();
-        } catch (NoAvailableCloudException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

@@ -1,7 +1,5 @@
 package it.polimi.ingsw.model.phases;
 
-import it.polimi.ingsw.exceptions.ExceededStepsException;
-import it.polimi.ingsw.exceptions.NoAvailableCloudException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.GameMode;
 import it.polimi.ingsw.model.GameState;
@@ -34,9 +32,7 @@ class PlanningPhaseTest {
         phase = phaseFactory.createPhase(GameState.LOBBY_PHASE);
         try {
             phase.play();
-        } catch (ExceededStepsException e) {
-            e.printStackTrace();
-        } catch (NoAvailableCloudException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -45,9 +41,7 @@ class PlanningPhaseTest {
         phase = phaseFactory.createPhase(GameState.PREPARE_PHASE);
         try {
             phase.play();
-        } catch (ExceededStepsException e) {
-            e.printStackTrace();
-        } catch (NoAvailableCloudException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -56,9 +50,7 @@ class PlanningPhaseTest {
         phase = phaseFactory.createPhase(GameState.PLANNING_PHASE);
         try {
             phase.play();
-        } catch (ExceededStepsException e) {
-            e.printStackTrace();
-        } catch (NoAvailableCloudException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

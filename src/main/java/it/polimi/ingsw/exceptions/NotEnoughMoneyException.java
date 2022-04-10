@@ -3,8 +3,7 @@ package it.polimi.ingsw.exceptions;
 /**
  * Class NotEnoughMoneyException is thrown when a player tries to spend more money than he has.
  */
-
-public class NotEnoughMoneyException extends Exception{
+public class NotEnoughMoneyException extends Exception {
 
     /**
      * @return the message (type String) of this NotEnoughMoneyException object.

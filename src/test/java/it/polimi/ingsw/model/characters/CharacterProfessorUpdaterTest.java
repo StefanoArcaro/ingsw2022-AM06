@@ -50,21 +50,21 @@ class CharacterProfessorUpdaterTest {
         phase = phaseFactory.createPhase(GameState.LOBBY_PHASE);
         try {
             phase.play();
-        } catch (ExceededStepsException | NoAvailableCloudException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         phase = phaseFactory.createPhase(GameState.PREPARE_PHASE);
         try {
             phase.play();
-        } catch (ExceededStepsException | NoAvailableCloudException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         phase = phaseFactory.createPhase(GameState.PLANNING_PHASE);
         try {
             phase.play();
-        } catch (ExceededStepsException | NoAvailableCloudException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

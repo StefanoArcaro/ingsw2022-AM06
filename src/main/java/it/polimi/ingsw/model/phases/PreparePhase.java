@@ -227,6 +227,7 @@ public class PreparePhase extends Phase {
         Random random = new Random();
         int firstPlayerIndex = random.nextInt(game.getNumberOfPlayers().getNum());
         game.setFirstPlayerIndex(firstPlayerIndex);
+        game.setCurrentPlayer(game.getPlayers().get(firstPlayerIndex));
     }
 
     /**

@@ -12,9 +12,9 @@ public class CharacterMover extends Character {
     private static final int ISLAND_ID_MIN = 1;
     private static final int ISLAND_ID_MAX = 12;
 
+    int islandID;
     CreatureColor fromColor;
     CreatureColor toColor;
-    int islandID;
     CreatureColor colorToRemove;
 
     /**

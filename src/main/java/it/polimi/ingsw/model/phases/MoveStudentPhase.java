@@ -4,8 +4,14 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.StudentDestination;
 import it.polimi.ingsw.model.gameBoard.CreatureColor;
+import it.polimi.ingsw.model.gameBoard.Student;
+
+import java.util.stream.Collectors;
 
 public class MoveStudentPhase extends ActionPhase {
+
+    private static final int HALL_DESTINATION = 0;
+    private static final int MOVES_ENDED = 0;
 
     private CreatureColor creatureColor;
     private StudentDestination studentDestination;
@@ -18,6 +24,8 @@ public class MoveStudentPhase extends ActionPhase {
     public MoveStudentPhase(Game game, Player currentPlayer) {
         this.game = game;
         this.currentPlayer = currentPlayer;
+        creatureColor = null;
+        studentDestination = null;
     }
 
     /**
@@ -29,9 +37,29 @@ public class MoveStudentPhase extends ActionPhase {
      */
     @Override
     public void play() {
+        //int validMoves = game.getNumberOfPlayers().getNum() + 1;
+        int validMoves = game.getNumberOfPlayers().getNum() + 1;
 
+        do {
+            // TODO Wait for input
+
+            if(checkColorInEntrance(creatureColor)) {
+                if(studentDestination.receiveStudent(creatureColor)) {
+                    currentPlayer.getBoard().removeStudentFromEntrance(creatureColor);
+                    validMoves -= 1;
+                } else {
+                    // TODO Send error message : table is full
+                }
+            } else {
+                // TODO send error message : color not in entrance
+            }
+            System.out.println(validMoves);
+        } while(validMoves > MOVES_ENDED);
     }
 
+    /**
+     * @return the color of the student to move
+     */
     public CreatureColor getCreatureColor() {
         return creatureColor;
     }
@@ -44,15 +72,34 @@ public class MoveStudentPhase extends ActionPhase {
         this.creatureColor = creatureColor;
     }
 
+    /**
+     * @return the destination of the student
+     */
     public StudentDestination getStudentDestination() {
         return studentDestination;
     }
 
     /**
-     * Sets the destination for a selected student to the specified one
+     * Sets the destination for a selected student to the specified one.
+     * Parameter: 0 = hall, 1-12 = islands
      * @param studentDestination to set
      */
-    public void setStudentDestination(StudentDestination studentDestination) {
-        this.studentDestination = studentDestination;
+    public void setStudentDestination(int studentDestination) {
+        if(studentDestination == HALL_DESTINATION) {
+            this.studentDestination = currentPlayer.getBoard().getHall();
+        } else {
+            this.studentDestination = game.getIslandByID(studentDestination);
+        }
+    }
+
+    /**
+     * Checks whether the current players' entrance has a student of the specified color
+     * @param color of the student to check
+     * @return whether the student was found
+     */
+    private boolean checkColorInEntrance(CreatureColor color) {
+        return currentPlayer.getBoard().getEntrance().getStudents().stream()
+                .map(Student::getColor)
+                .collect(Collectors.toList()).contains(color);
     }
 }

@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.phases;
 
-import it.polimi.ingsw.exceptions.ExceededStepsException;
 import it.polimi.ingsw.exceptions.NoAvailableCloudException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.GameMode;
@@ -37,7 +36,7 @@ class PickCloudPhaseTest {
         phase = phaseFactory.createPhase(GameState.LOBBY_PHASE);
         try {
             phase.play();
-        } catch (ExceededStepsException | NoAvailableCloudException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -47,7 +46,7 @@ class PickCloudPhaseTest {
         phase = phaseFactory.createPhase(GameState.PREPARE_PHASE);
         try {
             phase.play();
-        } catch (ExceededStepsException | NoAvailableCloudException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -59,7 +58,7 @@ class PickCloudPhaseTest {
         List<CreatureColor> colorCloud = game.getCloudByID(1).getStudents().stream().map(Creature::getColor).toList();
         try {
             phase.play();
-        } catch (ExceededStepsException | NoAvailableCloudException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
