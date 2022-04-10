@@ -111,7 +111,6 @@ class CharacterMoverTest {
         assertEquals(4, character.getStudents().size());
     }
 
-
     @Test
     void effect1_KO() {
         character = cf.createCharacter(1);
@@ -128,11 +127,8 @@ class CharacterMoverTest {
         island.receiveStudent(CreatureColor.PINK);
 
         ((CharacterMover) character).setFromColor(CreatureColor.YELLOW);
-        try {
-            character.effect();
-        } catch (NoAvailableBanCardsException | OutOfBoundException | NoAvailableColorException e) {
-            e.printStackTrace();
-        }
+
+        assertThrows(NoAvailableColorException.class, ()->character.effect());
 
         assertEquals(CreatureColor.RED, character.getStudents().get(0).getColor());
         assertEquals(CreatureColor.RED, character.getStudents().get(1).getColor());
@@ -161,7 +157,6 @@ class CharacterMoverTest {
         character.students.add(new Student(CreatureColor.BLUE));
         character.students.add(new Student(CreatureColor.GREEN));
         character.students.add(new Student(CreatureColor.BLUE));
-
 
         player.getBoard().addStudentToEntrance(CreatureColor.BLUE);
         player.getBoard().addStudentToEntrance(CreatureColor.PINK);
@@ -214,11 +209,7 @@ class CharacterMoverTest {
 
         ArrayList<CreatureColor> expectedEntrance = new ArrayList<>(Arrays.asList(CreatureColor.BLUE, CreatureColor.PINK));
 
-        try {
-            character.effect();
-        } catch (NoAvailableBanCardsException | OutOfBoundException | NoAvailableColorException e) {
-            e.printStackTrace();
-        }
+        assertThrows(NoAvailableColorException.class, ()-> character.effect());
 
         assertEquals(6, character.getStudents().size());
         assertEquals(expectedStudents, character.getStudents().stream().map(Creature::getColor).collect(Collectors.toList()));
@@ -281,11 +272,7 @@ class CharacterMoverTest {
 
         ArrayList<CreatureColor> expectedEntrance = new ArrayList<>(Arrays.asList(CreatureColor.BLUE, CreatureColor.PINK));
 
-        try {
-            character.effect();
-        } catch (NoAvailableBanCardsException | OutOfBoundException | NoAvailableColorException e) {
-            e.printStackTrace();
-        }
+        assertThrows(NoAvailableColorException.class, ()->character.effect());
 
         assertEquals(expectedEntrance, player.getBoard().getEntrance().getStudents().stream().map(Creature::getColor).collect(Collectors.toList()));
 
@@ -350,11 +337,7 @@ class CharacterMoverTest {
 
         ArrayList<Integer> expectedHall = new ArrayList<>(Arrays.asList(0,1,0,1,0));
 
-        try {
-            character.effect();
-        } catch (NoAvailableBanCardsException | OutOfBoundException | NoAvailableColorException e) {
-            e.printStackTrace();
-        }
+        assertThrows(NoAvailableColorException.class, ()->character.effect());
 
         assertEquals(expectedHall, player.getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
         assertEquals(4, character.getStudents().size());
@@ -421,6 +404,7 @@ class CharacterMoverTest {
         ArrayList<Integer> expectedHall2 = new ArrayList<>(Arrays.asList(2, 0, 0, 0, 0));
 
         ((CharacterMover)character).setColorToRemove(CreatureColor.RED);
+
         try {
             character.effect();
         } catch (NoAvailableBanCardsException | OutOfBoundException | NoAvailableColorException e) {
