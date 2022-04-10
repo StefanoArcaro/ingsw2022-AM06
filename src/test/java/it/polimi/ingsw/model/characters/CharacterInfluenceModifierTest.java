@@ -88,11 +88,7 @@ class CharacterInfluenceModifierTest {
 
         ((CharacterInfluenceModifier)character).setIslandGroupIndex(2);
 
-        try {
-            ((ActionPhase)game.getCurrentPhase()).playCharacter(character);
-        } catch (NoAvailableBanCardsException | OutOfBoundException | NoAvailableColorException | NotEnoughMoneyException | TooManyIterationsException e) {
-            e.printStackTrace();
-        }
+        assertThrows(TooManyIterationsException.class, ()->((ActionPhase)game.getCurrentPhase()).playCharacter(character));
 
         assertEquals(3, p1.getCoins());
         assertEquals(3, character.getNumberOfBanCards());
