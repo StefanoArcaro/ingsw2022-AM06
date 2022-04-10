@@ -12,15 +12,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LobbyPhaseTest {
 
-    Game game;
-    PhaseFactory phaseFactory;
-    Phase phase;
-    String nickname;
+    private Game game;
+    private Phase phase;
+    private String nickname;
 
     @BeforeEach
     void setUp() {
         game = new Game();
-        phaseFactory = new PhaseFactory(game);
         nickname = "";
     }
 
@@ -28,7 +26,7 @@ class LobbyPhaseTest {
     void play_2P() {
         game.setNumberOfPlayers(2);
 
-        phase = phaseFactory.createPhase(GameState.LOBBY_PHASE);
+        phase = game.getCurrentPhase();
 
         assertEquals(GameState.LOBBY_PHASE, game.getGameState());
 
@@ -100,7 +98,7 @@ class LobbyPhaseTest {
     void play_3P() {
         game.setNumberOfPlayers(3);
 
-        phase = phaseFactory.createPhase(GameState.LOBBY_PHASE);
+        phase = game.getCurrentPhase();
 
         assertEquals(GameState.LOBBY_PHASE, game.getGameState());
 

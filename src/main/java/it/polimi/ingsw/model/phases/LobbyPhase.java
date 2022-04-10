@@ -50,7 +50,7 @@ public class LobbyPhase extends Phase {
      * @throws NicknameTakenException if the nickname has already been chosen
      */
     private void addPlayer(String nickname) throws NicknameTakenException, MaxPlayersReachedException {
-        if(!isNicknameTaken(nickname)) {
+        if(!checkNicknameTaken(nickname)) {
             int num = game.getPlayers().size();
 
             switch (num) {
@@ -76,7 +76,7 @@ public class LobbyPhase extends Phase {
      * @param nickname to check
      * @return whether the nickname has been chosen already
      */
-    private boolean isNicknameTaken(String nickname) {
+    private boolean checkNicknameTaken(String nickname) {
         return getPlayerByNickname(nickname) != null;
     }
 

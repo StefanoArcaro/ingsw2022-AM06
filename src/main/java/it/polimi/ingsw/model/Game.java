@@ -16,7 +16,6 @@ public class Game {
     private NumberOfPlayers numberOfPlayers;
     private GameMode gameMode;
     private GameState gameState;
-    private final PhaseFactory phaseFactory;
     private Phase currentPhase;
     private final ArrayList<Player> players;
     private ArrayList<Player> playingOrder;
@@ -36,7 +35,7 @@ public class Game {
      * Default constructor
      */
     public Game() {
-        phaseFactory = new PhaseFactory(this);
+        PhaseFactory phaseFactory = new PhaseFactory(this); // TODO check if needed
         players = new ArrayList<>();
         playingOrder = new ArrayList<>();
         bag = new Bag();
@@ -194,6 +193,13 @@ public class Game {
      */
     public void setCurrentPlayer (Player player) {
         this.currentPlayer = player;
+    }
+
+    /**
+     * @return the player that comes after the current player
+     */
+    public Player getNextPlayer() {
+        return players.get((players.indexOf(currentPlayer) + 1) % numberOfPlayers.getNum());
     }
 
     /**

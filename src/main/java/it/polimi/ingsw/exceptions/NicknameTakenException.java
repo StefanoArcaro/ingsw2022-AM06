@@ -10,6 +10,6 @@ public class NicknameTakenException extends Exception {
      */
     @Override
     public String getMessage() {
-        return ("Error: this nickname has already been chosen");
+        return ("Error: this nickname has already been chosen.");
     }
 }

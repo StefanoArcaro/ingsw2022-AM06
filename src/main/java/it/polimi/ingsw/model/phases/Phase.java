@@ -1,9 +1,6 @@
 package it.polimi.ingsw.model.phases;
 
-import it.polimi.ingsw.exceptions.ExceededStepsException;
-import it.polimi.ingsw.exceptions.MaxPlayersReachedException;
-import it.polimi.ingsw.exceptions.NicknameTakenException;
-import it.polimi.ingsw.exceptions.NoAvailableCloudException;
+import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.characters.Character;
 
@@ -13,11 +10,12 @@ public abstract class Phase {
     protected PhaseFactory phaseFactory;
     protected Character activatedCharacter;
     protected String playerNickname;
+    protected int wizardID;
 
     /**
      * Method to be implemented by the different phases of the game
      */
-    public abstract void play() throws ExceededStepsException, NoAvailableCloudException, NicknameTakenException, MaxPlayersReachedException;
+    public abstract void play() throws ExceededStepsException, NoAvailableCloudException, NicknameTakenException, MaxPlayersReachedException, WizardTakenException, InvalidWizardException;
 
     /**
      * @return the activated character
@@ -32,5 +30,13 @@ public abstract class Phase {
      */
     public void setPlayerNickname(String playerNickname) {
         this.playerNickname = playerNickname;
+    }
+
+    /**
+     * Sets the ID of the wizard to assign to the player that chose it
+     * @param wizardID to set
+     */
+    public void setWizardID(int wizardID) {
+        this.wizardID = wizardID;
     }
 }
