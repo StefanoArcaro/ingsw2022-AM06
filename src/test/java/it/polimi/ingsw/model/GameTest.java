@@ -66,7 +66,7 @@ class GameTest {
         islandGroup2.getIslands().get(0).addTower(game, player1.getColor());
         islandGroup2.setConquerorColor(player1.getColor());
 
-        game.connectIslandGroups(1, 2);
+        game.connectIslandGroups(game.getIslandGroupByIndex(1), game.getIslandGroupByIndex(2));
 
         islandGroup3.getIslands().get(0).receiveStudent(CreatureColor.YELLOW);
         islandGroup3.getIslands().get(0).receiveStudent(CreatureColor.YELLOW);

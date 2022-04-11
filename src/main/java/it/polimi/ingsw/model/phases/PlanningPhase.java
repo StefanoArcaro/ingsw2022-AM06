@@ -1,11 +1,12 @@
 package it.polimi.ingsw.model.phases;
 
+import it.polimi.ingsw.exceptions.AssistantTakenException;
+import it.polimi.ingsw.exceptions.InvalidPriorityException;
 import it.polimi.ingsw.model.Assistant;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.characters.ConcreteCharacterFactory;
-import it.polimi.ingsw.model.gameBoard.Bag;
 import it.polimi.ingsw.model.gameBoard.Cloud;
 
 import java.util.ArrayList;
@@ -16,6 +17,9 @@ import java.util.stream.Collectors;
 
 public class PlanningPhase extends Phase {
 
+    private static final int MIN_PRIORITY = 1;
+    private static final int MAX_PRIORITY = 10;
+
     private static final int NULL_CHARACTER_ID = 0;
     private static final int FIRST_PLAYER_INDEX = 0;
 
@@ -23,6 +27,7 @@ public class PlanningPhase extends Phase {
     private Player currentPlayer;
     private ArrayList<Player> playingOrder;
     private final Map<Player, Assistant> playerPriority;
+    int turns;
 
     /**
      * Default constructor
@@ -32,10 +37,12 @@ public class PlanningPhase extends Phase {
      */
     public PlanningPhase(Game game, ArrayList<Player> players, int firstPlayerIndex) {
         this.game = game;
+        this.phaseFactory = new PhaseFactory(game);
         this.activatedCharacter = new ConcreteCharacterFactory(game).createCharacter(NULL_CHARACTER_ID);
         this.firstPlayerIndex = firstPlayerIndex;
         this.playingOrder = new ArrayList<>(players);
         this.playerPriority = new HashMap<>();
+        turns = 0;
     }
 
     /**
@@ -46,47 +53,57 @@ public class PlanningPhase extends Phase {
      * playing order.
      */
     @Override
-    public void play() {
-        fillClouds();
-        playAssistants();
-        calculatePlayingOrder();
+    public void play() throws AssistantTakenException, InvalidPriorityException {
+        playAssistant();
 
-        game.setPlayingOrder(playingOrder);
-        game.setFirstPlayerIndex(game.getPlayers().indexOf(playingOrder.get(FIRST_PLAYER_INDEX)));
-        game.setPlayerPriority(playerPriority);
-        game.setGameState(GameState.MOVE_STUDENT_PHASE);
-    }
+        if(turns == game.getNumberOfPlayers().getNum()) {
+            fillClouds();
+            calculatePlayingOrder();
 
-    /**
-     * Fills the cloud cards
-     */
-    private void fillClouds() {
-        for(Cloud cloud : game.getClouds()) {
-            cloud.fill(game.getBag(), playingOrder.size());
+            game.setPlayingOrder(playingOrder);
+            game.setFirstPlayerIndex(game.getPlayers().indexOf(playingOrder.get(FIRST_PLAYER_INDEX)));
+            game.setCurrentPlayer(playingOrder.get(FIRST_PLAYER_INDEX));
+            game.setPlayerPriority(playerPriority);
+            game.setGameState(GameState.MOVE_STUDENT_PHASE);
+            game.setCurrentPhase(phaseFactory.createPhase(game.getGameState()));
         }
     }
 
     /**
      * Each player chooses an assistant card to play
      */
-    private void playAssistants() {
-        int priority;
+    private void playAssistant() throws AssistantTakenException, InvalidPriorityException {
         Assistant assistant;
+        currentPlayer = game.getCurrentPlayer();
 
-        // Used for testing purposes
-        int[] tempPriorities = {2, 1, 3};
-
-        for(int i = 0; i < playingOrder.size(); i++) {
-            currentPlayer = playingOrder.get((i + firstPlayerIndex) % game.getNumberOfPlayers().getNum());
-
-            do {
-                priority = tempPriorities[i]; // TODO receive input
-            } while (checkAssistantPlayed(priority));
-
-            assistant = currentPlayer.getWizard().playAssistant(priority);
-            currentPlayer.getWizard().removeAssistant(priority);
-            playerPriority.put(currentPlayer, assistant);
+        if(checkValidPriority(priority)) {
+            if(!checkAssistantPlayed(priority)) {
+                turns += 1;
+                assistant = currentPlayer.getWizard().playAssistant(priority);
+                currentPlayer.getWizard().removeAssistant(priority);
+                playerPriority.put(currentPlayer, assistant);
+                game.setCurrentPlayer(game.getNextPlayer());
+            } else {
+                throw new AssistantTakenException();
+            }
+        } else {
+            throw new InvalidPriorityException();
         }
+    }
+
+    /**
+     * Checks if the selected priority is inside the external bounds and if
+     * the assistant corresponding to such priority has not been played yet
+     * @param priority to check
+     * @return whether the priority passed is valid and whether hte corresponding
+     * assistant has not yet been played
+     */
+    private boolean checkValidPriority(int priority) {
+        if(priority >= MIN_PRIORITY && priority <= MAX_PRIORITY) {
+            return currentPlayer.getWizard().getAssistants().stream()
+                    .map(Assistant::getPriority).toList().contains(priority);
+        }
+        return false;
     }
 
     /**
@@ -107,6 +124,17 @@ public class PlanningPhase extends Phase {
             return !priorities.containsAll(assistantsToPlay);
         }
         return false;
+    }
+
+    /**
+     * Fills the cloud cards
+     */
+    private void fillClouds() {
+        for(Cloud cloud : game.getClouds()) {
+            if(!cloud.fill(game.getBag(), playingOrder.size())) {
+                game.setSkipPickCloudPhase(true);
+            }
+        }
     }
 
     /**

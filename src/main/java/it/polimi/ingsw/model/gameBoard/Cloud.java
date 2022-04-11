@@ -33,11 +33,21 @@ public class Cloud {
      * Fills the cloud card with the correct number of students
      * based on the chosen number of players for the game
      * @param bag that contains all the students that have yet to be drawn
+     * @return whether all the clouds were filled or not
      */
-    public void fill(Bag bag, int numberOfStudents) {
+    public boolean fill(Bag bag, int numberOfStudents) {
+        Student student;
+
         for(int i = 0; i < numberOfStudents + 1; i++) {
-            students.add(bag.drawStudent());
+            student = bag.drawStudent();
+
+            if(student != null) {
+                students.add(student);
+            } else {
+                return false;
+            }
         }
+        return true;
     }
 
     /**

@@ -1,11 +1,11 @@
 package it.polimi.ingsw.model.phases;
 
+import it.polimi.ingsw.exceptions.MaxPlayersReachedException;
+import it.polimi.ingsw.exceptions.NicknameTakenException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.PlayerColor;
-
-import java.util.ArrayList;
 
 public class LobbyPhase extends Phase {
 
@@ -13,10 +13,9 @@ public class LobbyPhase extends Phase {
     private static final int ONE_PLAYER = 1;
     private static final int TWO_PLAYERS = 2;
 
-    private PlayerColor playerColor;
+    private static final int FIRST_PLAYER_INDEX = 0;
 
-    // Used for testing purposes
-    ArrayList<String> names;
+    private PlayerColor playerColor;
 
     /**
      * Default constructor
@@ -24,59 +23,51 @@ public class LobbyPhase extends Phase {
      */
     public LobbyPhase(Game game) {
         this.game = game;
-
-        // Testing
-        this.names = new ArrayList<>();
-        names.add("Stefano");
-        names.add("Stefano");
-        names.add("Chiara");
-        names.add("Stefano");
-        names.add("Nick");
-        names.add("Chiara");
-        names.add("Nick");
+        this.phaseFactory = new PhaseFactory(game);
     }
 
     /**
      * Lobby phase of the game.
      * Handles the entry of new players to the game up to
      * the chosen number of players.
+     * @throws NicknameTakenException when a nickname has already been chosen
      */
     @Override
-    public void play() {
-        int i = 0;
+    public void play() throws NicknameTakenException, MaxPlayersReachedException {
+        addPlayer(playerNickname);
 
-        while(game.getPlayers().size() < game.getNumberOfPlayers().getNum()) {
-            // TODO input : nickname to be received
-            String nickname = names.get(i);
-            i++;
-
-            addPlayer(nickname);
+        if(game.getPlayers().size() == game.getNumberOfPlayers().getNum()) {
+            game.setGameState(GameState.PREPARE_PHASE);
+            game.setCurrentPhase(phaseFactory.createPhase(game.getGameState()));
+            game.setCurrentPlayer(game.getPlayers().get(FIRST_PLAYER_INDEX));
         }
-
-        game.setGameState(GameState.PREPARE_PHASE);
     }
 
     /**
      * Adds a player to the game if the chosen number of
-     * players has yet to be reached
+     * players has yet to be reached.
+     * @param nickname of the player to add
+     * @throws NicknameTakenException if the nickname has already been chosen
      */
-    private void addPlayer(String nickname) {
+    private void addPlayer(String nickname) throws NicknameTakenException, MaxPlayersReachedException {
         if(!isNicknameTaken(nickname)) {
             int num = game.getPlayers().size();
 
-            switch(num) {
-                case NO_PLAYERS:
-                    playerColor = PlayerColor.BLACK;
-                    break;
-                case ONE_PLAYER:
-                    playerColor = PlayerColor.WHITE;
-                    break;
-                case TWO_PLAYERS:
-                    playerColor = PlayerColor.GRAY;
+            switch (num) {
+                case NO_PLAYERS -> playerColor = PlayerColor.BLACK;
+                case ONE_PLAYER -> playerColor = PlayerColor.WHITE;
+                case TWO_PLAYERS -> playerColor = PlayerColor.GRAY;
             }
 
             Player player = new Player(game, nickname, playerColor);
-            game.addPlayer(player);
+
+            if(game.getPlayers().size() < game.getNumberOfPlayers().getNum()) {
+                game.addPlayer(player);
+            } else {
+                throw new MaxPlayersReachedException();
+            }
+        } else {
+            throw new NicknameTakenException();
         }
     }
 

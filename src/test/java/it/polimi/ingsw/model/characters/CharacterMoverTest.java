@@ -4,63 +4,97 @@ import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.gameBoard.*;
 import it.polimi.ingsw.model.phases.Phase;
-import it.polimi.ingsw.model.phases.PhaseFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CharacterMoverTest {
 
-    Game game;
-    PhaseFactory phaseFactory;
-    Phase phase;
-    ConcreteCharacterFactory cf;
-    Character character;
-    Bag bag;
+    private Game game;
+    private Phase phase;
+    private Bag bag;
+    private ArrayList<String> nicknames;
+    private ArrayList<Integer> wizardIDs;
+    private ArrayList<Integer> priority;
+    private Character character;
+    private ConcreteCharacterFactory cf;
 
     @BeforeEach
     void setUp() {
         game = new Game();
-
-        cf = new ConcreteCharacterFactory(game);
         bag = game.getBag();
+        cf = new ConcreteCharacterFactory(game);
+        nicknames = new ArrayList<>();
+        wizardIDs = new ArrayList<>();
+        priority = new ArrayList<>();
 
-        for(int i=1; i<=12; i++) {
-            Island island = new Island(i);
-            IslandGroup islandGroup = new IslandGroup();
-            islandGroup.addIsland(island);
-            game.addIslandGroup(islandGroup);
+        nicknames.add("Stefano");
+        nicknames.add("Chiara");
+
+        wizardIDs.add(3); // SENSEI
+        wizardIDs.add(2); // WITCH
+
+        priority.add(2);
+        priority.add(1);
+
+        game.setNumberOfPlayers(2);
+        game.setGameMode(GameMode.EXPERT);
+
+        // Lobby phase
+        phase = game.getCurrentPhase();
+
+        for(String nickname : nicknames) {
+            try {
+                phase.setPlayerNickname(nickname);
+                phase.play();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        // Prepare phase
+        phase = game.getCurrentPhase();
+
+        for(int i = 0; i < game.getNumberOfPlayers().getNum(); i++) {
+            try {
+                phase.setWizardID(wizardIDs.get(i));
+                phase.play();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        // Planning phase
+        phase = game.getCurrentPhase();
+
+        for(int i = 0; i < game.getNumberOfPlayers().getNum(); i++) {
+            try {
+                phase.setPriority(priority.get(i));
+                phase.play();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
     @AfterEach
     void tearDown() {
+        game = null;
+        nicknames = null;
+        wizardIDs = null;
+        priority = null;
         cf = null;
-        character = null;
-        bag = null;
     }
 
     @Test
     void initialPreparation() {
-        bag.receiveStudent(CreatureColor.GREEN);
-        bag.receiveStudent(CreatureColor.RED);
-        bag.receiveStudent(CreatureColor.PINK);
-        bag.receiveStudent(CreatureColor.BLUE);
-        bag.receiveStudent(CreatureColor.YELLOW);
-        bag.receiveStudent(CreatureColor.RED);
-        bag.receiveStudent(CreatureColor.GREEN);
-        bag.receiveStudent(CreatureColor.RED);
-        bag.receiveStudent(CreatureColor.PINK);
-        bag.receiveStudent(CreatureColor.BLUE);
-        bag.receiveStudent(CreatureColor.YELLOW);
-        bag.receiveStudent(CreatureColor.RED);
-
         character = cf.createCharacter(1);
         character.initialPreparation();
         assertEquals(4, character.getStudents().size());
@@ -68,7 +102,6 @@ class CharacterMoverTest {
         character.initialPreparation();
         assertEquals(6, character.getStudents().size());
     }
-
 
     @Test
     void effect1_OK() {
@@ -81,17 +114,6 @@ class CharacterMoverTest {
         character.students.add(new Student(CreatureColor.GREEN));
         character.students.add(new Student(CreatureColor.BLUE));
 
-        game.setNumberOfPlayers(3);
-
-        phaseFactory = new PhaseFactory(game);
-
-        phase = phaseFactory.createPhase(GameState.LOBBY_PHASE);
-        try {
-            phase.play();
-        } catch (ExceededStepsException | NoAvailableCloudException e) {
-            e.printStackTrace();
-        }
-
         game.getIslandByID(1).receiveStudent(CreatureColor.GREEN);
         game.getIslandByID(1).receiveStudent(CreatureColor.PINK);
 
@@ -99,14 +121,14 @@ class CharacterMoverTest {
         ((CharacterMover) character).setIslandID(1);
         try {
             character.effect();
-        } catch (NoAvailableBanCardsException | OutOfBoundException | NoAvailableColorException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         assertEquals(4, character.getStudents().size());
 
-        assertEquals(CreatureColor.GREEN, game.getIslandByID(1).getStudents().get(0).getColor());
-        assertEquals(CreatureColor.PINK, game.getIslandByID(1).getStudents().get(1).getColor());
-        assertEquals(CreatureColor.RED, game.getIslandByID(1).getStudents().get(2).getColor());
+        List<CreatureColor> expectedColor = new ArrayList<>(Arrays.asList(CreatureColor.GREEN, CreatureColor.PINK, CreatureColor.RED));
+
+        assertTrue(game.getIslandByID(1).getStudents().stream().map(Creature::getColor).toList().containsAll(expectedColor));
 
         assertEquals(4, character.getStudents().size());
     }
@@ -136,8 +158,9 @@ class CharacterMoverTest {
         assertEquals(CreatureColor.BLUE, character.getStudents().get(3).getColor());
         assertEquals(4, character.getStudents().size());
 
-        assertEquals(CreatureColor.GREEN, island.getStudents().get(0).getColor());
-        assertEquals(CreatureColor.PINK, island.getStudents().get(1).getColor());
+        List<CreatureColor> expectedColor = new ArrayList<>(Arrays.asList(CreatureColor.GREEN, CreatureColor.PINK));
+
+        assertTrue(island.getStudents().stream().map(Creature::getColor).toList().containsAll(expectedColor));
         assertEquals(2, island.getStudents().size());
     }
 
@@ -146,11 +169,6 @@ class CharacterMoverTest {
     void effect7_OK() {
         character = cf.createCharacter(7);
 
-        Player player = new Player(game, "Chiara", PlayerColor.WHITE);
-        game.addPlayer(player);
-        player.getBoard().setTowers(5);
-        game.setCurrentPlayer(player);
-
         character.students.add(new Student(CreatureColor.RED));
         character.students.add(new Student(CreatureColor.RED));
         character.students.add(new Student(CreatureColor.GREEN));
@@ -158,8 +176,8 @@ class CharacterMoverTest {
         character.students.add(new Student(CreatureColor.GREEN));
         character.students.add(new Student(CreatureColor.BLUE));
 
-        player.getBoard().addStudentToEntrance(CreatureColor.BLUE);
-        player.getBoard().addStudentToEntrance(CreatureColor.PINK);
+        game.getCurrentPlayer().getBoard().addStudentToEntrance(CreatureColor.BLUE);
+        game.getCurrentPlayer().getBoard().addStudentToEntrance(CreatureColor.PINK);
 
         ((CharacterMover) character).setFromColor(CreatureColor.RED);
         ((CharacterMover) character).setToColor(CreatureColor.BLUE);
@@ -167,70 +185,26 @@ class CharacterMoverTest {
         ArrayList<CreatureColor> expectedStudents = new ArrayList<>(Arrays.asList(CreatureColor.RED,
                 CreatureColor.GREEN,CreatureColor.BLUE, CreatureColor.GREEN, CreatureColor.BLUE, CreatureColor.BLUE));
 
-        ArrayList<CreatureColor> expectedEntrance = new ArrayList<>(Arrays.asList(CreatureColor.PINK, CreatureColor.RED));
-
         try {
             character.effect();
-        } catch (NoAvailableBanCardsException | OutOfBoundException | NoAvailableColorException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         assertEquals(6, character.getStudents().size());
         assertEquals(expectedStudents, character.students.stream().map(Creature::getColor).collect(Collectors.toList()));
-        assertEquals(2, player.getBoard().getEntrance().getStudents().size());
-        assertEquals(expectedEntrance, player.getBoard().getEntrance().getStudents().stream().map(Creature::getColor).collect(Collectors.toList()));
-    }
-
-
-    @Test
-    void effect7_KO() {
-        character = cf.createCharacter(7);
-
-        Player player = new Player(game, "Chiara", PlayerColor.WHITE);
-        game.addPlayer(player);
-        player.getBoard().setTowers(5);
-        game.setCurrentPlayer(player);
-
-        character.students.add(new Student(CreatureColor.RED));
-        character.students.add(new Student(CreatureColor.RED));
-        character.students.add(new Student(CreatureColor.GREEN));
-        character.students.add(new Student(CreatureColor.BLUE));
-        character.students.add(new Student(CreatureColor.GREEN));
-        character.students.add(new Student(CreatureColor.BLUE));
-
-        player.getBoard().addStudentToEntrance(CreatureColor.BLUE);
-        player.getBoard().addStudentToEntrance(CreatureColor.PINK);
-
-        ((CharacterMover) character).setFromColor(CreatureColor.RED);
-        ((CharacterMover) character).setToColor(CreatureColor.GREEN);
-
-        ArrayList<CreatureColor> expectedStudents = new ArrayList<>(Arrays.asList(CreatureColor.RED, CreatureColor.RED,
-                CreatureColor.GREEN,CreatureColor.BLUE, CreatureColor.GREEN, CreatureColor.BLUE));
-
-        ArrayList<CreatureColor> expectedEntrance = new ArrayList<>(Arrays.asList(CreatureColor.BLUE, CreatureColor.PINK));
-
-        assertThrows(NoAvailableColorException.class, ()-> character.effect());
-
-        assertEquals(6, character.getStudents().size());
-        assertEquals(expectedStudents, character.getStudents().stream().map(Creature::getColor).collect(Collectors.toList()));
-        assertEquals(2, player.getBoard().getEntrance().getStudents().size());
-        assertEquals(expectedEntrance, player.getBoard().getEntrance().getStudents().stream().map(Creature::getColor).collect(Collectors.toList()));
+        assertEquals(9, game.getCurrentPlayer().getBoard().getEntrance().getStudents().size());
     }
 
     @Test
     void effect10_OK() {
         character = cf.createCharacter(10);
 
-        Player player = new Player(game, "Chiara", PlayerColor.WHITE);
-        game.addPlayer(player);
-        player.getBoard().setTowers(5);
-        game.setCurrentPlayer(player);
+        game.getCurrentPlayer().getBoard().addStudentToEntrance(CreatureColor.BLUE);
+        game.getCurrentPlayer().getBoard().addStudentToEntrance(CreatureColor.PINK);
 
-        player.getBoard().addStudentToEntrance(CreatureColor.BLUE);
-        player.getBoard().addStudentToEntrance(CreatureColor.PINK);
-
-        player.getBoard().addStudentToHall(CreatureColor.PINK);
-        player.getBoard().addStudentToHall(CreatureColor.RED);
+        game.getCurrentPlayer().getBoard().addStudentToHall(CreatureColor.PINK);
+        game.getCurrentPlayer().getBoard().addStudentToHall(CreatureColor.RED);
 
         ((CharacterMover) character).setFromColor(CreatureColor.PINK);
         ((CharacterMover) character).setToColor(CreatureColor.BLUE);
@@ -245,40 +219,10 @@ class CharacterMoverTest {
             e.printStackTrace();
         }
 
-        assertEquals(expectedEntrance, player.getBoard().getEntrance().getStudents().stream().map(Creature::getColor).collect(Collectors.toList()));
-
-        assertEquals(expectedHall, player.getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
+        assertTrue(game.getCurrentPlayer().getBoard().getEntrance().getStudents()
+                .stream().map(Creature::getColor).toList().containsAll(expectedEntrance));
+        assertEquals(expectedHall, game.getCurrentPlayer().getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
     }
-
-    @Test
-    void effect10_KO() {
-        character = cf.createCharacter(10);
-
-        Player player = new Player(game, "Chiara", PlayerColor.WHITE);
-        game.addPlayer(player);
-        player.getBoard().setTowers(5);
-        game.setCurrentPlayer(player);
-
-        player.getBoard().addStudentToEntrance(CreatureColor.BLUE);
-        player.getBoard().addStudentToEntrance(CreatureColor.PINK);
-
-        player.getBoard().addStudentToHall(CreatureColor.PINK);
-        player.getBoard().addStudentToHall(CreatureColor.RED);
-
-        ((CharacterMover) character).setFromColor(CreatureColor.GREEN);
-        ((CharacterMover) character).setToColor(CreatureColor.RED);
-
-        ArrayList<Integer> expectedHall = new ArrayList<>(Arrays.asList(0,1,0,1,0));
-
-        ArrayList<CreatureColor> expectedEntrance = new ArrayList<>(Arrays.asList(CreatureColor.BLUE, CreatureColor.PINK));
-
-        assertThrows(NoAvailableColorException.class, ()->character.effect());
-
-        assertEquals(expectedEntrance, player.getBoard().getEntrance().getStudents().stream().map(Creature::getColor).collect(Collectors.toList()));
-
-        assertEquals(expectedHall, player.getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
-    }
-
 
     @Test
     void effect11_OK() {
@@ -286,18 +230,13 @@ class CharacterMoverTest {
 
         bag.receiveStudent(CreatureColor.RED);
 
-        Player player = new Player(game, "Chiara", PlayerColor.WHITE);
-        game.addPlayer(player);
-        player.getBoard().setTowers(5);
-        game.setCurrentPlayer(player);
-
         character.students.add(new Student(CreatureColor.RED));
         character.students.add(new Student(CreatureColor.RED));
         character.students.add(new Student(CreatureColor.GREEN));
         character.students.add(new Student(CreatureColor.BLUE));
 
-        player.getBoard().addStudentToHall(CreatureColor.RED);
-        player.getBoard().addStudentToHall(CreatureColor.PINK);
+        game.getCurrentPlayer().getBoard().addStudentToHall(CreatureColor.RED);
+        game.getCurrentPlayer().getBoard().addStudentToHall(CreatureColor.PINK);
 
         ((CharacterMover)character).setFromColor(CreatureColor.RED);
 
@@ -305,11 +244,11 @@ class CharacterMoverTest {
 
         try {
             character.effect();
-        } catch (NoAvailableBanCardsException | NoAvailableColorException | OutOfBoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        assertEquals(expectedHall, player.getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
+        assertEquals(expectedHall, game.getCurrentPlayer().getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
         assertEquals(4, character.getStudents().size());
     }
 
@@ -320,18 +259,13 @@ class CharacterMoverTest {
 
         bag.receiveStudent(CreatureColor.RED);
 
-        Player player = new Player(game, "Chiara", PlayerColor.WHITE);
-        game.addPlayer(player);
-        player.getBoard().setTowers(5);
-        game.setCurrentPlayer(player);
-
         character.students.add(new Student(CreatureColor.RED));
         character.students.add(new Student(CreatureColor.RED));
         character.students.add(new Student(CreatureColor.GREEN));
         character.students.add(new Student(CreatureColor.BLUE));
 
-        player.getBoard().addStudentToHall(CreatureColor.RED);
-        player.getBoard().addStudentToHall(CreatureColor.PINK);
+        game.getCurrentPlayer().getBoard().addStudentToHall(CreatureColor.RED);
+        game.getCurrentPlayer().getBoard().addStudentToHall(CreatureColor.PINK);
 
         ((CharacterMover)character).setFromColor(CreatureColor.PINK);
 
@@ -339,19 +273,14 @@ class CharacterMoverTest {
 
         assertThrows(NoAvailableColorException.class, ()->character.effect());
 
-        assertEquals(expectedHall, player.getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
+        assertEquals(expectedHall, game.getCurrentPlayer().getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
         assertEquals(4, character.getStudents().size());
     }
 
     @Test
     void effect12_OK() {
-        Player p1 = new Player(game, "X", PlayerColor.WHITE);
-        Player p2 = new Player(game, "Y", PlayerColor.BLACK);
-        game.addPlayer(p1);
-        game.addPlayer(p2);
-        p1.getBoard().setTowers(5);
-        p2.getBoard().setTowers(5);
-        game.setCurrentPlayer(p1);
+        Player p1 = game.getPlayingOrder().get(0);
+        Player p2 = game.getPlayingOrder().get(1);
 
         character = cf.createCharacter(12);
 
@@ -371,7 +300,7 @@ class CharacterMoverTest {
         ((CharacterMover)character).setColorToRemove(CreatureColor.RED);
         try {
             character.effect();
-        } catch (NoAvailableBanCardsException | OutOfBoundException | NoAvailableColorException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -381,13 +310,8 @@ class CharacterMoverTest {
 
     @Test
     void effect12_KO() {
-        Player p1 = new Player(game, "X", PlayerColor.WHITE);
-        Player p2 = new Player(game, "Y", PlayerColor.BLACK);
-        game.addPlayer(p1);
-        game.addPlayer(p2);
-        p1.getBoard().setTowers(5);
-        p2.getBoard().setTowers(5);
-        game.setCurrentPlayer(p1);
+        Player p1 = game.getPlayingOrder().get(0);
+        Player p2 = game.getPlayingOrder().get(1);
 
         character = cf.createCharacter(12);
 
@@ -407,7 +331,7 @@ class CharacterMoverTest {
 
         try {
             character.effect();
-        } catch (NoAvailableBanCardsException | OutOfBoundException | NoAvailableColorException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

@@ -1,16 +1,20 @@
 package it.polimi.ingsw.model.phases;
 
+import it.polimi.ingsw.exceptions.InvalidWizardException;
+import it.polimi.ingsw.exceptions.WizardTakenException;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.characters.ConcreteCharacterFactory;
 import it.polimi.ingsw.model.gameBoard.*;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 import java.util.Stack;
 
 public class PreparePhase extends Phase {
+
+    private static final int MIN_WIZARD_ID = 0;
+    private static final int MAX_WIZARD_ID = 3;
 
     private static final int TWO_PLAYERS_TOWERS = 8;
     private static final int THREE_PLAYERS_TOWERS = 6;
@@ -27,8 +31,7 @@ public class PreparePhase extends Phase {
 
     private static final int TOTAL_COINS = 20;
 
-    // Used for testing purposes
-    ArrayList<WizardName> wizardNames;
+    private int turns;
 
     /**
      * Default constructor
@@ -36,16 +39,8 @@ public class PreparePhase extends Phase {
      */
     public PreparePhase(Game game) {
         this.game = game;
-
-        // Testing
-        wizardNames = new ArrayList<>();
-        wizardNames.add(WizardName.DRUID);
-        wizardNames.add(WizardName.DRUID);
-        wizardNames.add(WizardName.KING);
-        wizardNames.add(WizardName.DRUID);
-        wizardNames.add(WizardName.KING);
-        wizardNames.add(WizardName.SENSEI);
-        wizardNames.add(WizardName.WITCH);
+        this.phaseFactory = new PhaseFactory(game);
+        this.turns = 0;
     }
 
     /**
@@ -53,24 +48,89 @@ public class PreparePhase extends Phase {
      * It 'sets the table' in order to begin playing
      */
     @Override
-    public void play() {
-        islandGroupSetup();
-        int motherNaturePosition = placeMotherNature();
-        placeInitialStudents(motherNaturePosition);
-        initialBagFill();
-        instantiateClouds();
-        instantiateProfessors();
-        instantiateTowers();
-        assignWizards();
-        initializeEntranceStudents();
-        drawFirstPlayer();
+    public void play() throws WizardTakenException, InvalidWizardException {
+        assignWizard();
 
-        if(game.getGameMode().equals(GameMode.EXPERT)) {
-            drawCharacters();
-            distributeCoins();
+        if(turns == game.getNumberOfPlayers().getNum()) {
+            islandGroupSetup();
+            int motherNaturePosition = placeMotherNature();
+            placeInitialStudents(motherNaturePosition);
+            initialBagFill();
+            instantiateClouds();
+            instantiateProfessors();
+            instantiateTowers();
+            initializeEntranceStudents();
+            drawFirstPlayer();
+
+            if(game.getGameMode().equals(GameMode.EXPERT)) {
+                drawCharacters();
+                distributeCoins();
+            }
+
+            game.setGameState(GameState.PLANNING_PHASE);
+            game.setCurrentPhase(phaseFactory.createPhase(game.getGameState()));
+        }
+    }
+
+    /**
+     * Pairs a wizard with each player.
+     * The wizard must be unique to the player.
+     */
+    private void assignWizard() throws WizardTakenException, InvalidWizardException {
+        WizardName wizardName;
+
+        if(checkValidWizardID(wizardID)) {
+            if(!checkWizardTaken(wizardID)) {
+                turns += 1;
+                wizardName = getWizardNameByID(wizardID);
+                game.getCurrentPlayer().setWizard(wizardName);
+                game.setCurrentPlayer(game.getNextPlayer());
+            } else {
+                throw new WizardTakenException();
+            }
+        } else {
+            throw new InvalidWizardException();
+        }
+    }
+
+    /**
+     * Checks if the inputted ID corresponds to a valid wizard
+     * @param wizardID to check
+     * @return whether the ID is a correct one
+     */
+    private boolean checkValidWizardID(int wizardID) {
+        return wizardID >= MIN_WIZARD_ID && wizardID <= MAX_WIZARD_ID;
+    }
+
+    /**
+     * Checks whether a wizard has already been chosen by another player
+     * @param wizardID to be checked
+     * @return whether the wizard has been chosen already
+     */
+    private boolean checkWizardTaken(int wizardID) {
+        for(Player player : game.getPlayers()) {
+            if(player.getWizard() != null) {
+                if(player.getWizard().getName().getId() == wizardID) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns the wizard corresponding to such ID, null if it doesn't exist
+     * @param wizardID of the wizard to return
+     * @return the wizard whose ID is the same as the inputted parameter
+     */
+    private WizardName getWizardNameByID(int wizardID) {
+        for(WizardName wizardName : WizardName.values()) {
+            if(wizardName.getId() == wizardID) {
+                return wizardName;
+            }
         }
 
-        game.setGameState(GameState.PLANNING_PHASE);
+        return null;
     }
 
     /**
@@ -130,8 +190,6 @@ public class PreparePhase extends Phase {
                 game.getBag().receiveStudent(color);
             }
         }
-
-        game.getBag().shuffle();
     }
 
     /**
@@ -167,39 +225,6 @@ public class PreparePhase extends Phase {
     }
 
     /**
-     * Pairs a wizard with each player.
-     * The wizard must be unique to the player
-     */
-    private void assignWizards() {
-        WizardName wizardName;
-        int i = 0;
-
-        for(Player player : game.getPlayers()) {
-            do {
-                // TODO input : wizard name to be received
-                wizardName = wizardNames.get(i);
-                i++;
-            } while(checkWizardChosen(wizardName));
-
-            player.setWizard(wizardName);
-        }
-    }
-
-    /**
-     * Checks whether a wizard has already been chosen by another player
-     * @param wizardName name of the wizard to be checked
-     * @return whether the wizard has been chosen already
-     */
-    private boolean checkWizardChosen(WizardName wizardName) {
-        for(Player player : game.getPlayers()) {
-            if(player.getWizard() != null && player.getWizard().getName().equals(wizardName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * Prepares the initial number of students each player should have on
      * their board at the beginning of the game.
      * 2P -> 7 students
@@ -227,6 +252,7 @@ public class PreparePhase extends Phase {
         Random random = new Random();
         int firstPlayerIndex = random.nextInt(game.getNumberOfPlayers().getNum());
         game.setFirstPlayerIndex(firstPlayerIndex);
+        game.setCurrentPlayer(game.getPlayers().get(firstPlayerIndex));
     }
 
     /**

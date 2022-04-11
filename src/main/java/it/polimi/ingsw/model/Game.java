@@ -13,14 +13,16 @@ import java.util.Map;
 
 public class Game {
 
+    private static final int MAX_NUMBER_ISLANDGROUPS = 3;
+
     private NumberOfPlayers numberOfPlayers;
     private GameMode gameMode;
     private GameState gameState;
-    private final PhaseFactory phaseFactory;
     private Phase currentPhase;
+    private boolean skipPickCloudPhase;
     private final ArrayList<Player> players;
     private ArrayList<Player> playingOrder;
-    private Map<Player, Assistant> playerPriority; //(a)
+    private Map<Player, Assistant> playerPriority;
     private Player currentPlayer;
     private int firstPlayerIndex;
     private final Bag bag;
@@ -36,7 +38,8 @@ public class Game {
      * Default constructor
      */
     public Game() {
-        phaseFactory = new PhaseFactory(this);
+        PhaseFactory phaseFactory = new PhaseFactory(this); // TODO check if needed
+        skipPickCloudPhase = false;
         players = new ArrayList<>();
         playingOrder = new ArrayList<>();
         bag = new Bag();
@@ -52,13 +55,8 @@ public class Game {
 
         // Game begins waiting for players in the Lobby phase
         gameState = GameState.LOBBY_PHASE;
-    }
 
-    /**
-     * Manages the game
-     */
-    public void startGame() {
-        // Phase set before
+        // Initialize the first phase
         currentPhase = phaseFactory.createPhase(gameState);
     }
 
@@ -118,9 +116,26 @@ public class Game {
         return currentPhase;
     }
 
-    // Used for testing purposes
+    /**
+     * Sets the current phase of the game to the specified one
+     * @param phase to set
+     */
     public void setCurrentPhase(Phase phase) {
         this.currentPhase = phase;
+    }
+
+    /**
+     * @return whether to skip the PickCloudPhase or not
+     */
+    public boolean getSkipPickCloudPhase() {
+        return skipPickCloudPhase;
+    }
+
+    /**
+     * @param skipPickCloudPhase value to set
+     */
+    public void setSkipPickCloudPhase(boolean skipPickCloudPhase) {
+        this.skipPickCloudPhase = skipPickCloudPhase;
     }
 
     /**
@@ -202,6 +217,14 @@ public class Game {
     }
 
     /**
+     * @return the player that comes after the current player
+     */
+    public Player getNextPlayer() {
+        return players.get((players.indexOf(currentPlayer) + 1) % numberOfPlayers.getNum());
+    }
+
+
+    /**
      * The player corresponding to a certain PlayerColor
      * @param color of the player to return
      * @return player whose color matches with the inputted one
@@ -245,18 +268,27 @@ public class Game {
     }
 
     /**
+     * Check if the game has to end because of the archipelagos that have formed
+     * @return if the number of island groups is sufficient to stop the game
+     */
+    public boolean checkEndDueToIslandGroup() {
+        return islandGroups.size() == MAX_NUMBER_ISLANDGROUPS;
+    }
+
+    /**
      * Connects the specified island groups in case they need to be connected.
      * If they get connected, the second island group is removed from the island groups list
-     * @param indexPresentIslandGroup island group that eventually incorporates the other one
-     * @param indexIslandGroupToAdd island group that eventually gets incorporated into the first one
+     * @param presentIslandGroup island group that eventually incorporates the other one
+     * @param islandGroupToAdd island group that eventually gets incorporated into the first one
+     * @return if the connection succeeded
      */
-    public void connectIslandGroups(int indexPresentIslandGroup, int indexIslandGroupToAdd) {
-        IslandGroup presentIslandGroup = getIslandGroupByIndex(indexPresentIslandGroup);
-        IslandGroup islandGroupToAdd = getIslandGroupByIndex(indexIslandGroupToAdd);
+    public boolean connectIslandGroups(IslandGroup presentIslandGroup, IslandGroup islandGroupToAdd) {
 
         if(presentIslandGroup.connectIslandGroup(islandGroupToAdd)) {
-            islandGroups.remove(indexIslandGroupToAdd);
+            islandGroups.remove(islandGroupToAdd);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -275,12 +307,7 @@ public class Game {
      * @return the index of the inputted island group
      */
     public int getIndexOfIslandGroup(IslandGroup islandGroup) {
-        for (int i = 0; i<islandGroups.size(); i++) {
-            if(getIslandGroupByIndex(i).equals(islandGroup)){
-                return i;
-            }
-        }
-        return -1;
+        return islandGroups.indexOf(islandGroup);
     }
 
     /**
@@ -318,7 +345,7 @@ public class Game {
             islandGroup.removeBanCard();
             Character character= getCharacterByID(5);
             if(character != null) {
-                character.addBancCard();
+                character.addBanCard();
             }
             return;
         }
@@ -360,8 +387,8 @@ public class Game {
             int indexPreviousIslandGroup = (islandGroupIndex - 1) < 0 ? numberOfIslandGroups - 1 : islandGroupIndex - 1;
             int indexNextIslandGroup = (islandGroupIndex + 1) % numberOfIslandGroups;
 
-            connectIslandGroups(islandGroupIndex, indexPreviousIslandGroup);
-            connectIslandGroups(islandGroupIndex, indexNextIslandGroup);
+            connectIslandGroups(getIslandGroupByIndex(islandGroupIndex), getIslandGroupByIndex(indexPreviousIslandGroup));
+            connectIslandGroups(getIslandGroupByIndex(islandGroupIndex), getIslandGroupByIndex(indexNextIslandGroup));
         }
     }
 
@@ -416,8 +443,8 @@ public class Game {
             int indexPreviousIslandGroup = (islandGroupIndex - 1) < 0 ? numberOfIslandGroups - 1 : islandGroupIndex - 1;
             int indexNextIslandGroup = (islandGroupIndex + 1) % numberOfIslandGroups;
 
-            connectIslandGroups(islandGroupIndex, indexPreviousIslandGroup);
-            connectIslandGroups(islandGroupIndex, indexNextIslandGroup);
+            connectIslandGroups(getIslandGroupByIndex(islandGroupIndex), getIslandGroupByIndex(indexPreviousIslandGroup));
+            connectIslandGroups(getIslandGroupByIndex(islandGroupIndex), getIslandGroupByIndex(indexNextIslandGroup));
         }
     }
 

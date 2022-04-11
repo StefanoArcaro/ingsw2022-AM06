@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.phases;
 
-import it.polimi.ingsw.exceptions.ExceededStepsException;
-import it.polimi.ingsw.exceptions.NoAvailableCloudException;
+import it.polimi.ingsw.exceptions.MaxPlayersReachedException;
+import it.polimi.ingsw.exceptions.NicknameTakenException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.PlayerColor;
@@ -15,37 +15,161 @@ class LobbyPhaseTest {
     Game game;
     PhaseFactory phaseFactory;
     Phase phase;
+    String nickname;
 
     @BeforeEach
     void setUp() {
         game = new Game();
+        phaseFactory = new PhaseFactory(game);
+        nickname = "";
     }
 
     @Test
-    void play() {
-        game.setNumberOfPlayers(3);
+    void play_2P() {
+        game.setNumberOfPlayers(2);
 
-        phaseFactory = new PhaseFactory(game);
         phase = phaseFactory.createPhase(GameState.LOBBY_PHASE);
 
         assertEquals(GameState.LOBBY_PHASE, game.getGameState());
 
+        // Add first player
+        nickname = "Stefano";
+        phase.setPlayerNickname(nickname);
         try {
             phase.play();
-        } catch (ExceededStepsException e) {
-            e.printStackTrace();
-        } catch (NoAvailableCloudException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
+
+        assertEquals(GameState.LOBBY_PHASE, game.getGameState());
+
+        // Try nickname of first player
+        nickname = "Stefano";
+        phase.setPlayerNickname(nickname);
+        assertThrows(NicknameTakenException.class, () -> phase.play());
+
+        assertEquals(GameState.LOBBY_PHASE, game.getGameState());
+
+        // Add second player
+        nickname = "Chiara";
+        phase.setPlayerNickname(nickname);
+        try {
+            phase.play();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        assertEquals(GameState.PREPARE_PHASE, game.getGameState());
+
+        // Try nickname of first player again
+        nickname = "Stefano";
+        phase.setPlayerNickname(nickname);
+
+        assertThrows(NicknameTakenException.class, () -> phase.play());
+        assertEquals(GameState.PREPARE_PHASE, game.getGameState());
+
+        // Try adding third player
+        nickname = "Nick";
+        phase.setPlayerNickname(nickname);
+
+        assertThrows(MaxPlayersReachedException.class, () -> phase.play());
+        assertEquals(GameState.PREPARE_PHASE, game.getGameState());
+        assertInstanceOf(PreparePhase.class, game.getCurrentPhase());
+
+        // Try nickname of second player
+        nickname = "Chiara";
+        phase.setPlayerNickname(nickname);
+
+        assertThrows(NicknameTakenException.class, () -> phase.play());
+        assertEquals(GameState.PREPARE_PHASE, game.getGameState());
+
+        // Try nickname of third player again
+        nickname = "Nick";
+        phase.setPlayerNickname(nickname);
+
+        assertThrows(MaxPlayersReachedException.class, () -> phase.play());
+        assertEquals(GameState.PREPARE_PHASE, game.getGameState());
+
+        assertEquals("Stefano", game.getPlayers().get(0).getNickname());
+        assertEquals("Chiara", game.getPlayers().get(1).getNickname());
+        assertEquals(PlayerColor.BLACK, game.getPlayers().get(0).getColor());
+        assertEquals(PlayerColor.WHITE, game.getPlayers().get(1).getColor());
+    }
+
+    @Test
+    void play_3P() {
+        game.setNumberOfPlayers(3);
+
+        phase = phaseFactory.createPhase(GameState.LOBBY_PHASE);
+
+        assertEquals(GameState.LOBBY_PHASE, game.getGameState());
+
+        // Add first player
+        nickname = "Stefano";
+        phase.setPlayerNickname(nickname);
+        try {
+            phase.play();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        assertEquals(GameState.LOBBY_PHASE, game.getGameState());
+
+        // Try nickname of first player
+        nickname = "Stefano";
+        phase.setPlayerNickname(nickname);
+
+        assertThrows(NicknameTakenException.class, () -> phase.play());
+        assertEquals(GameState.LOBBY_PHASE, game.getGameState());
+
+        // Add second player
+        nickname = "Chiara";
+        phase.setPlayerNickname(nickname);
+        try {
+            phase.play();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        assertEquals(GameState.LOBBY_PHASE, game.getGameState());
+
+        // Try nickname of first player again
+        nickname = "Stefano";
+        phase.setPlayerNickname(nickname);
+
+        assertThrows(NicknameTakenException.class, () -> phase.play());
+        assertEquals(GameState.LOBBY_PHASE, game.getGameState());
+
+        // Add third player
+        nickname = "Nick";
+        phase.setPlayerNickname(nickname);
+        try {
+            phase.play();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        assertEquals(GameState.PREPARE_PHASE, game.getGameState());
+
+        // Try nickname of second player
+        nickname = "Chiara";
+        phase.setPlayerNickname(nickname);
+
+        assertThrows(NicknameTakenException.class, () -> phase.play());
+        assertEquals(GameState.PREPARE_PHASE, game.getGameState());
+
+        // Try nickname of third player
+        nickname = "Nick";
+        phase.setPlayerNickname(nickname);
+
+        assertThrows(NicknameTakenException.class, () -> phase.play());
+        assertEquals(GameState.PREPARE_PHASE, game.getGameState());
 
         assertEquals("Stefano", game.getPlayers().get(0).getNickname());
         assertEquals("Chiara", game.getPlayers().get(1).getNickname());
         assertEquals("Nick", game.getPlayers().get(2).getNickname());
-
         assertEquals(PlayerColor.BLACK, game.getPlayers().get(0).getColor());
         assertEquals(PlayerColor.WHITE, game.getPlayers().get(1).getColor());
         assertEquals(PlayerColor.GRAY, game.getPlayers().get(2).getColor());
-
-        assertEquals(GameState.PREPARE_PHASE, game.getGameState());
     }
 }

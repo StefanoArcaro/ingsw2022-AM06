@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Entrance implements StudentSource, StudentDestination {
 
-    private final ArrayList<Student> students;
+    private ArrayList<Student> students;
 
     /**
      * Default constructor

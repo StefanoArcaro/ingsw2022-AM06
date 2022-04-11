@@ -87,7 +87,7 @@ public abstract class Character {
     /**
      * Increases number of ban cards
      */
-    public void addBancCard() {
+    public void addBanCard() {
         numberOfBanCards += 1;
     }
 
@@ -110,6 +110,14 @@ public abstract class Character {
      */
     public int getNumberOfIterations() {
         return numberOfIterations;
+    }
+
+    /**
+     * Sets the number of times this card's effect was applied during the turn
+     * @param numberOfIterations number of times this card's effect was applied during the turn
+     */
+    public void setNumberOfIterations(int numberOfIterations) {
+        this.numberOfIterations = numberOfIterations;
     }
 
     /**
