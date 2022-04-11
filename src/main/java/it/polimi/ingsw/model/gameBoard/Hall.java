@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.gameBoard;
 
+import it.polimi.ingsw.exceptions.TableFullException;
 import it.polimi.ingsw.model.StudentDestination;
 import it.polimi.ingsw.model.StudentSource;
 
@@ -27,10 +28,8 @@ public class Hall implements StudentSource, StudentDestination {
         return students.get(color.getIndex());
     }
 
-    public boolean receiveStudent(CreatureColor color) {
-        Table tableToAdd;
-
-        tableToAdd = getTableByColor(color);
+    public boolean receiveStudent(CreatureColor color) throws TableFullException {
+        Table tableToAdd = getTableByColor(color);
 
         if(tableToAdd != null) {
             return tableToAdd.addStudent();

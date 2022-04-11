@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.gameBoard;
 
+import it.polimi.ingsw.exceptions.TableFullException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,16 +12,24 @@ class TableTest {
         Table table = new Table(CreatureColor.RED);
         assertEquals(0, table.getLength());
         for(int i = 0; i < 10; i++) {
-            table.addStudent();
+            try {
+                assertTrue(table.addStudent());
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
         assertEquals(10, table.getLength());
-        assertFalse(table.addStudent());
+        assertThrows(TableFullException.class, table::addStudent);
     }
 
     @Test
     void removeStudent() {
         Table table = new Table(CreatureColor.RED);
-        table.addStudent();
+        try {
+            table.addStudent();
+        } catch (TableFullException e) {
+            System.out.println(e.getMessage());
+        }
         assertTrue(table.removeStudent());
         assertFalse(table.removeStudent());
     }

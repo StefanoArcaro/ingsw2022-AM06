@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.gameBoard;
 
+import it.polimi.ingsw.exceptions.TableFullException;
+
 public class Table {
 
     private static final int MIN_INDEX = 0;
@@ -17,12 +19,13 @@ public class Table {
         return color;
     }
 
-    public boolean addStudent() {
+    public boolean addStudent() throws TableFullException {
         if(index < MAX_INDEX) {
             index = index + 1;
             return true;
+        } else {
+            throw new TableFullException();
         }
-        return false;
     }
 
     public boolean removeStudent() {

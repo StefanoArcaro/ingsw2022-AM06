@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.gameBoard;
 
+import it.polimi.ingsw.exceptions.TableFullException;
 import it.polimi.ingsw.model.*;
 
 import java.util.ArrayList;
@@ -84,7 +85,12 @@ public class Board {
      */
     public boolean addStudentToHall(CreatureColor color) {
         // TODO test coin distribution
-        boolean studentReceived = hall.receiveStudent(color);
+        boolean studentReceived = false;
+        try {
+            studentReceived = hall.receiveStudent(color);
+        } catch (TableFullException e) {
+            System.out.println(e.getMessage());
+        }
 
         if(studentReceived && player.getGame().getGameMode().equals(GameMode.EXPERT)) {
             if(hall.getTableByColor(color).getLength() % 3 == 0 && player.getGame().getTreasury() > 0) {

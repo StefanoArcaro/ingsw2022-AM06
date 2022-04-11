@@ -248,7 +248,7 @@ class PlanningPhaseTest {
             assertEquals(4, cloud.getStudents().size());
         }
 
-        // Check player order
+        // Check playing order
         assertEquals(game.getPlayers().get(game.getFirstPlayerIndex()), game.getPlayingOrder().get(0));
 
         // Check updated game state
