@@ -5,6 +5,7 @@ import it.polimi.ingsw.exceptions.NicknameTakenException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.PlayerColor;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +21,11 @@ class LobbyPhaseTest {
     void setUp() {
         game = new Game();
         nickname = "";
+    }
+
+    @AfterEach
+    void tearDown() {
+        game = null;
     }
 
     @Test

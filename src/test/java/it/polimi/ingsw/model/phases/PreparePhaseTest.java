@@ -4,6 +4,7 @@ import it.polimi.ingsw.exceptions.InvalidWizardException;
 import it.polimi.ingsw.exceptions.WizardTakenException;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.gameBoard.CreatureColor;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -26,6 +27,12 @@ class PreparePhaseTest {
         nicknames.add("Stefano");
         nicknames.add("Chiara");
         nicknames.add("Nick");
+    }
+
+    @AfterEach
+    void tearDown() {
+        game = null;
+        nicknames = null;
     }
 
     @Test

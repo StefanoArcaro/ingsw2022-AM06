@@ -11,11 +11,14 @@ public abstract class Phase {
     protected Character activatedCharacter;
     protected String playerNickname;
     protected int wizardID;
+    protected int priority;
 
     /**
      * Method to be implemented by the different phases of the game
      */
-    public abstract void play() throws ExceededStepsException, NoAvailableCloudException, NicknameTakenException, MaxPlayersReachedException, WizardTakenException, InvalidWizardException;
+    public abstract void play() throws ExceededStepsException, NoAvailableCloudException,
+            NicknameTakenException, MaxPlayersReachedException, WizardTakenException,
+            InvalidWizardException, AssistantTakenException, InvalidPriorityException;
 
     /**
      * @return the activated character
@@ -38,5 +41,13 @@ public abstract class Phase {
      */
     public void setWizardID(int wizardID) {
         this.wizardID = wizardID;
+    }
+
+    /**
+     * Sets the priority chosen by a player for an assistant
+     * @param priority of the assistant to play
+     */
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 }

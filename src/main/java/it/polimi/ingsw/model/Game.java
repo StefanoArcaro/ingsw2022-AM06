@@ -17,6 +17,7 @@ public class Game {
     private GameMode gameMode;
     private GameState gameState;
     private Phase currentPhase;
+    private boolean skipPickCloudPhase;
     private final ArrayList<Player> players;
     private ArrayList<Player> playingOrder;
     private Map<Player, Assistant> playerPriority; //(a)
@@ -36,6 +37,7 @@ public class Game {
      */
     public Game() {
         PhaseFactory phaseFactory = new PhaseFactory(this); // TODO check if needed
+        skipPickCloudPhase = false;
         players = new ArrayList<>();
         playingOrder = new ArrayList<>();
         bag = new Bag();
@@ -112,9 +114,26 @@ public class Game {
         return currentPhase;
     }
 
-    // Used for testing purposes
+    /**
+     * Sets the current phase of the game to the specified one
+     * @param phase to set
+     */
     public void setCurrentPhase(Phase phase) {
         this.currentPhase = phase;
+    }
+
+    /**
+     * @return whether to skip the PickCloudPhase or not
+     */
+    public boolean getSkipPickCloudPhase() {
+        return skipPickCloudPhase;
+    }
+
+    /**
+     * @param skipPickCloudPhase value to set
+     */
+    public void setSkipPickCloudPhase(boolean skipPickCloudPhase) {
+        this.skipPickCloudPhase = skipPickCloudPhase;
     }
 
     /**
