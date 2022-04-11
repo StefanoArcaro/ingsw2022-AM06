@@ -1,5 +1,6 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.gameBoard;
 
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.characters.ConcreteCharacterFactory;
 import org.junit.jupiter.api.AfterEach;
@@ -27,7 +28,9 @@ class AssistantTest {
 
     @Test
     void getMaxSteps() {
-        assertEquals(1, assistant.getMaxSteps());
+        ConcreteCharacterFactory cf = new ConcreteCharacterFactory(game);
+        Character character = cf.createCharacter(0);
+        assertEquals(1, assistant.getMaxSteps(character));
     }
 
     @Test

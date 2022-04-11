@@ -2,8 +2,8 @@ package it.polimi.ingsw.model.phases;
 
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.GameMode;
-import it.polimi.ingsw.model.GameState;
+import it.polimi.ingsw.model.enumerations.GameMode;
+import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.Player;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

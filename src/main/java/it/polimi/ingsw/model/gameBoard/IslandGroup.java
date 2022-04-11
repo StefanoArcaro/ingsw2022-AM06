@@ -2,12 +2,13 @@ package it.polimi.ingsw.model.gameBoard;
 
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.PlayerColor;
+import it.polimi.ingsw.model.enumerations.PlayerColor;
 import it.polimi.ingsw.model.characters.Character;
 
 import java.util.ArrayList;
 
 public class IslandGroup {
+
     private final ArrayList<Island> islands;
     private int numberOfBanCardPresent;
     private PlayerColor conquerorColor;
@@ -52,7 +53,7 @@ public class IslandGroup {
 
     public boolean removeBanCard() {
         if(numberOfBanCardPresent > 0) {
-            numberOfBanCardPresent --;
+            numberOfBanCardPresent -= 1;
             return true;
         }
         return false;
@@ -76,7 +77,7 @@ public class IslandGroup {
      * Add an island in the island group
      * @param island to add to the island group
      */
-    public boolean addIsland(Island island) throws NullPointerException {
+    public boolean addIsland(Island island) {
         int IDIslandToAdd;
         PlayerColor playerColorIslandToAdd;
 
@@ -123,7 +124,7 @@ public class IslandGroup {
      * Merge island groups together
      * @param islandGroup to join this.islandGroup
      */
-    public boolean connectIslandGroup(IslandGroup islandGroup) throws NullPointerException {
+    public boolean connectIslandGroup(IslandGroup islandGroup) {
         ArrayList<Island> islandsInGroupToAdd;
         int lenGroupToAdd;
         PlayerColor playerColorIslandGroupToAdd;
@@ -169,22 +170,6 @@ public class IslandGroup {
     /**
      * Calculates the influence of the island group as the
      * sum of the influences of the islands that are part of it
-     * @param player to calculate the influence for
-     * @return the influence for the player on the island group
-     */
-    public int calculateInfluence(Player player) {
-        int influence = 0;
-
-        for(Island island : islands) {
-            influence = influence + island.calculateInfluence(player);
-        }
-
-        return influence;
-    }
-
-    /**
-     * Calculates the influence of the island group as the
-     * sum of the influences of the islands that are part of it
      * Overloading of calculateInfluence with character
      * @param player to calculate the influence for
      * @param activatedCharacter active character which modifies influence
@@ -200,7 +185,7 @@ public class IslandGroup {
 
         Player currentPlayer = game.getCurrentPlayer();
 
-        if(currentPlayer.equals(player) && activatedCharacter != null) {
+        if(currentPlayer.equals(player)) {
             extraPoints = activatedCharacter.getExtraPoints();
         }
 

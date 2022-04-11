@@ -1,8 +1,7 @@
 package it.polimi.ingsw.model.gameBoard;
 
 import it.polimi.ingsw.exceptions.TableFullException;
-import it.polimi.ingsw.model.StudentDestination;
-import it.polimi.ingsw.model.StudentSource;
+import it.polimi.ingsw.model.enumerations.CreatureColor;
 
 import java.util.ArrayList;
 

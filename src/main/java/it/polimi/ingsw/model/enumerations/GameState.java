@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.enumerations;
 
 /**
  * Enumeration to keep track of the current state of the game

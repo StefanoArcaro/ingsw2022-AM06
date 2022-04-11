@@ -3,9 +3,9 @@ package it.polimi.ingsw.model.phases;
 import it.polimi.ingsw.exceptions.MaxPlayersReachedException;
 import it.polimi.ingsw.exceptions.NicknameTakenException;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.GameState;
+import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.PlayerColor;
+import it.polimi.ingsw.model.enumerations.PlayerColor;
 
 public class LobbyPhase extends Phase {
 

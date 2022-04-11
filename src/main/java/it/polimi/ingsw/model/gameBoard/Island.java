@@ -2,6 +2,8 @@ package it.polimi.ingsw.model.gameBoard;
 
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.characters.Character;
+import it.polimi.ingsw.model.enumerations.CreatureColor;
+import it.polimi.ingsw.model.enumerations.PlayerColor;
 
 
 import java.util.ArrayList;
@@ -78,67 +80,13 @@ public class Island implements StudentDestination {
      */
     public boolean removeTower(Game game) {
         Player player = game.getPlayerByColor(tower);
-        if(this.tower != null && player!=null) {
+        if(this.tower != null && player != null) {
             player.getBoard().addTowers(1);
             this.tower = null;
             return true;
         }
         return false;
     }
-
-
-    /**
-     * Calculates the player's influence on the island due to the towers
-     * @param player whose influence is being calculated
-     * @return the player's influence on the island due to the towers
-     */
-    private int towerInfluence(Player player) {
-        PlayerColor playerColor = player.getColor();
-
-        if(playerColor == this.tower) {
-            return 1;
-        }
-
-        return 0;
-    }
-
-    /**
-     * Calculates the player's influence on the island due to the students on the island
-     * @param player whose influence is being calculated
-     * @return the player's influence on the island due to the students
-     */
-    private int studentInfluence(Player player) {
-        int influenceByStudent = 0;
-        ArrayList<Professor> playerProfessors = player.getBoard().getProfessors();
-        ArrayList<CreatureColor> playerProfessorsColor;
-        List<CreatureColor> playerProfessorsColorList;
-
-        playerProfessorsColorList = playerProfessors.stream().map(Creature::getColor).collect(Collectors.toList());
-        playerProfessorsColor = new ArrayList<>(playerProfessorsColorList);
-
-        for (Student student : students) {
-            if(playerProfessorsColor.contains(student.getColor())) {
-                influenceByStudent++;
-            }
-        }
-
-        return influenceByStudent;
-    }
-
-    /**
-     * Calculate the influence of a player on the island
-     * @param player whose influence is being calculated
-     * @return the influence of the player on the island
-     */
-    public int calculateInfluence(Player player) {
-        int influence = 0;
-
-        influence = influence + towerInfluence(player) + studentInfluence(player);
-
-        return influence;
-    }
-
-
 
     /**
      * Calculates the player's influence on the island due to the towers
@@ -150,15 +98,13 @@ public class Island implements StudentDestination {
     private int towerInfluence(Player player, Character activatedCharacter) {
         PlayerColor playerColor = player.getColor();
 
-        //Automatically applied character effect 6
-        if(activatedCharacter!= null && !activatedCharacter.getTowerCounter()) {
+        if(!activatedCharacter.getTowerCounter()) {
             return 0;
         }
 
         if(playerColor == this.tower) {
             return 1;
         }
-
         return 0;
     }
 
@@ -174,7 +120,7 @@ public class Island implements StudentDestination {
         ArrayList<Professor> playerProfessors = player.getBoard().getProfessors();
         ArrayList<CreatureColor> playerProfessorsColor;
         List<CreatureColor> playerProfessorsColorList;
-        CreatureColor colorNoPoints = (activatedCharacter != null) ? activatedCharacter.getColorNoPoints() : null;
+        CreatureColor colorNoPoints = activatedCharacter.getColorNoPoints();
 
         // Automatically applied character effect 9
         playerProfessorsColorList = playerProfessors.stream().map(Creature::getColor)
@@ -189,7 +135,6 @@ public class Island implements StudentDestination {
 
         return influenceByStudent;
     }
-
 
     /**
      * Calculate the influence of a player on the island

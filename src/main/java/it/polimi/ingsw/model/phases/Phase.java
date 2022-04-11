@@ -3,15 +3,11 @@ package it.polimi.ingsw.model.phases;
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.StudentDestination;
-import it.polimi.ingsw.model.characters.Character;
-import it.polimi.ingsw.model.gameBoard.CreatureColor;
 
 public abstract class Phase {
 
     protected Game game;
     protected PhaseFactory phaseFactory;
-    protected Character activatedCharacter;
     protected String playerNickname;
     protected int wizardID;
     protected int priority;
@@ -29,13 +25,6 @@ public abstract class Phase {
             InvalidWizardException, AssistantTakenException, InvalidPriorityException,
             InvalidDestinationException, EntranceMissingColorException,
             InvalidColorException, TableFullException;
-
-    /**
-     * @return the activated character
-     */
-    public Character getActivatedCharacter() {
-        return activatedCharacter;
-    }
 
     /**
      * Sets the nickname of the player to add

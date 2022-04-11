@@ -2,8 +2,8 @@ package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.GameMode;
-import it.polimi.ingsw.model.GameState;
+import it.polimi.ingsw.model.enumerations.GameMode;
+import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.phases.ActionPhase;
 import it.polimi.ingsw.model.phases.Phase;
@@ -58,7 +58,7 @@ class CharacterInfluenceModifierTest {
     @Test
     void effect() {
         game.setNumberOfPlayers(2);
-        game.setGameMode(GameMode.EXPERT);
+        game.setGameMode(GameMode.EASY);
 
         assertEquals(GameState.LOBBY_PHASE, game.getGameState());
 
@@ -110,32 +110,35 @@ class CharacterInfluenceModifierTest {
         p1.receiveCoin();
         p1.receiveCoin();
         p1.receiveCoin();
+        p1.receiveCoin();
 
         phase = phaseFactory.createPhase(GameState.MOVE_MOTHER_NATURE_PHASE);
         phase.setNumberOfSteps(1);
         game.setCurrentPhase(phase);
 
         character = cf.createCharacter(5);
-        game.setActivatedCharacter(5);
+        game.setActivatedCharacter(character);
+
+        game.addDrawnCharacter(character);
 
         ((CharacterInfluenceModifier)character).setIslandGroupIndex(1);
 
         try {
-            ((ActionPhase)game.getCurrentPhase()).playCharacter(character);
+            ((ActionPhase)game.getCurrentPhase()).playCharacter(5);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         assertEquals(3, p1.getCoins());
-        assertEquals(3, character.getNumberOfBanCards());
+        assertEquals(3, game.getActivatedCharacter().getNumberOfBanCards());
         assertEquals(1, game.getIslandGroupByIndex(1).getNumberOfBanCardPresent());
 
         ((CharacterInfluenceModifier)character).setIslandGroupIndex(2);
 
-        assertThrows(TooManyIterationsException.class, ()->((ActionPhase)game.getCurrentPhase()).playCharacter(character));
+        assertThrows(TooManyIterationsException.class, ()->((ActionPhase)game.getCurrentPhase()).playCharacter(5));
 
         assertEquals(3, p1.getCoins());
-        assertEquals(3, character.getNumberOfBanCards());
+        assertEquals(3, game.getActivatedCharacter().getNumberOfBanCards());
         assertEquals(0, game.getIslandGroupByIndex(2).getNumberOfBanCardPresent());
     }
 }

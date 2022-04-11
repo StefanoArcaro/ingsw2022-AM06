@@ -3,6 +3,8 @@ package it.polimi.ingsw.model.characters;
 import it.polimi.ingsw.exceptions.NoAvailableColorException;
 import it.polimi.ingsw.exceptions.OutOfBoundException;
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.enumerations.CharacterID;
+import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.gameBoard.*;
 
 import java.util.ArrayList;

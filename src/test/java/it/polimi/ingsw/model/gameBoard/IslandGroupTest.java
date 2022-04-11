@@ -2,7 +2,8 @@ package it.polimi.ingsw.model.gameBoard;
 
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.PlayerColor;
+import it.polimi.ingsw.model.enumerations.CreatureColor;
+import it.polimi.ingsw.model.enumerations.PlayerColor;
 import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.characters.ConcreteCharacterFactory;
 import org.junit.jupiter.api.AfterEach;
@@ -16,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class IslandGroupTest {
 
     Game game;
+    ConcreteCharacterFactory cf;
     private IslandGroup islandGroup;
     private Island island1;
     private Island island2;
@@ -25,6 +27,7 @@ class IslandGroupTest {
     @BeforeEach
     void setUp() {
         game = new Game();
+        cf = new ConcreteCharacterFactory(game);
         islandGroup = new IslandGroup();
     }
 
@@ -360,6 +363,7 @@ class IslandGroupTest {
     void calculateInfluenceNoCharacter() {
         Player player = new Player(game, "Chiara", PlayerColor.BLACK);
         game.addPlayer(player);
+        game.setCurrentPlayer(player);
         player.getBoard().setTowers(5);
 
         island1 = new Island(1);
@@ -383,7 +387,8 @@ class IslandGroupTest {
         islandGroup.addIsland(island2);
         islandGroup.addIsland(island3);
 
-        assertEquals(7, islandGroup.calculateInfluence(player));
+        Character character = cf.createCharacter(0);
+        assertEquals(7, islandGroup.calculateInfluence(game, player, character));
     }
 
     @Test
@@ -415,7 +420,6 @@ class IslandGroupTest {
         islandGroup.addIsland(island2);
         islandGroup.addIsland(island3);
 
-        ConcreteCharacterFactory cf = new ConcreteCharacterFactory(game);
         Character character = cf.createCharacter(6);
         assertEquals(4, islandGroup.calculateInfluence(game, player, character));
     }

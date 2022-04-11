@@ -1,14 +1,10 @@
 package it.polimi.ingsw.model.characters;
 
-public class CharacterStepsAdder extends Character {
+public class CharacterNone extends Character {
 
-    /**
-     * Default constructor
-     * @param characterID id of the character to create
-     */
-    public CharacterStepsAdder(int characterID) {
+    public CharacterNone(int characterID) {
         this.characterID = characterID;
-        this.cost = 1;
+        this.cost = 0;
         this.used = false;
         this.numberOfStudents = 0;
         this.numberOfBanCards = 0;
@@ -17,7 +13,7 @@ public class CharacterStepsAdder extends Character {
         this.colorNoPoints = null;
         this.extraPoints = 0;
         this.towerCounter = true;
-        this.moreSteps = 2;
+        this.moreSteps = 0;
     }
 
     @Override

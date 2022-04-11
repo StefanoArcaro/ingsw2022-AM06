@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model.gameBoard;
+package it.polimi.ingsw.model.enumerations;
 
 public enum CreatureColor {
 

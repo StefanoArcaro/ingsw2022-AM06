@@ -5,10 +5,10 @@ import it.polimi.ingsw.exceptions.InvalidColorException;
 import it.polimi.ingsw.exceptions.InvalidDestinationException;
 import it.polimi.ingsw.exceptions.TableFullException;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.GameState;
+import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.StudentDestination;
-import it.polimi.ingsw.model.gameBoard.CreatureColor;
+import it.polimi.ingsw.model.gameBoard.StudentDestination;
+import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.gameBoard.Student;
 
 public class MoveStudentPhase extends ActionPhase {

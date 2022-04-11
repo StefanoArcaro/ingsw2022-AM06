@@ -2,11 +2,10 @@ package it.polimi.ingsw.model.phases;
 
 import it.polimi.ingsw.exceptions.AssistantTakenException;
 import it.polimi.ingsw.exceptions.InvalidPriorityException;
-import it.polimi.ingsw.model.Assistant;
+import it.polimi.ingsw.model.gameBoard.Assistant;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.GameState;
+import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.characters.ConcreteCharacterFactory;
 import it.polimi.ingsw.model.gameBoard.Cloud;
 
 import java.util.ArrayList;
@@ -20,7 +19,6 @@ public class PlanningPhase extends Phase {
     private static final int MIN_PRIORITY = 1;
     private static final int MAX_PRIORITY = 10;
 
-    private static final int NULL_CHARACTER_ID = 0;
     private static final int FIRST_PLAYER_INDEX = 0;
 
     int firstPlayerIndex;
@@ -38,7 +36,6 @@ public class PlanningPhase extends Phase {
     public PlanningPhase(Game game, ArrayList<Player> players, int firstPlayerIndex) {
         this.game = game;
         this.phaseFactory = new PhaseFactory(game);
-        this.activatedCharacter = new ConcreteCharacterFactory(game).createCharacter(NULL_CHARACTER_ID);
         this.firstPlayerIndex = firstPlayerIndex;
         this.playingOrder = new ArrayList<>(players);
         this.playerPriority = new HashMap<>();

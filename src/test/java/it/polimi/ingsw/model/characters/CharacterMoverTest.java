@@ -2,6 +2,8 @@ package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.enumerations.CreatureColor;
+import it.polimi.ingsw.model.enumerations.GameMode;
 import it.polimi.ingsw.model.gameBoard.*;
 import it.polimi.ingsw.model.phases.Phase;
 import org.junit.jupiter.api.AfterEach;

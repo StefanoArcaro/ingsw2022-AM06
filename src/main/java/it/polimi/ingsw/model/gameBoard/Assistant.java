@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.gameBoard;
 
 import it.polimi.ingsw.model.characters.Character;
 
@@ -20,14 +20,6 @@ public class Assistant implements Comparable<Assistant> {
      */
     public int getPriority() {
         return priority;
-    }
-
-    /**
-     * @return the maximum number of steps Mother Nature will be allowed
-     *         to take if this Assistant card is played
-     */
-    public int getMaxSteps() {
-        return maxSteps;
     }
 
     /**

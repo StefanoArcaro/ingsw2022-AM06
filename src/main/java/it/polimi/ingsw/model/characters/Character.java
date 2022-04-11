@@ -4,7 +4,7 @@ import it.polimi.ingsw.exceptions.NoAvailableBanCardsException;
 import it.polimi.ingsw.exceptions.NoAvailableColorException;
 import it.polimi.ingsw.exceptions.OutOfBoundException;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.gameBoard.CreatureColor;
+import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.gameBoard.Student;
 
 import java.util.ArrayList;
@@ -95,7 +95,7 @@ public abstract class Character {
      * Decreases number of ban cards
      */
     public void removeBanCard() {
-        numberOfBanCards -=1;
+        numberOfBanCards -= 1;
     }
 
     /**

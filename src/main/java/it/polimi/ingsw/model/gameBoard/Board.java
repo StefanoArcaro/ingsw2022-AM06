@@ -2,6 +2,8 @@ package it.polimi.ingsw.model.gameBoard;
 
 import it.polimi.ingsw.exceptions.TableFullException;
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.enumerations.CreatureColor;
+import it.polimi.ingsw.model.enumerations.GameMode;
 
 import java.util.ArrayList;
 
@@ -112,21 +114,6 @@ public class Board {
     }
 
     /**
-     * Moves a student of the specified color to the inputted island
-     * @param color of the student to move
-     * @param island to move the student to
-     * @return whether the student was moved or not
-     */
-    public boolean moveStudentToIsland(CreatureColor color,Island island) {
-       if(removeStudentFromEntrance(color)){
-           island.receiveStudent(color);
-           return true;
-       }
-       return false;
-
-    }
-
-    /**
      * Adds the specified professor to the board
      * @param professor to add
      */
@@ -155,7 +142,6 @@ public class Board {
             professors.remove(result);
             return result;
         }
-
         return null;
     }
 
@@ -209,8 +195,8 @@ public class Board {
         return false;
     }
 
-    //TODO check
-    public boolean isThereNoTowers() {
+
+    public boolean checkNoTowers() {
         return this.towers <= 0;
     }
 }

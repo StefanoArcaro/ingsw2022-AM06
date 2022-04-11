@@ -2,6 +2,8 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.characters.ConcreteCharacterFactory;
+import it.polimi.ingsw.model.enumerations.CreatureColor;
+import it.polimi.ingsw.model.enumerations.PlayerColor;
 import it.polimi.ingsw.model.gameBoard.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

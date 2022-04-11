@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model.characters;
+package it.polimi.ingsw.model.enumerations;
 
 public enum CharacterID {
 

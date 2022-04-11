@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.enumerations;
 
 /**
  * Enumeration for the possible game modes

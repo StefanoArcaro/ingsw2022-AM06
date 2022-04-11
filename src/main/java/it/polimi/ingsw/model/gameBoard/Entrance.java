@@ -1,13 +1,12 @@
 package it.polimi.ingsw.model.gameBoard;
 
-import it.polimi.ingsw.model.StudentDestination;
-import it.polimi.ingsw.model.StudentSource;
+import it.polimi.ingsw.model.enumerations.CreatureColor;
 
 import java.util.ArrayList;
 
 public class Entrance implements StudentSource, StudentDestination {
 
-    private ArrayList<Student> students;
+    private final ArrayList<Student> students;
 
     /**
      * Default constructor

@@ -1,7 +1,7 @@
 package it.polimi.ingsw.exceptions;
 
 /**
- * Class ExceededStepsException is thrown when more steps are taken than allowed
+ * Class ExceededStepsException is thrown when more steps are taken than allowed.
  */
 public class ExceededStepsException extends Exception {
 

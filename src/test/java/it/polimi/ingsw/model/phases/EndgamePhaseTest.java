@@ -1,10 +1,11 @@
 package it.polimi.ingsw.model.phases;
 
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.GameState;
+import it.polimi.ingsw.model.enumerations.GameMode;
+import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.PlayerColor;
-import it.polimi.ingsw.model.gameBoard.CreatureColor;
+import it.polimi.ingsw.model.enumerations.PlayerColor;
+import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.gameBoard.Professor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,7 @@ class EndgamePhaseTest {
     void setUp() {
         game = new Game();
         phaseFactory = new PhaseFactory(game);
+        game.setGameMode(GameMode.EXPERT);
     }
 
 

@@ -3,7 +3,10 @@ package it.polimi.ingsw.model.phases;
 import it.polimi.ingsw.exceptions.InvalidWizardException;
 import it.polimi.ingsw.exceptions.WizardTakenException;
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.model.gameBoard.CreatureColor;
+import it.polimi.ingsw.model.enumerations.GameMode;
+import it.polimi.ingsw.model.enumerations.GameState;
+import it.polimi.ingsw.model.enumerations.WizardName;
+import it.polimi.ingsw.model.enumerations.CreatureColor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -146,8 +149,9 @@ class PreparePhaseTest {
             assertEquals(0, game.getPlayers().get(1).getBoard().getHall().getTableByColor(color).getLength());
         }
 
+        // TODO change comment
         // Check that no characters were drawn
-        assertEquals(0, game.getDrawnCharacters().size());
+        assertEquals(1, game.getDrawnCharacters().size());
 
         // Check that no coins were distributed
         for(Player player : game.getPlayers()) {
@@ -298,8 +302,9 @@ class PreparePhaseTest {
             assertEquals(0, game.getPlayers().get(2).getBoard().getHall().getTableByColor(color).getLength());
         }
 
+        // TODO change comment
         // Check that no characters were drawn
-        assertEquals(0, game.getDrawnCharacters().size());
+        assertEquals(1, game.getDrawnCharacters().size());
 
         // Check that no coins were distributed
         for(Player player : game.getPlayers()) {
@@ -423,7 +428,7 @@ class PreparePhaseTest {
         }
 
         // Check drawn characters
-        assertEquals(3, game.getDrawnCharacters().size());
+        assertEquals(4, game.getDrawnCharacters().size());
         assertNotEquals(game.getDrawnCharacters().get(0).getCharacterID(), game.getDrawnCharacters().get(1).getCharacterID());
         assertNotEquals(game.getDrawnCharacters().get(0).getCharacterID(), game.getDrawnCharacters().get(2).getCharacterID());
         assertNotEquals(game.getDrawnCharacters().get(1).getCharacterID(), game.getDrawnCharacters().get(2).getCharacterID());
@@ -578,7 +583,7 @@ class PreparePhaseTest {
         }
 
         // Check drawn characters
-        assertEquals(3, game.getDrawnCharacters().size());
+        assertEquals(4, game.getDrawnCharacters().size());
         assertNotEquals(game.getDrawnCharacters().get(0).getCharacterID(), game.getDrawnCharacters().get(1).getCharacterID());
         assertNotEquals(game.getDrawnCharacters().get(0).getCharacterID(), game.getDrawnCharacters().get(2).getCharacterID());
         assertNotEquals(game.getDrawnCharacters().get(1).getCharacterID(), game.getDrawnCharacters().get(2).getCharacterID());

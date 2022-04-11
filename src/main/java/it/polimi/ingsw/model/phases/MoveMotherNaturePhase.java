@@ -2,8 +2,7 @@ package it.polimi.ingsw.model.phases;
 
 import it.polimi.ingsw.exceptions.ExceededStepsException;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.GameMode;
-import it.polimi.ingsw.model.GameState;
+import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.gameBoard.IslandGroup;
 
@@ -20,11 +19,8 @@ public class MoveMotherNaturePhase extends ActionPhase {
         this.game = game;
         this.currentPlayer = currentPlayer;
         this.phaseFactory = new PhaseFactory(game);
-        if(activatedCharacter != null) {
-            this.maxNumberOfSteps = game.getPlayerPriority().get(currentPlayer).getMaxSteps(activatedCharacter);
-        } else {
-            this.maxNumberOfSteps = game.getPlayerPriority().get(currentPlayer).getMaxSteps();
-        }
+
+        this.maxNumberOfSteps = game.getPlayerPriority().get(currentPlayer).getMaxSteps(game.getActivatedCharacter());
     }
 
 
@@ -62,11 +58,7 @@ public class MoveMotherNaturePhase extends ActionPhase {
             nextIslandGroup = game.getIslandGroupByIndex(nextIndex);
             game.getMotherNature().setCurrentIslandGroup(nextIslandGroup);
 
-            if (game.getGameMode().equals(GameMode.EXPERT)) {
-                game.calculateInfluence(nextIndex, activatedCharacter);
-            } else {
-                game.calculateInfluence(nextIndex);
-            }
+            game.calculateInfluence(nextIndex, game.getActivatedCharacter());
         }
 
         calculateNextPhase();
@@ -80,7 +72,7 @@ public class MoveMotherNaturePhase extends ActionPhase {
      * reaching the maximum number of island groups
      */
     private void calculateNextPhase() {
-        boolean endedTower = currentPlayer.getBoard().isThereNoTowers();
+        boolean endedTower = currentPlayer.getBoard().checkNoTowers();
         boolean endedIsland = game.checkEndDueToIslandGroup();
         boolean skipPickCloudPhase = game.getSkipPickCloudPhase();
 

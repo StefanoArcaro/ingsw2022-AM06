@@ -5,6 +5,7 @@ import it.polimi.ingsw.exceptions.WizardTakenException;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.characters.ConcreteCharacterFactory;
+import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.gameBoard.*;
 
 import java.util.Collections;
@@ -61,6 +62,8 @@ public class PreparePhase extends Phase {
             instantiateTowers();
             initializeEntranceStudents();
             drawFirstPlayer();
+
+            setDefaultCharacter();
 
             if(game.getGameMode().equals(GameMode.EXPERT)) {
                 drawCharacters();
@@ -253,6 +256,14 @@ public class PreparePhase extends Phase {
         int firstPlayerIndex = random.nextInt(game.getNumberOfPlayers().getNum());
         game.setFirstPlayerIndex(firstPlayerIndex);
         game.setCurrentPlayer(game.getPlayers().get(firstPlayerIndex));
+    }
+
+    private void setDefaultCharacter() {
+        ConcreteCharacterFactory characterFactory = new ConcreteCharacterFactory(game);
+        Character defaultCharacter = characterFactory.createCharacter(CharacterID.CHARACTER_NONE.getID());
+
+        game.addDrawnCharacter(defaultCharacter);
+        game.setActivatedCharacter(defaultCharacter);
     }
 
     /**

@@ -10,27 +10,36 @@ public abstract class ActionPhase extends Phase {
 
     /**
      * Pay and use the effect of a character
-     * @param activatedCharacter the character chosen
+     * @param characterID ID of the chosen character
      * @throws NoAvailableBanCardsException if there aren't available ban cards
      * @throws OutOfBoundException if the index of an island chosen doesn't exist
      * @throws NoAvailableColorException if the color chosen is not available
      * @throws NotEnoughMoneyException if the player doesn't have money to buy the character
      * @throws TooManyIterationsException if the player tries to use the effect of the character more times than allowed
      */
-    public void playCharacter(Character activatedCharacter) throws NoAvailableBanCardsException, OutOfBoundException,
-            NoAvailableColorException, NotEnoughMoneyException, TooManyIterationsException {
+    public void playCharacter(int characterID) throws NoAvailableBanCardsException, OutOfBoundException,
+            NoAvailableColorException, NotEnoughMoneyException, TooManyIterationsException, InvalidCharacterIDException {
 
-        if(activatedCharacter.getNumberOfIterations() < activatedCharacter.getToDoNow()) {
-            payCharacter(activatedCharacter);
-            this.activatedCharacter = activatedCharacter;
-            activatedCharacter.effect();
-            activatedCharacter.setUsed();
-            activatedCharacter.increaseNumberOfIteration();
+        if(checkValidCharacterID(characterID)) {
+            Character activatedCharacter = game.getCharacterByID(characterID);
+
+            if(activatedCharacter.getNumberOfIterations() < activatedCharacter.getToDoNow()) {
+                payCharacter(activatedCharacter);
+                game.setActivatedCharacter(activatedCharacter);
+                activatedCharacter.effect();
+                activatedCharacter.setUsed();
+                activatedCharacter.increaseNumberOfIteration();
+            } else {
+                throw new TooManyIterationsException();
+            }
         } else {
-            throw new TooManyIterationsException();
+            throw new InvalidCharacterIDException();
         }
     }
 
+    private boolean checkValidCharacterID(int characterID) {
+        return characterID != 0 && game.getCharacterByID(characterID) != null;
+    }
 
     /**
      * Method for paying the character
@@ -45,5 +54,4 @@ public abstract class ActionPhase extends Phase {
             throw new NotEnoughMoneyException();
         }
     }
-
 }

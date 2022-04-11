@@ -2,13 +2,12 @@ package it.polimi.ingsw.model.phases;
 
 import it.polimi.ingsw.exceptions.NoAvailableCloudException;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.GameState;
+import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.characters.CharacterID;
-import it.polimi.ingsw.model.characters.ConcreteCharacterFactory;
+import it.polimi.ingsw.model.enumerations.CharacterID;
 import it.polimi.ingsw.model.gameBoard.Cloud;
 import it.polimi.ingsw.model.gameBoard.Creature;
-import it.polimi.ingsw.model.gameBoard.CreatureColor;
+import it.polimi.ingsw.model.enumerations.CreatureColor;
 
 import java.util.List;
 
@@ -43,11 +42,8 @@ public class PickCloudPhase extends ActionPhase {
         }
         game.removeCloud(cloudChosen);
 
-        if(activatedCharacter != null) {
-            activatedCharacter.setNumberOfIterations(0);
-            activatedCharacter = new ConcreteCharacterFactory(game)
-                                    .createCharacter(CharacterID.CHARACTER_NONE.getID());
-        }
+        game.getActivatedCharacter().setNumberOfIterations(0);
+        game.setActivatedCharacter(game.getCharacterByID(CharacterID.CHARACTER_NONE.getID()));
 
         int numberOfPlayers = game.getNumberOfPlayers().getNum();
         Player lastPlayer = game.getPlayingOrder().get(numberOfPlayers - 1);

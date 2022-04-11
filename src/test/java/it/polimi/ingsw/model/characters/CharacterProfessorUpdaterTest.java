@@ -1,11 +1,13 @@
 package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.enumerations.GameMode;
+import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.phases.ActionPhase;
 import it.polimi.ingsw.model.phases.Phase;
 import it.polimi.ingsw.model.phases.PhaseFactory;
 import it.polimi.ingsw.model.gameBoard.Creature;
-import it.polimi.ingsw.model.gameBoard.CreatureColor;
+import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.gameBoard.Professor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -47,7 +49,7 @@ class CharacterProfessorUpdaterTest {
         priority.add(1);
 
         game.setNumberOfPlayers(2);
-        game.setGameMode(GameMode.EXPERT);
+        game.setGameMode(GameMode.EASY);
 
         // Lobby phase
         phase = game.getCurrentPhase();
@@ -99,6 +101,7 @@ class CharacterProfessorUpdaterTest {
     void effect() {
         game.getCurrentPlayer().receiveCoin();
         game.getCurrentPlayer().receiveCoin();
+        game.getCurrentPlayer().receiveCoin();
 
         Player p2 = game.getPlayingOrder().get(0);  //current player
         Player p1 = game.getPlayingOrder().get(1);
@@ -108,8 +111,10 @@ class CharacterProfessorUpdaterTest {
         game.setCurrentPhase(phase);
 
         Character character = cf.createCharacter(2);
+        game.addDrawnCharacter(character);
+
         try {
-            ((ActionPhase)game.getCurrentPhase()).playCharacter(character);
+            ((ActionPhase)game.getCurrentPhase()).playCharacter(2);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,6 +1,9 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.enumerations.PlayerColor;
+import it.polimi.ingsw.model.enumerations.WizardName;
 import it.polimi.ingsw.model.gameBoard.Board;
+import it.polimi.ingsw.model.gameBoard.Wizard;
 
 public class Player {
 

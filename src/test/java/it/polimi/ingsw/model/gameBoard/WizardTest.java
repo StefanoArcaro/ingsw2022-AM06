@@ -1,5 +1,11 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.gameBoard;
 
+import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.characters.Character;
+import it.polimi.ingsw.model.characters.ConcreteCharacterFactory;
+import it.polimi.ingsw.model.enumerations.PlayerColor;
+import it.polimi.ingsw.model.enumerations.WizardName;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,11 +34,14 @@ class WizardTest {
 
     @Test
     void wizard() {
+        ConcreteCharacterFactory cf = new ConcreteCharacterFactory(game);
+        Character character = cf.createCharacter(0);
+
         assertEquals(10, wizard.getAssistants().size());
         assertEquals(1, wizard.getAssistants().get(0).getPriority());
         assertEquals(10, wizard.getAssistants().get(9).getPriority());
-        assertEquals(1, wizard.getAssistants().get(1).getMaxSteps());
-        assertEquals(5, wizard.getAssistants().get(8).getMaxSteps());
+        assertEquals(1, wizard.getAssistants().get(1).getMaxSteps(character));
+        assertEquals(5, wizard.getAssistants().get(8).getMaxSteps(character));
     }
 
     @Test

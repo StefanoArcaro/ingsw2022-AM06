@@ -1,8 +1,9 @@
 package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.GameMode;
-import it.polimi.ingsw.model.GameState;
+import it.polimi.ingsw.model.enumerations.CreatureColor;
+import it.polimi.ingsw.model.enumerations.GameMode;
+import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.gameBoard.*;
 import it.polimi.ingsw.model.phases.Phase;

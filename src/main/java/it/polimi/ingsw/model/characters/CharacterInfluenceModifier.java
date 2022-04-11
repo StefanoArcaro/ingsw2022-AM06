@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.characters;
 import it.polimi.ingsw.exceptions.NoAvailableBanCardsException;
 import it.polimi.ingsw.exceptions.OutOfBoundException;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.enumerations.CharacterID;
 import it.polimi.ingsw.model.gameBoard.IslandGroup;
 
 public class CharacterInfluenceModifier extends Character {
@@ -63,7 +64,7 @@ public class CharacterInfluenceModifier extends Character {
     public void effect() throws NoAvailableBanCardsException, OutOfBoundException {
         CharacterID character = CharacterID.values()[characterID];
         if(character.equals(CharacterID.CHARACTER_FIVE)) {
-            effect_five(islandGroupIndex);
+            effect_five(this.islandGroupIndex);
         }
     }
 

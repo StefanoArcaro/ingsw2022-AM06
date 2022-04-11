@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.phases;
 
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.GameState;
+import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.Player;
 
 
