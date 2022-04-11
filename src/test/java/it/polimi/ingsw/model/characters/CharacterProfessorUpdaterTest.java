@@ -1,9 +1,7 @@
 package it.polimi.ingsw.model.characters;
 
-import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.phases.ActionPhase;
-import it.polimi.ingsw.model.phases.MoveMotherNaturePhase;
 import it.polimi.ingsw.model.phases.Phase;
 import it.polimi.ingsw.model.phases.PhaseFactory;
 import it.polimi.ingsw.model.gameBoard.Creature;
@@ -22,68 +20,97 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CharacterProfessorUpdaterTest {
 
-    Game game;
-    ConcreteCharacterFactory cf;
-    Character character;
-    PhaseFactory phaseFactory;
-    Phase phase;
+    private Game game;
+    private Phase phase;
+    private PhaseFactory phaseFactory;
+    private ArrayList<String> nicknames;
+    private ArrayList<Integer> wizardIDs;
+    private ArrayList<Integer> priority;
+    private ConcreteCharacterFactory cf;
 
     @BeforeEach
     void setUp() {
         game = new Game();
         cf = new ConcreteCharacterFactory(game);
-    }
+        phaseFactory = new PhaseFactory(game);
+        nicknames = new ArrayList<>();
+        wizardIDs = new ArrayList<>();
+        priority = new ArrayList<>();
 
-    @AfterEach
-    void tearDown() {
-        cf = null;
-        character = null;
-    }
+        nicknames.add("Stefano");
+        nicknames.add("Chiara");
 
-    @Test
-    void effect() {
+        wizardIDs.add(3); // SENSEI
+        wizardIDs.add(2); // WITCH
+
+        priority.add(2);
+        priority.add(1);
 
         game.setNumberOfPlayers(2);
         game.setGameMode(GameMode.EXPERT);
 
-        phaseFactory = new PhaseFactory(game);
-        phase = phaseFactory.createPhase(GameState.LOBBY_PHASE);
-        try {
-            phase.play();
-        } catch (Exception e) {
-            e.printStackTrace();
+        // Lobby phase
+        phase = game.getCurrentPhase();
+
+        for(String nickname : nicknames) {
+            try {
+                phase.setPlayerNickname(nickname);
+                phase.play();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
 
-        phase = phaseFactory.createPhase(GameState.PREPARE_PHASE);
-        try {
-            phase.play();
-        } catch (Exception e) {
-            e.printStackTrace();
+        // Prepare phase
+        phase = game.getCurrentPhase();
+
+        for(int i = 0; i < game.getNumberOfPlayers().getNum(); i++) {
+            try {
+                phase.setWizardID(wizardIDs.get(i));
+                phase.play();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
 
-        phase = phaseFactory.createPhase(GameState.PLANNING_PHASE);
-        try {
-            phase.play();
-        } catch (Exception e) {
-            e.printStackTrace();
+        // Planning phase
+        phase = game.getCurrentPhase();
+
+        for(int i = 0; i < game.getNumberOfPlayers().getNum(); i++) {
+            try {
+                phase.setPriority(priority.get(i));
+                phase.play();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
+    }
 
-        Player p1 = game.getPlayers().get(1);
-        Player p2 = game.getPlayers().get(0);
+    @AfterEach
+    void tearDown() {
+        game = null;
+        nicknames = null;
+        wizardIDs = null;
+        priority = null;
+        cf = null;
+    }
 
-        p2.receiveCoin();
-        p2.receiveCoin();
+    @Test
+    void effect() {
+        game.getCurrentPlayer().receiveCoin();
+        game.getCurrentPlayer().receiveCoin();
 
-        game.setCurrentPlayer(p2);
+        Player p2 = game.getPlayingOrder().get(0);  //current player
+        Player p1 = game.getPlayingOrder().get(1);
 
         phase = phaseFactory.createPhase(GameState.MOVE_MOTHER_NATURE_PHASE);
-        ((MoveMotherNaturePhase)phase).setNumberOfSteps(1);
+        phase.setNumberOfSteps(1);
         game.setCurrentPhase(phase);
 
-        character = cf.createCharacter(2);
+        Character character = cf.createCharacter(2);
         try {
             ((ActionPhase)game.getCurrentPhase()).playCharacter(character);
-        } catch (NoAvailableBanCardsException | OutOfBoundException | NoAvailableColorException | NotEnoughMoneyException | TooManyIterationsException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -96,7 +123,6 @@ class CharacterProfessorUpdaterTest {
         p1.getBoard().winProfessor(prof1);
         p1.getBoard().addStudentToHall(CreatureColor.PINK);
         p1.getBoard().winProfessor(prof3);
-
 
         p2.getBoard().addStudentToHall(CreatureColor.RED);
         p2.getBoard().addStudentToHall(CreatureColor.RED);
@@ -112,7 +138,7 @@ class CharacterProfessorUpdaterTest {
 
         try {
             character.effect();
-        } catch (NoAvailableBanCardsException | OutOfBoundException | NoAvailableColorException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

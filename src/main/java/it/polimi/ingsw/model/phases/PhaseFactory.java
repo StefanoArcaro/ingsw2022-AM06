@@ -31,7 +31,7 @@ public class PhaseFactory {
             case ENDED_ISLAND:
             case ENDED_STUDENTS:
             case ENDED_ASSISTANTS:
-                return new EndgamePhase();
+                return new EndgamePhase(game);
         }
         return null;
     }

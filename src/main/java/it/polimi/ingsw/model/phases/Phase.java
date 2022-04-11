@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.phases;
 
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.StudentDestination;
 import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.gameBoard.CreatureColor;
@@ -16,6 +17,9 @@ public abstract class Phase {
     protected int priority;
     protected int creatureColorIndex;
     protected int studentDestinationIndex;
+    protected int numberOfSteps;
+    protected int cloudID;
+    protected Player winner;
 
     /**
      * Method to be implemented by the different phases of the game
@@ -71,5 +75,28 @@ public abstract class Phase {
      */
     public void setStudentDestinationIndex(int studentDestination) {
         this.studentDestinationIndex = studentDestination;
+    }
+
+    /**
+     * Sets the number of steps mother nature has to take
+     * @param numberOfSteps number of steps chosen
+     */
+    public void setNumberOfSteps(int numberOfSteps) {
+        this.numberOfSteps = numberOfSteps; //TODO: input
+    }
+
+    /**
+     * Sets the ID of the cloud that the player wants to take
+     * @param cloudID ID of the cloud chosen
+     */
+    public void setCloudID(int cloudID) {
+        this.cloudID = cloudID; //TODO: input
+    }
+
+    /**
+     * @return the winner
+     */
+    public Player getWinner() {
+        return winner;
     }
 }

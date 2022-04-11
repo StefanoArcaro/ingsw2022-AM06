@@ -113,6 +113,14 @@ public abstract class Character {
     }
 
     /**
+     * Sets the number of times this card's effect was applied during the turn
+     * @param numberOfIterations number of times this card's effect was applied during the turn
+     */
+    public void setNumberOfIterations(int numberOfIterations) {
+        this.numberOfIterations = numberOfIterations;
+    }
+
+    /**
      * Increases the number of times this card's effect was applied during the turn
      */
     public void increaseNumberOfIteration() {

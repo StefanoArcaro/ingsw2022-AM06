@@ -35,7 +35,7 @@ public class Cloud {
      * @param bag that contains all the students that have yet to be drawn
      * @return whether all the clouds were filled or not
      */
-    public boolean fill(Bag bag, int numberOfStudents) { // TODO test cloud not full
+    public boolean fill(Bag bag, int numberOfStudents) {
         Student student;
 
         for(int i = 0; i < numberOfStudents + 1; i++) {

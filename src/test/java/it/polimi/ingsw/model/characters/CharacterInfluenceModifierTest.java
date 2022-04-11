@@ -6,79 +6,123 @@ import it.polimi.ingsw.model.GameMode;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.phases.ActionPhase;
-import it.polimi.ingsw.model.phases.MoveMotherNaturePhase;
 import it.polimi.ingsw.model.phases.Phase;
 import it.polimi.ingsw.model.phases.PhaseFactory;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CharacterInfluenceModifierTest {
 
     Game game;
+    private ArrayList<String> nicknames;
+    private ArrayList<Integer> wizardIDs;
+    private ArrayList<Integer> priority;
     ConcreteCharacterFactory cf;
     Character character;
-    PhaseFactory phaseFactory;
     Phase phase;
+    PhaseFactory phaseFactory;
 
     @BeforeEach
     void setUp() {
         game = new Game();
         cf = new ConcreteCharacterFactory(game);
-        character = cf.createCharacter(3);
+        phaseFactory = new PhaseFactory(game);
+        nicknames = new ArrayList<>();
+        wizardIDs = new ArrayList<>();
+        priority = new ArrayList<>();
+
+        nicknames.add("Stefano");
+        nicknames.add("Chiara");
+
+        wizardIDs.add(3); // SENSEI
+        wizardIDs.add(2); // WITCH
+
+        priority.add(2);
+        priority.add(1);
     }
+
+    @AfterEach
+    void tearDown() {
+        game = null;
+        nicknames = null;
+        wizardIDs = null;
+        priority = null;
+    }
+
 
     @Test
     void effect() {
         game.setNumberOfPlayers(2);
         game.setGameMode(GameMode.EXPERT);
 
-        phaseFactory = new PhaseFactory(game);
-        phase = phaseFactory.createPhase(GameState.LOBBY_PHASE);
-        try {
-            phase.play();
-        } catch (Exception e) {
-            e.printStackTrace();
+        assertEquals(GameState.LOBBY_PHASE, game.getGameState());
+
+        // Lobby phase
+        phase = game.getCurrentPhase();
+
+        for(String nickname : nicknames) {
+            try {
+                phase.setPlayerNickname(nickname);
+                phase.play();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
 
-        phase = phaseFactory.createPhase(GameState.PREPARE_PHASE);
-        try {
-            phase.play();
-        } catch (Exception e) {
-            e.printStackTrace();
+        assertEquals(GameState.PREPARE_PHASE, game.getGameState());
+
+        // Prepare phase
+        phase = game.getCurrentPhase();
+
+        for(int i = 0; i < game.getNumberOfPlayers().getNum(); i++) {
+            try {
+                phase.setWizardID(wizardIDs.get(i));
+                phase.play();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
 
-        phase = phaseFactory.createPhase(GameState.PLANNING_PHASE);
-        try {
-            phase.play();
-        } catch (Exception e) {
-            e.printStackTrace();
+        assertEquals(GameState.PLANNING_PHASE, game.getGameState());
+
+        // Planning phase
+        phase = game.getCurrentPhase();
+
+        for(int i = 0; i < game.getNumberOfPlayers().getNum(); i++) {
+            try {
+                phase.setPriority(priority.get(i));
+                phase.play();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
 
-        Player p1 = game.getPlayers().get(1);
-        Player p2 = game.getPlayers().get(0);
+        assertEquals(GameState.MOVE_STUDENT_PHASE, game.getGameState());
+
+        Player p1 = game.getPlayingOrder().get(0);
 
         p1.receiveCoin();
         p1.receiveCoin();
         p1.receiveCoin();
         p1.receiveCoin();
-
-        game.setCurrentPlayer(p1);
 
         phase = phaseFactory.createPhase(GameState.MOVE_MOTHER_NATURE_PHASE);
-        ((MoveMotherNaturePhase)phase).setNumberOfSteps(1);
+        phase.setNumberOfSteps(1);
         game.setCurrentPhase(phase);
 
         character = cf.createCharacter(5);
-
         game.setActivatedCharacter(5);
 
         ((CharacterInfluenceModifier)character).setIslandGroupIndex(1);
 
         try {
             ((ActionPhase)game.getCurrentPhase()).playCharacter(character);
-        } catch (NoAvailableBanCardsException | OutOfBoundException | NoAvailableColorException | NotEnoughMoneyException | TooManyIterationsException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -93,6 +137,5 @@ class CharacterInfluenceModifierTest {
         assertEquals(3, p1.getCoins());
         assertEquals(3, character.getNumberOfBanCards());
         assertEquals(0, game.getIslandGroupByIndex(2).getNumberOfBanCardPresent());
-
     }
 }

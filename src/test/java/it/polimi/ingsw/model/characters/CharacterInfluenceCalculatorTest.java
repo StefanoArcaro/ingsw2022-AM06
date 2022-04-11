@@ -1,55 +1,107 @@
 package it.polimi.ingsw.model.characters;
 
-import it.polimi.ingsw.exceptions.NoAvailableBanCardsException;
-import it.polimi.ingsw.exceptions.NoAvailableColorException;
-import it.polimi.ingsw.exceptions.OutOfBoundException;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.GameMode;
+import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.PlayerColor;
 import it.polimi.ingsw.model.gameBoard.*;
+import it.polimi.ingsw.model.phases.Phase;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CharacterInfluenceCalculatorTest {
 
-    Game game;
-    ConcreteCharacterFactory cf;
-    Character character;
+    private Game game;
+    private Phase phase;
+    private ArrayList<String> nicknames;
+    private ArrayList<Integer> wizardIDs;
+    private ArrayList<Integer> priority;
+    private Character character;
+    private ConcreteCharacterFactory cf;
 
     @BeforeEach
     void setUp() {
         game = new Game();
+        nicknames = new ArrayList<>();
+        wizardIDs = new ArrayList<>();
+        priority = new ArrayList<>();
         cf = new ConcreteCharacterFactory(game);
-        character = cf.createCharacter(3);
 
-        for(int i=1; i<=12; i++) {
-            Island island = new Island(i);
-            IslandGroup islandGroup = new IslandGroup();
-            islandGroup.addIsland(island);
-            game.addIslandGroup(islandGroup);
-        }
+        nicknames.add("Stefano");
+        nicknames.add("Chiara");
+
+        wizardIDs.add(3); // SENSEI
+        wizardIDs.add(2); // WITCH
+
+        priority.add(1);
+        priority.add(2);
     }
 
     @AfterEach
     void tearDown() {
-        cf = null;
-        character = null;
+        game = null;
+        nicknames = null;
+        wizardIDs = null;
+        priority = null;
     }
 
     @Test
     void effect(){
-        Player p1 = new Player(game, "X", PlayerColor.WHITE);
-        Player p2 = new Player(game, "Y", PlayerColor.BLACK);
-        game.addPlayer(p1);
-        game.addPlayer(p2);
-        game.setCurrentPlayer(p1);
+
+        game.setNumberOfPlayers(2);
+        game.setGameMode(GameMode.EXPERT);
+
+        assertEquals(GameState.LOBBY_PHASE, game.getGameState());
+
+        // Lobby phase
+        phase = game.getCurrentPhase();
+
+        for(String nickname : nicknames) {
+            try {
+                phase.setPlayerNickname(nickname);
+                phase.play();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        assertEquals(GameState.PREPARE_PHASE, game.getGameState());
+
+        // Prepare phase
+        phase = game.getCurrentPhase();
+
+        for(int i = 0; i < game.getNumberOfPlayers().getNum(); i++) {
+            try {
+                phase.setWizardID(wizardIDs.get(i));
+                phase.play();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        // Planning phase
+        phase = game.getCurrentPhase();
+
+        for(int i = 0; i < game.getNumberOfPlayers().getNum(); i++) {
+            try {
+                phase.setPriority(priority.get(i));
+                phase.play();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        assertEquals(GameState.MOVE_STUDENT_PHASE, game.getGameState());
+
+        Player p1 = game.getPlayingOrder().get(0);
+        Player p2 = game.getPlayingOrder().get(1);
 
         character = cf.createCharacter(3);
-
-        p1.getBoard().setTowers(3);
 
         p1.getBoard().addStudentToHall(CreatureColor.RED);
         p1.getBoard().addStudentToHall(CreatureColor.RED);
@@ -58,8 +110,6 @@ class CharacterInfluenceCalculatorTest {
         p1.getBoard().addStudentToHall(CreatureColor.PINK);
         p1.getBoard().addStudentToHall(CreatureColor.PINK);
         p1.getBoard().winProfessor(new Professor(CreatureColor.PINK));
-
-        p2.getBoard().setTowers(2);
 
         p2.getBoard().addStudentToHall(CreatureColor.GREEN);
         p2.getBoard().addStudentToHall(CreatureColor.GREEN);
@@ -72,6 +122,7 @@ class CharacterInfluenceCalculatorTest {
         islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.RED);
         islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.RED);
         islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.GREEN);
+        islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.PINK);
         islandGroup1.getIslands().get(0).addTower(game, p2.getColor());
         islandGroup1.setConquerorColor(p2.getColor());
 
@@ -84,17 +135,14 @@ class CharacterInfluenceCalculatorTest {
 
         try {
             character.effect();
-        } catch (NoAvailableBanCardsException | OutOfBoundException | NoAvailableColorException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         assertEquals(p1.getColor(), islandGroup1.getConquerorColor());
         assertEquals(p1.getColor(), islandGroup2.getConquerorColor());
 
-        assertEquals(1, p1.getBoard().getTowers());
-        assertEquals(2, p2.getBoard().getTowers());
-
-        assertEquals(1, p1.getBoard().getTowers());
-        assertEquals(2, p2.getBoard().getTowers());
+        assertEquals(6, p1.getBoard().getTowers());
+        assertEquals(8, p2.getBoard().getTowers());
     }
 }
