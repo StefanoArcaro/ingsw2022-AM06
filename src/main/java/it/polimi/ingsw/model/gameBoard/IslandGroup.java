@@ -23,34 +23,38 @@ public class IslandGroup {
     }
 
     /**
-     * @return the color of the player who conquered the island
+     * @return the color of the player who conquered the island.
      */
     public PlayerColor getConquerorColor() {
         return conquerorColor;
     }
 
     /**
-     * Set the color of the player who conquered the island
-     * @param conquerorColor color of the player who conquered the island
+     * Set the color of the player who conquered the island.
+     * @param conquerorColor color of the player who conquered the island.
      */
     public void setConquerorColor(PlayerColor conquerorColor) {
         this.conquerorColor = conquerorColor;
     }
 
     /**
-     * @return the number of ban card present
+     * @return the number of ban card present.
      */
     public int getNumberOfBanCardPresent() {
         return numberOfBanCardPresent;
     }
 
     /**
-     * Due to character effect: a ban card is added to the island group
+     * Due to character effect: a ban card is added to the island group.
      */
     public void addBanCard(){
         this.numberOfBanCardPresent ++;
     }
 
+    /**
+     * Removes one of the ban cards that are on the island group (if there are any).
+     * @return whether the removal is successful.
+     */
     public boolean removeBanCard() {
         if(numberOfBanCardPresent > 0) {
             numberOfBanCardPresent -= 1;
@@ -60,22 +64,22 @@ public class IslandGroup {
     }
 
     /**
-     * @return the islands that make up the island group
+     * @return the islands that make up the island group.
      */
     public ArrayList<Island> getIslands() {
         return new ArrayList<>(islands);
     }
 
     /**
-     * @return the number of islands which make up the group
+     * @return the number of islands that belong to the island group.
      */
     public int getNumberOfIslands() {
         return getIslands().size();
     }
 
     /**
-     * Add an island in the island group
-     * @param island to add to the island group
+     * Add an island to the island group.
+     * @param island to add to the island group.
      */
     public boolean addIsland(Island island) {
         int IDIslandToAdd;
@@ -84,7 +88,7 @@ public class IslandGroup {
         try {
             IDIslandToAdd = island.getIslandID();
             playerColorIslandToAdd = island.getTower();
-        } catch(NullPointerException e) {
+        } catch (NullPointerException e) {
             return false;
         }
 
@@ -121,8 +125,8 @@ public class IslandGroup {
     }
 
     /**
-     * Merge island groups together
-     * @param islandGroup to join this.islandGroup
+     * Merge island groups together.
+     * @param islandGroup to join this.islandGroup.
      */
     public boolean connectIslandGroup(IslandGroup islandGroup) {
         ArrayList<Island> islandsInGroupToAdd;
@@ -134,7 +138,7 @@ public class IslandGroup {
             islandsInGroupToAdd = islandGroup.getIslands();
             lenGroupToAdd = islandGroup.getNumberOfIslands();
             playerColorIslandGroupToAdd = islandGroup.getConquerorColor();
-        } catch(NullPointerException e) {
+        } catch (NullPointerException e) {
             return false;
         }
 
@@ -143,7 +147,7 @@ public class IslandGroup {
         }
 
         for(int j = 0; j < lenGroupToAdd; j++) {
-            for (int i = 0; i < this.getNumberOfIslands(); i++) {
+            for(int i = 0; i < this.getNumberOfIslands(); i++) {
                 if(this.getIslands().get(i).getIslandID() + 1 == islandsInGroupToAdd.get(j).getIslandID()) {
                     this.addIsland(islandsInGroupToAdd.get(j));
                     islandsAdded++;
@@ -168,12 +172,13 @@ public class IslandGroup {
     }
 
     /**
-     * Calculates the influence of the island group as the
-     * sum of the influences of the islands that are part of it
-     * Overloading of calculateInfluence with character
-     * @param player to calculate the influence for
-     * @param activatedCharacter active character which modifies influence
-     * @return the influence for the player on the island group
+     * Calculates the influence of the island group as the.
+     * sum of the influences of the islands that are part of it.
+     * Overloading of calculateInfluence with character.
+     * @param game reference to the game.
+     * @param player to calculate the influence for.
+     * @param activatedCharacter active character which modifies influence.
+     * @return the influence for the player on the island group.
      */
     public int calculateInfluence(Game game, Player player, Character activatedCharacter) {
         int influence = 0;

@@ -4,17 +4,25 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.CharacterID;
 
 /**
- * Overrides the factory method in order to return the object implementation
+ * Overrides the factory method in order to return the object implementation.
  */
 public class ConcreteCharacterFactory extends CharacterFactory {
 
+    /**
+     * Default constructor.
+     * @param game reference to the game.
+     */
     public ConcreteCharacterFactory(Game game) {
         this.game = game;
     }
 
+    /**
+     * Creates the character corresponding to the specified character ID.
+     * @param characterID ID of the character to create.
+     * @return the created character.
+     */
     @Override
     public Character createCharacter(int characterID) {
-
         CharacterID character = CharacterID.values()[characterID];
 
         return switch (character) {

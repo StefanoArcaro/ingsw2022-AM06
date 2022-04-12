@@ -36,6 +36,7 @@ class GameTest {
     void calculateInfluence_Conquer() {
         ConcreteCharacterFactory cf = new ConcreteCharacterFactory(game);
         Character character = cf.createCharacter(0);
+        game.setActivatedCharacter(character);
 
         Player player1 = new Player(game, "X", PlayerColor.BLACK);
         game.addPlayer(player1);
@@ -85,7 +86,7 @@ class GameTest {
         islandGroup4.getIslands().get(0).addTower(game, player2.getColor());
         islandGroup4.setConquerorColor(player2.getColor());
 
-        game.calculateInfluence(2, character);
+        game.calculateInfluence(2);
 
         assertEquals(10, game.getIslandGroups().size());
         assertEquals(PlayerColor.BLACK, game.getIslandGroups().get(1).getConquerorColor());
@@ -98,6 +99,7 @@ class GameTest {
     void calculateInfluence_WithCharacterNoTower() {
         ConcreteCharacterFactory cf = new ConcreteCharacterFactory(game);
         Character character = cf.createCharacter(6);
+        game.setActivatedCharacter(character);
 
         Player player1 = new Player(game, "X", PlayerColor.BLACK);
         game.addPlayer(player1);
@@ -126,7 +128,7 @@ class GameTest {
         islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.PINK);
         islandGroup1.getIslands().get(0).receiveStudent(CreatureColor.PINK);
 
-        game.calculateInfluence(1, character);
+        game.calculateInfluence(1);
 
         assertEquals(12, game.getIslandGroups().size());
         assertEquals(PlayerColor.WHITE, game.getIslandGroups().get(1).getConquerorColor());

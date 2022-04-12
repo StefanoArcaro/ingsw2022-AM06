@@ -35,8 +35,8 @@ public class PreparePhase extends Phase {
     private int turns;
 
     /**
-     * Default constructor
-     * @param game reference to the game
+     * Default constructor.
+     * @param game reference to the game.
      */
     public PreparePhase(Game game) {
         this.game = game;
@@ -46,7 +46,7 @@ public class PreparePhase extends Phase {
 
     /**
      * Prepare phase of the game.
-     * It 'sets the table' in order to begin playing
+     * It 'sets the table' in order to begin playing.
      */
     @Override
     public void play() throws WizardTakenException, InvalidWizardException {
@@ -97,18 +97,18 @@ public class PreparePhase extends Phase {
     }
 
     /**
-     * Checks if the inputted ID corresponds to a valid wizard
-     * @param wizardID to check
-     * @return whether the ID is a correct one
+     * Checks if the inputted ID corresponds to a valid wizard.
+     * @param wizardID to check.
+     * @return whether the ID is a correct one.
      */
     private boolean checkValidWizardID(int wizardID) {
         return wizardID >= MIN_WIZARD_ID && wizardID <= MAX_WIZARD_ID;
     }
 
     /**
-     * Checks whether a wizard has already been chosen by another player
-     * @param wizardID to be checked
-     * @return whether the wizard has been chosen already
+     * Checks whether a wizard has already been chosen by another player.
+     * @param wizardID to be checked.
+     * @return whether the wizard has been chosen already.
      */
     private boolean checkWizardTaken(int wizardID) {
         for(Player player : game.getPlayers()) {
@@ -122,9 +122,9 @@ public class PreparePhase extends Phase {
     }
 
     /**
-     * Returns the wizard corresponding to such ID, null if it doesn't exist
-     * @param wizardID of the wizard to return
-     * @return the wizard whose ID is the same as the inputted parameter
+     * Returns the wizard corresponding to such ID, null if it doesn't exist.
+     * @param wizardID of the wizard to return.
+     * @return the wizard whose ID is the same as the inputted parameter.
      */
     private WizardName getWizardNameByID(int wizardID) {
         for(WizardName wizardName : WizardName.values()) {
@@ -137,7 +137,7 @@ public class PreparePhase extends Phase {
     }
 
     /**
-     * Initializes the 12 islands and the beginning island groups
+     * Initializes the 12 islands and the beginning island groups.
      */
     private void islandGroupSetup() {
         for(int i = FIRST_ISLAND_ID; i <= LAST_ISLAND_ID; i++) {
@@ -149,8 +149,8 @@ public class PreparePhase extends Phase {
     }
 
     /**
-     * Randomly places Mother Nature on one of the initial island groups
-     * @return the index of the island group Mother Nature was placed on
+     * Randomly places Mother Nature on one of the initial island groups.
+     * @return the index of the island group Mother Nature was placed on.
      */
     private int placeMotherNature() {
         Random rand = new Random();
@@ -164,8 +164,8 @@ public class PreparePhase extends Phase {
 
     /**
      * Places two students of each color on the islands (one student for each island) except for
-     * the island Mother Nature was placed on and the one on the opposite side
-     * @param motherNaturePosition the index of the island group Mother Nature was placed on
+     * the island Mother Nature was placed on and the one on the opposite side.
+     * @param motherNaturePosition the index of the island group Mother Nature was placed on.
      */
     private void placeInitialStudents(int motherNaturePosition) {
         Stack<Student> initialStudents = new Stack<>();
@@ -185,7 +185,7 @@ public class PreparePhase extends Phase {
     }
 
     /**
-     * Fills the bag with the rest of the students and shuffles it
+     * Fills the bag with the rest of the students and shuffles it.
      */
     private void initialBagFill() {
         for(CreatureColor color : CreatureColor.values()) {
@@ -196,7 +196,7 @@ public class PreparePhase extends Phase {
     }
 
     /**
-     * Instantiates the cloud cards ('numberOfPlayers' many)
+     * Instantiates the cloud cards ('numberOfPlayers' many).
      */
     private void instantiateClouds() {
         for(int i = 0; i < game.getNumberOfPlayers().getNum(); i++) {
@@ -205,7 +205,7 @@ public class PreparePhase extends Phase {
     }
 
     /**
-     * Instantiates a professor for each color
+     * Instantiates a professor for each color.
      */
     private void instantiateProfessors() {
         for(CreatureColor color : CreatureColor.values()) {
@@ -214,7 +214,7 @@ public class PreparePhase extends Phase {
     }
 
     /**
-     * Instantiates a certain number of towers for each player:
+     * Instantiates a certain number of towers for each player.
      * 2P Mode -> 8 towers
      * 3P Mode -> 6 towers
      */
@@ -249,7 +249,7 @@ public class PreparePhase extends Phase {
 
 
     /**
-     * Randomly selects one of the players to be the first to play
+     * Randomly selects one of the players to be the first to play.
      */
     private void drawFirstPlayer() {
         Random random = new Random();
@@ -258,6 +258,9 @@ public class PreparePhase extends Phase {
         game.setCurrentPlayer(game.getPlayers().get(firstPlayerIndex));
     }
 
+    /**
+     * Initializes the game's active character to be the CharacterNone.
+     */
     private void setDefaultCharacter() {
         ConcreteCharacterFactory characterFactory = new ConcreteCharacterFactory(game);
         Character defaultCharacter = characterFactory.createCharacter(CharacterID.CHARACTER_NONE.getID());
@@ -270,7 +273,7 @@ public class PreparePhase extends Phase {
      * Randomly selects 3 characters from the total of 12.
      * Also calls the initialPreparation() method for each of them, in case
      * that some characters picked have some kind of effect to be activated
-     * before the game begins
+     * before the game begins.
      */
     private void drawCharacters() {
         Random random = new Random();
@@ -292,9 +295,9 @@ public class PreparePhase extends Phase {
 
     /**
      * Checks whether a certain character has already been selected to be
-     * part of the 3 for the game
-     * @param characterID ID of the character to be checked
-     * @return whether the character has already been selected
+     * part of the 3 for the game.
+     * @param characterID ID of the character to be checked.
+     * @return whether the character has already been selected.
      */
     private boolean checkCharacterDrawn(int characterID) {
         for(Character character : game.getDrawnCharacters()) {
@@ -307,7 +310,7 @@ public class PreparePhase extends Phase {
 
     /**
      * Each player receives 1 coin at the beginning of the game.
-     * The rest of the coins end up in the game 'treasury'
+     * The rest of the coins end up in the game 'treasury'.
      */
     private void distributeCoins() {
         for(Player player : game.getPlayers()) {

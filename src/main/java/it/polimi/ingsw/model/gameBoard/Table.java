@@ -11,15 +11,27 @@ public class Table {
     private final CreatureColor color;
     private int index;
 
+    /**
+     * Default constructor.
+     * @param color of the table.
+     */
     public Table(CreatureColor color) {
         this.color = color;
         this.index = MIN_INDEX;
     }
 
+    /**
+     * @return the table's color.
+     */
     public CreatureColor getColor() {
         return color;
     }
 
+    /**
+     * Adds a student to the table.
+     * @return whether the student is added successfully.
+     * @throws TableFullException when the table is full.
+     */
     public boolean addStudent() throws TableFullException {
         if(index < MAX_INDEX) {
             index = index + 1;
@@ -29,6 +41,10 @@ public class Table {
         }
     }
 
+    /**
+     * Removes a student from the table.
+     * @return whether the removal is successful.
+     */
     public boolean removeStudent() {
         if(index > MIN_INDEX) {
             index = index - 1;
@@ -37,6 +53,9 @@ public class Table {
         return false;
     }
 
+    /**
+     * @return the number of students at the table.
+     */
     public int getLength(){
         return index;
     }

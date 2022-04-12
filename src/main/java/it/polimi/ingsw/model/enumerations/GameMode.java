@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.enumerations;
 
 /**
- * Enumeration for the possible game modes
+ * Enumeration for the possible game modes.
  */
 public enum GameMode {
 

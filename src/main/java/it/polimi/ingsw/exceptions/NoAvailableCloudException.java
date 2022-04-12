@@ -1,7 +1,7 @@
 package it.polimi.ingsw.exceptions;
 
 /**
- * Class NoAvailableCloudException is thrown when the cloud chosen is not available.
+ * Class NoAvailableCloudException is thrown when the chosen cloud is not available.
  */
 public class NoAvailableCloudException extends Exception {
 

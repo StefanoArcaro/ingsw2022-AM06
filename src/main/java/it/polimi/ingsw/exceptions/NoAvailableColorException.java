@@ -1,12 +1,13 @@
 package it.polimi.ingsw.exceptions;
 
 /**
- * Class NoAvailableBanCardsException is thrown when more ban cards than the available are trying to be used .
+ * Class NoAvailableColorException is thrown when there are no students on a character
+ * card of the specified color.
  */
 public class NoAvailableColorException extends Exception {
 
     /**
-     * @return the message (type String) of this NoAvailableBanCardsException object.
+     * @return the message (type String) of this NoAvailableColorException object.
      */
     @Override
     public String getMessage() {

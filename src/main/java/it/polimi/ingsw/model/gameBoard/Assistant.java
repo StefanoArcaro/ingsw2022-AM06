@@ -8,7 +8,7 @@ public class Assistant implements Comparable<Assistant> {
     private final int maxSteps;
 
     /**
-     * Default constructor
+     * Default constructor.
      */
     public Assistant(int priority, int maxSteps) {
         this.priority = priority;
@@ -16,16 +16,15 @@ public class Assistant implements Comparable<Assistant> {
     }
 
     /**
-     * @return this Assistant card's priority
+     * @return this assistant card's priority.
      */
     public int getPriority() {
         return priority;
     }
 
     /**
-     * Overloading
-     * @param activatedCharacter character of class CharacterStepsAdder which is active
-     * @return the maximum number of steps Mother Nature will be allowed to take
+     * @param activatedCharacter character of class CharacterStepsAdder which is active.
+     * @return the maximum number of steps Mother Nature will be allowed to take.
      */
     public int getMaxSteps(Character activatedCharacter) {
         return maxSteps + activatedCharacter.getMoreSteps();

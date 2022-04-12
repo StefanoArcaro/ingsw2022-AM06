@@ -10,8 +10,8 @@ public class EndgamePhase extends Phase {
     private final static int MAX_TOWERS = 8;
 
     /**
-     * Default constructor
-     * @param game game played
+     * Default constructor.
+     * @param game game played.
      */
     public EndgamePhase(Game game) {
         this.game = game;
@@ -19,7 +19,7 @@ public class EndgamePhase extends Phase {
     }
 
     /**
-     * Check how ended the game and the winner
+     * Checks how the game ended and calculates the winner.
      */
     @Override
     public void play() {
@@ -31,7 +31,7 @@ public class EndgamePhase extends Phase {
     }
 
     /**
-     * @return the winner
+     * @return the winner.
      */
     private Player calculateWinner() {
         int numberOfTowers;
@@ -52,10 +52,10 @@ public class EndgamePhase extends Phase {
     }
 
     /**
-     * Calculates the player who has more professors
-     * @param playerA first player
-     * @param playerB second player
-     * @return the player with more professors
+     * Calculates the player who has more professors.
+     * @param playerA first player.
+     * @param playerB second player.
+     * @return the player with more professors.
      */
     private Player calculateWinner_Professors(Player playerA, Player playerB) {
         int numberOfProfessorsA = playerA.getBoard().getProfessors().size();
@@ -67,5 +67,4 @@ public class EndgamePhase extends Phase {
 
         return playerB;
     }
-
 }

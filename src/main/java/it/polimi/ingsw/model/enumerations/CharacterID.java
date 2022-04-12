@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model.enumerations;
 
+/**
+ * Enumeration of the possible character IDs.
+ */
 public enum CharacterID {
 
     CHARACTER_NONE(0),

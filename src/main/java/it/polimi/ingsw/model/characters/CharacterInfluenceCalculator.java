@@ -8,9 +8,9 @@ public class CharacterInfluenceCalculator extends Character {
     private int islandGroupIndex;
 
     /**
-     * Default constructor
-     * @param game game played
-     * @param characterID id of the character to create
+     * Default constructor.
+     * @param game game played.
+     * @param characterID id of the character to create.
      */
     public CharacterInfluenceCalculator(Game game, int characterID) {
         this.characterID = characterID;
@@ -28,29 +28,29 @@ public class CharacterInfluenceCalculator extends Character {
     }
 
     /**
-     * Set the index of island group where to calculate the influence
-     * @param islandGroupIndex where calculate the influence
-     */
-    public void setIslandGroupIndex(int islandGroupIndex) {
-        this.islandGroupIndex = islandGroupIndex; // TODO: input
-    }
-
-    /**
-     * @return the index of island group where to calculate the influence
+     * @return the index of island group where to calculate the influence.
      */
     public int getIslandGroupIndex() {
         return islandGroupIndex;
     }
 
     /**
-     * Calculates the influence on the island group chosen
-     * @throws OutOfBoundException when the index of the island group chosen doesn't exist
+     * Set the index of island group where to calculate the influence.
+     * @param islandGroupIndex where calculate the influence.
+     */
+    public void setIslandGroupIndex(int islandGroupIndex) {
+        this.islandGroupIndex = islandGroupIndex; // TODO: input
+    }
+
+    /**
+     * Calculates the influence on the island group chosen.
+     * @throws OutOfBoundException when the index of the island group chosen doesn't exist.
      */
     public void effect() throws OutOfBoundException {
         int numberOfIslandGroups = game.getIslandGroups().size();
 
         if(islandGroupIndex >= 0 && islandGroupIndex < numberOfIslandGroups) {
-            game.calculateInfluence(this.islandGroupIndex, this);
+            game.calculateInfluence(this.islandGroupIndex);
         } else {
             throw new OutOfBoundException();
         }

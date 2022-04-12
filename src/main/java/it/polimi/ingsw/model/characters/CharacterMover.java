@@ -112,7 +112,6 @@ public class CharacterMover extends Character {
 
     }
 
-
     @Override
     public void effect() throws NoAvailableColorException, OutOfBoundException {
         CharacterID character = CharacterID.values()[this.characterID];
@@ -125,6 +124,8 @@ public class CharacterMover extends Character {
             case CHARACTER_ELEVEN -> effect_eleven(fromColor);
             case CHARACTER_TWELVE -> effect_twelve(colorToRemove);
         }
+
+        game.updateProfessors();
     }
 
     /**

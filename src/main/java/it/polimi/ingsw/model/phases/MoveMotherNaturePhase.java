@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.phases;
 
 import it.polimi.ingsw.exceptions.ExceededStepsException;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.enumerations.CharacterID;
 import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.gameBoard.IslandGroup;
@@ -11,9 +12,9 @@ public class MoveMotherNaturePhase extends ActionPhase {
     private final int maxNumberOfSteps;
 
     /**
-     * Default constructor
-     * @param game game played
-     * @param currentPlayer player who is playing
+     * Default constructor.
+     * @param game game played.
+     * @param currentPlayer player who is playing.
      */
     public MoveMotherNaturePhase(Game game, Player currentPlayer) {
         this.game = game;
@@ -25,21 +26,21 @@ public class MoveMotherNaturePhase extends ActionPhase {
 
 
     /**
-     * Checks if the number of steps chosen is allowed
-     * by comparing them to the number of steps indicated by the assistant played
-     * @param numberOfSteps number of steps chosen
-     * @return whether the steps chosen are allowed
+     * Checks if the number of steps chosen is allowed.
+     * by comparing them to the number of steps indicated by the assistant played.
+     * @param numberOfSteps number of steps chosen.
+     * @return whether the steps chosen are allowed.
      */
     private boolean checkNumberOfSteps(int numberOfSteps) {
         return numberOfSteps <= maxNumberOfSteps;
     }
 
     /**
-     * Moves mother nature in the steps indicated
+     * Moves mother nature in the steps indicated.
      * Calculates the influence on the island where mother nature arrives
-     * and replaces the towers if necessary
-     * Check whether adjacent islands need to be merged
-     * @throws ExceededStepsException if it's tried to perform more steps than allowed
+     * and replaces the towers if necessary.
+     * Check whether adjacent islands need to be merged.
+     * @throws ExceededStepsException if it's tried to perform more steps than allowed.
      */
     @Override
     public void play() throws ExceededStepsException {
@@ -48,17 +49,17 @@ public class MoveMotherNaturePhase extends ActionPhase {
         int currentIslandGroupIndex = game.getIndexOfIslandGroup(currentIslandGroup);
         IslandGroup nextIslandGroup;
 
-        if (currentIslandGroupIndex >= 0) {
+        if(currentIslandGroupIndex >= 0) {
             int nextIndex;
-            if (checkNumberOfSteps(numberOfSteps)) {
+            if(checkNumberOfSteps(numberOfSteps)) {
                 nextIndex = (currentIslandGroupIndex + numberOfSteps) % numberOfIslandGroups;
             } else {
                 throw new ExceededStepsException();
             }
+
             nextIslandGroup = game.getIslandGroupByIndex(nextIndex);
             game.getMotherNature().setCurrentIslandGroup(nextIslandGroup);
-
-            game.calculateInfluence(nextIndex, game.getActivatedCharacter());
+            game.calculateInfluence(nextIndex);
         }
 
         calculateNextPhase();
@@ -66,10 +67,8 @@ public class MoveMotherNaturePhase extends ActionPhase {
     }
 
     /**
-     * Sets the next phase of the play
-     * checking the end of the game
-     * due to the end of a player's towers or
-     * reaching the maximum number of island groups
+     * Sets the next phase of the play checking if the game ended due to a player using all
+     * of their towers or the number of island groups reaching 3.
      */
     private void calculateNextPhase() {
         boolean endedTower = currentPlayer.getBoard().checkNoTowers();
@@ -91,6 +90,10 @@ public class MoveMotherNaturePhase extends ActionPhase {
         }
 
         if(skipPickCloudPhase) {
+            // TODO check
+            game.getActivatedCharacter().setNumberOfIterations(0);
+            game.setActivatedCharacter(game.getCharacterByID(CharacterID.CHARACTER_NONE.getID()));
+
             if(isCurrentPlayerTheLastOne) {
                 game.setGameState(GameState.ENDED_STUDENTS);
             } else {

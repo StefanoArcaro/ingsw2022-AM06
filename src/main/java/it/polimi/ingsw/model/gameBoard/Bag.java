@@ -12,23 +12,23 @@ public class Bag implements StudentDestination {
     private final ArrayList<Student> students;
 
     /**
-     * Default constructor
+     * Default constructor.
      */
     public Bag() {
         students = new ArrayList<>();
     }
 
     /**
-     * @return the list of students in the bag
+     * @return the list of students in the bag.
      */
     public ArrayList<Student> getStudents() {
         return new ArrayList<>(students);
     }
 
     /**
-     * Adds student of the specified color to the bag, then shuffles the bag
-     * @param color of the student to add
-     * @return whether the student was added
+     * Adds student of the specified color to the bag, then shuffles the bag.
+     * @param color of the student to add.
+     * @return whether the student was added.
      */
     public boolean receiveStudent(CreatureColor color) {
         boolean done = students.add(new Student(color));
@@ -37,15 +37,15 @@ public class Bag implements StudentDestination {
     }
 
     /**
-     * @return the number of students in the bag
+     * @return the number of students in the bag.
      */
     public int size() {
         return students.size();
     }
 
     /**
-     * Draws a student from the bag
-     * @return the drawn student
+     * Draws a student from the bag.
+     * @return the drawn student.
      */
     public Student drawStudent() {
         int len = students.size();

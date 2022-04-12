@@ -8,7 +8,7 @@ public class Cloud {
     private final ArrayList<Student> students;
 
     /**
-     * Default constructor
+     * Default constructor.
      */
     public Cloud(int cloudID) {
         this.cloudID = cloudID;
@@ -16,24 +16,24 @@ public class Cloud {
     }
 
     /**
-     * @return the cloud card's ID
+     * @return the cloud card's ID.
      */
     public int getCloudID() {
         return cloudID;
     }
 
     /**
-     * @return the students on the clout card
+     * @return the students on the cloud card.
      */
     public ArrayList<Student> getStudents() {
         return new ArrayList<>(students);
     }
 
     /**
-     * Fills the cloud card with the correct number of students
-     * based on the chosen number of players for the game
-     * @param bag that contains all the students that have yet to be drawn
-     * @return whether all the clouds were filled or not
+     * Fills the cloud card with the correct number of students.
+     * based on the chosen number of players for the game.
+     * @param bag that contains all the students that have yet to be drawn.
+     * @return whether all the clouds were filled or not.
      */
     public boolean fill(Bag bag, int numberOfStudents) {
         Student student;
@@ -51,8 +51,8 @@ public class Cloud {
     }
 
     /**
-     * Empties the cloud card's students' list
-     * @return the ArrayList of the students that were on the cloud card
+     * Empties the cloud card's students' list.
+     * @return the ArrayList of the students that were on the cloud card.
      */
     public ArrayList<Student> empty() {
         ArrayList<Student> result = new ArrayList<>(students);

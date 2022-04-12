@@ -20,8 +20,8 @@ public class Island implements StudentDestination {
     private PlayerColor tower;
 
     /**
-     * Default constructor
-     * @param islandID ID of the island
+     * Default constructor.
+     * @param islandID ID of the island.
      */
     public Island(int islandID) {
         if(islandID >= ISLAND_ID_MIN && islandID <= ISLAND_ID_MAX) {
@@ -31,36 +31,40 @@ public class Island implements StudentDestination {
         }
     }
 
+    /**
+     * @return the list of students on the island.
+     */
     public ArrayList<Student> getStudents() {
         return new ArrayList<>(students);
     }
 
     /**
-     * Add student on the island
-     * @param color of the student to add
-     * @return whether the student was added
+     * Add student to the island.
+     * @param color of the student to add.
+     * @return whether the student was added.
      */
     public boolean receiveStudent(CreatureColor color){
         return students.add(new Student(color));
     }
 
     /**
-     * @return the island ID
+     * @return the island ID.
      */
     public int getIslandID() {
         return islandID;
     }
 
     /**
-     * @return the color of the player who conquered the island
+     * @return the color of the player who conquered the island.
      */
     public PlayerColor getTower() {
         return tower;
     }
 
     /**
-     * Add a tower on the island
-     * @param tower represents the player who conquered the island
+     * Add a tower on the island.
+     * @param game reference to the game.
+     * @param tower represents the player who conquered the island.
      */
     public boolean addTower(Game game, PlayerColor tower) {
         Player player = game.getPlayerByColor(tower);
@@ -76,7 +80,8 @@ public class Island implements StudentDestination {
     }
 
     /**
-     * Removes the tower from the island: it has been conquered
+     * Removes the tower from the island: it has been conquered.
+     * @param game reference to the game.
      */
     public boolean removeTower(Game game) {
         Player player = game.getPlayerByColor(tower);
@@ -89,11 +94,10 @@ public class Island implements StudentDestination {
     }
 
     /**
-     * Calculates the player's influence on the island due to the towers
-     * Overloading
-     * @param player whose influence is being calculated
-     * @param activatedCharacter active character
-     * @return the player's influence on the island due to the towers
+     * Calculates the player's influence on the island due to the towers.
+     * @param player whose influence is being calculated.
+     * @param activatedCharacter active character.
+     * @return the player's influence on the island due to the towers.
      */
     private int towerInfluence(Player player, Character activatedCharacter) {
         PlayerColor playerColor = player.getColor();
@@ -109,11 +113,10 @@ public class Island implements StudentDestination {
     }
 
     /**
-     * Calculates the player's influence on the island due to the students on the island
-     * Overloading
-     * @param player whose influence is being calculated
-     * @param activatedCharacter active character
-     * @return the player's influence on the island due to the students
+     * Calculates the player's influence on the island due to the students on the island.
+     * @param player whose influence is being calculated.
+     * @param activatedCharacter active character.
+     * @return the player's influence on the island due to the students.
      */
     private int studentInfluence(Player player, Character activatedCharacter) {
         int influenceByStudent = 0;
@@ -127,8 +130,8 @@ public class Island implements StudentDestination {
                 .filter(x->!x.equals(colorNoPoints)).collect(Collectors.toList());
         playerProfessorsColor = new ArrayList<>(playerProfessorsColorList);
 
-        for (Student student : students){
-            if(playerProfessorsColor.contains(student.getColor())){
+        for(Student student : students) {
+            if(playerProfessorsColor.contains(student.getColor())) {
                 influenceByStudent++;
             }
         }
@@ -137,11 +140,10 @@ public class Island implements StudentDestination {
     }
 
     /**
-     * Calculate the influence of a player on the island
-     * Overloading
-     * @param player whose influence is being calculated
-     * @param activatedCharacter active character
-     * @return the influence of the player on the island
+     * Calculate the influence of a player on the island.
+     * @param player whose influence is being calculated.
+     * @param activatedCharacter active character.
+     * @return the influence of the player on the island.
      */
     public int calculateInfluence(Player player, Character activatedCharacter) {
         int influence = 0;

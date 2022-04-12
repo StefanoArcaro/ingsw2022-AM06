@@ -3,8 +3,8 @@ package it.polimi.ingsw.model.characters;
 public class CharacterStepsAdder extends Character {
 
     /**
-     * Default constructor
-     * @param characterID id of the character to create
+     * Default constructor.
+     * @param characterID id of the character to create.
      */
     public CharacterStepsAdder(int characterID) {
         this.characterID = characterID;

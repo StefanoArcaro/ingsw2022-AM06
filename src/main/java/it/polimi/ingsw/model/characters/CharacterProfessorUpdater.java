@@ -5,9 +5,9 @@ import it.polimi.ingsw.model.Game;
 public class CharacterProfessorUpdater extends Character {
 
     /**
-     * Default constructor
-     * @param game game played
-     * @param characterID id of the character to create
+     * Default constructor.
+     * @param game game played.
+     * @param characterID id of the character to create.
      */
     public CharacterProfessorUpdater(Game game, int characterID) {
         this.characterID = characterID;

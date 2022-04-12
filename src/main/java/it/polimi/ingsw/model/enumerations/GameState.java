@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.enumerations;
 
 /**
- * Enumeration to keep track of the current state of the game
+ * Enumeration to keep track of the current state of the game.
  */
 public enum GameState {
 

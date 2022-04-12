@@ -14,9 +14,9 @@ import java.util.List;
 public class PickCloudPhase extends ActionPhase {
 
     /**
-     * Default constructor
-     * @param game game played
-     * @param currentPlayer player who is playing
+     * Default constructor.
+     * @param game game played.
+     * @param currentPlayer player who is playing.
      */
     public PickCloudPhase(Game game, Player currentPlayer) {
         this.game = game;
@@ -25,8 +25,8 @@ public class PickCloudPhase extends ActionPhase {
     }
 
     /**
-     * Takes the students present on the chosen cloud and places them in the player's entrance
-     * @throws NoAvailableCloudException if the cloud chosen doesn't exist
+     * Takes the students present on the chosen cloud and places them in the player's entrance.
+     * @throws NoAvailableCloudException if the chosen cloud doesn't exist.
      */
     @Override
     public void play() throws NoAvailableCloudException {
@@ -61,9 +61,9 @@ public class PickCloudPhase extends ActionPhase {
     }
 
     /**
-     * Sets the next phase of the play
-     * checking the end of the game
-     * due to the end of the assistants or the end of the students
+     * Sets the next phase of the play.
+     * checking the end of the game.
+     * due to the end of the assistants or the end of the students.
      */
     private void calculateNextPhase() {
         boolean endedStudent = game.getBag().isEmpty();

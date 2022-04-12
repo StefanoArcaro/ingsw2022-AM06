@@ -1,8 +1,8 @@
 package it.polimi.ingsw.exceptions;
 
 /**
- * Class TooManyIterationsException is thrown when the effect of a character is tried to be used
- * more times than allowed
+ * Class TooManyIterationsException is thrown when a player tries to use a character's effect
+ * more times than allowed.
  */
 public class TooManyIterationsException extends Exception {
 

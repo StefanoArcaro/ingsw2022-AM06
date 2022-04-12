@@ -18,8 +18,8 @@ public class LobbyPhase extends Phase {
     private PlayerColor playerColor;
 
     /**
-     * Default constructor
-     * @param game reference to the game
+     * Default constructor.
+     * @param game reference to the game.
      */
     public LobbyPhase(Game game) {
         this.game = game;
@@ -28,9 +28,8 @@ public class LobbyPhase extends Phase {
 
     /**
      * Lobby phase of the game.
-     * Handles the entry of new players to the game up to
-     * the chosen number of players.
-     * @throws NicknameTakenException when a nickname has already been chosen
+     * Handles the entry of new players to the game up to the chosen number of players.
+     * @throws NicknameTakenException when a nickname has already been chosen.
      */
     @Override
     public void play() throws NicknameTakenException, MaxPlayersReachedException {
@@ -44,10 +43,9 @@ public class LobbyPhase extends Phase {
     }
 
     /**
-     * Adds a player to the game if the chosen number of
-     * players has yet to be reached.
-     * @param nickname of the player to add
-     * @throws NicknameTakenException if the nickname has already been chosen
+     * Adds a player to the game if the chosen number of players has yet to be reached.
+     * @param nickname of the player to add.
+     * @throws NicknameTakenException if the nickname has already been chosen.
      */
     private void addPlayer(String nickname) throws NicknameTakenException, MaxPlayersReachedException {
         if(!checkNicknameTaken(nickname)) {
@@ -72,18 +70,18 @@ public class LobbyPhase extends Phase {
     }
 
     /**
-     * Checks whether a nickname has already been chosen
-     * @param nickname to check
-     * @return whether the nickname has been chosen already
+     * Checks whether a nickname has already been chosen.
+     * @param nickname to check.
+     * @return whether the nickname has been chosen already.
      */
     private boolean checkNicknameTaken(String nickname) {
         return getPlayerByNickname(nickname) != null;
     }
 
     /**
-     * Returns the player having the inputted nickname
-     * @param nickname to check
-     * @return the player whose nickname matches the parameter passed
+     * Returns the player having the inputted nickname.
+     * @param nickname to check.
+     * @return the player whose nickname matches the parameter passed.
      */
     private Player getPlayerByNickname(String nickname) {
         for(Player player : game.getPlayers()) {

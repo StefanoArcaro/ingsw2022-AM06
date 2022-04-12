@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model.enumerations;
 
+/**
+ * Enumeration of the valid colors.
+ */
 public enum CreatureColor {
 
     GREEN(0),

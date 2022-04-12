@@ -28,10 +28,10 @@ public class PlanningPhase extends Phase {
     int turns;
 
     /**
-     * Default constructor
-     * @param game reference to the game
-     * @param players list of the players
-     * @param firstPlayerIndex index of the player going first
+     * Default constructor.
+     * @param game reference to the game.
+     * @param players list of the players.
+     * @param firstPlayerIndex index of the player going first.
      */
     public PlanningPhase(Game game, ArrayList<Player> players, int firstPlayerIndex) {
         this.game = game;
@@ -67,7 +67,7 @@ public class PlanningPhase extends Phase {
     }
 
     /**
-     * Each player chooses an assistant card to play
+     * The current player chooses an assistant card to play.
      */
     private void playAssistant() throws AssistantTakenException, InvalidPriorityException {
         Assistant assistant;
@@ -90,10 +90,10 @@ public class PlanningPhase extends Phase {
 
     /**
      * Checks if the selected priority is inside the external bounds and if
-     * the assistant corresponding to such priority has not been played yet
-     * @param priority to check
-     * @return whether the priority passed is valid and whether hte corresponding
-     * assistant has not yet been played
+     * the assistant corresponding to such priority has not been played yet.
+     * @param priority to check.
+     * @return whether the priority passed is valid and whether the corresponding
+     * assistant has not yet been played.
      */
     private boolean checkValidPriority(int priority) {
         if(priority >= MIN_PRIORITY && priority <= MAX_PRIORITY) {
@@ -104,9 +104,9 @@ public class PlanningPhase extends Phase {
     }
 
     /**
-     * Checks if the currentPlayer's chosen Assistant can be played or not
-     * @param priority of the Assistant that the currentPlayer wants to play
-     * @return whether the Assistant can be played or not
+     * Checks if the currentPlayer's chosen Assistant can be played or not.
+     * @param priority of the Assistant that the currentPlayer wants to play.
+     * @return whether the Assistant can be played or not.
      */
     private boolean checkAssistantPlayed(int priority) {
         List<Integer> priorities = playerPriority.values()
@@ -124,7 +124,7 @@ public class PlanningPhase extends Phase {
     }
 
     /**
-     * Fills the cloud cards
+     * Fills the cloud cards.
      */
     private void fillClouds() {
         for(Cloud cloud : game.getClouds()) {
@@ -135,7 +135,7 @@ public class PlanningPhase extends Phase {
     }
 
     /**
-     * Calculates the new playing order based on the assistant cards played
+     * Calculates the new playing order based on the assistant cards played.
      */
     private void calculatePlayingOrder() {
         playingOrder = playerPriority.entrySet().stream()

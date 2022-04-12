@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model.enumerations;
 
+/**
+ * Enumeration of the available wizards' names.
+ */
 public enum WizardName {
 
     DRUID (0),

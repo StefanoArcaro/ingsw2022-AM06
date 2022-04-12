@@ -2,6 +2,10 @@ package it.polimi.ingsw.model.characters;
 
 public class CharacterNone extends Character {
 
+    /**
+     * Default constructor.
+     * @param characterID of the CharacterNone (0).
+     */
     public CharacterNone(int characterID) {
         this.characterID = characterID;
         this.cost = 0;

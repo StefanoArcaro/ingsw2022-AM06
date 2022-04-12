@@ -5,12 +5,21 @@ import it.polimi.ingsw.model.enumerations.GameState;
 
 public class PhaseFactory {
 
-    private Game game;
+    private final Game game;
 
+    /**
+     * Default constructor.
+     * @param game reference to the game.
+     */
     public PhaseFactory(Game game) {
         this.game = game;
     }
 
+    /**
+     * Creates a phase based on the current state of the game.
+     * @param gameState state of the game.
+     * @return the created phase.
+     */
     public Phase createPhase(GameState gameState) {
 
         switch(gameState) {

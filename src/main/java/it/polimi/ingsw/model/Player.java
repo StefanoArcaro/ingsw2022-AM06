@@ -15,7 +15,7 @@ public class Player {
     private int coins;
 
     /**
-     * Default constructor
+     * Default constructor.
      */
     public Player(Game game, String nickname, PlayerColor color) {
         this.game = game;
@@ -26,57 +26,57 @@ public class Player {
     }
 
     /**
-     * @return game the player is in
+     * @return game the player is in.
      */
     public Game getGame() {
         return game;
     }
 
     /**
-     * @return the player's nickname
+     * @return the player's nickname.
      */
     public String getNickname() {
         return nickname;
     }
 
     /**
-     * @return the player's color
+     * @return the player's color.
      */
     public PlayerColor getColor() {
         return color;
     }
 
     /**
-     * @return the player's board
+     * @return the player's board.
      */
     public Board getBoard() {
         return board;
     }
 
     /**
-     * @return the Wizard chosen by the player
+     * @return the Wizard chosen by the player.
      */
     public Wizard getWizard() {
         return wizard;
     }
 
     /**
-     * Assigns to the player the Wizard they chose
-     * @param wizardName name of the Wizard chosen by the player
+     * Assigns to the player the Wizard they chose.
+     * @param wizardName name of the Wizard chosen by the player.
      */
     public void setWizard(WizardName wizardName) {
         this.wizard = new Wizard(this, wizardName);
     }
 
     /**
-     * @return the number of coins in the player's possession
+     * @return the number of coins in the player's possession.
      */
     public int getCoins() {
         return coins;
     }
 
     /**
-     * Adds 1 coin to the player's coins
+     * Adds 1 coin to the player's coins.
      */
     public void receiveCoin() {
         this.coins += 1;
@@ -84,8 +84,8 @@ public class Player {
 
     /**
      * Subtracts the specified number of coins from the player's coins
-     * if the player has enough of them
-     * @param coinsToSpend number of coins to be subtracted
+     * if the player has enough of them.
+     * @param coinsToSpend number of coins to be subtracted.
      */
     public void spendCoins(int coinsToSpend) {
         if(this.coins >= coinsToSpend) {

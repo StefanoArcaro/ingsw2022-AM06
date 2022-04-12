@@ -25,9 +25,9 @@ public class MoveStudentPhase extends ActionPhase {
     private int validMoves;
 
     /**
-     * Default constructor
-     * @param game reference to the game
-     * @param currentPlayer the current player
+     * Default constructor.
+     * @param game reference to the game.
+     * @param currentPlayer the current player.
      */
     public MoveStudentPhase(Game game, Player currentPlayer) {
         this.game = game;
@@ -39,15 +39,15 @@ public class MoveStudentPhase extends ActionPhase {
     /**
      * First part of the action phase.
      * The current player moves a certain number of students from his board's
-     * entrance to a specified destination (either hall or island) --- 0 = hall, 1-12 = islands
+     * entrance to a specified destination (either hall or island).
      * 2P -> 3 students
      * 3P -> 4 students
-     * @throws InvalidDestinationException when the specified destination is invalid
+     * @throws InvalidDestinationException when the specified destination is invalid.
      * @throws EntranceMissingColorException when there are no students of the specified color
-     *                                       in the current player's entrance
-     * @throws InvalidColorException when the specified color is invalid
+     *                                       in the current player's entrance.
+     * @throws InvalidColorException when the specified color is invalid.
      * @throws TableFullException when the specified destination is Hall and the table of the
-     *                            specified color is already full
+     *                            specified color is already full.
      */
     @Override
     public void play() throws InvalidDestinationException, EntranceMissingColorException,
@@ -63,6 +63,7 @@ public class MoveStudentPhase extends ActionPhase {
 
                     if(studentDestination.receiveStudent(creatureColor)) {
                         currentPlayer.getBoard().removeStudentFromEntrance(creatureColor);
+                        game.updateProfessors();
                         validMoves -= 1;
                     }
                 } else {
@@ -82,18 +83,18 @@ public class MoveStudentPhase extends ActionPhase {
     }
 
     /**
-     * Checks if the inputted color is a valid one
-     * @param color to check
-     * @return whether the color is valid
+     * Checks if the inputted color is a valid one.
+     * @param color to check.
+     * @return whether the color is valid.
      */
     private boolean checkValidColor(int color) {
         return color >= MIN_COLOR_INDEX && color <= MAX_COLOR_INDEX;
     }
 
     /**
-     * Checks whether the current players' entrance has a student of the specified color
-     * @param color of the student to check
-     * @return whether the student was found
+     * Checks whether the current players' entrance has a student of the specified color.
+     * @param color of the student to check.
+     * @return whether the student was found.
      */
     private boolean checkColorInEntrance(int color) {
         return currentPlayer.getBoard().getEntrance().getStudents().stream()
@@ -103,18 +104,18 @@ public class MoveStudentPhase extends ActionPhase {
     }
 
     /**
-     * Checks if the specified destination is a valid one
-     * @param destination to check
-     * @return whether the destination is valid
+     * Checks if the specified destination is a valid one.
+     * @param destination to check.
+     * @return whether the destination is valid.
      */
     private boolean checkValidDestination(int destination) {
         return destination >= MIN_DESTINATION_INDEX && destination <= MAX_DESTINATION_INDEX;
     }
 
     /**
-     * Returns the color corresponding to the specified index
-     * @param creatureColorIndex index of the color to return
-     * @return the color corresponding to the index if it exists, null otherwise
+     * Returns the color corresponding to the specified index.
+     * @param creatureColorIndex index of the color to return.
+     * @return the color corresponding to the index if it exists, null otherwise.
      */
     private CreatureColor getCreatureColorByIndex(int creatureColorIndex) {
         for(CreatureColor color : CreatureColor.values()) {
@@ -127,8 +128,7 @@ public class MoveStudentPhase extends ActionPhase {
 
     /**
      * Sets the destination for a selected student to the specified one.
-     * Parameter: 0 = hall, 1-12 = islands
-     * @param studentDestinationIndex index of the destination to set
+     * @param studentDestinationIndex index of the destination to set (0 = hall, 1-12 = island).
      */
     private StudentDestination setDestination(int studentDestinationIndex) {
         if(studentDestinationIndex == HALL_DESTINATION) {

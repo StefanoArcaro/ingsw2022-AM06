@@ -11,9 +11,9 @@ public class CharacterInfluenceModifier extends Character {
     protected int islandGroupIndex;
 
     /**
-     * Default constructor
-     * @param game game played
-     * @param characterID id of the character to create
+     * Default constructor.
+     * @param game game played.
+     * @param characterID id of the character to create.
      */
     public CharacterInfluenceModifier(Game game, int characterID) {
         this.game = game;
@@ -53,13 +53,18 @@ public class CharacterInfluenceModifier extends Character {
     }
 
     /**
-     * Set the island group on which to add the ban card
-     * @param islandGroupIndex is the index of the island group chosen
+     * Set the island group on which to add the ban card.
+     * @param islandGroupIndex is the index of the island group chosen.
      */
     public void setIslandGroupIndex(int islandGroupIndex) {
-        this.islandGroupIndex = islandGroupIndex; // TODO: input
+        this.islandGroupIndex = islandGroupIndex;
     }
 
+    /**
+     * Applies the effect of character five, if that is the active one.
+     * @throws NoAvailableBanCardsException when there are no ban cards on the character card.
+     * @throws OutOfBoundException if the index of the island group is invalid.
+     */
     @Override
     public void effect() throws NoAvailableBanCardsException, OutOfBoundException {
         CharacterID character = CharacterID.values()[characterID];
@@ -69,10 +74,10 @@ public class CharacterInfluenceModifier extends Character {
     }
 
     /**
-     * Add the ban card on the island group chosen, if there are enough ban cards
-     * @param islandGroupIndex is the index of the island group chosen
-     * @throws NoAvailableBanCardsException if there are not enough ban cards on the card
-     * @throws OutOfBoundException when the index of the island group chosen doesn't exist
+     * Add the ban card on the island group chosen, if there are enough ban cards.
+     * @param islandGroupIndex is the index of the island group chosen.
+     * @throws NoAvailableBanCardsException if there are not enough ban cards on the card.
+     * @throws OutOfBoundException when the index of the island group chosen doesn't exist.
      */
     private void effect_five(int islandGroupIndex) throws NoAvailableBanCardsException, OutOfBoundException {
         int numberOfIslandGroups = game.getIslandGroups().size();
@@ -89,5 +94,4 @@ public class CharacterInfluenceModifier extends Character {
             throw new OutOfBoundException();
         }
     }
-
 }
