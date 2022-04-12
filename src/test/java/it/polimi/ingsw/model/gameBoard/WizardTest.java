@@ -33,6 +33,11 @@ class WizardTest {
     }
 
     @Test
+    void getPlayer() {
+        assertEquals(player, wizard.getPlayer());
+    }
+
+    @Test
     void wizard() {
         ConcreteCharacterFactory cf = new ConcreteCharacterFactory(game);
         Character character = cf.createCharacter(0);

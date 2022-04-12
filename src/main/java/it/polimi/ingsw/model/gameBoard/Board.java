@@ -60,13 +60,6 @@ public class Board {
     }
 
     /**
-     * @return the player that owns the board.
-     */
-    public Player getPlayer() {
-        return player;
-    }
-
-    /**
      * Adds a student of the inputted color to the board's entrance.
      * @param color of the student to add to the entrance.
      */
@@ -166,11 +159,9 @@ public class Board {
      * @return the professor of the specified color if present, null otherwise.
      */
     private Professor getProfessorByColor(CreatureColor color) {
-        if(containsProfessor(color)) {
-            for(Professor professor : professors) {
-                if(professor.getColor().equals(color)) {
-                    return professor;
-                }
+        for(Professor professor : professors) {
+            if(professor.getColor().equals(color)) {
+                return professor;
             }
         }
         return null;

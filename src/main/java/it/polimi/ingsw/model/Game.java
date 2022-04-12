@@ -399,8 +399,18 @@ public class Game {
             int indexPreviousIslandGroup = (islandGroupIndex - 1) < 0 ? numberOfIslandGroups - 1 : islandGroupIndex - 1;
             int indexNextIslandGroup = (islandGroupIndex + 1) % numberOfIslandGroups;
 
-            connectIslandGroups(getIslandGroupByIndex(islandGroupIndex), getIslandGroupByIndex(indexPreviousIslandGroup));
-            connectIslandGroups(getIslandGroupByIndex(islandGroupIndex), getIslandGroupByIndex(indexNextIslandGroup));
+            IslandGroup islandGroup = getIslandGroupByIndex(islandGroupIndex);
+            IslandGroup previousIslandGroup = getIslandGroupByIndex(indexPreviousIslandGroup);
+            IslandGroup nextIslandGroup = getIslandGroupByIndex(indexNextIslandGroup);
+
+            if(islandGroup != null){
+                if(previousIslandGroup != null) {
+                    connectIslandGroups(islandGroup, previousIslandGroup);
+                }
+                if(nextIslandGroup != null) {
+                    connectIslandGroups(islandGroup, nextIslandGroup);
+                }
+            }
         }
     }
 

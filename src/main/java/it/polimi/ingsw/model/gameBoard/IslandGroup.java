@@ -134,13 +134,9 @@ public class IslandGroup {
         PlayerColor playerColorIslandGroupToAdd;
         int islandsAdded = 0;
 
-        try {
-            islandsInGroupToAdd = islandGroup.getIslands();
-            lenGroupToAdd = islandGroup.getNumberOfIslands();
-            playerColorIslandGroupToAdd = islandGroup.getConquerorColor();
-        } catch (NullPointerException e) {
-            return false;
-        }
+        islandsInGroupToAdd = islandGroup.getIslands();
+        lenGroupToAdd = islandGroup.getNumberOfIslands();
+        playerColorIslandGroupToAdd = islandGroup.getConquerorColor();
 
         if(this.conquerorColor != playerColorIslandGroupToAdd) {
             return false;
@@ -172,7 +168,7 @@ public class IslandGroup {
     }
 
     /**
-     * Calculates the influence of the island group as the.
+     * Calculates the influence of the island group as the
      * sum of the influences of the islands that are part of it.
      * Overloading of calculateInfluence with character.
      * @param game reference to the game.

@@ -40,14 +40,7 @@ public class Hall implements StudentSource, StudentDestination {
      * @return whether the student was sent.
      */
     public boolean sendStudent(CreatureColor color) {
-        Table tableToRemove;
-
-        tableToRemove = getTableByColor(color);
-
-        if(tableToRemove != null) {
-            return tableToRemove.removeStudent();
-        }
-        return false;
+        return getTableByColor(color).removeStudent();
     }
 
     /**
@@ -57,12 +50,7 @@ public class Hall implements StudentSource, StudentDestination {
      * @throws TableFullException when there's no more space for a student in that color's table.
      */
     public boolean receiveStudent(CreatureColor color) throws TableFullException {
-        Table tableToAdd = getTableByColor(color);
-
-        if(tableToAdd != null) {
-            return tableToAdd.addStudent();
-        }
-        return false;
+        return getTableByColor(color).addStudent();
     }
 
     /**

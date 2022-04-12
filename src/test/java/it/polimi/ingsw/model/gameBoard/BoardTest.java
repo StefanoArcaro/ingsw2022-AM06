@@ -170,6 +170,17 @@ class BoardTest {
         // I expect two error messages
     }
 
+    @Test
+    void removeTower() {
+        Player player = new Player(game, "x", PlayerColor.BLACK);
+        Board board = new Board(player);
+
+        assertFalse(board.removeTower());
+
+        board.addTowers(3);
+        assertTrue(board.removeTower());
+    }
+
 
 
 }

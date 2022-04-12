@@ -19,13 +19,6 @@ public class Bag implements StudentDestination {
     }
 
     /**
-     * @return the list of students in the bag.
-     */
-    public ArrayList<Student> getStudents() {
-        return new ArrayList<>(students);
-    }
-
-    /**
      * Adds student of the specified color to the bag, then shuffles the bag.
      * @param color of the student to add.
      * @return whether the student was added.
