@@ -44,19 +44,7 @@ class CharacterInfluenceModifierTest {
 
         priority.add(2);
         priority.add(1);
-    }
 
-    @AfterEach
-    void tearDown() {
-        game = null;
-        nicknames = null;
-        wizardIDs = null;
-        priority = null;
-    }
-
-
-    @Test
-    void effect() {
         game.setNumberOfPlayers(2);
         game.setGameMode(GameMode.EASY);
 
@@ -74,8 +62,6 @@ class CharacterInfluenceModifierTest {
             }
         }
 
-        assertEquals(GameState.PREPARE_PHASE, game.getGameState());
-
         // Prepare phase
         phase = game.getCurrentPhase();
 
@@ -88,8 +74,6 @@ class CharacterInfluenceModifierTest {
             }
         }
 
-        assertEquals(GameState.PLANNING_PHASE, game.getGameState());
-
         // Planning phase
         phase = game.getCurrentPhase();
 
@@ -101,9 +85,19 @@ class CharacterInfluenceModifierTest {
                 System.out.println(e.getMessage());
             }
         }
+    }
 
-        assertEquals(GameState.MOVE_STUDENT_PHASE, game.getGameState());
+    @AfterEach
+    void tearDown() {
+        game = null;
+        nicknames = null;
+        wizardIDs = null;
+        priority = null;
+    }
 
+
+    @Test
+    void effect() {
         Player p1 = game.getPlayingOrder().get(0);
 
         p1.receiveCoin();
@@ -140,5 +134,41 @@ class CharacterInfluenceModifierTest {
         assertEquals(3, p1.getCoins());
         assertEquals(3, game.getActivatedCharacter().getNumberOfBanCards());
         assertEquals(0, game.getIslandGroupByIndex(2).getNumberOfBanCardPresent());
+    }
+
+    @Test
+    void effect_noBanCardsLeft_OutOfBound() {
+        Player p1 = game.getPlayingOrder().get(0);
+
+        p1.receiveCoin();
+        p1.receiveCoin();
+        p1.receiveCoin();
+        p1.receiveCoin();
+        p1.receiveCoin();
+
+        phase = phaseFactory.createPhase(GameState.MOVE_MOTHER_NATURE_PHASE);
+        phase.setNumberOfSteps(1);
+        game.setCurrentPhase(phase);
+
+        character = cf.createCharacter(5);
+        character.removeBanCard();
+        character.removeBanCard();
+        character.removeBanCard();
+        character.removeBanCard();
+        game.setActivatedCharacter(character);
+
+        game.addDrawnCharacter(character);
+
+        ((CharacterInfluenceModifier)character).setIslandGroupIndex(1);
+
+        assertThrows(NoAvailableBanCardsException.class, ()-> ((ActionPhase)game.getCurrentPhase()).playCharacter(5));
+
+        assertEquals(3, p1.getCoins());
+        assertEquals(0, game.getActivatedCharacter().getNumberOfBanCards());
+        assertEquals(0, game.getIslandGroupByIndex(1).getNumberOfBanCardPresent());
+
+        ((CharacterInfluenceModifier)character).setIslandGroupIndex(13);
+
+        assertThrows(OutOfBoundException.class, ()->((ActionPhase)game.getCurrentPhase()).playCharacter(5));
     }
 }

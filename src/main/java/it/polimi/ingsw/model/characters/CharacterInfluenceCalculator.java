@@ -28,13 +28,6 @@ public class CharacterInfluenceCalculator extends Character {
     }
 
     /**
-     * @return the index of island group where to calculate the influence.
-     */
-    public int getIslandGroupIndex() {
-        return islandGroupIndex;
-    }
-
-    /**
      * Set the index of island group where to calculate the influence.
      * @param islandGroupIndex where calculate the influence.
      */

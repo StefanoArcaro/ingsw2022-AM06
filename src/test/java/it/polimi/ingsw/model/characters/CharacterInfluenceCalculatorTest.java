@@ -1,9 +1,9 @@
 package it.polimi.ingsw.model.characters;
 
+import it.polimi.ingsw.exceptions.OutOfBoundException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.enumerations.GameMode;
-import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.gameBoard.*;
 import it.polimi.ingsw.model.phases.Phase;
@@ -18,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class CharacterInfluenceCalculatorTest {
 
     private Game game;
-    private Phase phase;
     private ArrayList<String> nicknames;
     private ArrayList<Integer> wizardIDs;
     private ArrayList<Integer> priority;
@@ -41,26 +40,12 @@ class CharacterInfluenceCalculatorTest {
 
         priority.add(1);
         priority.add(2);
-    }
-
-    @AfterEach
-    void tearDown() {
-        game = null;
-        nicknames = null;
-        wizardIDs = null;
-        priority = null;
-    }
-
-    @Test
-    void effect(){
 
         game.setNumberOfPlayers(2);
         game.setGameMode(GameMode.EXPERT);
 
-        assertEquals(GameState.LOBBY_PHASE, game.getGameState());
-
         // Lobby phase
-        phase = game.getCurrentPhase();
+        Phase phase = game.getCurrentPhase();
 
         for(String nickname : nicknames) {
             try {
@@ -70,8 +55,6 @@ class CharacterInfluenceCalculatorTest {
                 System.out.println(e.getMessage());
             }
         }
-
-        assertEquals(GameState.PREPARE_PHASE, game.getGameState());
 
         // Prepare phase
         phase = game.getCurrentPhase();
@@ -96,13 +79,23 @@ class CharacterInfluenceCalculatorTest {
                 System.out.println(e.getMessage());
             }
         }
+    }
 
-        assertEquals(GameState.MOVE_STUDENT_PHASE, game.getGameState());
+    @AfterEach
+    void tearDown() {
+        game = null;
+        nicknames = null;
+        wizardIDs = null;
+        priority = null;
+    }
 
+    @Test
+    void effect(){
         Player p1 = game.getPlayingOrder().get(0);
         Player p2 = game.getPlayingOrder().get(1);
 
         character = cf.createCharacter(3);
+        game.setActivatedCharacter(character);
 
         p1.getBoard().addStudentToHall(CreatureColor.RED);
         p1.getBoard().addStudentToHall(CreatureColor.RED);
@@ -131,6 +124,9 @@ class CharacterInfluenceCalculatorTest {
         islandGroup2.getIslands().get(0).receiveStudent(CreatureColor.PINK);
         islandGroup2.getIslands().get(0).addTower(game, p1.getColor());
         islandGroup2.setConquerorColor(p1.getColor());
+
+        ((CharacterInfluenceCalculator)character).setIslandGroupIndex(12);
+        assertThrows(OutOfBoundException.class, ()->character.effect());
 
         ((CharacterInfluenceCalculator)character).setIslandGroupIndex(1);
 

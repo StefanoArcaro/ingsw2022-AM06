@@ -2,6 +2,9 @@ package it.polimi.ingsw.model.phases;
 
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.characters.Character;
+import it.polimi.ingsw.model.characters.CharacterInfluenceModifier;
+import it.polimi.ingsw.model.characters.ConcreteCharacterFactory;
 import it.polimi.ingsw.model.enumerations.GameMode;
 import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.Player;
@@ -192,5 +195,41 @@ class MoveMotherNaturePhaseTest {
             e.printStackTrace();
         }
         assertEquals(p1, game.getCurrentPhase().getWinner());
+    }
+
+    @Test
+    void play_islandWithBanCard() {
+        Character activatedCharacter = new ConcreteCharacterFactory(game).createCharacter(5);
+        game.addDrawnCharacter(activatedCharacter);
+        game.setActivatedCharacter(activatedCharacter);
+        ((CharacterInfluenceModifier)activatedCharacter).setIslandGroupIndex(1);
+
+        try {
+            activatedCharacter.effect();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        assertEquals(1, game.getIslandGroupByIndex(1).getNumberOfBanCardPresent());
+        assertEquals(3, activatedCharacter.getNumberOfBanCards());
+
+        game.getMotherNature().setCurrentIslandGroup(game.getIslandGroupByIndex(0));
+
+        game.setGameState(GameState.MOVE_MOTHER_NATURE_PHASE);
+        game.setCurrentPhase(new PhaseFactory(game).createPhase(game.getGameState()));
+        game.getCurrentPhase().setNumberOfSteps(1);
+
+        int expectedMNIndex = 1;
+
+        try {
+            game.getCurrentPhase().play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        assertEquals(expectedMNIndex, game.getIndexOfIslandGroup(game.getMotherNature().getCurrentIslandGroup()));
+        assertEquals(0, game.getIslandGroupByIndex(1).getNumberOfBanCardPresent());
+        assertEquals(4, activatedCharacter.getNumberOfBanCards());
+
+        assertEquals(GameState.PICK_CLOUD_PHASE, game.getGameState());
     }
 }
