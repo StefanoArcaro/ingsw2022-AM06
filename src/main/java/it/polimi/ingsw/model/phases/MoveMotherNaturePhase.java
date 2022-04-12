@@ -90,7 +90,6 @@ public class MoveMotherNaturePhase extends ActionPhase {
         }
 
         if(skipPickCloudPhase) {
-            // TODO check
             game.getActivatedCharacter().setNumberOfIterations(0);
             game.setActivatedCharacter(game.getCharacterByID(CharacterID.CHARACTER_NONE.getID()));
 

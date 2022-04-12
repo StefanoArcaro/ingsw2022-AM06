@@ -22,26 +22,16 @@ public class PhaseFactory {
      */
     public Phase createPhase(GameState gameState) {
 
-        switch(gameState) {
-            case LOBBY_PHASE:
-                return new LobbyPhase(game);
-            case PREPARE_PHASE:
-                return new PreparePhase(game);
-            case PLANNING_PHASE:
-                int firstPlayerIndex = game.getFirstPlayerIndex();
-                return new PlanningPhase(game, game.getPlayers(), firstPlayerIndex);
-            case MOVE_STUDENT_PHASE:
-                return new MoveStudentPhase(game, game.getCurrentPlayer());
-            case MOVE_MOTHER_NATURE_PHASE:
-                return new MoveMotherNaturePhase(game, game.getCurrentPlayer());
-            case PICK_CLOUD_PHASE:
-                return new PickCloudPhase(game, game.getCurrentPlayer());
-            case ENDED_TOWER:
-            case ENDED_ISLAND:
-            case ENDED_STUDENTS:
-            case ENDED_ASSISTANTS:
-                return new EndgamePhase(game);
-        }
-        return null;
+        int firstPlayerIndex = game.getFirstPlayerIndex();
+
+        return switch (gameState) {
+            case LOBBY_PHASE -> new LobbyPhase(game);
+            case PREPARE_PHASE -> new PreparePhase(game);
+            case PLANNING_PHASE -> new PlanningPhase(game, game.getPlayers(), firstPlayerIndex);
+            case MOVE_STUDENT_PHASE -> new MoveStudentPhase(game, game.getCurrentPlayer());
+            case MOVE_MOTHER_NATURE_PHASE -> new MoveMotherNaturePhase(game, game.getCurrentPlayer());
+            case PICK_CLOUD_PHASE -> new PickCloudPhase(game, game.getCurrentPlayer());
+            case ENDED_TOWER, ENDED_ISLAND, ENDED_STUDENTS, ENDED_ASSISTANTS -> new EndgamePhase(game);
+        };
     }
 }

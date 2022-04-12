@@ -58,6 +58,36 @@ class EndgamePhaseTest {
     }
 
     @Test
+    void play_equity_2() {
+        Player player1 = new Player(game, "x", PlayerColor.BLACK);
+        Player player2 = new Player(game, "y", PlayerColor.WHITE);
+
+        game.addPlayer(player1);
+        player1.getBoard().setTowers(3);
+        player1.getBoard().winProfessor(new Professor(CreatureColor.GREEN));
+        player1.getBoard().winProfessor(new Professor(CreatureColor.RED));
+        game.addPlayer(player2);
+        player2.getBoard().setTowers(3);
+        player2.getBoard().winProfessor(new Professor(CreatureColor.PINK));
+        player2.getBoard().winProfessor(new Professor(CreatureColor.BLUE));
+        player2.getBoard().winProfessor(new Professor(CreatureColor.YELLOW));
+
+        ArrayList<Player> playingOrder = new ArrayList<>(Arrays.asList(player1, player2));
+        game.setPlayingOrder(playingOrder);
+        game.setCurrentPlayer(player2);
+
+        game.setGameState(GameState.ENDED_ISLAND);
+        phase = phaseFactory.createPhase(game.getGameState());
+        try {
+            phase.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        assertEquals(player2, phase.getWinner());
+    }
+
+    @Test
     void play() {
         Player player1 = new Player(game, "x", PlayerColor.BLACK);
         Player player2 = new Player(game, "y", PlayerColor.WHITE);
