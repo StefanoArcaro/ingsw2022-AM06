@@ -5,6 +5,7 @@ import it.polimi.ingsw.exceptions.InvalidPriorityException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.GameMode;
 import it.polimi.ingsw.model.enumerations.GameState;
+import it.polimi.ingsw.model.gameBoard.Bag;
 import it.polimi.ingsw.model.gameBoard.Cloud;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -252,6 +253,84 @@ class PlanningPhaseTest {
         assertEquals(game.getPlayers().get(game.getFirstPlayerIndex()), game.getPlayingOrder().get(0));
 
         // Check updated game state
+        assertEquals(GameState.MOVE_STUDENT_PHASE, game.getGameState());
+    }
+
+    @Test
+    void play_notEnoughStudentsForClouds() {
+        game.setNumberOfPlayers(2);
+        game.setGameMode(GameMode.EASY);
+
+        assertEquals(GameState.LOBBY_PHASE, game.getGameState());
+
+        // Lobby phase
+        phase = game.getCurrentPhase();
+
+        for(String nickname : nicknames) {
+            try {
+                phase.setPlayerNickname(nickname);
+                phase.play();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        assertEquals(GameState.PREPARE_PHASE, game.getGameState());
+
+        // Prepare phase
+        phase = game.getCurrentPhase();
+
+        for(int i = 0; i < game.getNumberOfPlayers().getNum(); i++) {
+            try {
+                phase.setWizardID(wizardIDs.get(i));
+                phase.play();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        assertEquals(GameState.PLANNING_PHASE, game.getGameState());
+
+        // Planning phase
+        phase = game.getCurrentPhase();
+
+        // Planning phase
+        phase = game.getCurrentPhase();
+
+        ArrayList<Integer> priority = new ArrayList<>();
+        priority.add(2);
+        priority.add(1);
+
+        Bag bag = game.getBag();
+        int bagSize = bag.size();
+
+        //to empty the bag
+        for(int i = 0; i < bagSize; i++) {
+            bag.drawStudent();
+        }
+
+        for(int i = 0; i < game.getNumberOfPlayers().getNum(); i++) {
+            try {
+                phase.setPriority(priority.get(i));
+                phase.play();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        assertTrue(game.getSkipPickCloudPhase());
+        // Check updated game state
+        assertEquals(GameState.MOVE_STUDENT_PHASE, game.getGameState());
+
+        game.setCurrentPhase(new PhaseFactory(game).createPhase(GameState.MOVE_MOTHER_NATURE_PHASE));
+        game.getCurrentPhase().setNumberOfSteps(1);
+
+        try{
+            game.getCurrentPhase().play();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
         assertEquals(GameState.MOVE_STUDENT_PHASE, game.getGameState());
     }
 }
