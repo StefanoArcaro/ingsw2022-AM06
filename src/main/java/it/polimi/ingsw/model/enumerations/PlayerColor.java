@@ -15,7 +15,4 @@ public enum PlayerColor {
         this.id = id;
     }
 
-    public int getId() {
-        return this.id;
-    }
 }
