@@ -88,7 +88,7 @@ public class Board {
      * @param color of the student to add.
      */
     public void addStudentToHall(CreatureColor color) {
-        // TODO test coin distribution
+
         boolean studentReceived = false;
         try {
             studentReceived = hall.receiveStudent(color);
@@ -103,6 +103,7 @@ public class Board {
             }
         }
     }
+
 
     /**
      * Removes a student of the specified color from the board's hall.

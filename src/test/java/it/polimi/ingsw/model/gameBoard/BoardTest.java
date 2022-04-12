@@ -107,4 +107,69 @@ class BoardTest {
         assertTrue(board.containsProfessor(CreatureColor.PINK));
         assertTrue(board.containsProfessor(CreatureColor.YELLOW));
     }
+
+    @Test
+    void addStudentToHall() {
+        Player player = new Player(game, "nick", PlayerColor.BLACK);
+        Board board = new Board(player);
+        player.getGame().setGameMode(GameMode.EXPERT);
+
+        assertEquals(0,player.getGame().getTreasury());
+        assertEquals(0,player.getCoins());
+
+        player.getGame().setTreasury(2);
+
+        for(int i=1;i<3;i++) {
+            board.addStudentToHall(CreatureColor.PINK);
+            assertEquals(i, board.getHall().getTableByColor(CreatureColor.PINK).getLength());
+            assertEquals(0,player.getCoins());
+        } // now there are 2 students in the considered table
+
+        assertEquals(2,player.getGame().getTreasury());
+
+        board.addStudentToHall(CreatureColor.PINK);
+        assertEquals(3, board.getHall().getTableByColor(CreatureColor.PINK).getLength());
+        assertEquals(1,player.getCoins());
+        assertEquals(1,player.getGame().getTreasury());
+
+        for(int i=4;i<6;i++) {
+            board.addStudentToHall(CreatureColor.PINK);
+            assertEquals(i, board.getHall().getTableByColor(CreatureColor.PINK).getLength());
+            assertEquals(1, player.getCoins());
+        } // now there are 5 students in the considered table
+
+        board.addStudentToHall(CreatureColor.PINK);
+        assertEquals(6, board.getHall().getTableByColor(CreatureColor.PINK).getLength());
+        assertEquals(2,player.getCoins());
+        assertEquals(0,player.getGame().getTreasury());
+
+        for(int i=7;i<9;i++) {
+            board.addStudentToHall(CreatureColor.PINK);
+            assertEquals(i, board.getHall().getTableByColor(CreatureColor.PINK).getLength());
+            assertEquals(2, player.getCoins());
+        } // now there are 8 students in the considered table
+
+        board.addStudentToHall(CreatureColor.PINK);
+        assertEquals(9, board.getHall().getTableByColor(CreatureColor.PINK).getLength());
+        assertEquals(2, player.getCoins());
+        /*
+        even if the position was a multiple on 3, the player didn't receive an extra
+        coins because the treasury was empty!
+        */
+        assertEquals(0,player.getGame().getTreasury());
+        board.addStudentToHall(CreatureColor.PINK);
+        assertEquals(10, board.getHall().getTableByColor(CreatureColor.PINK).getLength());
+        // I don't expect an error message
+
+        board.addStudentToHall(CreatureColor.PINK);
+        assertEquals(10, board.getHall().getTableByColor(CreatureColor.PINK).getLength());
+        // I expect one error message
+
+        board.addStudentToHall(CreatureColor.PINK);
+        assertEquals(10, board.getHall().getTableByColor(CreatureColor.PINK).getLength());
+        // I expect two error messages
+    }
+
+
+
 }
