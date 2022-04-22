@@ -7,6 +7,8 @@ import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.PlayerColor;
 
+import java.util.Locale;
+
 public class LobbyPhase extends Phase {
 
     private static final int NO_PLAYERS = 0;
@@ -85,7 +87,7 @@ public class LobbyPhase extends Phase {
      */
     private Player getPlayerByNickname(String nickname) {
         for(Player player : game.getPlayers()) {
-            if(player.getNickname().equals(nickname)) {
+            if(player.getNickname().equalsIgnoreCase(nickname)) {
                 return player;
             }
         }
