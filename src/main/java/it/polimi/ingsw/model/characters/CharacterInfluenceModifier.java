@@ -8,8 +8,6 @@ import it.polimi.ingsw.model.gameBoard.IslandGroup;
 
 public class CharacterInfluenceModifier extends Character {
 
-    protected int islandGroupIndex;
-
     /**
      * Default constructor.
      * @param game game played.
@@ -50,14 +48,6 @@ public class CharacterInfluenceModifier extends Character {
                 this.numberOfBanCards = 0;
             }
         }
-    }
-
-    /**
-     * Set the island group on which to add the ban card.
-     * @param islandGroupIndex is the index of the island group chosen.
-     */
-    public void setIslandGroupIndex(int islandGroupIndex) {
-        this.islandGroupIndex = islandGroupIndex;
     }
 
     /**

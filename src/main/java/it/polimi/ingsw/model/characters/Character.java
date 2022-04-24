@@ -31,6 +31,12 @@ public abstract class Character {
 
     protected int moreSteps;
 
+    protected int islandGroupIndex;
+
+    protected int islandID;
+    protected CreatureColor firstColor;
+    protected CreatureColor secondColor;
+
     /**
      * Modify the game setup in order to use this character.
      */
@@ -164,4 +170,37 @@ public abstract class Character {
     public CreatureColor getColorNoPoints() {
         return colorNoPoints;
     }
+
+    /**
+     * Set the index of island group needed to apply the effect.
+     * @param islandGroupIndex index of island group.
+     */
+    public void setIslandGroupIndex(int islandGroupIndex) {
+        this.islandGroupIndex = islandGroupIndex;
+    }
+
+    /**
+     * Set the color of the student to move from the source
+     * @param fromColor color of the student to move
+     */
+    public void setFirstColor(CreatureColor fromColor) {
+        this.firstColor = fromColor;
+    }
+
+    /**
+     * Set the color of the student to move from the destination
+     * @param toColor color of the student to move
+     */
+    public void setSecondColor(CreatureColor toColor) {
+        this.secondColor = toColor;
+    }
+
+    /**
+     * Set the island ID of the island where to move the student
+     * @param islandID of the island where to move the student
+     */
+    public void setIslandID(int islandID) {
+        this.islandID = islandID; 
+    }
+
 }

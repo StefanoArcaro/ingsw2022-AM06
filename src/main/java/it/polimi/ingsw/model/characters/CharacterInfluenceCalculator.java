@@ -5,8 +5,6 @@ import it.polimi.ingsw.model.Game;
 
 public class CharacterInfluenceCalculator extends Character {
 
-    private int islandGroupIndex;
-
     /**
      * Default constructor.
      * @param game game played.
@@ -25,14 +23,6 @@ public class CharacterInfluenceCalculator extends Character {
         this.extraPoints = 0;
         this.towerCounter = true;
         this.moreSteps = 0;
-    }
-
-    /**
-     * Set the index of island group where to calculate the influence.
-     * @param islandGroupIndex where calculate the influence.
-     */
-    public void setIslandGroupIndex(int islandGroupIndex) {
-        this.islandGroupIndex = islandGroupIndex; // TODO: input
     }
 
     /**
