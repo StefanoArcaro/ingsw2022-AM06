@@ -1,7 +1,5 @@
 package it.polimi.ingsw.network.server;
 
-import it.polimi.ingsw.network.message.Message;
-
 public interface ClientHandler {
 
     boolean isConnected();
