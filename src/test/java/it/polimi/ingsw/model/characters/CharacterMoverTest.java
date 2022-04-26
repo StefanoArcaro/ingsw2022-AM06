@@ -118,7 +118,7 @@ class CharacterMoverTest {
         game.getIslandByID(1).receiveStudent(CreatureColor.GREEN);
         game.getIslandByID(1).receiveStudent(CreatureColor.PINK);
 
-        ((CharacterMover) character).setFromColor(CreatureColor.RED);
+        ((CharacterMover) character).setFirstColor(CreatureColor.RED);
         ((CharacterMover) character).setIslandID(1);
         try {
             character.effect();
@@ -149,7 +149,7 @@ class CharacterMoverTest {
         island.receiveStudent(CreatureColor.GREEN);
         island.receiveStudent(CreatureColor.PINK);
 
-        ((CharacterMover) character).setFromColor(CreatureColor.YELLOW);
+        ((CharacterMover) character).setFirstColor(CreatureColor.YELLOW);
         ((CharacterMover) character).setIslandID(1);
 
         assertThrows(NoAvailableColorException.class, ()->character.effect());
@@ -165,7 +165,7 @@ class CharacterMoverTest {
         assertTrue(island.getStudents().stream().map(Creature::getColor).toList().containsAll(expectedColor));
         assertEquals(2, island.getStudents().size());
 
-        ((CharacterMover) character).setFromColor(CreatureColor.RED);
+        ((CharacterMover) character).setFirstColor(CreatureColor.RED);
         ((CharacterMover) character).setIslandID(13);
 
         assertThrows(OutOfBoundException.class, ()->character.effect());
@@ -193,8 +193,8 @@ class CharacterMoverTest {
         game.getCurrentPlayer().getBoard().addStudentToEntrance(CreatureColor.BLUE);
         game.getCurrentPlayer().getBoard().addStudentToEntrance(CreatureColor.PINK);
 
-        ((CharacterMover) character).setFromColor(CreatureColor.RED);
-        ((CharacterMover) character).setToColor(CreatureColor.BLUE);
+        ((CharacterMover) character).setFirstColor(CreatureColor.RED);
+        ((CharacterMover) character).setSecondColor(CreatureColor.BLUE);
 
         ArrayList<CreatureColor> expectedStudents = new ArrayList<>(Arrays.asList(CreatureColor.RED,
                 CreatureColor.GREEN,CreatureColor.BLUE, CreatureColor.GREEN, CreatureColor.BLUE, CreatureColor.BLUE));
@@ -225,8 +225,8 @@ class CharacterMoverTest {
         game.getCurrentPlayer().getBoard().addStudentToEntrance(CreatureColor.BLUE);
         game.getCurrentPlayer().getBoard().addStudentToEntrance(CreatureColor.PINK);
 
-        ((CharacterMover) character).setFromColor(CreatureColor.PINK);
-        ((CharacterMover) character).setToColor(CreatureColor.BLUE);
+        ((CharacterMover) character).setFirstColor(CreatureColor.PINK);
+        ((CharacterMover) character).setSecondColor(CreatureColor.BLUE);
 
         ArrayList<CreatureColor> expectedStudents = new ArrayList<>(Arrays.asList(CreatureColor.RED, CreatureColor.RED,
                 CreatureColor.GREEN,CreatureColor.BLUE, CreatureColor.GREEN, CreatureColor.BLUE));
@@ -248,8 +248,8 @@ class CharacterMoverTest {
         game.getCurrentPlayer().getBoard().addStudentToHall(CreatureColor.PINK);
         game.getCurrentPlayer().getBoard().addStudentToHall(CreatureColor.RED);
 
-        ((CharacterMover) character).setFromColor(CreatureColor.PINK);
-        ((CharacterMover) character).setToColor(CreatureColor.BLUE);
+        ((CharacterMover) character).setFirstColor(CreatureColor.PINK);
+        ((CharacterMover) character).setSecondColor(CreatureColor.BLUE);
 
         ArrayList<Integer> expectedHall = new ArrayList<>(Arrays.asList(0,1,0,0,1));
 
@@ -277,8 +277,8 @@ class CharacterMoverTest {
         game.getCurrentPlayer().getBoard().addStudentToHall(CreatureColor.PINK);
         game.getCurrentPlayer().getBoard().addStudentToHall(CreatureColor.RED);
 
-        ((CharacterMover) character).setFromColor(CreatureColor.GREEN);
-        ((CharacterMover) character).setToColor(CreatureColor.BLUE);
+        ((CharacterMover) character).setFirstColor(CreatureColor.GREEN);
+        ((CharacterMover) character).setSecondColor(CreatureColor.BLUE);
 
         ArrayList<Integer> expectedHall = new ArrayList<>(Arrays.asList(0,1,0,1,0));
 
@@ -305,7 +305,7 @@ class CharacterMoverTest {
         game.getCurrentPlayer().getBoard().addStudentToHall(CreatureColor.RED);
         game.getCurrentPlayer().getBoard().addStudentToHall(CreatureColor.PINK);
 
-        ((CharacterMover)character).setFromColor(CreatureColor.RED);
+        ((CharacterMover)character).setFirstColor(CreatureColor.RED);
 
         ArrayList<Integer> expectedHall = new ArrayList<>(Arrays.asList(0, 2, 0, 1, 0));
 
@@ -334,7 +334,7 @@ class CharacterMoverTest {
         game.getCurrentPlayer().getBoard().addStudentToHall(CreatureColor.RED);
         game.getCurrentPlayer().getBoard().addStudentToHall(CreatureColor.PINK);
 
-        ((CharacterMover)character).setFromColor(CreatureColor.PINK);
+        ((CharacterMover)character).setFirstColor(CreatureColor.PINK);
 
         ArrayList<Integer> expectedHall = new ArrayList<>(Arrays.asList(0,1,0,1,0));
 
@@ -364,7 +364,7 @@ class CharacterMoverTest {
 
         ArrayList<Integer> expectedHall2 = new ArrayList<>(Arrays.asList(0, 1, 0, 0, 0));
 
-        ((CharacterMover)character).setColorToRemove(CreatureColor.RED);
+        ((CharacterMover)character).setFirstColor(CreatureColor.RED);
         try {
             character.effect();
         } catch (Exception e) {
@@ -394,7 +394,7 @@ class CharacterMoverTest {
 
         ArrayList<Integer> expectedHall2 = new ArrayList<>(Arrays.asList(2, 0, 0, 0, 0));
 
-        ((CharacterMover)character).setColorToRemove(CreatureColor.RED);
+        ((CharacterMover)character).setFirstColor(CreatureColor.RED);
 
         try {
             character.effect();
