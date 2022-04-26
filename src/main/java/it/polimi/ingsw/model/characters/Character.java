@@ -200,7 +200,7 @@ public abstract class Character {
      * @param islandID of the island where to move the student
      */
     public void setIslandID(int islandID) {
-        this.islandID = islandID; 
+        this.islandID = islandID;
     }
 
 }
