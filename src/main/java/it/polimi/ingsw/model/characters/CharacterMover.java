@@ -14,11 +14,6 @@ public class CharacterMover extends Character {
     private static final int ISLAND_ID_MIN = 1;
     private static final int ISLAND_ID_MAX = 12;
 
-    int islandID;
-    CreatureColor fromColor;
-    CreatureColor toColor;
-    CreatureColor colorToRemove;
-
     /**
      * Default constructor
      * @param game game played
@@ -76,53 +71,17 @@ public class CharacterMover extends Character {
         }
     }
 
-
-    /**
-     * Set the color of the student to move from the source
-     * @param fromColor color of the student to move
-     */
-    public void setFromColor(CreatureColor fromColor) {
-        this.fromColor = fromColor; //TODO: input
-    }
-
-    /**
-     * Set the color of the student to move from the destination
-     * @param toColor color of the student to move
-     */
-    public void setToColor(CreatureColor toColor) {
-        this.toColor = toColor; //TODO: input
-    }
-
-    /**
-     * Set the island ID of the island where to move the student
-     * @param islandID of the island where to move the student
-     */
-    public void setIslandID(int islandID) {
-        this.islandID = islandID; //TODO: input
-
-    }
-
-    /**
-     * Set the color of the students to remove from the hall of all players.
-     * Up to three students per color can be removed.
-     * @param colorToRemove color of the students to remove
-     */
-    public void setColorToRemove(CreatureColor colorToRemove) {
-        this.colorToRemove = colorToRemove; //TODO: input
-
-    }
-
     @Override
     public void effect() throws NoAvailableColorException, OutOfBoundException {
         CharacterID character = CharacterID.values()[this.characterID];
 
         //TODO: input
         switch (character) {
-            case CHARACTER_ONE -> effect_one(fromColor, islandID);
-            case CHARACTER_SEVEN -> effect_seven(fromColor, toColor);
-            case CHARACTER_TEN -> effect_ten(fromColor, toColor);
-            case CHARACTER_ELEVEN -> effect_eleven(fromColor);
-            case CHARACTER_TWELVE -> effect_twelve(colorToRemove);
+            case CHARACTER_ONE -> effect_one(firstColor, islandID);
+            case CHARACTER_SEVEN -> effect_seven(firstColor, secondColor);
+            case CHARACTER_TEN -> effect_ten(firstColor, secondColor);
+            case CHARACTER_ELEVEN -> effect_eleven(firstColor);
+            case CHARACTER_TWELVE -> effect_twelve(firstColor);
         }
 
         game.updateProfessors();

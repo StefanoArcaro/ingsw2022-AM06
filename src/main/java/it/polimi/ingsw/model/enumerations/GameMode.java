@@ -14,4 +14,7 @@ public enum GameMode {
         this.mode = mode;
     }
 
+    public int getMode() {
+        return mode;
+    }
 }

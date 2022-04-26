@@ -22,4 +22,7 @@ public enum GameState {
         this.code = code;
     }
 
+    public int getCode() {
+        return code;
+    }
 }
