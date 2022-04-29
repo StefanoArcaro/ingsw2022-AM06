@@ -111,7 +111,6 @@ class CharacterInfluenceModifierTest {
         game.setCurrentPhase(phase);
 
         character = cf.createCharacter(5);
-        game.setActivatedCharacter(character);
 
         game.addDrawnCharacter(character);
 
@@ -155,7 +154,6 @@ class CharacterInfluenceModifierTest {
         character.removeBanCard();
         character.removeBanCard();
         character.removeBanCard();
-        game.setActivatedCharacter(character);
 
         game.addDrawnCharacter(character);
 
@@ -163,12 +161,13 @@ class CharacterInfluenceModifierTest {
 
         assertThrows(NoAvailableBanCardsException.class, ()-> ((ActionPhase)game.getCurrentPhase()).playCharacter(5));
 
-        assertEquals(3, p1.getCoins());
+        assertEquals(5, p1.getCoins());
         assertEquals(0, game.getActivatedCharacter().getNumberOfBanCards());
         assertEquals(0, game.getIslandGroupByIndex(1).getNumberOfBanCardPresent());
 
         ((CharacterInfluenceModifier)character).setIslandGroupIndex(13);
 
         assertThrows(OutOfBoundException.class, ()->((ActionPhase)game.getCurrentPhase()).playCharacter(5));
+        assertEquals(5, p1.getCoins());
     }
 }

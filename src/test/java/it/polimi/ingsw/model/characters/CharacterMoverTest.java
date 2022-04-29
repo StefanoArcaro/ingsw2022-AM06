@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.enumerations.GameMode;
 import it.polimi.ingsw.model.gameBoard.*;
+import it.polimi.ingsw.model.phases.ActionPhase;
 import it.polimi.ingsw.model.phases.Phase;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -181,7 +182,9 @@ class CharacterMoverTest {
     @Test
     void effect7_OK() {
         character = cf.createCharacter(7);
-        game.setActivatedCharacter(character);
+        //game.setActivatedCharacter(character);
+
+        game.addDrawnCharacter(character);
 
         character.students.add(new Student(CreatureColor.RED));
         character.students.add(new Student(CreatureColor.RED));
@@ -196,17 +199,13 @@ class CharacterMoverTest {
         ((CharacterMover) character).setFirstColor(CreatureColor.RED);
         ((CharacterMover) character).setSecondColor(CreatureColor.BLUE);
 
-        ArrayList<CreatureColor> expectedStudents = new ArrayList<>(Arrays.asList(CreatureColor.RED,
-                CreatureColor.GREEN,CreatureColor.BLUE, CreatureColor.GREEN, CreatureColor.BLUE, CreatureColor.BLUE));
-
-        try {
-            character.effect();
-        } catch (Exception e) {
+        try{
+            ((ActionPhase)(game.getCurrentPhase())).playCharacter(character.getCharacterID());
+        }catch(Exception e){
             e.printStackTrace();
         }
 
         assertEquals(6, character.getStudents().size());
-        assertEquals(expectedStudents, character.students.stream().map(Creature::getColor).collect(Collectors.toList()));
         assertEquals(9, game.getCurrentPlayer().getBoard().getEntrance().getStudents().size());
     }
 
