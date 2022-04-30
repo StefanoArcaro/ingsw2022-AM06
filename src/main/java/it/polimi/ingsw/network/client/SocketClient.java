@@ -8,7 +8,6 @@ import it.polimi.ingsw.network.message.serverToclient.Answer;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -22,10 +21,8 @@ public class SocketClient extends Client {
     private final Socket socket;
     private BufferedReader reader;
     private BufferedWriter writer;
-    private final ExecutorService keyboardQueue;
     private final ExecutorService readQueue;
     private final ScheduledExecutorService pinger;
-    private final MessageParser messageParser;
 
     public SocketClient(Socket socket) {
         this.socket = socket;
@@ -38,23 +35,8 @@ public class SocketClient extends Client {
             disconnect();
         }
 
-        this.keyboardQueue = Executors.newSingleThreadExecutor();
         this.readQueue = Executors.newSingleThreadExecutor();
         this.pinger = Executors.newSingleThreadScheduledExecutor();
-        this.messageParser = new MessageParser(this);
-    }
-
-    @Override
-    public void listenToKeyboard() {
-        keyboardQueue.execute(() -> {
-            while(!keyboardQueue.isShutdown()) {
-                Scanner scanner = new Scanner(System.in);
-                String message = scanner.nextLine();
-                // TODO parser should be added as a listener in CLI
-                messageParser.parseInput(message);
-                // TODO add parsing for disconnecting: done but to modify, see MessageParser 41
-            }
-        });
     }
 
     // From server
@@ -67,7 +49,7 @@ public class SocketClient extends Client {
                     Answer message = gson.fromJson(reader.readLine(), Answer.class);
 
                     if(message.getMessageType() != MessageType.PONG_MESSAGE) {
-                        System.out.println(message);
+                        System.out.println(message); //todo: handleAnswer
                     }
 
                     if(message.getMessageType() == MessageType.DISCONNECTION_MESSAGE) {
@@ -112,7 +94,6 @@ public class SocketClient extends Client {
     private void closeEverything() {
         try {
             enablePinger(false);
-            keyboardQueue.shutdownNow();
             readQueue.shutdownNow();
 
             if(reader != null) {

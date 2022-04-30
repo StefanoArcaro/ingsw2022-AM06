@@ -5,8 +5,6 @@ import it.polimi.ingsw.network.message.serverToclient.Answer;
 
 public abstract class Client {
 
-    public abstract void listenToKeyboard();
-
     public abstract void readMessage();
 
     public abstract void sendMessage(Message message);

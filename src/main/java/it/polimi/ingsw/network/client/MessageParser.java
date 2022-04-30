@@ -38,8 +38,7 @@ public class MessageParser implements PropertyChangeListener {
             case "PICKCLOUD" -> message = thirdActionPhase(in);
             case "CHARACTERINFO" -> message = characterInfoMessage(in);
             case "CHARACTER" -> message = characterMessage(in);
-            // TODO disconnection: to modify
-            case "QUIT" -> message = disconnectionMessage(in);
+            case "QUIT" -> message = disconnectionMessage();
             default -> {
                 System.out.println("Unknown input, please try again!");
                 return;
@@ -167,8 +166,8 @@ public class MessageParser implements PropertyChangeListener {
     }
 
     // TODO change: add new type of disconnectionRequestMessage client -> server
-    private Message disconnectionMessage(String[] in) {
-        return new Message(nickname, MessageType.DISCONNECTION_MESSAGE);
+    private DisconnectionRequestMessage disconnectionMessage() {
+        return new DisconnectionRequestMessage(nickname);
     }
 
 

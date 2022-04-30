@@ -29,6 +29,7 @@ public class SocketServer implements Runnable {
             try {
                 Socket client = serverSocket.accept();
                 SocketClientHandler clientHandler = new SocketClientHandler(this, client);
+                server.addClient(clientHandler);
                 Thread thread = new Thread(clientHandler, "client_handler " + client.getInetAddress());
                 thread.start();
             } catch (IOException e) {
@@ -37,7 +38,7 @@ public class SocketServer implements Runnable {
         }
     }
 
-    public void onDisconnect(SocketClientHandler clientHandler) {
+    public void onDisconnect(ClientHandler clientHandler) {
         server.onDisconnect(clientHandler);
     }
 }
