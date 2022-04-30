@@ -1,10 +1,13 @@
 package it.polimi.ingsw.network.client;
 
-import it.polimi.ingsw.network.server.Server;
+import com.google.gson.Gson;
+import it.polimi.ingsw.network.message.MessageType;
+import it.polimi.ingsw.network.message.clientToserver.Message;
+import it.polimi.ingsw.network.message.clientToserver.PingMessage;
+import it.polimi.ingsw.network.message.serverToclient.Answer;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -14,13 +17,15 @@ import java.util.concurrent.TimeUnit;
 public class SocketClient extends Client {
 
     private static final int PING_INITIAL_DELAY = 0;
-    private static final int PING_PERIOD = 5000;
+    private static final int PING_PERIOD = 15000;
 
     private final Socket socket;
     private BufferedReader reader;
     private BufferedWriter writer;
+    private final ExecutorService keyboardQueue;
     private final ExecutorService readQueue;
     private final ScheduledExecutorService pinger;
+    private final MessageParser messageParser;
 
     public SocketClient(Socket socket) {
         this.socket = socket;
@@ -30,15 +35,86 @@ public class SocketClient extends Client {
             this.writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
         } catch (IOException e) {
             System.err.println("A problem with I/O streams instantiation occurred.");
-            closeEverything(socket, reader, writer);
+            disconnect();
         }
 
+        this.keyboardQueue = Executors.newSingleThreadExecutor();
         this.readQueue = Executors.newSingleThreadExecutor();
         this.pinger = Executors.newSingleThreadScheduledExecutor();
+        this.messageParser = new MessageParser(this);
     }
 
-    private void closeEverything(Socket socket, BufferedReader reader, BufferedWriter writer) {
+    @Override
+    public void listenToKeyboard() {
+        keyboardQueue.execute(() -> {
+            while(!keyboardQueue.isShutdown()) {
+                Scanner scanner = new Scanner(System.in);
+                String message = scanner.nextLine();
+                // TODO parser should be added as a listener in CLI
+                messageParser.parseInput(message);
+                // TODO add parsing for disconnecting: done but to modify, see MessageParser 41
+            }
+        });
+    }
+
+    // From server
+    @Override
+    public void readMessage() {
+        readQueue.execute(() -> {
+            while(!readQueue.isShutdown()) {
+                try {
+                    Gson gson = new Gson();
+                    Answer message = gson.fromJson(reader.readLine(), Answer.class);
+
+                    if(message.getMessageType() != MessageType.PONG_MESSAGE) {
+                        System.out.println(message);
+                    }
+
+                    if(message.getMessageType() == MessageType.DISCONNECTION_MESSAGE) {
+                        disconnect();
+                    }
+                } catch (IOException e) {
+                    System.err.println(e.getMessage());
+                }
+            }
+        });
+    }
+
+    // To server
+    @Override
+    public void sendMessage(Message message) {
         try {
+            Gson gson = new Gson();
+            String msg = gson.toJson(message);
+
+            writer.write(msg);
+            writer.newLine();
+            writer.flush();
+        } catch (IOException e) {
+            disconnect();
+        }
+    }
+
+    @Override
+    public void disconnect() {
+        closeEverything();
+    }
+
+    @Override
+    public void enablePinger(boolean enabled) {
+        if(enabled) {
+            pinger.scheduleAtFixedRate(() -> sendMessage(new PingMessage()), PING_INITIAL_DELAY, PING_PERIOD, TimeUnit.MILLISECONDS);
+        } else {
+            pinger.shutdownNow();
+        }
+    }
+
+    private void closeEverything() {
+        try {
+            enablePinger(false);
+            keyboardQueue.shutdownNow();
+            readQueue.shutdownNow();
+
             if(reader != null) {
                 reader.close();
             }
@@ -50,61 +126,8 @@ public class SocketClient extends Client {
             }
         } catch (IOException e) {
             System.err.println(e.getMessage());
-        }
-    }
-
-    @Override
-    public void readMessage() {
-        readQueue.execute(() -> {
-            while(!readQueue.isShutdown()) {
-                Scanner scanner = new Scanner(System.in);
-                String message = scanner.nextLine();
-                sendMessage(message);
-            }
-        });
-    }
-
-    @Override
-    public void sendMessage(String message) {
-        // TODO change it to use Message class
-        try {
-            writer.write(message);
-            writer.newLine();
-            writer.flush();
-            System.out.println("echo: " + reader.readLine());
-        } catch (IOException e) {
-            closeEverything(socket, reader, writer);
-        }
-    }
-
-    @Override
-    public void disconnect() {
-
-    }
-
-    @Override
-    public void enablePinger(boolean enabled) {
-        if(enabled) {
-            pinger.scheduleAtFixedRate(() -> sendMessage("Ping"), PING_INITIAL_DELAY, PING_PERIOD, TimeUnit.MILLISECONDS);
-        } else {
-            pinger.shutdownNow();
-        }
-    }
-
-    // TODO MODIFY
-    public static void main(String[] args) {
-        System.out.println("Eriantys client | Welcome!");
-
-        // TODO
-        // askServerInfo() -> to connect to the server, so IP and port
-
-        try {
-            Socket socket = new Socket("localhost", 1234);
-            SocketClient client = new SocketClient(socket);
-            client.readMessage(); // Asynchronous read from stdin
-            client.enablePinger(true);
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
+        } finally {
+            System.exit(0);
         }
     }
 }

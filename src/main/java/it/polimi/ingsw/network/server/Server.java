@@ -2,17 +2,37 @@ package it.polimi.ingsw.network.server;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Main server class
  */
 public class Server {
 
-    private SocketServer socketServer;
+    private final SocketServer socketServer;
 
     // TODO
     public Server(int port) {
-        this.socketServer = new SocketServer(port);
+        this.socketServer = new SocketServer(port, this);
+        new Thread(this::quit).start(); // Asynchronously listening to server stdin for quitting
+    }
+
+    private void quit() {
+        Scanner scanner = new Scanner(System.in);
+
+        while(true) {
+            if(scanner.nextLine().equalsIgnoreCase("QUIT")) {
+                // TODO disconnect clients
+                System.out.println("Server quitting!");
+                System.exit(0);
+            }
+        }
+    }
+
+    public void onDisconnect(SocketClientHandler clientHandler) {
+        // TODO remove player
+        System.out.println("Client disconnected!");
     }
 
     // TODO
@@ -39,7 +59,8 @@ public class Server {
             Server server = new Server(port);
 
             System.out.println("Starting socket server...");
-            new Thread(server.socketServer).start();
+            ExecutorService executorService = Executors.newCachedThreadPool();
+            executorService.submit(server.socketServer);
         }
     }
 }

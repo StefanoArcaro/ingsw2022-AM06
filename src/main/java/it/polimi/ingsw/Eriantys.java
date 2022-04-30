@@ -2,6 +2,7 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.network.client.SocketClient;
 import it.polimi.ingsw.network.server.Server;
+import it.polimi.ingsw.view.CLI;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -33,9 +34,7 @@ public class Eriantys {
                 System.out.println("You selected the CLI, have fun!");
                 countdown();
                 System.out.println("\n=============================================================\n");
-                // System.out.println("CLI main running!");
-                SocketClient.main(null);
-                // CLI.main(null);
+                CLI.main(null);
             }
             case 2 -> {
                 System.out.println("You selected the GUI, have fun!");

@@ -7,7 +7,7 @@ import it.polimi.ingsw.network.message.MessageType;
  * The client communicates with the server using this generic type of message.
  */
 
-public abstract class Message {
+public class Message {
     private final String nickname;
     private final MessageType messageType;
 
