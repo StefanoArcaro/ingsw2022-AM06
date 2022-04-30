@@ -1,5 +1,13 @@
 package it.polimi.ingsw.network.server;
 
+import com.google.gson.Gson;
+import it.polimi.ingsw.network.message.MessageType;
+import it.polimi.ingsw.network.message.clientToserver.Message;
+import it.polimi.ingsw.network.message.serverToclient.Answer;
+import it.polimi.ingsw.network.message.serverToclient.DisconnectionMessage;
+import it.polimi.ingsw.network.message.serverToclient.GenericMessage;
+import it.polimi.ingsw.network.message.serverToclient.PongMessage;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -44,24 +52,51 @@ public class SocketClientHandler implements ClientHandler, Runnable {
         System.out.println("Client connected from " + client.getInetAddress());
 
         while(!Thread.currentThread().isInterrupted()) {
-            String message;
-            while ((message = reader.readLine()) != null) {
-                writer.write(message);
-                writer.newLine();
-                writer.flush();
-                System.out.println("Client: " + message);
+            synchronized (inputLock) {
+                Gson gson = new Gson();
+                String message;
+
+                while ((message = reader.readLine()) != null) {
+                    Message msg = gson.fromJson(message, Message.class);
+
+                    if(msg.getMessageType() == MessageType.PING_MESSAGE) {
+                        sendMessage(new PongMessage());
+                    } else if(msg.getMessageType() == MessageType.DISCONNECTION_MESSAGE) {
+                        // TODO change
+                        sendMessage(new DisconnectionMessage("server", "disconnected"));
+                        disconnect();
+                    } else {
+                        // TODO change
+                        // socketServer.onMessageReceived();
+                        sendMessage(new GenericMessage("SERVER echo: " + message));
+                    }
+
+                    System.out.println("Client: " + message);
+                }
             }
         }
     }
 
     @Override
-    public boolean isConnected() {
-        return connected;
+    public void sendMessage(Answer message) {
+        Gson gson = new Gson();
+        String msg = gson.toJson(message);
+
+        try {
+            synchronized (outputLock) {
+                writer.write(msg);
+                writer.newLine();
+                writer.flush();
+            }
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     @Override
     public void disconnect() {
         if(connected) {
+
             try {
                 if(!client.isClosed()) {
                     client.close();
@@ -71,13 +106,13 @@ public class SocketClientHandler implements ClientHandler, Runnable {
             }
 
             connected = false;
+            socketServer.onDisconnect(this); // TODO update every other player
             Thread.currentThread().interrupt();
-            // socketServer.onDisconnect(this) TODO
         }
     }
 
     @Override
-    public void sendMessage(String message) {
-
+    public boolean isConnected() {
+        return connected;
     }
 }

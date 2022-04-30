@@ -7,10 +7,12 @@ import java.net.Socket;
 public class SocketServer implements Runnable {
 
     private final int port;
+    private final Server server;
     private ServerSocket serverSocket;
 
-    public SocketServer(int port) {
+    public SocketServer(int port, Server server) {
         this.port = port;
+        this.server = server;
     }
 
     @Override
@@ -33,5 +35,9 @@ public class SocketServer implements Runnable {
                 System.err.println("Connection dropped");
             }
         }
+    }
+
+    public void onDisconnect(SocketClientHandler clientHandler) {
+        server.onDisconnect(clientHandler);
     }
 }

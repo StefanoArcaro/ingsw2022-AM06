@@ -6,7 +6,8 @@ import it.polimi.ingsw.network.message.MessageType;
  * Abstract answer class which must be extended by message sent by the server.
  * The server communicates with the client using this generic type of message.
  */
-public abstract class Answer {
+// TODO check if ok (removed abstract)
+public class Answer {
 
     private final static String SERVER_NICKNAME = "server";
     private final String nickname;
