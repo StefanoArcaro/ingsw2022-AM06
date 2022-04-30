@@ -57,6 +57,8 @@ public class CharacterInfluenceModifier extends Character {
      */
     @Override
     public void effect() throws NoAvailableBanCardsException, OutOfBoundException {
+        listeners.firePropertyChange(CHARACTER_LISTENER, null, this);
+
         CharacterID character = CharacterID.values()[characterID];
         if(character.equals(CharacterID.CHARACTER_FIVE)) {
             effect_five(this.islandGroupIndex);
@@ -76,7 +78,9 @@ public class CharacterInfluenceModifier extends Character {
             IslandGroup islandGroupChosen = game.getIslandGroupByIndex(islandGroupIndex);
             if(numberOfBanCards > 0) {
                 islandGroupChosen.addBanCard();
+                listeners.firePropertyChange(ISLAND_GROUP_LISTENER, null, islandGroupChosen);
                 removeBanCard();
+                listeners.firePropertyChange(CHARACTER_LISTENER, null, this);
             } else {
                 throw new NoAvailableBanCardsException();
             }

@@ -1,12 +1,16 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.listeners.BoardListener;
+import it.polimi.ingsw.listeners.IslandGroupListener;
 import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.gameBoard.*;
 import it.polimi.ingsw.model.phases.Phase;
 import it.polimi.ingsw.model.phases.PhaseFactory;
 import it.polimi.ingsw.observer.Observable;
+import it.polimi.ingsw.view.VirtualView;
 
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -33,6 +37,11 @@ public class Game extends Observable {
     private Character activatedCharacter;
     private int treasury;
 
+    //Listeners
+    protected final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
+    private final static String ISLAND_GROUP_LISTENER = "islandGroupListener";
+    private final static String BOARD_LISTENER = "boardListener";
+
     /**
      * Default constructor.
      */
@@ -54,6 +63,12 @@ public class Game extends Observable {
         // Initialize the first phase
         currentPhase = phaseFactory.createPhase(gameState);
     }
+
+    public void createListeners(VirtualView clientView){
+        listeners.addPropertyChangeListener(ISLAND_GROUP_LISTENER, new IslandGroupListener(clientView));
+        listeners.addPropertyChangeListener(BOARD_LISTENER, new BoardListener(clientView));
+    }
+
 
     /**
      * @return the chosen number of players for the game.
@@ -365,6 +380,7 @@ public class Game extends Observable {
     private boolean isBanCardPresent(IslandGroup islandGroup) {
         if(islandGroup.getNumberOfBanCardPresent() > 0) {
             islandGroup.removeBanCard();
+            listeners.firePropertyChange(ISLAND_GROUP_LISTENER, null, islandGroup);
             Character character= getCharacterByID(5);
             if(character != null) {
                 character.addBanCard();
@@ -387,11 +403,13 @@ public class Game extends Observable {
                 for(Island island : getIslandGroupByIndex(islandGroupIndex).getIslands()) {
                     island.removeTower(this);
                 }
+                listeners.firePropertyChange(BOARD_LISTENER, null, playerOlderConquerorIslandGroup.getBoard());
             }
 
             for(Island island : getIslandGroupByIndex(islandGroupIndex).getIslands()) {
                 island.addTower(this, playerMaxInfluence.getColor());
             }
+            listeners.firePropertyChange(ISLAND_GROUP_LISTENER, null, playerMaxInfluence.getBoard());
 
             islandGroups.get(islandGroupIndex).setConquerorColor(playerMaxInfluence.getColor());
 
@@ -412,6 +430,9 @@ public class Game extends Observable {
                     connectIslandGroups(islandGroup, nextIslandGroup);
                 }
             }
+
+            listeners.firePropertyChange(ISLAND_GROUP_LISTENER, null, islandGroup);
+
         }
     }
 

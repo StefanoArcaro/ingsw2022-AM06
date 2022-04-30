@@ -102,7 +102,7 @@ public class SocketClient extends Client {
             Socket socket = new Socket("localhost", 1234);
             SocketClient client = new SocketClient(socket);
             client.readMessage(); // Asynchronous read from stdin
-            client.enablePinger(false);
+            client.enablePinger(true);
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }

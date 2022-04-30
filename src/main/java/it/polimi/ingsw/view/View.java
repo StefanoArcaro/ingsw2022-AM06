@@ -25,6 +25,8 @@ import java.util.List;
  */
 public class View extends Observable implements Observer {
 
+    //todo: da eliminare?
+
     //attributo che lega la view ad un client
 
 
@@ -43,7 +45,7 @@ public class View extends Observable implements Observer {
      * @param assistantsAvailable list of assistant that the player has not used yet.
      */
     public void askAssistant(ArrayList<Assistant> assistantsAvailable) {
-        //client: send(new AssistantsAvailableMessage(assistantsAvailable));
+        //client: send(new AssistantsMessage(assistantsAvailable));
     }
 
     /**
@@ -59,7 +61,7 @@ public class View extends Observable implements Observer {
      * @param cloudsAvailable list of clouds' id that aren't been chosen from other players.
      */
     public void askCloudId(ArrayList<Integer> cloudsAvailable) {
-        //client: send(new CloudsAvailableMessage(cloudsAvailable));
+        //client: send(new CloudsMessage(cloudsAvailable));
     }
 
     /**
@@ -101,7 +103,7 @@ public class View extends Observable implements Observer {
      * @param description description of the character.
      */
     public void showCharacterInfoReply(int characterID, String description) {
-        //client: send(new CharacterInfoReplyMessage(characterID, description));
+        //client: send(new CharacterInfoMessage(characterID, description));
     }
 
     /**

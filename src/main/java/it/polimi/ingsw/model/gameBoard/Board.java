@@ -1,10 +1,14 @@
 package it.polimi.ingsw.model.gameBoard;
 
 import it.polimi.ingsw.exceptions.TableFullException;
+import it.polimi.ingsw.listeners.BoardListener;
+import it.polimi.ingsw.listeners.WinListener;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.enumerations.GameMode;
+import it.polimi.ingsw.view.VirtualView;
 
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
 public class Board {
@@ -87,6 +91,7 @@ public class Board {
             studentReceived = hall.receiveStudent(color);
         } catch (TableFullException e) {
             System.out.println(e.getMessage());
+            return;
         }
 
         if(studentReceived && player.getGame().getGameMode().equals(GameMode.EXPERT)) {

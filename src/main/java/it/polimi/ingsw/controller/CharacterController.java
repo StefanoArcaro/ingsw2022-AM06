@@ -58,7 +58,12 @@ public class CharacterController {
         int characterID = message.getCharacterID();
         String description = null; //= classe da cui prendere descrizione in base all'id
 
-        view.showCharacterInfoReply(characterID, description);
+
+        //si crea answer
+        //si prende game manager corrispondente
+        //gameManager.signleSend(answer, client a cui mandare)
+
+        //view.showCharacterInfoReply(characterID, description); non così
     }
 
     /**
@@ -72,7 +77,7 @@ public class CharacterController {
         try {
             ((ActionPhase) (game.getCurrentPhase())).playCharacter(characterID);
         } catch (Exception e) {
-            view.showErrorMessage(e.getMessage());
+            view.showErrorMessage(e.getMessage()); //todo
         }
     }
 
@@ -94,7 +99,7 @@ public class CharacterController {
         try {
             ((ActionPhase) (game.getCurrentPhase())).playCharacter(characterID);
         } catch (Exception e) {
-            view.showErrorMessage(e.getMessage());
+            view.showErrorMessage(e.getMessage()); //todo
         }
     }
 
@@ -114,7 +119,7 @@ public class CharacterController {
         try {
             ((ActionPhase) (game.getCurrentPhase())).playCharacter(characterID);
         } catch (Exception e) {
-            view.showErrorMessage(e.getMessage());
+            view.showErrorMessage(e.getMessage());  //todo
         }
     }
 
@@ -136,7 +141,7 @@ public class CharacterController {
         try {
             ((ActionPhase) (game.getCurrentPhase())).playCharacter(characterID);
         } catch (Exception e) {
-            view.showErrorMessage(e.getMessage());
+            view.showErrorMessage(e.getMessage());  //todo
         }
     }
 
@@ -156,7 +161,7 @@ public class CharacterController {
         try {
             ((ActionPhase) (game.getCurrentPhase())).playCharacter(characterID);
         } catch (Exception e) {
-            view.showErrorMessage(e.getMessage());
+            view.showErrorMessage(e.getMessage());  //todo
         }
     }
 }

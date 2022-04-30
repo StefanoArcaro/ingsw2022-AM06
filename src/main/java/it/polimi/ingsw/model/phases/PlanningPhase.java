@@ -2,12 +2,15 @@ package it.polimi.ingsw.model.phases;
 
 import it.polimi.ingsw.exceptions.AssistantTakenException;
 import it.polimi.ingsw.exceptions.InvalidPriorityException;
+import it.polimi.ingsw.listeners.AssistantListener;
 import it.polimi.ingsw.model.gameBoard.Assistant;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.gameBoard.Cloud;
+import it.polimi.ingsw.view.VirtualView;
 
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +30,10 @@ public class PlanningPhase extends Phase {
     private final Map<Player, Assistant> playerPriority;
     int turns;
 
+    //listeners
+    protected final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
+    private final static String ASSISTANT_LISTENER = "assistantListener";
+
     /**
      * Default constructor.
      * @param game reference to the game.
@@ -40,6 +47,10 @@ public class PlanningPhase extends Phase {
         this.playingOrder = new ArrayList<>(players);
         this.playerPriority = new HashMap<>();
         turns = 0;
+    }
+
+    public void createListeners(VirtualView clientView){
+        listeners.addPropertyChangeListener(ASSISTANT_LISTENER, new AssistantListener(clientView));
     }
 
     /**
@@ -78,6 +89,8 @@ public class PlanningPhase extends Phase {
                 turns += 1;
                 assistant = currentPlayer.getWizard().playAssistant(priority);
                 currentPlayer.getWizard().removeAssistant(priority);
+                listeners.firePropertyChange(ASSISTANT_LISTENER, null, assistant);
+
                 playerPriority.put(currentPlayer, assistant);
                 game.setCurrentPlayer(game.getNextPlayer());
             } else {

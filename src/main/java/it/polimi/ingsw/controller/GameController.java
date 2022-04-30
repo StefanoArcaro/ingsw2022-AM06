@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.GameManager;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.CreatureColor;
@@ -11,34 +12,89 @@ import it.polimi.ingsw.network.message.clientToserver.*;
 import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.view.View;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Controller class that manages the evolution of the game.
  */
-public class GameController implements Observer {
+public class GameController implements PropertyChangeListener {
 
     private final Game model;
     private final Map<String, View> clientsView; //todo
+    private final GameManager gameManager;
     private final InputController inputController;
     private final CharacterController characterController;
+
+
+    //todo: sistemare l'invio dei messaggi
+    //todo: in risposta al messaggio del client, se serve mandare una risposta del server Answer
 
     /**
      * Default constructor.
      * @param model the game.
      */
-    public GameController(Game model) {
+    public GameController(Game model, GameManager gameManager) {
         this.model = model;
+        this.gameManager = gameManager;
         this.clientsView = new HashMap<>(); //todo
         this.inputController = new InputController(model, clientsView);
         this.characterController = new CharacterController(model, clientsView);
     }
 
     /**
-     * Determines the action to make based on the game state and the message received.
-     * @param message the message sent by the current player.
+     * Determines the action to make based on the game state and the message received by the client.
      */
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        Message message = (Message) evt.getNewValue();
+
+        if(!inputController.checkOnMessageReceived(message)){
+            return;
+        }
+
+        switch(model.getGameState()) {
+            case LOBBY_PHASE:
+                loginState(message);
+                break;
+            case PREPARE_PHASE:
+                if(checkUser(message)) {
+                    prepareState(message);
+                }
+                break;
+            case PLANNING_PHASE:
+                if(checkUser(message)) {
+                    planningState(message);
+                }
+                break;
+            case MOVE_STUDENT_PHASE:
+                if(checkUser(message)) {
+                    moveStudentPhase(message);
+                }
+                break;
+            case MOVE_MOTHER_NATURE_PHASE:
+                if(checkUser(message)) {
+                    moveMotherNaturePhase(message);
+                }
+                break;
+            case PICK_CLOUD_PHASE:
+                if(checkUser(message)) {
+                    pickCloudPhase(message);
+                }
+                break;
+            default: //end game states
+                //todo: clientsView.get(message.getNickname()).showErrorMessage("The game is over, you can't send a message.");
+
+        }
+
+
+    }
+
+
+
+    /*
     public void onReceivedMessage(Message message) {
 
         if(!inputController.checkOnMessageReceived(message)){
@@ -77,7 +133,7 @@ public class GameController implements Observer {
             default: //end game states
                 clientsView.get(message.getNickname()).showErrorMessage("The game is over, you can't send a message.");
         }
-    }
+    }*/
 
     /**
      * Check if the message is sent by the current player
@@ -89,7 +145,7 @@ public class GameController implements Observer {
         boolean checkUser = message.getNickname().equalsIgnoreCase(model.getCurrentPlayer().getNickname());
 
         if(!checkUser){
-            view.showErrorMessage("You aren't the current player!");
+            view.showErrorMessage("You aren't the current player!");    //todo
             return false;
         }
 
@@ -101,8 +157,10 @@ public class GameController implements Observer {
      * Adds a player to the game.
      * @param message the message received by the current client.
      */
+
+    //todo: fix partite multiple ---inoltre, messaggi di login nel server?
     private void loginState(Message message) {
-        View view = clientsView.get(message.getNickname());
+        View view = clientsView.get(message.getNickname()); //todo
 
         if(message.getMessageType() == MessageType.LOGIN_REQUEST_MESSAGE) {
             String nickname = message.getNickname();
@@ -132,7 +190,7 @@ public class GameController implements Observer {
      * @param message the message received by the current player.
      */
     private void prepareState(Message message) {
-        View view = clientsView.get(message.getNickname());
+        View view = clientsView.get(message.getNickname()); //todo
 
         if(message.getMessageType() == MessageType.WIZARD_REQUEST_MESSAGE) {
             WizardName wizardName = ((WizardRequestMessage)message).getWizardName();
@@ -176,9 +234,10 @@ public class GameController implements Observer {
     private void moveStudentPhase(Message message) {
         switch (message.getMessageType()) {
             case MOVE_STUDENT_MESSAGE -> doMoveStudent((MoveStudentMessage) message);
-            case CHARACTER_INFO_REQUEST_MESSAGE, CHARACTER_MESSAGE, CHARACTER_COLOR_MESSAGE,
+            default -> characterController.onMessageReceived(message); //todo
+            /*case CHARACTER_INFO_REQUEST_MESSAGE, CHARACTER_MESSAGE, CHARACTER_COLOR_MESSAGE,
                     CHARACTER_DOUBLE_COLOR_MESSAGE, CHARACTER_DESTINATION_MESSAGE,
-                    CHARACTER_COLOR_DESTINATION_MESSAGE -> characterController.onMessageReceived(message);
+                    CHARACTER_COLOR_DESTINATION_MESSAGE -> characterController.onMessageReceived(message);*/
         }
     }
 
@@ -288,10 +347,12 @@ public class GameController implements Observer {
 
     /**
      * Receives an update message from the view.
-     * @param message the update message
+     *
      */
-    @Override
+    /*@Override
     public void update(Message message) {
         //todo
-    }
+    }*/
+
+
 }

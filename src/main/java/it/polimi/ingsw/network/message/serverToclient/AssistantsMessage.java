@@ -8,18 +8,18 @@ import java.util.ArrayList;
 /**
  * Message used by the server to display the available assistants.
  */
-public class AssistantsAvailableMessage extends Answer {
+public class AssistantsMessage extends Answer {
 
     private final ArrayList<Assistant> assistants;
 
-    public AssistantsAvailableMessage(ArrayList<Assistant> assistants) {
-        super(MessageType.ASSISTANTS_AVAILABLE_MESSAGE);
+    public AssistantsMessage(ArrayList<Assistant> assistants) {
+        super(MessageType.ASSISTANTS_MESSAGE);
         this.assistants = assistants;
     }
 
     @Override
     public String toString() {
-        return "AssistantsAvailableMessage{" +
+        return "AssistantsMessage{" +
                 "nickname=" + getNickname() +
                 ", assistants=" + assistants +
                 '}';

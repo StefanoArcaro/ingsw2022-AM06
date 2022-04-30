@@ -33,6 +33,7 @@ public class CharacterInfluenceCalculator extends Character {
         int numberOfIslandGroups = game.getIslandGroups().size();
 
         if(islandGroupIndex >= 0 && islandGroupIndex < numberOfIslandGroups) {
+            listeners.firePropertyChange(CHARACTER_LISTENER, null, this);
             game.calculateInfluence(this.islandGroupIndex);
         } else {
             throw new OutOfBoundException();
