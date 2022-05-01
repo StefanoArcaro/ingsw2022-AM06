@@ -10,6 +10,6 @@ public class InvalidPriorityException extends Exception {
      */
     @Override
     public String getMessage() {
-        return ("Error: the selected priority is invalid (out of bounds or already played.");
+        return ("Error: the selected priority is invalid (out of bounds or already played).");
     }
 }

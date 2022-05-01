@@ -57,6 +57,7 @@ public class CLI {
             Socket socket = new Socket("localhost", 1234);
             cli.setSocketClient(new SocketClient(socket));
             SocketClient client = cli.getSocketClient();
+
             cli.addListener("MessageParser", new MessageParser(client));
             cli.listenToKeyboard(); // Asynchronous read (keyboard input)
 
@@ -67,3 +68,5 @@ public class CLI {
         }
     }
 }
+
+// TODO maybe socketClient doesn't need to be an attribute of CLI
