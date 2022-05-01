@@ -1,6 +1,7 @@
 package it.polimi.ingsw.network.message.clientToserver;
 
 import it.polimi.ingsw.model.enumerations.GameMode;
+import it.polimi.ingsw.model.enumerations.NumberOfPlayers;
 import it.polimi.ingsw.network.message.MessageType;
 import it.polimi.ingsw.network.message.clientToserver.Message;
 
@@ -9,10 +10,10 @@ import it.polimi.ingsw.network.message.clientToserver.Message;
  */
 public class LoginRequestMessage extends Message {
 
-    private int numberOfPlayers;
+    private NumberOfPlayers numberOfPlayers;
     private GameMode gameMode;
 
-    public LoginRequestMessage(String nickname, int numberOfPlayers, GameMode gameMode) {
+    public LoginRequestMessage(String nickname, NumberOfPlayers numberOfPlayers, GameMode gameMode) {
         super(nickname, MessageType.LOGIN_REQUEST_MESSAGE);
         this.numberOfPlayers = numberOfPlayers;
         this.gameMode = gameMode;
@@ -27,7 +28,7 @@ public class LoginRequestMessage extends Message {
                 '}';
     }
 
-    public int getNumberOfPlayers() {
+    public NumberOfPlayers getNumberOfPlayers() {
         return numberOfPlayers;
     }
 

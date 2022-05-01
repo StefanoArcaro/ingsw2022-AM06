@@ -4,17 +4,17 @@ import it.polimi.ingsw.GameManager;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.CreatureColor;
-import it.polimi.ingsw.model.enumerations.GameMode;
 import it.polimi.ingsw.model.enumerations.WizardName;
 import it.polimi.ingsw.model.phases.EndgamePhase;
 import it.polimi.ingsw.network.message.*;
 import it.polimi.ingsw.network.message.clientToserver.*;
-import it.polimi.ingsw.observer.Observer;
-import it.polimi.ingsw.view.View;
+import it.polimi.ingsw.network.message.serverToclient.ErrorMessage;
+import it.polimi.ingsw.network.message.serverToclient.GenericMessage;
+import it.polimi.ingsw.network.message.serverToclient.WinnerMessage;
+import it.polimi.ingsw.network.server.ClientHandler;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -22,9 +22,11 @@ import java.util.Map;
  */
 public class GameController implements PropertyChangeListener {
 
-    private final Game model;
-    private final Map<String, View> clientsView; //todo
     private final GameManager gameManager;
+
+    private final Game model;
+    private final Map<Integer, ClientHandler> clients;
+
     private final InputController inputController;
     private final CharacterController characterController;
 
@@ -36,12 +38,13 @@ public class GameController implements PropertyChangeListener {
      * Default constructor.
      * @param model the game.
      */
-    public GameController(Game model, GameManager gameManager) {
-        this.model = model;
+    public GameController(GameManager gameManager, Game model) {
         this.gameManager = gameManager;
-        this.clientsView = new HashMap<>(); //todo
-        this.inputController = new InputController(model, clientsView);
-        this.characterController = new CharacterController(model, clientsView);
+
+        this.model = model;
+        this.clients = gameManager.getClients();
+        this.inputController = new InputController(model, gameManager.getClients());
+        this.characterController = new CharacterController(model, clients);
     }
 
     /**
@@ -51,14 +54,11 @@ public class GameController implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         Message message = (Message) evt.getNewValue();
 
-        if(!inputController.checkOnMessageReceived(message)){
+        if(!inputController.checkOnMessageReceived(message)) {
             return;
         }
 
         switch(model.getGameState()) {
-            case LOBBY_PHASE:
-                loginState(message);
-                break;
             case PREPARE_PHASE:
                 if(checkUser(message)) {
                     prepareState(message);
@@ -84,7 +84,7 @@ public class GameController implements PropertyChangeListener {
                     pickCloudPhase(message);
                 }
                 break;
-            default: //end game states
+            default: //end game states and lobby
                 //todo: clientsView.get(message.getNickname()).showErrorMessage("The game is over, you can't send a message.");
 
         }
@@ -92,97 +92,22 @@ public class GameController implements PropertyChangeListener {
 
     }
 
-
-
-    /*
-    public void onReceivedMessage(Message message) {
-
-        if(!inputController.checkOnMessageReceived(message)){
-            return;
-        }
-
-        switch(model.getGameState()) {
-            case LOBBY_PHASE:
-                loginState(message);
-                break;
-            case PREPARE_PHASE:
-                if(checkUser(message)) {
-                    prepareState(message);
-                }
-                break;
-            case PLANNING_PHASE:
-                if(checkUser(message)) {
-                    planningState(message);
-                }
-                break;
-            case MOVE_STUDENT_PHASE:
-                if(checkUser(message)) {
-                    moveStudentPhase(message);
-                }
-                break;
-            case MOVE_MOTHER_NATURE_PHASE:
-                if(checkUser(message)) {
-                    moveMotherNaturePhase(message);
-                }
-                break;
-            case PICK_CLOUD_PHASE:
-                if(checkUser(message)) {
-                    pickCloudPhase(message);
-                }
-                break;
-            default: //end game states
-                clientsView.get(message.getNickname()).showErrorMessage("The game is over, you can't send a message.");
-        }
-    }*/
-
     /**
      * Check if the message is sent by the current player
      * @param message message sent by client
      * @return whether the message is sent by the current player or not
      */
     private boolean checkUser(Message message) {
-        View view = clientsView.get(message.getNickname());
+        ClientHandler clientHandler = clients.get(message.getClientID());
+
         boolean checkUser = message.getNickname().equalsIgnoreCase(model.getCurrentPlayer().getNickname());
 
         if(!checkUser){
-            view.showErrorMessage("You aren't the current player!");    //todo
+            clientHandler.sendMessage(new ErrorMessage("You aren't the current player!"));
             return false;
         }
 
         return true;
-    }
-
-
-    /**
-     * Adds a player to the game.
-     * @param message the message received by the current client.
-     */
-
-    //todo: fix partite multiple ---inoltre, messaggi di login nel server?
-    private void loginState(Message message) {
-        View view = clientsView.get(message.getNickname()); //todo
-
-        if(message.getMessageType() == MessageType.LOGIN_REQUEST_MESSAGE) {
-            String nickname = message.getNickname();
-
-            //if first player: set number of player and game mode
-            if(model.getPlayers().size() == 0) {
-                int numberOfPlayers = ((LoginRequestMessage)message).getNumberOfPlayers();
-                GameMode gameMode = ((LoginRequestMessage)message).getGameMode();
-                model.setNumberOfPlayers(numberOfPlayers);
-                model.setGameMode(gameMode);
-            }
-
-            model.getCurrentPhase().setPlayerNickname(nickname);
-
-            try{
-                model.getCurrentPhase().play();
-            } catch(Exception e) {
-                view.showErrorMessage(e.getMessage());
-            }
-
-            //todo: gestione multi partita
-        }
     }
 
     /**
@@ -190,7 +115,7 @@ public class GameController implements PropertyChangeListener {
      * @param message the message received by the current player.
      */
     private void prepareState(Message message) {
-        View view = clientsView.get(message.getNickname()); //todo
+        ClientHandler clientHandler = clients.get(message.getClientID());
 
         if(message.getMessageType() == MessageType.WIZARD_REQUEST_MESSAGE) {
             WizardName wizardName = ((WizardRequestMessage)message).getWizardName();
@@ -199,7 +124,7 @@ public class GameController implements PropertyChangeListener {
             try {
                 model.getCurrentPhase().play();
             } catch (Exception e) {
-                view.showErrorMessage(e.getMessage());
+                clientHandler.sendMessage(new ErrorMessage(e.getMessage()));
             }
         }else if(message.getMessageType() == MessageType.CHARACTER_INFO_REQUEST_MESSAGE) {
             characterController.onMessageReceived(message);
@@ -211,7 +136,7 @@ public class GameController implements PropertyChangeListener {
      * @param message the message sent by the current player.
      */
     private void planningState(Message message) {
-        View view = clientsView.get(message.getNickname());
+        ClientHandler clientHandler = clients.get(message.getClientID());
 
         if(message.getMessageType() == MessageType.ASSISTANT_REQUEST_MESSAGE) {
             int assistantID = ((AssistantRequestMessage)message).getAssistantID();
@@ -220,7 +145,7 @@ public class GameController implements PropertyChangeListener {
             try {
                 model.getCurrentPhase().play();
             } catch (Exception e) {
-                view.showErrorMessage(e.getMessage());
+                clientHandler.sendMessage(new ErrorMessage(e.getMessage()));
             }
         }else if(message.getMessageType() == MessageType.CHARACTER_INFO_REQUEST_MESSAGE) {
             characterController.onMessageReceived(message);
@@ -232,12 +157,10 @@ public class GameController implements PropertyChangeListener {
      * @param message the message sent by the current player.
      */
     private void moveStudentPhase(Message message) {
-        switch (message.getMessageType()) {
-            case MOVE_STUDENT_MESSAGE -> doMoveStudent((MoveStudentMessage) message);
-            default -> characterController.onMessageReceived(message); //todo
-            /*case CHARACTER_INFO_REQUEST_MESSAGE, CHARACTER_MESSAGE, CHARACTER_COLOR_MESSAGE,
-                    CHARACTER_DOUBLE_COLOR_MESSAGE, CHARACTER_DESTINATION_MESSAGE,
-                    CHARACTER_COLOR_DESTINATION_MESSAGE -> characterController.onMessageReceived(message);*/
+        if (message.getMessageType() == MessageType.MOVE_STUDENT_MESSAGE) {
+            doMoveStudent((MoveStudentMessage) message);
+        } else {
+            characterController.onMessageReceived(message);
         }
     }
 
@@ -246,7 +169,7 @@ public class GameController implements PropertyChangeListener {
      * @param message the message sent by the current player.
      */
     private void doMoveStudent(MoveStudentMessage message) {
-        View view = clientsView.get(message.getNickname());
+        ClientHandler clientHandler = clients.get(message.getClientID());
         CreatureColor color = message.getColor();
         int destination = message.getDestination();
 
@@ -256,7 +179,7 @@ public class GameController implements PropertyChangeListener {
         try {
             model.getCurrentPhase().play();
         } catch (Exception e) {
-            view.showErrorMessage(e.getMessage());
+            clientHandler.sendMessage(new ErrorMessage(e.getMessage()));
         }
     }
 
@@ -266,11 +189,10 @@ public class GameController implements PropertyChangeListener {
      * @param message the message sent by the current player.
      */
     private void moveMotherNaturePhase(Message message) {
-        switch (message.getMessageType()) {
-            case MOVE_MOTHER_NATURE_MESSAGE -> doMoveMotherNature((MoveMotherNatureMessage) message);
-            case CHARACTER_INFO_REQUEST_MESSAGE, CHARACTER_MESSAGE, CHARACTER_COLOR_MESSAGE,
-                    CHARACTER_DOUBLE_COLOR_MESSAGE, CHARACTER_DESTINATION_MESSAGE,
-                    CHARACTER_COLOR_DESTINATION_MESSAGE -> characterController.onMessageReceived(message);
+        if (message.getMessageType() == MessageType.MOVE_MOTHER_NATURE_MESSAGE) {
+            doMoveMotherNature((MoveMotherNatureMessage) message);
+        } else {
+            characterController.onMessageReceived(message);
         }
     }
 
@@ -279,7 +201,7 @@ public class GameController implements PropertyChangeListener {
      * @param message the message sent by the current player.
      */
     private void doMoveMotherNature(MoveMotherNatureMessage message) {
-        View view = clientsView.get(message.getNickname());
+        ClientHandler clientHandler = clients.get(message.getClientID());
         int numberOfSteps = message.getNumberOfSteps();
 
         model.getCurrentPhase().setNumberOfSteps(numberOfSteps);
@@ -287,7 +209,7 @@ public class GameController implements PropertyChangeListener {
         try {
             model.getCurrentPhase().play();
         } catch (Exception e) {
-            view.showErrorMessage(e.getMessage());
+            clientHandler.sendMessage(new ErrorMessage(e.getMessage()));
         }
         checkEndGame();
     }
@@ -298,11 +220,10 @@ public class GameController implements PropertyChangeListener {
      * @param message the message sent by the current player.
      */
     private void pickCloudPhase(Message message) {
-        switch (message.getMessageType()) {
-            case PICK_CLOUD_MESSAGE -> doPickCloud((PickCloudMessage) message);
-            case CHARACTER_INFO_REQUEST_MESSAGE, CHARACTER_MESSAGE, CHARACTER_COLOR_MESSAGE,
-                    CHARACTER_DOUBLE_COLOR_MESSAGE, CHARACTER_DESTINATION_MESSAGE,
-                    CHARACTER_COLOR_DESTINATION_MESSAGE -> characterController.onMessageReceived(message);
+        if (message.getMessageType() == MessageType.PICK_CLOUD_MESSAGE) {
+            doPickCloud((PickCloudMessage) message);
+        } else {
+            characterController.onMessageReceived(message);
         }
     }
 
@@ -311,7 +232,7 @@ public class GameController implements PropertyChangeListener {
      * @param message the message sent by the current player.
      */
     private void doPickCloud(PickCloudMessage message) {
-        View view = clientsView.get(message.getNickname());
+        ClientHandler clientHandler = clients.get(message.getClientID());
         int cloudID = message.getCloudID();
 
         model.getCurrentPhase().setCloudID(cloudID);
@@ -319,7 +240,7 @@ public class GameController implements PropertyChangeListener {
         try {
             model.getCurrentPhase().play();
         } catch (Exception e) {
-            view.showErrorMessage(e.getMessage());
+            clientHandler.sendMessage(new ErrorMessage(e.getMessage()));
         }
         checkEndGame();
     }
@@ -336,23 +257,14 @@ public class GameController implements PropertyChangeListener {
             ((EndgamePhase)model.getCurrentPhase()).play();
             Player winner = model.getCurrentPhase().getWinner();
 
-            for(Player player : model.getPlayers()) {
-                View view = clientsView.get(player.getNickname());
-                view.showWinMessage(winner.getNickname());
-            }
+            gameManager.singleSend(new GenericMessage("You won! Congratulations!"), winner.getNickname());
+            gameManager.sendAllExcept(new WinnerMessage(winner.getNickname()), winner.getNickname());
 
-            //end of the game todo
+            //todo end of the game
         }
     }
 
-    /**
-     * Receives an update message from the view.
-     *
-     */
-    /*@Override
-    public void update(Message message) {
-        //todo
-    }*/
+
 
 
 }

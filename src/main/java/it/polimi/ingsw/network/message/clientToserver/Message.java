@@ -8,12 +8,15 @@ import it.polimi.ingsw.network.message.MessageType;
  */
 
 public class Message {
+    private int clientID;
+
     private final String nickname;
     private final MessageType messageType;
 
     public Message(String nickname, MessageType messageType) {
         this.nickname = nickname;
         this.messageType = messageType;
+        this.clientID = -1;
     }
 
     public String getNickname() {
@@ -22,6 +25,14 @@ public class Message {
 
     public MessageType getMessageType() {
         return messageType;
+    }
+
+    public int getClientID() {
+        return clientID;
+    }
+
+    public void setClientID(int clientID) {
+        this.clientID = clientID;
     }
 
     @Override

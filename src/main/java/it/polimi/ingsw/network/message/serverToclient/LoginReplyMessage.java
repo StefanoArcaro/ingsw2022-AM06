@@ -8,13 +8,11 @@ import it.polimi.ingsw.network.message.clientToserver.Message;
  */
 public class LoginReplyMessage extends Answer {
 
-    private final boolean connectionAccepted;
-    private final boolean nicknameAccepted;
+    private final String message;
 
-    public LoginReplyMessage(boolean connectionAccepted, boolean nicknameAccepted) {
+    public LoginReplyMessage(String message) {
         super(MessageType.LOGIN_REPLY_MESSAGE);
-        this.connectionAccepted = connectionAccepted;
-        this.nicknameAccepted = nicknameAccepted;
+        this.message = message;
     }
 
     @Override
@@ -23,5 +21,9 @@ public class LoginReplyMessage extends Answer {
                 "nickname= "  + getNickname() +
                 ", nickname accepted and connection established" +
                 '}';
+    }
+
+    public String getMessage() {
+        return message;
     }
 }

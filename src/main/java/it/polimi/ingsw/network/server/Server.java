@@ -1,13 +1,16 @@
 package it.polimi.ingsw.network.server;
 
-import it.polimi.ingsw.network.message.serverToclient.Answer;
-import it.polimi.ingsw.network.message.serverToclient.DisconnectionMessage;
-import it.polimi.ingsw.network.message.serverToclient.GenericMessage;
+import com.google.gson.Gson;
+import it.polimi.ingsw.GameManager;
+import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.enumerations.GameMode;
+import it.polimi.ingsw.model.enumerations.GameState;
+import it.polimi.ingsw.model.enumerations.NumberOfPlayers;
+import it.polimi.ingsw.network.message.clientToserver.LoginRequestMessage;
+import it.polimi.ingsw.network.message.clientToserver.Message;
+import it.polimi.ingsw.network.message.serverToclient.*;
 
-import java.util.HashMap;
-import java.util.InputMismatchException;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -17,63 +20,195 @@ import java.util.concurrent.Executors;
 public class Server {
 
     private final SocketServer socketServer;
-    private Map<Integer, ClientHandler> idToConnection;
-    private int clientID;
+    private final ArrayList<GameManager> gameManagers;
+    private final Map<Integer, ClientHandler> idToConnection;
+    private final Map<Integer, String> idToNickname;
+    private final Map<Integer, GameManager> idToGameManager;
+    private int nextClientID;
 
-    // TODO
     public Server(int port) {
+        this.gameManagers = new ArrayList<>();
         this.socketServer = new SocketServer(port, this);
         this.idToConnection = new HashMap<>();
-        this.clientID = -1;
+        this.idToNickname = new HashMap<>();
+        this.idToGameManager = new HashMap<>();
+        this.nextClientID = -1;
+
         new Thread(this::quit).start(); // Asynchronously listening to server stdin for quitting
     }
 
 
     public void addClient(ClientHandler clientHandler) {
         int clientID = getNextClientID();
-
         idToConnection.put(clientID, clientHandler);
     }
 
     public int getNextClientID() {
-        clientID += 1;
-        return clientID;
+        nextClientID += 1;
+        return nextClientID;
     }
-
 
     private void quit() {
         Scanner scanner = new Scanner(System.in);
 
         while(true) {
             if(scanner.nextLine().equalsIgnoreCase("QUIT")) {
-                // TODO disconnect clients
-                broadcastMessage(new DisconnectionMessage("da fare", "disconnected"));
-
+                broadcastMessage(new DisconnectionMessage("Server"));
                 System.out.println("Server quitting!");
                 System.exit(0);
             }
         }
     }
 
-    public void onDisconnect(ClientHandler clientHandler) {
-        removeClient(clientHandler);
-        broadcastMessage(new GenericMessage("nickname da mettere disconnected"));
-        System.out.println("Client disconnected!");
-        //TODO REMOVE EVERY PLAYERS
+    // Find clientID, find GameHandler from id, gamehandler calls controller to switch on messageType
+    public void onMessageReceived(ClientHandler clientHandler, String msg) {
+        Gson gson = new Gson();
+        Message message = gson.fromJson(msg, Message.class);
+
+        switch(message.getMessageType()) {
+            case PING_MESSAGE -> pingHandler(clientHandler);
+            case DISCONNECTION_MESSAGE -> disconnectionHandler(clientHandler);
+            case LOGIN_REQUEST_MESSAGE -> loginHandler(clientHandler, msg);
+
+            default -> {
+                message.setClientID(getClientIDFromClientHandler(clientHandler));
+
+                GameManager gameManager = idToGameManager.get(getClientIDFromClientHandler(clientHandler));
+                if(gameManager != null) {
+                    gameManager.onMessageReceived(message); // TODO msg
+                } else {
+                    // TODO SBAGLIATO MA DIGLIELO (da cambiare)
+                    clientHandler.sendMessage(new ErrorMessage("Send a login message AOO"));
+                }
+            }
+        }
     }
 
+    private void pingHandler(ClientHandler clientHandler) {
+        clientHandler.sendMessage(new PongMessage());
+    }
+
+    private void disconnectionHandler(ClientHandler clientHandler) {
+        int clientID = getClientIDFromClientHandler(clientHandler);
+
+        // Disconnect clientHandler
+        clientHandler.sendMessage(new DisconnectionMessage("You"));
+        clientHandler.disconnect();
+
+        // Update other players in the same game as disconnected clientHandler
+        String nicknameDisconnected = idToNickname.get(clientID);
+        GameManager gameManager = idToGameManager.get(clientID);
+        if(gameManager != null) {
+            System.out.println(nicknameDisconnected + " has disconnected.");
+            gameManager.sendAllExcept(new GenericMessage(nicknameDisconnected + " has disconnected."), nicknameDisconnected);
+        }
+
+        // Remove clientHandler from maps
+        removeClient(clientHandler);
+
+        // TODO: countdown to disconnect other players
+
+        // TODO remove other players and end game
+
+        System.out.println("Client disconnected!");
+    }
+
+    private void loginHandler(ClientHandler clientHandler, String message) {
+        Gson gson = new Gson();
+
+        LoginRequestMessage loginMessage = gson.fromJson(message, LoginRequestMessage.class);
+
+        // Get login nickname and preferences
+        String nickname = loginMessage.getNickname();
+        NumberOfPlayers numberOfPlayers = loginMessage.getNumberOfPlayers();
+        GameMode gameMode = loginMessage.getGameMode();
+
+        // Check if the nickname is unique
+        if(checkUniqueNickname(nickname)) {
+            // Check if already logged in
+            boolean alreadyLogged = idToNickname.containsKey(getClientIDFromClientHandler(clientHandler));
+
+            if(!alreadyLogged) {
+                int clientID = getClientIDFromClientHandler(clientHandler);
+
+                // TODO change: NO toUpperCase
+                idToNickname.put(clientID, nickname.toUpperCase());
+
+                GameManager gameManager = checkGamePreferences(clientID, numberOfPlayers, gameMode);
+                gameManager.addClient(clientID, clientHandler, nickname);
+                gameManager.getGame().getCurrentPhase().setPlayerNickname(nickname);
+
+                try {
+                    gameManager.getGame().getCurrentPhase().play();
+
+                    clientHandler.sendMessage(new LoginReplyMessage("You logged in!"));
+
+                    // TODO test with 3 players
+                    gameManager.sendAllExcept(new GenericMessage(nickname + " joined the game!"), nickname);
+
+                    System.out.println(nickname + " logged in!");
+                } catch (Exception e) {
+                    System.err.println(e.getMessage());
+                }
+            } else {
+                clientHandler.sendMessage(new ErrorMessage("You are already logged in!"));
+            }
+        } else {
+            clientHandler.sendMessage(new ErrorMessage("This nickname has already been taken, please select another one."));
+        }
+    }
+
+    private boolean checkUniqueNickname(String nickname) {
+        return !idToNickname.containsValue(nickname.toUpperCase());
+    }
+
+    private GameManager checkGamePreferences(int clientID, NumberOfPlayers numberOfPlayers, GameMode gameMode) {
+        // TODO eventually remove list and use maps
+        for(GameManager gameManager : gameManagers) {
+            Game game = gameManager.getGame();
+
+            if(numberOfPlayers == game.getNumberOfPlayers() && gameMode.equals(game.getGameMode())) {
+                if(game.getGameState().equals(GameState.LOBBY_PHASE)) {
+                    return gameManager;
+                }
+            }
+        }
+
+        // Create new GameManager
+        GameManager gameManager = new GameManager();
+
+        // Set preferences
+        gameManager.setGamePreferences(numberOfPlayers, gameMode);
+
+        // Add to gameManager list
+        gameManagers.add(gameManager);
+        idToGameManager.put(clientID, gameManager);
+        return gameManager;
+    }
 
     private void removeClient(ClientHandler clientHandler) {
-        idToConnection.remove(clientHandler);
-        //TODO SISTEMARE ALTRE MAPPE
+        int idToRemove = getClientIDFromClientHandler(clientHandler);
+
+        idToConnection.remove(idToRemove);
+        idToNickname.remove(idToRemove);
+        idToGameManager.remove(idToRemove);
+    }
+
+    private int getClientIDFromClientHandler(ClientHandler clientHandler) {
+        for(int key : idToConnection.keySet()) {
+            if(idToConnection.get(key).equals(clientHandler)) {
+                return key;
+            }
+        }
+        return -1;
     }
 
     public void broadcastMessage(Answer answer) {
+        System.out.println(answer);
         for(ClientHandler clientHandler : idToConnection.values()) {
             clientHandler.sendMessage(answer);
         }
     }
-
 
     // TODO
     public static void main(String[] args) {

@@ -8,7 +8,6 @@ public class SocketServer implements Runnable {
 
     private final int port;
     private final Server server;
-    private ServerSocket serverSocket;
 
     public SocketServer(int port, Server server) {
         this.port = port;
@@ -17,6 +16,7 @@ public class SocketServer implements Runnable {
 
     @Override
     public void run() {
+        ServerSocket serverSocket;
         try {
             serverSocket = new ServerSocket(port);
             System.out.println("Server started on port " + port + ".");
@@ -38,7 +38,7 @@ public class SocketServer implements Runnable {
         }
     }
 
-    public void onDisconnect(ClientHandler clientHandler) {
-        server.onDisconnect(clientHandler);
+    public void onMessageReceived(ClientHandler clientHandler, String message) {
+        server.onMessageReceived(clientHandler, message);
     }
 }

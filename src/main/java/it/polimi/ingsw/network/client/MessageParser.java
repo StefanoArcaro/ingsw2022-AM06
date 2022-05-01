@@ -4,6 +4,7 @@ package it.polimi.ingsw.network.client;
 
 import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.enumerations.GameMode;
+import it.polimi.ingsw.model.enumerations.NumberOfPlayers;
 import it.polimi.ingsw.model.enumerations.WizardName;
 import it.polimi.ingsw.network.message.MessageType;
 import it.polimi.ingsw.network.message.clientToserver.*;
@@ -13,7 +14,6 @@ import java.beans.PropertyChangeListener;
 
 public class MessageParser implements PropertyChangeListener {
 
-    //attributo per la connessione -> collegamento al client che manda il messaggio ?
     SocketClient client;
 
     public MessageParser(SocketClient client) {
@@ -21,7 +21,7 @@ public class MessageParser implements PropertyChangeListener {
     }
 
     //per ora metto attributo nickname per creare i messaggi
-    private String nickname;
+    private String nickname;    //todo: togliere nickname dai messaggi
 
     //called when a client insert a command in Cli
     public void parseInput(String input) {
@@ -46,18 +46,39 @@ public class MessageParser implements PropertyChangeListener {
         }
 
         if(message != null) {
-            //connection send al server(message)
             client.sendMessage(message);
         }
-
     }
 
     private LoginRequestMessage loginMessage(String[] in) {
-        String nickname = in[1];
-        int numberOfPlayer = Integer.parseInt(in[2]);
-        GameMode gameMode = Integer.parseInt(in[3]) == 0 ? GameMode.EASY : GameMode.EXPERT;
+        if(in.length == 4) {
+            String nickname = in[1];
 
-        return new LoginRequestMessage(nickname, numberOfPlayer, gameMode);
+            int numberOfPlayers = Integer.parseInt(in[2]);
+            NumberOfPlayers playerNum = null;
+            if(numberOfPlayers == 2) {
+                playerNum = NumberOfPlayers.TWO_PLAYERS;
+            } else if(numberOfPlayers == 3) {
+                playerNum = NumberOfPlayers.THREE_PLAYERS;
+            }
+
+            int mode = Integer.parseInt(in[3]);
+            GameMode gameMode = null;
+            if(mode == 0) {
+                gameMode = GameMode.EASY;
+            } else if(mode == 1) {
+                gameMode = GameMode.EXPERT;
+            }
+
+            if(playerNum != null && gameMode != null) {
+                return new LoginRequestMessage(nickname, playerNum, gameMode);
+            }
+        }
+
+        System.out.println("Correct format for LOGIN message:");
+        System.out.println("login [nickname] [numberOfPlayers (2/3)] [gameMode (0 = EASY / 1 = EXPERT)]");
+
+        return null;
     }
 
     private WizardRequestMessage prepareMessage(String[] in) {
@@ -165,11 +186,9 @@ public class MessageParser implements PropertyChangeListener {
         return null;
     }
 
-    // TODO change: add new type of disconnectionRequestMessage client -> server
     private DisconnectionRequestMessage disconnectionMessage() {
         return new DisconnectionRequestMessage(nickname);
     }
-
 
     private CreatureColor switchColor(String colorString){
         CreatureColor color = null;
@@ -184,10 +203,6 @@ public class MessageParser implements PropertyChangeListener {
         return color;
     }
 
-
-
-
-    //todo - notifica dalla view che è stato scritto qualcosa - parso - mando al server
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         parseInput(evt.getNewValue().toString());

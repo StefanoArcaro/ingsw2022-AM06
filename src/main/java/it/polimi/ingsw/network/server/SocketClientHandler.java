@@ -1,12 +1,7 @@
 package it.polimi.ingsw.network.server;
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.network.message.MessageType;
-import it.polimi.ingsw.network.message.clientToserver.Message;
 import it.polimi.ingsw.network.message.serverToclient.Answer;
-import it.polimi.ingsw.network.message.serverToclient.DisconnectionMessage;
-import it.polimi.ingsw.network.message.serverToclient.GenericMessage;
-import it.polimi.ingsw.network.message.serverToclient.PongMessage;
 
 import java.io.*;
 import java.net.Socket;
@@ -53,25 +48,10 @@ public class SocketClientHandler implements ClientHandler, Runnable {
 
         while(!Thread.currentThread().isInterrupted()) {
             synchronized (inputLock) {
-                Gson gson = new Gson();
                 String message;
 
                 while ((message = reader.readLine()) != null) {
-                    Message msg = gson.fromJson(message, Message.class);
-
-                    if(msg.getMessageType() == MessageType.PING_MESSAGE) {
-                        sendMessage(new PongMessage());
-                    } else if(msg.getMessageType() == MessageType.DISCONNECTION_MESSAGE) {
-                        // TODO change
-                        sendMessage(new DisconnectionMessage("server", "disconnected"));
-                        disconnect();
-                    } else {
-                        // TODO change
-                        // socketServer.onMessageReceived();
-                        sendMessage(new GenericMessage("SERVER echo: " + message));
-                    }
-
-                    System.out.println("Client: " + message);
+                    socketServer.onMessageReceived(this, message);
                 }
             }
         }
@@ -96,7 +76,6 @@ public class SocketClientHandler implements ClientHandler, Runnable {
     @Override
     public void disconnect() {
         if(connected) {
-
             try {
                 if(!client.isClosed()) {
                     client.close();
@@ -106,7 +85,6 @@ public class SocketClientHandler implements ClientHandler, Runnable {
             }
 
             connected = false;
-            socketServer.onDisconnect(this); // TODO update every other player
             Thread.currentThread().interrupt();
         }
     }

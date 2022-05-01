@@ -1,10 +1,10 @@
 package it.polimi.ingsw.network.client;
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.network.message.MessageType;
+import it.polimi.ingsw.network.message.clientToserver.CharacterMessage;
 import it.polimi.ingsw.network.message.clientToserver.Message;
 import it.polimi.ingsw.network.message.clientToserver.PingMessage;
-import it.polimi.ingsw.network.message.serverToclient.Answer;
+import it.polimi.ingsw.network.message.serverToclient.*;
 
 import java.io.*;
 import java.net.Socket;
@@ -45,16 +45,8 @@ public class SocketClient extends Client {
         readQueue.execute(() -> {
             while(!readQueue.isShutdown()) {
                 try {
-                    Gson gson = new Gson();
-                    Answer message = gson.fromJson(reader.readLine(), Answer.class);
-
-                    if(message.getMessageType() != MessageType.PONG_MESSAGE) {
-                        System.out.println(message); //todo: handleAnswer
-                    }
-
-                    if(message.getMessageType() == MessageType.DISCONNECTION_MESSAGE) {
-                        disconnect();
-                    }
+                    String message = reader.readLine();
+                    handleAnswer(message);
                 } catch (IOException e) {
                     System.err.println(e.getMessage());
                 }
@@ -74,6 +66,93 @@ public class SocketClient extends Client {
             writer.flush();
         } catch (IOException e) {
             disconnect();
+        }
+    }
+
+    // From server
+    public void handleAnswer(String message) {
+        Gson gson = new Gson();
+
+        Answer answer = gson.fromJson(message, Answer.class);
+
+        switch(answer.getMessageType()) {
+            case LOGIN_REPLY_MESSAGE -> {
+                LoginReplyMessage msg = gson.fromJson(message, LoginReplyMessage.class);
+                System.out.println(msg.getMessage());
+            }
+            case WIZARDS_AVAILABLE_MESSAGE -> {
+                WizardsAvailableMessage msg = gson.fromJson(message, WizardsAvailableMessage.class);
+                //todo
+            }
+            case ASSISTANTS_MESSAGE -> {
+                AssistantsMessage msg = gson.fromJson(message, AssistantsMessage.class);
+                //todo
+            }
+            case MATCH_INFO_MESSAGE -> {
+                MatchInfoMessage msg = gson.fromJson(message, MatchInfoMessage.class);
+                //todo
+            }
+            case COLORS_AVAILABLE_MESSAGE -> {
+                ColorsAvailableMessage msg = gson.fromJson(message, ColorsAvailableMessage.class);
+                //todo
+            }
+            case BOARD_MESSAGE -> {
+                BoardMessage msg = gson.fromJson(message, BoardMessage.class);
+                //todo
+            }
+            case ISLAND_GROUPS_MESSAGE -> {
+                IslandGroupsMessage msg = gson.fromJson(message, IslandGroupsMessage.class);
+                //todo
+            }
+            case ISLAND_MESSAGE -> {
+                IslandMessage msg = gson.fromJson(message, IslandMessage.class);
+                //todo
+            }
+            case CLOUDS_MESSAGE -> {
+                CloudsMessage msg = gson.fromJson(message, CloudsMessage.class);
+                //todo
+            }
+            case COIN_MESSAGE -> {
+                CoinMessage msg = gson.fromJson(message, CoinMessage.class);
+                //todo
+            }
+            case CURRENT_PLAYER_MESSAGE -> {
+                CurrentPlayerMessage msg = gson.fromJson(message, CurrentPlayerMessage.class);
+                //todo
+            }
+            case CURRENT_PHASE_MESSAGE -> {
+                CurrentPhaseMessage msg = gson.fromJson(message, CurrentPhaseMessage.class);
+                //todo
+            }
+            case CHARACTERS_DRAWN_MESSAGE -> {
+                CharactersDrawnMessage msg = gson.fromJson(message, CharactersDrawnMessage.class);
+                //todo
+            }
+            case CHARACTER_INFO_MESSAGE -> {
+                CharacterInfoMessage msg = gson.fromJson(message, CharacterInfoMessage.class);
+                //todo
+            }
+            case CHARACTER_PLAYED_MESSAGE -> {
+                CharacterMessage msg = gson.fromJson(message, CharacterMessage.class);
+                //todo
+            }
+            case WINNER_MESSAGE -> {
+                WinnerMessage msg = gson.fromJson(message, WinnerMessage.class);
+                //todo
+            }
+
+            case GENERIC_MESSAGE -> {
+                GenericMessage msg = gson.fromJson(message, GenericMessage.class);
+                System.out.println(msg.getMessage());
+            }
+            case ERROR_MESSAGE -> {
+                ErrorMessage msg = gson.fromJson(message, ErrorMessage.class);
+                System.out.println(msg.getError());
+            }
+            case DISCONNECTION_MESSAGE -> disconnect();
+            case PONG_MESSAGE -> {}
+
+            default -> System.out.println(answer.getMessageType());
         }
     }
 

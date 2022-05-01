@@ -6,6 +6,8 @@ import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.enumerations.GameMode;
 import it.polimi.ingsw.model.phases.ActionPhase;
 import it.polimi.ingsw.network.message.clientToserver.*;
+import it.polimi.ingsw.network.message.serverToclient.ErrorMessage;
+import it.polimi.ingsw.network.server.ClientHandler;
 import it.polimi.ingsw.view.View;
 
 import java.util.Map;
@@ -16,16 +18,16 @@ import java.util.Map;
 public class CharacterController {
 
     private final Game game;
-    private final Map<String, View> clientsView;
+    private final Map<Integer, ClientHandler> clients;
 
     /**
      * Default constructor.
      * @param game the game.
-     * @param clientsView the map of clients to their views.
+     * @param clients the map of clients to their views. //todo
      */
-    public CharacterController(Game game, Map<String, View> clientsView) {
+    public CharacterController(Game game, Map<Integer, ClientHandler> clients) {
         this.game = game;
-        this.clientsView = clientsView;
+        this.clients = clients;
     }
 
     /**
@@ -34,8 +36,8 @@ public class CharacterController {
      */
     public void onMessageReceived(Message message) {
         if(game.getGameMode() == GameMode.EASY) {
-            View view = clientsView.get(message.getNickname());
-            view.showErrorMessage("You have chosen the easy mode, there are no characters.");
+            ClientHandler clientHandler = clients.get(message.getClientID());
+            clientHandler.sendMessage(new ErrorMessage("You have chosen the easy mode, there are no characters."));
             return;
         }
 
@@ -54,7 +56,7 @@ public class CharacterController {
      * @param message the message received.
      */
     private void infoAboutCharacter(CharacterInfoRequestMessage message) {
-        View view = clientsView.get(message.getNickname());
+        ClientHandler clientHandler = clients.get(message.getClientID());
         int characterID = message.getCharacterID();
         String description = null; //= classe da cui prendere descrizione in base all'id
 
@@ -71,13 +73,13 @@ public class CharacterController {
      * @param message the message received.
      */
     private void doCharacterEffect(CharacterMessage message) {
-        View view = clientsView.get(message.getNickname());
+        ClientHandler clientHandler = clients.get(message.getClientID());
         int characterID = message.getCharacterID();
 
         try {
             ((ActionPhase) (game.getCurrentPhase())).playCharacter(characterID);
         } catch (Exception e) {
-            view.showErrorMessage(e.getMessage()); //todo
+            clientHandler.sendMessage(new ErrorMessage(e.getMessage()));
         }
     }
 
@@ -86,7 +88,7 @@ public class CharacterController {
      * @param message the message received.
      */
     private void doCharacterEffect(CharacterColorMessage message) {
-        View view = clientsView.get(message.getNickname());
+        ClientHandler clientHandler = clients.get(message.getClientID());
         int characterID = message.getCharacterID();
         CreatureColor color = message.getColor();
 
@@ -99,7 +101,7 @@ public class CharacterController {
         try {
             ((ActionPhase) (game.getCurrentPhase())).playCharacter(characterID);
         } catch (Exception e) {
-            view.showErrorMessage(e.getMessage()); //todo
+            clientHandler.sendMessage(new ErrorMessage(e.getMessage()));
         }
     }
 
@@ -108,7 +110,7 @@ public class CharacterController {
      * @param message the message received.
      */
     private void doCharacterEffect(CharacterDoubleColorMessage message) {
-        View view = clientsView.get(message.getNickname());
+        ClientHandler clientHandler = clients.get(message.getClientID());
         int characterID = message.getCharacterID();
         CreatureColor firstColor = message.getFirstColor();
         CreatureColor secondColor = message.getSecondColor();
@@ -119,7 +121,7 @@ public class CharacterController {
         try {
             ((ActionPhase) (game.getCurrentPhase())).playCharacter(characterID);
         } catch (Exception e) {
-            view.showErrorMessage(e.getMessage());  //todo
+            clientHandler.sendMessage(new ErrorMessage(e.getMessage()));
         }
     }
 
@@ -128,7 +130,7 @@ public class CharacterController {
      * @param message the message received.
      */
     private void doCharacterEffect(CharacterDestinationMessage message) {
-        View view = clientsView.get(message.getNickname());
+        ClientHandler clientHandler = clients.get(message.getClientID());
         int characterID = message.getCharacterID();
         int destination = message.getDestination();
 
@@ -141,7 +143,7 @@ public class CharacterController {
         try {
             ((ActionPhase) (game.getCurrentPhase())).playCharacter(characterID);
         } catch (Exception e) {
-            view.showErrorMessage(e.getMessage());  //todo
+            clientHandler.sendMessage(new ErrorMessage(e.getMessage()));
         }
     }
 
@@ -150,7 +152,7 @@ public class CharacterController {
      * @param message the message received.
      */
     private void doCharacterEffect(CharacterColorDestinationMessage message) {
-        View view = clientsView.get(message.getNickname());
+        ClientHandler clientHandler = clients.get(message.getClientID());
         int characterID = message.getCharacterID();
         CreatureColor firstColor = message.getColor();
         int destination = message.getDestination();
@@ -161,7 +163,7 @@ public class CharacterController {
         try {
             ((ActionPhase) (game.getCurrentPhase())).playCharacter(characterID);
         } catch (Exception e) {
-            view.showErrorMessage(e.getMessage());  //todo
+            clientHandler.sendMessage(new ErrorMessage(e.getMessage()));
         }
     }
 }

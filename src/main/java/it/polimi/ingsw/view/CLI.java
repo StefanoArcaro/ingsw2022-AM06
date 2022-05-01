@@ -15,7 +15,7 @@ public class CLI {
 
     private SocketClient socketClient;
     private final ExecutorService keyboardQueue;
-    private final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
+    private final PropertyChangeSupport listener = new PropertyChangeSupport(this);
 
     public CLI() {
         this.keyboardQueue = Executors.newSingleThreadExecutor();
@@ -30,7 +30,7 @@ public class CLI {
     }
 
     public void addListener(String propertyName, PropertyChangeListener listener) {
-        listeners.addPropertyChangeListener(propertyName, listener);
+        this.listener.addPropertyChangeListener(propertyName, listener);
     }
 
     public void listenToKeyboard() {
@@ -39,7 +39,7 @@ public class CLI {
                 Scanner scanner = new Scanner(System.in);
                 String message = scanner.nextLine();
                 // TODO parser should be added as a listener in CLI
-                listeners.firePropertyChange("MessageParser", null, message);
+                listener.firePropertyChange("MessageParser", null, message);
                 // TODO add parsing for disconnecting: done but to modify, see MessageParser 41
             }
         });

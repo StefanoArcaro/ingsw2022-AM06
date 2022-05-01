@@ -3,9 +3,12 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.network.message.clientToserver.*;
-import it.polimi.ingsw.view.View;
+import it.polimi.ingsw.network.message.serverToclient.ErrorMessage;
+import it.polimi.ingsw.network.server.ClientHandler;
 
 import java.util.Map;
+
+//TODO: fix comments
 
 /**
  * Controller Class that has the task of checking that the messages received by a client
@@ -14,16 +17,16 @@ import java.util.Map;
 public class InputController {
 
     private final Game game;
-    private final Map<String, View> clientsView;
+    private final Map<Integer, ClientHandler> clients;
 
     /**
      * Default constructor.
      * @param game the game.
-     * @param clientsView the map of clients to their views.
+     * @param clients the map of clients to their views. //todo change
      */
-    public InputController(Game game, Map<String, View> clientsView) {
+    public InputController(Game game, Map<Integer, ClientHandler> clients) {
         this.game = game;
-        this.clientsView = clientsView;
+        this.clients = clients;
     }
 
     /**
@@ -33,7 +36,6 @@ public class InputController {
      */
     public boolean checkOnMessageReceived(Message message) {
         return switch (message.getMessageType()) {
-            case LOGIN_REQUEST_MESSAGE -> checkLogin((LoginRequestMessage) message);
             case WIZARD_REQUEST_MESSAGE -> checkWizard((WizardRequestMessage) message);
             case ASSISTANT_REQUEST_MESSAGE -> checkAssistant((AssistantRequestMessage) message);
             case MOVE_STUDENT_MESSAGE -> checkMoveStudent((MoveStudentMessage) message);
@@ -50,35 +52,6 @@ public class InputController {
     }
 
     /**
-     * Checks if the login request is valid or not.
-     * @param message the message sent by the client.
-     * @return whether the message contains valid information, and it's
-     *            consistent with the current game state.
-     */
-    private boolean checkLogin(LoginRequestMessage message) {
-        int numberOfPlayers = message.getNumberOfPlayers();
-        int gameMode = message.getGameMode().getMode();
-        String error;
-        View view = clientsView.get(message.getNickname());
-
-        if(game.getGameState() == GameState.LOBBY_PHASE) {
-            if(numberOfPlayers >= 0 && numberOfPlayers <= 3) {
-                if(gameMode == 0 || gameMode == 1) {
-                    return true;
-                } else {
-                    error = "The game mode selected doesn't exist. Choose Easy or Expert";
-                }
-            } else {
-                error = "Choose a number of player between 2 and 3";
-            }
-        } else {
-            error = "The message sent is not consistent with the phase playing";
-        }
-        view.showErrorMessage(error);
-        return false;
-    }
-
-    /**
      * Checks if the wizard request is valid or not.
      * @param message the message sent by the client.
      * @return whether the message contains valid information, and it's
@@ -87,7 +60,7 @@ public class InputController {
     private boolean checkWizard(WizardRequestMessage message) {
         int wizardID = message.getWizardName().getId();
         String error;
-        View view = clientsView.get(message.getNickname());
+        ClientHandler clientHandler = clients.get(message.getClientID());
 
         if (game.getGameState() == GameState.PREPARE_PHASE) {
             if (wizardID >= 0 && wizardID < 4) {
@@ -98,7 +71,9 @@ public class InputController {
         } else {
             error = "The message sent is not consistent with the phase playing";
         }
-        view.showErrorMessage(error);
+
+        clientHandler.sendMessage(new ErrorMessage(error));
+
         return false;
     }
 
@@ -111,7 +86,7 @@ public class InputController {
     private boolean checkAssistant(AssistantRequestMessage message) {
         int priority = message.getAssistantID();
         String error;
-        View view = clientsView.get(message.getNickname());
+        ClientHandler clientHandler = clients.get(message.getClientID());
 
         if(game.getGameState() == GameState.PLANNING_PHASE) {
             if (priority >= 1 && priority <= 10) {
@@ -122,7 +97,7 @@ public class InputController {
         } else {
             error = "The message sent is not consistent with the phase playing";
         }
-        view.showErrorMessage(error);
+        clientHandler.sendMessage(new ErrorMessage(error));
         return false;
     }
 
@@ -136,13 +111,13 @@ public class InputController {
         int color = message.getColor().getIndex();
         int destination = message.getDestination();
         String error;
-        View view = clientsView.get(message.getNickname());
+        ClientHandler clientHandler = clients.get(message.getClientID());
 
         if(game.getGameState() == GameState.MOVE_STUDENT_PHASE) {
-            return checkColor(view, color) && checkDestination(view, destination);
+            return checkColor(clientHandler, color) && checkDestination(clientHandler, destination);
         } else {
             error = "The message sent is not consistent with the phase playing";
-            view.showErrorMessage(error);
+            clientHandler.sendMessage(new ErrorMessage(error));
         }
         return false;
     }
@@ -156,7 +131,7 @@ public class InputController {
     private boolean checkMoveMotherNature(MoveMotherNatureMessage message) {
         int steps = message.getNumberOfSteps();
         String error;
-        View view = clientsView.get(message.getNickname());
+        ClientHandler clientHandler = clients.get(message.getClientID());
 
         if(game.getGameState() == GameState.MOVE_MOTHER_NATURE_PHASE) {
             if(steps > 0 && steps < 6) {
@@ -167,7 +142,7 @@ public class InputController {
         } else {
             error = "The message sent is not consistent with the phase playing";
         }
-        view.showErrorMessage(error);
+        clientHandler.sendMessage(new ErrorMessage(error));
         return false;
     }
 
@@ -180,7 +155,7 @@ public class InputController {
     private boolean checkPickCloud(PickCloudMessage message) {
         int cloudID = message.getCloudID();
         String error;
-        View view = clientsView.get(message.getNickname());
+        ClientHandler clientHandler = clients.get(message.getClientID());
 
         if(game.getGameState() == GameState.PICK_CLOUD_PHASE) {
             if (cloudID >= 1 && cloudID <= 3) {
@@ -191,7 +166,7 @@ public class InputController {
         } else {
             error = "The message sent is not consistent with the phase playing";
         }
-        view.showErrorMessage(error);
+        clientHandler.sendMessage(new ErrorMessage(error));
         return false;
     }
 
@@ -204,13 +179,13 @@ public class InputController {
     private boolean checkCharacterInfo(CharacterInfoRequestMessage message) {
         int characterID = message.getCharacterID();
         String error;
-        View view = clientsView.get(message.getNickname());
+        ClientHandler clientHandler = clients.get(message.getClientID());
 
         if(game.getGameState() != GameState.LOBBY_PHASE) {
-            return checkCharacterID(view, characterID);
+            return checkCharacterID(clientHandler, characterID);
         } else {
             error = "The message sent is not consistent with the phase playing";
-            view.showErrorMessage(error);
+            clientHandler.sendMessage(new ErrorMessage(error));
         }
         return  false;
     }
@@ -224,16 +199,16 @@ public class InputController {
     private boolean checkCharacter(CharacterMessage message) {
         int characterID = message.getCharacterID();
         String error;
-        View view = clientsView.get(message.getNickname());
+        ClientHandler clientHandler = clients.get(message.getClientID());
         boolean correctPhase = game.getGameState() != GameState.LOBBY_PHASE &&
                 game.getGameState() != GameState.PREPARE_PHASE &&
                 game.getGameState() != GameState.PLANNING_PHASE;
 
         if(correctPhase) {
-            return checkCharacterID(view, characterID);
+            return checkCharacterID(clientHandler, characterID);
         } else {
             error = "The message sent is not consistent with the phase playing";
-            view.showErrorMessage(error);
+            clientHandler.sendMessage(new ErrorMessage(error));
         }
         return  false;
     }
@@ -249,16 +224,16 @@ public class InputController {
         int characterID = message.getCharacterID();
         int color = message.getColor().getIndex();
         String error;
-        View view = clientsView.get(message.getNickname());
+        ClientHandler clientHandler = clients.get(message.getClientID());
         boolean correctPhase = game.getGameState() != GameState.LOBBY_PHASE &&
                 game.getGameState() != GameState.PREPARE_PHASE &&
                 game.getGameState() != GameState.PLANNING_PHASE;
 
         if(correctPhase) {
-            return checkCharacterID(view, characterID) && checkColor(view, color);
+            return checkCharacterID(clientHandler, characterID) && checkColor(clientHandler, color);
         } else {
             error = "The message sent is not consistent with the phase playing";
-            view.showErrorMessage(error);
+            clientHandler.sendMessage(new ErrorMessage(error));
         }
         return  false;
     }
@@ -274,16 +249,16 @@ public class InputController {
         int firstColor = message.getFirstColor().getIndex();
         int secondColor = message.getSecondColor().getIndex();
         String error;
-        View view = clientsView.get(message.getNickname());
+        ClientHandler clientHandler = clients.get(message.getClientID());
         boolean correctPhase = game.getGameState() != GameState.LOBBY_PHASE &&
                 game.getGameState() != GameState.PREPARE_PHASE &&
                 game.getGameState() != GameState.PLANNING_PHASE;
 
         if(correctPhase) {
-            return checkColor(view, firstColor) && checkColor(view, secondColor);
+            return checkColor(clientHandler, firstColor) && checkColor(clientHandler, secondColor);
         } else {
             error = "The message sent is not consistent with the phase playing";
-            view.showErrorMessage(error);
+            clientHandler.sendMessage(new ErrorMessage(error));
         }
         return  false;
     }
@@ -300,16 +275,16 @@ public class InputController {
         int characterID = message.getCharacterID();
         int destination = message.getDestination();
         String error;
-        View view = clientsView.get(message.getNickname());
+        ClientHandler clientHandler = clients.get(message.getClientID());
         boolean correctPhase = game.getGameState() != GameState.LOBBY_PHASE &&
                 game.getGameState() != GameState.PREPARE_PHASE &&
                 game.getGameState() != GameState.PLANNING_PHASE;
 
         if(correctPhase) {
-            return checkCharacterID(view, characterID) && checkDestination(view, destination);
+            return checkCharacterID(clientHandler, characterID) && checkDestination(clientHandler, destination);
         }else {
             error = "The message sent is not consistent with the phase playing";
-            view.showErrorMessage(error);
+            clientHandler.sendMessage(new ErrorMessage(error));
         }
         return  false;
     }
@@ -326,60 +301,60 @@ public class InputController {
         int color = message.getColor().getIndex();
         int destination = message.getDestination();
         String error;
-        View view = clientsView.get(message.getNickname());
+        ClientHandler clientHandler = clients.get(message.getClientID());
         boolean correctPhase = game.getGameState() != GameState.LOBBY_PHASE &&
                 game.getGameState() != GameState.PREPARE_PHASE &&
                 game.getGameState() != GameState.PLANNING_PHASE;
 
         if(correctPhase) {
-            return checkCharacterID(view, characterID) && checkColor(view, color)
-                    && checkDestination(view, destination);
+            return checkCharacterID(clientHandler, characterID) && checkColor(clientHandler, color)
+                    && checkDestination(clientHandler, destination);
         } else {
             error = "The message sent is not consistent with the phase playing";
-            view.showErrorMessage(error);
+            clientHandler.sendMessage(new ErrorMessage(error));
         }
         return  false;
     }
 
     /**
      * Checks if the character ID is valid or not.
-     * @param view view of the client who sent the message.
+     * @param clientHandler view of the client who sent the message. //todo
      * @param characterID the ID of the character to check.
      * @return whether the ID is valid or not.
      */
-    private boolean checkCharacterID(View view, int characterID) {
+    private boolean checkCharacterID(ClientHandler clientHandler, int characterID) {
         if(game.getCharacterByID(characterID) != null) {
             return true;
         }
-        view.showErrorMessage("The character ID chosen doesn't exist.");
+        clientHandler.sendMessage(new ErrorMessage("The character ID chosen doesn't exist."));
         return false;
     }
 
     /**
      * Checks if the color chosen is valid or not.
-     * @param view view of the client who sent the message.
+     * @param clientHandler view of the client who sent the message. //todo
      * @param color the color to check.
      * @return whether the color is valid or not.
      */
-    private boolean checkColor(View view, int color) {
+    private boolean checkColor(ClientHandler clientHandler, int color) {
         if(color >= 0 && color <= 4) {
             return true;
         }
-        view.showErrorMessage("The color chosen doesn't exist.");
+        clientHandler.sendMessage(new ErrorMessage("The color chosen doesn't exist."));
         return false;
     }
 
     /**
      * Checks if the destination chosen is valid or not.
-     * @param view view of the client who sent the message.
+     * @param clientHandler view of the client who sent the message. //todo
      * @param destination the destination to check.
      * @return whether the destination is valid or not.
      */
-    private boolean checkDestination(View view, int destination) {
+    private boolean checkDestination(ClientHandler clientHandler, int destination) {
         if(destination >= 0 && destination <= 12) {
             return true;
         }
-        view.showErrorMessage("The destination chosen doesn't exist.");
+        clientHandler.sendMessage(new ErrorMessage("The destination chosen doesn't exist."));
         return false;
     }
 }

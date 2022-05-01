@@ -1,6 +1,6 @@
 package it.polimi.ingsw.view;
 
-import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.enumerations.CharacterID;
 import it.polimi.ingsw.model.enumerations.CreatureColor;
@@ -11,9 +11,6 @@ import it.polimi.ingsw.model.gameBoard.IslandGroup;
 import it.polimi.ingsw.model.phases.Phase;
 
 import it.polimi.ingsw.network.message.clientToserver.Message;
-import it.polimi.ingsw.network.message.serverToclient.*;
-import it.polimi.ingsw.observer.Observable;
-import it.polimi.ingsw.observer.Observer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +20,7 @@ import java.util.List;
  * It observes the model.
  * It's observed by the controller.
  */
-public class View extends Observable implements Observer {
+public class View  {
 
     //todo: da eliminare?
 
@@ -168,13 +165,4 @@ public class View extends Observable implements Observer {
         //client: send(new WinnerMessage(winner));
     }
 
-    /**
-     * Since the view is an observer of the model, it receives an update message when the model changes.
-     * The message is sent to the client.
-     * @param message the update message.
-     */
-    @Override
-    public void update(Message message) {
-        //client send(message);
-    }
 }

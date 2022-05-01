@@ -7,14 +7,14 @@ import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.gameBoard.*;
 import it.polimi.ingsw.model.phases.Phase;
 import it.polimi.ingsw.model.phases.PhaseFactory;
-import it.polimi.ingsw.observer.Observable;
 import it.polimi.ingsw.view.VirtualView;
+
 
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class Game extends Observable {
+public class Game {
 
     private static final int MAX_NUMBER_ISLAND_GROUPS = 3;
 

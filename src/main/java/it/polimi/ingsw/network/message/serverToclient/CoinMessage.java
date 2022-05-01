@@ -7,7 +7,7 @@ public class CoinMessage extends Answer {
     private final int coins;
 
     public CoinMessage(int coins) {
-        super(MessageType.MONEY_MESSAGE);
+        super(MessageType.COIN_MESSAGE);
         this.coins = coins;
     }
 
