@@ -17,7 +17,6 @@ import java.util.Map;
  * Controller class used to manage the messages about the use of characters.
  */
 
-//TODO: fix comments
 public class CharacterController {
 
     private final Game game;
@@ -26,7 +25,7 @@ public class CharacterController {
     /**
      * Default constructor.
      * @param game the game.
-     * @param clients the map of clients to their views. //todo
+     * @param clients the map of client IDs to their client handlers.
      */
     public CharacterController(Game game, Map<Integer, ClientHandler> clients) {
         this.game = game;
@@ -35,7 +34,8 @@ public class CharacterController {
 
     /**
      * Determines the action to do based on the message received from the client.
-     * @param input the message received.
+     * @param input JSON of the message.
+     * @param msg the message received.
      */
     public void onMessageReceived(String input, Message msg) {
 
@@ -57,7 +57,8 @@ public class CharacterController {
 
     /**
      * Sends a message which contains the info about the character chosen.
-     * @param input the message received.
+     * @param input JSON of the message.
+     * @param msg the message received.
      */
     private void infoAboutCharacter(String input, Message msg) {
         Gson gson = new Gson();
@@ -72,7 +73,8 @@ public class CharacterController {
 
     /**
      * Plays the character chosen if this one doesn't need any parameters.
-     * @param input the message received.
+     * @param input JSON of the message.
+     * @param msg the message received.
      */
     private void doCharacterEffect(String input, Message msg) {
         Gson gson = new Gson();
@@ -90,7 +92,8 @@ public class CharacterController {
 
     /**
      * Plays the character chosen if this one only needs a color as parameter.
-     * @param input the message received.
+     * @param input JSON of the message.
+     * @param msg the message received.
      */
     private void doCharacterColorEffect(String input, Message msg) {
         Gson gson = new Gson();
@@ -115,7 +118,8 @@ public class CharacterController {
 
     /**
      * Plays the character chosen if this one only needs two colors as parameters.
-     * @param input the message received.
+     * @param input JSON of the message.
+     * @param msg the message received.
      */
     private void doCharacterDoubleColorEffect(String input, Message msg) {
         Gson gson = new Gson();
@@ -138,7 +142,8 @@ public class CharacterController {
 
     /**
      * Plays the character chosen if this one only needs the destination as parameter.
-     * @param input the message received.
+     * @param input JSON of the message.
+     * @param msg the message received.
      */
     private void doCharacterDestinationEffect(String input, Message msg) {
         Gson gson = new Gson();
@@ -163,7 +168,8 @@ public class CharacterController {
 
     /**
      * Plays the character chosen if this one only needs a color and a destination as parameters.
-     * @param input the message received.
+     * @param input JSON of the message.
+     * @param msg the message received.
      */
     private void doCharacterColorDestinationEffect(String input, Message msg) {
         Gson gson = new Gson();
