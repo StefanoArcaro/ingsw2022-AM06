@@ -81,10 +81,11 @@ public class Server {
 
                 GameManager gameManager = idToGameManager.get(getClientIDFromClientHandler(clientHandler));
                 if(gameManager != null) {
-                    gameManager.onMessageReceived(message); // TODO msg
+                    Map.Entry<String, Message> pair = new AbstractMap.SimpleEntry<>(msg, message);
+                    gameManager.onMessageReceived(pair); // TODO NICEEEEEE
                 } else {
                     // TODO SBAGLIATO MA DIGLIELO (da cambiare)
-                    clientHandler.sendMessage(new ErrorMessage("Send a login message AOO"));
+                    clientHandler.sendMessage(new ErrorMessage("Send a login message AOOOOO"));
                 }
             }
         }
@@ -123,7 +124,6 @@ public class Server {
         }
 
 
-
         // TODO: countdown to disconnect other players
 
         // TODO remove other players and end game
@@ -154,6 +154,7 @@ public class Server {
 
                 GameManager gameManager = checkGamePreferences(clientID, numberOfPlayers, gameMode);
                 gameManager.addClient(clientID, clientHandler, nickname);
+                idToGameManager.put(clientID, gameManager);
                 gameManager.getGame().getCurrentPhase().setPlayerNickname(nickname);
 
                 try {
@@ -163,6 +164,9 @@ public class Server {
 
                     // TODO test with 3 players
                     gameManager.sendAllExcept(new GenericMessage(nickname + " joined the game!"), nickname);
+
+                    //TODO listeners
+                    gameManager.sendAll(new GenericMessage("Current phase is: "+ gameManager.getGame().getCurrentPhase().getPhaseName()));
 
                     System.out.println(nickname + " logged in!");
                 } catch (Exception e) {

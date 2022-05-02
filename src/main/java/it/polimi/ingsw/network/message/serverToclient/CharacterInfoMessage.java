@@ -14,7 +14,7 @@ public class CharacterInfoMessage extends Answer {
     public CharacterInfoMessage(Character character) {
         super(MessageType.CHARACTER_INFO_MESSAGE);
         this.characterID = character.getCharacterID();
-        //this.description = character.getDescription(); todo
+        //this.description = character.getDescription(); todo constants
     }
 
     @Override

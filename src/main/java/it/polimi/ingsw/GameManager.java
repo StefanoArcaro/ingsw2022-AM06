@@ -37,10 +37,14 @@ public class GameManager {
     }
 
     public Map<Integer, ClientHandler> getClients() {
-        return new HashMap<>(clients);
+        return clients; //todo new hash map
     }
 
-    public void setGamePreferences(NumberOfPlayers numberOfPlayers,GameMode gameMode) {
+    public Map<String, Integer> getNicknameToId() {
+        return nicknameToId;    //todo new hash map
+    }
+
+    public void setGamePreferences(NumberOfPlayers numberOfPlayers, GameMode gameMode) {
         setNumberOfPlayers(numberOfPlayers);
         setGameMode(gameMode);
     }
@@ -56,6 +60,7 @@ public class GameManager {
     public void addClient(int clientID, ClientHandler clientHandler, String nickname) {
         clients.put(clientID, clientHandler);
         nicknameToId.put(nickname, clientID);
+
     }
 
     public void singleSend(Answer answer, String nickname) {
@@ -77,7 +82,8 @@ public class GameManager {
         }
     }
 
-    public void onMessageReceived(Message message) {
-        listeners.firePropertyChange("gameController", null, message);
+    // TODO string message
+    public void onMessageReceived(Map.Entry<String, Message> pair) {
+        listeners.firePropertyChange("gameController", null, pair);
     }
 }

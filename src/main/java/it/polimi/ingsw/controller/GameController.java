@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import com.google.gson.Gson;
 import it.polimi.ingsw.GameManager;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
@@ -52,41 +53,57 @@ public class GameController implements PropertyChangeListener {
      */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        Message message = (Message) evt.getNewValue();
+        Map.Entry<String, Message> pair = (Map.Entry<String, Message>) evt.getNewValue();
 
-        if(!inputController.checkOnMessageReceived(message)) {
+        String input = pair.getKey();
+        Message msg = pair.getValue();
+
+        System.out.println(msg.getClientID()); //TODO pair
+
+
+        if(checkUser(msg)) {
+            if (!inputController.checkOnMessageReceived(pair)) {
+                return;
+            }
+        } else {
             return;
         }
 
         switch(model.getGameState()) {
             case PREPARE_PHASE:
-                if(checkUser(message)) {
-                    prepareState(message);
+                if(checkUser(msg)) {
+                    prepareState(input, msg);
                 }
                 break;
             case PLANNING_PHASE:
-                if(checkUser(message)) {
-                    planningState(message);
+                if(checkUser(msg)) {
+                    planningState(input, msg);
                 }
                 break;
             case MOVE_STUDENT_PHASE:
-                if(checkUser(message)) {
-                    moveStudentPhase(message);
+                if(checkUser(msg)) {
+                    moveStudentState(input, msg);
                 }
                 break;
             case MOVE_MOTHER_NATURE_PHASE:
-                if(checkUser(message)) {
-                    moveMotherNaturePhase(message);
+                if(checkUser(msg)) {
+                    moveMotherNatureState(input, msg);
                 }
                 break;
             case PICK_CLOUD_PHASE:
-                if(checkUser(message)) {
-                    pickCloudPhase(message);
+                if(checkUser(msg)) {
+                    pickCloudState(input, msg);
                 }
                 break;
             default: //end game states and lobby
                 //todo: clientsView.get(message.getNickname()).showErrorMessage("The game is over, you can't send a message.");
         }
+
+        //TODO
+        gameManager.sendAll(new GenericMessage("\n===========================================================\n"));
+        gameManager.sendAll(new GenericMessage("Current phase is: "+ gameManager.getGame().getCurrentPhase().getPhaseName()));
+        gameManager.sendAll(new GenericMessage("Current player is: "+ gameManager.getGame().getCurrentPlayer().getNickname()));
+
     }
 
     /**
@@ -97,25 +114,44 @@ public class GameController implements PropertyChangeListener {
     private boolean checkUser(Message message) {
         ClientHandler clientHandler = clients.get(message.getClientID());
 
-        boolean checkUser = message.getNickname().equalsIgnoreCase(model.getCurrentPlayer().getNickname());
+        String nickname = getNicknameByClientId(message.getClientID());
 
-        if(!checkUser){
-            clientHandler.sendMessage(new ErrorMessage("You aren't the current player!"));
-            return false;
+        if(nickname != null) {
+            boolean checkUser = nickname.equalsIgnoreCase(model.getCurrentPlayer().getNickname());
+
+            if (!checkUser) {
+                clientHandler.sendMessage(new ErrorMessage("You aren't the current player!"));
+                return false;
+            }
+            return true;
         }
 
-        return true;
+        clientHandler.sendMessage(new ErrorMessage("Nickname doesn't exist."));
+        return false;
+    }
+
+    private String getNicknameByClientId(int clientID) {
+        for(String name : gameManager.getNicknameToId().keySet()) {
+            if(gameManager.getNicknameToId().get(name) == clientID) {
+                return name;
+            }
+        }
+        return null;
     }
 
     /**
      * Assigns a wizard to the current player.
-     * @param message the message received by the current player.
+     * @param input JSON of the message.
+     * @param msg the message received by the current player.
      */
-    private void prepareState(Message message) {
-        ClientHandler clientHandler = clients.get(message.getClientID());
+    private void prepareState(String input, Message msg) {
+        Gson gson = new Gson();
+        ClientHandler clientHandler = clients.get(msg.getClientID());
 
-        if(message.getMessageType() == MessageType.WIZARD_REQUEST_MESSAGE) {
-            WizardName wizardName = ((WizardRequestMessage)message).getWizardName();
+        if(msg.getMessageType() == MessageType.WIZARD_REQUEST_MESSAGE) {
+            WizardRequestMessage message = gson.fromJson(input, WizardRequestMessage.class);
+
+            WizardName wizardName = message.getWizardName();
             model.getCurrentPhase().setWizardID(wizardName.getId());
 
             try {
@@ -123,20 +159,25 @@ public class GameController implements PropertyChangeListener {
             } catch (Exception e) {
                 clientHandler.sendMessage(new ErrorMessage(e.getMessage()));
             }
-        }else if(message.getMessageType() == MessageType.CHARACTER_INFO_REQUEST_MESSAGE) {
-            characterController.onMessageReceived(message);
+
+        }else if(msg.getMessageType() == MessageType.CHARACTER_INFO_REQUEST_MESSAGE) {
+            characterController.onMessageReceived(input, msg);
         }
     }
 
     /**
      * Allows the current player to play an assistant.
-     * @param message the message sent by the current player.
+     * @param input JSON of the message.
+     * @param msg the message sent by the current player.
      */
-    private void planningState(Message message) {
-        ClientHandler clientHandler = clients.get(message.getClientID());
+    private void planningState(String input, Message msg) {
+        Gson gson = new Gson();
+        ClientHandler clientHandler = clients.get(msg.getClientID());
 
-        if(message.getMessageType() == MessageType.ASSISTANT_REQUEST_MESSAGE) {
-            int assistantID = ((AssistantRequestMessage)message).getAssistantID();
+        if(msg.getMessageType() == MessageType.ASSISTANT_REQUEST_MESSAGE) {
+            AssistantRequestMessage message = gson.fromJson(input, AssistantRequestMessage.class);
+
+            int assistantID = message.getAssistantID();
             model.getCurrentPhase().setPriority(assistantID);
 
             try {
@@ -144,29 +185,33 @@ public class GameController implements PropertyChangeListener {
             } catch (Exception e) {
                 clientHandler.sendMessage(new ErrorMessage(e.getMessage()));
             }
-        }else if(message.getMessageType() == MessageType.CHARACTER_INFO_REQUEST_MESSAGE) {
-            characterController.onMessageReceived(message);
+
+        }else if(msg.getMessageType() == MessageType.CHARACTER_INFO_REQUEST_MESSAGE) {
+            characterController.onMessageReceived(input, msg);
         }
     }
 
     /**
      * Switch on type messages that can be received in move student phase: move a student or play a character
-     * @param message the message sent by the current player.
+     * @param input JSON of the message.
+     * @param msg the message sent by the current player.
      */
-    private void moveStudentPhase(Message message) {
-        if (message.getMessageType() == MessageType.MOVE_STUDENT_MESSAGE) {
-            doMoveStudent((MoveStudentMessage) message);
+    private void moveStudentState(String input, Message msg) {
+        if (msg.getMessageType() == MessageType.MOVE_STUDENT_MESSAGE) {
+            doMoveStudent(input, msg);
         } else {
-            characterController.onMessageReceived(message);
+            characterController.onMessageReceived(input, msg);
         }
     }
 
     /**
      * Allows the current player to move a student to an island or to his hall.
-     * @param message the message sent by the current player.
+     * @param input the message sent by the current player.
      */
-    private void doMoveStudent(MoveStudentMessage message) {
-        ClientHandler clientHandler = clients.get(message.getClientID());
+    private void doMoveStudent(String input, Message msg) {
+        Gson gson = new Gson();
+        MoveStudentMessage message = gson.fromJson(input, MoveStudentMessage.class);
+
         CreatureColor color = message.getColor();
         int destination = message.getDestination();
 
@@ -176,6 +221,7 @@ public class GameController implements PropertyChangeListener {
         try {
             model.getCurrentPhase().play();
         } catch (Exception e) {
+            ClientHandler clientHandler = clients.get(msg.getClientID());
             clientHandler.sendMessage(new ErrorMessage(e.getMessage()));
         }
     }
@@ -183,22 +229,25 @@ public class GameController implements PropertyChangeListener {
     /**
      * Switch on type messages that can be received in move mother nature phase:
      * move mother nature or play a character
-     * @param message the message sent by the current player.
+     * @param input JSON of the message.
+     * @param msg the message sent by the current player.
      */
-    private void moveMotherNaturePhase(Message message) {
-        if (message.getMessageType() == MessageType.MOVE_MOTHER_NATURE_MESSAGE) {
-            doMoveMotherNature((MoveMotherNatureMessage) message);
+    private void moveMotherNatureState(String input, Message msg) {
+        if (msg.getMessageType() == MessageType.MOVE_MOTHER_NATURE_MESSAGE) {
+            doMoveMotherNature(input, msg);
         } else {
-            characterController.onMessageReceived(message);
+            characterController.onMessageReceived(input, msg);
         }
     }
 
     /**
      * Allows the current player to move mother nature.
-     * @param message the message sent by the current player.
+     * @param input the message sent by the current player.
      */
-    private void doMoveMotherNature(MoveMotherNatureMessage message) {
-        ClientHandler clientHandler = clients.get(message.getClientID());
+    private void doMoveMotherNature(String input, Message msg) {
+        Gson gson = new Gson();
+        MoveMotherNatureMessage message = gson.fromJson(input, MoveMotherNatureMessage.class);
+
         int numberOfSteps = message.getNumberOfSteps();
 
         model.getCurrentPhase().setNumberOfSteps(numberOfSteps);
@@ -206,6 +255,7 @@ public class GameController implements PropertyChangeListener {
         try {
             model.getCurrentPhase().play();
         } catch (Exception e) {
+            ClientHandler clientHandler = clients.get(msg.getClientID());
             clientHandler.sendMessage(new ErrorMessage(e.getMessage()));
         }
         checkEndGame();
@@ -214,22 +264,25 @@ public class GameController implements PropertyChangeListener {
     /**
      * Switch on type messages that can be received in move pick cloud phase:
      * choose a cloud or play a character
-     * @param message the message sent by the current player.
+     * @param input JSON of the message.
+     * @param msg the message sent by the current player.
      */
-    private void pickCloudPhase(Message message) {
-        if (message.getMessageType() == MessageType.PICK_CLOUD_MESSAGE) {
-            doPickCloud((PickCloudMessage) message);
+    private void pickCloudState(String input, Message msg) {
+        if (msg.getMessageType() == MessageType.PICK_CLOUD_MESSAGE) {
+            doPickCloud(input, msg);
         } else {
-            characterController.onMessageReceived(message);
+            characterController.onMessageReceived(input, msg);
         }
     }
 
     /**
      * Allows the current player to choose an island to pick.
-     * @param message the message sent by the current player.
+     * @param input the message sent by the current player.
      */
-    private void doPickCloud(PickCloudMessage message) {
-        ClientHandler clientHandler = clients.get(message.getClientID());
+    private void doPickCloud(String input, Message msg) {
+        Gson gson = new Gson();
+        PickCloudMessage message = gson.fromJson(input, PickCloudMessage.class);
+
         int cloudID = message.getCloudID();
 
         model.getCurrentPhase().setCloudID(cloudID);
@@ -237,6 +290,7 @@ public class GameController implements PropertyChangeListener {
         try {
             model.getCurrentPhase().play();
         } catch (Exception e) {
+            ClientHandler clientHandler = clients.get(msg.getClientID());
             clientHandler.sendMessage(new ErrorMessage(e.getMessage()));
         }
         checkEndGame();
