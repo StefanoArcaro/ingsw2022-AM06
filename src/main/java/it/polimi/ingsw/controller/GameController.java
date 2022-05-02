@@ -32,8 +32,7 @@ public class GameController implements PropertyChangeListener {
     private final CharacterController characterController;
 
 
-    //todo: sistemare l'invio dei messaggi
-    //todo: in risposta al messaggio del client, se serve mandare una risposta del server Answer
+    //todo: sistemare l'invio dei messaggi - in risposta al messaggio del client, se serve mandare una risposta del server Answer
 
     /**
      * Default constructor.
@@ -41,7 +40,6 @@ public class GameController implements PropertyChangeListener {
      */
     public GameController(GameManager gameManager, Game model) {
         this.gameManager = gameManager;
-
         this.model = model;
         this.clients = gameManager.getClients();
         this.inputController = new InputController(model, gameManager.getClients());
@@ -104,9 +102,9 @@ public class GameController implements PropertyChangeListener {
     }
 
     /**
-     * Check if the message is sent by the current player
-     * @param message message sent by client
-     * @return whether the message is sent by the current player or not
+     * Check if the message is sent by the current player.
+     * @param message message sent by client.
+     * @return whether the message is sent by the current player or not.
      */
     private boolean checkUser(Message message) {
         ClientHandler clientHandler = clients.get(message.getClientID());
@@ -127,6 +125,11 @@ public class GameController implements PropertyChangeListener {
         return false;
     }
 
+    /**
+     * Looks in the client map for the nickname that matches the supplied client id.
+     * @param clientID the client id to match.
+     * @return the nickname that matches the client id given.
+     */
     private String getNicknameByClientId(int clientID) {
         for(String name : gameManager.getNicknameToId().keySet()) {
             if(gameManager.getNicknameToId().get(name) == clientID) {
@@ -203,7 +206,8 @@ public class GameController implements PropertyChangeListener {
 
     /**
      * Allows the current player to move a student to an island or to his hall.
-     * @param input the message sent by the current player.
+     * @param input JSON of the message.
+     * @param msg the message sent by the current player.
      */
     private void doMoveStudent(String input, Message msg) {
         Gson gson = new Gson();
@@ -239,7 +243,8 @@ public class GameController implements PropertyChangeListener {
 
     /**
      * Allows the current player to move mother nature.
-     * @param input the message sent by the current player.
+     * @param input JSON of the message.
+     * @param msg the message sent by the current player.
      */
     private void doMoveMotherNature(String input, Message msg) {
         Gson gson = new Gson();
@@ -274,7 +279,8 @@ public class GameController implements PropertyChangeListener {
 
     /**
      * Allows the current player to choose an island to pick.
-     * @param input the message sent by the current player.
+     * @param input JSON of the message.
+     * @param msg the message sent by the current player.
      */
     private void doPickCloud(String input, Message msg) {
         Gson gson = new Gson();
