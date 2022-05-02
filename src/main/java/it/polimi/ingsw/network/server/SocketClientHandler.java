@@ -5,6 +5,7 @@ import it.polimi.ingsw.network.message.serverToclient.Answer;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 
 public class SocketClientHandler implements ClientHandler, Runnable {
 
@@ -48,11 +49,9 @@ public class SocketClientHandler implements ClientHandler, Runnable {
 
         while(!Thread.currentThread().isInterrupted()) {
             synchronized (inputLock) {
-                String message;
-
-                while ((message = reader.readLine()) != null) {
-                    socketServer.onMessageReceived(this, message);
-                }
+                client.setSoTimeout(10000);
+                String message = reader.readLine();
+                socketServer.onMessageReceived(this, message);
             }
         }
     }

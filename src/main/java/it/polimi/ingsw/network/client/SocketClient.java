@@ -2,12 +2,14 @@ package it.polimi.ingsw.network.client;
 
 import com.google.gson.Gson;
 import it.polimi.ingsw.network.message.clientToserver.CharacterMessage;
+import it.polimi.ingsw.network.message.clientToserver.DisconnectionRequestMessage;
 import it.polimi.ingsw.network.message.clientToserver.Message;
 import it.polimi.ingsw.network.message.clientToserver.PingMessage;
 import it.polimi.ingsw.network.message.serverToclient.*;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -16,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 public class SocketClient extends Client {
 
     private static final int PING_INITIAL_DELAY = 0;
-    private static final int PING_PERIOD = 15000;
+    private static final int PING_PERIOD = 2000;
 
     private final Socket socket;
     private BufferedReader reader;
@@ -45,10 +47,19 @@ public class SocketClient extends Client {
         readQueue.execute(() -> {
             while(!readQueue.isShutdown()) {
                 try {
+                    socket.setSoTimeout(10000);
                     String message = reader.readLine();
-                    handleAnswer(message);
+
+                    // If message is null, it means the server's connection has fallen
+                    if(message != null) {
+                        handleAnswer(message);
+                    } else {
+                        System.err.println("\nThe connection to the server was severed, closing the application...");
+                        disconnect();
+                    }
                 } catch (IOException e) {
-                    System.err.println(e.getMessage());
+                    System.err.println("\nThe connection to the server was severed, closing the application...");
+                    disconnect();
                 }
             }
         });
@@ -149,7 +160,14 @@ public class SocketClient extends Client {
                 ErrorMessage msg = gson.fromJson(message, ErrorMessage.class);
                 System.out.println(msg.getError());
             }
-            case DISCONNECTION_MESSAGE -> disconnect();
+            case DISCONNECTION_REPLY_MESSAGE -> {
+                System.out.println("\nClosing the application...");
+                disconnect();
+            }
+            case SERVER_QUIT_MESSAGE -> {
+                System.err.println("\nThe server was quit. Closing the application...");
+                disconnect();
+            }
             case PONG_MESSAGE -> {}
 
             default -> System.out.println(answer.getMessageType());

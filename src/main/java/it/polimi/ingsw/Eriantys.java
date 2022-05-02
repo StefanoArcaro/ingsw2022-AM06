@@ -52,7 +52,7 @@ public class Eriantys {
         for(int i = 3; i > 0; i--) {
             System.out.print(".");
             try {
-                Thread.sleep(1000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 System.err.println("There's been an error with the thread management");
                 System.err.println("The application will now close...");

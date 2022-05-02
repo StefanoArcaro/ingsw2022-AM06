@@ -86,10 +86,7 @@ public class GameController implements PropertyChangeListener {
                 break;
             default: //end game states and lobby
                 //todo: clientsView.get(message.getNickname()).showErrorMessage("The game is over, you can't send a message.");
-
         }
-
-
     }
 
     /**
@@ -263,8 +260,4 @@ public class GameController implements PropertyChangeListener {
             //todo end of the game
         }
     }
-
-
-
-
 }

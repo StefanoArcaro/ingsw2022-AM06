@@ -53,7 +53,7 @@ public class Server {
 
         while(true) {
             if(scanner.nextLine().equalsIgnoreCase("QUIT")) {
-                broadcastMessage(new DisconnectionMessage("Server"));
+                broadcastMessage(new ServerQuitMessage());
                 System.out.println("Server quitting!");
                 System.exit(0);
             }
@@ -65,9 +65,15 @@ public class Server {
         Gson gson = new Gson();
         Message message = gson.fromJson(msg, Message.class);
 
+        // If msg is null, it means the client's connection has fallen
+        if(msg == null) {
+            disconnectionHandler(clientHandler);
+            return;
+        }
+
         switch(message.getMessageType()) {
             case PING_MESSAGE -> pingHandler(clientHandler);
-            case DISCONNECTION_MESSAGE -> disconnectionHandler(clientHandler);
+            case DISCONNECTION_REQUEST_MESSAGE -> quitHandler(clientHandler);
             case LOGIN_REQUEST_MESSAGE -> loginHandler(clientHandler, msg);
 
             default -> {
@@ -88,29 +94,41 @@ public class Server {
         clientHandler.sendMessage(new PongMessage());
     }
 
+    private void quitHandler(ClientHandler clientHandler) {
+        // Disconnect clientHandler
+        clientHandler.sendMessage(new DisconnectionReplyMessage("You"));
+
+        disconnectionHandler(clientHandler);
+    }
+
     private void disconnectionHandler(ClientHandler clientHandler) {
         int clientID = getClientIDFromClientHandler(clientHandler);
-
-        // Disconnect clientHandler
-        clientHandler.sendMessage(new DisconnectionMessage("You"));
-        clientHandler.disconnect();
 
         // Update other players in the same game as disconnected clientHandler
         String nicknameDisconnected = idToNickname.get(clientID);
         GameManager gameManager = idToGameManager.get(clientID);
-        if(gameManager != null) {
-            System.out.println(nicknameDisconnected + " has disconnected.");
-            gameManager.sendAllExcept(new GenericMessage(nicknameDisconnected + " has disconnected."), nicknameDisconnected);
-        }
 
+        System.out.print("ClientID: " + clientID + " - Nickname: " + nicknameDisconnected);
+
+        // TODO maybe before if
         // Remove clientHandler from maps
         removeClient(clientHandler);
+
+        if(gameManager != null) {
+            System.out.println(nicknameDisconnected + " has disconnected.");
+            // TODO remove player from gameManager
+            gameManager.sendAllExcept(new GenericMessage(nicknameDisconnected + " has disconnected."), nicknameDisconnected);
+        } else {
+            System.out.println("Client disconnected!");
+        }
+
+
 
         // TODO: countdown to disconnect other players
 
         // TODO remove other players and end game
 
-        System.out.println("Client disconnected!");
+        clientHandler.disconnect();
     }
 
     private void loginHandler(ClientHandler clientHandler, String message) {
@@ -204,7 +222,6 @@ public class Server {
     }
 
     public void broadcastMessage(Answer answer) {
-        System.out.println(answer);
         for(ClientHandler clientHandler : idToConnection.values()) {
             clientHandler.sendMessage(answer);
         }

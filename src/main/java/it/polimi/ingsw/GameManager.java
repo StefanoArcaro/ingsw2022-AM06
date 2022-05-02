@@ -19,7 +19,6 @@ public class GameManager {
     private final Map<String, Integer> nicknameToId;
 
     private final Game game;
-    private final GameController gameController;
     private final PropertyChangeSupport listeners =new PropertyChangeSupport(this);
     private final static String GAME_CONTROLLER = "gameController";
 
@@ -28,9 +27,9 @@ public class GameManager {
         this.clients = new HashMap<>();
         this.nicknameToId = new HashMap<>();
 
-        game = new Game();
-        gameController = new GameController(this, game);
-        listeners.addPropertyChangeListener(GAME_CONTROLLER, gameController);
+        this.game = new Game();
+        GameController gameController = new GameController(this, game);
+        this.listeners.addPropertyChangeListener(GAME_CONTROLLER, gameController);
     }
 
     public Game getGame() {
@@ -41,18 +40,17 @@ public class GameManager {
         return new HashMap<>(clients);
     }
 
+    public void setGamePreferences(NumberOfPlayers numberOfPlayers,GameMode gameMode) {
+        setNumberOfPlayers(numberOfPlayers);
+        setGameMode(gameMode);
+    }
+
     private void setNumberOfPlayers(NumberOfPlayers numberOfPlayers) {
         game.setNumberOfPlayers(numberOfPlayers.getNum());
     }
 
-
     private void setGameMode(GameMode gameMode) {
         game.setGameMode(gameMode);
-    }
-
-    public void setGamePreferences(NumberOfPlayers numberOfPlayers,GameMode gameMode) {
-        setNumberOfPlayers(numberOfPlayers);
-        setGameMode(gameMode);
     }
 
     public void addClient(int clientID, ClientHandler clientHandler, String nickname) {
