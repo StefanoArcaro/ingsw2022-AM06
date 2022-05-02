@@ -59,16 +59,13 @@ public class InputController {
      *            consistent with the current game state.
      */
     private boolean checkWizard(Message msg) {
-        String error;
         ClientHandler clientHandler = clients.get(msg.getClientID());
 
         if (game.getGameState() == GameState.PREPARE_PHASE) {
             return true;
-        } else {
-            error = "The message sent is not consistent with the phase playing";
         }
 
-        clientHandler.sendMessage(new ErrorMessage(error));
+        clientHandler.sendMessage(new ErrorMessage("The message sent is not consistent with the phase playing"));
 
         return false;
     }
@@ -80,15 +77,13 @@ public class InputController {
      *            consistent with the current game state.
      */
     private boolean checkAssistant(Message msg) {
-        String error;
         ClientHandler clientHandler = clients.get(msg.getClientID());
 
         if(game.getGameState() == GameState.PLANNING_PHASE) {
             return true;
-        } else {
-            error = "The message sent is not consistent with the phase playing";
         }
-        clientHandler.sendMessage(new ErrorMessage(error));
+        clientHandler.sendMessage(new ErrorMessage("The message sent is not consistent with the phase playing"));
+
         return false;
     }
 
@@ -99,15 +94,14 @@ public class InputController {
      *            consistent with the current game state.
      */
     private boolean checkMoveStudent(Message msg) {
-        String error;
         ClientHandler clientHandler = clients.get(msg.getClientID());
 
         if(game.getGameState() == GameState.MOVE_STUDENT_PHASE) {
             return true;
-        } else {
-            error = "The message sent is not consistent with the phase playing";
-            clientHandler.sendMessage(new ErrorMessage(error));
         }
+
+        clientHandler.sendMessage(new ErrorMessage("The message sent is not consistent with the phase playing"));
+
         return false;
     }
 
@@ -118,15 +112,14 @@ public class InputController {
      *            consistent with the current game state.
      */
     private boolean checkMoveMotherNature(Message msg) {
-        String error;
         ClientHandler clientHandler = clients.get(msg.getClientID());
 
         if(game.getGameState() == GameState.MOVE_MOTHER_NATURE_PHASE) {
             return true;
-        } else {
-            error = "The message sent is not consistent with the phase playing";
         }
-        clientHandler.sendMessage(new ErrorMessage(error));
+
+        clientHandler.sendMessage(new ErrorMessage("The message sent is not consistent with the phase playing"));
+
         return false;
     }
 
@@ -137,15 +130,14 @@ public class InputController {
      *            consistent with the current game state.
      */
     private boolean checkPickCloud(Message msg) {
-        String error;
         ClientHandler clientHandler = clients.get(msg.getClientID());
 
         if(game.getGameState() == GameState.PICK_CLOUD_PHASE) {
             return true;
-        } else {
-            error = "The message sent is not consistent with the phase playing";
         }
-        clientHandler.sendMessage(new ErrorMessage(error));
+
+        clientHandler.sendMessage(new ErrorMessage("The message sent is not consistent with the phase playing"));
+
         return false;
     }
 
@@ -161,15 +153,13 @@ public class InputController {
         CharacterInfoRequestMessage message = gson.fromJson(input, CharacterInfoRequestMessage.class);
 
         int characterID = message.getCharacterID();
-        String error;
         ClientHandler clientHandler = clients.get(msg.getClientID());
 
         if(game.getGameMode() == GameMode.EXPERT) {
             if(game.getGameState() != GameState.LOBBY_PHASE) {
                 return checkCharacterID(clientHandler, characterID);
             } else {
-                error = "The message sent is not consistent with the phase playing";
-                clientHandler.sendMessage(new ErrorMessage(error));
+                clientHandler.sendMessage(new ErrorMessage("The message sent is not consistent with the phase playing"));
             }
         }else {
             clientHandler.sendMessage(new ErrorMessage("You have chosen the easy mode, there are no characters."));
@@ -189,7 +179,6 @@ public class InputController {
         CharacterMessage message = gson.fromJson(input, CharacterMessage.class);
 
         int characterID = message.getCharacterID();
-        String error;
         ClientHandler clientHandler = clients.get(msg.getClientID());
         boolean correctPhase = game.getGameState() != GameState.LOBBY_PHASE &&
                 game.getGameState() != GameState.PREPARE_PHASE &&
@@ -197,10 +186,8 @@ public class InputController {
 
         if(correctPhase) {
             return checkCharacterID(clientHandler, characterID);
-        } else {
-            error = "The message sent is not consistent with the phase playing";
-            clientHandler.sendMessage(new ErrorMessage(error));
         }
+        clientHandler.sendMessage(new ErrorMessage("The message sent is not consistent with the phase playing"));
         return  false;
     }
 
