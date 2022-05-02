@@ -10,11 +10,11 @@ Group participants:
 |:------------------|:--------------------------------------------------:|
 | Basic rules       | 🟢 |
 | Complete rules    | 🟢 |
-| Socket            | 🔴 |
-| CLI               | 🔴 |
+| Socket            | 🟢 |
+| CLI               | 🟡 |
 | GUI               | 🔴 |
 | All 12 characters | 🟢 |
-| Multiple games    | 🔴 |
+| Multiple games    | 🟡 |
 
 🔴
 🟡

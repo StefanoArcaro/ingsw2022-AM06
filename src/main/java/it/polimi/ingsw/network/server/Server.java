@@ -82,7 +82,7 @@ public class Server {
                 GameManager gameManager = idToGameManager.get(getClientIDFromClientHandler(clientHandler));
                 if(gameManager != null) {
                     Map.Entry<String, Message> pair = new AbstractMap.SimpleEntry<>(msg, message);
-                    gameManager.onMessageReceived(pair); // TODO NICEEEEEE
+                    gameManager.onMessageReceived(pair);
                 } else {
                     // TODO SBAGLIATO MA DIGLIELO (da cambiare)
                     clientHandler.sendMessage(new ErrorMessage("Send a login message AOOOOO"));
@@ -108,8 +108,6 @@ public class Server {
         // Update other players in the same game as disconnected clientHandler
         String nicknameDisconnected = idToNickname.get(clientID);
         GameManager gameManager = idToGameManager.get(clientID);
-
-        System.out.print("ClientID: " + clientID + " - Nickname: " + nicknameDisconnected);
 
         // TODO maybe before if
         // Remove clientHandler from maps

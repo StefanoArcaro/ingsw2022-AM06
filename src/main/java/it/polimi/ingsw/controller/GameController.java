@@ -58,9 +58,6 @@ public class GameController implements PropertyChangeListener {
         String input = pair.getKey();
         Message msg = pair.getValue();
 
-        System.out.println(msg.getClientID()); //TODO pair
-
-
         if(checkUser(msg)) {
             if (!inputController.checkOnMessageReceived(pair)) {
                 return;
