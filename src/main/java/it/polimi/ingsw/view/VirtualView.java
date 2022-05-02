@@ -1,6 +1,8 @@
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.GameManager;
 import it.polimi.ingsw.network.message.serverToclient.Answer;
+import it.polimi.ingsw.network.server.ClientHandler;
 import it.polimi.ingsw.network.server.SocketClientHandler;
 
 import java.beans.PropertyChangeEvent;
@@ -14,19 +16,19 @@ import java.beans.PropertyChangeListener;
 
 public class VirtualView {
 
-    private SocketClientHandler socketClientHandler;
-    private String nickname;
-    private int clientID;
+    private final GameManager gameManager;
 
+    public VirtualView(GameManager gameManager) {
+        this.gameManager = gameManager;
+    }
 
 
     /**
      * Prepares the answer for sending it through the network.
      * @param serverAnswer the answer to be sent to the user.
      */
-    public void send(Answer serverAnswer) {
-        //serializzazione? //todo
-        //socketClientHandler.send(serverAnswer serializzato);
+    public void send(Answer serverAnswer, String nickname) {
+        gameManager.singleSend(serverAnswer, nickname);
     }
 
     /**
@@ -34,12 +36,11 @@ public class VirtualView {
      * @param serverAnswer the answer to be sent to the players.
      */
     public void sendAll(Answer serverAnswer){
-        //gamegiocato.sendAll(serverAnswer)
+        gameManager.sendAll(serverAnswer);
     }
 
-    public void win(Answer serverAnswer){
-        //si manda il messaggio di vittoria
-        //gestore del gioco.endGame()
+    public void sendAllExcept(Answer serverAnswer, String nickname){
+        gameManager.sendAllExcept(serverAnswer, nickname);
     }
 
 

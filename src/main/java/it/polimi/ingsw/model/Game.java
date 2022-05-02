@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.listeners.BoardListener;
-import it.polimi.ingsw.listeners.IslandGroupListener;
+import it.polimi.ingsw.listeners.*;
 import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.gameBoard.*;
@@ -11,6 +10,7 @@ import it.polimi.ingsw.view.VirtualView;
 
 
 import java.beans.PropertyChangeSupport;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -39,8 +39,14 @@ public class Game {
 
     //Listeners
     protected final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
-    private final static String ISLAND_GROUP_LISTENER = "islandGroupListener";
-    private final static String BOARD_LISTENER = "boardListener";
+    private static final String ISLAND_GROUP_LISTENER = "islandGroupListener";
+    private static final String BOARD_LISTENER = "boardListener";
+    private static final String PHASE_LISTENER = "phaseListener";
+    private static final String COIN_LISTENER = "coinListener";
+    private static final String ISLAND_LISTENER = "islandListener";
+    private final static String ASSISTANT_LISTENER = "assistantListener";
+    private final static String WIN_LISTENER = "winListener";
+    private final static String PLAYER_LISTENER = "playerListener";
 
     /**
      * Default constructor.
@@ -67,6 +73,16 @@ public class Game {
     public void createListeners(VirtualView clientView){
         listeners.addPropertyChangeListener(ISLAND_GROUP_LISTENER, new IslandGroupListener(clientView));
         listeners.addPropertyChangeListener(BOARD_LISTENER, new BoardListener(clientView));
+        listeners.addPropertyChangeListener(PHASE_LISTENER, new PhaseListener(clientView));
+        listeners.addPropertyChangeListener(COIN_LISTENER, new BoardListener(clientView));
+        listeners.addPropertyChangeListener(ISLAND_LISTENER, new IslandListener(clientView));
+        listeners.addPropertyChangeListener(ASSISTANT_LISTENER, new AssistantListener(clientView));
+        listeners.addPropertyChangeListener(WIN_LISTENER, new WinListener(clientView));
+        listeners.addPropertyChangeListener(PLAYER_LISTENER, new PlayerListener(clientView));
+    }
+
+    public PropertyChangeSupport getListeners() {
+        return listeners;
     }
 
 
@@ -132,6 +148,7 @@ public class Game {
      */
     public void setCurrentPhase(Phase phase) {
         this.currentPhase = phase;
+        listeners.firePropertyChange(PHASE_LISTENER, null, new AbstractMap.SimpleEntry<>(gameState, gameMode));
     }
 
     /**
@@ -224,6 +241,7 @@ public class Game {
      */
     public void setCurrentPlayer (Player player) {
         this.currentPlayer = player;
+        listeners.firePropertyChange(PLAYER_LISTENER, null, player.getNickname());
     }
 
     /**
@@ -432,7 +450,6 @@ public class Game {
             }
 
             listeners.firePropertyChange(ISLAND_GROUP_LISTENER, null, islandGroup);
-
         }
     }
 

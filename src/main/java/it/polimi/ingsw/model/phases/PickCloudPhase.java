@@ -14,12 +14,13 @@ import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.view.VirtualView;
 
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PickCloudPhase extends ActionPhase {
 
     //Listeners
-    protected final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
+    //protected final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
     private final static String CLOUD_LISTENER = "cloudListener";
     private final static String BOARD_LISTENER = "boardListener";
 
@@ -34,10 +35,10 @@ public class PickCloudPhase extends ActionPhase {
         this.phaseFactory = new PhaseFactory(game);
     }
 
-    public void createListeners(VirtualView clientView){
+    /*public void createListeners(VirtualView clientView){
         listeners.addPropertyChangeListener(CLOUD_LISTENER, new CloudListener(clientView));
         listeners.addPropertyChangeListener(BOARD_LISTENER, new BoardListener(clientView));
-    }
+    }*/
 
     /**
      * Takes the students present on the chosen cloud and places them in the player's entrance.
@@ -50,14 +51,14 @@ public class PickCloudPhase extends ActionPhase {
             throw new NoAvailableCloudException();
         }
 
-        listeners.firePropertyChange(CLOUD_LISTENER, null, cloudID);
+        game.getListeners().firePropertyChange(CLOUD_LISTENER, null, new ArrayList<>(List.of(cloudID)));
 
         List<CreatureColor> colorChosen = cloudChosen.getStudents().stream().map(Creature::getColor).toList();
 
         for(CreatureColor color : colorChosen) {
             currentPlayer.getBoard().addStudentToEntrance(color);
         }
-        listeners.firePropertyChange(BOARD_LISTENER, null, currentPlayer.getBoard());
+        game.getListeners().firePropertyChange(BOARD_LISTENER, null, currentPlayer.getBoard());
 
         game.removeCloud(cloudChosen);
 

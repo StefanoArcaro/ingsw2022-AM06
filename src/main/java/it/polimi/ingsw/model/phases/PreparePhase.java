@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.characters.ConcreteCharacterFactory;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.gameBoard.*;
+import it.polimi.ingsw.util.Constants;
 
 import java.util.Collections;
 import java.util.Random;
@@ -87,7 +88,10 @@ public class PreparePhase extends Phase {
                 turns += 1;
                 wizardName = getWizardNameByID(wizardID);
                 game.getCurrentPlayer().setWizard(wizardName);
-                game.setCurrentPlayer(game.getNextPlayer());
+
+                if(turns < game.getNumberOfPlayers().getNum()) {
+                    game.setCurrentPlayer(game.getNextPlayer());
+                }
             } else {
                 throw new WizardTakenException();
             }
@@ -291,6 +295,9 @@ public class PreparePhase extends Phase {
 
             characterToAdd.initialPreparation();
         }
+
+        // Set Constants
+        Constants.setDrawnCharacters(game.getDrawnCharacters());
     }
 
     /**

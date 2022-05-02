@@ -9,6 +9,7 @@ import it.polimi.ingsw.model.enumerations.NumberOfPlayers;
 import it.polimi.ingsw.network.message.clientToserver.LoginRequestMessage;
 import it.polimi.ingsw.network.message.clientToserver.Message;
 import it.polimi.ingsw.network.message.serverToclient.*;
+import it.polimi.ingsw.util.Constants;
 
 import java.util.*;
 import java.util.concurrent.ExecutorService;
@@ -41,6 +42,8 @@ public class Server {
     public void addClient(ClientHandler clientHandler) {
         int clientID = getNextClientID();
         idToConnection.put(clientID, clientHandler);
+
+        clientHandler.sendMessage(new GenericMessage(Constants.getPhaseInstructions(GameState.LOBBY_PHASE, GameMode.EASY)));
     }
 
     public int getNextClientID() {
@@ -85,7 +88,7 @@ public class Server {
                     gameManager.onMessageReceived(pair);
                 } else {
                     // TODO SBAGLIATO MA DIGLIELO (da cambiare)
-                    clientHandler.sendMessage(new ErrorMessage("Send a login message AOOOOO"));
+                    clientHandler.sendMessage(new ErrorMessage("Send a login message."));
                 }
             }
         }
@@ -156,15 +159,11 @@ public class Server {
                 gameManager.getGame().getCurrentPhase().setPlayerNickname(nickname);
 
                 try {
-                    gameManager.getGame().getCurrentPhase().play();
-
                     clientHandler.sendMessage(new LoginReplyMessage("You logged in!"));
 
-                    // TODO test with 3 players
                     gameManager.sendAllExcept(new GenericMessage(nickname + " joined the game!"), nickname);
 
-                    //TODO listeners
-                    gameManager.sendAll(new GenericMessage("Current phase is: "+ gameManager.getGame().getCurrentPhase().getPhaseName()));
+                    gameManager.getGame().getCurrentPhase().play();
 
                     System.out.println(nickname + " logged in!");
                 } catch (Exception e) {

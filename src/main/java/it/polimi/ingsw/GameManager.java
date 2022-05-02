@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.enumerations.NumberOfPlayers;
 import it.polimi.ingsw.network.message.clientToserver.Message;
 import it.polimi.ingsw.network.message.serverToclient.Answer;
 import it.polimi.ingsw.network.server.ClientHandler;
+import it.polimi.ingsw.view.VirtualView;
 
 import java.beans.PropertyChangeSupport;
 import java.util.HashMap;
@@ -28,6 +29,7 @@ public class GameManager {
         this.nicknameToId = new HashMap<>();
 
         this.game = new Game();
+        this.game.createListeners(new VirtualView(this));
         GameController gameController = new GameController(this, game);
         this.listeners.addPropertyChangeListener(GAME_CONTROLLER, gameController);
     }

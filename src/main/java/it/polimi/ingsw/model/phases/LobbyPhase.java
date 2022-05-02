@@ -7,8 +7,6 @@ import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.PlayerColor;
 
-import java.util.Locale;
-
 public class LobbyPhase extends Phase {
 
     private static final int NO_PLAYERS = 0;

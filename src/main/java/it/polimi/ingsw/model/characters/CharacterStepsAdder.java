@@ -12,7 +12,7 @@ public class CharacterStepsAdder extends Character {
         this.used = false;
         this.numberOfStudents = 0;
         this.numberOfBanCards = 0;
-        this.toDoNow = 0;
+        this.toDoNow = 1;
         this.numberOfIterations = 0;
         this.colorNoPoints = null;
         this.extraPoints = 0;

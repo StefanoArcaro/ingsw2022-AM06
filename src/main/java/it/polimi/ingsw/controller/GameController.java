@@ -93,12 +93,6 @@ public class GameController implements PropertyChangeListener {
             default: //end game states and lobby
                 //todo: clientsView.get(message.getNickname()).showErrorMessage("The game is over, you can't send a message.");
         }
-
-        //TODO
-        gameManager.sendAll(new GenericMessage("\n===========================================================\n"));
-        gameManager.sendAll(new GenericMessage("Current phase is: "+ gameManager.getGame().getCurrentPhase().getPhaseName()));
-        gameManager.sendAll(new GenericMessage("Current player is: "+ gameManager.getGame().getCurrentPlayer().getNickname()));
-
     }
 
     /**

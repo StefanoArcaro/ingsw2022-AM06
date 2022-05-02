@@ -21,7 +21,7 @@ public class CharacterInfluenceModifier extends Character {
         this.colorNoPoints = null;
         this.towerCounter = true;
         this.extraPoints = 0;
-        this.toDoNow = 0;
+        this.toDoNow = 1;
         this.numberOfIterations = 0;
         this.moreSteps = 0;
 

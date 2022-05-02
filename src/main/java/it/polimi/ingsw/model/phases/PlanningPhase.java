@@ -2,19 +2,13 @@ package it.polimi.ingsw.model.phases;
 
 import it.polimi.ingsw.exceptions.AssistantTakenException;
 import it.polimi.ingsw.exceptions.InvalidPriorityException;
-import it.polimi.ingsw.listeners.AssistantListener;
 import it.polimi.ingsw.model.gameBoard.Assistant;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.gameBoard.Cloud;
-import it.polimi.ingsw.view.VirtualView;
 
-import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class PlanningPhase extends Phase {
@@ -31,7 +25,7 @@ public class PlanningPhase extends Phase {
     int turns;
 
     //listeners
-    protected final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
+    //protected final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
     private final static String ASSISTANT_LISTENER = "assistantListener";
 
     /**
@@ -49,9 +43,9 @@ public class PlanningPhase extends Phase {
         turns = 0;
     }
 
-    public void createListeners(VirtualView clientView){
+    /*public void createListeners(VirtualView clientView){
         listeners.addPropertyChangeListener(ASSISTANT_LISTENER, new AssistantListener(clientView));
-    }
+    }*/
 
     /**
      * Planning phase of the game.
@@ -89,10 +83,13 @@ public class PlanningPhase extends Phase {
                 turns += 1;
                 assistant = currentPlayer.getWizard().playAssistant(priority);
                 currentPlayer.getWizard().removeAssistant(priority);
-                listeners.firePropertyChange(ASSISTANT_LISTENER, null, assistant);
+                game.getListeners().firePropertyChange(ASSISTANT_LISTENER, null, new ArrayList<>(List.of(assistant)));
 
                 playerPriority.put(currentPlayer, assistant);
-                game.setCurrentPlayer(game.getNextPlayer());
+
+                if(turns < game.getNumberOfPlayers().getNum()) {
+                    game.setCurrentPlayer(game.getNextPlayer());
+                }
             } else {
                 throw new AssistantTakenException();
             }

@@ -16,7 +16,7 @@ public class EndgamePhase extends Phase {
     private final static int MAX_TOWERS = 8;
 
     //Listener
-    protected final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
+    //protected final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
     private final static String WIN_LISTENER = "winListener";
 
 
@@ -29,9 +29,9 @@ public class EndgamePhase extends Phase {
         this.phaseFactory = new PhaseFactory(game);
     }
 
-    public void createListeners(VirtualView clientView){
+    /*public void createListeners(VirtualView clientView){
         listeners.addPropertyChangeListener(WIN_LISTENER, new WinListener(clientView));
-    }
+    }*/
 
     /**
      * Checks how the game ended and calculates the winner.
@@ -43,7 +43,7 @@ public class EndgamePhase extends Phase {
         } else {
             winner = calculateWinner();
         }
-        listeners.firePropertyChange(WIN_LISTENER, null, winner.getNickname());
+        game.getListeners().firePropertyChange(WIN_LISTENER, null, winner.getNickname());
     }
 
     /**

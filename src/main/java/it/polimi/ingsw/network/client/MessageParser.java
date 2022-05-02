@@ -80,7 +80,7 @@ public class MessageParser implements PropertyChangeListener {
             }
         }
 
-        System.out.println("Correct format for LOGIN message:");
+        System.out.println("Correct format for LOGIN message:"); //TODO: constants
         System.out.println("login [nickname] [number of players (2 / 3)] [game mode (0 = EASY / 1 = EXPERT)]");
 
         return null;

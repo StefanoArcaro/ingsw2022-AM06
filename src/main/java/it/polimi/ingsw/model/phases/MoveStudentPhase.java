@@ -4,17 +4,16 @@ import it.polimi.ingsw.exceptions.EntranceMissingColorException;
 import it.polimi.ingsw.exceptions.InvalidColorException;
 import it.polimi.ingsw.exceptions.InvalidDestinationException;
 import it.polimi.ingsw.exceptions.TableFullException;
-import it.polimi.ingsw.listeners.BoardListener;
-import it.polimi.ingsw.listeners.IslandListener;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.enumerations.GameMode;
 import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.gameBoard.StudentDestination;
 import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.gameBoard.Student;
-import it.polimi.ingsw.view.VirtualView;
 
-import java.beans.PropertyChangeSupport;
+import java.util.AbstractMap;
+import java.util.Map;
 
 public class MoveStudentPhase extends ActionPhase {
 
@@ -30,10 +29,10 @@ public class MoveStudentPhase extends ActionPhase {
     private int validMoves;
 
     //Listeners
-    protected final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
-    private final static String BOARD_LISTENER = "boardListener";
-    private final static String COIN_LISTENER = "coinListener";
-    private final static String ISLAND_LISTENER = "islandListener";
+    //protected final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
+    private static final String BOARD_LISTENER = "boardListener";
+    private static final String COIN_LISTENER = "coinListener";
+    private static final String ISLAND_LISTENER = "islandListener";
 
     /**
      * Default constructor.
@@ -47,12 +46,12 @@ public class MoveStudentPhase extends ActionPhase {
         validMoves = game.getNumberOfPlayers().getNum() + 1;
     }
 
-
-    public void createListeners(VirtualView clientView){
+    /*public void createListeners(VirtualView clientView){
         listeners.addPropertyChangeListener(BOARD_LISTENER, new BoardListener(clientView));
         listeners.addPropertyChangeListener(COIN_LISTENER, new BoardListener(clientView));
         listeners.addPropertyChangeListener(ISLAND_LISTENER, new IslandListener(clientView));
-    }
+        listeners.addPropertyChangeListener(PHASE_LISTENER, new PhaseListener(clientView));
+    }*/
 
     /**
      * First part of the action phase.
@@ -84,10 +83,10 @@ public class MoveStudentPhase extends ActionPhase {
                         game.updateProfessors();
 
                         if(studentDestinationIndex != 0){
-                            listeners.firePropertyChange(ISLAND_LISTENER, null, game.getIslandByID(studentDestinationIndex));
+                            game.getListeners().firePropertyChange(ISLAND_LISTENER, null, game.getIslandByID(studentDestinationIndex));
                         }
-                        listeners.firePropertyChange(BOARD_LISTENER, null, currentPlayer.getBoard());
-                        listeners.firePropertyChange(COIN_LISTENER, currentPlayer.getCoins(), currentPlayer.getCoins());
+                        game.getListeners().firePropertyChange(BOARD_LISTENER, null, currentPlayer.getBoard());
+                        game.getListeners().firePropertyChange(COIN_LISTENER, currentPlayer.getCoins(), currentPlayer.getCoins());
 
                         validMoves -= 1;
                     }
