@@ -11,6 +11,7 @@ import it.polimi.ingsw.model.enumerations.CharacterID;
 import it.polimi.ingsw.model.gameBoard.Cloud;
 import it.polimi.ingsw.model.gameBoard.Creature;
 import it.polimi.ingsw.model.enumerations.CreatureColor;
+import it.polimi.ingsw.network.message.serverToclient.BoardMessage;
 import it.polimi.ingsw.view.VirtualView;
 
 import java.beans.PropertyChangeSupport;

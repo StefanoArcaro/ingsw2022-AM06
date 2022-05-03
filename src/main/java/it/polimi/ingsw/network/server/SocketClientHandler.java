@@ -24,6 +24,7 @@ public class SocketClientHandler implements ClientHandler, Runnable {
         this.connected = true;
 
         try {
+            client.setSoTimeout(10000);
             this.reader = new BufferedReader(new InputStreamReader(this.client.getInputStream()));
             this.writer = new BufferedWriter(new OutputStreamWriter(this.client.getOutputStream()));
         } catch (IOException e) {
@@ -49,7 +50,7 @@ public class SocketClientHandler implements ClientHandler, Runnable {
 
         while(!Thread.currentThread().isInterrupted()) {
             synchronized (inputLock) {
-                client.setSoTimeout(10000);
+                //client.setSoTimeout(10000);
                 String message = reader.readLine();
                 socketServer.onMessageReceived(this, message);
             }

@@ -38,7 +38,7 @@ public class Game {
     private int treasury;
 
     //Listeners
-    protected final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
+    private final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
     private static final String ISLAND_GROUP_LISTENER = "islandGroupListener";
     private static final String BOARD_LISTENER = "boardListener";
     private static final String PHASE_LISTENER = "phaseListener";
@@ -84,7 +84,6 @@ public class Game {
     public PropertyChangeSupport getListeners() {
         return listeners;
     }
-
 
     /**
      * @return the chosen number of players for the game.
@@ -427,7 +426,7 @@ public class Game {
             for(Island island : getIslandGroupByIndex(islandGroupIndex).getIslands()) {
                 island.addTower(this, playerMaxInfluence.getColor());
             }
-            listeners.firePropertyChange(ISLAND_GROUP_LISTENER, null, playerMaxInfluence.getBoard());
+            listeners.firePropertyChange(BOARD_LISTENER, null, playerMaxInfluence.getBoard());
 
             islandGroups.get(islandGroupIndex).setConquerorColor(playerMaxInfluence.getColor());
 

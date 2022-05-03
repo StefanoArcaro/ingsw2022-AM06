@@ -4,7 +4,7 @@ import it.polimi.ingsw.network.message.MessageType;
 
 public class CoinMessage extends Answer {
 
-    private final int coins;
+    public int coins;
 
     public CoinMessage(int coins) {
         super(MessageType.COIN_MESSAGE);
@@ -21,5 +21,9 @@ public class CoinMessage extends Answer {
 
     public int getCoins() {
         return coins;
+    }
+
+    public void setCoins(int coins) {
+        this.coins = coins;
     }
 }
