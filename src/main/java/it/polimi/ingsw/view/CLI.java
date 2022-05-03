@@ -54,7 +54,7 @@ public class CLI {
         // askServerInfo() -> to connect to the server, so IP and port
 
         try {
-            Socket socket = new Socket("localhost", 1234);
+            Socket socket = new Socket("172.20.10.2", 1234);
             cli.setSocketClient(new SocketClient(socket));
             SocketClient client = cli.getSocketClient();
 

@@ -11,6 +11,7 @@ import it.polimi.ingsw.network.message.clientToserver.Message;
 import it.polimi.ingsw.network.message.serverToclient.*;
 import it.polimi.ingsw.util.Constants;
 
+import java.net.Socket;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -61,6 +62,14 @@ public class Server {
                 System.exit(0);
             }
         }
+    }
+
+    public void onConnectionDropped(ClientHandler clientHandler, Socket client) {
+        // Remove client from maps
+        disconnectionHandler(clientHandler);
+
+        //System.err.println("Client " + client.getInetAddress() + ": connection dropped.");
+        //clientHandler.disconnect();
     }
 
     // Find clientID, find GameHandler from id, gamehandler calls controller to switch on messageType
@@ -210,6 +219,11 @@ public class Server {
 
         idToConnection.remove(idToRemove);
         idToNickname.remove(idToRemove);
+
+        GameManager manager = idToGameManager.get(idToRemove);
+        if(manager != null) {
+            manager.removeClient(idToRemove);
+        }
         idToGameManager.remove(idToRemove);
     }
 

@@ -40,8 +40,8 @@ public class SocketClientHandler implements ClientHandler, Runnable {
         try {
             handleClientConnection();
         } catch (IOException e) {
-            System.err.println("Client " + client.getInetAddress() + ": connection dropped.");
-            disconnect();
+            // TODO client no internet, remove from maps
+            socketServer.onConnectionDropped(this, client);
         }
     }
 

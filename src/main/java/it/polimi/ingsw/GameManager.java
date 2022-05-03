@@ -65,6 +65,15 @@ public class GameManager {
 
     }
 
+    public void removeClient(int clientID) {
+        for(String name : nicknameToId.keySet()) {
+            if(nicknameToId.get(name) == clientID) {
+                nicknameToId.remove(name);
+                return;
+            }
+        }
+    }
+
     public void singleSend(Answer answer, String nickname) {
         ClientHandler clientHandler = clients.get(nicknameToId.get(nickname));
         clientHandler.sendMessage(answer);

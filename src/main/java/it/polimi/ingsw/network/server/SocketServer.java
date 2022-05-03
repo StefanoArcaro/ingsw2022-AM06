@@ -38,6 +38,10 @@ public class SocketServer implements Runnable {
         }
     }
 
+    public void onConnectionDropped(ClientHandler clientHandler, Socket client) {
+        server.onConnectionDropped(clientHandler, client);
+    }
+
     public void onMessageReceived(ClientHandler clientHandler, String message) {
         server.onMessageReceived(clientHandler, message);
     }
