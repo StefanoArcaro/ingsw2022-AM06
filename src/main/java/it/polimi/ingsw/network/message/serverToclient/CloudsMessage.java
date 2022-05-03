@@ -16,14 +16,6 @@ public class CloudsMessage extends Answer {
         this.clouds = clouds;
     }
 
-    @Override
-    public String toString() {
-        return "CloudsMessage{" +
-                "nickname=" + getNickname() +
-                ", clouds=" + clouds +
-                '}';
-    }
-
     public ArrayList<Integer> getClouds() {
         return clouds;
     }

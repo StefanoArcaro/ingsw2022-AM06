@@ -1,14 +1,10 @@
 package it.polimi.ingsw.model.gameBoard;
 
 import it.polimi.ingsw.exceptions.TableFullException;
-import it.polimi.ingsw.listeners.BoardListener;
-import it.polimi.ingsw.listeners.WinListener;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.enumerations.GameMode;
-import it.polimi.ingsw.view.VirtualView;
 
-import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
 public class Board {
@@ -30,7 +26,17 @@ public class Board {
         this.professors = new ArrayList<>();
     }
 
+    /**
+     * @return the nickname of the owner of this board.
+     */
+    public String getPlayerNickname() {
+        return player.getNickname();
+    }
 
+    /**
+     * Sets the number of towers in the board.
+     * @param towers the number of towers to set.
+     */
     public void setTowers(int towers) {
         this.towers = towers;
     }
@@ -86,7 +92,7 @@ public class Board {
      */
     public void addStudentToHall(CreatureColor color) {
 
-        boolean studentReceived = false;
+        boolean studentReceived;
         try {
             studentReceived = hall.receiveStudent(color);
         } catch (TableFullException e) {

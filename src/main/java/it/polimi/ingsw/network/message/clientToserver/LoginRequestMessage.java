@@ -10,22 +10,19 @@ import it.polimi.ingsw.network.message.clientToserver.Message;
  */
 public class LoginRequestMessage extends Message {
 
-    private NumberOfPlayers numberOfPlayers;
-    private GameMode gameMode;
+    private final String nickname;
+    private final NumberOfPlayers numberOfPlayers;
+    private final GameMode gameMode;
 
     public LoginRequestMessage(String nickname, NumberOfPlayers numberOfPlayers, GameMode gameMode) {
-        super(nickname, MessageType.LOGIN_REQUEST_MESSAGE);
+        super(MessageType.LOGIN_REQUEST_MESSAGE);
+        this.nickname = nickname;
         this.numberOfPlayers = numberOfPlayers;
         this.gameMode = gameMode;
     }
 
-    @Override
-    public String toString() {
-        return "LoginRequestMessage{" +
-                "nickname=" + getNickname() +
-                ", numberOfPlayers=" + numberOfPlayers +
-                ", gameMode=" + gameMode +
-                '}';
+    public String getNickname() {
+        return nickname;
     }
 
     public NumberOfPlayers getNumberOfPlayers() {

@@ -17,14 +17,6 @@ public class WizardsAvailableMessage extends Answer {
         this.wizardNames = wizardNames;
     }
 
-    @Override
-    public String toString() {
-        return "WizardsAvailableMessage{" +
-                "nickname=" + getNickname() +
-                ", wizardNames=" + wizardNames +
-                '}';
-    }
-
     public ArrayList<WizardName> getWizardNames() {
         return wizardNames;
     }

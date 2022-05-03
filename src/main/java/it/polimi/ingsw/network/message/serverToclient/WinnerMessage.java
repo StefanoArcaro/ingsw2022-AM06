@@ -15,14 +15,6 @@ public class WinnerMessage extends Answer {
         this.winnerNickname = winnerNickname;
     }
 
-    @Override
-    public String toString() {
-        return "WinnerMessage{" +
-                "nickname=" + getNickname() +
-                ", winnerNickname='" + winnerNickname + '\'' +
-                '}';
-    }
-
     public String getWinnerNickname() {
         return winnerNickname;
     }

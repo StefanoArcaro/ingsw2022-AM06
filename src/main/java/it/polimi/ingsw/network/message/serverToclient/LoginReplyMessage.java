@@ -15,14 +15,6 @@ public class LoginReplyMessage extends Answer {
         this.message = message;
     }
 
-    @Override
-    public String toString() {
-        return "LoginSuccessMessage{" +
-                "nickname= "  + getNickname() +
-                ", nickname accepted and connection established" +
-                '}';
-    }
-
     public String getMessage() {
         return message;
     }

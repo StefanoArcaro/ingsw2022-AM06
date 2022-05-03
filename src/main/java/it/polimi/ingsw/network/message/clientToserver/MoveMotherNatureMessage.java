@@ -9,19 +9,11 @@ import it.polimi.ingsw.network.message.clientToserver.Message;
  */
 public class MoveMotherNatureMessage extends Message {
 
-    private int numberOfSteps;
+    private final int numberOfSteps;
 
-    public MoveMotherNatureMessage(String nickname, int numberOfSteps) {
-        super(nickname, MessageType.MOVE_MOTHER_NATURE_MESSAGE);
+    public MoveMotherNatureMessage(int numberOfSteps) {
+        super(MessageType.MOVE_MOTHER_NATURE_MESSAGE);
         this.numberOfSteps = numberOfSteps;
-    }
-
-    @Override
-    public String toString() {
-        return "MoveMotherNatureMessage{" +
-                "nickname=" + getNickname() +
-                ", numberOfSteps=" + numberOfSteps +
-                '}';
     }
 
     public int getNumberOfSteps() {

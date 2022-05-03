@@ -29,18 +29,6 @@ public class MatchInfoMessage extends Answer {
         this.currentPlayerNickname = currentPlayerNickname;
     }
 
-    @Override
-    public String toString() {
-        return "MatchInfoMessage{" +
-                "nickname=" + getNickname() +
-                ", activePlayers=" + activePlayers +
-                ", drawnCharacters=" + drawnCharacters +
-                ", boards=" + boards +
-                ", islandGroups=" + islandGroups +
-                ", currentPlayerNickname='" + currentPlayerNickname + '\'' +
-                '}';
-    }
-
     public List<String> getActivePlayers() {
         return activePlayers;
     }

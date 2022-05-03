@@ -13,19 +13,10 @@ public class MoveStudentMessage extends Message {
     private final CreatureColor color;
     private final int destination;
 
-    public MoveStudentMessage(String nickname, CreatureColor color, int destination) {
-        super(nickname, MessageType.MOVE_STUDENT_MESSAGE);
+    public MoveStudentMessage(CreatureColor color, int destination) {
+        super(MessageType.MOVE_STUDENT_MESSAGE);
         this.color = color;
         this.destination = destination;
-    }
-
-    @Override
-    public String toString() {
-        return "MoveStudentMessage{" +
-                "nickname=" + getNickname() +
-                ", color=" + color +
-                ", destination=" + destination +
-                '}';
     }
 
     public CreatureColor getColor() {

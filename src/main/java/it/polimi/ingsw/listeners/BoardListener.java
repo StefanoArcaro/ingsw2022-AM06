@@ -16,7 +16,7 @@ public class BoardListener extends Listener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         Board board = (Board) evt.getNewValue();
-        BoardMessage message = new BoardMessage(board.getEntrance(), board.getHall(), board.getProfessors(), board.getTowers());
+        BoardMessage message = new BoardMessage(board.getPlayerNickname(), board.getEntrance(), board.getHall(), board.getProfessors(), board.getTowers());
         virtualView.sendAll(message);
     }
 }

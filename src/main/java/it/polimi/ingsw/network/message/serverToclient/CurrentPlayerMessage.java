@@ -14,14 +14,6 @@ public class CurrentPlayerMessage extends Answer {
         this.currentPlayer = currentPlayer;
     }
 
-    @Override
-    public String toString() {
-        return "CurrentPlayerMessage{" +
-                "nickname=" + getNickname() +
-                " currentPlayer='" + currentPlayer + '\'' +
-                '}';
-    }
-
     public String getCurrentPlayer() {
         return currentPlayer;
     }

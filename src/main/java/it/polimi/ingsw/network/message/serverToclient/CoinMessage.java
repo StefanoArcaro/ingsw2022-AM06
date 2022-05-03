@@ -11,14 +11,6 @@ public class CoinMessage extends Answer {
         this.coins = coins;
     }
 
-    @Override
-    public String toString() {
-        return "CoinMessage{" +
-                "nickname=" + getNickname() +
-                ", coins=" + coins +
-                '}';
-    }
-
     public int getCoins() {
         return coins;
     }

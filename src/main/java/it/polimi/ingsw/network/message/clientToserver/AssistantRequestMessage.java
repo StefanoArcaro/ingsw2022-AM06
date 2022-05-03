@@ -7,19 +7,11 @@ import it.polimi.ingsw.network.message.MessageType;
  */
 public class AssistantRequestMessage extends Message {
 
-    private int assistantID;
+    private final int assistantID;
 
-    public AssistantRequestMessage (String nickname, int assistantID) {
-        super(nickname, MessageType.ASSISTANT_REQUEST_MESSAGE);
+    public AssistantRequestMessage (int assistantID) {
+        super(MessageType.ASSISTANT_REQUEST_MESSAGE);
         this.assistantID = assistantID;
-    }
-
-    @Override
-    public String toString() {
-        return "AssistantRequestMessage{" +
-                "nickname=" + getNickname() +
-                ", assistantID=" + assistantID +
-                '}';
     }
 
     public int getAssistantID() {

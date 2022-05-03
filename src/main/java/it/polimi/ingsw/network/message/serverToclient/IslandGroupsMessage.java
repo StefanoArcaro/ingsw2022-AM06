@@ -17,14 +17,6 @@ public class IslandGroupsMessage extends Answer {
         this.islandGroups = islandGroups;
     }
 
-    @Override
-    public String toString() {
-        return "IslandGroupsMessage{" +
-                "nickname=" + getNickname() +
-                ", islandGroups=" + islandGroups +
-                '}';
-    }
-
     public ArrayList<IslandGroup> getIslandGroups() {
         return islandGroups;
     }

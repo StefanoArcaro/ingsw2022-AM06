@@ -7,19 +7,11 @@ import it.polimi.ingsw.network.message.MessageType;
  */
 public class CharacterInfoRequestMessage extends Message {
 
-    private int characterID;
+    private final int characterID;
 
-    public CharacterInfoRequestMessage(String nickname, int characterID) {
-        super(nickname, MessageType.CHARACTER_INFO_REQUEST_MESSAGE);
+    public CharacterInfoRequestMessage(int characterID) {
+        super(MessageType.CHARACTER_INFO_REQUEST_MESSAGE);
         this.characterID = characterID;
-    }
-
-    @Override
-    public String toString() {
-        return "CharacterInfoRequestMessage{" +
-                "nickname=" + getNickname() +
-                ", characterID=" + characterID +
-                '}';
     }
 
     public int getCharacterID() {

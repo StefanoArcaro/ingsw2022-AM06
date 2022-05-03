@@ -17,14 +17,6 @@ public class AssistantsMessage extends Answer {
         this.assistants = assistants;
     }
 
-    @Override
-    public String toString() {
-        return "AssistantsMessage{" +
-                "nickname=" + getNickname() +
-                ", assistants=" + assistants +
-                '}';
-    }
-
     public ArrayList<Assistant> getAssistants() {
         return assistants;
     }
