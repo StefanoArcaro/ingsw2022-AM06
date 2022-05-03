@@ -10,6 +10,7 @@ import it.polimi.ingsw.network.message.clientToserver.*;
 import it.polimi.ingsw.network.message.serverToclient.ErrorMessage;
 import it.polimi.ingsw.network.message.serverToclient.GenericMessage;
 import it.polimi.ingsw.network.server.ClientHandler;
+import it.polimi.ingsw.util.Constants;
 
 import java.util.Map;
 
@@ -68,7 +69,7 @@ public class CharacterController {
         int characterID = message.getCharacterID();
 
         //clientHandler.sendMessage(new CharacterInfoMessage(characterID));
-        clientHandler.sendMessage(new GenericMessage("Description of character: " + characterID)); //todo no
+        clientHandler.sendMessage(new GenericMessage(Constants.getCharacterInformation(characterID))); //todo no
     }
 
     /**

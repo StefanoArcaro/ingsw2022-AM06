@@ -298,6 +298,7 @@ public class PreparePhase extends Phase {
 
         // Set Constants
         Constants.setDrawnCharacters(game.getDrawnCharacters());
+        Constants.setPlayCharacters(game.getDrawnCharacters());
     }
 
     /**
