@@ -1,6 +1,7 @@
 package it.polimi.ingsw.network.message.serverToclient;
 
 import it.polimi.ingsw.model.enumerations.WizardName;
+import it.polimi.ingsw.model.gameBoard.Wizard;
 import it.polimi.ingsw.network.message.MessageType;
 
 import java.util.ArrayList;
@@ -10,14 +11,20 @@ import java.util.ArrayList;
  */
 public class WizardsAvailableMessage extends Answer {
 
-    private final ArrayList<WizardName> wizardNames;
+    private final ArrayList<Wizard> wizards;
 
-    public WizardsAvailableMessage(ArrayList<WizardName> wizardNames) {
+    public WizardsAvailableMessage(ArrayList<Wizard> wizards) {
         super(MessageType.WIZARDS_AVAILABLE_MESSAGE);
-        this.wizardNames = wizardNames;
+        this.wizards= wizards;
     }
 
-    public ArrayList<WizardName> getWizardNames() {
-        return wizardNames;
+    @Override
+    public String getMessage() {
+        StringBuilder wizardNames = new StringBuilder("Available wizards: ");
+
+        for(Wizard wizard : wizards) {
+            wizardNames.append(wizard.getWizardName()).append(" ");
+        }
+        return wizardNames.toString();
     }
 }

@@ -17,4 +17,9 @@ public class CurrentPlayerMessage extends Answer {
     public String getCurrentPlayer() {
         return currentPlayer;
     }
+
+    @Override
+    public String getMessage() {
+        return "The current player is " + currentPlayer;
+    }
 }

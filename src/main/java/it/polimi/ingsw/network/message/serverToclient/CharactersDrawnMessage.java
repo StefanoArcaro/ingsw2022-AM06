@@ -19,7 +19,8 @@ public class CharactersDrawnMessage extends Answer {
 
     }
 
-    public String getCharacters() {
+    @Override
+    public String getMessage() {
         return characters;
     }
 }

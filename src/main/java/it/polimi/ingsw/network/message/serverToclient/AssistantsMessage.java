@@ -17,7 +17,14 @@ public class AssistantsMessage extends Answer {
         this.assistants = assistants;
     }
 
-    public ArrayList<Assistant> getAssistants() {
-        return assistants;
+    @Override
+    public String getMessage() {
+        String assistantString = "";
+
+        for(Assistant assistant : assistants) {
+            assistantString = assistantString + "Priority = " + assistant.getPriority() + ". Number of steps = " + assistant.getNumberOfSteps() + "\n";
+        }
+
+        return assistantString;
     }
 }

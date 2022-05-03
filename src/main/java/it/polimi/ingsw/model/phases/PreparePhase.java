@@ -62,7 +62,6 @@ public class PreparePhase extends Phase {
             instantiateProfessors();
             instantiateTowers();
             initializeEntranceStudents();
-            drawFirstPlayer();
 
             setDefaultCharacter();
 
@@ -73,6 +72,8 @@ public class PreparePhase extends Phase {
 
             game.setGameState(GameState.PLANNING_PHASE);
             game.setCurrentPhase(phaseFactory.createPhase(game.getGameState()));
+
+            drawFirstPlayer();
         }
     }
 

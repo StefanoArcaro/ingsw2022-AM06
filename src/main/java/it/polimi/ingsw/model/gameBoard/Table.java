@@ -21,6 +21,13 @@ public class Table {
     }
 
     /**
+     * @return the color of the table.
+     */
+    public CreatureColor getColor() {
+        return color;
+    }
+
+    /**
      * Adds a student to the table.
      * @return whether the student is added successfully.
      * @throws TableFullException when the table is full.

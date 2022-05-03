@@ -15,7 +15,8 @@ public class WinnerMessage extends Answer {
         this.winnerNickname = winnerNickname;
     }
 
-    public String getWinnerNickname() {
-        return winnerNickname;
+    @Override
+    public String getMessage() {
+        return "The winner is " + winnerNickname + "!";
     }
 }

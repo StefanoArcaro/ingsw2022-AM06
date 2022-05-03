@@ -20,4 +20,19 @@ public enum CreatureColor {
     public int getIndex() {
         return index;
     }
+
+
+    /**
+     * @return the string of the color.
+     */
+    public String getColorName() {
+        return switch (index) {
+            case 0 -> "Green";
+            case 1 -> "Red";
+            case 2 -> "Yellow";
+            case 3 -> "Pink";
+            case 4 -> "Blue";
+            default -> "";
+        };
+    }
 }

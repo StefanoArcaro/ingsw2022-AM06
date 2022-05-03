@@ -1,24 +1,13 @@
 package it.polimi.ingsw.model.phases;
 
-import it.polimi.ingsw.listeners.BoardListener;
-import it.polimi.ingsw.listeners.CloudListener;
-import it.polimi.ingsw.listeners.WinListener;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.view.VirtualView;
-
-import java.beans.PropertyChangeSupport;
-
+import it.polimi.ingsw.util.Constants;
 
 public class EndgamePhase extends Phase {
 
     private final static int MAX_TOWERS = 8;
-
-    //Listener
-    //protected final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
-    private final static String WIN_LISTENER = "winListener";
-
 
     /**
      * Default constructor.
@@ -28,10 +17,6 @@ public class EndgamePhase extends Phase {
         this.game = game;
         this.phaseFactory = new PhaseFactory(game);
     }
-
-    /*public void createListeners(VirtualView clientView){
-        listeners.addPropertyChangeListener(WIN_LISTENER, new WinListener(clientView));
-    }*/
 
     /**
      * Checks how the game ended and calculates the winner.
@@ -43,7 +28,7 @@ public class EndgamePhase extends Phase {
         } else {
             winner = calculateWinner();
         }
-        game.getListeners().firePropertyChange(WIN_LISTENER, null, winner.getNickname());
+        game.getListeners().firePropertyChange(Constants.WIN_LISTENER, null, winner.getNickname());
     }
 
     /**

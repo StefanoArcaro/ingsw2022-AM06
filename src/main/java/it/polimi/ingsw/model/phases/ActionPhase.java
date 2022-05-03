@@ -1,29 +1,14 @@
 package it.polimi.ingsw.model.phases;
 
 import it.polimi.ingsw.exceptions.*;
-import it.polimi.ingsw.listeners.CharacterListener;
-import it.polimi.ingsw.listeners.CoinListener;
-import it.polimi.ingsw.listeners.IslandGroupListener;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.enumerations.CharacterID;
-import it.polimi.ingsw.view.VirtualView;
-
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
+import it.polimi.ingsw.util.Constants;
 
 public abstract class ActionPhase extends Phase {
 
     protected Player currentPlayer;
-
-    //listeners
-    protected final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
-    protected final String COIN_LISTENER = "coinListener";
-
-    public void createListeners(VirtualView clientView){
-        listeners.addPropertyChangeListener(COIN_LISTENER, new CoinListener(clientView));
-    }
-
 
     /**
      * Pay and use the effect of a character.
@@ -61,7 +46,7 @@ public abstract class ActionPhase extends Phase {
 
                     currentPlayer.spendCoins(price);
                     int oldCoins = currentPlayer.getCoins();
-                    listeners.firePropertyChange(COIN_LISTENER, oldCoins, currentPlayer.getCoins());
+                    game.getListeners().firePropertyChange(Constants.COIN_LISTENER, oldCoins, currentPlayer.getCoins());
 
                 } else {
                     throw new NotEnoughMoneyException();

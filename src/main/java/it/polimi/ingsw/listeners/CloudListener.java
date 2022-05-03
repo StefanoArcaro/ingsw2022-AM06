@@ -1,5 +1,6 @@
 package it.polimi.ingsw.listeners;
 
+import it.polimi.ingsw.model.gameBoard.Cloud;
 import it.polimi.ingsw.network.message.serverToclient.CloudsMessage;
 import it.polimi.ingsw.view.VirtualView;
 
@@ -14,7 +15,7 @@ public class CloudListener extends Listener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        CloudsMessage message = new CloudsMessage((ArrayList<Integer>) evt.getNewValue());
+        CloudsMessage message = new CloudsMessage((ArrayList<Cloud>) evt.getNewValue());
         virtualView.sendAll(message);
     }
 }

@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.enumerations.GameMode;
 import it.polimi.ingsw.model.enumerations.GameState;
 
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
 public class Constants {
@@ -224,7 +225,7 @@ public class Constants {
             """;
 
     public static String getCharacterInformation(int characterID) {
-        return switch (characterID) {
+        return switch (characterID) { //todo: add cost
             case 1 -> CHARACTER_ONE_DESCRIPTION;
             case 2 -> CHARACTER_TWO_DESCRIPTION;
             case 3 -> CHARACTER_THREE_DESCRIPTION;
@@ -240,5 +241,17 @@ public class Constants {
             default -> "";
         };
     }
+
+    //Listeners
+    public static final String ISLAND_GROUP_LISTENER = "islandGroupListener";
+    public static final String BOARD_LISTENER = "boardListener";
+    public static final String PHASE_LISTENER = "phaseListener";
+    public static final String COIN_LISTENER = "coinListener";
+    public static final String ISLAND_LISTENER = "islandListener";
+    public static final String ASSISTANT_LISTENER = "assistantListener";
+    public static final String WIN_LISTENER = "winListener";
+    public static final String PLAYER_LISTENER = "playerListener";
+    public static final String CHARACTER_LISTENER = "characterListener";
+    public static final String CLOUD_LISTENER = "cloudListener";
 
 }

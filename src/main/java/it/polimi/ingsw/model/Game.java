@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.gameBoard.*;
 import it.polimi.ingsw.model.phases.Phase;
 import it.polimi.ingsw.model.phases.PhaseFactory;
+import it.polimi.ingsw.util.Constants;
 import it.polimi.ingsw.view.VirtualView;
 
 
@@ -39,14 +40,6 @@ public class Game {
 
     //Listeners
     private final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
-    private static final String ISLAND_GROUP_LISTENER = "islandGroupListener";
-    private static final String BOARD_LISTENER = "boardListener";
-    private static final String PHASE_LISTENER = "phaseListener";
-    private static final String COIN_LISTENER = "coinListener";
-    private static final String ISLAND_LISTENER = "islandListener";
-    private final static String ASSISTANT_LISTENER = "assistantListener";
-    private final static String WIN_LISTENER = "winListener";
-    private final static String PLAYER_LISTENER = "playerListener";
 
     /**
      * Default constructor.
@@ -70,17 +63,26 @@ public class Game {
         currentPhase = phaseFactory.createPhase(gameState);
     }
 
+    /**
+     * Creates the listeners to the model.
+     * @param clientView the virtual client on the server.
+     */
     public void createListeners(VirtualView clientView){
-        listeners.addPropertyChangeListener(ISLAND_GROUP_LISTENER, new IslandGroupListener(clientView));
-        listeners.addPropertyChangeListener(BOARD_LISTENER, new BoardListener(clientView));
-        listeners.addPropertyChangeListener(PHASE_LISTENER, new PhaseListener(clientView));
-        listeners.addPropertyChangeListener(COIN_LISTENER, new BoardListener(clientView));
-        listeners.addPropertyChangeListener(ISLAND_LISTENER, new IslandListener(clientView));
-        listeners.addPropertyChangeListener(ASSISTANT_LISTENER, new AssistantListener(clientView));
-        listeners.addPropertyChangeListener(WIN_LISTENER, new WinListener(clientView));
-        listeners.addPropertyChangeListener(PLAYER_LISTENER, new PlayerListener(clientView));
+        listeners.addPropertyChangeListener(Constants.PLAYER_LISTENER, new PlayerListener(clientView));
+        listeners.addPropertyChangeListener(Constants.PHASE_LISTENER, new PhaseListener(clientView));
+        listeners.addPropertyChangeListener(Constants.ASSISTANT_LISTENER, new AssistantListener(clientView));
+        listeners.addPropertyChangeListener(Constants.ISLAND_LISTENER, new IslandListener(clientView));
+        listeners.addPropertyChangeListener(Constants.ISLAND_GROUP_LISTENER, new IslandGroupListener(clientView));
+        listeners.addPropertyChangeListener(Constants.BOARD_LISTENER, new BoardListener(clientView));
+        listeners.addPropertyChangeListener(Constants.COIN_LISTENER, new BoardListener(clientView));
+        listeners.addPropertyChangeListener(Constants.CLOUD_LISTENER, new CloudListener(clientView));
+        listeners.addPropertyChangeListener(Constants.CHARACTER_LISTENER, new CharacterListener(clientView));
+        listeners.addPropertyChangeListener(Constants.WIN_LISTENER, new WinListener(clientView));
     }
 
+    /**
+     * @return the listeners to the model.
+     */
     public PropertyChangeSupport getListeners() {
         return listeners;
     }
@@ -147,7 +149,7 @@ public class Game {
      */
     public void setCurrentPhase(Phase phase) {
         this.currentPhase = phase;
-        listeners.firePropertyChange(PHASE_LISTENER, null, new AbstractMap.SimpleEntry<>(gameState, gameMode));
+        listeners.firePropertyChange(Constants.PHASE_LISTENER, null, new AbstractMap.SimpleEntry<>(gameState, gameMode));
     }
 
     /**
@@ -240,7 +242,7 @@ public class Game {
      */
     public void setCurrentPlayer (Player player) {
         this.currentPlayer = player;
-        listeners.firePropertyChange(PLAYER_LISTENER, null, player.getNickname());
+        listeners.firePropertyChange(Constants.PLAYER_LISTENER, null, player.getNickname());
     }
 
     /**
@@ -397,7 +399,7 @@ public class Game {
     private boolean isBanCardPresent(IslandGroup islandGroup) {
         if(islandGroup.getNumberOfBanCardPresent() > 0) {
             islandGroup.removeBanCard();
-            listeners.firePropertyChange(ISLAND_GROUP_LISTENER, null, islandGroup);
+            listeners.firePropertyChange(Constants.ISLAND_GROUP_LISTENER, null, islandGroup);
             Character character= getCharacterByID(5);
             if(character != null) {
                 character.addBanCard();
@@ -420,13 +422,13 @@ public class Game {
                 for(Island island : getIslandGroupByIndex(islandGroupIndex).getIslands()) {
                     island.removeTower(this);
                 }
-                listeners.firePropertyChange(BOARD_LISTENER, null, playerOlderConquerorIslandGroup.getBoard());
+                listeners.firePropertyChange(Constants.BOARD_LISTENER, null, playerOlderConquerorIslandGroup.getBoard());
             }
 
             for(Island island : getIslandGroupByIndex(islandGroupIndex).getIslands()) {
                 island.addTower(this, playerMaxInfluence.getColor());
             }
-            listeners.firePropertyChange(BOARD_LISTENER, null, playerMaxInfluence.getBoard());
+            listeners.firePropertyChange(Constants.BOARD_LISTENER, null, playerMaxInfluence.getBoard());
 
             islandGroups.get(islandGroupIndex).setConquerorColor(playerMaxInfluence.getColor());
 
@@ -448,7 +450,7 @@ public class Game {
                 }
             }
 
-            listeners.firePropertyChange(ISLAND_GROUP_LISTENER, null, islandGroup);
+            listeners.firePropertyChange(Constants.ISLAND_GROUP_LISTENER, null, islandGroup);
         }
     }
 

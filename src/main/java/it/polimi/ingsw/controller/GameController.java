@@ -32,7 +32,7 @@ public class GameController implements PropertyChangeListener {
     private final CharacterController characterController;
 
 
-    //todo: sistemare l'invio dei messaggi - in risposta al messaggio del client, se serve mandare una risposta del server Answer
+    //todo: fix messages: server -> client
 
     /**
      * Default constructor.
@@ -90,8 +90,10 @@ public class GameController implements PropertyChangeListener {
                     pickCloudState(input, msg);
                 }
                 break;
-            default: //end game states and lobby
-                //todo: clientsView.get(message.getNickname()).showErrorMessage("The game is over, you can't send a message.");
+            default: { //end game states and lobby
+                ClientHandler clientHandler = clients.get(msg.getClientID());
+                clientHandler.sendMessage(new GenericMessage("The game is over, you can't send a message."));
+            }
         }
     }
 

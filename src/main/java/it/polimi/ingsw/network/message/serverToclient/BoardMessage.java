@@ -1,11 +1,10 @@
 package it.polimi.ingsw.network.message.serverToclient;
 
-import it.polimi.ingsw.model.gameBoard.Entrance;
-import it.polimi.ingsw.model.gameBoard.Hall;
-import it.polimi.ingsw.model.gameBoard.Professor;
+import it.polimi.ingsw.model.gameBoard.*;
 import it.polimi.ingsw.network.message.MessageType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Message used by the server to display a player's board.
@@ -45,5 +44,33 @@ public class BoardMessage extends Answer {
 
     public ArrayList<Professor> getProfessors() {
         return professors;
+    }
+
+    @Override
+    public String getMessage() {
+        String owner = nickname + "'s board.\n";
+
+        StringBuilder entranceStudents = new StringBuilder("Entrance:\n");
+        for(Student student : entrance.getStudents()) {
+            entranceStudents.append(student.getColor().getColorName()).append(" ");
+        }
+        entranceStudents.append("\n");
+
+        StringBuilder hallStudents = new StringBuilder("Hall:\n");
+        for(Table table : hall.getStudents()) {
+            hallStudents.append(table.getColor().getColorName()).append(" ").append(table.getLength()).append("\n");
+        }
+
+        StringBuilder professorsInBoard = new StringBuilder("Professors: ");
+        if(professors.size() > 0) {
+            for (Professor professor : professors) {
+                professorsInBoard.append(professor.getColor().getColorName()).append(" ");
+            }
+            professorsInBoard.append("\n");
+        }
+
+        String numTowers = "Number of towers: " + towers;
+
+        return owner + entranceStudents + hallStudents + professorsInBoard + numTowers;
     }
 }
