@@ -10,8 +10,8 @@ import it.polimi.ingsw.network.message.clientToserver.Message;
  */
 public class MoveStudentMessage extends Message {
 
-    private CreatureColor color;
-    private int destination;
+    private final CreatureColor color;
+    private final int destination;
 
     public MoveStudentMessage(String nickname, CreatureColor color, int destination) {
         super(nickname, MessageType.MOVE_STUDENT_MESSAGE);

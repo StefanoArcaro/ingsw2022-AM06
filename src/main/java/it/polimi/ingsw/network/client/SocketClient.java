@@ -30,6 +30,7 @@ public class SocketClient extends Client {
         this.socket = socket;
 
         try {
+            socket.setSoTimeout(10000);
             this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
         } catch (IOException e) {
@@ -47,7 +48,7 @@ public class SocketClient extends Client {
         readQueue.execute(() -> {
             while(!readQueue.isShutdown()) {
                 try {
-                    socket.setSoTimeout(10000);
+                    //socket.setSoTimeout(10000); //todo
                     String message = reader.readLine();
 
                     // If message is null, it means the server's connection has fallen
@@ -93,63 +94,78 @@ public class SocketClient extends Client {
             }
             case WIZARDS_AVAILABLE_MESSAGE -> {
                 WizardsAvailableMessage msg = gson.fromJson(message, WizardsAvailableMessage.class);
+                System.out.println(answer.getMessageType());
                 //todo
             }
             case ASSISTANTS_MESSAGE -> {
                 AssistantsMessage msg = gson.fromJson(message, AssistantsMessage.class);
                 //todo
+                System.out.println(answer.getMessageType());
             }
             case MATCH_INFO_MESSAGE -> {
                 MatchInfoMessage msg = gson.fromJson(message, MatchInfoMessage.class);
                 //todo
+                System.out.println(answer.getMessageType());
             }
             case COLORS_AVAILABLE_MESSAGE -> {
                 ColorsAvailableMessage msg = gson.fromJson(message, ColorsAvailableMessage.class);
                 //todo
+                System.out.println(answer.getMessageType());
             }
             case BOARD_MESSAGE -> {
                 BoardMessage msg = gson.fromJson(message, BoardMessage.class);
                 //todo
+                System.out.println(answer.getMessageType());
             }
             case ISLAND_GROUPS_MESSAGE -> {
                 IslandGroupsMessage msg = gson.fromJson(message, IslandGroupsMessage.class);
                 //todo
+                System.out.println(answer.getMessageType());
             }
             case ISLAND_MESSAGE -> {
                 IslandMessage msg = gson.fromJson(message, IslandMessage.class);
                 //todo
+                System.out.println(answer.getMessageType());
             }
             case CLOUDS_MESSAGE -> {
                 CloudsMessage msg = gson.fromJson(message, CloudsMessage.class);
                 //todo
+                System.out.println(answer.getMessageType());
             }
             case COIN_MESSAGE -> {
                 CoinMessage msg = gson.fromJson(message, CoinMessage.class);
                 //todo
+                System.out.println(answer.getMessageType());
             }
             case CURRENT_PLAYER_MESSAGE -> {
                 CurrentPlayerMessage msg = gson.fromJson(message, CurrentPlayerMessage.class);
                 //todo
+                System.out.println(answer.getMessageType());
             }
             case CURRENT_PHASE_MESSAGE -> {
                 CurrentPhaseMessage msg = gson.fromJson(message, CurrentPhaseMessage.class);
                 //todo
+                System.out.println(answer.getMessageType());
             }
             case CHARACTERS_DRAWN_MESSAGE -> {
                 CharactersDrawnMessage msg = gson.fromJson(message, CharactersDrawnMessage.class);
                 //todo
+                System.out.println(answer.getMessageType());
             }
             case CHARACTER_INFO_MESSAGE -> {
                 CharacterInfoMessage msg = gson.fromJson(message, CharacterInfoMessage.class);
                 //todo
+                System.out.println(answer.getMessageType());
             }
             case CHARACTER_PLAYED_MESSAGE -> {
                 CharacterMessage msg = gson.fromJson(message, CharacterMessage.class);
                 //todo
+                System.out.println(answer.getMessageType());
             }
             case WINNER_MESSAGE -> {
                 WinnerMessage msg = gson.fromJson(message, WinnerMessage.class);
                 //todo
+                System.out.println(answer.getMessageType());
             }
 
             case GENERIC_MESSAGE -> {

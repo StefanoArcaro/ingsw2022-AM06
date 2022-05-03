@@ -11,6 +11,7 @@ import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.gameBoard.StudentDestination;
 import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.gameBoard.Student;
+import it.polimi.ingsw.network.message.serverToclient.BoardMessage;
 
 import java.util.AbstractMap;
 import java.util.Map;
@@ -85,8 +86,11 @@ public class MoveStudentPhase extends ActionPhase {
                         if(studentDestinationIndex != 0){
                             game.getListeners().firePropertyChange(ISLAND_LISTENER, null, game.getIslandByID(studentDestinationIndex));
                         }
-                        game.getListeners().firePropertyChange(BOARD_LISTENER, null, currentPlayer.getBoard());
-                        game.getListeners().firePropertyChange(COIN_LISTENER, currentPlayer.getCoins(), currentPlayer.getCoins());
+
+
+                        //TODO
+                        game.getListeners().firePropertyChange(BOARD_LISTENER, null, game.getCurrentPlayer().getBoard());
+                        game.getListeners().firePropertyChange(COIN_LISTENER, currentPlayer.getCoins(), currentPlayer.getCoins()); // TODO old coins
 
                         validMoves -= 1;
                     }
