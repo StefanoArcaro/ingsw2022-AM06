@@ -34,7 +34,9 @@ public class Constants {
     
     private static final String QUIT_FORMAT = "quit";
 
-    private static String charactersDrawn = "";
+    private static String charactersDrawn = "- Drawn characters:";
+
+    private static String playCharacters = "- Play a character";
     
     // Phase instructions
     private static String expertCharacterAction(GameMode gameMode) {
@@ -59,6 +61,7 @@ public class Constants {
                 "The actions you can take are the following:\n" +
                 "- Play an assistant\n\t" + PLANNING_FORMAT + "\n" +
                 expertCharacterAction(gameMode) + "\n" +
+                charactersDrawn + "\n" +
                 "- Quit\n\t" + QUIT_FORMAT;
     }
 
@@ -68,7 +71,7 @@ public class Constants {
                 "The actions you can take are the following:\n" +
                 "- Move a student from your entrance to the hall or one of the islands\n\t" + MOVE_STUDENT_FORMAT + "\n" +
                 expertCharacterAction(gameMode) + "\n" +
-                charactersDrawn + "\n" +
+                playCharacters + "\n" +
                 "- Quit\n\t" + QUIT_FORMAT;
     }
 
@@ -78,7 +81,7 @@ public class Constants {
                 "The actions you can take are the following:\n" +
                 "- Move mother nature a certain amount of steps\n\t" + MOVE_MOTHER_NATURE_FORMAT + "\n" +
                 expertCharacterAction(gameMode) + "\n" +
-                charactersDrawn + "\n" +
+                playCharacters + "\n" +
                 "- Quit\n\t" + QUIT_FORMAT;
     }
 
@@ -88,7 +91,7 @@ public class Constants {
                 "The actions you can take are the following:\n" +
                 "- Choose a cloud from which to get students\n\t" + PICK_CLOUD_FORMAT + "\n" +
                 expertCharacterAction(gameMode) + "\n" +
-                charactersDrawn + "\n" +
+                playCharacters + "\n" +
                 "- Quit\n\t" + QUIT_FORMAT;
     }
 
@@ -104,9 +107,17 @@ public class Constants {
         };
     }
 
-    //set in game
     public static void setDrawnCharacters(ArrayList<Character> characters) {
-        String characterDrawn = "- Play a character";
+        for(Character character : characters) {
+            if(character.getCharacterID() != 0) {
+                charactersDrawn = charactersDrawn + " " + character.getCharacterID();
+            }
+        }
+    }
+
+    //set in game
+    public static void setPlayCharacters(ArrayList<Character> characters) {
+        String characterDrawn = "";
 
         for(Character character : characters) {
             if(character.getCharacterID() != 0) {
@@ -114,7 +125,7 @@ public class Constants {
             }
         }
 
-        charactersDrawn = characterDrawn;
+        playCharacters = playCharacters + characterDrawn;
     }
 
     private static String getCharacterFormat(int characterID) {
@@ -135,15 +146,71 @@ public class Constants {
         };
     }
 
+    // characters descriptions
+    private static final String CHARACTER_ONE_DESCRIPTION = "Take 1 Student from this card and place it on\n" +
+            "an Island of your choice\n";
 
+    private static final String CHARACTER_TWO_DESCRIPTION = "During this turn, you take control of any\n" +
+            "number of Professors even if you have the same\n" +
+            "number of Students as the player who currently\n" +
+            "controls them.\n";
 
+    private static final String CHARACTER_THREE_DESCRIPTION = "Choose an Island and resolve the Island as if\n" +
+            "Mother Nature had ended her movement there. Mother\n" +
+            "Nature will still move and the Island where she ends\n" +
+            "her movement will also be resolved.\n";
 
+    private static final String CHARACTER_FOUR_DESCRIPTION = "You may move Mother Nature up to 2\n" +
+            "additional Islands than is indicated by the Assistant\n" +
+            "card you've played.\n";
 
+    private static final String CHARACTER_FIVE_DESCRIPTION = "In Setup, put the 4 Ban Cards on this card.\n" +
+            "Place a Ban Card on an Island Group of your choice.\n" +
+            "The first time Mother Nature ends her movement\n" +
+            "there, the Ban Card is removed and the influence is not calculated in that Island Group.\n";
 
+    private static final String CHARACTER_SIX_DESCRIPTION = "When resolving a Conquering on an Island,\n" +
+            "Towers do not count towards influence.\n";
 
+    private static final String CHARACTER_SEVEN_DESCRIPTION = "You may take up to 3 Students from this card\n" +
+            "and replace them with the same number of Students\n" +
+            "from your Entrance.\n";
 
+    private static final String CHARACTER_EIGHT_DESCRIPTION = "During the influence calculation this turn, you\n" +
+            "count as having 2 more influence.\n";
 
+    private static final String CHARACTER_NINE_DESCRIPTION = "Choose a color of Student: during the influence\n" +
+            "calculation this turn, that color adds no influence.\n";
 
+    private static final String CHARACTER_TEN_DESCRIPTION = "You may exchange up to 2 Students between\n" +
+            "your Entrance and your Hall.\n";
 
+    private static final String CHARACTER_ELEVEN_DESCRIPTION = "Take 1 Student from this card and place it in\n" +
+            "your Dining Room. Then, draw a new Student from the\n" +
+            "Bag and place it on this card.\n";
+
+    private static final String CHARACTER_TWELVE_DESCRIPTION = "Choose a type of Student: every player\n" +
+            "(including yourself) must return 3 Students of that type\n" +
+            "from their Dining Room to the bag. If any player has\n" +
+            "fewer than 3 Students of that type, return as many\n" +
+            "Students as they have.\n";
+
+    public static String getCharacterInformation(int characterID) {
+        return switch (characterID) {
+            case 1 -> CHARACTER_ONE_DESCRIPTION;
+            case 2 -> CHARACTER_TWO_DESCRIPTION;
+            case 3 -> CHARACTER_THREE_DESCRIPTION;
+            case 4 -> CHARACTER_FOUR_DESCRIPTION;
+            case 5 -> CHARACTER_FIVE_DESCRIPTION;
+            case 6 -> CHARACTER_SIX_DESCRIPTION;
+            case 7 -> CHARACTER_SEVEN_DESCRIPTION;
+            case 8 -> CHARACTER_EIGHT_DESCRIPTION;
+            case 9 -> CHARACTER_NINE_DESCRIPTION;
+            case 10 -> CHARACTER_TEN_DESCRIPTION;
+            case 11 -> CHARACTER_ELEVEN_DESCRIPTION;
+            case 12 -> CHARACTER_TWELVE_DESCRIPTION;
+            default -> "";
+        };
+    }
 
 }
