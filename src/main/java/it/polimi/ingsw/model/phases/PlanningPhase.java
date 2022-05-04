@@ -59,8 +59,8 @@ public class PlanningPhase extends Phase {
             game.setFirstPlayerIndex(game.getPlayers().indexOf(playingOrder.get(FIRST_PLAYER_INDEX)));
             game.setPlayerPriority(playerPriority);
             game.setGameState(GameState.MOVE_STUDENT_PHASE);
-            game.setCurrentPhase(phaseFactory.createPhase(game.getGameState()));
             game.setCurrentPlayer(playingOrder.get(FIRST_PLAYER_INDEX));
+            game.setCurrentPhase(phaseFactory.createPhase(game.getGameState()));
         }
     }
 
