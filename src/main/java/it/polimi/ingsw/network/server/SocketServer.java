@@ -9,6 +9,11 @@ public class SocketServer implements Runnable {
     private final int port;
     private final Server server;
 
+    /**
+     * Default constructor.
+     * @param port the port that the server will be listening on.
+     * @param server reference to the Server that instantiated this.
+     */
     public SocketServer(int port, Server server) {
         this.port = port;
         this.server = server;
@@ -19,7 +24,7 @@ public class SocketServer implements Runnable {
         ServerSocket serverSocket;
         try {
             serverSocket = new ServerSocket(port);
-            System.out.println("Server started on port " + port + ".");
+            System.out.println("Server started on port " + port + ".\n");
         } catch (IOException e) {
             System.err.println("Server was unable to start!");
             return;
@@ -38,11 +43,22 @@ public class SocketServer implements Runnable {
         }
     }
 
-    public void onConnectionDropped(ClientHandler clientHandler, Socket client) {
-        server.onConnectionDropped(clientHandler, client);
-    }
-
+    /**
+     * Forwards to the server the client handler that received a message
+     * from its client, and the message.
+     * @param clientHandler that received the message.
+     * @param message that was received.
+     */
     public void onMessageReceived(ClientHandler clientHandler, String message) {
         server.onMessageReceived(clientHandler, message);
+    }
+
+    /**
+     * Forwards to the server the reference to the clientHandler whose connection
+     * with its client dropped.
+     * @param clientHandler the lost connection with its client.
+     */
+    public void onConnectionDropped(ClientHandler clientHandler) {
+        server.onConnectionDropped(clientHandler);
     }
 }

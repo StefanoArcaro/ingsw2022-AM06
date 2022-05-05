@@ -6,6 +6,7 @@ import it.polimi.ingsw.network.message.clientToserver.DisconnectionRequestMessag
 import it.polimi.ingsw.network.message.clientToserver.Message;
 import it.polimi.ingsw.network.message.clientToserver.PingMessage;
 import it.polimi.ingsw.network.message.serverToclient.*;
+import it.polimi.ingsw.util.Constants;
 
 import java.io.*;
 import java.net.Socket;
@@ -17,20 +18,21 @@ import java.util.concurrent.TimeUnit;
 
 public class SocketClient extends Client {
 
-    private static final int PING_INITIAL_DELAY = 0;
-    private static final int PING_PERIOD = 2000;
-
     private final Socket socket;
     private BufferedReader reader;
     private BufferedWriter writer;
     private final ExecutorService readQueue;
     private final ScheduledExecutorService pinger;
 
+    /**
+     * Default constructor.
+     * @param socket the server socket.
+     */
     public SocketClient(Socket socket) {
         this.socket = socket;
 
         try {
-            socket.setSoTimeout(10000);
+            socket.setSoTimeout(Constants.SOCKET_TIMEOUT);
             this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
         } catch (IOException e) {
@@ -42,7 +44,9 @@ public class SocketClient extends Client {
         this.pinger = Executors.newSingleThreadScheduledExecutor();
     }
 
-    // From server
+    /**
+     * Asynchronously read messages from the server.
+     */
     @Override
     public void readMessage() {
         readQueue.execute(() -> {
@@ -66,7 +70,10 @@ public class SocketClient extends Client {
         });
     }
 
-    // To server
+    /**
+     * Sends a message to the server by serializing it using a JSON format.
+     * @param message the message to send.
+     */
     @Override
     public void sendMessage(Message message) {
         try {
@@ -81,7 +88,11 @@ public class SocketClient extends Client {
         }
     }
 
-    // From server
+    /**
+     * Deserializes the message received from the server and handles it based
+     * on the type of said message.
+     * @param message the (yet to be deserialized) message.
+     */
     public void handleAnswer(String message) {
         Gson gson = new Gson();
 
@@ -190,20 +201,19 @@ public class SocketClient extends Client {
         }
     }
 
+    /**
+     * Disconnects from the server.
+     */
     @Override
     public void disconnect() {
         closeEverything();
     }
 
-    @Override
-    public void enablePinger(boolean enabled) {
-        if(enabled) {
-            pinger.scheduleAtFixedRate(() -> sendMessage(new PingMessage()), PING_INITIAL_DELAY, PING_PERIOD, TimeUnit.MILLISECONDS);
-        } else {
-            pinger.shutdownNow();
-        }
-    }
-
+    /**
+     * Shuts down the threads used for asynchronous actions, then
+     * closes the socket's input and output streams, then the socket itself.
+     * Finally, closes the application.
+     */
     private void closeEverything() {
         try {
             enablePinger(false);
@@ -222,6 +232,19 @@ public class SocketClient extends Client {
             System.err.println(e.getMessage());
         } finally {
             System.exit(0);
+        }
+    }
+
+    /**
+     * Activates the periodic sending of a ping message to keep the connection alive.
+     * @param enabled used to either enable or disable the ping functionality.
+     */
+    @Override
+    public void enablePinger(boolean enabled) {
+        if(enabled) {
+            pinger.scheduleAtFixedRate(() -> sendMessage(new PingMessage()), Constants.PING_INITIAL_DELAY, Constants.PING_PERIOD, TimeUnit.MILLISECONDS);
+        } else {
+            pinger.shutdownNow();
         }
     }
 }

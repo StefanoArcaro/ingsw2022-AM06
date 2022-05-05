@@ -1,12 +1,16 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.network.client.SocketClient;
 import it.polimi.ingsw.network.server.Server;
+import it.polimi.ingsw.util.Constants;
 import it.polimi.ingsw.view.CLI;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Main class of the game.
+ * This class is the one that gets executed when the program starts.
+ */
 public class Eriantys {
 
     public static void main(String[] args) {
@@ -17,6 +21,7 @@ public class Eriantys {
 
         Scanner scanner = new Scanner(System.in);
         int launchInput = 0;
+        // TODO while loop
         try {
             launchInput = scanner.nextInt();
         } catch (InputMismatchException e) {
@@ -32,33 +37,20 @@ public class Eriantys {
             // TODO
             case 1 -> {
                 System.out.println("You selected the CLI, have fun!");
-                countdown();
-                System.out.println("\n=============================================================\n");
+                System.out.print("Starting");
+                Constants.countdown(400);
                 CLI.main(null);
             }
             case 2 -> {
+                // TODO
                 System.out.println("You selected the GUI, have fun!");
-                countdown();
+                System.out.print("Starting");
+                Constants.countdown(400);
                 System.out.println("\n=============================================================\n");
                 System.out.println("GUI main running!");
                 //GUI.main(null);
             }
             default -> System.err.println("Invalid argument, please run the executable again and select one of the available options.");
         }
-    }
-
-    private static void countdown() {
-        System.out.print("Starting");
-        for(int i = 3; i > 0; i--) {
-            System.out.print(".");
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                System.err.println("There's been an error with the thread management");
-                System.err.println("The application will now close...");
-                System.exit(-1);
-            }
-        }
-        System.out.println();
     }
 }

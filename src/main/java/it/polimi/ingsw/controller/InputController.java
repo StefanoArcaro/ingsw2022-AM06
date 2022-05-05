@@ -158,10 +158,9 @@ public class InputController {
         if(game.getGameMode() == GameMode.EXPERT) {
             if(game.getGameState() != GameState.LOBBY_PHASE) {
                 return checkCharacterID(clientHandler, characterID);
-            } else {
-                clientHandler.sendMessage(new ErrorMessage("The message sent is not consistent with the phase playing"));
             }
-        }else {
+            clientHandler.sendMessage(new ErrorMessage("The message sent is not consistent with the phase playing"));
+        } else {
             clientHandler.sendMessage(new ErrorMessage("You have chosen the easy mode, there are no characters."));
         }
         return false;
@@ -184,11 +183,15 @@ public class InputController {
                 game.getGameState() != GameState.PREPARE_PHASE &&
                 game.getGameState() != GameState.PLANNING_PHASE;
 
-        if(correctPhase) {
-            return checkCharacterID(clientHandler, characterID);
+        if(game.getGameMode() == GameMode.EXPERT) {
+            if (correctPhase) {
+                return checkCharacterID(clientHandler, characterID);
+            }
+            clientHandler.sendMessage(new ErrorMessage("The message sent is not consistent with the phase playing"));
+        } else {
+            clientHandler.sendMessage(new ErrorMessage("You have chosen the easy mode, there are no characters."));
         }
-        clientHandler.sendMessage(new ErrorMessage("The message sent is not consistent with the phase playing"));
-        return  false;
+        return false;
     }
 
     /**

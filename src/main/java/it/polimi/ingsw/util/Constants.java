@@ -5,20 +5,54 @@ import it.polimi.ingsw.model.enumerations.GameMode;
 import it.polimi.ingsw.model.enumerations.GameState;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class Constants {
 
-    private static final String SEPARATOR = "\n============================================================================\n";
-    
+    // Default network constants
+    public static final String IPV4_PATTERN = "^(\\d+)\\.(\\d+)\\.(\\d+)\\.(\\d+)";
+
+    public static final String DEFAULT_IP_ADDRESS = "localhost";
+    public static final int DEFAULT_PORT = 1234;
+
+    public static final int PING_INITIAL_DELAY = 0;
+    public static final int PING_PERIOD = 2000;
+    public static final int SOCKET_TIMEOUT = 5000;
+
+    // Text util
+    public static final String ERIANTYS = "\n" +Constants.BOX_TOP + "\n" +
+        "  ███████╗██████╗ ██╗ █████╗ ███╗   ██╗████████╗██╗   ██╗███████╗" + "\n" +
+        "  ██╔════╝██╔══██╗██║██╔══██╗████╗  ██║╚══██╔══╝╚██╗ ██╔╝██╔════╝" + "\n" +
+        "  █████╗  ██████╔╝██║███████║██╔██╗ ██║   ██║    ╚████╔╝ ███████╗" + "\n" +
+        "  ██╔══╝  ██╔══██╗██║██╔══██║██║╚██╗██║   ██║     ╚██╔╝  ╚════██║" + "\n" +
+        "  ███████╗██║  ██║██║██║  ██║██║ ╚████║   ██║      ██║   ███████║" + "\n" +
+        "  ╚══════╝╚═╝  ╚═╝╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝      ╚═╝   ╚══════╝" + "\n" +
+        Constants.BOX_BOTTOM + "\n";
+
+    private static final String BOX_TOP = "╔═════════════════════════════════════════════════════════════════╗";
+    private static final String BOX_BOTTOM = "╚═════════════════════════════════════════════════════════════════╝";
+
+    public static final String ANSI_BLACK = "\u001b[30m";
+    public static final String ANSI_RED = "\u001b[31m";
+    public static final String ANSI_GREEN = "\u001b[32m";
+    public static final String ANSI_YELLOW = "\u001b[33m";
+    public static final String ANSI_BLUE = "\u001b[34m";
+    public static final String ANSI_MAGENTA = "\u001b[35m";
+    public static final String ANSI_CYAN = "\u001b[36m";
+    public static final String ANSI_WHITE = "\u001b[37m";
+    public static final String ANSI_RESET = "\u001b[0m";
+
+    private static final String SEPARATOR = "\n==================================================================\n\n";
+
     // Message formats CLIENT -> SERVER
-    private static final String LOGIN_FORMAT = "login [nickname] [number of players (2 / 3)] [game mode (0 = EASY / 1 = EXPERT)]";
-    private static final String PREPARE_FORMAT = "wizard [DRUID / KING / WITCH / SENSEI]";
-    private static final String PLANNING_FORMAT = "assistant [1..10]";
-    private static final String MOVE_STUDENT_FORMAT = "movestudent [color from entrance (GREEN / RED / YELLOW / PINK / BLUE)] [destination (0 = hall / 1..12 = island)]";
-    private static final String MOVE_MOTHER_NATURE_FORMAT = "movemothernature [number of steps]";
-    private static final String PICK_CLOUD_FORMAT = "pickcloud [cloud id]";
+    public static final String LOGIN_FORMAT = "login [nickname] [number of players (2 / 3)] [game mode (0 = EASY / 1 = EXPERT)]";
+    public static final String PREPARE_FORMAT = "wizard [DRUID / KING / WITCH / SENSEI]";
+    public static final String PLANNING_FORMAT = "assistant [1..10]";
+    public static final String MOVE_STUDENT_FORMAT = "movestudent [color from entrance (GREEN / RED / YELLOW / PINK / BLUE)] [destination (0 = hall / 1..12 = island)]";
+    public static final String MOVE_MOTHER_NATURE_FORMAT = "movemothernature [number of steps]";
+    public static final String PICK_CLOUD_FORMAT = "pickcloud [cloud id]";
     
-    private static final String CHARACTER_INFO_FORMAT = "characterinfo [character id (1..12)]";
+    public static final String CHARACTER_INFO_FORMAT = "characterinfo [character id (1..12)]";
     private static final String CHARACTER_ONE_FORMAT = "character 1 [color from character] [island id (1..12)]";
     private static final String CHARACTER_TWO_FORMAT = "character 2";
     private static final String CHARACTER_THREE_FORMAT = "character 3 [island group index]";
@@ -32,7 +66,7 @@ public class Constants {
     private static final String CHARACTER_ELEVEN_FORMAT = "character 11 [color from character]";
     private static final String CHARACTER_TWELVE_FORMAT = "character 12 [color (GREEN / RED / YELLOW / PINK / BLUE)]";
     
-    private static final String QUIT_FORMAT = "quit";
+    public static final String QUIT_FORMAT = "quit";
 
     private static String charactersDrawn = "- Drawn characters:";
 
@@ -40,11 +74,18 @@ public class Constants {
     
     // Phase instructions
     private static String expertCharacterAction(GameMode gameMode) {
-        return gameMode.equals(GameMode.EXPERT) ? "- Ask for characters' info\n\t" + CHARACTER_INFO_FORMAT : "";
+        return gameMode.equals(GameMode.EXPERT) ? "- Ask for characters' info\n\t" + CHARACTER_INFO_FORMAT + "\n" : "";
     }
 
-    private static final String LOGIN_PHASE_INSTRUCTIONS = SEPARATOR +
-            "LOGIN PHASE\n" +
+    private static String expertCharactersDrawn(GameMode gameMode) {
+        return gameMode.equals(GameMode.EXPERT) ? charactersDrawn + "\n" : "";
+    }
+
+    private static String expertPlayCharacters(GameMode gameMode) {
+        return gameMode.equals(GameMode.EXPERT) ? playCharacters + "\n" : "";
+    }
+
+    private static final String LOGIN_PHASE_INSTRUCTIONS = ANSI_GREEN + "LOGIN PHASE\n" + ANSI_RESET +
             "The actions you can take are the following:\n" +
             "- Login\n\t" + LOGIN_FORMAT + "\n" +
             "- Quit\n\t" + QUIT_FORMAT;
@@ -60,8 +101,8 @@ public class Constants {
                 "PLANNING PHASE\n" +
                 "The actions you can take are the following:\n" +
                 "- Play an assistant\n\t" + PLANNING_FORMAT + "\n" +
-                expertCharacterAction(gameMode) + "\n" +
-                charactersDrawn + "\n" +
+                expertCharacterAction(gameMode) +
+                expertCharactersDrawn(gameMode) +
                 "- Quit\n\t" + QUIT_FORMAT;
     }
 
@@ -70,8 +111,8 @@ public class Constants {
                 "MOVE STUDENT PHASE\n" +
                 "The actions you can take are the following:\n" +
                 "- Move a student from your entrance to the hall or one of the islands\n\t" + MOVE_STUDENT_FORMAT + "\n" +
-                expertCharacterAction(gameMode) + "\n" +
-                playCharacters + "\n" +
+                expertCharacterAction(gameMode) +
+                expertPlayCharacters(gameMode) +
                 "- Quit\n\t" + QUIT_FORMAT;
     }
 
@@ -80,8 +121,8 @@ public class Constants {
                 "MOVE MOTHER NATURE PHASE\n" +
                 "The actions you can take are the following:\n" +
                 "- Move mother nature a certain amount of steps\n\t" + MOVE_MOTHER_NATURE_FORMAT + "\n" +
-                expertCharacterAction(gameMode) + "\n" +
-                playCharacters + "\n" +
+                expertCharacterAction(gameMode) +
+                expertPlayCharacters(gameMode) +
                 "- Quit\n\t" + QUIT_FORMAT;
     }
 
@@ -90,8 +131,8 @@ public class Constants {
                 "PICK CLOUD PHASE\n" +
                 "The actions you can take are the following:\n" +
                 "- Choose a cloud from which to get students\n\t" + PICK_CLOUD_FORMAT + "\n" +
-                expertCharacterAction(gameMode) + "\n" +
-                playCharacters + "\n" +
+                expertCharacterAction(gameMode) +
+                expertPlayCharacters(gameMode) +
                 "- Quit\n\t" + QUIT_FORMAT;
     }
 
@@ -117,15 +158,11 @@ public class Constants {
 
     //set in game
     public static void setPlayCharacters(ArrayList<Character> characters) {
-        String characterDrawn = "";
-
         for(Character character : characters) {
             if(character.getCharacterID() != 0) {
-                characterDrawn = characterDrawn + "\n\t" + getCharacterFormat(character.getCharacterID());
+                playCharacters = playCharacters + "\n\t" + getCharacterFormat(character.getCharacterID());
             }
         }
-
-        playCharacters = playCharacters + characterDrawn;
     }
 
     private static String getCharacterFormat(int characterID) {
@@ -213,4 +250,17 @@ public class Constants {
         };
     }
 
+    public static void countdown(int milliseconds) {
+        for(int i = 3; i > 0; i--) {
+            System.out.print(".");
+            try {
+                Thread.sleep(milliseconds);
+            } catch (InterruptedException e) {
+                System.err.println("There's been an error with the thread management");
+                System.err.println("The application will now close...");
+                System.exit(-1);
+            }
+        }
+        System.out.println("\n");
+    }
 }

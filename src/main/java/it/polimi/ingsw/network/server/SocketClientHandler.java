@@ -5,7 +5,6 @@ import it.polimi.ingsw.network.message.serverToclient.Answer;
 
 import java.io.*;
 import java.net.Socket;
-import java.net.SocketTimeoutException;
 
 public class SocketClientHandler implements ClientHandler, Runnable {
 
@@ -14,10 +13,14 @@ public class SocketClientHandler implements ClientHandler, Runnable {
     private boolean connected;
     private BufferedReader reader;
     private BufferedWriter writer;
-
     private final Object inputLock;
     private final Object outputLock;
 
+    /**
+     * Default constructor.
+     * @param socketServer reference to the SocketServer that instantiated this instance.
+     * @param client the client's socket.
+     */
     public SocketClientHandler(SocketServer socketServer, Socket client) {
         this.socketServer = socketServer;
         this.client = client;
@@ -40,11 +43,14 @@ public class SocketClientHandler implements ClientHandler, Runnable {
         try {
             handleClientConnection();
         } catch (IOException e) {
-            // TODO client no internet, remove from maps
-            socketServer.onConnectionDropped(this, client);
+            socketServer.onConnectionDropped(this);
         }
     }
 
+    /**
+     * Reads messages from the client and forwards them to the SocketServer.
+     * @throws IOException when a problem with the connection occurs.
+     */
     private void handleClientConnection() throws IOException {
         System.out.println("Client connected from " + client.getInetAddress());
 
@@ -57,6 +63,10 @@ public class SocketClientHandler implements ClientHandler, Runnable {
         }
     }
 
+    /**
+     * Sends a message to the client by serializing it using a JSON format.
+     * @param message the message to send.
+     */
     @Override
     public void sendMessage(Answer message) {
         Gson gson = new Gson();
@@ -73,6 +83,9 @@ public class SocketClientHandler implements ClientHandler, Runnable {
         }
     }
 
+    /**
+     * Closes the connection with the client, then this thread.
+     */
     @Override
     public void disconnect() {
         if(connected) {
@@ -87,10 +100,5 @@ public class SocketClientHandler implements ClientHandler, Runnable {
             connected = false;
             Thread.currentThread().interrupt();
         }
-    }
-
-    @Override
-    public boolean isConnected() {
-        return connected;
     }
 }

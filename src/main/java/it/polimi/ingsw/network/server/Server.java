@@ -11,7 +11,6 @@ import it.polimi.ingsw.network.message.clientToserver.Message;
 import it.polimi.ingsw.network.message.serverToclient.*;
 import it.polimi.ingsw.util.Constants;
 
-import java.net.Socket;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -28,6 +27,10 @@ public class Server {
     private final Map<Integer, GameManager> idToGameManager;
     private int nextClientID;
 
+    /**
+     * Default constructor.
+     * @param port the port that the server will be listening on.
+     */
     public Server(int port) {
         this.gameManagers = new ArrayList<>();
         this.socketServer = new SocketServer(port, this);
@@ -36,10 +39,27 @@ public class Server {
         this.idToGameManager = new HashMap<>();
         this.nextClientID = -1;
 
-        new Thread(this::quit).start(); // Asynchronously listening to server stdin for quitting
+        new Thread(this::quit).start(); // Asynchronously listen to server stdin for quitting
     }
 
+    /**
+     * Increases the clientID variable in order to assign a unique ID to
+     * every connected client.
+     * @return the next client ID.
+     */
+    public int getNextClientID() {
+        nextClientID += 1;
+        return nextClientID;
+    }
 
+    /**
+     * Assigns a unique ID to the client that just connected, then puts
+     * the ID and the relative client handler in a map that keeps track
+     * of every currently connected client.
+     * Also welcomes the client by sending them a message containing the
+     * actions they are allowed to take after connecting (login / quit).
+     * @param clientHandler handler of the newly connected client.
+     */
     public void addClient(ClientHandler clientHandler) {
         int clientID = getNextClientID();
         idToConnection.put(clientID, clientHandler);
@@ -47,32 +67,20 @@ public class Server {
         clientHandler.sendMessage(new GenericMessage(Constants.getPhaseInstructions(GameState.LOBBY_PHASE, GameMode.EASY)));
     }
 
-    public int getNextClientID() {
-        nextClientID += 1;
-        return nextClientID;
-    }
-
-    private void quit() {
-        Scanner scanner = new Scanner(System.in);
-
-        while(true) {
-            if(scanner.nextLine().equalsIgnoreCase("QUIT")) {
-                broadcastMessage(new ServerQuitMessage());
-                System.out.println("Server quitting!");
-                System.exit(0);
-            }
-        }
-    }
-
-    public void onConnectionDropped(ClientHandler clientHandler, Socket client) {
-        // Remove client from maps
+    /**
+     * Removes the client whose connection dropped from the maps.
+     * @param clientHandler handler of said client.
+     */
+    public void onConnectionDropped(ClientHandler clientHandler) {
+        // Handle disconnection
         disconnectionHandler(clientHandler);
-
-        //System.err.println("Client " + client.getInetAddress() + ": connection dropped.");
-        //clientHandler.disconnect();
     }
 
-    // Find clientID, find GameHandler from id, gamehandler calls controller to switch on messageType
+    /**
+     * Handles the message received by a client.
+     * @param clientHandler handler of the client that sent a message.
+     * @param msg the message sent by the client.
+     */
     public void onMessageReceived(ClientHandler clientHandler, String msg) {
         Gson gson = new Gson();
         Message message = gson.fromJson(msg, Message.class);
@@ -87,26 +95,32 @@ public class Server {
             case PING_MESSAGE -> pingHandler(clientHandler);
             case DISCONNECTION_REQUEST_MESSAGE -> quitHandler(clientHandler);
             case LOGIN_REQUEST_MESSAGE -> loginHandler(clientHandler, msg);
-
             default -> {
                 message.setClientID(getClientIDFromClientHandler(clientHandler));
-
                 GameManager gameManager = idToGameManager.get(getClientIDFromClientHandler(clientHandler));
                 if(gameManager != null) {
                     Map.Entry<String, Message> pair = new AbstractMap.SimpleEntry<>(msg, message);
                     gameManager.onMessageReceived(pair);
                 } else {
-                    // TODO SBAGLIATO MA DIGLIELO (da cambiare)
-                    clientHandler.sendMessage(new ErrorMessage("Send a login message."));
+                    clientHandler.sendMessage(new ErrorMessage("To begin playing, you need to login."));
                 }
             }
         }
     }
 
+    /**
+     * Handles the reception of a Ping message by sending a
+     * Pong message in response.
+     * @param clientHandler handler of the client who sent the ping message.
+     */
     private void pingHandler(ClientHandler clientHandler) {
         clientHandler.sendMessage(new PongMessage());
     }
 
+    /**
+     * Handles the reception of a message notifying the client quitting the application.
+     * @param clientHandler handler of the client who quit.
+     */
     private void quitHandler(ClientHandler clientHandler) {
         // Disconnect clientHandler
         clientHandler.sendMessage(new DisconnectionReplyMessage("You"));
@@ -114,25 +128,27 @@ public class Server {
         disconnectionHandler(clientHandler);
     }
 
+    /**
+     * Handles the disconnection of a client, then notifies every other player in the
+     * game the client was in (if the game was already instantiated) and ends the game.
+     * @param clientHandler handler of the client who is to be disconnected.
+     */
     private void disconnectionHandler(ClientHandler clientHandler) {
         int clientID = getClientIDFromClientHandler(clientHandler);
 
-        // Update other players in the same game as disconnected clientHandler
         String nicknameDisconnected = idToNickname.get(clientID);
         GameManager gameManager = idToGameManager.get(clientID);
 
-        // TODO maybe before if
-        // Remove clientHandler from maps
+        // Remove clientHandler from server maps and game manager
         removeClient(clientHandler);
 
+        // Update other players in the same game as disconnected clientHandler
         if(gameManager != null) {
             System.out.println(nicknameDisconnected + " has disconnected.");
-            // TODO remove player from gameManager
             gameManager.sendAllExcept(new GenericMessage(nicknameDisconnected + " has disconnected."), nicknameDisconnected);
         } else {
             System.out.println("Client disconnected!");
         }
-
 
         // TODO: countdown to disconnect other players
 
@@ -141,6 +157,15 @@ public class Server {
         clientHandler.disconnect();
     }
 
+    /**
+     * Handles the login of a client.
+     * If a game with the client's preferences (number of players and mode) that has not
+     * yet started exists, the client is automatically added to said game.
+     * Otherwise, a new game is created and the client is added to that game as
+     * the first player.
+     * @param clientHandler handler of the client who sent the login request message.
+     * @param message sent by the client.
+     */
     private void loginHandler(ClientHandler clientHandler, String message) {
         Gson gson = new Gson();
 
@@ -169,11 +194,8 @@ public class Server {
 
                 try {
                     clientHandler.sendMessage(new LoginReplyMessage("You logged in!"));
-
                     gameManager.sendAllExcept(new GenericMessage(nickname + " joined the game!"), nickname);
-
                     gameManager.getGame().getCurrentPhase().play();
-
                     System.out.println(nickname + " logged in!");
                 } catch (Exception e) {
                     System.err.println(e.getMessage());
@@ -186,10 +208,25 @@ public class Server {
         }
     }
 
+    /**
+     * Checks if the specified nickname is unique in the server, meaning that there
+     * is no other nickname like it (the check is case-insensitive).
+     * @param nickname the nickname to check.
+     * @return whether the nickname is unique.
+     */
     private boolean checkUniqueNickname(String nickname) {
         return !idToNickname.containsValue(nickname.toUpperCase());
     }
 
+    /**
+     * Checks if a game manager with the specified preferences that has not yet begun exists.
+     * If that is the case, it returns said game manager.
+     * Otherwise, a new game manager with those preferences is created and returned.
+     * @param clientID ID of the client to add to the game manager's list of players.
+     * @param numberOfPlayers the preferred number of players.
+     * @param gameMode the preferred game mode.
+     * @return either an existing or a new game manager.
+     */
     private GameManager checkGamePreferences(int clientID, NumberOfPlayers numberOfPlayers, GameMode gameMode) {
         // TODO eventually remove list and use maps
         for(GameManager gameManager : gameManagers) {
@@ -214,6 +251,12 @@ public class Server {
         return gameManager;
     }
 
+    /**
+     * Removes a client from the various server maps.
+     * If the client is already logged into a game, they are also
+     * removed from that game.
+     * @param clientHandler handler of the client to remove.
+     */
     private void removeClient(ClientHandler clientHandler) {
         int idToRemove = getClientIDFromClientHandler(clientHandler);
 
@@ -227,6 +270,11 @@ public class Server {
         idToGameManager.remove(idToRemove);
     }
 
+    /**
+     * Gets the ID corresponding to the specified client handler.
+     * @param clientHandler handler of the client whose ID is returned.
+     * @return the client's ID if the client exists, -1 otherwise.
+     */
     private int getClientIDFromClientHandler(ClientHandler clientHandler) {
         for(int key : idToConnection.keySet()) {
             if(idToConnection.get(key).equals(clientHandler)) {
@@ -236,13 +284,33 @@ public class Server {
         return -1;
     }
 
+    /**
+     * Broadcasts the specified message to every client currently connected to the server.
+     * @param answer the message to broadcast.
+     */
     public void broadcastMessage(Answer answer) {
         for(ClientHandler clientHandler : idToConnection.values()) {
             clientHandler.sendMessage(answer);
         }
     }
 
-    // TODO
+    /**
+     * Listens for a keyboard input.
+     * If such input is "quit" then the server's execution is stopped and every client
+     * that is currently connected is notified.
+     */
+    private void quit() {
+        Scanner scanner = new Scanner(System.in);
+
+        while(true) {
+            if(scanner.nextLine().equalsIgnoreCase(Constants.QUIT_FORMAT)) {
+                broadcastMessage(new ServerQuitMessage());
+                System.out.println("Server quitting!");
+                System.exit(0);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("Eriantys Server | Welcome!");
 
@@ -250,12 +318,12 @@ public class Server {
         Scanner scanner = new Scanner(System.in);
         System.out.println("> Insert the port which the server will be listening on.");
         System.out.print("> ");
-        int port = 0;
+        int port;
         try {
             port = scanner.nextInt();
         } catch (InputMismatchException e) {
-            System.err.println("Numeric format requested, application will now close...");
-            System.exit(-1);
+            port = Constants.DEFAULT_PORT;
+            System.err.println("Numeric format requested, the server will be listening on the default port: " + port + ".");
         }
 
         if(port < 1024) {
@@ -264,7 +332,6 @@ public class Server {
         } else {
             System.out.println("Instantiating server class...");
             Server server = new Server(port);
-
             System.out.println("Starting socket server...");
             ExecutorService executorService = Executors.newCachedThreadPool();
             executorService.submit(server.socketServer);
