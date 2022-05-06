@@ -202,7 +202,7 @@ class CharacterMoverTest {
         try{
             ((ActionPhase)(game.getCurrentPhase())).playCharacter(character.getCharacterID());
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         assertEquals(6, character.getStudents().size());
