@@ -1,10 +1,15 @@
 package it.polimi.ingsw.listeners;
 
+import it.polimi.ingsw.model.enumerations.GameMode;
+import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.gameBoard.IslandGroup;
-import it.polimi.ingsw.network.message.serverToclient.IslandGroupMessage;
+import it.polimi.ingsw.model.gameBoard.MotherNature;
+import it.polimi.ingsw.network.message.serverToclient.IslandGroupsMessage;
 import it.polimi.ingsw.view.VirtualView;
 
 import java.beans.PropertyChangeEvent;
+import java.util.ArrayList;
+import java.util.Map;
 
 public class IslandGroupListener extends Listener {
 
@@ -14,8 +19,10 @@ public class IslandGroupListener extends Listener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        IslandGroup islandGroups = (IslandGroup) evt.getNewValue();
-        IslandGroupMessage message = new IslandGroupMessage(islandGroups);
+        Map.Entry<ArrayList<IslandGroup>, Integer> islands = (Map.Entry<ArrayList<IslandGroup>, Integer>) evt.getNewValue();
+        ArrayList<IslandGroup> islandGroups = islands.getKey();
+        int motherNatureIndex = islands.getValue();
+        IslandGroupsMessage message = new IslandGroupsMessage(islandGroups, motherNatureIndex);
         virtualView.sendAll(message);
     }
 }

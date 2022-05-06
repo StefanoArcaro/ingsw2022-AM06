@@ -7,6 +7,8 @@ import it.polimi.ingsw.model.enumerations.CharacterID;
 import it.polimi.ingsw.model.gameBoard.IslandGroup;
 import it.polimi.ingsw.util.Constants;
 
+import java.util.AbstractMap;
+
 public class CharacterInfluenceModifier extends Character {
 
     /**
@@ -78,7 +80,8 @@ public class CharacterInfluenceModifier extends Character {
             IslandGroup islandGroupChosen = game.getIslandGroupByIndex(islandGroupIndex);
             if(numberOfBanCards > 0) {
                 islandGroupChosen.addBanCard();
-                game.getListeners().firePropertyChange(Constants.ISLAND_GROUP_LISTENER, null, islandGroupChosen);
+                int motherNatureIndex = game.getIndexOfIslandGroup(game.getMotherNature().getCurrentIslandGroup());
+                game.getListeners().firePropertyChange(Constants.ISLAND_GROUPS_LISTENER, null, new AbstractMap.SimpleEntry<>(game.getIslandGroups(), motherNatureIndex));
                 removeBanCard();
                 game.getListeners().firePropertyChange(Constants.CHARACTER_LISTENER, null, this);
             } else {

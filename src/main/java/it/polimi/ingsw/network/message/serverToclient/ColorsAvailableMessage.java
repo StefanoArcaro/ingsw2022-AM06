@@ -17,7 +17,13 @@ public class ColorsAvailableMessage extends Answer {
         this.colors = colors;
     }
 
-    public ArrayList<CreatureColor> getColors() {
-        return colors;
+    public String getMessage() {
+        String message = "Available colors:\n";
+
+        for(CreatureColor c : colors) {
+            message = message + "\t-" + c.getColorName() + "\n";
+        }
+
+        return message;
     }
 }

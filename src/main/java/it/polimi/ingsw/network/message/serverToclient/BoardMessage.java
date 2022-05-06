@@ -66,8 +66,9 @@ public class BoardMessage extends Answer {
             for (Professor professor : professors) {
                 professorsInBoard.append(professor.getColor().getColorName()).append(" ");
             }
-            professorsInBoard.append("\n");
         }
+        professorsInBoard.append("\n");
+
 
         String numTowers = "Number of towers: " + towers;
 

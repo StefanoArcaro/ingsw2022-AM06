@@ -283,7 +283,7 @@ public class Constants {
     }
 
     //Listeners
-    public static final String ISLAND_GROUP_LISTENER = "islandGroupListener";
+    public static final String ISLAND_GROUPS_LISTENER = "islandGroupsListener";
     public static final String BOARD_LISTENER = "boardListener";
     public static final String PHASE_LISTENER = "phaseListener";
     public static final String COIN_LISTENER = "coinListener";

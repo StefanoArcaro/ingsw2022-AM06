@@ -110,27 +110,23 @@ public class SocketClient extends Client {
             }
             case MATCH_INFO_MESSAGE -> {
                 MatchInfoMessage msg = gson.fromJson(message, MatchInfoMessage.class);
-                //todo
-                System.out.println(answer.getMessageType());
+                System.out.println(msg.getMessage());
             }
             case COLORS_AVAILABLE_MESSAGE -> {
                 ColorsAvailableMessage msg = gson.fromJson(message, ColorsAvailableMessage.class);
-                //todo
-                System.out.println(answer.getMessageType());
+                System.out.println(msg.getMessage());
             }
             case BOARD_MESSAGE -> {
                 BoardMessage msg = gson.fromJson(message, BoardMessage.class);
                 System.out.println(msg.getMessage());
             }
-            case ISLAND_GROUP_MESSAGE -> {
-                IslandGroupMessage msg = gson.fromJson(message, IslandGroupMessage.class);
-                //todo
-                System.out.println(answer.getMessageType());
+            case ISLAND_GROUPS_MESSAGE -> {
+                IslandGroupsMessage msg = gson.fromJson(message, IslandGroupsMessage.class);
+                System.out.println(msg.getMessage());
             }
             case ISLAND_MESSAGE -> {
                 IslandMessage msg = gson.fromJson(message, IslandMessage.class);
-                //todo
-                System.out.println(answer.getMessageType());
+                System.out.println(msg.getMessage());
             }
             case CLOUDS_MESSAGE -> {
                 CloudsMessage msg = gson.fromJson(message, CloudsMessage.class);

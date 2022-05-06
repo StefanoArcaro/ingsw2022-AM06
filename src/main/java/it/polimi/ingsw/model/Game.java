@@ -72,7 +72,7 @@ public class Game {
         listeners.addPropertyChangeListener(Constants.PHASE_LISTENER, new PhaseListener(clientView));
         listeners.addPropertyChangeListener(Constants.ASSISTANT_LISTENER, new AssistantListener(clientView));
         listeners.addPropertyChangeListener(Constants.ISLAND_LISTENER, new IslandListener(clientView));
-        listeners.addPropertyChangeListener(Constants.ISLAND_GROUP_LISTENER, new IslandGroupListener(clientView));
+        listeners.addPropertyChangeListener(Constants.ISLAND_GROUPS_LISTENER, new IslandGroupListener(clientView));
         listeners.addPropertyChangeListener(Constants.BOARD_LISTENER, new BoardListener(clientView));
         listeners.addPropertyChangeListener(Constants.COIN_LISTENER, new BoardListener(clientView));
         listeners.addPropertyChangeListener(Constants.CLOUD_LISTENER, new CloudListener(clientView));
@@ -399,7 +399,7 @@ public class Game {
     private boolean isBanCardPresent(IslandGroup islandGroup) {
         if(islandGroup.getNumberOfBanCardPresent() > 0) {
             islandGroup.removeBanCard();
-            listeners.firePropertyChange(Constants.ISLAND_GROUP_LISTENER, null, islandGroup);
+            //listeners.firePropertyChange(Constants.ISLAND_GROUPS_LISTENER, null, new AbstractMap.SimpleEntry<>(islandGroups, motherNature));
             Character character= getCharacterByID(5);
             if(character != null) {
                 character.addBanCard();
@@ -450,8 +450,10 @@ public class Game {
                 }
             }
 
-            listeners.firePropertyChange(Constants.ISLAND_GROUP_LISTENER, null, islandGroup);
+            //listeners.firePropertyChange(Constants.ISLAND_GROUPS_LISTENER, null, new AbstractMap.SimpleEntry<>(islandGroups, motherNature));
         }
+        int motherNatureIndex = getIndexOfIslandGroup(motherNature.getCurrentIslandGroup());
+        listeners.firePropertyChange(Constants.ISLAND_GROUPS_LISTENER, null, new AbstractMap.SimpleEntry<>(islandGroups, motherNatureIndex));
     }
 
     /**
