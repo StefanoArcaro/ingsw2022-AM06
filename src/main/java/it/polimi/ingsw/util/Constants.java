@@ -4,8 +4,8 @@ import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.enumerations.GameMode;
 import it.polimi.ingsw.model.enumerations.GameState;
 
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 public class Constants {
 
@@ -156,13 +156,21 @@ public class Constants {
         }
     }
 
+    public static String getDrawnCharacters() {
+        return charactersDrawn;
+    }
+
     //set in game
     public static void setPlayCharacters(ArrayList<Character> characters) {
+        StringBuilder characterDrawn = new StringBuilder();
+
         for(Character character : characters) {
             if(character.getCharacterID() != 0) {
-                playCharacters = playCharacters + "\n\t" + getCharacterFormat(character.getCharacterID());
+                characterDrawn.append("\n\t").append(getCharacterFormat(character.getCharacterID()));
             }
         }
+
+        playCharacters = playCharacters + characterDrawn;
     }
 
     private static String getCharacterFormat(int characterID) {
@@ -183,57 +191,81 @@ public class Constants {
         };
     }
 
-    // characters descriptions
-    private static final String CHARACTER_ONE_DESCRIPTION = "Take 1 Student from this card and place it on\n" +
-            "an Island of your choice\n";
+    // Characters' descriptions
+    private static final String CHARACTER_ONE_DESCRIPTION = """
+            Take 1 Student from this card and place it on
+            an Island of your choice
+            """;
 
-    private static final String CHARACTER_TWO_DESCRIPTION = "During this turn, you take control of any\n" +
-            "number of Professors even if you have the same\n" +
-            "number of Students as the player who currently\n" +
-            "controls them.\n";
+    private static final String CHARACTER_TWO_DESCRIPTION = """
+            During this turn, you take control of any
+            number of Professors even if you have the same
+            number of Students as the player who currently
+            controls them.
+            """;
 
-    private static final String CHARACTER_THREE_DESCRIPTION = "Choose an Island and resolve the Island as if\n" +
-            "Mother Nature had ended her movement there. Mother\n" +
-            "Nature will still move and the Island where she ends\n" +
-            "her movement will also be resolved.\n";
+    private static final String CHARACTER_THREE_DESCRIPTION = """
+            Choose an Island and resolve the Island as if
+            Mother Nature had ended her movement there. Mother
+            Nature will still move and the Island where she ends
+            her movement will also be resolved.
+            """;
 
-    private static final String CHARACTER_FOUR_DESCRIPTION = "You may move Mother Nature up to 2\n" +
-            "additional Islands than is indicated by the Assistant\n" +
-            "card you've played.\n";
+    private static final String CHARACTER_FOUR_DESCRIPTION = """
+            You may move Mother Nature up to 2
+            additional Islands than is indicated by the Assistant
+            card you've played.
+            """;
 
-    private static final String CHARACTER_FIVE_DESCRIPTION = "In Setup, put the 4 Ban Cards on this card.\n" +
-            "Place a Ban Card on an Island Group of your choice.\n" +
-            "The first time Mother Nature ends her movement\n" +
-            "there, the Ban Card is removed and the influence is not calculated in that Island Group.\n";
+    private static final String CHARACTER_FIVE_DESCRIPTION = """
+            In Setup, put the 4 Ban Cards on this card.
+            Place a Ban Card on an Island Group of your choice.
+            The first time Mother Nature ends her movement
+            there, the Ban Card is removed and the influence is not calculated in that Island Group.
+            """;
 
-    private static final String CHARACTER_SIX_DESCRIPTION = "When resolving a Conquering on an Island,\n" +
-            "Towers do not count towards influence.\n";
+    private static final String CHARACTER_SIX_DESCRIPTION = """
+            When resolving a Conquering on an Island,
+            Towers do not count towards influence.
+            """;
 
-    private static final String CHARACTER_SEVEN_DESCRIPTION = "You may take up to 3 Students from this card\n" +
-            "and replace them with the same number of Students\n" +
-            "from your Entrance.\n";
+    private static final String CHARACTER_SEVEN_DESCRIPTION = """
+            You may take up to 3 Students from this card
+            and replace them with the same number of Students
+            from your Entrance.
+            """;
 
-    private static final String CHARACTER_EIGHT_DESCRIPTION = "During the influence calculation this turn, you\n" +
-            "count as having 2 more influence.\n";
+    private static final String CHARACTER_EIGHT_DESCRIPTION = """
+            During the influence calculation this turn, you
+            count as having 2 more influence.
+            """;
 
-    private static final String CHARACTER_NINE_DESCRIPTION = "Choose a color of Student: during the influence\n" +
-            "calculation this turn, that color adds no influence.\n";
+    private static final String CHARACTER_NINE_DESCRIPTION = """
+            Choose a color of Student: during the influence
+            calculation this turn, that color adds no influence.
+            """;
 
-    private static final String CHARACTER_TEN_DESCRIPTION = "You may exchange up to 2 Students between\n" +
-            "your Entrance and your Hall.\n";
+    private static final String CHARACTER_TEN_DESCRIPTION = """
+            You may exchange up to 2 Students between
+            your Entrance and your Hall.
+            """;
 
-    private static final String CHARACTER_ELEVEN_DESCRIPTION = "Take 1 Student from this card and place it in\n" +
-            "your Dining Room. Then, draw a new Student from the\n" +
-            "Bag and place it on this card.\n";
+    private static final String CHARACTER_ELEVEN_DESCRIPTION = """
+            Take 1 Student from this card and place it in
+            your Dining Room. Then, draw a new Student from the
+            Bag and place it on this card.
+            """;
 
-    private static final String CHARACTER_TWELVE_DESCRIPTION = "Choose a type of Student: every player\n" +
-            "(including yourself) must return 3 Students of that type\n" +
-            "from their Dining Room to the bag. If any player has\n" +
-            "fewer than 3 Students of that type, return as many\n" +
-            "Students as they have.\n";
+    private static final String CHARACTER_TWELVE_DESCRIPTION = """
+            Choose a type of Student: every player
+            (including yourself) must return 3 Students of that type
+            from their Dining Room to the bag. If any player has
+            fewer than 3 Students of that type, return as many
+            Students as they have.
+            """;
 
     public static String getCharacterInformation(int characterID) {
-        return switch (characterID) {
+        return switch (characterID) { //todo: add cost
             case 1 -> CHARACTER_ONE_DESCRIPTION;
             case 2 -> CHARACTER_TWO_DESCRIPTION;
             case 3 -> CHARACTER_THREE_DESCRIPTION;
@@ -249,6 +281,18 @@ public class Constants {
             default -> "";
         };
     }
+
+    //Listeners
+    public static final String ISLAND_GROUP_LISTENER = "islandGroupListener";
+    public static final String BOARD_LISTENER = "boardListener";
+    public static final String PHASE_LISTENER = "phaseListener";
+    public static final String COIN_LISTENER = "coinListener";
+    public static final String ISLAND_LISTENER = "islandListener";
+    public static final String ASSISTANT_LISTENER = "assistantListener";
+    public static final String WIN_LISTENER = "winListener";
+    public static final String PLAYER_LISTENER = "playerListener";
+    public static final String CHARACTER_LISTENER = "characterListener";
+    public static final String CLOUD_LISTENER = "cloudListener";
 
     public static void countdown(int milliseconds) {
         for(int i = 3; i > 0; i--) {

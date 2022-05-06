@@ -18,14 +18,13 @@ public class AssistantsMessage extends Answer {
     }
 
     @Override
-    public String toString() {
-        return "AssistantsMessage{" +
-                "nickname=" + getNickname() +
-                ", assistants=" + assistants +
-                '}';
-    }
+    public String getMessage() {
+        String assistantString = "";
 
-    public ArrayList<Assistant> getAssistants() {
-        return assistants;
+        for(Assistant assistant : assistants) {
+            assistantString = assistantString + "Priority = " + assistant.getPriority() + ". Number of steps = " + assistant.getNumberOfSteps() + "\n";
+        }
+
+        return assistantString;
     }
 }

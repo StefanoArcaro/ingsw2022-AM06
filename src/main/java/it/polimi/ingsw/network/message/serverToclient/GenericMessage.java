@@ -15,14 +15,6 @@ public class GenericMessage extends Answer {
         this.message = message;
     }
 
-    @Override
-    public String toString() {
-        return "GenericMessage{" +
-                "nickname=" + getNickname() +
-                ", message='" + message + '\'' +
-                '}';
-    }
-
     public String getMessage() {
         return message;
     }

@@ -2,35 +2,22 @@ package it.polimi.ingsw.network.message.serverToclient;
 
 import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.network.message.MessageType;
+import it.polimi.ingsw.util.Constants;
 
 /**
  * Message sent to the client to give information about a character's effect.
  */
 public class CharacterInfoMessage extends Answer {
 
-    private int characterID;
-    private String description;
+    private final String description;
 
-    public CharacterInfoMessage(Character character) {
+    public CharacterInfoMessage(int characterID) {
         super(MessageType.CHARACTER_INFO_MESSAGE);
-        this.characterID = character.getCharacterID();
-        //this.description = character.getDescription(); todo constants
+        this.description = Constants.getCharacterInformation(characterID);
     }
 
     @Override
-    public String toString() {
-        return "CharacterInfoMessage{" +
-                "nickname=" + getNickname() +
-                ", characterID=" + characterID +
-                ", description='" + description + '\'' +
-                '}';
-    }
-
-    public int getCharacterID() {
-        return characterID;
-    }
-
-    public String getDescription() {
+    public String getMessage() {
         return description;
     }
 }

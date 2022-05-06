@@ -9,6 +9,6 @@ import it.polimi.ingsw.network.message.clientToserver.Message;
 public class PingMessage extends Message {
 
     public PingMessage() {
-        super(null, MessageType.PING_MESSAGE);
+        super(MessageType.PING_MESSAGE);
     }
 }

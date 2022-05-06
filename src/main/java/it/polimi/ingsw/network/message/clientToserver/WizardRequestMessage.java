@@ -9,19 +9,11 @@ import it.polimi.ingsw.network.message.clientToserver.Message;
  */
 public class WizardRequestMessage extends Message {
 
-    private WizardName wizardName;
+    private final WizardName wizardName;
 
-    public WizardRequestMessage(String nickname, WizardName wizardName) {
-        super(nickname, MessageType.WIZARD_REQUEST_MESSAGE);
+    public WizardRequestMessage(WizardName wizardName) {
+        super(MessageType.WIZARD_REQUEST_MESSAGE);
         this.wizardName = wizardName;
-    }
-
-    @Override
-    public String toString() {
-        return "WizardRequestMessage{" +
-                "nickname=" + getNickname() +
-                ", wizardName=" + wizardName +
-                '}';
     }
 
     public WizardName getWizardName() {

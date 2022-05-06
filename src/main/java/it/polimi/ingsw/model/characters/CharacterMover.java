@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.enumerations.CharacterID;
 import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.gameBoard.*;
+import it.polimi.ingsw.util.Constants;
 
 import java.util.ArrayList;
 
@@ -73,7 +74,7 @@ public class CharacterMover extends Character {
 
     @Override
     public void effect() throws NoAvailableColorException, OutOfBoundException {
-        listeners.firePropertyChange(CHARACTER_LISTENER, null, this);
+        game.getListeners().firePropertyChange(Constants.CHARACTER_LISTENER, null, this);
 
         CharacterID character = CharacterID.values()[this.characterID];
 
@@ -98,11 +99,11 @@ public class CharacterMover extends Character {
             if(islandID >= ISLAND_ID_MIN && islandID <= ISLAND_ID_MAX) {
                 Island island = game.getIslandByID(islandID);
                 island.receiveStudent(studentColor);
-                listeners.firePropertyChange(ISLAND_LISTENER, null, island);
+                game.getListeners().firePropertyChange(Constants.ISLAND_LISTENER, null, island);
 
                 students.remove(getStudentByColor(students, studentColor));
                 students.add(game.getBag().drawStudent());
-                listeners.firePropertyChange(CHARACTER_LISTENER, null, this);
+                game.getListeners().firePropertyChange(Constants.CHARACTER_LISTENER, null, this);
 
             } else {
                 throw new OutOfBoundException();
@@ -128,10 +129,10 @@ public class CharacterMover extends Character {
             students.remove(studentCard);
 
             playerBoard.addStudentToEntrance(cardColor);
-            listeners.firePropertyChange(BOARD_LISTENER, null, game.getCurrentPlayer().getBoard());
+            game.getListeners().firePropertyChange(Constants.BOARD_LISTENER, null, game.getCurrentPlayer().getBoard());
 
             students.add(studentEntrance);
-            listeners.firePropertyChange(CHARACTER_LISTENER, null, this);
+            game.getListeners().firePropertyChange(Constants.CHARACTER_LISTENER, null, this);
 
         } else {
             throw new NoAvailableColorException();
@@ -158,7 +159,7 @@ public class CharacterMover extends Character {
             playerBoard.addStudentToHall(entranceColor);
 
             game.updateProfessors();
-            listeners.firePropertyChange(BOARD_LISTENER, null, game.getCurrentPlayer().getBoard());
+            game.getListeners().firePropertyChange(Constants.BOARD_LISTENER, null, game.getCurrentPlayer().getBoard());
 
         } else {
             throw new NoAvailableColorException();
@@ -178,10 +179,10 @@ public class CharacterMover extends Character {
             students.remove(cardStudent);
             boardPlayer.addStudentToHall(cardColor);
             game.updateProfessors();
-            listeners.firePropertyChange(BOARD_LISTENER, null, boardPlayer);
+            game.getListeners().firePropertyChange(Constants.BOARD_LISTENER, null, boardPlayer);
 
             students.add(game.getBag().drawStudent());
-            listeners.firePropertyChange(CHARACTER_LISTENER, null, this);
+            game.getListeners().firePropertyChange(Constants.CHARACTER_LISTENER, null, this);
         } else {
             throw new NoAvailableColorException();
         }
@@ -207,7 +208,7 @@ public class CharacterMover extends Character {
         game.updateProfessors();
 
         for(Player player : players) {
-            listeners.firePropertyChange(BOARD_LISTENER, null, player.getBoard());
+            game.getListeners().firePropertyChange(Constants.BOARD_LISTENER, null, player.getBoard());
         }
 
     }

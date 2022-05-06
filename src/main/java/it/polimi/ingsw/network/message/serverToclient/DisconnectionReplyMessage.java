@@ -14,11 +14,6 @@ public class DisconnectionReplyMessage extends Answer {
         this.nicknameDisconnected = nicknameDisconnected;
     }
 
-    @Override
-    public String toString() {
-        return nicknameDisconnected + " has disconnected.";
-    }
-
     public String getNicknameDisconnected() {
         return nicknameDisconnected;
     }

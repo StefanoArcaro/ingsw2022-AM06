@@ -12,13 +12,6 @@ public class IslandMessage extends Answer {
         this.island = island;
     }
 
-    @Override
-    public String toString() {
-        return "IslandMessage{" +
-                "island=" + island +
-                '}';
-    }
-
     public Island getIsland() {
         return island;
     }

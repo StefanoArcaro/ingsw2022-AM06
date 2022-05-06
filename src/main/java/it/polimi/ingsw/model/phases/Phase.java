@@ -71,7 +71,7 @@ public abstract class Phase {
      * @param numberOfSteps number of steps chosen.
      */
     public void setNumberOfSteps(int numberOfSteps) {
-        this.numberOfSteps = numberOfSteps; //TODO: input
+        this.numberOfSteps = numberOfSteps;
     }
 
     /**
@@ -79,7 +79,7 @@ public abstract class Phase {
      * @param cloudID ID of the cloud chosen.
      */
     public void setCloudID(int cloudID) {
-        this.cloudID = cloudID; //TODO: input
+        this.cloudID = cloudID;
     }
 
     /**

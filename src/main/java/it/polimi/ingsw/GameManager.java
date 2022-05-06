@@ -13,14 +13,16 @@ import java.beans.PropertyChangeSupport;
 import java.util.HashMap;
 import java.util.Map;
 
-//gestisce la singola partita
+/**
+ * GameManager class handles a single match.
+ */
 public class GameManager {
 
     private final Map<Integer, ClientHandler> clients;
     private final Map<String, Integer> nicknameToId;
 
     private final Game game;
-    private final PropertyChangeSupport listeners =new PropertyChangeSupport(this);
+    private final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
     private final static String GAME_CONTROLLER = "gameController";
 
 
@@ -39,11 +41,11 @@ public class GameManager {
     }
 
     public Map<Integer, ClientHandler> getClients() {
-        return clients; //todo new hash map
+        return clients;
     }
 
     public Map<String, Integer> getNicknameToId() {
-        return nicknameToId;    //todo new hash map
+        return nicknameToId;
     }
 
     public void setGamePreferences(NumberOfPlayers numberOfPlayers, GameMode gameMode) {
@@ -93,7 +95,6 @@ public class GameManager {
         }
     }
 
-    // TODO string message
     public void onMessageReceived(Map.Entry<String, Message> pair) {
         listeners.firePropertyChange("gameController", null, pair);
     }

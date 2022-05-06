@@ -9,19 +9,11 @@ import it.polimi.ingsw.network.message.clientToserver.Message;
  */
 public class PickCloudMessage extends Message {
 
-    private int cloudID;
+    private final int cloudID;
 
-    public PickCloudMessage(String nickname, int cloudID) {
-        super(nickname, MessageType.PICK_CLOUD_MESSAGE);
+    public PickCloudMessage(int cloudID) {
+        super(MessageType.PICK_CLOUD_MESSAGE);
         this.cloudID = cloudID;
-    }
-
-    @Override
-    public String toString() {
-        return "PickCloudMessage{" +
-                "nickname=" + getNickname() +
-                ", cloudID=" + cloudID +
-                '}';
     }
 
     public int getCloudID() {

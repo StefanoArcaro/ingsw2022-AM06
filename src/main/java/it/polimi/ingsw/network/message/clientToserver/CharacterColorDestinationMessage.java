@@ -8,25 +8,15 @@ import it.polimi.ingsw.network.message.MessageType;
  */
 public class CharacterColorDestinationMessage extends Message {
 
-    private int characterID;
-    private CreatureColor color;
-    private int destination;
+    private final int characterID;
+    private final CreatureColor color;
+    private final int destination;
 
-    public CharacterColorDestinationMessage(String nickname, int characterID, CreatureColor color, int destination) {
-        super(nickname, MessageType.CHARACTER_COLOR_DESTINATION_MESSAGE);
+    public CharacterColorDestinationMessage(int characterID, CreatureColor color, int destination) {
+        super(MessageType.CHARACTER_COLOR_DESTINATION_MESSAGE);
         this.characterID = characterID;
         this.color = color;
         this.destination = destination;
-    }
-
-    @Override
-    public String toString() {
-        return "CharacterColorDestinationMessage{" +
-                "nickname=" + getNickname() +
-                ", characterID=" + characterID +
-                ", color=" + color +
-                ", destination=" + destination +
-                '}';
     }
 
     public int getCharacterID() {

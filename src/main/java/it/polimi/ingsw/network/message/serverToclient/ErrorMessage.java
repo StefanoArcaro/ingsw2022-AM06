@@ -15,14 +15,6 @@ public class ErrorMessage extends Answer {
         this.error = error;
     }
 
-    @Override
-    public String toString() {
-        return "OperationSuccessMessage{" +
-                "nickname=" + getNickname() +
-                ", error='" + error + '\'' +
-                '}';
-    }
-
     public String getError() {
         return error;
     }

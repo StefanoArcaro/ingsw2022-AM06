@@ -15,14 +15,8 @@ public class CurrentPhaseMessage extends Answer {
     }
 
     @Override
-    public String toString() {
-        return "CurrentPhaseMessage{" +
-                "nickname=" + getNickname() +
-                ", currentPhase='" + currentPhase + '\'' +
-                '}';
-    }
-
-    public String getCurrentPhase() {
+    public String getMessage() {
         return currentPhase;
     }
+
 }

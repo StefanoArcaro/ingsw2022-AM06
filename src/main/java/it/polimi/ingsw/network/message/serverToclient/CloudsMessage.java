@@ -1,5 +1,7 @@
 package it.polimi.ingsw.network.message.serverToclient;
 
+import it.polimi.ingsw.model.gameBoard.Cloud;
+import it.polimi.ingsw.model.gameBoard.Student;
 import it.polimi.ingsw.network.message.MessageType;
 
 import java.util.ArrayList;
@@ -9,22 +11,25 @@ import java.util.ArrayList;
  */
 public class CloudsMessage extends Answer {
 
-    private final ArrayList<Integer> clouds;
+    private final ArrayList<Cloud> clouds;
 
-    public CloudsMessage(ArrayList<Integer> clouds) {
+    public CloudsMessage(ArrayList<Cloud> clouds) {
         super(MessageType.CLOUDS_MESSAGE);
         this.clouds = clouds;
     }
 
     @Override
-    public String toString() {
-        return "CloudsMessage{" +
-                "nickname=" + getNickname() +
-                ", clouds=" + clouds +
-                '}';
-    }
+    public String getMessage() {
+        StringBuilder answer = new StringBuilder();
 
-    public ArrayList<Integer> getClouds() {
-        return clouds;
+        for(Cloud cloud : clouds) {
+            answer.append("Student on cloud ").append(cloud.getCloudID()).append(" : ");
+            for(Student student : cloud.getStudents()) {
+                answer.append(student.getColor().getColorName()).append(" ");
+            }
+            answer.append("\n");
+        }
+
+        return answer.toString();
     }
 }

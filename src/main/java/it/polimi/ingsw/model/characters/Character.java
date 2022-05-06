@@ -3,16 +3,10 @@ package it.polimi.ingsw.model.characters;
 import it.polimi.ingsw.exceptions.NoAvailableBanCardsException;
 import it.polimi.ingsw.exceptions.NoAvailableColorException;
 import it.polimi.ingsw.exceptions.OutOfBoundException;
-import it.polimi.ingsw.listeners.BoardListener;
-import it.polimi.ingsw.listeners.CharacterListener;
-import it.polimi.ingsw.listeners.IslandGroupListener;
-import it.polimi.ingsw.listeners.IslandListener;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.gameBoard.Student;
-import it.polimi.ingsw.view.VirtualView;
 
-import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
 /**
@@ -42,21 +36,6 @@ public abstract class Character {
     protected int islandID;
     protected CreatureColor firstColor;
     protected CreatureColor secondColor;
-
-    //listeners
-    protected final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
-    protected final String CHARACTER_LISTENER = "characterListener";
-    protected final String ISLAND_GROUP_LISTENER = "islandGroupListener";
-    protected final String ISLAND_LISTENER = "islandListener";
-    protected final String BOARD_LISTENER = "boardListener";
-
-    public void createListeners(VirtualView clientView){
-        listeners.addPropertyChangeListener(CHARACTER_LISTENER, new CharacterListener(clientView));
-        listeners.addPropertyChangeListener(ISLAND_GROUP_LISTENER, new IslandGroupListener(clientView));
-        listeners.addPropertyChangeListener(ISLAND_LISTENER, new IslandListener(clientView));
-        listeners.addPropertyChangeListener(BOARD_LISTENER, new BoardListener(clientView));
-    }
-
 
     /**
      * Modify the game setup in order to use this character.

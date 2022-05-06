@@ -7,22 +7,13 @@ import it.polimi.ingsw.network.message.MessageType;
  */
 public class CharacterDestinationMessage extends Message {
 
-    private int characterID;
-    private int destination;
+    private final int characterID;
+    private final int destination;
 
-    public CharacterDestinationMessage(String nickname, int characterID, int destination) {
-        super(nickname, MessageType.CHARACTER_DESTINATION_MESSAGE);
+    public CharacterDestinationMessage(int characterID, int destination) {
+        super(MessageType.CHARACTER_DESTINATION_MESSAGE);
         this.characterID = characterID;
         this.destination = destination;
-    }
-
-    @Override
-    public String toString() {
-        return "CharacterDestinationMessage{" +
-                "nickname=" + getNickname() +
-                ", characterID=" + characterID +
-                ", destination=" + destination +
-                '}';
     }
 
     public int getCharacterID() {

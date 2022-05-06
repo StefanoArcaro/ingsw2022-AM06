@@ -8,26 +8,15 @@ import it.polimi.ingsw.network.message.MessageType;
  */
 public class CharacterDoubleColorMessage extends Message {
 
-    private int characterID;
-    private CreatureColor firstColor;
-    private CreatureColor secondColor;
+    private final int characterID;
+    private final CreatureColor firstColor;
+    private final CreatureColor secondColor;
 
-    public CharacterDoubleColorMessage(String nickname, int characterID,
-                                       CreatureColor firstColor, CreatureColor secondColor) {
-        super(nickname, MessageType.CHARACTER_DOUBLE_COLOR_MESSAGE);
+    public CharacterDoubleColorMessage(int characterID, CreatureColor firstColor, CreatureColor secondColor) {
+        super(MessageType.CHARACTER_DOUBLE_COLOR_MESSAGE);
         this.characterID = characterID;
         this.firstColor = firstColor;
         this.secondColor = secondColor;
-    }
-
-    @Override
-    public String toString() {
-        return "CharacterDoubleColorMessage{" +
-                "nickname=" + getNickname() +
-                ", characterID=" + characterID +
-                ", firstColor=" + firstColor +
-                ", secondColor=" + secondColor +
-                '}';
     }
 
     public int getCharacterID() {

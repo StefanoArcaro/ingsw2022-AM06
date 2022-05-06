@@ -1,7 +1,7 @@
 package it.polimi.ingsw.listeners;
 
 import it.polimi.ingsw.model.characters.Character;
-import it.polimi.ingsw.network.message.serverToclient.CharacterInfoMessage;
+import it.polimi.ingsw.network.message.serverToclient.CharacterPlayedMessage;
 import it.polimi.ingsw.view.VirtualView;
 
 import java.beans.PropertyChangeEvent;
@@ -14,7 +14,7 @@ public class CharacterListener extends Listener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        CharacterInfoMessage message = new CharacterInfoMessage((Character) evt.getNewValue());
+        CharacterPlayedMessage message = new CharacterPlayedMessage((Character) evt.getNewValue());
         virtualView.sendAll(message);
     }
 }

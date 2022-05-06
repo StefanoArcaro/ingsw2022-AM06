@@ -17,14 +17,6 @@ public class ColorsAvailableMessage extends Answer {
         this.colors = colors;
     }
 
-    @Override
-    public String toString() {
-        return "ColorsAvailableMessage{" +
-                "nickname=" + getNickname() +
-                ", colors=" + colors +
-                '}';
-    }
-
     public ArrayList<CreatureColor> getColors() {
         return colors;
     }

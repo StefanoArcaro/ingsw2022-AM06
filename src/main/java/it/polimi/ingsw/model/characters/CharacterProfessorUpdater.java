@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.characters;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.gameBoard.Board;
+import it.polimi.ingsw.util.Constants;
 
 import java.util.ArrayList;
 
@@ -30,12 +31,12 @@ public class CharacterProfessorUpdater extends Character {
 
     @Override
     public void effect() {
-        listeners.firePropertyChange(CHARACTER_LISTENER, null, this);
+        game.getListeners().firePropertyChange(Constants.CHARACTER_LISTENER, null, this);
 
         game.updateProfessors();
 
         for(Player player : game.getPlayers()){
-            listeners.firePropertyChange(BOARD_LISTENER, null, player.getBoard());
+            game.getListeners().firePropertyChange(Constants.BOARD_LISTENER, null, player.getBoard());
         }
 
     }

@@ -1,6 +1,6 @@
 package it.polimi.ingsw.listeners;
 
-import it.polimi.ingsw.network.message.serverToclient.GenericMessage;
+import it.polimi.ingsw.network.message.serverToclient.CurrentPlayerMessage;
 import it.polimi.ingsw.view.VirtualView;
 
 import java.beans.PropertyChangeEvent;
@@ -13,7 +13,6 @@ public class PlayerListener extends Listener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        virtualView.sendAll(new GenericMessage("The current player is: " + (String) evt.getNewValue()));
-        //todo: player message
+        virtualView.sendAll(new CurrentPlayerMessage((String) evt.getNewValue()));
     }
 }

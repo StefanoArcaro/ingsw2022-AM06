@@ -23,6 +23,13 @@ public class Assistant implements Comparable<Assistant> {
     }
 
     /**
+     * @return the number of steps that mother nature can take due to this assistant.
+     */
+    public int getNumberOfSteps() {
+        return maxSteps;
+    }
+
+    /**
      * @param activatedCharacter character of class CharacterStepsAdder which is active.
      * @return the maximum number of steps Mother Nature will be allowed to take.
      */

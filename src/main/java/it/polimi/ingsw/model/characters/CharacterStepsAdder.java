@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.characters;
 
+import it.polimi.ingsw.util.Constants;
+
 public class CharacterStepsAdder extends Character {
 
     /**
@@ -22,6 +24,6 @@ public class CharacterStepsAdder extends Character {
 
     @Override
     public void effect() {
-        // do nothing
+        game.getListeners().firePropertyChange(Constants.CHARACTER_LISTENER, null, this);
     }
 }

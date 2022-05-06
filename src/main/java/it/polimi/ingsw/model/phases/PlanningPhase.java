@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.gameBoard.Cloud;
+import it.polimi.ingsw.util.Constants;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -24,10 +25,6 @@ public class PlanningPhase extends Phase {
     private final Map<Player, Assistant> playerPriority;
     int turns;
 
-    //listeners
-    //protected final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
-    private final static String ASSISTANT_LISTENER = "assistantListener";
-
     /**
      * Default constructor.
      * @param game reference to the game.
@@ -42,10 +39,6 @@ public class PlanningPhase extends Phase {
         this.playerPriority = new HashMap<>();
         turns = 0;
     }
-
-    /*public void createListeners(VirtualView clientView){
-        listeners.addPropertyChangeListener(ASSISTANT_LISTENER, new AssistantListener(clientView));
-    }*/
 
     /**
      * Planning phase of the game.
@@ -64,9 +57,9 @@ public class PlanningPhase extends Phase {
 
             game.setPlayingOrder(playingOrder);
             game.setFirstPlayerIndex(game.getPlayers().indexOf(playingOrder.get(FIRST_PLAYER_INDEX)));
-            game.setCurrentPlayer(playingOrder.get(FIRST_PLAYER_INDEX));
             game.setPlayerPriority(playerPriority);
             game.setGameState(GameState.MOVE_STUDENT_PHASE);
+            game.setCurrentPlayer(playingOrder.get(FIRST_PLAYER_INDEX));
             game.setCurrentPhase(phaseFactory.createPhase(game.getGameState()));
         }
     }
@@ -83,7 +76,7 @@ public class PlanningPhase extends Phase {
                 turns += 1;
                 assistant = currentPlayer.getWizard().playAssistant(priority);
                 currentPlayer.getWizard().removeAssistant(priority);
-                game.getListeners().firePropertyChange(ASSISTANT_LISTENER, null, new ArrayList<>(List.of(assistant)));
+                game.getListeners().firePropertyChange(Constants.ASSISTANT_LISTENER, null, new ArrayList<>(List.of(assistant)));
 
                 playerPriority.put(currentPlayer, assistant);
 

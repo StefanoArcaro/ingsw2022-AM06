@@ -5,6 +5,7 @@ import it.polimi.ingsw.exceptions.OutOfBoundException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.CharacterID;
 import it.polimi.ingsw.model.gameBoard.IslandGroup;
+import it.polimi.ingsw.util.Constants;
 
 public class CharacterInfluenceModifier extends Character {
 
@@ -31,7 +32,6 @@ public class CharacterInfluenceModifier extends Character {
             case CHARACTER_FIVE -> {
                 this.cost = 2;
                 this.numberOfBanCards = 4;
-                this.toDoNow = 1;
             }
             case CHARACTER_SIX -> {
                 this.cost = 3;
@@ -57,7 +57,7 @@ public class CharacterInfluenceModifier extends Character {
      */
     @Override
     public void effect() throws NoAvailableBanCardsException, OutOfBoundException {
-        listeners.firePropertyChange(CHARACTER_LISTENER, null, this);
+        game.getListeners().firePropertyChange(Constants.CHARACTER_LISTENER, null, this);
 
         CharacterID character = CharacterID.values()[characterID];
         if(character.equals(CharacterID.CHARACTER_FIVE)) {
@@ -78,9 +78,9 @@ public class CharacterInfluenceModifier extends Character {
             IslandGroup islandGroupChosen = game.getIslandGroupByIndex(islandGroupIndex);
             if(numberOfBanCards > 0) {
                 islandGroupChosen.addBanCard();
-                listeners.firePropertyChange(ISLAND_GROUP_LISTENER, null, islandGroupChosen);
+                game.getListeners().firePropertyChange(Constants.ISLAND_GROUP_LISTENER, null, islandGroupChosen);
                 removeBanCard();
-                listeners.firePropertyChange(CHARACTER_LISTENER, null, this);
+                game.getListeners().firePropertyChange(Constants.CHARACTER_LISTENER, null, this);
             } else {
                 throw new NoAvailableBanCardsException();
             }

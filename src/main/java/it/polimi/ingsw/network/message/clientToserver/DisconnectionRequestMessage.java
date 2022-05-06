@@ -4,7 +4,8 @@ import it.polimi.ingsw.network.message.MessageType;
 
 public class DisconnectionRequestMessage extends Message {
 
-    public DisconnectionRequestMessage(String nickname) {
-        super(nickname, MessageType.DISCONNECTION_REQUEST_MESSAGE);
+    public DisconnectionRequestMessage() {
+        super(MessageType.DISCONNECTION_REQUEST_MESSAGE);
     }
+
 }

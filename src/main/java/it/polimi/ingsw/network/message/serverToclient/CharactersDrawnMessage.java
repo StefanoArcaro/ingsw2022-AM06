@@ -2,6 +2,7 @@ package it.polimi.ingsw.network.message.serverToclient;
 
 import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.network.message.MessageType;
+import it.polimi.ingsw.util.Constants;
 
 import java.util.ArrayList;
 
@@ -10,22 +11,16 @@ import java.util.ArrayList;
  */
 public class CharactersDrawnMessage extends Answer {
 
-    private final ArrayList<Character> characters;
+    private final String characters;
 
-    public CharactersDrawnMessage(ArrayList<Character> characters) {
+    public CharactersDrawnMessage() {
         super(MessageType.CHARACTERS_DRAWN_MESSAGE);
-        this.characters = characters;
+        this.characters = Constants.getDrawnCharacters();
+
     }
 
     @Override
-    public String toString() {
-        return "CharactersDrawnMessage{" +
-                "nickname=" + getNickname() +
-                ", characters=" + characters +
-                '}';
-    }
-
-    public ArrayList<Character> getCharacters() {
+    public String getMessage() {
         return characters;
     }
 }

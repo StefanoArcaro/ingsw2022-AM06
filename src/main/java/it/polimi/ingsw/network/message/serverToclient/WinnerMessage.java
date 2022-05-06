@@ -16,14 +16,7 @@ public class WinnerMessage extends Answer {
     }
 
     @Override
-    public String toString() {
-        return "WinnerMessage{" +
-                "nickname=" + getNickname() +
-                ", winnerNickname='" + winnerNickname + '\'' +
-                '}';
-    }
-
-    public String getWinnerNickname() {
-        return winnerNickname;
+    public String getMessage() {
+        return "The winner is " + winnerNickname + "!";
     }
 }
