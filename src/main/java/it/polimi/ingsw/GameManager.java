@@ -25,7 +25,9 @@ public class GameManager {
     private final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
     private final static String GAME_CONTROLLER = "gameController";
 
-
+    /**
+     * Default constructor.
+     */
     public GameManager() {
         this.clients = new HashMap<>();
         this.nicknameToId = new HashMap<>();
@@ -36,37 +38,71 @@ public class GameManager {
         this.listeners.addPropertyChangeListener(GAME_CONTROLLER, gameController);
     }
 
+    /**
+     * @return the Game instance managed by this.
+     */
     public Game getGame() {
         return game;
     }
 
+    /**
+     * @return the map containing ID and handler of each player of the game.
+     */
     public Map<Integer, ClientHandler> getClients() {
         return clients;
     }
 
+    /**
+     * @return the map containing nickname and ID of each player of the game.
+     */
     public Map<String, Integer> getNicknameToId() {
         return nicknameToId;
     }
 
+    /**
+     * Sets the number of players for the game to the specified one.
+     * @param numberOfPlayers number of players to set.
+     */
+    private void setNumberOfPlayers(NumberOfPlayers numberOfPlayers) {
+        game.setNumberOfPlayers(numberOfPlayers.getNum());
+    }
+
+    /**
+     * Sets the game mode for the game to the specified one.
+     * @param gameMode the mode to set.
+     */
+    private void setGameMode(GameMode gameMode) {
+        game.setGameMode(gameMode);
+    }
+
+    /**
+     * Sets the preferences of the game to the specified ones.
+     * @param numberOfPlayers the number of players to set for the game.
+     * @param gameMode the mode to set for the game.
+     */
     public void setGamePreferences(NumberOfPlayers numberOfPlayers, GameMode gameMode) {
         setNumberOfPlayers(numberOfPlayers);
         setGameMode(gameMode);
     }
 
-    private void setNumberOfPlayers(NumberOfPlayers numberOfPlayers) {
-        game.setNumberOfPlayers(numberOfPlayers.getNum());
-    }
-
-    private void setGameMode(GameMode gameMode) {
-        game.setGameMode(gameMode);
-    }
-
+    /**
+     * Adds a client as a player to the game.
+     * To do so, it also puts the client's information in the
+     * clients and nicknameToId maps.
+     * @param clientID ID of the client to add.
+     * @param clientHandler handler of the client to add.
+     * @param nickname nickname of the client to add.
+     */
     public void addClient(int clientID, ClientHandler clientHandler, String nickname) {
         clients.put(clientID, clientHandler);
         nicknameToId.put(nickname, clientID);
 
     }
 
+    /**
+     * Removes a player from the game.
+     * @param clientID ID of the client to remove.
+     */
     public void removeClient(int clientID) {
         for(String name : nicknameToId.keySet()) {
             if(nicknameToId.get(name) == clientID) {
@@ -76,17 +112,32 @@ public class GameManager {
         }
     }
 
+    /**
+     * Sends the specified message to the client identified by the specified nickname only.
+     * @param answer the message to send.
+     * @param nickname the nickname of the client to send the message to.
+     */
     public void singleSend(Answer answer, String nickname) {
         ClientHandler clientHandler = clients.get(nicknameToId.get(nickname));
         clientHandler.sendMessage(answer);
     }
 
+    /**
+     * Sends the specified message to all the players in the game.
+     * @param answer the message to send.
+     */
     public void sendAll(Answer answer) {
         for(ClientHandler clientHandler : clients.values()) {
             clientHandler.sendMessage(answer);
         }
     }
 
+    /**
+     * Sends a message to all the players in the gaem but the one identified
+     * by the specified nickname.
+     * @param answer the message to send.
+     * @param nickname the nickname of the client to not send the message to.
+     */
     public void sendAllExcept(Answer answer, String nickname) {
         for(String name : nicknameToId.keySet()) {
             if(!name.equals(nickname)) {
@@ -95,6 +146,11 @@ public class GameManager {
         }
     }
 
+    /**
+     * Calls for the game controller to handle the reception of a message from a client.
+     * @param pair a pair of values made of the JSON representation of the message
+     *             and the message itself.
+     */
     public void onMessageReceived(Map.Entry<String, Message> pair) {
         listeners.firePropertyChange("gameController", null, pair);
     }
