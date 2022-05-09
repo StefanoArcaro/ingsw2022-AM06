@@ -73,6 +73,7 @@ public class PreparePhase extends Phase {
 
             String oldPlayer = game.getCurrentPlayer().getNickname();
             drawFirstPlayer();
+            game.getListeners().firePropertyChange(Constants.GAME_STARTED_LISTENER, null, game);
             game.getListeners().firePropertyChange(Constants.PLAYER_LISTENER, oldPlayer, game.getCurrentPlayer().getNickname());
 
             game.setGameState(GameState.PLANNING_PHASE);
@@ -298,6 +299,8 @@ public class PreparePhase extends Phase {
 
             Character characterToAdd = characterFactory.createCharacter(randomCharacterID);
             game.addDrawnCharacter(characterToAdd);
+
+            game.getListeners().firePropertyChange(Constants.CHARACTER_DRAWN_LISTENER, null, characterToAdd);
 
             characterToAdd.initialPreparation();
         }

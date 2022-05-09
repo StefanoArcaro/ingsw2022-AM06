@@ -59,4 +59,7 @@ public class IslandGroupsMessage extends Answer {
         return islands;
     }
 
+    public ArrayList<IslandGroup> getIslandGroup() {
+        return new ArrayList<>(islandGroup);
+    }
 }

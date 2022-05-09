@@ -125,7 +125,7 @@ public class View  {
      * @param characters the characters to show.
      */
     public void showCharactersDrawn(ArrayList<Character> characters) {
-        //client: send(new CharactersDrawnMessage(characters));
+        //client: send(new CharacterDrawnMessage(characters));
     }
 
     /**
@@ -154,7 +154,7 @@ public class View  {
      */
     public void showMatchInfo(List<String> activePlayers, List<CharacterID> drawnCharacters,
                        List<Board> boards, List<IslandGroup> islandGroups, String currentPlayerNickname) {
-        //client: send(new MatchInfoMessage(activePlayers, drawnCharacters, boards, islandGroups, currentPlayerNickname));
+        //client: send(new ActivePlayersMessage(activePlayers, drawnCharacters, boards, islandGroups, currentPlayerNickname));
     }
 
     /**

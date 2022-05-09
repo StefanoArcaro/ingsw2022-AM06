@@ -24,6 +24,6 @@ public class CharacterStepsAdder extends Character {
 
     @Override
     public void effect() {
-        game.getListeners().firePropertyChange(Constants.CHARACTER_LISTENER, null, this);
+        game.getListeners().firePropertyChange(Constants.CHARACTER_PLAYED_LISTENER, null, this);
     }
 }

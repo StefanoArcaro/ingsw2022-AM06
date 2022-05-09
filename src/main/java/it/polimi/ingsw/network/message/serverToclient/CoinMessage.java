@@ -4,15 +4,25 @@ import it.polimi.ingsw.network.message.MessageType;
 
 public class CoinMessage extends Answer {
 
+    private final String nickname;
     private final int coins;
 
-    public CoinMessage(int coins) {
+    public CoinMessage(String nickname, int coins) {
         super(MessageType.COIN_MESSAGE);
+        this.nickname = nickname;
         this.coins = coins;
     }
 
     @Override
     public String getMessage() {
         return "The current player has " + coins + " coins.";
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public int getCoins() {
+        return coins;
     }
 }

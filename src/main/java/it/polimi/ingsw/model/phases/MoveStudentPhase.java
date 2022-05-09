@@ -75,7 +75,6 @@ public class MoveStudentPhase extends ActionPhase {
                         }
 
                         game.getListeners().firePropertyChange(Constants.BOARD_LISTENER, null, game.getCurrentPlayer().getBoard());
-                        game.getListeners().firePropertyChange(Constants.COIN_LISTENER, oldCoins, currentPlayer.getCoins());
 
                         validMoves -= 1;
                     }

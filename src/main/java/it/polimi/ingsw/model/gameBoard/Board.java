@@ -9,10 +9,11 @@ import java.util.ArrayList;
 
 public class Board {
 
-    private final Player player;
-    private final Entrance entrance;
-    private final Hall hall;
-    private final ArrayList<Professor> professors;
+    private Player player;
+    private String playerNickname;
+    private Entrance entrance;
+    private Hall hall;
+    private ArrayList<Professor> professors;
     private int towers;
 
     /**
@@ -21,6 +22,13 @@ public class Board {
      */
     public Board(Player player) {
         this.player = player;
+        this.entrance = new Entrance();
+        this.hall = new Hall();
+        this.professors = new ArrayList<>();
+    }
+
+    public Board(String playerNickname) {
+        this.playerNickname = playerNickname;
         this.entrance = new Entrance();
         this.hall = new Hall();
         this.professors = new ArrayList<>();
@@ -48,6 +56,10 @@ public class Board {
         return this.entrance;
     }
 
+    public void setEntrance(Entrance entrance) {
+        this.entrance = entrance;
+    }
+
     /**
      * @return the Hall component of the board.
      */
@@ -55,11 +67,19 @@ public class Board {
         return this.hall;
     }
 
+    public void setHall(Hall hall) {
+        this.hall = hall;
+    }
+
     /**
      * @return the list of professors on the board.
      */
     public ArrayList<Professor> getProfessors() {
         return new ArrayList<>(professors);
+    }
+
+    public void setProfessors(ArrayList<Professor> professors) {
+        this.professors = professors;
     }
 
     /**

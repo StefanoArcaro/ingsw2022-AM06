@@ -32,4 +32,8 @@ public class CloudsMessage extends Answer {
 
         return answer.toString();
     }
+
+    public ArrayList<Cloud> getClouds() {
+        return clouds;
+    }
 }

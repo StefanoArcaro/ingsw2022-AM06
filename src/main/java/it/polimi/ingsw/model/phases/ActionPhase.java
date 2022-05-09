@@ -45,9 +45,6 @@ public abstract class ActionPhase extends Phase {
                     activatedCharacter.increaseNumberOfIteration();
 
                     currentPlayer.spendCoins(price);
-                    int oldCoins = currentPlayer.getCoins();
-                    game.getListeners().firePropertyChange(Constants.COIN_LISTENER, oldCoins, currentPlayer.getCoins());
-
                 } else {
                     throw new NotEnoughMoneyException();
                 }

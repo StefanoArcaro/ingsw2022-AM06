@@ -74,10 +74,12 @@ public class Game {
         listeners.addPropertyChangeListener(Constants.ISLAND_LISTENER, new IslandListener(clientView));
         listeners.addPropertyChangeListener(Constants.ISLAND_GROUPS_LISTENER, new IslandGroupListener(clientView));
         listeners.addPropertyChangeListener(Constants.BOARD_LISTENER, new BoardListener(clientView));
-        listeners.addPropertyChangeListener(Constants.COIN_LISTENER, new BoardListener(clientView));
+        listeners.addPropertyChangeListener(Constants.COIN_LISTENER, new CoinListener(clientView));
         listeners.addPropertyChangeListener(Constants.CLOUD_LISTENER, new CloudListener(clientView));
-        listeners.addPropertyChangeListener(Constants.CHARACTER_LISTENER, new CharacterListener(clientView));
+        listeners.addPropertyChangeListener(Constants.CHARACTER_DRAWN_LISTENER, new CharacterDrawnListener(clientView));
+        listeners.addPropertyChangeListener(Constants.CHARACTER_PLAYED_LISTENER, new CharacterPlayedListener(clientView));
         listeners.addPropertyChangeListener(Constants.WIN_LISTENER, new WinListener(clientView));
+        listeners.addPropertyChangeListener(Constants.GAME_STARTED_LISTENER, new GameStartedListener(clientView));
     }
 
     /**

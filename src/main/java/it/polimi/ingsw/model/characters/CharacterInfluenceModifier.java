@@ -59,7 +59,7 @@ public class CharacterInfluenceModifier extends Character {
      */
     @Override
     public void effect() throws NoAvailableBanCardsException, OutOfBoundException {
-        game.getListeners().firePropertyChange(Constants.CHARACTER_LISTENER, null, this);
+        game.getListeners().firePropertyChange(Constants.CHARACTER_PLAYED_LISTENER, null, this);
 
         CharacterID character = CharacterID.values()[characterID];
         if(character.equals(CharacterID.CHARACTER_FIVE)) {
@@ -83,7 +83,7 @@ public class CharacterInfluenceModifier extends Character {
                 int motherNatureIndex = game.getIndexOfIslandGroup(game.getMotherNature().getCurrentIslandGroup());
                 game.getListeners().firePropertyChange(Constants.ISLAND_GROUPS_LISTENER, null, new AbstractMap.SimpleEntry<>(game.getIslandGroups(), motherNatureIndex));
                 removeBanCard();
-                game.getListeners().firePropertyChange(Constants.CHARACTER_LISTENER, null, this);
+                game.getListeners().firePropertyChange(Constants.CHARACTER_PLAYED_LISTENER, null, this);
             } else {
                 throw new NoAvailableBanCardsException();
             }

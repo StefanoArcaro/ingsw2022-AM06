@@ -19,4 +19,7 @@ public class CurrentPhaseMessage extends Answer {
         return currentPhase;
     }
 
+    public String getCurrentPhase() {
+        return currentPhase; //todo
+    }
 }

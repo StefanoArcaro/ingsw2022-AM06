@@ -258,13 +258,13 @@ public class MessageParser implements PropertyChangeListener {
      * Parses a message for playing a certain character.
      * If the input is invalid, it suggests the correct format.
      * @param in the client's input.
-     * @return the parsed CharacterMessage if the format is correct, null otherwise.
+     * @return the parsed CharacterPlayedMessage if the format is correct, null otherwise.
      */
     private Message characterMessage(String[] in) {
         int numberOfParameters = in.length;
         //[0] -> command
         //[1] -> characterID
-        // 2 parameters: CharacterMessage: [2] -> color / destination
+        // 2 parameters: CharacterPlayedMessage: [2] -> color / destination
         // 3 parameters: CharacterColorMessage / CharacterDestinationMessage: [3] -> color / destination
         // 4 parameters: CharacterDoubleColorMessage / CharacterColorDestinationMessage
 
@@ -315,7 +315,7 @@ public class MessageParser implements PropertyChangeListener {
      * Manages the message to be created in case the client wants to play a character
      * that doesn't require any extra parameter.
      * @param in the input entered by the client.
-     * @return a CharacterMessage containing the information needed.
+     * @return a CharacterPlayedMessage containing the information needed.
      */
     private Message characterTwoParameters(String[] in) {
         int characterID = -1;

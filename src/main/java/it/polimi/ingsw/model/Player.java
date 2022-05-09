@@ -4,6 +4,9 @@ import it.polimi.ingsw.model.enumerations.PlayerColor;
 import it.polimi.ingsw.model.enumerations.WizardName;
 import it.polimi.ingsw.model.gameBoard.Board;
 import it.polimi.ingsw.model.gameBoard.Wizard;
+import it.polimi.ingsw.util.Constants;
+
+import java.util.AbstractMap;
 
 public class Player {
 
@@ -80,6 +83,7 @@ public class Player {
      */
     public void receiveCoin() {
         this.coins += 1;
+        game.getListeners().firePropertyChange(Constants.COIN_LISTENER, null, new AbstractMap.SimpleEntry<>(nickname, coins));
     }
 
     /**
@@ -90,6 +94,7 @@ public class Player {
     public void spendCoins(int coinsToSpend) {
         if(this.coins >= coinsToSpend) {
             this.coins -= coinsToSpend;
+            game.getListeners().firePropertyChange(Constants.COIN_LISTENER, null, new AbstractMap.SimpleEntry<>(nickname, coins));
         }
     }
 }

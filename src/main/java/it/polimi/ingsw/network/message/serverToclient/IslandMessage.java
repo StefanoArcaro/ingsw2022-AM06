@@ -15,7 +15,7 @@ public class IslandMessage extends Answer {
     }
 
     public String getMessage() {
-        String message = "Island group: " + island.getIslandID() + ":\n";
+        String message = "Island: " + island.getIslandID() + ":\n";
 
         for(Student s : island.getStudents()) {
             message = message + "\t-" + s.getColor().getColorName() + "\n";
@@ -26,5 +26,9 @@ public class IslandMessage extends Answer {
         }
 
         return message;
+    }
+
+    public Island getIsland() {
+        return island;
     }
 }

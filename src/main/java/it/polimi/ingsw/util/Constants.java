@@ -290,8 +290,10 @@ public class Constants {
     public static final String ASSISTANT_LISTENER = "assistantListener";
     public static final String WIN_LISTENER = "winListener";
     public static final String PLAYER_LISTENER = "playerListener";
-    public static final String CHARACTER_LISTENER = "characterListener";
+    public static final String CHARACTER_DRAWN_LISTENER = "characterDrawnListener";
+    public static final String CHARACTER_PLAYED_LISTENER = "characterPlayedListener";
     public static final String CLOUD_LISTENER = "cloudListener";
+    public static final String GAME_STARTED_LISTENER = "gameStartedListener";
 
     public static void countdown(int milliseconds) {
         for(int i = 3; i > 0; i--) {

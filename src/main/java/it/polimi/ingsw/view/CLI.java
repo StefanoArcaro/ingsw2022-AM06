@@ -2,6 +2,7 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.network.client.MessageParser;
 import it.polimi.ingsw.network.client.SocketClient;
+import it.polimi.ingsw.network.message.serverToclient.*;
 import it.polimi.ingsw.util.Constants;
 
 import java.beans.PropertyChangeListener;
@@ -21,12 +22,14 @@ public class CLI {
     private SocketClient socketClient;
     private final ExecutorService keyboardQueue;
     private final PropertyChangeSupport listener = new PropertyChangeSupport(this);
+    private final ModelView modelView;
 
     /**
      * Default constructor.
      */
     public CLI() {
         this.keyboardQueue = Executors.newSingleThreadExecutor();
+        this.modelView = new ModelView();
     }
 
     /**
@@ -67,6 +70,51 @@ public class CLI {
             }
         });
     }
+
+
+
+
+    public void activePlayersHandler(ActivePlayersMessage msg) {
+        modelView.setPlayers(msg.getActivePlayers());
+    }
+
+    public void boardHandler(BoardMessage msg) {
+        modelView.setBoard(msg);
+    }
+
+    public void islandGroupsHandler(IslandGroupsMessage msg) {
+        modelView.setIslandGroups(msg.getIslandGroup());
+    }
+
+    public void islandHandler(IslandMessage msg) {
+        modelView.setIsland(msg.getIsland());
+    }
+
+    public void cloudsHandler(CloudsMessage msg) {
+        modelView.setClouds(msg.getClouds()); //todo
+    }
+
+    public void coinsHandler(CoinMessage msg) {
+        modelView.setCoins(msg);
+    }
+
+    public void currentPlayerHandler(CurrentPlayerMessage msg) {
+        modelView.setCurrentPlayer(msg.getCurrentPlayer());
+    }
+
+    //todo
+    public void currentPhaseHandler(CurrentPhaseMessage msg) {
+        modelView.setCurrentPhase(msg.getCurrentPhase());
+    }
+
+    public void charactersDrawnHandler(CharacterDrawnMessage msg) {
+        modelView.setDrawnCharacter(msg);
+    }
+
+    public void characterPlayedHandler(CharacterPlayedMessage msg) {
+        modelView.setPlayedCharacter(msg);
+    }
+
 
     /**
      * Asks for the IP address and port of the server in order to
@@ -119,10 +167,19 @@ public class CLI {
         return Constants.DEFAULT_IP_ADDRESS;
     }
 
+
+
+
+
+
+
+
+
+
     public static void main(String[] args) {
         CLI cli = new CLI();
         Socket socket = askServerInfo();
-        cli.setSocketClient(new SocketClient(socket));
+        cli.setSocketClient(new SocketClient(cli, socket));
         SocketClient client = cli.getSocketClient();
 
         System.out.println(Constants.ERIANTYS + "\n");
