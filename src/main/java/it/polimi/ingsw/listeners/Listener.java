@@ -10,8 +10,11 @@ public abstract class Listener implements PropertyChangeListener {
 
     protected final VirtualView virtualView;
 
+    /**
+     * Default constructor.
+     * @param virtualView virtual representation of the clients' view.
+     */
     public Listener(VirtualView virtualView) {
         this.virtualView = virtualView;
     }
-
 }

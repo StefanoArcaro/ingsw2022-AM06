@@ -13,6 +13,7 @@ public class PlayerListener extends Listener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        // TODO check the current player to send different messages to them and the other players
         virtualView.sendAll(new CurrentPlayerMessage((String) evt.getNewValue()));
     }
 }

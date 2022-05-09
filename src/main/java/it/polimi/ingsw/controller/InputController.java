@@ -65,8 +65,7 @@ public class InputController {
             return true;
         }
 
-        clientHandler.sendMessage(new ErrorMessage("The message sent is not consistent with the phase playing"));
-
+        clientHandler.sendMessage(new ErrorMessage("The message you sent is not consistent with the current phase."));
         return false;
     }
 
@@ -82,8 +81,8 @@ public class InputController {
         if(game.getGameState() == GameState.PLANNING_PHASE) {
             return true;
         }
-        clientHandler.sendMessage(new ErrorMessage("The message sent is not consistent with the phase playing"));
 
+        clientHandler.sendMessage(new ErrorMessage("The message you sent is not consistent with the current phase."));
         return false;
     }
 
@@ -100,8 +99,7 @@ public class InputController {
             return true;
         }
 
-        clientHandler.sendMessage(new ErrorMessage("The message sent is not consistent with the phase playing"));
-
+        clientHandler.sendMessage(new ErrorMessage("The message you sent is not consistent with the current phase."));
         return false;
     }
 
@@ -118,8 +116,7 @@ public class InputController {
             return true;
         }
 
-        clientHandler.sendMessage(new ErrorMessage("The message sent is not consistent with the phase playing"));
-
+        clientHandler.sendMessage(new ErrorMessage("The message you sent is not consistent with the current phase."));
         return false;
     }
 
@@ -136,8 +133,7 @@ public class InputController {
             return true;
         }
 
-        clientHandler.sendMessage(new ErrorMessage("The message sent is not consistent with the phase playing"));
-
+        clientHandler.sendMessage(new ErrorMessage("The message you sent is not consistent with the current phase."));
         return false;
     }
 
@@ -159,7 +155,7 @@ public class InputController {
             if(game.getGameState() != GameState.LOBBY_PHASE) {
                 return checkCharacterID(clientHandler, characterID);
             }
-            clientHandler.sendMessage(new ErrorMessage("The message sent is not consistent with the phase playing"));
+            clientHandler.sendMessage(new ErrorMessage("The message you sent is not consistent with the current phase."));
         } else {
             clientHandler.sendMessage(new ErrorMessage("You have chosen the easy mode, there are no characters."));
         }
@@ -187,7 +183,7 @@ public class InputController {
             if (correctPhase) {
                 return checkCharacterID(clientHandler, characterID);
             }
-            clientHandler.sendMessage(new ErrorMessage("The message sent is not consistent with the phase playing"));
+            clientHandler.sendMessage(new ErrorMessage("The message you sent is not consistent with the current phase."));
         } else {
             clientHandler.sendMessage(new ErrorMessage("You have chosen the easy mode, there are no characters."));
         }
@@ -204,7 +200,7 @@ public class InputController {
         if(game.getCharacterByID(characterID) != null) {
             return true;
         }
-        clientHandler.sendMessage(new ErrorMessage("The character ID was not drawn in this game."));
+        clientHandler.sendMessage(new ErrorMessage("The character you asked for was not drawn in this game."));
         return false;
     }
 

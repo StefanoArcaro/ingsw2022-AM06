@@ -148,31 +148,6 @@ public class Constants {
         };
     }
 
-    public static void setDrawnCharacters(ArrayList<Character> characters) {
-        for(Character character : characters) {
-            if(character.getCharacterID() != 0) {
-                charactersDrawn = charactersDrawn + " " + character.getCharacterID();
-            }
-        }
-    }
-
-    public static String getDrawnCharacters() {
-        return charactersDrawn;
-    }
-
-    //set in game
-    public static void setPlayCharacters(ArrayList<Character> characters) {
-        StringBuilder characterDrawn = new StringBuilder();
-
-        for(Character character : characters) {
-            if(character.getCharacterID() != 0) {
-                characterDrawn.append("\n\t").append(getCharacterFormat(character.getCharacterID()));
-            }
-        }
-
-        playCharacters = playCharacters + characterDrawn;
-    }
-
     private static String getCharacterFormat(int characterID) {
         return switch (characterID) {
             case 1 -> CHARACTER_ONE_FORMAT;
@@ -189,6 +164,30 @@ public class Constants {
             case 12 -> CHARACTER_TWELVE_FORMAT;
             default -> "";
         };
+    }
+
+    public static String getDrawnCharacters() {
+        return charactersDrawn;
+    }
+
+    public static void setDrawnCharacters(ArrayList<Character> characters) {
+        for(Character character : characters) {
+            if(character.getCharacterID() != 0) {
+                charactersDrawn = charactersDrawn + " " + character.getCharacterID();
+            }
+        }
+    }
+
+    public static void setPlayCharacters(ArrayList<Character> characters) {
+        StringBuilder characterDrawn = new StringBuilder();
+
+        for(Character character : characters) {
+            if(character.getCharacterID() != 0) {
+                characterDrawn.append("\n\t").append(getCharacterFormat(character.getCharacterID()));
+            }
+        }
+
+        playCharacters = playCharacters + characterDrawn;
     }
 
     // Characters' descriptions
