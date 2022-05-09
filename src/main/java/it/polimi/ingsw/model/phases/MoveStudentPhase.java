@@ -12,6 +12,8 @@ import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.gameBoard.Student;
 import it.polimi.ingsw.util.Constants;
 
+import java.util.AbstractMap;
+
 public class MoveStudentPhase extends ActionPhase {
 
     private static final int MIN_COLOR_INDEX = 0;
@@ -90,6 +92,7 @@ public class MoveStudentPhase extends ActionPhase {
         if(validMoves <= MOVES_ENDED) {
             game.setGameState(GameState.MOVE_MOTHER_NATURE_PHASE);
             game.setCurrentPhase(phaseFactory.createPhase(game.getGameState()));
+            game.getListeners().firePropertyChange(Constants.PHASE_LISTENER, null, new AbstractMap.SimpleEntry<>(game.getGameState(), game.getGameMode()));
         }
     }
 

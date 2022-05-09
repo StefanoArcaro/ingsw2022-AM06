@@ -9,6 +9,7 @@ import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.gameBoard.*;
 import it.polimi.ingsw.util.Constants;
 
+import java.util.AbstractMap;
 import java.util.Collections;
 import java.util.Random;
 import java.util.Stack;
@@ -70,10 +71,13 @@ public class PreparePhase extends Phase {
                 distributeCoins();
             }
 
+            String oldPlayer = game.getCurrentPlayer().getNickname();
+            drawFirstPlayer();
+            game.getListeners().firePropertyChange(Constants.PLAYER_LISTENER, oldPlayer, game.getCurrentPlayer().getNickname());
+
             game.setGameState(GameState.PLANNING_PHASE);
             game.setCurrentPhase(phaseFactory.createPhase(game.getGameState()));
-
-            drawFirstPlayer();
+            game.getListeners().firePropertyChange(Constants.PHASE_LISTENER, null, new AbstractMap.SimpleEntry<>(game.getGameState(), game.getGameMode()));
         }
     }
 
@@ -92,6 +96,7 @@ public class PreparePhase extends Phase {
 
                 if(turns < game.getNumberOfPlayers().getNum()) {
                     game.setCurrentPlayer(game.getNextPlayer());
+                    game.getListeners().firePropertyChange(Constants.PLAYER_LISTENER, null, game.getCurrentPlayer().getNickname());
                 }
             } else {
                 throw new WizardTakenException();

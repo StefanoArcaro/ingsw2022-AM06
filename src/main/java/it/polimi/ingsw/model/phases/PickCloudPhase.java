@@ -10,6 +10,7 @@ import it.polimi.ingsw.model.gameBoard.Creature;
 import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.util.Constants;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,13 +59,15 @@ public class PickCloudPhase extends ActionPhase {
 
         if(isCurrentPlayerTheLastOne) {
             calculateNextPhase();
-            game.setCurrentPhase(phaseFactory.createPhase(game.getGameState()));
             game.setCurrentPlayer(game.getPlayers().get(game.getFirstPlayerIndex()));
+            game.setCurrentPhase(phaseFactory.createPhase(game.getGameState()));
         } else {
+            game.setCurrentPlayer(game.getNextPlayer());
             game.setGameState(GameState.MOVE_STUDENT_PHASE);
             game.setCurrentPhase(phaseFactory.createPhase(game.getGameState()));
-            game.setCurrentPlayer(game.getNextPlayer());
         }
+        game.getListeners().firePropertyChange(Constants.PLAYER_LISTENER, null, game.getCurrentPlayer().getNickname());
+        game.getListeners().firePropertyChange(Constants.PHASE_LISTENER, null, new AbstractMap.SimpleEntry<>(game.getGameState(), game.getGameMode()));
     }
 
     /**

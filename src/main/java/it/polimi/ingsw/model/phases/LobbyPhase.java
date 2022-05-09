@@ -6,6 +6,9 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.PlayerColor;
+import it.polimi.ingsw.util.Constants;
+
+import java.util.AbstractMap;
 
 public class LobbyPhase extends Phase {
 
@@ -36,9 +39,12 @@ public class LobbyPhase extends Phase {
         addPlayer(playerNickname);
 
         if(game.getPlayers().size() == game.getNumberOfPlayers().getNum()) {
+            game.setCurrentPlayer(game.getPlayers().get(FIRST_PLAYER_INDEX));
+            game.getListeners().firePropertyChange(Constants.PLAYER_LISTENER, null, game.getCurrentPlayer().getNickname());
+
             game.setGameState(GameState.PREPARE_PHASE);
             game.setCurrentPhase(phaseFactory.createPhase(game.getGameState()));
-            game.setCurrentPlayer(game.getPlayers().get(FIRST_PLAYER_INDEX));
+            game.getListeners().firePropertyChange(Constants.PHASE_LISTENER, null, new AbstractMap.SimpleEntry<>(game.getGameState(), game.getGameMode()));
         }
     }
 

@@ -20,6 +20,6 @@ public class CurrentPlayerMessage extends Answer {
 
     @Override
     public String getMessage() {
-        return "The current player is " + currentPlayer;
+        return "It's " + currentPlayer + "'s turn!";
     }
 }

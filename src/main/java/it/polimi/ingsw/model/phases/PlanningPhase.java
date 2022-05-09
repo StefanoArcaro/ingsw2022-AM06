@@ -59,8 +59,13 @@ public class PlanningPhase extends Phase {
             game.setFirstPlayerIndex(game.getPlayers().indexOf(playingOrder.get(FIRST_PLAYER_INDEX)));
             game.setPlayerPriority(playerPriority);
             game.setGameState(GameState.MOVE_STUDENT_PHASE);
+
+            String oldPlayer = game.getCurrentPlayer().getNickname();
             game.setCurrentPlayer(playingOrder.get(FIRST_PLAYER_INDEX));
+            game.getListeners().firePropertyChange(Constants.PLAYER_LISTENER, oldPlayer, game.getCurrentPlayer().getNickname());
+
             game.setCurrentPhase(phaseFactory.createPhase(game.getGameState()));
+            game.getListeners().firePropertyChange(Constants.PHASE_LISTENER, null, new AbstractMap.SimpleEntry<>(game.getGameState(), game.getGameMode()));
         }
     }
 
@@ -82,6 +87,7 @@ public class PlanningPhase extends Phase {
 
                 if(turns < game.getNumberOfPlayers().getNum()) {
                     game.setCurrentPlayer(game.getNextPlayer());
+                    game.getListeners().firePropertyChange(Constants.PLAYER_LISTENER, null, game.getCurrentPlayer().getNickname());
                 }
             } else {
                 throw new AssistantTakenException();

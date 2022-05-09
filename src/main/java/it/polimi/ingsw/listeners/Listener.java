@@ -17,4 +17,11 @@ public abstract class Listener implements PropertyChangeListener {
     public Listener(VirtualView virtualView) {
         this.virtualView = virtualView;
     }
+
+    /**
+     * @return the nickname of the current player.
+     */
+    public String getCurrentPlayer() {
+        return virtualView.getGameManager().getGame().getCurrentPlayer().getNickname();
+    }
 }

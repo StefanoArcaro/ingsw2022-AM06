@@ -149,7 +149,7 @@ public class Game {
      */
     public void setCurrentPhase(Phase phase) {
         this.currentPhase = phase;
-        listeners.firePropertyChange(Constants.PHASE_LISTENER, null, new AbstractMap.SimpleEntry<>(gameState, gameMode));
+        //listeners.firePropertyChange(Constants.PHASE_LISTENER, null, new AbstractMap.SimpleEntry<>(gameState, gameMode));
     }
 
     /**
@@ -198,7 +198,6 @@ public class Game {
     }
 
     /**
-     * (a)
      * @return the association of players' to their assistants played.
      */
     public Map<Player, Assistant> getPlayerPriority() {
@@ -242,7 +241,7 @@ public class Game {
      */
     public void setCurrentPlayer (Player player) {
         this.currentPlayer = player;
-        listeners.firePropertyChange(Constants.PLAYER_LISTENER, null, player.getNickname());
+        //listeners.firePropertyChange(Constants.PLAYER_LISTENER, null, player.getNickname());
     }
 
     /**

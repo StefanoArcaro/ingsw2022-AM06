@@ -6,6 +6,9 @@ import it.polimi.ingsw.model.enumerations.CharacterID;
 import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.gameBoard.IslandGroup;
+import it.polimi.ingsw.util.Constants;
+
+import java.util.AbstractMap;
 
 public class MoveMotherNaturePhase extends ActionPhase {
 
@@ -64,6 +67,7 @@ public class MoveMotherNaturePhase extends ActionPhase {
 
         calculateNextPhase();
         game.setCurrentPhase(phaseFactory.createPhase(game.getGameState()));
+        game.getListeners().firePropertyChange(Constants.PHASE_LISTENER, null, new AbstractMap.SimpleEntry<>(game.getGameState(), game.getGameMode()));
     }
 
     /**
@@ -98,6 +102,7 @@ public class MoveMotherNaturePhase extends ActionPhase {
             } else {
                 game.setGameState(GameState.MOVE_STUDENT_PHASE);
                 game.setCurrentPlayer(game.getNextPlayer());
+                game.getListeners().firePropertyChange(Constants.PLAYER_LISTENER, null, game.getCurrentPlayer().getNickname());
             }
             return;
         }
