@@ -38,7 +38,7 @@ public class Game {
     private Character activatedCharacter;
     private int treasury;
 
-    //Listeners
+    // Listeners
     private final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
 
     /**

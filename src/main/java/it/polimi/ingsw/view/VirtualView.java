@@ -22,6 +22,12 @@ public class VirtualView {
         this.gameManager = gameManager;
     }
 
+    /**
+     * @return the game manager attribute of this virtual view.
+     */
+    public GameManager getGameManager() {
+        return gameManager;
+    }
 
     /**
      * Prepares the answer for sending it through the network.
@@ -32,17 +38,20 @@ public class VirtualView {
     }
 
     /**
-     * Sends the message to all playing clients
+     * Sends the message to all the players in the game.
      * @param serverAnswer the answer to be sent to the players.
      */
     public void sendAll(Answer serverAnswer){
         gameManager.sendAll(serverAnswer);
     }
 
+    /**
+     * Sends the specified message to all the players in the game but the one
+     * identified by the specified nickname.
+     * @param serverAnswer the message to send.
+     * @param nickname nickname of the player to exclude.
+     */
     public void sendAllExcept(Answer serverAnswer, String nickname){
         gameManager.sendAllExcept(serverAnswer, nickname);
     }
-
-
-
 }

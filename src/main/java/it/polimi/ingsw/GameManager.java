@@ -33,6 +33,7 @@ public class GameManager {
         this.nicknameToId = new HashMap<>();
 
         this.game = new Game();
+        // todo add game as a parameter for the listeners' constructors
         this.game.createListeners(new VirtualView(this));
         GameController gameController = new GameController(this, game);
         this.listeners.addPropertyChangeListener(GAME_CONTROLLER, gameController);

@@ -145,7 +145,7 @@ public class Server {
         // Update other players in the same game as disconnected clientHandler
         if(gameManager != null) {
             System.out.println(nicknameDisconnected + " has disconnected.");
-            gameManager.sendAllExcept(new GenericMessage(nicknameDisconnected + " has disconnected."), nicknameDisconnected);
+            gameManager.sendAllExcept(new GenericMessage("\n" + nicknameDisconnected + " has disconnected."), nicknameDisconnected);
         } else {
             System.out.println("Client disconnected!");
         }
