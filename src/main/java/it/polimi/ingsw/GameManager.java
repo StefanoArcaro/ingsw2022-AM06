@@ -101,10 +101,20 @@ public class GameManager {
     }
 
     /**
+     * Empties the game manager's maps.
+     */
+    public void emptyClients() {
+        clients.clear();
+        nicknameToId.clear();
+    }
+
+    /**
      * Removes a player from the game.
      * @param clientID ID of the client to remove.
      */
     public void removeClient(int clientID) {
+        clients.remove(clientID);
+
         for(String name : nicknameToId.keySet()) {
             if(nicknameToId.get(name) == clientID) {
                 nicknameToId.remove(name);

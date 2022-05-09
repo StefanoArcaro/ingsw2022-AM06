@@ -2,6 +2,7 @@ package it.polimi.ingsw.network.server;
 
 import com.google.gson.Gson;
 import it.polimi.ingsw.network.message.serverToclient.Answer;
+import it.polimi.ingsw.util.Constants;
 
 import java.io.*;
 import java.net.Socket;
@@ -27,7 +28,7 @@ public class SocketClientHandler implements ClientHandler, Runnable {
         this.connected = true;
 
         try {
-            client.setSoTimeout(10000);
+            client.setSoTimeout(Constants.SOCKET_TIMEOUT);
             this.reader = new BufferedReader(new InputStreamReader(this.client.getInputStream()));
             this.writer = new BufferedWriter(new OutputStreamWriter(this.client.getOutputStream()));
         } catch (IOException e) {
@@ -56,7 +57,6 @@ public class SocketClientHandler implements ClientHandler, Runnable {
 
         while(!Thread.currentThread().isInterrupted()) {
             synchronized (inputLock) {
-                //client.setSoTimeout(10000);
                 String message = reader.readLine();
                 socketServer.onMessageReceived(this, message);
             }

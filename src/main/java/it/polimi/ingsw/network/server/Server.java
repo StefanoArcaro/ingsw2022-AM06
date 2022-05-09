@@ -72,8 +72,10 @@ public class Server {
      * @param clientHandler handler of said client.
      */
     public void onConnectionDropped(ClientHandler clientHandler) {
-        // Handle disconnection
-        disconnectionHandler(clientHandler);
+        // Handle disconnection todo
+        if(idToConnection.containsValue(clientHandler)) {
+            disconnectionHandler(clientHandler);
+        }
     }
 
     /**
@@ -87,7 +89,11 @@ public class Server {
 
         // If msg is null, it means the client's connection has fallen
         if(msg == null) {
-            disconnectionHandler(clientHandler);
+
+            //todo
+            if(idToConnection.containsValue(clientHandler)) {
+                disconnectionHandler(clientHandler);
+            }
             return;
         }
 
@@ -145,14 +151,26 @@ public class Server {
         // Update other players in the same game as disconnected clientHandler
         if(gameManager != null) {
             System.out.println(nicknameDisconnected + " has disconnected.");
-            gameManager.sendAllExcept(new GenericMessage("\n" + nicknameDisconnected + " has disconnected."), nicknameDisconnected);
+            gameManager.sendAllExcept(new GenericMessage("\n" + nicknameDisconnected + " has disconnected, the game will end."), nicknameDisconnected);
+
+            gameManager.removeClient(clientID);
+
+            gameManager.sendAllExcept(new DisconnectionReplyMessage(nicknameDisconnected), nicknameDisconnected);
+
+            for(ClientHandler client : gameManager.getClients().values()) {
+                String nickname = idToNickname.get(getClientIDFromClientHandler(client));
+
+                System.out.println(nickname + " has disconnected.");
+                removeClient(client);
+                client.disconnect();
+            }
+
+            gameManager.emptyClients();
+
+            gameManagers.remove(gameManager);
         } else {
             System.out.println("Client disconnected!");
         }
-
-        // TODO: countdown to disconnect other players
-
-        // TODO remove other players and end game
 
         clientHandler.disconnect();
     }
@@ -184,8 +202,7 @@ public class Server {
             if(!alreadyLogged) {
                 int clientID = getClientIDFromClientHandler(clientHandler);
 
-                // TODO change: NO toUpperCase
-                idToNickname.put(clientID, nickname.toUpperCase());
+                idToNickname.put(clientID, nickname);
 
                 GameManager gameManager = checkGamePreferences(clientID, numberOfPlayers, gameMode);
                 gameManager.addClient(clientID, clientHandler, nickname);
@@ -215,7 +232,13 @@ public class Server {
      * @return whether the nickname is unique.
      */
     private boolean checkUniqueNickname(String nickname) {
-        return !idToNickname.containsValue(nickname.toUpperCase());
+        for(String name : idToNickname.values()) {
+            if(name.equalsIgnoreCase(nickname)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -228,7 +251,6 @@ public class Server {
      * @return either an existing or a new game manager.
      */
     private GameManager checkGamePreferences(int clientID, NumberOfPlayers numberOfPlayers, GameMode gameMode) {
-        // TODO eventually remove list and use maps
         for(GameManager gameManager : gameManagers) {
             Game game = gameManager.getGame();
 
@@ -263,10 +285,6 @@ public class Server {
         idToConnection.remove(idToRemove);
         idToNickname.remove(idToRemove);
 
-        GameManager manager = idToGameManager.get(idToRemove);
-        if(manager != null) {
-            manager.removeClient(idToRemove);
-        }
         idToGameManager.remove(idToRemove);
     }
 

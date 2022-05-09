@@ -49,7 +49,6 @@ public class SocketClient extends Client {
         readQueue.execute(() -> {
             while(!readQueue.isShutdown()) {
                 try {
-                    //socket.setSoTimeout(10000); //todo
                     String message = reader.readLine();
 
                     // If message is null, it means the server's connection has fallen
@@ -170,7 +169,8 @@ public class SocketClient extends Client {
                 System.out.println(msg.getError());
             }
             case DISCONNECTION_REPLY_MESSAGE -> {
-                System.out.println("\nClosing the application...");
+                System.out.print("\nClosing the application");
+                Constants.countdown(400);
                 disconnect();
             }
             case SERVER_QUIT_MESSAGE -> {
