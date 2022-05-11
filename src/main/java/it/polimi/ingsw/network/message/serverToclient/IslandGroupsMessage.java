@@ -62,4 +62,8 @@ public class IslandGroupsMessage extends Answer {
     public ArrayList<IslandGroup> getIslandGroup() {
         return new ArrayList<>(islandGroup);
     }
+
+    public int getMotherNatureIndex() {
+        return motherNatureIndex;
+    }
 }

@@ -13,6 +13,7 @@ import it.polimi.ingsw.view.VirtualView;
 import java.beans.PropertyChangeSupport;
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 public class Game {
@@ -67,10 +68,11 @@ public class Game {
      * Creates the listeners to the model.
      * @param clientView the virtual client on the server.
      */
-    public void createListeners(VirtualView clientView){
+    public void createListeners(VirtualView clientView) {
         listeners.addPropertyChangeListener(Constants.PLAYER_LISTENER, new PlayerListener(clientView));
         listeners.addPropertyChangeListener(Constants.PHASE_LISTENER, new PhaseListener(clientView));
-        listeners.addPropertyChangeListener(Constants.ASSISTANT_LISTENER, new AssistantListener(clientView));
+        listeners.addPropertyChangeListener(Constants.ASSISTANTS_AVAILABLE_LISTENER, new AssistantsAvailableListener(clientView));
+        listeners.addPropertyChangeListener(Constants.ASSISTANT_PLAYED_LISTENER, new AssistantPlayedListener(clientView));
         listeners.addPropertyChangeListener(Constants.ISLAND_LISTENER, new IslandListener(clientView));
         listeners.addPropertyChangeListener(Constants.ISLAND_GROUPS_LISTENER, new IslandGroupListener(clientView));
         listeners.addPropertyChangeListener(Constants.BOARD_LISTENER, new BoardListener(clientView));
@@ -151,7 +153,6 @@ public class Game {
      */
     public void setCurrentPhase(Phase phase) {
         this.currentPhase = phase;
-        //listeners.firePropertyChange(Constants.PHASE_LISTENER, null, new AbstractMap.SimpleEntry<>(gameState, gameMode));
     }
 
     /**
@@ -200,6 +201,22 @@ public class Game {
     }
 
     /**
+     * @return the list of available wizards.
+     */
+    public ArrayList<WizardName> getAvailableWizards() {
+
+        ArrayList<WizardName> wizardNames = new ArrayList<>(Arrays.asList(WizardName.values()));
+
+        for(Player player : players) {
+            if(player.getWizard() != null) {
+                wizardNames.remove(player.getWizard().getName());
+            }
+        }
+
+        return wizardNames;
+    }
+
+    /**
      * @return the association of players' to their assistants played.
      */
     public Map<Player, Assistant> getPlayerPriority() {
@@ -243,7 +260,6 @@ public class Game {
      */
     public void setCurrentPlayer (Player player) {
         this.currentPlayer = player;
-        //listeners.firePropertyChange(Constants.PLAYER_LISTENER, null, player.getNickname());
     }
 
     /**
@@ -470,14 +486,6 @@ public class Game {
      */
     public void addCloud(Cloud cloud) {
         this.clouds.add(cloud);
-    }
-
-    /**
-     * Removes a cloud card from the clouds list.
-     * @param cloud cloud card to be removed.
-     */
-    public void removeCloud(Cloud cloud) {
-        this.clouds.remove(cloud);
     }
 
     /**

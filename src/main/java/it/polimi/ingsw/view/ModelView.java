@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.gameBoard.IslandGroup;
 import it.polimi.ingsw.network.message.serverToclient.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,14 +22,20 @@ public class ModelView {
     private Map<String, Board> nicknameToBoard;
     private Map<String, Integer> nicknameToCoins;
     private ArrayList<IslandGroup> islandGroups;
+    private int motherNatureIndex;
     private Map<Integer, CharacterView> idToCharacter;
     private int activeCharacterID;
     private ArrayList<Cloud> clouds;
+    private String winner;
 
     private Answer serverAnswer;
 
 
-
+    public ModelView() {
+        this.nicknameToBoard = new HashMap<>();
+        this.nicknameToCoins = new HashMap<>();
+        this.idToCharacter = new HashMap<>();
+    }
 
 
     //TODO
@@ -80,16 +87,29 @@ public class ModelView {
         board.setTowers(msg.getTowers());
     }
 
-
-
     public ArrayList<IslandGroup> getIslandGroups() {
         return islandGroups;
     }
 
-    public void setIslandGroups(ArrayList<IslandGroup> islandGroups) {
+    public void setIslandGroups(ArrayList<IslandGroup> islandGroups, int motherNatureIndex) {
         this.islandGroups = islandGroups;
+        this.motherNatureIndex = motherNatureIndex;
     }
 
+    public int getMotherNatureIndex() {
+        return motherNatureIndex;
+    }
+
+    public Island getIsland(int islandID) {
+        for(IslandGroup iG : islandGroups) {
+            for(Island i : iG.getIslands()) {
+                if(i.getIslandID() == islandID) {
+                    return i;
+                }
+            }
+        }
+        return null;
+    }
 
     public void setIsland(Island island) {
         int islandID = island.getIslandID();
@@ -105,9 +125,12 @@ public class ModelView {
         }
     }
 
-    //todo
     public void setClouds(ArrayList<Cloud> clouds) {
         this.clouds = clouds;
+    }
+
+    public int getCoinsByNickname(String nickname) {
+        return nicknameToCoins.get(nickname);
     }
 
     public void setCoins(CoinMessage msg) {
@@ -138,11 +161,21 @@ public class ModelView {
         return activeCharacterID;
     }
 
+    public CharacterView getCharacterViewById(int characterID) {
+        return idToCharacter.get(characterID);
+    }
 
+    public ArrayList<Cloud> getClouds() {
+        return clouds;
+    }
 
+    public void setWinner(String winner) {
+        this.winner = winner;
+    }
 
-
-
+    public String getWinner() {
+        return winner;
+    }
 
     public Answer getServerAnswer() {
         return serverAnswer;

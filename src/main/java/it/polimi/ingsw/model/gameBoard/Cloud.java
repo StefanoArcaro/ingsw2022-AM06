@@ -59,4 +59,11 @@ public class Cloud {
         students.clear();
         return result;
     }
+
+    /**
+     * @return whether the cloud is empty.
+     */
+    public boolean isEmpty() {
+        return students.isEmpty();
+    }
 }

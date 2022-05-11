@@ -12,6 +12,7 @@ import it.polimi.ingsw.util.Constants;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PickCloudPhase extends ActionPhase {
@@ -34,11 +35,13 @@ public class PickCloudPhase extends ActionPhase {
     @Override
     public void play() throws NoAvailableCloudException {
         Cloud cloudChosen = game.getCloudByID(cloudID);
-        if(cloudChosen == null) {
+        if(cloudChosen == null || cloudChosen.isEmpty()) {
             throw new NoAvailableCloudException();
         }
 
-        game.getListeners().firePropertyChange(Constants.CLOUD_LISTENER, null, new ArrayList<>(List.of(cloudChosen)));
+        ArrayList<Cloud> cloud = new ArrayList<>();
+        cloud.add(cloudChosen);
+        game.getListeners().firePropertyChange(Constants.CLOUD_LISTENER, null, cloud);
 
         List<CreatureColor> colorChosen = cloudChosen.getStudents().stream().map(Creature::getColor).toList();
 
@@ -47,7 +50,7 @@ public class PickCloudPhase extends ActionPhase {
         }
         game.getListeners().firePropertyChange(Constants.BOARD_LISTENER, null, currentPlayer.getBoard());
 
-        game.removeCloud(cloudChosen);
+        cloudChosen.empty();
 
         //restore
         game.getActivatedCharacter().setNumberOfIterations(0);
@@ -64,6 +67,10 @@ public class PickCloudPhase extends ActionPhase {
         } else {
             game.setCurrentPlayer(game.getNextPlayer());
             game.setGameState(GameState.MOVE_STUDENT_PHASE);
+
+            game.getListeners().firePropertyChange(Constants.BOARD_LISTENER, null, game.getCurrentPlayer().getBoard());
+            game.getListeners().firePropertyChange(Constants.ISLAND_GROUPS_LISTENER, null, new AbstractMap.SimpleEntry<>(game.getIslandGroups(), game.getIndexOfIslandGroup(game.getMotherNature().getCurrentIslandGroup())));
+
             game.setCurrentPhase(phaseFactory.createPhase(game.getGameState()));
         }
         game.getListeners().firePropertyChange(Constants.PLAYER_LISTENER, null, game.getCurrentPlayer().getNickname());

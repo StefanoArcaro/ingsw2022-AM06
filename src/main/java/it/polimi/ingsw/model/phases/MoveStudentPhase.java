@@ -92,6 +92,8 @@ public class MoveStudentPhase extends ActionPhase {
             game.setGameState(GameState.MOVE_MOTHER_NATURE_PHASE);
             game.setCurrentPhase(phaseFactory.createPhase(game.getGameState()));
             game.getListeners().firePropertyChange(Constants.PHASE_LISTENER, null, new AbstractMap.SimpleEntry<>(game.getGameState(), game.getGameMode()));
+
+            game.getListeners().firePropertyChange(Constants.ISLAND_GROUPS_LISTENER, null, new AbstractMap.SimpleEntry<>(game.getIslandGroups(), game.getIndexOfIslandGroup(game.getMotherNature().getCurrentIslandGroup())));
         }
     }
 

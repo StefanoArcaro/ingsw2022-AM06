@@ -19,4 +19,14 @@ public enum WizardName {
     public int getId() {
         return this.id;
     }
+
+    public String getName() {
+        return switch(id) {
+            case 0 -> "DRUID";
+            case 1 -> "KING";
+            case 2 -> "WITCH";
+            case 3 -> "SENSEI";
+            default -> "ERROR";
+        };
+    }
 }

@@ -9,10 +9,9 @@ import it.polimi.ingsw.model.enumerations.WizardName;
 import it.polimi.ingsw.model.phases.EndgamePhase;
 import it.polimi.ingsw.network.message.*;
 import it.polimi.ingsw.network.message.clientToserver.*;
-import it.polimi.ingsw.network.message.serverToclient.ErrorMessage;
-import it.polimi.ingsw.network.message.serverToclient.GenericMessage;
-import it.polimi.ingsw.network.message.serverToclient.WinnerMessage;
+import it.polimi.ingsw.network.message.serverToclient.*;
 import it.polimi.ingsw.network.server.ClientHandler;
+import it.polimi.ingsw.util.Constants;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -153,6 +152,8 @@ public class GameController implements PropertyChangeListener {
                 model.getCurrentPhase().play();
             } catch (Exception e) {
                 clientHandler.sendMessage(new ErrorMessage(e.getMessage()));
+                e.printStackTrace();
+                clientHandler.sendMessage(new WizardsAvailableMessage(model.getAvailableWizards()));
             }
         } else if(msg.getMessageType() == MessageType.CHARACTER_INFO_REQUEST_MESSAGE) {
             characterController.onMessageReceived(input, msg);
@@ -178,6 +179,7 @@ public class GameController implements PropertyChangeListener {
                 model.getCurrentPhase().play();
             } catch (Exception e) {
                 clientHandler.sendMessage(new ErrorMessage(e.getMessage()));
+                model.getListeners().firePropertyChange(Constants.ASSISTANTS_AVAILABLE_LISTENER, null, model.getCurrentPlayer().getWizard().getAssistants());
             }
         } else if(msg.getMessageType() == MessageType.CHARACTER_INFO_REQUEST_MESSAGE) {
             characterController.onMessageReceived(input, msg);

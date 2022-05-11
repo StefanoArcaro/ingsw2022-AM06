@@ -11,9 +11,9 @@ import java.util.ArrayList;
  */
 public class WizardsAvailableMessage extends Answer {
 
-    private final ArrayList<Wizard> wizards;
+    private final ArrayList<WizardName> wizards;
 
-    public WizardsAvailableMessage(ArrayList<Wizard> wizards) {
+    public WizardsAvailableMessage(ArrayList<WizardName> wizards) {
         super(MessageType.WIZARDS_AVAILABLE_MESSAGE);
         this.wizards= wizards;
     }
@@ -22,9 +22,13 @@ public class WizardsAvailableMessage extends Answer {
     public String getMessage() {
         StringBuilder wizardNames = new StringBuilder("Available wizards: ");
 
-        for(Wizard wizard : wizards) {
-            wizardNames.append(wizard.getWizardName()).append(" ");
+        for(WizardName wizard : wizards) {
+            wizardNames.append(wizard).append(" ");
         }
         return wizardNames.toString();
+    }
+
+    public ArrayList<WizardName> getWizards() {
+        return wizards;
     }
 }

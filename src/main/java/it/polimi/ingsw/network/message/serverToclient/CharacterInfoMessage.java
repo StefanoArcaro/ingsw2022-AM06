@@ -20,4 +20,8 @@ public class CharacterInfoMessage extends Answer {
     public String getMessage() {
         return description;
     }
+
+    public String getDescription() {
+        return description;
+    }
 }

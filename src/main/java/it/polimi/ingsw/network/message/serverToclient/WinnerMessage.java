@@ -19,4 +19,8 @@ public class WinnerMessage extends Answer {
     public String getMessage() {
         return "The winner is " + winnerNickname + "!";
     }
+
+    public String getWinnerNickname() {
+        return winnerNickname;
+    }
 }

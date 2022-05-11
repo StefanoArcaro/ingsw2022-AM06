@@ -100,58 +100,55 @@ public class SocketClient extends Client {
         switch(answer.getMessageType()) {
             case LOGIN_REPLY_MESSAGE -> {
                 LoginReplyMessage msg = gson.fromJson(message, LoginReplyMessage.class);
-                System.out.println(msg.getMessage());
+                cli.loginReplyHandler(msg);
             }
             case WIZARDS_AVAILABLE_MESSAGE -> {
                 WizardsAvailableMessage msg = gson.fromJson(message, WizardsAvailableMessage.class);
-                System.out.println(msg.getMessage());
+                cli.wizardsHandler(msg);
             }
             case ASSISTANTS_MESSAGE -> {
                 AssistantsMessage msg = gson.fromJson(message, AssistantsMessage.class);
-                System.out.println(msg.getMessage());
+                cli.assistantsHandler(msg);
             }
+            //TODO: remove?
             case COLORS_AVAILABLE_MESSAGE -> {
                 ColorsAvailableMessage msg = gson.fromJson(message, ColorsAvailableMessage.class);
                 System.out.println(msg.getMessage());
             }
             case ACTIVE_PLAYERS_MESSAGE -> {
                 ActivePlayersMessage msg = gson.fromJson(message, ActivePlayersMessage.class);
-                System.out.println(msg.getMessage());
                 cli.activePlayersHandler(msg);
             }
             case BOARD_MESSAGE -> {
                 BoardMessage msg = gson.fromJson(message, BoardMessage.class);
-                System.out.println(msg.getMessage());
                 cli.boardHandler(msg);
             }
             case ISLAND_GROUPS_MESSAGE -> {
                 IslandGroupsMessage msg = gson.fromJson(message, IslandGroupsMessage.class);
-                System.out.println(msg.getMessage());
                 cli.islandGroupsHandler(msg);
             }
             case ISLAND_MESSAGE -> {
                 IslandMessage msg = gson.fromJson(message, IslandMessage.class);
-                System.out.println(msg.getMessage());
                 cli.islandHandler(msg);
             }
-            case CLOUDS_MESSAGE -> {
-                CloudsMessage msg = gson.fromJson(message, CloudsMessage.class);
-                System.out.println(msg.getMessage());
-                cli.cloudsHandler(msg);
+            case CLOUDS_AVAILABLE_MESSAGE -> {
+                CloudsAvailableMessage msg = gson.fromJson(message, CloudsAvailableMessage.class);
+                cli.cloudsAvailableHandler(msg);
+            }
+            case CLOUD_CHOSEN_MESSAGE -> {
+                CloudChosenMessage msg = gson.fromJson(message, CloudChosenMessage.class);
+                cli.cloudChosenHandler(msg);
             }
             case COIN_MESSAGE -> {
                 CoinMessage msg = gson.fromJson(message, CoinMessage.class);
-                System.out.println(msg.getMessage());
                 cli.coinsHandler(msg);
             }
             case CURRENT_PLAYER_MESSAGE -> {
                 CurrentPlayerMessage msg = gson.fromJson(message, CurrentPlayerMessage.class);
-                System.out.println(msg.getMessage());
                 cli.currentPlayerHandler(msg);
             }
             case CURRENT_PHASE_MESSAGE -> {
                 CurrentPhaseMessage msg = gson.fromJson(message, CurrentPhaseMessage.class);
-                System.out.println(msg.getMessage());
                 cli.currentPhaseHandler(msg);
             }
             case CHARACTER_DRAWN_MESSAGE -> {
@@ -160,25 +157,24 @@ public class SocketClient extends Client {
             }
             case CHARACTER_INFO_MESSAGE -> {
                 CharacterInfoMessage msg = gson.fromJson(message, CharacterInfoMessage.class);
-                System.out.println(msg.getMessage());
+                cli.characterInfoHandler(msg);
             }
             case CHARACTER_PLAYED_MESSAGE -> {
                 CharacterPlayedMessage msg = gson.fromJson(message, CharacterPlayedMessage.class);
-                System.out.println(msg.getMessage());
                 cli.characterPlayedHandler(msg);
             }
             case WINNER_MESSAGE -> {
                 WinnerMessage msg = gson.fromJson(message, WinnerMessage.class);
-                System.out.println(msg.getMessage());
+                cli.winnerHandler(msg);
             }
 
             case GENERIC_MESSAGE -> {
                 GenericMessage msg = gson.fromJson(message, GenericMessage.class);
-                System.out.println(msg.getMessage());
+                cli.genericMessageHandler(msg);
             }
             case ERROR_MESSAGE -> {
                 ErrorMessage msg = gson.fromJson(message, ErrorMessage.class);
-                System.out.println(msg.getError());
+                cli.errorMessageHandler(msg);
             }
             case DISCONNECTION_REPLY_MESSAGE -> {
                 System.out.print("\nClosing the application");
@@ -191,7 +187,7 @@ public class SocketClient extends Client {
             }
             case PONG_MESSAGE -> {}
 
-            default -> System.out.println(answer.getMessageType());
+            default -> System.out.println(answer.getMessageType()); //should never reach this condition
         }
     }
 

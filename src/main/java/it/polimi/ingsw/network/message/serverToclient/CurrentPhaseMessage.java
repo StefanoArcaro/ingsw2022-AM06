@@ -8,10 +8,12 @@ import it.polimi.ingsw.network.message.MessageType;
 public class CurrentPhaseMessage extends Answer {
 
     private final String currentPhase;
+    private final String instructions;
 
-    public CurrentPhaseMessage(String currentPhase) {
+    public CurrentPhaseMessage(String currentPhase, String instructions) {
         super(MessageType.CURRENT_PHASE_MESSAGE);
         this.currentPhase = currentPhase;
+        this.instructions = instructions;
     }
 
     @Override
@@ -20,6 +22,10 @@ public class CurrentPhaseMessage extends Answer {
     }
 
     public String getCurrentPhase() {
-        return currentPhase; //todo
+        return currentPhase;
+    }
+
+    public String getInstructions() {
+        return instructions;
     }
 }

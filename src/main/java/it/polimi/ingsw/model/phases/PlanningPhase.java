@@ -53,6 +53,7 @@ public class PlanningPhase extends Phase {
 
         if(turns == game.getNumberOfPlayers().getNum()) {
             fillClouds();
+            game.getListeners().firePropertyChange(Constants.CLOUD_LISTENER, null, game.getClouds());
             calculatePlayingOrder();
 
             game.setPlayingOrder(playingOrder);
@@ -66,6 +67,9 @@ public class PlanningPhase extends Phase {
 
             game.setCurrentPhase(phaseFactory.createPhase(game.getGameState()));
             game.getListeners().firePropertyChange(Constants.PHASE_LISTENER, null, new AbstractMap.SimpleEntry<>(game.getGameState(), game.getGameMode()));
+
+            game.getListeners().firePropertyChange(Constants.BOARD_LISTENER, null, game.getCurrentPlayer().getBoard());
+            game.getListeners().firePropertyChange(Constants.ISLAND_GROUPS_LISTENER, null, new AbstractMap.SimpleEntry<>(game.getIslandGroups(), game.getIndexOfIslandGroup(game.getMotherNature().getCurrentIslandGroup())));
         }
     }
 
@@ -81,7 +85,7 @@ public class PlanningPhase extends Phase {
                 turns += 1;
                 assistant = currentPlayer.getWizard().playAssistant(priority);
                 currentPlayer.getWizard().removeAssistant(priority);
-                game.getListeners().firePropertyChange(Constants.ASSISTANT_LISTENER, null, new ArrayList<>(List.of(assistant)));
+                game.getListeners().firePropertyChange(Constants.ASSISTANT_PLAYED_LISTENER, null, new ArrayList<>(List.of(assistant)));
 
                 playerPriority.put(currentPlayer, assistant);
 

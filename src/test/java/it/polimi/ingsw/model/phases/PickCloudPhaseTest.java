@@ -112,7 +112,7 @@ class PickCloudPhaseTest {
                 getEntrance().getStudents().stream().map(Creature::getColor).toList();
 
         assertTrue(entrancePlayer.containsAll(colorCloud));
-        assertEquals(1, game.getClouds().size());
+        assertEquals(1, game.getClouds().stream().filter(cloud -> !cloud.isEmpty()).toList().size());
     }
 
     @Test
@@ -151,7 +151,7 @@ class PickCloudPhaseTest {
         List<CreatureColor> entrancePlayer = lastPlayer.getBoard().getEntrance().getStudents().stream().map(Creature::getColor).toList();
 
         assertTrue(entrancePlayer.containsAll(colorCloud));
-        assertEquals(1, game.getClouds().size());
+        assertEquals(1, game.getClouds().stream().filter(cloud -> !cloud.isEmpty()).toList().size());
 
         assertEquals(GameState.ENDED_STUDENTS, game.getGameState());
     }
@@ -183,7 +183,7 @@ class PickCloudPhaseTest {
         List<CreatureColor> entrancePlayer = lastPlayer.getBoard().getEntrance().getStudents().stream().map(Creature::getColor).toList();
 
         assertTrue(entrancePlayer.containsAll(colorCloud));
-        assertEquals(1, game.getClouds().size());
+        assertEquals(1, game.getClouds().stream().filter(cloud -> !cloud.isEmpty()).toList().size());
 
         assertEquals(GameState.ENDED_ASSISTANTS, game.getGameState());
     }
@@ -209,7 +209,7 @@ class PickCloudPhaseTest {
         List<CreatureColor> entrancePlayer = lastPlayer.getBoard().getEntrance().getStudents().stream().map(Creature::getColor).toList();
 
         assertTrue(entrancePlayer.containsAll(colorCloud));
-        assertEquals(1, game.getClouds().size());
+        assertEquals(1, game.getClouds().stream().filter(cloud -> !cloud.isEmpty()).toList().size());
 
         assertEquals(GameState.PLANNING_PHASE, game.getGameState());
     }

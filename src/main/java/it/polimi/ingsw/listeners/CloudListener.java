@@ -1,7 +1,8 @@
 package it.polimi.ingsw.listeners;
 
 import it.polimi.ingsw.model.gameBoard.Cloud;
-import it.polimi.ingsw.network.message.serverToclient.CloudsMessage;
+import it.polimi.ingsw.network.message.serverToclient.CloudChosenMessage;
+import it.polimi.ingsw.network.message.serverToclient.CloudsAvailableMessage;
 import it.polimi.ingsw.view.VirtualView;
 
 import java.beans.PropertyChangeEvent;
@@ -15,7 +16,16 @@ public class CloudListener extends Listener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        CloudsMessage message = new CloudsMessage((ArrayList<Cloud>) evt.getNewValue());
-        virtualView.sendAll(message);
+        ArrayList<Cloud> clouds = (ArrayList<Cloud>) evt.getNewValue();
+
+        if(clouds.size() == 1) {
+            // Cloud chosen
+            CloudChosenMessage message = new CloudChosenMessage(clouds.get(0));
+            virtualView.sendAllExcept(message, getCurrentPlayer());
+        } else {
+            // Available clouds
+            CloudsAvailableMessage message = new CloudsAvailableMessage(clouds);
+            virtualView.send(message, getCurrentPlayer());
+        }
     }
 }

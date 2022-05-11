@@ -24,25 +24,8 @@ public class PhaseListener extends Listener {
         GameMode gameMode = preferences.getValue();
 
         if(!gameState.equals(GameState.LOBBY_PHASE)) {
-            virtualView.send(new CurrentPhaseMessage(Constants.getPhaseInstructions(gameState, gameMode)), getCurrentPlayer());
-
-            // TODO check gameState to determine whether to send to all players or just the current player
+            virtualView.send(new CurrentPhaseMessage(getCurrentPhaseAction(gameState), Constants.getPhaseInstructions(gameState, gameMode)), getCurrentPlayer());
             virtualView.sendAllExcept(new GenericMessage(getCurrentPlayer() + ": " + getCurrentPhaseAction(gameState)), getCurrentPlayer());
         }
-    }
-
-    public String getCurrentPhaseAction(GameState gameState) {
-        return switch(gameState) {
-            case LOBBY_PHASE -> "Lobby phase";
-            case PREPARE_PHASE -> "Prepare phase";
-            case PLANNING_PHASE -> "Planning phase";
-            case MOVE_STUDENT_PHASE -> "Move student phase";
-            case MOVE_MOTHER_NATURE_PHASE -> "Move mother nature phase";
-            case PICK_CLOUD_PHASE -> "Pick cloud phase";
-            case ENDED_ISLAND -> "Game ended (reached three groups of islands)";
-            case ENDED_TOWER -> "Game ended (a player finished his towers)";
-            case ENDED_STUDENTS -> "Game ended (finished student in bag)";
-            case ENDED_ASSISTANTS -> "Game ended (a player finished his assistants)";
-        };
     }
 }

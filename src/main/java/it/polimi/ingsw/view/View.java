@@ -58,7 +58,7 @@ public class View  {
      * @param cloudsAvailable list of clouds' id that aren't been chosen from other players.
      */
     public void askCloudId(ArrayList<Integer> cloudsAvailable) {
-        //client: send(new CloudsMessage(cloudsAvailable));
+        //client: send(new CloudChosenMessage(cloudsAvailable));
     }
 
     /**

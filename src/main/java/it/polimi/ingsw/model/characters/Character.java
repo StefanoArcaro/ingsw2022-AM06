@@ -74,7 +74,12 @@ public abstract class Character {
      * @return the list of students on the character card.
      */
     public ArrayList<Student> getStudents() {
-        return new ArrayList<>(students);
+        ArrayList<Student> st = new ArrayList<>();
+        if(numberOfStudents > 0) {
+            st.addAll(students);
+        }
+
+        return st;
     }
 
     /**

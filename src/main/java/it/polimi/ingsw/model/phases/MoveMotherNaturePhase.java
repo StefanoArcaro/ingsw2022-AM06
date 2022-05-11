@@ -108,5 +108,6 @@ public class MoveMotherNaturePhase extends ActionPhase {
         }
 
         game.setGameState(GameState.PICK_CLOUD_PHASE);
+        game.getListeners().firePropertyChange(Constants.CLOUD_LISTENER, null, game.getClouds());
     }
 }
