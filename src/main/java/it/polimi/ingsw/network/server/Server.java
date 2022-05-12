@@ -42,6 +42,14 @@ public class Server {
         new Thread(this::quit).start(); // Asynchronously listen to server stdin for quitting
     }
 
+    public SocketServer getSocketServer() {
+        return socketServer;
+    }
+
+    public ArrayList<GameManager> getGameManagers() {
+        return new ArrayList<>(gameManagers);
+    }
+
     /**
      * Increases the clientID variable in order to assign a unique ID to
      * every connected client.

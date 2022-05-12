@@ -4,7 +4,6 @@ import it.polimi.ingsw.network.message.serverToclient.CoinMessage;
 import it.polimi.ingsw.view.VirtualView;
 
 import java.beans.PropertyChangeEvent;
-import java.util.AbstractMap;
 import java.util.Map;
 
 public class CoinListener extends Listener {

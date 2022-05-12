@@ -1,9 +1,6 @@
 package it.polimi.ingsw.listeners;
 
-import it.polimi.ingsw.model.enumerations.GameMode;
-import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.gameBoard.IslandGroup;
-import it.polimi.ingsw.model.gameBoard.MotherNature;
 import it.polimi.ingsw.network.message.serverToclient.IslandGroupsMessage;
 import it.polimi.ingsw.view.VirtualView;
 

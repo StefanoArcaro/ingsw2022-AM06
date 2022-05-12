@@ -26,6 +26,9 @@ public abstract class Listener implements PropertyChangeListener {
         return virtualView.getGameManager().getGame().getCurrentPlayer().getNickname();
     }
 
+    /**
+     * @return the name of the phase.
+     */
     public String getCurrentPhaseAction(GameState gameState) {
         return switch(gameState) {
             case LOBBY_PHASE -> "Lobby phase";

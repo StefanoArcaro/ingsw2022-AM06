@@ -2,7 +2,6 @@ package it.polimi.ingsw.listeners;
 
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.gameBoard.Board;
 import it.polimi.ingsw.model.gameBoard.IslandGroup;
 import it.polimi.ingsw.network.message.serverToclient.*;

@@ -3,7 +3,6 @@ package it.polimi.ingsw.listeners;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.GameMode;
 import it.polimi.ingsw.model.enumerations.GameState;
-import it.polimi.ingsw.model.phases.Phase;
 import it.polimi.ingsw.network.message.serverToclient.CurrentPhaseMessage;
 import it.polimi.ingsw.network.message.serverToclient.GenericMessage;
 import it.polimi.ingsw.util.Constants;

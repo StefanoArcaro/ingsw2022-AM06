@@ -2,7 +2,6 @@ package it.polimi.ingsw.listeners;
 
 import it.polimi.ingsw.model.gameBoard.Board;
 import it.polimi.ingsw.network.message.serverToclient.BoardMessage;
-import it.polimi.ingsw.network.message.serverToclient.GenericMessage;
 import it.polimi.ingsw.view.VirtualView;
 
 import java.beans.PropertyChangeEvent;

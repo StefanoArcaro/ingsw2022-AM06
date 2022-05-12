@@ -30,9 +30,6 @@ public class GameController implements PropertyChangeListener {
     private final InputController inputController;
     private final CharacterController characterController;
 
-
-    //todo: fix messages: server -> client
-
     /**
      * Default constructor.
      * @param model the game.
@@ -89,7 +86,8 @@ public class GameController implements PropertyChangeListener {
                     pickCloudState(input, msg);
                 }
                 break;
-            default: { //end game states and lobby todo probably not lobby
+            default: {
+                // End game states
                 ClientHandler clientHandler = clients.get(msg.getClientID());
                 clientHandler.sendMessage(new GenericMessage("The game is over, you can't send a message."));
             }

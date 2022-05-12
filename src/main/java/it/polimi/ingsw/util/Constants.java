@@ -1,6 +1,7 @@
 package it.polimi.ingsw.util;
 
 import it.polimi.ingsw.model.characters.Character;
+import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.enumerations.GameMode;
 import it.polimi.ingsw.model.enumerations.GameState;
 
@@ -54,6 +55,28 @@ public class Constants {
     // Unicode text
     public static final String CIRCLE_EMPTY = "\u25ef";
     public static final String CIRCLE_FULL = "\u25cf";
+
+    public static String getCircleEmptyByColor(CreatureColor color) {
+        return getAnsiByColor(color) + CIRCLE_EMPTY + ANSI_RESET;
+    }
+
+    public static String getCircleFullByColor(CreatureColor color) {
+        return getAnsiByColor(color) + CIRCLE_FULL + ANSI_RESET;
+    }
+
+    private static String getAnsiByColor(CreatureColor color) {
+        String result = "";
+
+        switch (color) {
+            case GREEN -> result = result + ANSI_GREEN;
+            case RED -> result = result + ANSI_RED;
+            case YELLOW -> result = result + ANSI_YELLOW;
+            case PINK -> result = result + ANSI_MAGENTA;
+            case BLUE -> result = result + ANSI_BLUE;
+        }
+
+        return result;
+    }
 
     private static final String SEPARATOR = "\n==================================================================\n\n";
 

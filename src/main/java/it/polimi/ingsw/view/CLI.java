@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.enumerations.CharacterID;
+import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.enumerations.WizardName;
 import it.polimi.ingsw.model.gameBoard.*;
 import it.polimi.ingsw.network.client.MessageParser;
@@ -130,28 +131,43 @@ public class CLI {
 
         String owner = nickname + "'s board.\n";
 
-        StringBuilder entranceStudents = new StringBuilder("Entrance:\n");
+        StringBuilder entranceStudents = new StringBuilder("Entrance:");
         for(Student student : board.getEntrance().getStudents()) {
-            entranceStudents.append(student.getColor().getColorName()).append(" ");
+            entranceStudents.append(" ").append(Constants.getCircleFullByColor(student.getColor()));
         }
         entranceStudents.append("\n");
 
         StringBuilder hallStudents = new StringBuilder("Hall:\n");
         for(Table table : board.getHall().getStudents()) {
-            hallStudents.append(table.getColor().getColorName()).append(" ").append(table.getLength()).append("\n");
-        }
-
-        StringBuilder professorsInBoard = new StringBuilder("Professors: ");
-        if(board.getProfessors().size() > 0) {
-            for (Professor professor : board.getProfessors()) {
-                professorsInBoard.append(professor.getColor().getColorName()).append(" ");
+            int i;
+            for(i = 0; i < table.getLength(); i++) {
+                hallStudents.append(Constants.getCircleFullByColor(table.getColor())).append(" ");
             }
+            while(i < 10) {
+                hallStudents.append(Constants.getCircleEmptyByColor(table.getColor())).append(" ");
+                i++;
+            }
+
+            hallStudents.append("| ");
+
+            // TODO change symbol
+            boolean found = false;
+            for(Professor p : board.getProfessors()) {
+                if(p.getColor().equals(table.getColor())) {
+                    hallStudents.append(Constants.getCircleFullByColor(table.getColor()));
+                    found = true;
+                }
+            }
+            if(!found) {
+                hallStudents.append(Constants.getCircleEmptyByColor(table.getColor()));
+            }
+
+            hallStudents.append("\n");
         }
-        professorsInBoard.append("\n");
 
-        String numTowers = "Number of towers: " + board.getTowers();
+        String numTowers = "Number of towers: " + board.getTowers(); //todo change symbol
 
-        System.out.println(owner + entranceStudents + hallStudents + professorsInBoard + numTowers);
+        System.out.println(owner + entranceStudents + hallStudents + numTowers);
     }
 
 
@@ -445,15 +461,6 @@ public class CLI {
         System.out.println("Invalid IP address, setting it to the default: " + Constants.DEFAULT_IP_ADDRESS + ".\n");
         return Constants.DEFAULT_IP_ADDRESS;
     }
-
-
-
-
-
-
-
-
-
 
     public static void main(String[] args) {
         CLI cli = new CLI();
