@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.model.enumerations.CharacterID;
 import it.polimi.ingsw.model.enumerations.WizardName;
 import it.polimi.ingsw.model.gameBoard.*;
 import it.polimi.ingsw.network.client.MessageParser;
@@ -26,7 +27,7 @@ public class CLI {
     private SocketClient socketClient;
     private final ExecutorService keyboardQueue;
     private final PropertyChangeSupport listener = new PropertyChangeSupport(this);
-    private final ModelView modelView;
+    private ModelView modelView;
 
     /**
      * Default constructor.
@@ -287,11 +288,53 @@ public class CLI {
 
     public void currentPhaseHandler(CurrentPhaseMessage msg) {
         modelView.setCurrentPhase(msg.getCurrentPhase());
-        showCurrentPhase(msg.getInstructions());
+        showCurrentPhase(msg);
     }
 
-    public void showCurrentPhase(String instructions) {
-        System.out.println(instructions);
+    public void showCurrentPhase(CurrentPhaseMessage msg) {
+        System.out.println(msg.getInstructions());
+
+        List<CharacterView> characterViews = modelView.getIdToCharacter().values().stream().toList();
+        if(characterViews.size() > 0) {
+            showDrawnCharacters(msg.getCurrentPhase(), characterViews);
+        }
+    }
+
+    public void showDrawnCharacters(String currentPhase, List<CharacterView> characterViews) {
+
+        if(currentPhase.equals("Planning phase")) {
+            StringBuilder characters = new StringBuilder("- Drawn characters:");
+            for(CharacterView c : characterViews) {
+                characters.append(" ").append(c.getCharacterID());
+            }
+            characters.append("\n");
+
+            System.out.println(characters);
+        } else if(currentPhase.equals("Move student phase") || currentPhase.equals("Move mother nature phase")
+                || currentPhase.equals("Pick cloud phase")) {
+            StringBuilder characters = new StringBuilder("- Play a character:\n");
+
+            for(CharacterView c : characterViews) {
+                characters.append("\tCharacter ID: ").append(c.getCharacterID());
+
+                if(c.getStudents().size() > 0) {
+                    characters.append(", students:");
+                    for(Student s : c.getStudents()) {
+                        characters.append(" ").append(s.getColor().getColorName());
+                    }
+                }
+
+                if(c.getCharacterID() == CharacterID.CHARACTER_FIVE.getID()) {
+                    characters.append(", ban cards: ").append(c.getBanCards());
+                }
+
+                characters.append("\n");
+
+                // Format
+                characters.append("\t\t").append(Constants.getCharacterFormat(c.getCharacterID())).append("\n");
+            }
+            System.out.println(characters);
+        }
     }
 
 

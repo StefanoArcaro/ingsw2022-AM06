@@ -12,7 +12,6 @@ import it.polimi.ingsw.util.Constants;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class PickCloudPhase extends ActionPhase {
@@ -64,17 +63,21 @@ public class PickCloudPhase extends ActionPhase {
             calculateNextPhase();
             game.setCurrentPlayer(game.getPlayers().get(game.getFirstPlayerIndex()));
             game.setCurrentPhase(phaseFactory.createPhase(game.getGameState()));
+
+            game.getListeners().firePropertyChange(Constants.PLAYER_LISTENER, null, game.getCurrentPlayer().getNickname());
+            game.getListeners().firePropertyChange(Constants.PHASE_LISTENER, null, new AbstractMap.SimpleEntry<>(game.getGameState(), game.getGameMode()));
         } else {
             game.setCurrentPlayer(game.getNextPlayer());
             game.setGameState(GameState.MOVE_STUDENT_PHASE);
 
-            game.getListeners().firePropertyChange(Constants.BOARD_LISTENER, null, game.getCurrentPlayer().getBoard());
-            game.getListeners().firePropertyChange(Constants.ISLAND_GROUPS_LISTENER, null, new AbstractMap.SimpleEntry<>(game.getIslandGroups(), game.getIndexOfIslandGroup(game.getMotherNature().getCurrentIslandGroup())));
+            game.getListeners().firePropertyChange(Constants.PLAYER_LISTENER, null, game.getCurrentPlayer().getNickname());
+            game.getListeners().firePropertyChange(Constants.PHASE_LISTENER, null, new AbstractMap.SimpleEntry<>(game.getGameState(), game.getGameMode()));
+
+            game.getListeners().firePropertyChange(Constants.BOARD_LISTENER, game.getCurrentPlayer().getNickname(), game.getCurrentPlayer().getBoard());
+            game.getListeners().firePropertyChange(Constants.ISLAND_GROUPS_LISTENER, game.getCurrentPlayer().getNickname(), new AbstractMap.SimpleEntry<>(game.getIslandGroups(), game.getIndexOfIslandGroup(game.getMotherNature().getCurrentIslandGroup())));
 
             game.setCurrentPhase(phaseFactory.createPhase(game.getGameState()));
         }
-        game.getListeners().firePropertyChange(Constants.PLAYER_LISTENER, null, game.getCurrentPlayer().getNickname());
-        game.getListeners().firePropertyChange(Constants.PHASE_LISTENER, null, new AbstractMap.SimpleEntry<>(game.getGameState(), game.getGameMode()));
     }
 
     /**

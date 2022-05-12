@@ -17,6 +17,11 @@ public class BoardListener extends Listener {
     public void propertyChange(PropertyChangeEvent evt) {
         Board board = (Board) evt.getNewValue();
         BoardMessage message = new BoardMessage(board.getPlayerNickname(), board.getEntrance(), board.getHall(), board.getProfessors(), board.getTowers());
-        virtualView.sendAll(message);
+        if(evt.getOldValue() != null) {
+            String nickname = (String) evt.getOldValue();
+            virtualView.send(message, nickname);
+        } else {
+            virtualView.sendAll(message);
+        }
     }
 }

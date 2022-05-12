@@ -2,6 +2,7 @@ package it.polimi.ingsw.listeners;
 
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.GameState;
+import it.polimi.ingsw.network.message.serverToclient.AssistantsMessage;
 import it.polimi.ingsw.network.message.serverToclient.CurrentPhaseMessage;
 import it.polimi.ingsw.network.message.serverToclient.CurrentPlayerMessage;
 import it.polimi.ingsw.network.message.serverToclient.GenericMessage;
@@ -29,6 +30,7 @@ public class PlayerListener extends Listener {
         } else if(game.getGameState().equals(GameState.PLANNING_PHASE)) {
             if(game.getFirstPlayerIndex() != game.getPlayers().indexOf(game.getCurrentPlayer())) {
                 virtualView.send(new CurrentPhaseMessage(getCurrentPhaseAction(game.getGameState()), Constants.getPhaseInstructions(game.getGameState(), game.getGameMode())), getCurrentPlayer());
+                virtualView.send(new AssistantsMessage(game.getCurrentPlayer().getWizard().getAssistants()), getCurrentPlayer());
             }
         }
     }

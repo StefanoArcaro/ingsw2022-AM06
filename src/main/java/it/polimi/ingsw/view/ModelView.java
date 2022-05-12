@@ -37,9 +37,6 @@ public class ModelView {
         this.idToCharacter = new HashMap<>();
     }
 
-
-    //TODO
-
     public String getCurrentPhase() {
         return currentPhase;
     }
@@ -155,6 +152,10 @@ public class ModelView {
         this.activeCharacterID = msg.getCharacterID();
         CharacterView characterView = new CharacterView(msg.getCharacterID(), msg.getCost(), msg.isUsed(), msg.getStudents(), msg.getBanCards());
         idToCharacter.replace(characterView.getCharacterID(), characterView);
+    }
+
+    public Map<Integer, CharacterView> getIdToCharacter() {
+        return new HashMap<>(idToCharacter); //todo
     }
 
     public int getActiveCharacterID() {

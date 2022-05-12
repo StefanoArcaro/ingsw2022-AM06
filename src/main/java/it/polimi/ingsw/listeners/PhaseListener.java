@@ -1,5 +1,6 @@
 package it.polimi.ingsw.listeners;
 
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.GameMode;
 import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.phases.Phase;
@@ -26,6 +27,12 @@ public class PhaseListener extends Listener {
         if(!gameState.equals(GameState.LOBBY_PHASE)) {
             virtualView.send(new CurrentPhaseMessage(getCurrentPhaseAction(gameState), Constants.getPhaseInstructions(gameState, gameMode)), getCurrentPlayer());
             virtualView.sendAllExcept(new GenericMessage(getCurrentPlayer() + ": " + getCurrentPhaseAction(gameState)), getCurrentPlayer());
+
+            if(gameState.equals(GameState.MOVE_MOTHER_NATURE_PHASE)) {
+                Game game = virtualView.getGameManager().getGame();
+                int maxSteps = game.getPlayerPriority().get(game.getCurrentPlayer()).getMaxSteps(game.getActivatedCharacter());
+                virtualView.send(new GenericMessage("Mother nature can take " + maxSteps + " steps at most."), getCurrentPlayer());
+            }
         }
     }
 }

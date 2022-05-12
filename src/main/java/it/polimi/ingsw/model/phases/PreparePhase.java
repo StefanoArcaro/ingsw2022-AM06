@@ -302,14 +302,10 @@ public class PreparePhase extends Phase {
             Character characterToAdd = characterFactory.createCharacter(randomCharacterID);
             game.addDrawnCharacter(characterToAdd);
 
-            game.getListeners().firePropertyChange(Constants.CHARACTER_DRAWN_LISTENER, null, characterToAdd);
-
             characterToAdd.initialPreparation();
-        }
 
-        // Set Constants
-        Constants.setDrawnCharacters(game.getDrawnCharacters());
-        Constants.setPlayCharacters(game.getDrawnCharacters());
+            game.getListeners().firePropertyChange(Constants.CHARACTER_DRAWN_LISTENER, null, characterToAdd);
+        }
     }
 
     /**

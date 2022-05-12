@@ -23,6 +23,12 @@ public class IslandGroupListener extends Listener {
         ArrayList<IslandGroup> islandGroups = islands.getKey();
         int motherNatureIndex = islands.getValue();
         IslandGroupsMessage message = new IslandGroupsMessage(islandGroups, motherNatureIndex);
-        virtualView.sendAll(message);
+
+        if(evt.getOldValue() != null) {
+            String nickname = (String) evt.getOldValue();
+            virtualView.send(message, nickname);
+        } else {
+            virtualView.sendAll(message);
+        }
     }
 }

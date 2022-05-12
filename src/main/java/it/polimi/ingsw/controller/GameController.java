@@ -152,7 +152,6 @@ public class GameController implements PropertyChangeListener {
                 model.getCurrentPhase().play();
             } catch (Exception e) {
                 clientHandler.sendMessage(new ErrorMessage(e.getMessage()));
-                e.printStackTrace();
                 clientHandler.sendMessage(new WizardsAvailableMessage(model.getAvailableWizards()));
             }
         } else if(msg.getMessageType() == MessageType.CHARACTER_INFO_REQUEST_MESSAGE) {

@@ -81,42 +81,27 @@ public class Constants {
     
     public static final String QUIT_FORMAT = "quit";
 
-    private static String charactersDrawn = "- Drawn characters:";
-
-    private static String playCharacters = "- Play a character";
-    
     // Phase instructions
     private static String expertCharacterAction(GameMode gameMode) {
         return gameMode.equals(GameMode.EXPERT) ? "- Ask for characters' info\n\t" + CHARACTER_INFO_FORMAT + "\n" : "";
     }
 
-    private static String expertCharactersDrawn(GameMode gameMode) {
-        return gameMode.equals(GameMode.EXPERT) ? charactersDrawn + "\n" : "";
-    }
-
-    private static String expertPlayCharacters(GameMode gameMode) {
-        return gameMode.equals(GameMode.EXPERT) ? playCharacters + "\n" : "";
-    }
-
     private static final String LOGIN_PHASE_INSTRUCTIONS = ANSI_GREEN + "LOGIN PHASE\n" + ANSI_RESET +
             "The actions you can take are the following:\n" +
-            "- Login\n\t" + LOGIN_FORMAT + "\n" +
-            "- Quit\n\t" + QUIT_FORMAT;
+            "- Login\n\t" + LOGIN_FORMAT + "\n\n" +
+            "You can always quit the game by typing: " + QUIT_FORMAT;
 
     private static final String PREPARE_PHASE_INSTRUCTIONS = SEPARATOR +
             "PREPARE PHASE\n" +
             "The actions you can take are the following:\n" +
-            "- Choose a wizard\n\t" + PREPARE_FORMAT + "\n" +
-            "- Quit\n\t" + QUIT_FORMAT;
+            "- Choose a wizard\n\t" + PREPARE_FORMAT + "\n";
 
     private static String planningPhaseInstructions(GameMode gameMode) {
         return SEPARATOR +
                 "PLANNING PHASE\n" +
                 "The actions you can take are the following:\n" +
                 "- Play an assistant\n\t" + PLANNING_FORMAT + "\n" +
-                expertCharacterAction(gameMode) +
-                expertCharactersDrawn(gameMode) +
-                "- Quit\n\t" + QUIT_FORMAT;
+                expertCharacterAction(gameMode);
     }
 
     private static String moveStudentPhaseInstructions(GameMode gameMode) {
@@ -124,9 +109,7 @@ public class Constants {
                 "MOVE STUDENT PHASE\n" +
                 "The actions you can take are the following:\n" +
                 "- Move a student from your entrance to the hall or one of the islands\n\t" + MOVE_STUDENT_FORMAT + "\n" +
-                expertCharacterAction(gameMode) +
-                expertPlayCharacters(gameMode) +
-                "- Quit\n\t" + QUIT_FORMAT;
+                expertCharacterAction(gameMode);
     }
 
     private static String moveMotherNaturePhaseInstructions(GameMode gameMode) {
@@ -134,9 +117,7 @@ public class Constants {
                 "MOVE MOTHER NATURE PHASE\n" +
                 "The actions you can take are the following:\n" +
                 "- Move mother nature a certain amount of steps\n\t" + MOVE_MOTHER_NATURE_FORMAT + "\n" +
-                expertCharacterAction(gameMode) +
-                expertPlayCharacters(gameMode) +
-                "- Quit\n\t" + QUIT_FORMAT;
+                expertCharacterAction(gameMode);
     }
 
     private static String pickCloudPhaseInstructions(GameMode gameMode) {
@@ -144,9 +125,7 @@ public class Constants {
                 "PICK CLOUD PHASE\n" +
                 "The actions you can take are the following:\n" +
                 "- Choose a cloud from which to get students\n\t" + PICK_CLOUD_FORMAT + "\n" +
-                expertCharacterAction(gameMode) +
-                expertPlayCharacters(gameMode) +
-                "- Quit\n\t" + QUIT_FORMAT;
+                expertCharacterAction(gameMode);
     }
 
     public static String getPhaseInstructions(GameState gameState, GameMode gameMode) {
@@ -161,7 +140,7 @@ public class Constants {
         };
     }
 
-    private static String getCharacterFormat(int characterID) {
+    public static String getCharacterFormat(int characterID) {
         return switch (characterID) {
             case 1 -> CHARACTER_ONE_FORMAT;
             case 2 -> CHARACTER_TWO_FORMAT;
@@ -177,30 +156,6 @@ public class Constants {
             case 12 -> CHARACTER_TWELVE_FORMAT;
             default -> "";
         };
-    }
-
-    public static String getDrawnCharacters() {
-        return charactersDrawn;
-    }
-
-    public static void setDrawnCharacters(ArrayList<Character> characters) {
-        for(Character character : characters) {
-            if(character.getCharacterID() != 0) {
-                charactersDrawn = charactersDrawn + " " + character.getCharacterID();
-            }
-        }
-    }
-
-    public static void setPlayCharacters(ArrayList<Character> characters) {
-        StringBuilder characterDrawn = new StringBuilder();
-
-        for(Character character : characters) {
-            if(character.getCharacterID() != 0) {
-                characterDrawn.append("\n\t").append(getCharacterFormat(character.getCharacterID()));
-            }
-        }
-
-        playCharacters = playCharacters + characterDrawn;
     }
 
     // Characters' descriptions
