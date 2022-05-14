@@ -1,7 +1,6 @@
 package it.polimi.ingsw.network.message.serverToclient;
 
 import it.polimi.ingsw.network.message.MessageType;
-import it.polimi.ingsw.network.message.clientToserver.Message;
 
 /**
  * Message used to reply to a login request of a client.

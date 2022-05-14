@@ -19,7 +19,6 @@ public class PlanningPhase extends Phase {
 
     private static final int FIRST_PLAYER_INDEX = 0;
 
-    int firstPlayerIndex;
     private Player currentPlayer;
     private ArrayList<Player> playingOrder;
     private final Map<Player, Assistant> playerPriority;
@@ -29,12 +28,10 @@ public class PlanningPhase extends Phase {
      * Default constructor.
      * @param game reference to the game.
      * @param players list of the players.
-     * @param firstPlayerIndex index of the player going first.
      */
-    public PlanningPhase(Game game, ArrayList<Player> players, int firstPlayerIndex) {
+    public PlanningPhase(Game game, ArrayList<Player> players) {
         this.game = game;
         this.phaseFactory = new PhaseFactory(game);
-        this.firstPlayerIndex = firstPlayerIndex;
         this.playingOrder = new ArrayList<>(players);
         this.playerPriority = new HashMap<>();
         turns = 0;

@@ -2,7 +2,6 @@ package it.polimi.ingsw.model.phases;
 
 import it.polimi.ingsw.exceptions.ExceededStepsException;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.enumerations.CharacterID;
 import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.Player;
@@ -12,8 +11,6 @@ import it.polimi.ingsw.util.Constants;
 import java.util.AbstractMap;
 
 public class MoveMotherNaturePhase extends ActionPhase {
-
-    private int maxNumberOfSteps;
 
     /**
      * Default constructor.
@@ -34,7 +31,7 @@ public class MoveMotherNaturePhase extends ActionPhase {
      * @return whether the steps chosen are allowed.
      */
     private boolean checkNumberOfSteps(int numberOfSteps) {
-        this.maxNumberOfSteps = game.getPlayerPriority().get(currentPlayer).getMaxSteps(game.getActivatedCharacter());
+        int maxNumberOfSteps = game.getPlayerPriority().get(currentPlayer).getMaxSteps(game.getActivatedCharacter());
         return numberOfSteps <= maxNumberOfSteps;
     }
 

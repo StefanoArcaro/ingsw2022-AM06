@@ -1,7 +1,6 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.enumerations.CharacterID;
-import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.enumerations.WizardName;
 import it.polimi.ingsw.model.gameBoard.*;
 import it.polimi.ingsw.network.client.MessageParser;
@@ -28,7 +27,7 @@ public class CLI {
     private SocketClient socketClient;
     private final ExecutorService keyboardQueue;
     private final PropertyChangeSupport listener = new PropertyChangeSupport(this);
-    private ModelView modelView;
+    private final ModelView modelView;
 
     /**
      * Default constructor.
@@ -113,9 +112,9 @@ public class CLI {
     public void showActivePlayers() {
         List<String> players = modelView.getPlayers();
 
-        String playersInGame = "Active players:\n";
+        StringBuilder playersInGame = new StringBuilder("Active players:\n");
         for(String p : players) {
-            playersInGame = playersInGame + p + "\t";
+            playersInGame.append(p).append("\t");
         }
         System.out.println(playersInGame + "\n");
     }
@@ -179,35 +178,35 @@ public class CLI {
     public void showIslandGroups() {
         ArrayList<IslandGroup> islandGroups = modelView.getIslandGroups();
 
-        String islands = "\n";
+        StringBuilder islands = new StringBuilder("\n");
         int islandGroupIndex = 0;
 
         for(IslandGroup iG : islandGroups) {
             int islandGroupId = islandGroupIndex + 1;
-            islands = islands + "Island group " + islandGroupId + " composed by islands: \n";
+            islands.append("Island group ").append(islandGroupId).append(" composed by islands: \n");
 
             for(Island i : iG.getIslands()) {
-                islands = "\t" + islands + i.getIslandID() + " -> ";
+                islands = new StringBuilder("\t" + islands + i.getIslandID() + " -> ");
                 for(Student s : i.getStudents()) {
-                    islands = islands + s.getColor().getColorName() + " ";
+                    islands.append(s.getColor().getColorName()).append(" ");
                 }
             }
-            islands = islands + "\n";
+            islands.append("\n");
 
 
             if(iG.getConquerorColor() != null) {
-                islands = islands + "\tConquered by -> " + iG.getConquerorColor() + "\n";
+                islands.append("\tConquered by -> ").append(iG.getConquerorColor()).append("\n");
             }
 
             if(iG.getNumberOfBanCardPresent() > 0) {
-                islands = islands + "\tThere are " + iG.getNumberOfBanCardPresent() + " ban card on this island group.\n";
+                islands.append("\tThere are ").append(iG.getNumberOfBanCardPresent()).append(" ban card on this island group.\n");
             }
 
             if(modelView.getMotherNatureIndex() == islandGroupIndex){
-                islands = islands + Constants.ANSI_CYAN + "Mother nature is on this island group!\n" + Constants.ANSI_RESET;
+                islands.append(Constants.ANSI_CYAN).append("Mother nature is on this island group!\n").append(Constants.ANSI_RESET);
             }
 
-            islands = islands + "\n";
+            islands.append("\n");
 
             islandGroupIndex += 1;
         }
@@ -224,15 +223,15 @@ public class CLI {
     public void showIsland(int islandID) {
         Island island = modelView.getIsland(islandID);
 
-        String message = "Island: " + island.getIslandID() + ":";
+        StringBuilder message = new StringBuilder("Island: " + island.getIslandID() + ":");
 
         for(Student s : island.getStudents()) {
-            message = message + "\t" + s.getColor().getColorName();
+            message.append("\t").append(s.getColor().getColorName());
         }
-        message = message + "\n";
+        message.append("\n");
 
         if(island.getTower() != null) {
-            message = message + "\t\tConquered by -> " + island.getTower() + "\n";
+            message.append("\t\tConquered by -> ").append(island.getTower()).append("\n");
         }
 
         System.out.println(message);
@@ -249,15 +248,15 @@ public class CLI {
 
     public void showAvailableClouds() {
         ArrayList<Cloud> clouds = modelView.getClouds();
-        String message = "Available clouds\n";
+        StringBuilder message = new StringBuilder("Available clouds\n");
 
         for(Cloud c : clouds) {
             if(!c.isEmpty()) {
-                message = message + "- Cloud " + c.getCloudID() + ":";
+                message.append("- Cloud ").append(c.getCloudID()).append(":");
                 for (Student s : c.getStudents()) {
-                    message = message + "\t" + s.getColor().getColorName();
+                    message.append("\t").append(s.getColor().getColorName());
                 }
-                message = message + "\n";
+                message.append("\n");
             }
         }
 
@@ -270,12 +269,12 @@ public class CLI {
     }
 
     public void showChosenCloud(Cloud cloud) {
-        String message = modelView.getCurrentPlayer() + "has chosen cloud " + cloud.getCloudID() + ":";
+        StringBuilder message = new StringBuilder(modelView.getCurrentPlayer() + "has chosen cloud " + cloud.getCloudID() + ":");
 
         for (Student s : cloud.getStudents()) {
-            message = message + "\t" + s.getColor().getColorName();
+            message.append("\t").append(s.getColor().getColorName());
         }
-        message = message + "\n";
+        message.append("\n");
 
         System.out.println(message);
     }
@@ -380,11 +379,11 @@ public class CLI {
             banCard = "Number of ban cards: " + characterView.getBanCards();
         }
 
-        String studentString = "";
+        StringBuilder studentString = new StringBuilder();
         if(characterView.getStudents() != null) {
-            studentString = "Students: ";
+            studentString = new StringBuilder("Students: ");
             for(Student student : characterView.getStudents()) {
-                studentString = studentString + student.getColor().getColorName() + " ";
+                studentString.append(student.getColor().getColorName()).append(" ");
             }
         }
 

@@ -92,15 +92,4 @@ public class Wizard {
         return assistants.size() <= 0;
     }
 
-    /**
-     * @return the name of the wizard.
-     */
-    public String getWizardName() {
-        return switch (name) {
-            case DRUID -> "Druid";
-            case KING -> "King";
-            case WITCH -> "Witch";
-            case SENSEI -> "Sensei";
-        };
-    }
 }

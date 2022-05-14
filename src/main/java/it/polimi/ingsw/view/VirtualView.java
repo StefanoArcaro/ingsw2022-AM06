@@ -2,11 +2,6 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.GameManager;
 import it.polimi.ingsw.network.message.serverToclient.Answer;
-import it.polimi.ingsw.network.server.ClientHandler;
-import it.polimi.ingsw.network.server.SocketClientHandler;
-
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 /**
  * It is a representation of the virtual instance of the client.

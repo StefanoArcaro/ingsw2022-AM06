@@ -151,7 +151,7 @@ public class GameManager {
     }
 
     /**
-     * Sends a message to all the players in the gaem but the one identified
+     * Sends a message to all the players in the game but the one identified
      * by the specified nickname.
      * @param answer the message to send.
      * @param nickname the nickname of the client to not send the message to.

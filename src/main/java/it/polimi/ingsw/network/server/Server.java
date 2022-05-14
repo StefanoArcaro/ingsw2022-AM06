@@ -42,14 +42,6 @@ public class Server {
         new Thread(this::quit).start(); // Asynchronously listen to server stdin for quitting
     }
 
-    public SocketServer getSocketServer() {
-        return socketServer;
-    }
-
-    public ArrayList<GameManager> getGameManagers() {
-        return new ArrayList<>(gameManagers);
-    }
-
     /**
      * Increases the clientID variable in order to assign a unique ID to
      * every connected client.
@@ -137,7 +129,7 @@ public class Server {
      */
     private void quitHandler(ClientHandler clientHandler) {
         // Disconnect clientHandler
-        clientHandler.sendMessage(new DisconnectionReplyMessage("You"));
+        clientHandler.sendMessage(new DisconnectionReplyMessage());
 
         disconnectionHandler(clientHandler);
     }
@@ -163,7 +155,7 @@ public class Server {
 
             gameManager.removeClient(clientID);
 
-            gameManager.sendAllExcept(new DisconnectionReplyMessage(nicknameDisconnected), nicknameDisconnected);
+            gameManager.sendAllExcept(new DisconnectionReplyMessage(), nicknameDisconnected);
 
             for(ClientHandler client : gameManager.getClients().values()) {
                 String nickname = idToNickname.get(getClientIDFromClientHandler(client));

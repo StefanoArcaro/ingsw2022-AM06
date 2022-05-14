@@ -4,7 +4,6 @@ import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.enumerations.CharacterID;
-import it.polimi.ingsw.util.Constants;
 
 public abstract class ActionPhase extends Phase {
 
@@ -58,19 +57,5 @@ public abstract class ActionPhase extends Phase {
 
     private boolean checkValidCharacterID(int characterID) {
         return characterID != 0 && game.getCharacterByID(characterID) != null;
-    }
-
-    /**
-     * Method for paying the character.
-     * @param activatedCharacter character chosen to pay.
-     * @throws NotEnoughMoneyException if the player doesn't have so many coins.
-     */
-    private void payCharacter(Character activatedCharacter) throws NotEnoughMoneyException {
-        int price = activatedCharacter.getCost();
-        if(currentPlayer.getCoins() >= price) {
-            currentPlayer.spendCoins(price);
-        } else {
-            throw new NotEnoughMoneyException();
-        }
     }
 }

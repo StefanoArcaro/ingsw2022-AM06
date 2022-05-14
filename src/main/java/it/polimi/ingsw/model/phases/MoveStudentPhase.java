@@ -72,6 +72,8 @@ public class MoveStudentPhase extends ActionPhase {
 
                         if(studentDestinationIndex != 0){
                             game.getListeners().firePropertyChange(Constants.ISLAND_LISTENER, null, game.getIslandByID(studentDestinationIndex));
+                        } else {
+                            game.getListeners().firePropertyChange(Constants.COIN_LISTENER, oldCoins, currentPlayer.getCoins());
                         }
 
                         game.getListeners().firePropertyChange(Constants.BOARD_LISTENER, null, game.getCurrentPlayer().getBoard());

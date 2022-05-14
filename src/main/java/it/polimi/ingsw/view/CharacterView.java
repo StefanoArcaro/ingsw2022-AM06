@@ -52,6 +52,7 @@ public class CharacterView {
         return banCards;
     }
 
+    //todo
     public void setBanCards(int banCards) {
         this.banCards = banCards;
     }

@@ -113,7 +113,6 @@ public class SocketClient extends Client {
             //TODO: remove?
             case COLORS_AVAILABLE_MESSAGE -> {
                 ColorsAvailableMessage msg = gson.fromJson(message, ColorsAvailableMessage.class);
-                System.out.println(msg.getMessage());
             }
             case ACTIVE_PLAYERS_MESSAGE -> {
                 ActivePlayersMessage msg = gson.fromJson(message, ActivePlayersMessage.class);

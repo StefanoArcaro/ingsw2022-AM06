@@ -10,7 +10,6 @@ import java.util.ArrayList;
 public class Board {
 
     private Player player;
-    private String playerNickname;
     private Entrance entrance;
     private Hall hall;
     private ArrayList<Professor> professors;
@@ -27,12 +26,15 @@ public class Board {
         this.professors = new ArrayList<>();
     }
 
-    public Board(String playerNickname) {
-        this.playerNickname = playerNickname;
+    /**
+     * Constructor without parameters used by model view.
+     */
+    public Board() {
         this.entrance = new Entrance();
         this.hall = new Hall();
         this.professors = new ArrayList<>();
     }
+
 
     /**
      * @return the nickname of the owner of this board.

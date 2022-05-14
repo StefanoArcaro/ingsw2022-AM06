@@ -7,14 +7,8 @@ import it.polimi.ingsw.network.message.MessageType;
  */
 public class DisconnectionReplyMessage extends Answer {
 
-    private final String nicknameDisconnected;
-
-    public DisconnectionReplyMessage(String nicknameDisconnected) {
+    public DisconnectionReplyMessage() {
         super(MessageType.DISCONNECTION_REPLY_MESSAGE);
-        this.nicknameDisconnected = nicknameDisconnected;
     }
 
-    public String getNicknameDisconnected() {
-        return nicknameDisconnected;
-    }
 }

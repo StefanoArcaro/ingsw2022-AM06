@@ -16,11 +16,6 @@ public class CurrentPhaseMessage extends Answer {
         this.instructions = instructions;
     }
 
-    @Override
-    public String getMessage() {
-        return currentPhase;
-    }
-
     public String getCurrentPhase() {
         return currentPhase;
     }

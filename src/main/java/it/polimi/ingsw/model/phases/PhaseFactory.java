@@ -21,13 +21,10 @@ public class PhaseFactory {
      * @return the created phase.
      */
     public Phase createPhase(GameState gameState) {
-
-        int firstPlayerIndex = game.getFirstPlayerIndex();
-
         return switch (gameState) {
             case LOBBY_PHASE -> new LobbyPhase(game);
             case PREPARE_PHASE -> new PreparePhase(game);
-            case PLANNING_PHASE -> new PlanningPhase(game, game.getPlayers(), firstPlayerIndex);
+            case PLANNING_PHASE -> new PlanningPhase(game, game.getPlayers());
             case MOVE_STUDENT_PHASE -> new MoveStudentPhase(game, game.getCurrentPlayer());
             case MOVE_MOTHER_NATURE_PHASE -> new MoveMotherNaturePhase(game, game.getCurrentPlayer());
             case PICK_CLOUD_PHASE -> new PickCloudPhase(game, game.getCurrentPlayer());

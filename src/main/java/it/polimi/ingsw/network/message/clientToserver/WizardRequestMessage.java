@@ -2,7 +2,6 @@ package it.polimi.ingsw.network.message.clientToserver;
 
 import it.polimi.ingsw.model.enumerations.WizardName;
 import it.polimi.ingsw.network.message.MessageType;
-import it.polimi.ingsw.network.message.clientToserver.Message;
 
 /**
  * Message used by the client to request a specific wizard.
