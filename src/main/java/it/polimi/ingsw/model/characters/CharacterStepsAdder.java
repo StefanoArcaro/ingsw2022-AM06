@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.characters;
 
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.util.Constants;
 
 public class CharacterStepsAdder extends Character {
@@ -8,8 +9,9 @@ public class CharacterStepsAdder extends Character {
      * Default constructor.
      * @param characterID id of the character to create.
      */
-    public CharacterStepsAdder(int characterID) {
+    public CharacterStepsAdder(Game game, int characterID) {
         this.characterID = characterID;
+        this.game = game;
         this.cost = 1;
         this.used = false;
         this.numberOfStudents = 0;

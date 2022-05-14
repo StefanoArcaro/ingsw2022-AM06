@@ -38,11 +38,11 @@ public class CharacterController {
      * @param msg the message received.
      */
     public void onMessageReceived(String input, Message msg) {
-        if(game.getGameMode() == GameMode.EASY) {
+        /*if(game.getGameMode() == GameMode.EASY) {
             ClientHandler clientHandler = clients.get(msg.getClientID());
             clientHandler.sendMessage(new ErrorMessage("You have chosen the easy mode, there are no characters."));
             return;
-        }
+        }*/ //checked in input controller
 
         switch (msg.getMessageType()) {
             case CHARACTER_INFO_REQUEST_MESSAGE -> infoAboutCharacter(input, msg);
@@ -66,10 +66,6 @@ public class CharacterController {
         ClientHandler clientHandler = clients.get(msg.getClientID());
         int characterID = message.getCharacterID();
 
-        //clientHandler.sendMessage(new CharacterInfoMessage(characterID));
-        //clientHandler.sendMessage(new GenericMessage(Constants.getCharacterInformation(characterID))); //todo no
-
-        //todo check if it works
         clientHandler.sendMessage(new CharacterInfoMessage(characterID));
     }
 

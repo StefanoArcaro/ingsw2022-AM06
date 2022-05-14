@@ -24,25 +24,24 @@ public abstract class ActionPhase extends Phase {
             NoAvailableColorException, NotEnoughMoneyException, TooManyIterationsException, InvalidCharacterIDException, MoreCharactersInTurnExceptions {
 
         if(checkValidCharacterID(characterID)) {
-            Character activatedCharacter = game.getCharacterByID(characterID);
+            Character characterToActivate = game.getCharacterByID(characterID);
 
-            if(activatedCharacter.getNumberOfIterations() < activatedCharacter.getToDoNow()) {
+            if(characterToActivate.getNumberOfIterations() < characterToActivate.getToDoNow()) {
 
                 //just one character in each player's turn
                 Character activateCharacter = game.getActivatedCharacter();
                 Character characterNone = game.getCharacterByID(CharacterID.CHARACTER_NONE.getID());
-                if(!activateCharacter.equals(characterNone) && !activateCharacter.equals(activatedCharacter)){
+                if(!activateCharacter.equals(characterNone) && !activateCharacter.equals(characterToActivate)) {
                     throw new MoreCharactersInTurnExceptions();
                 }
 
-                int price = activatedCharacter.getCost();
+                int price = characterToActivate.getCost();
                 if(currentPlayer.getCoins() >= price) {
 
-                    activatedCharacter.effect();
-                    game.setActivatedCharacter(activatedCharacter);
-
-                    activatedCharacter.setUsed();
-                    activatedCharacter.increaseNumberOfIteration();
+                    characterToActivate.effect();
+                    game.setActivatedCharacter(characterToActivate);
+                    characterToActivate.setUsed();
+                    characterToActivate.increaseNumberOfIteration();
 
                     currentPlayer.spendCoins(price);
                 } else {
