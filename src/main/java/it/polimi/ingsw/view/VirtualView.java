@@ -13,6 +13,10 @@ public class VirtualView {
 
     private final GameManager gameManager;
 
+    /**
+     * Default constructor.
+     * @param gameManager reference to the game manager.
+     */
     public VirtualView(GameManager gameManager) {
         this.gameManager = gameManager;
     }
