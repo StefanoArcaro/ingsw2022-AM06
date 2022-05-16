@@ -64,6 +64,8 @@ public class MoveStudentPhase extends ActionPhase {
                     creatureColor = getCreatureColorByIndex(creatureColorIndex);
                     studentDestination = setDestination(studentDestinationIndex);
 
+                    int oldCoins = currentPlayer.getCoins();
+
                     if(studentDestination.receiveStudent(creatureColor)) {
                         currentPlayer.getBoard().removeStudentFromEntrance(creatureColor);
                         game.updateProfessors();

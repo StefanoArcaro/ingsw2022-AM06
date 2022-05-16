@@ -1,7 +1,6 @@
 package it.polimi.ingsw.network.server;
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.GameManager;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.GameMode;
 import it.polimi.ingsw.model.enumerations.GameState;
@@ -139,7 +138,7 @@ public class Server {
      * @param clientHandler handler of the client who quit.
      */
     private void quitHandler(ClientHandler clientHandler) {
-        clientHandler.sendMessage(new DisconnectionReplyMessage("You"));
+        clientHandler.sendMessage(new DisconnectionReplyMessage());
 
         disconnectionHandler(clientHandler);
     }

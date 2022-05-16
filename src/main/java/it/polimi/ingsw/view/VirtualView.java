@@ -1,6 +1,6 @@
 package it.polimi.ingsw.view;
 
-import it.polimi.ingsw.GameManager;
+import it.polimi.ingsw.network.server.GameManager;
 import it.polimi.ingsw.network.message.serverToclient.Answer;
 
 /**
