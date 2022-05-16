@@ -1,12 +1,8 @@
 package it.polimi.ingsw.util;
 
-import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.enumerations.GameMode;
 import it.polimi.ingsw.model.enumerations.GameState;
-
-import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
 
 public class Constants {
 
@@ -53,15 +49,27 @@ public class Constants {
     public static final String WHITE_UNDERLINED = "\033[4;37m";
 
     // Unicode text
-    public static final String CIRCLE_EMPTY = "\u25ef";
     public static final String CIRCLE_FULL = "\u25cf";
+    public static final String CIRCLE_EMPTY = "\u25ef";
+    public static final String DIAMOND_FULL = "\u25c6";
+    public static final String DIAMOND_EMPTY = "\u25c7";
+    public static final String SQUARE_FULL = "\u25a0";
+    public static final String SQUARE_EMPTY = "\u25a1";
+
+    public static String getCircleFullByColor(CreatureColor color) {
+        return getAnsiByColor(color) + CIRCLE_FULL + ANSI_RESET;
+    }
 
     public static String getCircleEmptyByColor(CreatureColor color) {
         return getAnsiByColor(color) + CIRCLE_EMPTY + ANSI_RESET;
     }
 
-    public static String getCircleFullByColor(CreatureColor color) {
-        return getAnsiByColor(color) + CIRCLE_FULL + ANSI_RESET;
+    public static String getDiamondFullByColor(CreatureColor color) {
+        return getAnsiByColor(color) + DIAMOND_FULL + ANSI_RESET;
+    }
+
+    public static String getDiamondEmptyByColor(CreatureColor color) {
+        return getAnsiByColor(color) + DIAMOND_EMPTY + ANSI_RESET;
     }
 
     private static String getAnsiByColor(CreatureColor color) {

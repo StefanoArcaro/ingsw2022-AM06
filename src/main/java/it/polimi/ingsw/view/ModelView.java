@@ -62,6 +62,9 @@ public class ModelView {
         this.players = players;
     }
 
+    public int getNumberOfPlayers() {
+        return players.size();
+    }
 
     public Board getBoard(String nickname) {
         return nicknameToBoard.get(nickname);

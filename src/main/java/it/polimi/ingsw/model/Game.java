@@ -204,7 +204,6 @@ public class Game {
      * @return the list of available wizards.
      */
     public ArrayList<WizardName> getAvailableWizards() {
-
         ArrayList<WizardName> wizardNames = new ArrayList<>(Arrays.asList(WizardName.values()));
 
         for(Player player : players) {
@@ -342,7 +341,6 @@ public class Game {
         return islandGroups.get(index);
     }
 
-
     /**
      * Return the index of an island group.
      * @param islandGroup for which the index is being searched.
@@ -416,7 +414,6 @@ public class Game {
     private boolean isBanCardPresent(IslandGroup islandGroup) {
         if(islandGroup.getNumberOfBanCardPresent() > 0) {
             islandGroup.removeBanCard();
-            //listeners.firePropertyChange(Constants.ISLAND_GROUPS_LISTENER, null, new AbstractMap.SimpleEntry<>(islandGroups, motherNature));
             Character character= getCharacterByID(5);
             if(character != null) {
                 character.addBanCard();
@@ -458,7 +455,7 @@ public class Game {
             IslandGroup previousIslandGroup = getIslandGroupByIndex(indexPreviousIslandGroup);
             IslandGroup nextIslandGroup = getIslandGroupByIndex(indexNextIslandGroup);
 
-            if(islandGroup != null){
+            if(islandGroup != null) {
                 if(previousIslandGroup != null) {
                     connectIslandGroups(islandGroup, previousIslandGroup);
                 }
@@ -466,9 +463,8 @@ public class Game {
                     connectIslandGroups(islandGroup, nextIslandGroup);
                 }
             }
-
-            //listeners.firePropertyChange(Constants.ISLAND_GROUPS_LISTENER, null, new AbstractMap.SimpleEntry<>(islandGroups, motherNature));
         }
+
         int motherNatureIndex = getIndexOfIslandGroup(motherNature.getCurrentIslandGroup());
         listeners.firePropertyChange(Constants.ISLAND_GROUPS_LISTENER, null, new AbstractMap.SimpleEntry<>(islandGroups, motherNatureIndex));
     }

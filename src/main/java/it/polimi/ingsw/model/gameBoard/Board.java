@@ -27,6 +27,10 @@ public class Board {
         this.professors = new ArrayList<>();
     }
 
+    /**
+     * Second constructor.
+     * @param playerNickname nickname of the player whose board this is.
+     */
     public Board(String playerNickname) {
         this.playerNickname = playerNickname;
         this.entrance = new Entrance();
@@ -56,6 +60,10 @@ public class Board {
         return this.entrance;
     }
 
+    /**
+     * Sets the Entrance component of this board to the specified one.
+     * @param entrance to set.
+     */
     public void setEntrance(Entrance entrance) {
         this.entrance = entrance;
     }
@@ -67,6 +75,10 @@ public class Board {
         return this.hall;
     }
 
+    /**
+     * Sets the Hall component of this board to the specified one.
+     * @param hall to set.
+     */
     public void setHall(Hall hall) {
         this.hall = hall;
     }
@@ -78,6 +90,10 @@ public class Board {
         return new ArrayList<>(professors);
     }
 
+    /**
+     * Sets the this board's professors' list to the specified one.
+     * @param professors to set.
+     */
     public void setProfessors(ArrayList<Professor> professors) {
         this.professors = professors;
     }
@@ -127,7 +143,6 @@ public class Board {
             }
         }
     }
-
 
     /**
      * Removes a student of the specified color from the board's hall.

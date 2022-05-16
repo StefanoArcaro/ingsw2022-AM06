@@ -21,7 +21,6 @@ public class PhaseFactory {
      * @return the created phase.
      */
     public Phase createPhase(GameState gameState) {
-
         int firstPlayerIndex = game.getFirstPlayerIndex();
 
         return switch (gameState) {

@@ -96,7 +96,6 @@ public class GameManager {
     public void addClient(int clientID, ClientHandler clientHandler, String nickname) {
         clients.put(clientID, clientHandler);
         nicknameToId.put(nickname, clientID);
-
     }
 
     /**

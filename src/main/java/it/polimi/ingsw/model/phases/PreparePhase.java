@@ -145,7 +145,6 @@ public class PreparePhase extends Phase {
                 return wizardName;
             }
         }
-
         return null;
     }
 
@@ -267,6 +266,7 @@ public class PreparePhase extends Phase {
     private void drawFirstPlayer() {
         Random random = new Random();
         int firstPlayerIndex = random.nextInt(game.getNumberOfPlayers().getNum());
+
         game.setFirstPlayerIndex(firstPlayerIndex);
         game.setCurrentPlayer(game.getPlayers().get(firstPlayerIndex));
     }

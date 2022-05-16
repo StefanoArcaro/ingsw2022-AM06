@@ -63,6 +63,9 @@ public class CharacterMover extends Character {
         }
     }
 
+    /**
+     * Fills the character card with the correct number of students.
+     */
     @Override
     public void initialPreparation() {
         Bag bag = game.getBag();
@@ -72,6 +75,11 @@ public class CharacterMover extends Character {
         }
     }
 
+    /**
+     * Calls the effect method of the played character.
+     * @throws NoAvailableColorException when the specified color is not available.
+     * @throws OutOfBoundException when the selected destination doesn't exist.
+     */
     @Override
     public void effect() throws NoAvailableColorException, OutOfBoundException {
         game.getListeners().firePropertyChange(Constants.CHARACTER_PLAYED_LISTENER, null, this);

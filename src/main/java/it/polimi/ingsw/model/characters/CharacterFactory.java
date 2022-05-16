@@ -9,5 +9,10 @@ public abstract class CharacterFactory {
 
     Game game;
 
+    /**
+     * Instantiates a character based on the specified character ID.
+     * @param characterID the ID of the character to instantiate.
+     * @return the instantiated character.
+     */
     protected abstract Character createCharacter(int characterID);
 }

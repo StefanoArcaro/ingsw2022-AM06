@@ -27,7 +27,6 @@ public class MoveMotherNaturePhase extends ActionPhase {
         this.maxNumberOfSteps = game.getPlayerPriority().get(currentPlayer).getMaxSteps(game.getActivatedCharacter());
     }
 
-
     /**
      * Checks if the number of steps chosen is allowed.
      * by comparing them to the number of steps indicated by the assistant played.

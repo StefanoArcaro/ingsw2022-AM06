@@ -207,5 +207,4 @@ public abstract class Character {
     public void setIslandID(int islandID) {
         this.islandID = islandID;
     }
-
 }

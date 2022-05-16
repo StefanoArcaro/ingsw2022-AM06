@@ -4,7 +4,6 @@ import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.enumerations.CharacterID;
-import it.polimi.ingsw.util.Constants;
 
 public abstract class ActionPhase extends Phase {
 
@@ -57,6 +56,12 @@ public abstract class ActionPhase extends Phase {
         }
     }
 
+    /**
+     * Checks if the specified character ID is valid, meaning if it's within the
+     * boundaries of possible character IDs.
+     * @param characterID to check.
+     * @return whether the ID is valid.
+     */
     private boolean checkValidCharacterID(int characterID) {
         return characterID != 0 && game.getCharacterByID(characterID) != null;
     }

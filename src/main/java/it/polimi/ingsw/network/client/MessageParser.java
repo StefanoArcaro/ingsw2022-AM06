@@ -36,6 +36,7 @@ public class MessageParser implements PropertyChangeListener {
         String command = in[0];
         Message message = null;
 
+        // TODO ADD MATCHINFO CASE
         switch (command.toUpperCase()) {
             case "LOGIN" -> message = loginMessage(in);
             case "WIZARD" -> message = prepareMessage(in);
@@ -271,9 +272,9 @@ public class MessageParser implements PropertyChangeListener {
         if(numberOfParameters == 2) {
             return characterTwoParameters(in);
         } else if(numberOfParameters == 3 || numberOfParameters == 4) {
-
             int characterID = -1;
-            try{ characterID = Integer.parseInt(in[1]);
+            try {
+                characterID = Integer.parseInt(in[1]);
             } catch (NumberFormatException ignored) {}
 
             if(characterID >= 1 && characterID <= 12) {
@@ -282,9 +283,10 @@ public class MessageParser implements PropertyChangeListener {
                 Integer destination = null;
                 color = switchColor(secondInput);
 
-                if (color == null) {
-                    try { destination = Integer.parseInt(secondInput);
-                    }catch (NumberFormatException ignored) {}
+                if(color == null) {
+                    try {
+                        destination = Integer.parseInt(secondInput);
+                    } catch (NumberFormatException ignored) {}
                 }
 
                 // [2] -> color / destination
@@ -295,19 +297,19 @@ public class MessageParser implements PropertyChangeListener {
 
                 // [3] -> color / destination
                 // 4 parameters: CharacterDoubleColorMessage / CharacterColorDestinationMessage
-                if (color != null) {
+                if(color != null) {
                     String thirdInput = in[3];
                     CreatureColor secondColor = switchColor(thirdInput);
 
-                    if (secondColor == null) {
-                        try { destination = Integer.parseInt(thirdInput);
-                        }catch (NumberFormatException ignored) {}
+                    if(secondColor == null) {
+                        try {
+                            destination = Integer.parseInt(thirdInput);
+                        } catch (NumberFormatException ignored) {}
                     }
                     return characterFourParameters(characterID, color, secondColor, destination);
                 }
             }
         }
-
         return null;
     }
 
@@ -320,13 +322,14 @@ public class MessageParser implements PropertyChangeListener {
     private Message characterTwoParameters(String[] in) {
         int characterID = -1;
 
-        try{
+        try {
             characterID = Integer.parseInt(in[1]);
         } catch (NumberFormatException ignored) {}
 
         if(characterID >= 1 && characterID <= 12) {
             return new CharacterMessage(characterID);
         }
+
         return null;
     }
 
@@ -339,11 +342,11 @@ public class MessageParser implements PropertyChangeListener {
      * @return a CharacterColorMessage or a CharacterDestinationMessage containing the information needed.
      */
     private Message characterThreeParameters(int characterID, CreatureColor color, Integer destination) {
-        if (color != null) {
+        if(color != null) {
             return new CharacterColorMessage(characterID, color);
         }
 
-        if (destination != null) {
+        if(destination != null) {
             return new CharacterDestinationMessage(characterID, destination);
         }
 
@@ -360,7 +363,7 @@ public class MessageParser implements PropertyChangeListener {
      * @return a CharacterDoubleColorMessage or a CharacterColorDestinationMessage containing the information needed.
      */
     private Message characterFourParameters(int characterID, CreatureColor color, CreatureColor secondColor, Integer destination) {
-        if (secondColor != null) {
+        if(secondColor != null) {
             return new CharacterDoubleColorMessage(characterID, color, secondColor);
         }
 
@@ -394,6 +397,7 @@ public class MessageParser implements PropertyChangeListener {
             case "PINK" -> color = CreatureColor.PINK;
             case "BLUE" -> color = CreatureColor.BLUE;
         }
+
         return color;
     }
 

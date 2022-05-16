@@ -19,22 +19,31 @@ public class Eriantys {
         System.out.println("Please type the number of the desired option!");
         System.out.print("> ");
 
-        Scanner scanner = new Scanner(System.in);
-        int launchInput = 0;
-        // TODO while loop
-        try {
-            launchInput = scanner.nextInt();
-        } catch (InputMismatchException e) {
-            System.err.println("Numeric format requested, application will now close...");
-            System.exit(-1);
-        }
+        int launchInput;
+
+        do {
+            Scanner scanner = new Scanner(System.in);
+
+            try {
+                launchInput = scanner.nextInt();
+
+                if(launchInput < 0 || launchInput > 2) {
+                    System.out.println("Please enter either 0, 1 or 2.");
+                    System.out.println("> ");
+                    launchInput = -1;
+                }
+            } catch (InputMismatchException e) {
+                System.err.println("Numeric format requested, please enter either 0, 1 or 2.");
+                System.out.println("> ");
+                launchInput = -1;
+            }
+        } while(launchInput < 0);
 
         switch(launchInput) {
             case 0 -> {
                 System.out.println("\n=============================================================\n");
                 Server.main(null);
             }
-            // TODO
             case 1 -> {
                 System.out.println("You selected the CLI, have fun!");
                 System.out.print("Starting");

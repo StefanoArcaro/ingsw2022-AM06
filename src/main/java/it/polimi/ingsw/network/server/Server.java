@@ -39,13 +39,19 @@ public class Server {
         this.idToGameManager = new HashMap<>();
         this.nextClientID = -1;
 
-        new Thread(this::quit).start(); // Asynchronously listen to server stdin for quitting
+        new Thread(this::quit).start(); // Asynchronously listen to server's stdin stream for quitting
     }
 
+    /**
+     * @return this server's Socketserver component.
+     */
     public SocketServer getSocketServer() {
         return socketServer;
     }
 
+    /**
+     * @return this server's game managers' list component.
+     */
     public ArrayList<GameManager> getGameManagers() {
         return new ArrayList<>(gameManagers);
     }
@@ -80,7 +86,6 @@ public class Server {
      * @param clientHandler handler of said client.
      */
     public void onConnectionDropped(ClientHandler clientHandler) {
-        // Handle disconnection todo
         if(idToConnection.containsValue(clientHandler)) {
             disconnectionHandler(clientHandler);
         }
@@ -97,8 +102,6 @@ public class Server {
 
         // If msg is null, it means the client's connection has fallen
         if(msg == null) {
-
-            //todo
             if(idToConnection.containsValue(clientHandler)) {
                 disconnectionHandler(clientHandler);
             }
@@ -136,7 +139,6 @@ public class Server {
      * @param clientHandler handler of the client who quit.
      */
     private void quitHandler(ClientHandler clientHandler) {
-        // Disconnect clientHandler
         clientHandler.sendMessage(new DisconnectionReplyMessage("You"));
 
         disconnectionHandler(clientHandler);
@@ -245,7 +247,6 @@ public class Server {
                 return false;
             }
         }
-
         return true;
     }
 
@@ -292,7 +293,6 @@ public class Server {
 
         idToConnection.remove(idToRemove);
         idToNickname.remove(idToRemove);
-
         idToGameManager.remove(idToRemove);
     }
 

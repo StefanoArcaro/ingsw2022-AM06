@@ -51,7 +51,7 @@ public class PickCloudPhase extends ActionPhase {
 
         cloudChosen.empty();
 
-        //restore
+        // Restore
         game.getActivatedCharacter().setNumberOfIterations(0);
         game.setActivatedCharacter(game.getCharacterByID(CharacterID.CHARACTER_NONE.getID()));
 

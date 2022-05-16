@@ -38,6 +38,5 @@ public class CharacterProfessorUpdater extends Character {
         for(Player player : game.getPlayers()){
             game.getListeners().firePropertyChange(Constants.BOARD_LISTENER, null, player.getBoard());
         }
-
     }
 }

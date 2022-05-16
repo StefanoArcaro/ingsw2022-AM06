@@ -1,7 +1,6 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.enumerations.CharacterID;
-import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.enumerations.WizardName;
 import it.polimi.ingsw.model.gameBoard.*;
 import it.polimi.ingsw.network.client.MessageParser;
@@ -28,7 +27,7 @@ public class CLI {
     private SocketClient socketClient;
     private final ExecutorService keyboardQueue;
     private final PropertyChangeSupport listener = new PropertyChangeSupport(this);
-    private ModelView modelView;
+    private final ModelView modelView;
 
     /**
      * Default constructor.
@@ -77,66 +76,116 @@ public class CLI {
         });
     }
 
-
-
+    /**
+     * Handles the LoginReplyMessage sent by the server.
+     * @param msg the message to handle.
+     */
     public void loginReplyHandler(LoginReplyMessage msg) {
         System.out.println(msg.getMessage());
     }
 
+    /**
+     * Handles the WizardsAvailableMessage sent by the server.
+     * @param msg the message to handle.
+     */
     public void wizardsHandler(WizardsAvailableMessage msg) {
         ArrayList<WizardName> wizardNames = msg.getWizards();
-        StringBuilder wizards = new StringBuilder("Available wizards: ");
+        StringBuilder wizards = new StringBuilder("Available wizards:");
 
         for(WizardName wizard : wizardNames) {
-            wizards.append(wizard.getName()).append(" ");
+            wizards.append(" ").append(wizard.getName());
         }
 
         System.out.println(wizards);
     }
 
+    /**
+     * Handles the AssistantsMessage sent by the server.
+     * @param msg the message to handle.
+     */
     public void assistantsHandler(AssistantsMessage msg) {
         ArrayList<Assistant> assistants = msg.getAssistants();
         StringBuilder assistantString = new StringBuilder();
 
         for(Assistant assistant : assistants) {
-            assistantString.append("Priority = ").append(assistant.getPriority()).append("- Number of steps = ").append(assistant.getNumberOfSteps()).append("\n");
+            assistantString.append("\t-> Priority = ").append(assistant.getPriority()).append(" - Number of steps = ").append(assistant.getNumberOfSteps()).append("\n");
         }
 
         System.out.println(assistantString);
     }
 
+    /**
+     * Handles the ActivePlayersMessage sent by the server.
+     * @param msg the message to handle.
+     */
     public void activePlayersHandler(ActivePlayersMessage msg) {
         modelView.setPlayers(msg.getActivePlayers());
         showActivePlayers();
     }
 
+    /**
+     * Displays the active players on the console.
+     */
     public void showActivePlayers() {
         List<String> players = modelView.getPlayers();
 
-        String playersInGame = "Active players:\n";
+        StringBuilder playersInGame = new StringBuilder("Active players:");
         for(String p : players) {
-            playersInGame = playersInGame + p + "\t";
+            playersInGame.append(" ").append(p);
         }
         System.out.println(playersInGame + "\n");
     }
 
-
+    /**
+     * Handles the BoardMessage sent by the server.
+     * @param msg the message to handle.
+     */
     public void boardHandler(BoardMessage msg) {
         modelView.setBoard(msg);
         showBoard(msg.getNickname());
     }
 
+    /**
+     * Displays the board of the player with the specified nickname to the console.
+     * @param nickname nickname of the player.
+     */
     public void showBoard(String nickname) {
         Board board = modelView.getBoard(nickname);
-
         String owner = nickname + "'s board.\n";
 
+        // Entrance
+        String entrance = showEntrance(board);
+
+        // Hall & professors
+        String hall = showHall(board);
+
+        // Towers
+        String towers = showTowers(board);
+
+        System.out.println(owner + entrance + hall + towers);
+    }
+
+    /**
+     * Creates a string representation of the specified board's entrance.
+     * @param board whose entrance is displayed.
+     * @return the formatted string.
+     */
+    public String showEntrance(Board board) {
         StringBuilder entranceStudents = new StringBuilder("Entrance:");
         for(Student student : board.getEntrance().getStudents()) {
             entranceStudents.append(" ").append(Constants.getCircleFullByColor(student.getColor()));
         }
         entranceStudents.append("\n");
 
+        return entranceStudents.toString();
+    }
+
+    /**
+     * Creates a string representation of the specified board's hall.
+     * @param board whose hall is displayed.
+     * @return the formatted string.
+     */
+    public String showHall(Board board) {
         StringBuilder hallStudents = new StringBuilder("Hall:\n");
         for(Table table : board.getHall().getStudents()) {
             int i;
@@ -150,64 +199,89 @@ public class CLI {
 
             hallStudents.append("| ");
 
-            // TODO change symbol
             boolean found = false;
             for(Professor p : board.getProfessors()) {
                 if(p.getColor().equals(table.getColor())) {
-                    hallStudents.append(Constants.getCircleFullByColor(table.getColor()));
+                    hallStudents.append(Constants.getDiamondFullByColor(table.getColor()));
                     found = true;
                 }
             }
             if(!found) {
-                hallStudents.append(Constants.getCircleEmptyByColor(table.getColor()));
+                hallStudents.append(Constants.getDiamondEmptyByColor(table.getColor()));
             }
 
             hallStudents.append("\n");
         }
 
-        String numTowers = "Number of towers: " + board.getTowers(); //todo change symbol
-
-        System.out.println(owner + entranceStudents + hallStudents + numTowers);
+        return hallStudents.toString();
     }
 
+    /**
+     * Creates a string representation of the specified board's towers.
+     * @param board whose towers are displayed.
+     * @return the formatted string.
+     */
+    public String showTowers(Board board) {
+        int maxTowers = modelView.getNumberOfPlayers() == 2 ? 8 : 6;
+        int actualTowers = board.getTowers();
 
+        StringBuilder towers = new StringBuilder("Towers:");
+        for(int i = 0; i < actualTowers; i++) {
+            towers.append(" ").append(Constants.SQUARE_FULL);
+        }
+
+        for(int i = actualTowers; i < maxTowers; i++) {
+            towers.append(" ").append(Constants.SQUARE_EMPTY);
+        }
+
+        towers.append("\n");
+
+        return towers.toString();
+    }
+
+    /**
+     * Handles the IslandGroupsMessage sent by the server.
+     * @param msg the message to handle.
+     */
     public void islandGroupsHandler(IslandGroupsMessage msg) {
         modelView.setIslandGroups(msg.getIslandGroup(), msg.getMotherNatureIndex());
         showIslandGroups();
     }
 
+    /**
+     * Displays the island groups' state.
+     */
     public void showIslandGroups() {
         ArrayList<IslandGroup> islandGroups = modelView.getIslandGroups();
-
-        String islands = "\n";
         int islandGroupIndex = 0;
 
+        StringBuilder islands = new StringBuilder("\n");
         for(IslandGroup iG : islandGroups) {
             int islandGroupId = islandGroupIndex + 1;
-            islands = islands + "Island group " + islandGroupId + " composed by islands: \n";
+            islands.append("Island group ").append(islandGroupId).append(" composed by islands:\n");
 
             for(Island i : iG.getIslands()) {
-                islands = "\t" + islands + i.getIslandID() + " -> ";
+                islands = new StringBuilder("\t" + islands + i.getIslandID() + " ->");
                 for(Student s : i.getStudents()) {
-                    islands = islands + s.getColor().getColorName() + " ";
+                    islands.append(" ").append(Constants.getCircleFullByColor(s.getColor()));
                 }
             }
-            islands = islands + "\n";
+            islands.append("\n");
 
-
+            // TODO conquered by nickname?
             if(iG.getConquerorColor() != null) {
-                islands = islands + "\tConquered by -> " + iG.getConquerorColor() + "\n";
+                islands.append("\tConquered by -> ").append(iG.getConquerorColor()).append("\n");
             }
 
             if(iG.getNumberOfBanCardPresent() > 0) {
-                islands = islands + "\tThere are " + iG.getNumberOfBanCardPresent() + " ban card on this island group.\n";
+                islands.append("\tThere are ").append(iG.getNumberOfBanCardPresent()).append(" ban card(s) on this island group.\n");
             }
 
             if(modelView.getMotherNatureIndex() == islandGroupIndex){
-                islands = islands + Constants.ANSI_CYAN + "Mother nature is on this island group!\n" + Constants.ANSI_RESET;
+                islands.append(Constants.ANSI_CYAN).append("Mother nature is on this island group!\n").append(Constants.ANSI_RESET);
             }
 
-            islands = islands + "\n";
+            islands.append("\n");
 
             islandGroupIndex += 1;
         }
@@ -215,30 +289,40 @@ public class CLI {
         System.out.println(islands);
     }
 
-
+    /**
+     * Handles the IslandMessage sent by the server.
+     * @param msg the message to handle.
+     */
     public void islandHandler(IslandMessage msg) {
         modelView.setIsland(msg.getIsland());
         showIsland(msg.getIsland().getIslandID());
     }
 
+    /**
+     * Displays the status of the island whose ID corresponds to the specified one.
+     * @param islandID the ID of the island to display.
+     */
     public void showIsland(int islandID) {
         Island island = modelView.getIsland(islandID);
 
-        String message = "Island: " + island.getIslandID() + ":";
-
+        StringBuilder message = new StringBuilder("Island " + island.getIslandID() + ":");
         for(Student s : island.getStudents()) {
-            message = message + "\t" + s.getColor().getColorName();
+            message.append(" ").append(Constants.getCircleFullByColor(s.getColor()));
         }
-        message = message + "\n";
+        message.append("\n");
 
+        // TODO conquered by nickname?
         if(island.getTower() != null) {
-            message = message + "\t\tConquered by -> " + island.getTower() + "\n";
+            message.append("\t\tConquered by -> ").append(island.getTower()).append("\n");
         }
 
         System.out.println(message);
     }
 
-
+    /**
+     * Handles the CloudsAvailableMessage sent by the server.
+     * @param msg the message to handle.
+     */
     public void cloudsAvailableHandler(CloudsAvailableMessage msg) {
         modelView.setClouds(msg.getClouds());
 
@@ -247,66 +331,97 @@ public class CLI {
         }
     }
 
+    /**
+     * Displays the available cloud cards with their respective students.
+     */
     public void showAvailableClouds() {
         ArrayList<Cloud> clouds = modelView.getClouds();
-        String message = "Available clouds\n";
+        StringBuilder message = new StringBuilder("Available clouds\n");
 
         for(Cloud c : clouds) {
             if(!c.isEmpty()) {
-                message = message + "- Cloud " + c.getCloudID() + ":";
+                message.append("- Cloud ").append(c.getCloudID()).append(":");
                 for (Student s : c.getStudents()) {
-                    message = message + "\t" + s.getColor().getColorName();
+                    message.append(" ").append(Constants.getCircleFullByColor(s.getColor()));
                 }
-                message = message + "\n";
+                message.append("\n");
             }
         }
 
         System.out.println(message);
     }
 
-
+    /**
+     * Handles the CloudChosenMessage sent by the server.
+     * @param msg the message to handle.
+     */
     public void cloudChosenHandler(CloudChosenMessage msg) {
          showChosenCloud(msg.getCloud());
     }
 
+    /**
+     * Displays the specified cloud with its students.
+     * @param cloud to display.
+     */
     public void showChosenCloud(Cloud cloud) {
-        String message = modelView.getCurrentPlayer() + "has chosen cloud " + cloud.getCloudID() + ":";
+        StringBuilder message = new StringBuilder(modelView.getCurrentPlayer() + "has chosen cloud " + cloud.getCloudID() + ":");
 
         for (Student s : cloud.getStudents()) {
-            message = message + "\t" + s.getColor().getColorName();
+            message.append(" ").append(Constants.getCircleFullByColor(s.getColor()));
         }
-        message = message + "\n";
+        message.append("\n");
 
         System.out.println(message);
     }
 
-
+    /**
+     * Handles the CoinMessage sent by the server.
+     * @param msg the message to handle.
+     */
     public void coinsHandler(CoinMessage msg) {
         modelView.setCoins(msg);
         showCoins(msg.getNickname());
     }
 
+    /**
+     * Displays the number of coins the player whose nickname is specified has.
+     * @param nickname of the player whose coins are displayed.
+     */
     public void showCoins(String nickname) {
         // TODO personalized messages
-        System.out.println(nickname + " has " + modelView.getCoinsByNickname(nickname) + " coins.\n");
+        System.out.println(nickname + " has " + modelView.getCoinsByNickname(nickname) + " coins.");
     }
 
-
+    /**
+     * Handles the CurrentPlayerMessage sent by the server.
+     * @param msg the message to handle.
+     */
     public void currentPlayerHandler(CurrentPlayerMessage msg) {
         modelView.setCurrentPlayer(msg.getCurrentPlayer());
         showCurrentPlayer();
     }
 
+    /**
+     * Displays the current player.
+     */
     public void showCurrentPlayer() {
         System.out.println("The current player is: " + modelView.getCurrentPlayer());
     }
 
-
+    /**
+     * Handles the CurrentPhaseMessage sent by the server.
+     * @param msg the message to handle.
+     */
     public void currentPhaseHandler(CurrentPhaseMessage msg) {
         modelView.setCurrentPhase(msg.getCurrentPhase());
         showCurrentPhase(msg);
     }
 
+    /**
+     * Displays the instructions of the specified phase.
+     * If the chosen game mode is expert, it also displays the drawn characters.
+     * @param msg the message containing the phase information.
+     */
     public void showCurrentPhase(CurrentPhaseMessage msg) {
         System.out.println(msg.getInstructions());
 
@@ -316,8 +431,13 @@ public class CLI {
         }
     }
 
+    /**
+     * Displays the drawn characters, with a different format based on the
+     * current phase.
+     * @param currentPhase the current phase.
+     * @param characterViews the drawn characters.
+     */
     public void showDrawnCharacters(String currentPhase, List<CharacterView> characterViews) {
-
         if(currentPhase.equals("Planning phase")) {
             StringBuilder characters = new StringBuilder("- Drawn characters:");
             for(CharacterView c : characterViews) {
@@ -353,23 +473,35 @@ public class CLI {
         }
     }
 
-
-
+    /**
+     * Handles the CharacterDrawnMessage sent by the server.
+     * @param msg the message to handle.
+     */
     public void charactersDrawnHandler(CharacterDrawnMessage msg) {
         modelView.setDrawnCharacter(msg);
     }
 
-
+    /**
+     * Handles the CharacterInfoMessage sent by the server.
+     * @param msg the message to handle.
+     */
     public void characterInfoHandler(CharacterInfoMessage msg) {
         System.out.println(msg.getDescription());
     }
 
-
+    /**
+     * Handles the CharacterPlayedMessage sent by the server.
+     * @param msg the message to handle.
+     */
     public void characterPlayedHandler(CharacterPlayedMessage msg) {
         modelView.setPlayedCharacter(msg);
         showPlayedCharacter(msg.getCharacterID());
     }
 
+    /**
+     * Displays the played character whose ID is specified.
+     * @param characterID the ID of the played character.
+     */
     public void showPlayedCharacter(int characterID) {
         CharacterView characterView = modelView.getCharacterViewById(characterID);
 
@@ -380,32 +512,46 @@ public class CLI {
             banCard = "Number of ban cards: " + characterView.getBanCards();
         }
 
-        String studentString = "";
+        StringBuilder studentString = new StringBuilder();
         if(characterView.getStudents() != null) {
-            studentString = "Students: ";
+            studentString = new StringBuilder("Students:");
             for(Student student : characterView.getStudents()) {
-                studentString = studentString + student.getColor().getColorName() + " ";
+                studentString.append(" ").append(Constants.getCircleFullByColor(student.getColor()));
             }
         }
 
         System.out.println(played + studentString + banCard);
     }
 
-
+    /**
+     * Handles the WinnerMessage sent by the server.
+     * @param msg the message to handle.
+     */
     public void winnerHandler(WinnerMessage msg) {
         modelView.setWinner(msg.getWinnerNickname());
         showWinner(msg.getWinnerNickname());
     }
 
+    /**
+     * Displays the winner.
+     * @param nickname the nickname of the winner.
+     */
     public void showWinner(String nickname) {
         System.out.println("The winner is " + nickname + "!\n");
     }
 
-
+    /**
+     * Handles the GenericMessage sent by the server.
+     * @param msg the message to handle.
+     */
     public void genericMessageHandler(GenericMessage msg) {
         System.out.println(msg.getMessage());
     }
 
+    /**
+     * Handles the ErrorMessage sent by the server.
+     * @param msg the message to handle.
+     */
     public void errorMessageHandler(ErrorMessage msg) {
         System.out.println(msg.getError());
     }

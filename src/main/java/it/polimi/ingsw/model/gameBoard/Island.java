@@ -38,6 +38,10 @@ public class Island implements StudentDestination {
         return new ArrayList<>(students);
     }
 
+    /**
+     * Sets this island's students' list to the specified one.
+     * @param students to set.
+     */
     public void setStudents(ArrayList<Student> students) {
         this.students = students;
     }
@@ -65,6 +69,10 @@ public class Island implements StudentDestination {
         return tower;
     }
 
+    /**
+     * Sets this island's tower to the specified one.
+     * @param tower to set.
+     */
     public void setTower(PlayerColor tower) {
         this.tower = tower;
     }
