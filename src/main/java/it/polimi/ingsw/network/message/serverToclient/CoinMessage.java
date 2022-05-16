@@ -13,11 +13,6 @@ public class CoinMessage extends Answer {
         this.coins = coins;
     }
 
-    @Override
-    public String getMessage() {
-        return "The current player has " + coins + " coins.";
-    }
-
     public String getNickname() {
         return nickname;
     }

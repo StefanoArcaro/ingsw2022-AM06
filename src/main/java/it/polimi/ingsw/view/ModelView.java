@@ -19,17 +19,14 @@ public class ModelView {
     private String currentPhase;
     private String currentPlayer;
     private List<String> players;
-    private Map<String, Board> nicknameToBoard;
-    private Map<String, Integer> nicknameToCoins;
+    private final Map<String, Board> nicknameToBoard;
+    private final Map<String, Integer> nicknameToCoins;
     private ArrayList<IslandGroup> islandGroups;
     private int motherNatureIndex;
-    private Map<Integer, CharacterView> idToCharacter;
+    private final Map<Integer, CharacterView> idToCharacter;
     private int activeCharacterID;
     private ArrayList<Cloud> clouds;
     private String winner;
-
-    private Answer serverAnswer;
-
 
     public ModelView() {
         this.nicknameToBoard = new HashMap<>();
@@ -41,7 +38,6 @@ public class ModelView {
         return currentPhase;
     }
 
-    //todo
     public void setCurrentPhase(String currentPhase) {
         this.currentPhase = currentPhase;
     }
@@ -77,7 +73,7 @@ public class ModelView {
         if(nicknameToBoard.containsKey(nickname)) {
             board = nicknameToBoard.get(nickname);
         } else {
-            board = new Board(nickname);
+            board = new Board();
             nicknameToBoard.put(nickname, board);
         }
 
@@ -144,8 +140,6 @@ public class ModelView {
         }
     }
 
-
-
     public void setDrawnCharacter(CharacterDrawnMessage msg) {
         CharacterView characterView = new CharacterView(msg.getCharacterID(), msg.getCost(), msg.isUsed(), msg.getStudents(), msg.getBanCards());
         idToCharacter.put(characterView.getCharacterID(), characterView);
@@ -158,15 +152,15 @@ public class ModelView {
     }
 
     public Map<Integer, CharacterView> getIdToCharacter() {
-        return new HashMap<>(idToCharacter); //todo
-    }
-
-    public int getActiveCharacterID() {
-        return activeCharacterID;
+        return new HashMap<>(idToCharacter);
     }
 
     public CharacterView getCharacterViewById(int characterID) {
         return idToCharacter.get(characterID);
+    }
+
+    public int getActiveCharacterID() {
+        return activeCharacterID;
     }
 
     public ArrayList<Cloud> getClouds() {
@@ -179,13 +173,5 @@ public class ModelView {
 
     public String getWinner() {
         return winner;
-    }
-
-    public Answer getServerAnswer() {
-        return serverAnswer;
-    }
-
-    public void setServerAnswer(Answer serverAnswer) {
-        this.serverAnswer = serverAnswer;
     }
 }

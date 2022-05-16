@@ -22,6 +22,7 @@ public class GameManager {
     private final Map<String, Integer> nicknameToId;
 
     private final Game game;
+    private final GameController gameController;
     private final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
     private final static String GAME_CONTROLLER = "gameController";
 
@@ -34,7 +35,7 @@ public class GameManager {
 
         this.game = new Game();
         this.game.createListeners(new VirtualView(this));
-        GameController gameController = new GameController(this, game);
+        this.gameController = new GameController(this, game);
         this.listeners.addPropertyChangeListener(GAME_CONTROLLER, gameController);
     }
 
@@ -43,6 +44,13 @@ public class GameManager {
      */
     public Game getGame() {
         return game;
+    }
+
+    /**
+     * @return the Game controller.
+     */
+    public GameController getGameController() {
+        return gameController;
     }
 
     /**
@@ -142,7 +150,7 @@ public class GameManager {
     }
 
     /**
-     * Sends a message to all the players in the gaem but the one identified
+     * Sends a message to all the players in the game but the one identified
      * by the specified nickname.
      * @param answer the message to send.
      * @param nickname the nickname of the client to not send the message to.

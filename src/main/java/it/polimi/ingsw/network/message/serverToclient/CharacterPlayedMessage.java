@@ -22,26 +22,6 @@ public class CharacterPlayedMessage extends Answer {
         this.banCards = banCards;
     }
 
-    @Override
-    public String getMessage() {
-        String played = "Character played: " + characterID;
-
-        String banCard = "";
-        if(banCards > 0) {
-            banCard = "Number of ban cards: " + banCards;
-        }
-
-        String studentString = "";
-        if(students != null) {
-            studentString = "Students: ";
-            for(Student student : students) {
-                studentString = studentString + student.getColor().getColorName() + " ";
-            }
-        }
-
-        return played + studentString + banCard;
-    }
-
     public int getCharacterID() {
         return characterID;
     }

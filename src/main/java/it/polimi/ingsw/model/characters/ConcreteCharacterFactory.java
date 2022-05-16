@@ -31,7 +31,7 @@ public class ConcreteCharacterFactory extends CharacterFactory {
                     CHARACTER_ELEVEN, CHARACTER_TWELVE -> new CharacterMover(game, characterID);
             case CHARACTER_TWO -> new CharacterProfessorUpdater(game, characterID);
             case CHARACTER_THREE -> new CharacterInfluenceCalculator(game, characterID);
-            case CHARACTER_FOUR -> new CharacterStepsAdder(characterID);
+            case CHARACTER_FOUR -> new CharacterStepsAdder(game, characterID);
             case CHARACTER_FIVE, CHARACTER_SIX,
                     CHARACTER_EIGHT, CHARACTER_NINE -> new CharacterInfluenceModifier(game, characterID);
         };

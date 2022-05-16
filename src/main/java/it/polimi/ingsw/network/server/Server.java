@@ -165,7 +165,7 @@ public class Server {
 
             gameManager.removeClient(clientID);
 
-            gameManager.sendAllExcept(new DisconnectionReplyMessage(nicknameDisconnected), nicknameDisconnected);
+            gameManager.sendAllExcept(new DisconnectionReplyMessage(), nicknameDisconnected);
 
             for(ClientHandler client : gameManager.getClients().values()) {
                 String nickname = idToNickname.get(getClientIDFromClientHandler(client));

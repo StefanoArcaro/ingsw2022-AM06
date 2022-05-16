@@ -1,7 +1,6 @@
 package it.polimi.ingsw.network.message.serverToclient;
 
 import it.polimi.ingsw.network.message.MessageType;
-import it.polimi.ingsw.network.message.clientToserver.Message;
 
 /**
  * Message used to notify that a player has won the game.
@@ -13,11 +12,6 @@ public class WinnerMessage extends Answer {
     public WinnerMessage(String winnerNickname) {
         super(MessageType.WINNER_MESSAGE);
         this.winnerNickname = winnerNickname;
-    }
-
-    @Override
-    public String getMessage() {
-        return "The winner is " + winnerNickname + "!";
     }
 
     public String getWinnerNickname() {

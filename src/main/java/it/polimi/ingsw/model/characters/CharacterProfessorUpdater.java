@@ -2,10 +2,7 @@ package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.gameBoard.Board;
 import it.polimi.ingsw.util.Constants;
-
-import java.util.ArrayList;
 
 public class CharacterProfessorUpdater extends Character {
 

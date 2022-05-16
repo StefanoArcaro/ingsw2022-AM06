@@ -12,8 +12,6 @@ import java.util.AbstractMap;
 
 public class MoveMotherNaturePhase extends ActionPhase {
 
-    private final int maxNumberOfSteps;
-
     /**
      * Default constructor.
      * @param game game played.
@@ -23,8 +21,6 @@ public class MoveMotherNaturePhase extends ActionPhase {
         this.game = game;
         this.currentPlayer = currentPlayer;
         this.phaseFactory = new PhaseFactory(game);
-
-        this.maxNumberOfSteps = game.getPlayerPriority().get(currentPlayer).getMaxSteps(game.getActivatedCharacter());
     }
 
     /**
@@ -34,6 +30,7 @@ public class MoveMotherNaturePhase extends ActionPhase {
      * @return whether the steps chosen are allowed.
      */
     private boolean checkNumberOfSteps(int numberOfSteps) {
+        int maxNumberOfSteps = game.getPlayerPriority().get(currentPlayer).getMaxSteps(game.getActivatedCharacter());
         return numberOfSteps <= maxNumberOfSteps;
     }
 

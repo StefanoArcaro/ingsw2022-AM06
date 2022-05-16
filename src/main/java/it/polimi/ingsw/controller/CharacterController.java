@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.CharacterID;
 import it.polimi.ingsw.model.enumerations.CreatureColor;
-import it.polimi.ingsw.model.enumerations.GameMode;
 import it.polimi.ingsw.model.phases.ActionPhase;
 import it.polimi.ingsw.network.message.clientToserver.*;
 import it.polimi.ingsw.network.message.serverToclient.CharacterInfoMessage;
@@ -38,12 +37,6 @@ public class CharacterController {
      * @param msg the message received.
      */
     public void onMessageReceived(String input, Message msg) {
-        if(game.getGameMode() == GameMode.EASY) {
-            ClientHandler clientHandler = clients.get(msg.getClientID());
-            clientHandler.sendMessage(new ErrorMessage("You have chosen the easy mode, there are no characters."));
-            return;
-        }
-
         switch (msg.getMessageType()) {
             case CHARACTER_INFO_REQUEST_MESSAGE -> infoAboutCharacter(input, msg);
             case CHARACTER_MESSAGE -> doCharacterEffect(input, msg);
@@ -66,10 +59,6 @@ public class CharacterController {
         ClientHandler clientHandler = clients.get(msg.getClientID());
         int characterID = message.getCharacterID();
 
-        //clientHandler.sendMessage(new CharacterInfoMessage(characterID));
-        //clientHandler.sendMessage(new GenericMessage(Constants.getCharacterInformation(characterID))); //todo no
-
-        //todo check if it works
         clientHandler.sendMessage(new CharacterInfoMessage(characterID));
     }
 
