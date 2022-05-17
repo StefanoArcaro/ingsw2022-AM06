@@ -42,20 +42,6 @@ public class Server {
     }
 
     /**
-     * @return this server's Socketserver component.
-     */
-    public SocketServer getSocketServer() {
-        return socketServer;
-    }
-
-    /**
-     * @return this server's game managers' list component.
-     */
-    public ArrayList<GameManager> getGameManagers() {
-        return new ArrayList<>(gameManagers);
-    }
-
-    /**
      * Increases the clientID variable in order to assign a unique ID to
      * every connected client.
      * @return the next client ID.
@@ -97,7 +83,21 @@ public class Server {
      */
     public void onMessageReceived(ClientHandler clientHandler, String msg) {
         Gson gson = new Gson();
-        Message message = gson.fromJson(msg, Message.class);
+        Message message = null;
+
+        try {
+            message = gson.fromJson(msg, Message.class);
+        } catch (Exception e) {
+            GameManager gameManager = idToGameManager.get(getClientIDFromClientHandler(clientHandler));
+            if(gameManager != null) {
+                gameManager.sendAll(new ErrorMessage("There's been a connection error."));
+                closeGame(gameManager);
+            } else {
+                clientHandler.sendMessage(new ErrorMessage("There's been a connection error."));
+                removeClient(clientHandler);
+                clientHandler.disconnect();
+            }
+        }
 
         // If msg is null, it means the client's connection has fallen
         if(msg == null) {
@@ -107,21 +107,41 @@ public class Server {
             return;
         }
 
-        switch(message.getMessageType()) {
-            case PING_MESSAGE -> pingHandler(clientHandler);
-            case DISCONNECTION_REQUEST_MESSAGE -> quitHandler(clientHandler);
-            case LOGIN_REQUEST_MESSAGE -> loginHandler(clientHandler, msg);
-            default -> {
-                message.setClientID(getClientIDFromClientHandler(clientHandler));
-                GameManager gameManager = idToGameManager.get(getClientIDFromClientHandler(clientHandler));
-                if(gameManager != null) {
-                    Map.Entry<String, Message> pair = new AbstractMap.SimpleEntry<>(msg, message);
-                    gameManager.onMessageReceived(pair);
-                } else {
-                    clientHandler.sendMessage(new ErrorMessage("To begin playing, you need to login."));
+        if(message != null) {
+            switch (message.getMessageType()) {
+                case PING_MESSAGE -> pingHandler(clientHandler);
+                case DISCONNECTION_REQUEST_MESSAGE -> quitHandler(clientHandler);
+                case LOGIN_REQUEST_MESSAGE -> loginHandler(clientHandler, msg);
+                default -> {
+                    message.setClientID(getClientIDFromClientHandler(clientHandler));
+                    GameManager gameManager = idToGameManager.get(getClientIDFromClientHandler(clientHandler));
+                    if (gameManager != null) {
+                        Map.Entry<String, Message> pair = new AbstractMap.SimpleEntry<>(msg, message);
+                        gameManager.onMessageReceived(pair);
+                    } else {
+                        clientHandler.sendMessage(new ErrorMessage("To begin playing, you need to login."));
+                    }
                 }
             }
         }
+    }
+
+    /**
+     * Closes the game handled by the specified game manager.
+     * @param gameManager that handles the game to close.
+     */
+    private void closeGame(GameManager gameManager) {
+        for(ClientHandler client : gameManager.getClients().values()) {
+            String nickname = idToNickname.get(getClientIDFromClientHandler(client));
+
+            System.out.println(nickname + " has disconnected.");
+            removeClient(client);
+            client.disconnect();
+        }
+
+        gameManager.emptyClients();
+
+        gameManagers.remove(gameManager);
     }
 
     /**
@@ -166,17 +186,7 @@ public class Server {
 
             gameManager.sendAllExcept(new DisconnectionReplyMessage(), nicknameDisconnected);
 
-            for(ClientHandler client : gameManager.getClients().values()) {
-                String nickname = idToNickname.get(getClientIDFromClientHandler(client));
-
-                System.out.println(nickname + " has disconnected.");
-                removeClient(client);
-                client.disconnect();
-            }
-
-            gameManager.emptyClients();
-
-            gameManagers.remove(gameManager);
+            closeGame(gameManager);
         } else {
             System.out.println("Client disconnected!");
         }

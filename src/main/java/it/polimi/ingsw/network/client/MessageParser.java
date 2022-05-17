@@ -46,6 +46,7 @@ public class MessageParser implements PropertyChangeListener {
             case "PICKCLOUD" -> message = thirdActionPhase(in);
             case "CHARACTERINFO" -> message = characterInfoMessage(in);
             case "CHARACTER" -> message = characterMessage(in);
+            case "MATCHINFO" -> matchInfoMessage();
             case "QUIT" -> message = disconnectionMessage();
             default -> System.out.println("Unknown input, please try again!");
         }
@@ -372,6 +373,13 @@ public class MessageParser implements PropertyChangeListener {
         }
 
         return null;
+    }
+
+    /**
+     * Forwards the request for displaying the match's current state to the CLI.
+     */
+    private void matchInfoMessage() {
+        client.getCli().matchInfoHandler();
     }
 
     /**

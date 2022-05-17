@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.model.enumerations.PlayerColor;
 import it.polimi.ingsw.model.gameBoard.Board;
 import it.polimi.ingsw.model.gameBoard.Cloud;
 import it.polimi.ingsw.model.gameBoard.Island;
@@ -8,7 +9,6 @@ import it.polimi.ingsw.network.message.serverToclient.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,7 +18,7 @@ public class ModelView {
 
     private String currentPhase;
     private String currentPlayer;
-    private List<String> players;
+    private Map<String, PlayerColor> players;
     private final Map<String, Board> nicknameToBoard;
     private final Map<String, Integer> nicknameToCoins;
     private ArrayList<IslandGroup> islandGroups;
@@ -70,7 +70,7 @@ public class ModelView {
     /**
      * @return the list of players in the game.
      */
-    public List<String> getPlayers() {
+    public Map<String, PlayerColor> getPlayers() {
         return players;
     }
 
@@ -78,7 +78,7 @@ public class ModelView {
      * Sets the players in the game to the ones in the specified list.
      * @param players to set.
      */
-    public void setPlayers(List<String> players) {
+    public void setPlayers(Map<String, PlayerColor> players) {
         this.players = players;
     }
 
@@ -87,6 +87,19 @@ public class ModelView {
      */
     public int getNumberOfPlayers() {
         return players.size();
+    }
+
+    /**
+     * @param color the color of the player to find.
+     * @return the nickname of the player with the specified color if it exists, null otherwise.
+     */
+    public String getPlayerByColor(PlayerColor color) {
+        for(String name : players.keySet()) {
+            if(players.get(name).equals(color)) {
+                return name;
+            }
+        }
+        return null;
     }
 
     /**

@@ -6,7 +6,6 @@ import it.polimi.ingsw.model.enumerations.GameMode;
 import it.polimi.ingsw.model.enumerations.NumberOfPlayers;
 import it.polimi.ingsw.network.message.clientToserver.Message;
 import it.polimi.ingsw.network.message.serverToclient.Answer;
-import it.polimi.ingsw.network.server.ClientHandler;
 import it.polimi.ingsw.view.VirtualView;
 
 import java.beans.PropertyChangeSupport;
@@ -192,7 +191,7 @@ public class GameManager {
      * @param pair a pair of values made of the JSON representation of the message
      *             and the message itself.
      */
-    public void onMessageReceived(Map.Entry<String, Message> pair) {
+    public synchronized void onMessageReceived(Map.Entry<String, Message> pair) {
         listeners.firePropertyChange("gameController", null, pair);
     }
 }

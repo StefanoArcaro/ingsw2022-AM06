@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.enumerations.CharacterID;
+import it.polimi.ingsw.model.enumerations.PlayerColor;
 import it.polimi.ingsw.model.enumerations.WizardName;
 import it.polimi.ingsw.model.gameBoard.*;
 import it.polimi.ingsw.network.client.MessageParser;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -127,11 +129,11 @@ public class CLI {
      * Displays the active players on the console.
      */
     public void showActivePlayers() {
-        List<String> players = modelView.getPlayers();
+        Map<String, PlayerColor> players = modelView.getPlayers();
 
-        StringBuilder playersInGame = new StringBuilder("Active players:");
-        for(String p : players) {
-            playersInGame.append(" ").append(p);
+        StringBuilder playersInGame = new StringBuilder("Active players:\n");
+        for(Map.Entry<String, PlayerColor> p : players.entrySet()) {
+            playersInGame.append("\t- ").append(p.getKey()).append(" -> ").append(p.getValue().getColorName()).append("\n");
         }
         System.out.println(playersInGame + "\n");
     }
@@ -143,6 +145,10 @@ public class CLI {
     public void boardHandler(BoardMessage msg) {
         modelView.setBoard(msg);
         showBoard(msg.getNickname());
+    }
+
+    public void showBoards() {
+        // TODO
     }
 
     /**
@@ -270,7 +276,7 @@ public class CLI {
 
             // TODO conquered by nickname?
             if(iG.getConquerorColor() != null) {
-                islands.append("\tConquered by -> ").append(iG.getConquerorColor()).append("\n");
+                islands.append("\tConquered by -> ").append(modelView.getPlayerByColor(iG.getConquerorColor())).append("\n");
             }
 
             if(iG.getNumberOfBanCardPresent() > 0) {
@@ -313,7 +319,7 @@ public class CLI {
 
         // TODO conquered by nickname?
         if(island.getTower() != null) {
-            message.append("\t\tConquered by -> ").append(island.getTower()).append("\n");
+            message.append("\t\tConquered by -> ").append(modelView.getPlayerByColor(island.getTower())).append("\n");
         }
 
         System.out.println(message);
@@ -521,6 +527,32 @@ public class CLI {
         }
 
         System.out.println(played + studentString + banCard);
+    }
+
+    /**
+     * Displays the match's current state.
+     */
+    public void matchInfoHandler() {
+        // Display players
+        showActivePlayers();
+
+        // Display the boards and coins (if EXPERT game mode)
+        showBoards();
+
+        // Display the island groups
+        showIslandGroups();
+
+        // Display drawn characters
+        List<CharacterView> characterViews = modelView.getIdToCharacter().values().stream().toList();
+        if(characterViews.size() > 0) {
+            showDrawnCharacters(modelView.getCurrentPhase(), characterViews);
+        }
+
+        // Display active character (if present)
+        int characterID = modelView.getActiveCharacterID();
+        if(characterID > 0) {
+            showPlayedCharacter(characterID);
+        }
     }
 
     /**

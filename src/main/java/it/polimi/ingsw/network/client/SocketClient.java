@@ -45,6 +45,13 @@ public class SocketClient extends Client {
     }
 
     /**
+     * @return the CLI.
+     */
+    public CLI getCli() {
+        return cli;
+    }
+
+    /**
      * Asynchronously read messages from the server.
      */
     @Override
@@ -61,8 +68,8 @@ public class SocketClient extends Client {
                         System.err.println("\nThe connection to the server was severed, closing the application...");
                         disconnect();
                     }
-                } catch (IOException e) {
-                    System.err.println("\nThe connection to the server was severed, closing the application...");
+                } catch (Exception e) {
+                    System.err.println("\nA problem with the connection occurred, closing the application...");
                     disconnect();
                 }
             }
@@ -95,101 +102,106 @@ public class SocketClient extends Client {
     public void handleAnswer(String message) {
         Gson gson = new Gson();
 
-        Answer answer = gson.fromJson(message, Answer.class);
+        try {
+            Answer answer = gson.fromJson(message, Answer.class);
 
-        switch(answer.getMessageType()) {
-            case LOGIN_REPLY_MESSAGE -> {
-                LoginReplyMessage msg = gson.fromJson(message, LoginReplyMessage.class);
-                cli.loginReplyHandler(msg);
-            }
-            case WIZARDS_AVAILABLE_MESSAGE -> {
-                WizardsAvailableMessage msg = gson.fromJson(message, WizardsAvailableMessage.class);
-                cli.wizardsHandler(msg);
-            }
-            case ASSISTANTS_MESSAGE -> {
-                AssistantsMessage msg = gson.fromJson(message, AssistantsMessage.class);
-                cli.assistantsHandler(msg);
-            }
-            case ACTIVE_PLAYERS_MESSAGE -> {
-                ActivePlayersMessage msg = gson.fromJson(message, ActivePlayersMessage.class);
-                cli.activePlayersHandler(msg);
-            }
-            case BOARD_MESSAGE -> {
-                BoardMessage msg = gson.fromJson(message, BoardMessage.class);
-                cli.boardHandler(msg);
-            }
-            case ISLAND_GROUPS_MESSAGE -> {
-                IslandGroupsMessage msg = gson.fromJson(message, IslandGroupsMessage.class);
-                cli.islandGroupsHandler(msg);
-            }
-            case ISLAND_MESSAGE -> {
-                IslandMessage msg = gson.fromJson(message, IslandMessage.class);
-                cli.islandHandler(msg);
-            }
-            case CLOUDS_AVAILABLE_MESSAGE -> {
-                CloudsAvailableMessage msg = gson.fromJson(message, CloudsAvailableMessage.class);
-                cli.cloudsAvailableHandler(msg);
-            }
-            case CLOUD_CHOSEN_MESSAGE -> {
-                CloudChosenMessage msg = gson.fromJson(message, CloudChosenMessage.class);
-                cli.cloudChosenHandler(msg);
-            }
-            case COIN_MESSAGE -> {
-                CoinMessage msg = gson.fromJson(message, CoinMessage.class);
-                cli.coinsHandler(msg);
-            }
-            case CURRENT_PLAYER_MESSAGE -> {
-                CurrentPlayerMessage msg = gson.fromJson(message, CurrentPlayerMessage.class);
-                cli.currentPlayerHandler(msg);
-            }
-            case CURRENT_PHASE_MESSAGE -> {
-                CurrentPhaseMessage msg = gson.fromJson(message, CurrentPhaseMessage.class);
-                cli.currentPhaseHandler(msg);
-            }
-            case CHARACTER_DRAWN_MESSAGE -> {
-                CharacterDrawnMessage msg = gson.fromJson(message, CharacterDrawnMessage.class);
-                cli.charactersDrawnHandler(msg);
-            }
-            case CHARACTER_INFO_MESSAGE -> {
-                CharacterInfoMessage msg = gson.fromJson(message, CharacterInfoMessage.class);
-                cli.characterInfoHandler(msg);
-            }
-            case CHARACTER_PLAYED_MESSAGE -> {
-                CharacterPlayedMessage msg = gson.fromJson(message, CharacterPlayedMessage.class);
-                cli.characterPlayedHandler(msg);
-            }
-            case WINNER_MESSAGE -> {
-                WinnerMessage msg = gson.fromJson(message, WinnerMessage.class);
-                cli.winnerHandler(msg);
-            }
-            case LOSER_MESSAGE -> {
-                LoserMessage msg = gson.fromJson(message, LoserMessage.class);
-                cli.loserHandler(msg);
-            }
-            case GAME_ENDED_MESSAGE -> {
-                cli.gameEndedHandler();
-            }
+            switch (answer.getMessageType()) {
+                case LOGIN_REPLY_MESSAGE -> {
+                    LoginReplyMessage msg = gson.fromJson(message, LoginReplyMessage.class);
+                    cli.loginReplyHandler(msg);
+                }
+                case WIZARDS_AVAILABLE_MESSAGE -> {
+                    WizardsAvailableMessage msg = gson.fromJson(message, WizardsAvailableMessage.class);
+                    cli.wizardsHandler(msg);
+                }
+                case ASSISTANTS_MESSAGE -> {
+                    AssistantsMessage msg = gson.fromJson(message, AssistantsMessage.class);
+                    cli.assistantsHandler(msg);
+                }
+                case ACTIVE_PLAYERS_MESSAGE -> {
+                    ActivePlayersMessage msg = gson.fromJson(message, ActivePlayersMessage.class);
+                    cli.activePlayersHandler(msg);
+                }
+                case BOARD_MESSAGE -> {
+                    BoardMessage msg = gson.fromJson(message, BoardMessage.class);
+                    cli.boardHandler(msg);
+                }
+                case ISLAND_GROUPS_MESSAGE -> {
+                    IslandGroupsMessage msg = gson.fromJson(message, IslandGroupsMessage.class);
+                    cli.islandGroupsHandler(msg);
+                }
+                case ISLAND_MESSAGE -> {
+                    IslandMessage msg = gson.fromJson(message, IslandMessage.class);
+                    cli.islandHandler(msg);
+                }
+                case CLOUDS_AVAILABLE_MESSAGE -> {
+                    CloudsAvailableMessage msg = gson.fromJson(message, CloudsAvailableMessage.class);
+                    cli.cloudsAvailableHandler(msg);
+                }
+                case CLOUD_CHOSEN_MESSAGE -> {
+                    CloudChosenMessage msg = gson.fromJson(message, CloudChosenMessage.class);
+                    cli.cloudChosenHandler(msg);
+                }
+                case COIN_MESSAGE -> {
+                    CoinMessage msg = gson.fromJson(message, CoinMessage.class);
+                    cli.coinsHandler(msg);
+                }
+                case CURRENT_PLAYER_MESSAGE -> {
+                    CurrentPlayerMessage msg = gson.fromJson(message, CurrentPlayerMessage.class);
+                    cli.currentPlayerHandler(msg);
+                }
+                case CURRENT_PHASE_MESSAGE -> {
+                    CurrentPhaseMessage msg = gson.fromJson(message, CurrentPhaseMessage.class);
+                    cli.currentPhaseHandler(msg);
+                }
+                case CHARACTER_DRAWN_MESSAGE -> {
+                    CharacterDrawnMessage msg = gson.fromJson(message, CharacterDrawnMessage.class);
+                    cli.charactersDrawnHandler(msg);
+                }
+                case CHARACTER_INFO_MESSAGE -> {
+                    CharacterInfoMessage msg = gson.fromJson(message, CharacterInfoMessage.class);
+                    cli.characterInfoHandler(msg);
+                }
+                case CHARACTER_PLAYED_MESSAGE -> {
+                    CharacterPlayedMessage msg = gson.fromJson(message, CharacterPlayedMessage.class);
+                    cli.characterPlayedHandler(msg);
+                }
+                case WINNER_MESSAGE -> {
+                    WinnerMessage msg = gson.fromJson(message, WinnerMessage.class);
+                    cli.winnerHandler(msg);
+                }
+                case LOSER_MESSAGE -> {
+                    LoserMessage msg = gson.fromJson(message, LoserMessage.class);
+                    cli.loserHandler(msg);
+                }
+                case GAME_ENDED_MESSAGE -> cli.gameEndedHandler();
 
-            case GENERIC_MESSAGE -> {
-                GenericMessage msg = gson.fromJson(message, GenericMessage.class);
-                cli.genericMessageHandler(msg);
-            }
-            case ERROR_MESSAGE -> {
-                ErrorMessage msg = gson.fromJson(message, ErrorMessage.class);
-                cli.errorMessageHandler(msg);
-            }
-            case DISCONNECTION_REPLY_MESSAGE -> {
-                System.out.print("\nClosing the application");
-                Constants.countdown(400);
-                disconnect();
-            }
-            case SERVER_QUIT_MESSAGE -> {
-                System.err.println("\nThe server was quit. Closing the application...");
-                disconnect();
-            }
-            case PONG_MESSAGE -> {}
+                case GENERIC_MESSAGE -> {
+                    GenericMessage msg = gson.fromJson(message, GenericMessage.class);
+                    cli.genericMessageHandler(msg);
+                }
+                case ERROR_MESSAGE -> {
+                    ErrorMessage msg = gson.fromJson(message, ErrorMessage.class);
+                    cli.errorMessageHandler(msg);
+                }
+                case DISCONNECTION_REPLY_MESSAGE -> {
+                    System.out.print("\nClosing the application");
+                    Constants.countdown(400);
+                    disconnect();
+                }
+                case SERVER_QUIT_MESSAGE -> {
+                    System.err.println("\nThe server was quit. Closing the application...");
+                    disconnect();
+                }
+                case PONG_MESSAGE -> {
+                }
 
-            default -> System.out.println(answer.getMessageType()); //should never reach this condition
+                default -> System.out.println(answer.getMessageType()); //should never reach this condition
+            }
+        } catch (Exception e) {
+            System.err.print("There's been a connection error, application will now close");
+            Constants.countdown(400);
+            disconnect();
         }
     }
 
@@ -222,9 +234,10 @@ public class SocketClient extends Client {
             }
         } catch (IOException e) {
             System.err.println(e.getMessage());
-        } finally {
             System.exit(0);
         }
+
+        System.exit(0);
     }
 
     /**
