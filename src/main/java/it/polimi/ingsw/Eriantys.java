@@ -15,9 +15,9 @@ public class Eriantys {
 
     public static void main(String[] args) {
         System.out.println("Welcome to Eriantys!\nWhat do you want to launch?");
-        System.out.println("0 - SERVER\n1 - CLI (Command Line Interface)\n2 - GUI (Graphical User Interface)");
+        System.out.println("0 - SERVER\n1 - CLI (Command Line Interface)\n2 - GUI (Graphical User Interface)\n");
         System.out.println("Please type the number of the desired option!");
-        System.out.print("> ");
+        System.out.print(Constants.PROMPT);
 
         int launchInput;
 
@@ -29,12 +29,12 @@ public class Eriantys {
 
                 if(launchInput < 0 || launchInput > 2) {
                     System.out.println("Please enter either 0, 1 or 2.");
-                    System.out.println("> ");
+                    System.out.print(Constants.PROMPT);
                     launchInput = -1;
                 }
             } catch (InputMismatchException e) {
-                System.err.println("Numeric format requested, please enter either 0, 1 or 2.");
-                System.out.println("> ");
+                System.out.println("Numeric format requested, please enter either 0, 1 or 2.");
+                System.out.print(Constants.PROMPT);
                 launchInput = -1;
             }
         } while(launchInput < 0);

@@ -341,8 +341,8 @@ public class Server {
 
         // Port choice
         Scanner scanner = new Scanner(System.in);
-        System.out.println("> Insert the port which the server will be listening on.");
-        System.out.print("> ");
+        System.out.println("Insert the port which the server will be listening on.");
+        System.out.print(Constants.PROMPT);
         int port;
         try {
             port = scanner.nextInt();

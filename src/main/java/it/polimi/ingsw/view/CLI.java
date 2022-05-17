@@ -567,13 +567,13 @@ public class CLI {
         String IPAddress;
         int port;
 
-        System.out.println("> Please insert the IP address of the server (format: x.y.z.w).");
-        System.out.print("> ");
+        System.out.println("Please insert the IP address of the server (format: x.y.z.w).");
+        System.out.print(Constants.PROMPT);
 
         IPAddress = setIPAddress(scanner.nextLine());
 
-        System.out.println("> Please insert the port that the server is listening on.");
-        System.out.print("> ");
+        System.out.println("Please insert the port that the server is listening on.");
+        System.out.print(Constants.PROMPT);
 
         try {
             port = Integer.parseInt(scanner.nextLine());

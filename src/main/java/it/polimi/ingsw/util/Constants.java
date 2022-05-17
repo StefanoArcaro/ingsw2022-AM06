@@ -49,6 +49,7 @@ public class Constants {
     public static final String WHITE_UNDERLINED = "\033[4;37m";*/
 
     // Unicode text
+    public static final String PROMPT = "\u25b7 ";
     public static final String CIRCLE_FULL = "\u25cf";
     public static final String CIRCLE_EMPTY = "\u25ef";
     public static final String DIAMOND_FULL = "\u25c6";
