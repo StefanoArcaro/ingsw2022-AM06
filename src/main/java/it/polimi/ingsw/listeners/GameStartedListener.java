@@ -41,11 +41,10 @@ public class GameStartedListener extends Listener {
         virtualView.sendAll(new ActivePlayersMessage(activePlayers));
         virtualView.sendAll(new CurrentPlayerMessage(currentPlayerNickname));
 
+        virtualView.sendAll(new IslandGroupsMessage(islandGroups, motherNatureIndex));
+
         for(Board b : boards) {
             virtualView.sendAll(new BoardMessage(b.getPlayerNickname(), b.getEntrance(), b.getHall(), b.getProfessors(), b.getTowers()));
         }
-
-        virtualView.sendAll(new IslandGroupsMessage(islandGroups, motherNatureIndex));
-
     }
 }

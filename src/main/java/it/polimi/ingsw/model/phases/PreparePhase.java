@@ -66,15 +66,16 @@ public class PreparePhase extends Phase {
 
             setDefaultCharacter();
 
-            if(game.getGameMode().equals(GameMode.EXPERT)) {
-                drawCharacters();
-                distributeCoins();
-            }
 
             String oldPlayer = game.getCurrentPlayer().getNickname();
             drawFirstPlayer();
             game.getListeners().firePropertyChange(Constants.GAME_STARTED_LISTENER, null, game);
             game.getListeners().firePropertyChange(Constants.PLAYER_LISTENER, oldPlayer, game.getCurrentPlayer().getNickname());
+
+            if(game.getGameMode().equals(GameMode.EXPERT)) {
+                distributeCoins();
+                drawCharacters();
+            }
 
             game.setGameState(GameState.PLANNING_PHASE);
             game.setCurrentPhase(phaseFactory.createPhase(game.getGameState()));

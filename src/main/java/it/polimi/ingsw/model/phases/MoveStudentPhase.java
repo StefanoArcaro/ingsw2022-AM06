@@ -5,8 +5,10 @@ import it.polimi.ingsw.exceptions.InvalidColorException;
 import it.polimi.ingsw.exceptions.InvalidDestinationException;
 import it.polimi.ingsw.exceptions.TableFullException;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.enumerations.GameMode;
 import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.gameBoard.Hall;
 import it.polimi.ingsw.model.gameBoard.StudentDestination;
 import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.gameBoard.Student;
@@ -64,8 +66,6 @@ public class MoveStudentPhase extends ActionPhase {
                     creatureColor = getCreatureColorByIndex(creatureColorIndex);
                     studentDestination = setDestination(studentDestinationIndex);
 
-                    int oldCoins = currentPlayer.getCoins();
-
                     if(studentDestination.receiveStudent(creatureColor)) {
                         currentPlayer.getBoard().removeStudentFromEntrance(creatureColor);
                         game.updateProfessors();
@@ -73,7 +73,8 @@ public class MoveStudentPhase extends ActionPhase {
                         if(studentDestinationIndex != 0){
                             game.getListeners().firePropertyChange(Constants.ISLAND_LISTENER, null, game.getIslandByID(studentDestinationIndex));
                         } else {
-                            game.getListeners().firePropertyChange(Constants.COIN_LISTENER, oldCoins, currentPlayer.getCoins());
+                            checkCoins(creatureColor, studentDestination); //TODO
+                            //game.getListeners().firePropertyChange(Constants.COIN_LISTENER, oldCoins, currentPlayer.getCoins()); already done in player.receive
                         }
 
                         game.getListeners().firePropertyChange(Constants.BOARD_LISTENER, null, game.getCurrentPlayer().getBoard());
@@ -152,6 +153,20 @@ public class MoveStudentPhase extends ActionPhase {
             return currentPlayer.getBoard().getHall();
         } else {
             return game.getIslandByID(studentDestinationIndex);
+        }
+    }
+
+    /**
+     * Checks if a player must receive a coin.
+     * @param creatureColor color of the student added in hall.
+     * @param studentDestination the hall of the current player.
+     */
+    private void checkCoins(CreatureColor creatureColor, StudentDestination studentDestination) {
+        if(game.getGameMode().equals(GameMode.EXPERT) && creatureColor != null) {
+            if(((Hall)studentDestination).getTableByColor(creatureColor).getLength() % 3 == 0 && game.getTreasury() > 0) {
+                game.setTreasury(game.getTreasury() - 1);
+                currentPlayer.receiveCoin();
+            }
         }
     }
 }
