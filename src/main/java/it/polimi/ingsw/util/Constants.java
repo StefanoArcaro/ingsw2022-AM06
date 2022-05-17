@@ -13,8 +13,8 @@ public class Constants {
     public static final int DEFAULT_PORT = 1234;
 
     public static final int PING_INITIAL_DELAY = 0;
-    public static final int PING_PERIOD = 2000;
-    public static final int SOCKET_TIMEOUT = 5000;
+    public static final int PING_PERIOD = 1000;
+    public static final int SOCKET_TIMEOUT = 2000;
 
     // Text util
     public static final String ERIANTYS = "\n" +Constants.BOX_TOP + "\n" +

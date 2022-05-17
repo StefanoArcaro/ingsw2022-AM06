@@ -235,6 +235,28 @@ public class Server {
     }
 
     /**
+     * Handles the end of the game by disconnecting every player in that game.
+     * @param gameManager the manager of the game that has ended.
+     */
+    public void endGameHandler(GameManager gameManager) {
+        System.out.println("Game " + gameManager.getGame() + " has ended, disconnecting all players...");
+
+        for(ClientHandler client : gameManager.getClients().values()) {
+            String nickname = idToNickname.get(getClientIDFromClientHandler(client));
+
+            System.out.println(nickname + " has disconnected.");
+
+            client.sendMessage(new GameEndedMessage());
+
+            removeClient(client);
+        }
+
+        gameManager.emptyClients();
+
+        gameManagers.remove(gameManager);
+    }
+
+    /**
      * Checks if the specified nickname is unique in the server, meaning that there
      * is no other nickname like it (the check is case-insensitive).
      * @param nickname the nickname to check.
@@ -270,7 +292,7 @@ public class Server {
         }
 
         // Create new GameManager
-        GameManager gameManager = new GameManager();
+        GameManager gameManager = new GameManager(this);
 
         // Set preferences
         gameManager.setGamePreferences(numberOfPlayers, gameMode);

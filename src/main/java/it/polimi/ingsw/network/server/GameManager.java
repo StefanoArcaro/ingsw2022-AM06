@@ -18,6 +18,8 @@ import java.util.Map;
  */
 public class GameManager {
 
+    private Server server;
+
     private final Map<Integer, ClientHandler> clients;
     private final Map<String, Integer> nicknameToId;
 
@@ -29,6 +31,21 @@ public class GameManager {
     /**
      * Default constructor.
      */
+    public GameManager(Server server) {
+        this.server = server;
+
+        this.clients = new HashMap<>();
+        this.nicknameToId = new HashMap<>();
+
+        this.game = new Game();
+        this.game.createListeners(new VirtualView(this));
+        this.gameController = new GameController(this, game);
+        this.listeners.addPropertyChangeListener(GAME_CONTROLLER, gameController);
+    }
+
+    /**
+     * Constructor used in controllers' tests.
+     */
     public GameManager() {
         this.clients = new HashMap<>();
         this.nicknameToId = new HashMap<>();
@@ -37,6 +54,13 @@ public class GameManager {
         this.game.createListeners(new VirtualView(this));
         this.gameController = new GameController(this, game);
         this.listeners.addPropertyChangeListener(GAME_CONTROLLER, gameController);
+    }
+
+    /**
+     * @return the server that instantiated this game manager.
+     */
+    public Server getServer() {
+        return server;
     }
 
     /**

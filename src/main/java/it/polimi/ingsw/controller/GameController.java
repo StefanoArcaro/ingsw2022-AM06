@@ -303,10 +303,10 @@ public class GameController implements PropertyChangeListener {
             ((EndgamePhase)model.getCurrentPhase()).play();
             Player winner = model.getCurrentPhase().getWinner();
 
-            gameManager.singleSend(new GenericMessage("You won! Congratulations!"), winner.getNickname());
-            gameManager.sendAllExcept(new WinnerMessage(winner.getNickname()), winner.getNickname());
+            gameManager.singleSend(new WinnerMessage(winner.getNickname()), winner.getNickname());
+            gameManager.sendAllExcept(new LoserMessage(winner.getNickname()), winner.getNickname());
 
-            //todo end of the game
+            gameManager.getServer().endGameHandler(gameManager);
         }
     }
 }

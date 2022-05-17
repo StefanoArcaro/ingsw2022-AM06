@@ -529,15 +529,26 @@ public class CLI {
      */
     public void winnerHandler(WinnerMessage msg) {
         modelView.setWinner(msg.getWinnerNickname());
-        showWinner(msg.getWinnerNickname());
+        System.out.println("You won! Congratulations!\n");
     }
 
     /**
-     * Displays the winner.
-     * @param nickname the nickname of the winner.
+     * Handles the WinnerMessage sent by the server.
+     * @param msg the message to handle.
      */
-    public void showWinner(String nickname) {
-        System.out.println("The winner is " + nickname + "!\n");
+    public void loserHandler(LoserMessage msg) {
+        modelView.setWinner(msg.getWinnerNickname());
+        System.out.println("The winner is " + msg.getWinnerNickname() + "!\n");
+    }
+
+    /**
+     * Handles the end of the game
+     */
+    public void gameEndedHandler() {
+        System.out.print("The game has ended, the application will close soon");
+        Constants.countdown(500);
+
+        socketClient.disconnect();
     }
 
     /**

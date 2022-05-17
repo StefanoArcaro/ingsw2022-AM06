@@ -110,10 +110,6 @@ public class SocketClient extends Client {
                 AssistantsMessage msg = gson.fromJson(message, AssistantsMessage.class);
                 cli.assistantsHandler(msg);
             }
-            //TODO: remove?
-            case COLORS_AVAILABLE_MESSAGE -> {
-                ColorsAvailableMessage msg = gson.fromJson(message, ColorsAvailableMessage.class);
-            }
             case ACTIVE_PLAYERS_MESSAGE -> {
                 ActivePlayersMessage msg = gson.fromJson(message, ActivePlayersMessage.class);
                 cli.activePlayersHandler(msg);
@@ -165,6 +161,13 @@ public class SocketClient extends Client {
             case WINNER_MESSAGE -> {
                 WinnerMessage msg = gson.fromJson(message, WinnerMessage.class);
                 cli.winnerHandler(msg);
+            }
+            case LOSER_MESSAGE -> {
+                LoserMessage msg = gson.fromJson(message, LoserMessage.class);
+                cli.loserHandler(msg);
+            }
+            case GAME_ENDED_MESSAGE -> {
+                cli.gameEndedHandler();
             }
 
             case GENERIC_MESSAGE -> {
