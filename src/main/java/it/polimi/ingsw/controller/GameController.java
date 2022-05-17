@@ -11,6 +11,7 @@ import it.polimi.ingsw.network.message.*;
 import it.polimi.ingsw.network.message.clientToserver.*;
 import it.polimi.ingsw.network.message.serverToclient.*;
 import it.polimi.ingsw.network.server.ClientHandler;
+import it.polimi.ingsw.network.server.Server;
 import it.polimi.ingsw.util.Constants;
 
 import java.beans.PropertyChangeEvent;
@@ -300,13 +301,16 @@ public class GameController implements PropertyChangeListener {
         int END_GAME = 6;
 
         if(model.getGameState().getCode() >= END_GAME) {
-            ((EndgamePhase)model.getCurrentPhase()).play();
+            ((EndgamePhase) model.getCurrentPhase()).play();
             Player winner = model.getCurrentPhase().getWinner();
 
             gameManager.singleSend(new WinnerMessage(winner.getNickname()), winner.getNickname());
             gameManager.sendAllExcept(new LoserMessage(winner.getNickname()), winner.getNickname());
 
-            gameManager.getServer().endGameHandler(gameManager);
+            Server server = gameManager.getServer();
+            if (server != null) {
+                server.endGameHandler(gameManager);
+            }
         }
     }
 }
