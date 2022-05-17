@@ -6,6 +6,7 @@ import it.polimi.ingsw.network.message.clientToserver.PingMessage;
 import it.polimi.ingsw.network.message.serverToclient.*;
 import it.polimi.ingsw.util.Constants;
 import it.polimi.ingsw.view.CLI;
+import it.polimi.ingsw.view.View;
 
 import java.io.*;
 import java.net.Socket;
@@ -16,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 public class SocketClient extends Client {
 
-    private final CLI cli;
+    private final View view;
     private final Socket socket;
     private BufferedReader reader;
     private BufferedWriter writer;
@@ -28,7 +29,7 @@ public class SocketClient extends Client {
      * @param socket the server socket.
      */
     public SocketClient(CLI cli, Socket socket) {
-        this.cli = cli;
+        this.view = cli;
         this.socket = socket;
 
         try {
@@ -45,10 +46,10 @@ public class SocketClient extends Client {
     }
 
     /**
-     * @return the CLI.
+     * @return the View.
      */
-    public CLI getCli() {
-        return cli;
+    public View getView() {
+        return view;
     }
 
     /**
@@ -108,81 +109,81 @@ public class SocketClient extends Client {
             switch (answer.getMessageType()) {
                 case LOGIN_REPLY_MESSAGE -> {
                     LoginReplyMessage msg = gson.fromJson(message, LoginReplyMessage.class);
-                    cli.loginReplyHandler(msg);
+                    view.loginReplyHandler(msg);
                 }
                 case WIZARDS_AVAILABLE_MESSAGE -> {
                     WizardsAvailableMessage msg = gson.fromJson(message, WizardsAvailableMessage.class);
-                    cli.wizardsHandler(msg);
+                    view.wizardsHandler(msg);
                 }
                 case ASSISTANTS_MESSAGE -> {
                     AssistantsMessage msg = gson.fromJson(message, AssistantsMessage.class);
-                    cli.assistantsHandler(msg);
+                    view.assistantsHandler(msg);
                 }
                 case ACTIVE_PLAYERS_MESSAGE -> {
                     ActivePlayersMessage msg = gson.fromJson(message, ActivePlayersMessage.class);
-                    cli.activePlayersHandler(msg);
+                    view.activePlayersHandler(msg);
                 }
                 case BOARD_MESSAGE -> {
                     BoardMessage msg = gson.fromJson(message, BoardMessage.class);
-                    cli.boardHandler(msg);
+                    view.boardHandler(msg);
                 }
                 case ISLAND_GROUPS_MESSAGE -> {
                     IslandGroupsMessage msg = gson.fromJson(message, IslandGroupsMessage.class);
-                    cli.islandGroupsHandler(msg);
+                    view.islandGroupsHandler(msg);
                 }
                 case ISLAND_MESSAGE -> {
                     IslandMessage msg = gson.fromJson(message, IslandMessage.class);
-                    cli.islandHandler(msg);
+                    view.islandHandler(msg);
                 }
                 case CLOUDS_AVAILABLE_MESSAGE -> {
                     CloudsAvailableMessage msg = gson.fromJson(message, CloudsAvailableMessage.class);
-                    cli.cloudsAvailableHandler(msg);
+                    view.cloudsAvailableHandler(msg);
                 }
                 case CLOUD_CHOSEN_MESSAGE -> {
                     CloudChosenMessage msg = gson.fromJson(message, CloudChosenMessage.class);
-                    cli.cloudChosenHandler(msg);
+                    view.cloudChosenHandler(msg);
                 }
                 case COIN_MESSAGE -> {
                     CoinMessage msg = gson.fromJson(message, CoinMessage.class);
-                    cli.coinsHandler(msg);
+                    view.coinsHandler(msg);
                 }
                 case CURRENT_PLAYER_MESSAGE -> {
                     CurrentPlayerMessage msg = gson.fromJson(message, CurrentPlayerMessage.class);
-                    cli.currentPlayerHandler(msg);
+                    view.currentPlayerHandler(msg);
                 }
                 case CURRENT_PHASE_MESSAGE -> {
                     CurrentPhaseMessage msg = gson.fromJson(message, CurrentPhaseMessage.class);
-                    cli.currentPhaseHandler(msg);
+                    view.currentPhaseHandler(msg);
                 }
                 case CHARACTER_DRAWN_MESSAGE -> {
                     CharacterDrawnMessage msg = gson.fromJson(message, CharacterDrawnMessage.class);
-                    cli.charactersDrawnHandler(msg);
+                    view.charactersDrawnHandler(msg);
                 }
                 case CHARACTER_INFO_MESSAGE -> {
                     CharacterInfoMessage msg = gson.fromJson(message, CharacterInfoMessage.class);
-                    cli.characterInfoHandler(msg);
+                    view.characterInfoHandler(msg);
                 }
                 case CHARACTER_PLAYED_MESSAGE -> {
                     CharacterPlayedMessage msg = gson.fromJson(message, CharacterPlayedMessage.class);
-                    cli.characterPlayedHandler(msg);
+                    view.characterPlayedHandler(msg);
                 }
                 case WINNER_MESSAGE -> {
                     WinnerMessage msg = gson.fromJson(message, WinnerMessage.class);
-                    cli.winnerHandler(msg);
+                    view.winnerHandler(msg);
                 }
                 case LOSER_MESSAGE -> {
                     LoserMessage msg = gson.fromJson(message, LoserMessage.class);
-                    cli.loserHandler(msg);
+                    view.loserHandler(msg);
                 }
-                case GAME_ENDED_MESSAGE -> cli.gameEndedHandler();
+                case GAME_ENDED_MESSAGE -> view.gameEndedHandler();
 
                 case GENERIC_MESSAGE -> {
                     GenericMessage msg = gson.fromJson(message, GenericMessage.class);
-                    cli.genericMessageHandler(msg);
+                    view.genericMessageHandler(msg);
                 }
                 case ERROR_MESSAGE -> {
                     ErrorMessage msg = gson.fromJson(message, ErrorMessage.class);
-                    cli.errorMessageHandler(msg);
+                    view.errorMessageHandler(msg);
                 }
                 case DISCONNECTION_REPLY_MESSAGE -> {
                     System.out.print("\nClosing the application");

@@ -379,7 +379,7 @@ public class MessageParser implements PropertyChangeListener {
      * Forwards the request for displaying the match's current state to the CLI.
      */
     private void matchInfoMessage() {
-        client.getCli().matchInfoHandler();
+        client.getView().matchInfoHandler();
     }
 
     /**

@@ -24,7 +24,7 @@ import java.util.concurrent.Executors;
  * Main class for the Command Line Interface client.
  * This is executed when the client chooses the CLI option at the beginning of the game.
  */
-public class CLI {
+public class CLI implements View {
 
     private SocketClient socketClient;
     private final ExecutorService keyboardQueue;
@@ -82,6 +82,7 @@ public class CLI {
      * Handles the LoginReplyMessage sent by the server.
      * @param msg the message to handle.
      */
+    @Override
     public void loginReplyHandler(LoginReplyMessage msg) {
         System.out.println(msg.getMessage());
     }
@@ -90,6 +91,7 @@ public class CLI {
      * Handles the WizardsAvailableMessage sent by the server.
      * @param msg the message to handle.
      */
+    @Override
     public void wizardsHandler(WizardsAvailableMessage msg) {
         ArrayList<WizardName> wizardNames = msg.getWizards();
         StringBuilder wizards = new StringBuilder("Available wizards:");
@@ -105,6 +107,7 @@ public class CLI {
      * Handles the AssistantsMessage sent by the server.
      * @param msg the message to handle.
      */
+    @Override
     public void assistantsHandler(AssistantsMessage msg) {
         ArrayList<Assistant> assistants = msg.getAssistants();
         StringBuilder assistantString = new StringBuilder();
@@ -120,6 +123,7 @@ public class CLI {
      * Handles the ActivePlayersMessage sent by the server.
      * @param msg the message to handle.
      */
+    @Override
     public void activePlayersHandler(ActivePlayersMessage msg) {
         modelView.setPlayers(msg.getActivePlayers());
         showActivePlayers();
@@ -142,6 +146,7 @@ public class CLI {
      * Handles the BoardMessage sent by the server.
      * @param msg the message to handle.
      */
+    @Override
     public void boardHandler(BoardMessage msg) {
         modelView.setBoard(msg);
         showBoard(msg.getNickname());
@@ -249,6 +254,7 @@ public class CLI {
      * Handles the IslandGroupsMessage sent by the server.
      * @param msg the message to handle.
      */
+    @Override
     public void islandGroupsHandler(IslandGroupsMessage msg) {
         modelView.setIslandGroups(msg.getIslandGroup(), msg.getMotherNatureIndex());
         showIslandGroups();
@@ -274,7 +280,6 @@ public class CLI {
             }
             islands.append("\n");
 
-            // TODO conquered by nickname?
             if(iG.getConquerorColor() != null) {
                 islands.append("\tConquered by -> ").append(modelView.getPlayerByColor(iG.getConquerorColor())).append("\n");
             }
@@ -299,6 +304,7 @@ public class CLI {
      * Handles the IslandMessage sent by the server.
      * @param msg the message to handle.
      */
+    @Override
     public void islandHandler(IslandMessage msg) {
         modelView.setIsland(msg.getIsland());
         showIsland(msg.getIsland().getIslandID());
@@ -317,7 +323,6 @@ public class CLI {
         }
         message.append("\n");
 
-        // TODO conquered by nickname?
         if(island.getTower() != null) {
             message.append("\t\tConquered by -> ").append(modelView.getPlayerByColor(island.getTower())).append("\n");
         }
@@ -329,6 +334,7 @@ public class CLI {
      * Handles the CloudsAvailableMessage sent by the server.
      * @param msg the message to handle.
      */
+    @Override
     public void cloudsAvailableHandler(CloudsAvailableMessage msg) {
         modelView.setClouds(msg.getClouds());
 
@@ -361,6 +367,7 @@ public class CLI {
      * Handles the CloudChosenMessage sent by the server.
      * @param msg the message to handle.
      */
+    @Override
     public void cloudChosenHandler(CloudChosenMessage msg) {
          showChosenCloud(msg.getCloud());
     }
@@ -384,6 +391,7 @@ public class CLI {
      * Handles the CoinMessage sent by the server.
      * @param msg the message to handle.
      */
+    @Override
     public void coinsHandler(CoinMessage msg) {
         modelView.setCoins(msg);
         showCoins(msg.getNickname());
@@ -402,6 +410,7 @@ public class CLI {
      * Handles the CurrentPlayerMessage sent by the server.
      * @param msg the message to handle.
      */
+    @Override
     public void currentPlayerHandler(CurrentPlayerMessage msg) {
         modelView.setCurrentPlayer(msg.getCurrentPlayer());
         showCurrentPlayer();
@@ -418,6 +427,7 @@ public class CLI {
      * Handles the CurrentPhaseMessage sent by the server.
      * @param msg the message to handle.
      */
+    @Override
     public void currentPhaseHandler(CurrentPhaseMessage msg) {
         modelView.setCurrentPhase(msg.getCurrentPhase());
         showCurrentPhase(msg);
@@ -483,6 +493,7 @@ public class CLI {
      * Handles the CharacterDrawnMessage sent by the server.
      * @param msg the message to handle.
      */
+    @Override
     public void charactersDrawnHandler(CharacterDrawnMessage msg) {
         modelView.setDrawnCharacter(msg);
     }
@@ -491,6 +502,7 @@ public class CLI {
      * Handles the CharacterInfoMessage sent by the server.
      * @param msg the message to handle.
      */
+    @Override
     public void characterInfoHandler(CharacterInfoMessage msg) {
         System.out.println(msg.getDescription());
     }
@@ -499,6 +511,7 @@ public class CLI {
      * Handles the CharacterPlayedMessage sent by the server.
      * @param msg the message to handle.
      */
+    @Override
     public void characterPlayedHandler(CharacterPlayedMessage msg) {
         modelView.setPlayedCharacter(msg);
         showPlayedCharacter(msg.getCharacterID());
@@ -532,6 +545,7 @@ public class CLI {
     /**
      * Displays the match's current state.
      */
+    @Override
     public void matchInfoHandler() {
         // Display players
         showActivePlayers();
@@ -559,15 +573,17 @@ public class CLI {
      * Handles the WinnerMessage sent by the server.
      * @param msg the message to handle.
      */
+    @Override
     public void winnerHandler(WinnerMessage msg) {
         modelView.setWinner(msg.getWinnerNickname());
         System.out.println("You won! Congratulations!\n");
     }
 
     /**
-     * Handles the WinnerMessage sent by the server.
+     * Handles the LoserMessage sent by the server.
      * @param msg the message to handle.
      */
+    @Override
     public void loserHandler(LoserMessage msg) {
         modelView.setWinner(msg.getWinnerNickname());
         System.out.println("The winner is " + msg.getWinnerNickname() + "!\n");
@@ -576,6 +592,7 @@ public class CLI {
     /**
      * Handles the end of the game
      */
+    @Override
     public void gameEndedHandler() {
         System.out.print("The game has ended, the application will close soon");
         Constants.countdown(500);
@@ -587,6 +604,7 @@ public class CLI {
      * Handles the GenericMessage sent by the server.
      * @param msg the message to handle.
      */
+    @Override
     public void genericMessageHandler(GenericMessage msg) {
         System.out.println(msg.getMessage());
     }
@@ -595,6 +613,7 @@ public class CLI {
      * Handles the ErrorMessage sent by the server.
      * @param msg the message to handle.
      */
+    @Override
     public void errorMessageHandler(ErrorMessage msg) {
         System.out.println(msg.getError());
     }
