@@ -256,7 +256,7 @@ public class CLI implements View {
      */
     @Override
     public void islandGroupsHandler(IslandGroupsMessage msg) {
-        modelView.setIslandGroups(msg.getIslandGroup(), msg.getMotherNatureIndex());
+        modelView.setIslandGroups(msg.getIslandGroups(), msg.getMotherNatureIndex());
         showIslandGroups();
     }
 
@@ -514,7 +514,12 @@ public class CLI implements View {
     @Override
     public void characterPlayedHandler(CharacterPlayedMessage msg) {
         modelView.setPlayedCharacter(msg);
-        showPlayedCharacter(msg.getCharacterID());
+
+        int characterID = msg.getCharacterID();
+
+        if(characterID > 0) {
+            showPlayedCharacter(characterID);
+        }
     }
 
     /**
@@ -528,12 +533,12 @@ public class CLI implements View {
 
         String banCard = "";
         if(characterView.getBanCards() > 0) {
-            banCard = "Number of ban cards: " + characterView.getBanCards();
+            banCard = " Number of ban cards: " + characterView.getBanCards();
         }
 
         StringBuilder studentString = new StringBuilder();
-        if(characterView.getStudents() != null) {
-            studentString = new StringBuilder("Students:");
+        if(characterView.getStudents().size() > 0) {
+            studentString = new StringBuilder(" Students:");
             for(Student student : characterView.getStudents()) {
                 studentString.append(" ").append(Constants.getCircleFullByColor(student.getColor()));
             }

@@ -1,10 +1,7 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.enumerations.PlayerColor;
-import it.polimi.ingsw.model.gameBoard.Board;
-import it.polimi.ingsw.model.gameBoard.Cloud;
-import it.polimi.ingsw.model.gameBoard.Island;
-import it.polimi.ingsw.model.gameBoard.IslandGroup;
+import it.polimi.ingsw.model.gameBoard.*;
 import it.polimi.ingsw.network.message.serverToclient.*;
 
 import java.util.ArrayList;

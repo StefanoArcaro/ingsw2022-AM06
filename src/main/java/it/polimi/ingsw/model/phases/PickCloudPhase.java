@@ -54,6 +54,8 @@ public class PickCloudPhase extends ActionPhase {
         // Restore
         game.getActivatedCharacter().setNumberOfIterations(0);
         game.setActivatedCharacter(game.getCharacterByID(CharacterID.CHARACTER_NONE.getID()));
+        //TODO: check - reset character in model view
+        game.getListeners().firePropertyChange(Constants.CHARACTER_PLAYED_LISTENER, null, game.getActivatedCharacter());
 
         int numberOfPlayers = game.getNumberOfPlayers().getNum();
         Player lastPlayer = game.getPlayingOrder().get(numberOfPlayers - 1);
@@ -66,6 +68,9 @@ public class PickCloudPhase extends ActionPhase {
 
             game.getListeners().firePropertyChange(Constants.PLAYER_LISTENER, null, game.getCurrentPlayer().getNickname());
             game.getListeners().firePropertyChange(Constants.PHASE_LISTENER, null, new AbstractMap.SimpleEntry<>(game.getGameState(), game.getGameMode()));
+
+            game.getListeners().firePropertyChange(Constants.ASSISTANTS_AVAILABLE_LISTENER, null, game.getCurrentPlayer().getWizard().getAssistants());
+
         } else {
             game.setCurrentPlayer(game.getNextPlayer());
             game.setGameState(GameState.MOVE_STUDENT_PHASE);
