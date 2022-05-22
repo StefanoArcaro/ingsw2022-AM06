@@ -5,7 +5,6 @@ import it.polimi.ingsw.network.message.clientToserver.Message;
 import it.polimi.ingsw.network.message.clientToserver.PingMessage;
 import it.polimi.ingsw.network.message.serverToclient.*;
 import it.polimi.ingsw.util.Constants;
-import it.polimi.ingsw.view.CLI;
 import it.polimi.ingsw.view.View;
 
 import java.io.*;
@@ -28,8 +27,8 @@ public class SocketClient extends Client {
      * Default constructor.
      * @param socket the server socket.
      */
-    public SocketClient(CLI cli, Socket socket) {
-        this.view = cli;
+    public SocketClient(View view, Socket socket) {
+        this.view = view;
         this.socket = socket;
 
         try {
