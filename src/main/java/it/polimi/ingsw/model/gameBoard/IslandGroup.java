@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class IslandGroup {
 
-    private final ArrayList<Island> islands;
+    private ArrayList<Island> islands;
     private int numberOfBanCardPresent;
     private PlayerColor conquerorColor;
 
@@ -71,6 +71,15 @@ public class IslandGroup {
     }
 
     /**
+     * Sets the islands to the given ones.
+     * @param islands the group of islands to set.
+     */
+    public void setIslands(ArrayList<Island> islands) {
+        this.islands = islands;
+    }
+
+
+    /**
      * @return the number of islands that belong to the island group.
      */
     public int getNumberOfIslands() {
@@ -127,8 +136,9 @@ public class IslandGroup {
     /**
      * Merge island groups together.
      * @param islandGroup to join this.islandGroup.
+     * @return the updated island group.
      */
-    public boolean connectIslandGroup(IslandGroup islandGroup) {
+    public IslandGroup connectIslandGroup(IslandGroup islandGroup) {
         ArrayList<Island> islandsInGroupToAdd;
         int lenGroupToAdd;
         PlayerColor playerColorIslandGroupToAdd;
@@ -139,12 +149,20 @@ public class IslandGroup {
         playerColorIslandGroupToAdd = islandGroup.getConquerorColor();
 
         if(this.conquerorColor != playerColorIslandGroupToAdd) {
-            return false;
+            return null;
         }
 
         for(int j = 0; j < lenGroupToAdd; j++) {
             for(int i = 0; i < this.getNumberOfIslands(); i++) {
-                if(this.getIslands().get(i).getIslandID() + 1 == islandsInGroupToAdd.get(j).getIslandID()) {
+
+                int next;
+                if(this.getIslands().get(i).getIslandID() + 1 < 13) {
+                    next = this.getIslands().get(i).getIslandID() + 1;
+                }else{
+                    next = 1;
+                }
+
+                if(next == islandsInGroupToAdd.get(j).getIslandID()) {
                     this.addIsland(islandsInGroupToAdd.get(j));
                     islandsAdded++;
                     break;
@@ -152,7 +170,9 @@ public class IslandGroup {
             }
         }
 
-        if(islandsAdded == lenGroupToAdd) { return true; }
+        if(islandsAdded == lenGroupToAdd) {
+            return this;
+        }
 
         for(int j = lenGroupToAdd - 1; j >= 0; j--) {
             for(int i = 0; i < this.getNumberOfIslands(); i++) {
@@ -164,7 +184,11 @@ public class IslandGroup {
             }
         }
 
-        return islandsAdded == lenGroupToAdd;
+        if(islandsAdded == lenGroupToAdd) {
+            return this;
+        }
+
+        return null;
     }
 
     /**

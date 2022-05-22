@@ -28,7 +28,9 @@ public class EndgamePhase extends Phase {
         } else {
             winner = calculateWinner();
         }
-        game.getListeners().firePropertyChange(Constants.WIN_LISTENER, null, winner.getNickname());
+
+        //TODO: probably no need: end game checked in game controller
+        //game.getListeners().firePropertyChange(Constants.WIN_LISTENER, null, winner.getNickname());
     }
 
     /**

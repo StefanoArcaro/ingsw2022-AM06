@@ -239,7 +239,7 @@ class IslandGroupTest {
         islandGroup.addIsland(island1);
         islandGroup.addIsland(island2);
 
-        assertTrue(islandGroup.connectIslandGroup(islandGroupToAdd));
+        assertNotNull(islandGroup.connectIslandGroup(islandGroupToAdd));
 
         assertEquals(1, islandGroup.getIslands().get(0).getIslandID());
         assertEquals(2, islandGroup.getIslands().get(1).getIslandID());
@@ -270,7 +270,7 @@ class IslandGroupTest {
         islandGroup.addIsland(island3);
         islandGroup.addIsland(island4);
 
-        assertTrue(islandGroup.connectIslandGroup(islandGroupToAdd));
+        assertNotNull(islandGroup.connectIslandGroup(islandGroupToAdd));
 
         assertEquals(1, islandGroup.getIslands().get(0).getIslandID());
         assertEquals(2, islandGroup.getIslands().get(1).getIslandID());
@@ -298,7 +298,8 @@ class IslandGroupTest {
 
         islandGroup.addIsland(island4);
 
-        assertFalse(islandGroup.connectIslandGroup(islandGroupToAdd));
+        assertNull(islandGroup.connectIslandGroup(islandGroupToAdd));
+
         assertEquals(4, islandGroup.getIslands().get(0).getIslandID());
         assertEquals(1, islandGroup.getNumberOfIslands());
     }
@@ -325,7 +326,8 @@ class IslandGroupTest {
 
         islandGroup.addIsland(island4);
 
-        assertFalse(islandGroup.connectIslandGroup(islandGroupToAdd));
+        assertNull(islandGroup.connectIslandGroup(islandGroupToAdd));
+
         assertEquals(4, islandGroup.getIslands().get(0).getIslandID());
         assertEquals(1, islandGroup.getNumberOfIslands());
     }
@@ -351,7 +353,8 @@ class IslandGroupTest {
         islandGroup.addIsland(island12);
         islandGroup.addIsland(island1);
 
-        assertTrue(islandGroup.connectIslandGroup(islandGroupToAdd));
+        assertNotNull(islandGroup.connectIslandGroup(islandGroupToAdd));
+
         assertEquals(1, islandGroup.getIslands().get(0).getIslandID());
         assertEquals(2, islandGroup.getIslands().get(1).getIslandID());
         assertEquals(3, islandGroup.getIslands().get(2).getIslandID());

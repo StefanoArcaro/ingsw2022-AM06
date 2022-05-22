@@ -418,4 +418,195 @@ class GameTest {
         newIndexMotherNature = game.getIndexOfIslandGroup(game.getMotherNature().getCurrentIslandGroup());
         assertEquals(3, newIndexMotherNature);
     }
+
+    @Test
+    void calculateInfluence_connectIslandGroups2() {
+        int newIndexMotherNature;
+        ArrayList<Integer> expectedIDIslands;
+
+        game = new Game();
+        ArrayList<String> nicknames = new ArrayList<>();
+        ArrayList<Integer> wizardIDs = new ArrayList<>();
+        ArrayList<Integer> priority = new ArrayList<>();
+
+        nicknames.add("Stefano");
+        nicknames.add("Chiara");
+
+        wizardIDs.add(3); // SENSEI
+        wizardIDs.add(2); // WITCH
+
+        priority.add(10);
+        priority.add(9);
+
+        game.setNumberOfPlayers(2);
+        game.setGameMode(GameMode.EASY);
+
+        // Lobby phase
+        Phase phase = game.getCurrentPhase();
+
+        for(String nickname : nicknames) {
+            try {
+                phase.setPlayerNickname(nickname);
+                phase.play();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        // Prepare phase
+        phase = game.getCurrentPhase();
+
+        for(int i = 0; i < game.getNumberOfPlayers().getNum(); i++) {
+            try {
+                phase.setWizardID(wizardIDs.get(i));
+                phase.play();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        // Planning phase
+        phase = game.getCurrentPhase();
+
+        for(int i = 0; i < game.getNumberOfPlayers().getNum(); i++) {
+            try {
+                phase.setPriority(priority.get(i));
+                phase.play();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        Player firstPlayer = game.getPlayingOrder().get(0);
+        Player lastPlayer = game.getPlayingOrder().get(1);
+
+        //first player: professors green, blue, yellow
+        firstPlayer.getBoard().addStudentToHall(CreatureColor.GREEN);
+        firstPlayer.getBoard().addStudentToHall(CreatureColor.GREEN);
+        firstPlayer.getBoard().addStudentToHall(CreatureColor.GREEN);
+        firstPlayer.getBoard().winProfessor(new Professor(CreatureColor.GREEN));
+
+        firstPlayer.getBoard().addStudentToHall(CreatureColor.BLUE);
+        firstPlayer.getBoard().addStudentToHall(CreatureColor.BLUE);
+        firstPlayer.getBoard().addStudentToHall(CreatureColor.BLUE);
+        firstPlayer.getBoard().addStudentToHall(CreatureColor.BLUE);
+        firstPlayer.getBoard().winProfessor(new Professor(CreatureColor.BLUE));
+
+        firstPlayer.getBoard().addStudentToHall(CreatureColor.YELLOW);
+        firstPlayer.getBoard().addStudentToHall(CreatureColor.YELLOW);
+        firstPlayer.getBoard().addStudentToHall(CreatureColor.YELLOW);
+        firstPlayer.getBoard().addStudentToHall(CreatureColor.YELLOW);
+        firstPlayer.getBoard().winProfessor(new Professor(CreatureColor.YELLOW));
+
+        //last player: professors red, pink
+        lastPlayer.getBoard().addStudentToHall(CreatureColor.RED);
+        lastPlayer.getBoard().addStudentToHall(CreatureColor.RED);
+        lastPlayer.getBoard().addStudentToHall(CreatureColor.RED);
+        lastPlayer.getBoard().addStudentToHall(CreatureColor.RED);
+        lastPlayer.getBoard().winProfessor(new Professor(CreatureColor.RED));
+
+        lastPlayer.getBoard().addStudentToHall(CreatureColor.PINK);
+        lastPlayer.getBoard().addStudentToHall(CreatureColor.PINK);
+        lastPlayer.getBoard().addStudentToHall(CreatureColor.PINK);
+        lastPlayer.getBoard().addStudentToHall(CreatureColor.PINK);
+        lastPlayer.getBoard().winProfessor(new Professor(CreatureColor.PINK));
+
+        //fill the islands so that the calculation of the influence is not random
+        //and place some towers
+
+        //islandGroup 0: green - firstPlayer
+        game.getIslandGroupByIndex(0).getIslands().get(0).receiveStudent(CreatureColor.GREEN);
+        game.getIslandGroupByIndex(0).getIslands().get(0).receiveStudent(CreatureColor.GREEN);
+        game.getIslandGroupByIndex(0).getIslands().get(0).receiveStudent(CreatureColor.GREEN);
+        game.getIslandGroupByIndex(0).getIslands().get(0).addTower(game, firstPlayer.getColor());
+        game.getIslandGroupByIndex(0).setConquerorColor(firstPlayer.getColor());
+
+        //islandGroup 1: blue
+        game.getIslandGroupByIndex(1).getIslands().get(0).receiveStudent(CreatureColor.BLUE);
+        game.getIslandGroupByIndex(1).getIslands().get(0).receiveStudent(CreatureColor.BLUE);
+        game.getIslandGroupByIndex(1).getIslands().get(0).receiveStudent(CreatureColor.BLUE);
+
+        //islandGroup 2: red - lastPlayer
+        game.getIslandGroupByIndex(2).getIslands().get(0).receiveStudent(CreatureColor.RED);
+        game.getIslandGroupByIndex(2).getIslands().get(0).receiveStudent(CreatureColor.RED);
+        game.getIslandGroupByIndex(2).getIslands().get(0).receiveStudent(CreatureColor.RED);
+        game.getIslandGroupByIndex(2).getIslands().get(0).addTower(game, lastPlayer.getColor());
+        game.getIslandGroupByIndex(2).setConquerorColor(lastPlayer.getColor());
+
+        //islandGroup 3: pink
+        game.getIslandGroupByIndex(3).getIslands().get(0).receiveStudent(CreatureColor.PINK);
+        game.getIslandGroupByIndex(3).getIslands().get(0).receiveStudent(CreatureColor.PINK);
+        game.getIslandGroupByIndex(3).getIslands().get(0).receiveStudent(CreatureColor.PINK);
+
+        //islandGroup 4: red
+        game.getIslandGroupByIndex(4).getIslands().get(0).receiveStudent(CreatureColor.RED);
+        game.getIslandGroupByIndex(4).getIslands().get(0).receiveStudent(CreatureColor.RED);
+        game.getIslandGroupByIndex(4).getIslands().get(0).receiveStudent(CreatureColor.RED);
+
+        //islandGroup 5: pink - lastPlayer
+        game.getIslandGroupByIndex(5).getIslands().get(0).receiveStudent(CreatureColor.PINK);
+        game.getIslandGroupByIndex(5).getIslands().get(0).receiveStudent(CreatureColor.PINK);
+        game.getIslandGroupByIndex(5).getIslands().get(0).receiveStudent(CreatureColor.PINK);
+        game.getIslandGroupByIndex(5).getIslands().get(0).addTower(game, lastPlayer.getColor());
+        game.getIslandGroupByIndex(5).setConquerorColor(lastPlayer.getColor());
+
+        //islandGroup 6: yellow
+        game.getIslandGroupByIndex(6).getIslands().get(0).receiveStudent(CreatureColor.YELLOW);
+        game.getIslandGroupByIndex(6).getIslands().get(0).receiveStudent(CreatureColor.YELLOW);
+        game.getIslandGroupByIndex(6).getIslands().get(0).receiveStudent(CreatureColor.YELLOW);
+
+        //islandGroup 7: pink
+        game.getIslandGroupByIndex(7).getIslands().get(0).receiveStudent(CreatureColor.PINK);
+        game.getIslandGroupByIndex(7).getIslands().get(0).receiveStudent(CreatureColor.PINK);
+        game.getIslandGroupByIndex(7).getIslands().get(0).receiveStudent(CreatureColor.PINK);
+
+        //islandGroup 8: pink
+        game.getIslandGroupByIndex(8).getIslands().get(0).receiveStudent(CreatureColor.PINK);
+        game.getIslandGroupByIndex(8).getIslands().get(0).receiveStudent(CreatureColor.PINK);
+        game.getIslandGroupByIndex(8).getIslands().get(0).receiveStudent(CreatureColor.PINK);
+
+        //islandGroup 9: red
+        game.getIslandGroupByIndex(9).getIslands().get(0).receiveStudent(CreatureColor.RED);
+        game.getIslandGroupByIndex(9).getIslands().get(0).receiveStudent(CreatureColor.RED);
+        game.getIslandGroupByIndex(9).getIslands().get(0).receiveStudent(CreatureColor.RED);
+
+        //islandGroup 10: blue - firstPlayer
+        game.getIslandGroupByIndex(10).getIslands().get(0).receiveStudent(CreatureColor.BLUE);
+        game.getIslandGroupByIndex(10).getIslands().get(0).receiveStudent(CreatureColor.BLUE);
+        game.getIslandGroupByIndex(10).getIslands().get(0).receiveStudent(CreatureColor.BLUE);
+        game.getIslandGroupByIndex(10).getIslands().get(0).addTower(game, firstPlayer.getColor());
+        game.getIslandGroupByIndex(10).setConquerorColor(firstPlayer.getColor());
+
+
+        //islandGroup 11: yellow
+        game.getIslandGroupByIndex(11).getIslands().get(0).receiveStudent(CreatureColor.YELLOW);
+        game.getIslandGroupByIndex(11).getIslands().get(0).receiveStudent(CreatureColor.YELLOW);
+        game.getIslandGroupByIndex(11).getIslands().get(0).receiveStudent(CreatureColor.YELLOW);
+
+        assertEquals(12, game.getIslandGroups().size());
+
+        //move mother nature to island group with index 10
+        game.getMotherNature().setCurrentIslandGroup(game.getIslandGroupByIndex(10));
+
+        //start mother nature phase for firstPlayer
+        game.setGameState(GameState.MOVE_MOTHER_NATURE_PHASE);
+        game.setCurrentPhase(new PhaseFactory(game).createPhase(game.getGameState()));
+        game.getCurrentPhase().setNumberOfSteps(1);
+
+        try {
+            game.getCurrentPhase().play();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        //firstPlayer conquered islandGroup (index 11)
+        //and created an archipelago (id 1, 11, 12)
+        assertEquals(10, game.getIslandGroups().size());
+        newIndexMotherNature = game.getIndexOfIslandGroup(game.getMotherNature().getCurrentIslandGroup());
+        assertEquals(9, newIndexMotherNature);
+        assertEquals(firstPlayer.getColor(), game.getMotherNature().getCurrentIslandGroup().getConquerorColor());
+        assertEquals(3, game.getIslandGroups().get(9).getIslands().size());
+        expectedIDIslands = new ArrayList<>(Arrays.asList(1, 11, 12));
+        assertEquals(expectedIDIslands, game.getIslandGroups().get(9).getIslands().stream().map(Island::getIslandID).toList());
+    }
 }

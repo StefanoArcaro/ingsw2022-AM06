@@ -11,10 +11,7 @@ import it.polimi.ingsw.view.VirtualView;
 
 
 import java.beans.PropertyChangeSupport;
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Map;
+import java.util.*;
 
 public class Game {
 
@@ -268,7 +265,6 @@ public class Game {
         return players.get((players.indexOf(currentPlayer) + 1) % numberOfPlayers.getNum());
     }
 
-
     /**
      * The player corresponding to a certain PlayerColor.
      * @param color of the player to return.
@@ -325,11 +321,14 @@ public class Game {
      * If they get connected, the second island group is removed from the island groups list.
      * @param presentIslandGroup island group that eventually incorporates the other one.
      * @param islandGroupToAdd island group that eventually gets incorporated into the first one.
+     * @return the updated island group, if the connection is possible, null otherwise.
      */
-    public void connectIslandGroups(IslandGroup presentIslandGroup, IslandGroup islandGroupToAdd) {
-        if(presentIslandGroup.connectIslandGroup(islandGroupToAdd)) {
+    public IslandGroup connectIslandGroups(IslandGroup presentIslandGroup, IslandGroup islandGroupToAdd) {
+        IslandGroup result = presentIslandGroup.connectIslandGroup(islandGroupToAdd);
+        if(result != null) {
             islandGroups.remove(islandGroupToAdd);
         }
+        return result;
     }
 
     /**
@@ -456,12 +455,23 @@ public class Game {
             IslandGroup nextIslandGroup = getIslandGroupByIndex(indexNextIslandGroup);
 
             if(islandGroup != null) {
+
                 if(previousIslandGroup != null) {
-                    connectIslandGroups(islandGroup, previousIslandGroup);
+                    IslandGroup result = connectIslandGroups(islandGroup, previousIslandGroup);
+
+                    if(result != null) {
+                        islandGroup = result;
+                    }
                 }
                 if(nextIslandGroup != null) {
                     connectIslandGroups(islandGroup, nextIslandGroup);
                 }
+
+                //reorder islandGroup
+                ArrayList<Island> toSort = islandGroup.getIslands();
+                toSort.sort(Comparator.comparingInt(Island::getIslandID));
+                islandGroup.setIslands(toSort);
+
             }
         }
 

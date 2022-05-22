@@ -142,7 +142,7 @@ class MoveMotherNaturePhaseTest {
         Player p1 = game.getPlayingOrder().get(0);
         Player p2 = game.getPlayingOrder().get(1);
 
-        //connect some island groups
+        //connect some island groups: 0-1-2-3
         game.getIslandGroups().get(0).getIslands().get(0).addTower(game, p1.getColor());
         game.getIslandGroups().get(1).getIslands().get(0).addTower(game, p1.getColor());
         game.getIslandGroups().get(2).getIslands().get(0).addTower(game, p1.getColor());
@@ -156,6 +156,7 @@ class MoveMotherNaturePhaseTest {
         game.connectIslandGroups(game.getIslandGroups().get(0), game.getIslandGroups().get(1));
         game.connectIslandGroups(game.getIslandGroups().get(0), game.getIslandGroups().get(1));
 
+        //connect some island groups: 4-5-6-7
         game.getIslandGroups().get(1).getIslands().get(0).addTower(game, p1.getColor());
         game.getIslandGroups().get(2).getIslands().get(0).addTower(game, p1.getColor());
         game.getIslandGroups().get(3).getIslands().get(0).addTower(game, p1.getColor());
@@ -169,6 +170,7 @@ class MoveMotherNaturePhaseTest {
         game.connectIslandGroups(game.getIslandGroups().get(1), game.getIslandGroups().get(2));
         game.connectIslandGroups(game.getIslandGroups().get(1), game.getIslandGroups().get(2));
 
+        //connect some island groups: 8-9-10-11
         game.getIslandGroups().get(2).getIslands().get(0).addTower(game, p2.getColor());
         game.getIslandGroups().get(3).getIslands().get(0).addTower(game, p2.getColor());
         game.getIslandGroups().get(4).getIslands().get(0).addTower(game, p2.getColor());
@@ -384,7 +386,7 @@ class MoveMotherNaturePhaseTest {
         Character activatedCharacter = new ConcreteCharacterFactory(game).createCharacter(5);
         game.addDrawnCharacter(activatedCharacter);
         game.setActivatedCharacter(activatedCharacter);
-        ((CharacterInfluenceModifier)activatedCharacter).setIslandGroupIndex(1);
+        activatedCharacter.setIslandGroupIndex(1);
 
         try {
             activatedCharacter.effect();

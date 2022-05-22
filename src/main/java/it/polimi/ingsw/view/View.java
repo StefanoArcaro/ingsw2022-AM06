@@ -1,8 +1,35 @@
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.network.client.SocketClient;
 import it.polimi.ingsw.network.message.serverToclient.*;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
 public interface View {
+
+
+    /**
+     * @return the socket attribute of this client.
+     */
+    SocketClient getSocketClient();
+
+    /**
+     * Sets the socket attribute of this client to the specified one.
+     * @param socketClient socket to set.
+     */
+    void setSocketClient(SocketClient socketClient);
+
+
+
+
+    /**
+     * Adds a listener to the View.
+     * @param propertyName name of the observed property of the View.
+     * @param listener listener added to the View.
+     */
+    void addListener(String propertyName, PropertyChangeListener listener);
+
 
     /**
      * Handles the LoginReplyMessage sent by the server.

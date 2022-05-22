@@ -10,17 +10,17 @@ import java.util.ArrayList;
  */
 public class IslandGroupsMessage extends Answer {
 
-    private final ArrayList<IslandGroup> islandGroup;
+    private final ArrayList<IslandGroup> islandGroups;
     private final int motherNatureIndex;
 
-    public IslandGroupsMessage(ArrayList<IslandGroup> islandGroup, int motherNatureIndex) {
+    public IslandGroupsMessage(ArrayList<IslandGroup> islandGroups, int motherNatureIndex) {
         super(MessageType.ISLAND_GROUPS_MESSAGE);
-        this.islandGroup = islandGroup;
+        this.islandGroups = islandGroups;
         this.motherNatureIndex = motherNatureIndex;
     }
 
-    public ArrayList<IslandGroup> getIslandGroup() {
-        return new ArrayList<>(islandGroup);
+    public ArrayList<IslandGroup> getIslandGroups() {
+        return new ArrayList<>(islandGroups);
     }
 
     public int getMotherNatureIndex() {
