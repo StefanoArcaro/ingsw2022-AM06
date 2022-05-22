@@ -36,7 +36,6 @@ public class MessageParser implements PropertyChangeListener {
         String command = in[0];
         Message message = null;
 
-        // TODO ADD MATCHINFO CASE
         switch (command.toUpperCase()) {
             case "LOGIN" -> message = loginMessage(in);
             case "WIZARD" -> message = prepareMessage(in);

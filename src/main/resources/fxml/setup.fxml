@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane fx:controller="it.polimi.ingsw.view.GUI.controllers.MainMenuController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="692.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextField fx:id="address_field" layoutX="78.0" layoutY="163.0" text="localhost">
+         <font>
+            <Font name="Cambria" size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="portNumber_field" layoutX="81.0" layoutY="253.0" text="1234" />
+      <Label layoutX="81.0" layoutY="136.0" text="IP address" />
+      <Label layoutX="81.0" layoutY="226.0" text="Port number" />
+      <Label layoutX="81.0" layoutY="73.0" text="Server info">
+         <font>
+            <Font name="System Italic" size="35.0" />
+         </font>
+      </Label>
+      <Button fx:id="submit_serverInfo" layoutX="141.0" layoutY="317.0" mnemonicParsing="false" onAction="#serverInfo" text="Submit" />
+      <Button fx:id="quit_button" layoutX="581.0" layoutY="414.0" mnemonicParsing="false" onAction="#quit" text="Quit" />
+   </children>
+</Pane>
+

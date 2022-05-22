@@ -309,4 +309,9 @@ public class Constants {
         }
         System.out.println("\n");
     }
+
+    //GUI
+    public static final String MENU = "MainMenu.fxml";
+    public static final String SETUP = "setup.fxml";
+    public static final String LOGIN = "login.fxml";
 }

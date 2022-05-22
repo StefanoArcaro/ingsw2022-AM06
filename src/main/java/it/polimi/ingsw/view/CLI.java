@@ -42,6 +42,7 @@ public class CLI implements View {
     /**
      * @return the socket attribute of this client.
      */
+    @Override
     public SocketClient getSocketClient() {
         return this.socketClient;
     }
@@ -50,6 +51,7 @@ public class CLI implements View {
      * Sets the socket attribute of this client to the specified one.
      * @param socketClient socket to set.
      */
+    @Override
     public void setSocketClient(SocketClient socketClient) {
         this.socketClient = socketClient;
     }
@@ -59,6 +61,7 @@ public class CLI implements View {
      * @param propertyName name of the observed property of the CLI.
      * @param listener listener added to the CLI.
      */
+    @Override
     public void addListener(String propertyName, PropertyChangeListener listener) {
         this.listener.addPropertyChangeListener(propertyName, listener);
     }
