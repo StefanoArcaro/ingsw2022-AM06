@@ -3,6 +3,7 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.network.server.Server;
 import it.polimi.ingsw.util.Constants;
 import it.polimi.ingsw.view.CLI;
+import it.polimi.ingsw.view.GUI.GUIMain;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -58,6 +59,7 @@ public class Eriantys {
                 System.out.println("\n=============================================================\n");
                 System.out.println("GUI main running!");
                 //GUI.main(null);
+                new GUIMain().callGUI();
             }
             default -> System.err.println("Invalid argument, please run the executable again and select one of the available options.");
         }
