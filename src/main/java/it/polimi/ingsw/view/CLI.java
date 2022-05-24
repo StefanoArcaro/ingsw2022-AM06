@@ -156,12 +156,10 @@ public class CLI implements View {
         showBoard(msg.getNickname());
     }
 
-
-
-
-
+    /**
+     * Displays the players' boards horizontally.
+     */
     public void showBoards() {
-        // TODO
         ArrayList<String> players = modelView.getPlayersSorted();
 
         if(players.size() > 0) {
@@ -177,13 +175,14 @@ public class CLI implements View {
             // Towers
             String towers = showTowers(players);
 
-            // Coins
-            String coins = showCoins(players);
-
-            System.out.println(owners + entrances + halls + towers + coins);
+            System.out.println(owners + entrances + halls + towers);
         }
     }
 
+    /**
+     * @param players list of the active players.
+     * @return the string of the players' names.
+     */
     public String showOwners(ArrayList<String> players) {
         StringBuilder owners = new StringBuilder();
 
@@ -196,19 +195,30 @@ public class CLI implements View {
         return owners.toString();
     }
 
+    /**
+     * @param players list of the active players.
+     * @return the string of the players' entrances.
+     */
     public String showEntrances(ArrayList<String> players) {
+        int maxStudents = modelView.getNumberOfPlayers() == 2 ? 7 : 9;
+
         StringBuilder entrances = new StringBuilder();
 
         for(String p : players) {
             Board board = modelView.getBoard(p);
             entrances.append("Entrance:");
+            int i = 0;
             for(Student student : board.getEntrance().getStudents()) {
                 entrances.append(" ").append(Constants.getCircleFullByColor(student.getColor()));
+                i++;
+            }
+            while(i < maxStudents) {
+                entrances.append(" ").append(Constants.CIRCLE_EMPTY);
+                i++;
             }
             entrances.append("\t\t");
 
-            // TODO change
-            if(board.getEntrance().getStudents().size() < 9) {
+            if(maxStudents < 9) {
                 entrances.append("\t");
             }
         }
@@ -218,6 +228,10 @@ public class CLI implements View {
         return entrances.toString();
     }
 
+    /**
+     * @param players list of the active players.
+     * @return the string of the players' halls.
+     */
     public String showHalls(ArrayList<String> players) {
         ArrayList<Board> boards = new ArrayList<>();
 
@@ -267,6 +281,10 @@ public class CLI implements View {
         return halls.toString();
     }
 
+    /**
+     * @param players list of the active players.
+     * @return the string of the players' towers.
+     */
     public String showTowers(ArrayList<String> players) {
         StringBuilder towers = new StringBuilder();
 
@@ -299,36 +317,32 @@ public class CLI implements View {
         return towers.toString();
     }
 
-    public String showCoins(ArrayList<String> players) {
+    /**
+     * Displays the coins of all the active players.
+     * @param players list of the active players.
+     */
+    public void showCoins(ArrayList<String> players) {
         StringBuilder coins = new StringBuilder();
 
         for(String p : players) {
             int numberOfCoins = modelView.getCoinsByNickname(p);
 
             if(numberOfCoins > 0) {
-                coins.append("Coins: ");
+                coins.append(p).append("'s coins: ");
 
                 for(int i = 0; i < numberOfCoins; i++) {
                     coins.append(" ").append(Constants.CIRCLE_FULL);
                 }
 
-                // TODO change
-                coins.append("  ".repeat(Math.max(0, 8 - numberOfCoins)));
-
-                coins.append("\t\t\t");
+            } else {
+                coins.append(p).append(" has no coins");
             }
+
+            coins.append("\n");
         }
 
-        coins.append("\n");
-
-        return coins.toString();
+        System.out.println(coins);
     }
-
-
-
-
-
-
 
     /**
      * Displays the board of the player with the specified nickname to the console.
@@ -349,15 +363,7 @@ public class CLI implements View {
         // Towers
         String towers = showTowers(board);
 
-        // Coins
-        StringBuilder coins = new StringBuilder();
-        int numberOfCoins = modelView.getCoinsByNickname(nickname);
-        if(numberOfCoins > 0) {
-            coins.append("Coins: ");
-            coins = showCoins(coins, numberOfCoins);
-        }
-
-        System.out.println(owner + entrance + hall + towers + coins + "\n");
+        System.out.println(owner + entrance + hall + towers + "\n");
     }
 
     /**
@@ -439,14 +445,11 @@ public class CLI implements View {
      * Displays the coins a player has.
      * @param coins StringBuilder to be modified and returned.
      * @param numberOfCoins the number of coins the player has.
-     * @return the modified StringBuilder.
      */
-    public StringBuilder showCoins(StringBuilder coins, int numberOfCoins) {
+    public void showCoins(StringBuilder coins, int numberOfCoins) {
         for(int i = 0; i < numberOfCoins; i++) {
             coins.append(" ").append(Constants.CIRCLE_FULL);
         }
-
-        return coins;
     }
 
     /**
@@ -678,6 +681,8 @@ public class CLI implements View {
                     characters.append(", ban cards: ").append(c.getBanCards());
                 }
 
+                characters.append(" (cost: ").append(c.getCost()).append(")");
+
                 characters.append("\n");
 
                 // Format
@@ -703,6 +708,7 @@ public class CLI implements View {
     @Override
     public void characterInfoHandler(CharacterInfoMessage msg) {
         System.out.println(msg.getDescription());
+        System.out.println("Cost: " + modelView.getCharacterViewById(msg.getId()).getCost());
     }
 
     /**
@@ -727,7 +733,7 @@ public class CLI implements View {
     public void showPlayedCharacter(int characterID) {
         CharacterView characterView = modelView.getCharacterViewById(characterID);
 
-        String played = "Character played: " + characterID;
+        String played = "Character played: " + characterID + " (cost: " + characterView.getCost() + ")";
 
         String banCard = "";
         if(characterView.getBanCards() > 0) {
@@ -755,6 +761,9 @@ public class CLI implements View {
 
         // Display the boards and coins (if EXPERT game mode)
         showBoards();
+
+        // Coins
+        showCoins(modelView.getPlayersSorted());
 
         // Display the island groups
         showIslandGroups();
@@ -820,7 +829,6 @@ public class CLI implements View {
     public void errorMessageHandler(ErrorMessage msg) {
         System.out.println(msg.getError());
     }
-
 
     /**
      * Asks for the IP address and port of the server in order to

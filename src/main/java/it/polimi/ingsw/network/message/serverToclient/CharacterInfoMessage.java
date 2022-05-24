@@ -8,11 +8,17 @@ import it.polimi.ingsw.util.Constants;
  */
 public class CharacterInfoMessage extends Answer {
 
+    private final int id;
     private final String description;
 
     public CharacterInfoMessage(int characterID) {
         super(MessageType.CHARACTER_INFO_MESSAGE);
+        this.id = characterID;
         this.description = Constants.getCharacterInformation(characterID);
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getDescription() {

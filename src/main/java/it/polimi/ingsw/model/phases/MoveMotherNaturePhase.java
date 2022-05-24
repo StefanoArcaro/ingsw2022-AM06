@@ -90,12 +90,10 @@ public class MoveMotherNaturePhase extends ActionPhase {
         }
 
         if(skipPickCloudPhase) {
-            game.getActivatedCharacter().setNumberOfIterations(0);
+            game.getActivatedCharacter().reset();
             game.setActivatedCharacter(game.getCharacterByID(CharacterID.CHARACTER_NONE.getID()));
 
-            //TODO: check - reset character in model view
             game.getListeners().firePropertyChange(Constants.CHARACTER_PLAYED_LISTENER, null, game.getActivatedCharacter());
-
 
             if(isCurrentPlayerTheLastOne) {
                 game.setGameState(GameState.ENDED_STUDENTS);

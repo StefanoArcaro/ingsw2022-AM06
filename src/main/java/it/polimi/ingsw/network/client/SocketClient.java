@@ -5,8 +5,6 @@ import it.polimi.ingsw.network.message.clientToserver.Message;
 import it.polimi.ingsw.network.message.clientToserver.PingMessage;
 import it.polimi.ingsw.network.message.serverToclient.*;
 import it.polimi.ingsw.util.Constants;
-import it.polimi.ingsw.view.CLI;
-import it.polimi.ingsw.view.GUI.GUI;
 import it.polimi.ingsw.view.View;
 
 import java.io.*;

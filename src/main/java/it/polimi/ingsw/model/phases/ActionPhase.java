@@ -35,18 +35,19 @@ public abstract class ActionPhase extends Phase {
                 }
 
                 int price = characterToActivate.getCost();
-                if(currentPlayer.getCoins() >= price) {
-
+                if(currentPlayer.getCoins() >= price || characterToActivate.isPayed()) {
                     characterToActivate.effect();
-                    game.setActivatedCharacter(characterToActivate);
                     characterToActivate.setUsed();
+                    game.setActivatedCharacter(characterToActivate);
                     characterToActivate.increaseNumberOfIteration();
 
-                    currentPlayer.spendCoins(price);
+                    if(!characterToActivate.isPayed()) {
+                        currentPlayer.spendCoins(price);
+                        characterToActivate.setPayed(true);
+                    }
                 } else {
                     throw new NotEnoughMoneyException();
                 }
-
             } else {
                 throw new TooManyIterationsException();
             }

@@ -193,7 +193,7 @@ public class Constants {
     // Characters' descriptions
     private static final String CHARACTER_ONE_DESCRIPTION = """
             Take 1 Student from this card and place it on
-            an Island of your choice
+            an Island of your choice.
             """;
 
     private static final String CHARACTER_TWO_DESCRIPTION = """

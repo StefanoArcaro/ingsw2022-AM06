@@ -287,17 +287,17 @@ public class ModelView {
     }
 
     /**
+     * @return the nickname of the winner.
+     */
+    public String getWinner() {
+        return winner;
+    }
+
+    /**
      * Sets the winner of the game.
      * @param winner the nickname of the game's winner.
      */
     public void setWinner(String winner) {
         this.winner = winner;
-    }
-
-    /**
-     * @return the nickname of the winner.
-     */
-    public String getWinner() {
-        return winner;
     }
 }

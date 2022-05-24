@@ -52,9 +52,8 @@ public class PickCloudPhase extends ActionPhase {
         cloudChosen.empty();
 
         // Restore
-        game.getActivatedCharacter().setNumberOfIterations(0);
+        game.getActivatedCharacter().reset();
         game.setActivatedCharacter(game.getCharacterByID(CharacterID.CHARACTER_NONE.getID()));
-        //TODO: check - reset character in model view
         game.getListeners().firePropertyChange(Constants.CHARACTER_PLAYED_LISTENER, null, game.getActivatedCharacter());
 
         int numberOfPlayers = game.getNumberOfPlayers().getNum();
