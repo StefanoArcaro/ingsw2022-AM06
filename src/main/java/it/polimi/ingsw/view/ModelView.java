@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.model.enumerations.GameMode;
 import it.polimi.ingsw.model.enumerations.PlayerColor;
 import it.polimi.ingsw.model.gameBoard.*;
 import it.polimi.ingsw.network.message.serverToclient.*;
@@ -13,6 +14,9 @@ import java.util.Map;
  */
 public class ModelView {
 
+    private String nickname;
+    private int numberOfPlayers;
+    private GameMode gameMode;
     private String currentPhase;
     private String currentPlayer;
     private Map<String, PlayerColor> players;
@@ -32,6 +36,51 @@ public class ModelView {
         this.nicknameToBoard = new HashMap<>();
         this.nicknameToCoins = new HashMap<>();
         this.idToCharacter = new HashMap<>();
+    }
+
+    /**
+     * @return the client's nickname.
+     */
+    public String getNickname() {
+        return nickname;
+    }
+
+    /**
+     * Sets the client's nickname.
+     * @param nickname the nickname to set.
+     */
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    /**
+     * @return the number of players in the game.
+     */
+    public int getNumberOfPlayers() {
+        return this.numberOfPlayers;
+    }
+
+    /**
+     * Sets the number of players in the game.
+     * @param numberOfPlayers to set.
+     */
+    public void setNumberOfPlayers(int numberOfPlayers) {
+        this.numberOfPlayers = numberOfPlayers;
+    }
+
+    /**
+     * @return the game mode.
+     */
+    public GameMode getGameMode() {
+        return gameMode;
+    }
+
+    /**
+     * Sets the game mode.
+     * @param gameMode to set.
+     */
+    public void setGameMode(GameMode gameMode) {
+        this.gameMode = gameMode;
     }
 
     /**
@@ -94,13 +143,6 @@ public class ModelView {
         }
 
         return playersSorted;
-    }
-
-    /**
-     * @return the number of players in the game.
-     */
-    public int getNumberOfPlayers() {
-        return players.size();
     }
 
     /**

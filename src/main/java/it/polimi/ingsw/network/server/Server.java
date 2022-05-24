@@ -229,7 +229,7 @@ public class Server {
                 gameManager.getGame().getCurrentPhase().setPlayerNickname(nickname);
 
                 try {
-                    clientHandler.sendMessage(new LoginReplyMessage("You logged in!"));
+                    clientHandler.sendMessage(new LoginReplyMessage("You logged in!", nickname, numberOfPlayers, gameMode));
                     gameManager.sendAllExcept(new GenericMessage(nickname + " joined the game!"), nickname);
                     gameManager.getGame().getCurrentPhase().play();
                     System.out.println(nickname + " logged in!");

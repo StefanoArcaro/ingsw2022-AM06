@@ -89,6 +89,9 @@ public class CLI implements View {
     @Override
     public void loginReplyHandler(LoginReplyMessage msg) {
         System.out.println(msg.getMessage());
+        modelView.setNickname(msg.getNickname());
+        modelView.setNumberOfPlayers(msg.getNumberOfPlayers().getNum());
+        modelView.setGameMode(msg.getGameMode());
     }
 
     /**
@@ -141,7 +144,11 @@ public class CLI implements View {
 
         StringBuilder playersInGame = new StringBuilder("Active players:\n");
         for(Map.Entry<String, PlayerColor> p : players.entrySet()) {
-            playersInGame.append("\t- ").append(p.getKey()).append(" -> ").append(p.getValue().getColorName()).append("\n");
+            playersInGame.append("\t- ").append(p.getKey()).append(" -> ").append(p.getValue().getColorName());
+            if(p.getKey().equals(modelView.getNickname())) {
+                playersInGame.append(" (You)");
+            }
+            playersInGame.append("\n");
         }
         System.out.println(playersInGame + "\n");
     }
@@ -187,7 +194,11 @@ public class CLI implements View {
         StringBuilder owners = new StringBuilder();
 
         for(String p : players) {
-            owners.append(p).append("'s board").append("\t\t\t\t\t\t");
+            if(p.equals(modelView.getNickname())) {
+                owners.append("Your board").append("\t\t\t\t\t\t");
+            } else {
+                owners.append(p).append("'s board").append("\t\t\t\t\t\t");
+            }
         }
 
         owners.append("\n");
@@ -328,14 +339,22 @@ public class CLI implements View {
             int numberOfCoins = modelView.getCoinsByNickname(p);
 
             if(numberOfCoins > 0) {
-                coins.append(p).append("'s coins: ");
+                if(p.equals(modelView.getNickname())) {
+                    coins.append("Your coins:");
+                } else {
+                    coins.append(p).append("'s coins:");
+                }
 
                 for(int i = 0; i < numberOfCoins; i++) {
                     coins.append(" ").append(Constants.CIRCLE_FULL);
                 }
 
             } else {
-                coins.append(p).append(" has no coins");
+                if(p.equals(modelView.getNickname())) {
+                    coins.append("You have no coins");
+                } else {
+                    coins.append(p).append(" has no coins");
+                }
             }
 
             coins.append("\n");
@@ -352,7 +371,7 @@ public class CLI implements View {
         Board board = modelView.getBoard(nickname);
 
         // Names
-        String owner = nickname + "'s board.\n";
+        String owner = (nickname.equals(modelView.getNickname()) ? "Your" : nickname + "'s") + " board.\n";
 
         // Entrance
         String entrance = showEntrance(board);
@@ -599,11 +618,20 @@ public class CLI implements View {
         int numberOfCoins = modelView.getCoinsByNickname(msg.getNickname());
 
         if(numberOfCoins > 0) {
-            StringBuilder coins = new StringBuilder(msg.getNickname() + "'s coins:");
+            StringBuilder coins = new StringBuilder();
+            if(msg.getNickname().equals(modelView.getNickname())) {
+                coins.append("Your coins:");
+            } else {
+                coins.append(msg.getNickname()).append("'s coins:");
+            }
             showCoins(coins, numberOfCoins);
             System.out.println(coins);
         } else {
-            System.out.println(msg.getNickname() + " has no coins left.");
+            if(msg.getNickname().equals(modelView.getNickname())) {
+                System.out.println("You have no coins left.");
+            } else {
+                System.out.println(msg.getNickname() + " has no coins left.");
+            }
         }
     }
 
@@ -762,8 +790,10 @@ public class CLI implements View {
         // Display the boards and coins (if EXPERT game mode)
         showBoards();
 
-        // Coins
-        showCoins(modelView.getPlayersSorted());
+        // Coins (if EXPERT mode)
+        if(modelView.getGameMode().equals(GameMode.EXPERT)) {
+            showCoins(modelView.getPlayersSorted());
+        }
 
         // Display the island groups
         showIslandGroups();
