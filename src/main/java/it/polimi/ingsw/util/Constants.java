@@ -28,28 +28,30 @@ public class Constants {
 
     private static final String BOX_TOP = "╔═════════════════════════════════════════════════════════════════╗";
     private static final String BOX_BOTTOM = "╚═════════════════════════════════════════════════════════════════╝";
+    private static final String SEPARATOR = "\n━━━━━━━━━━━━━━━━━━ ✦ ━━━━━━━━━━━━━━━━━━\n\n";
 
-    public static final String ANSI_BLACK = "\u001b[30m";
     public static final String ANSI_RED = "\u001b[31m";
     public static final String ANSI_GREEN = "\u001b[32m";
     public static final String ANSI_YELLOW = "\u001b[33m";
     public static final String ANSI_BLUE = "\u001b[34m";
     public static final String ANSI_MAGENTA = "\u001b[35m";
     public static final String ANSI_CYAN = "\u001b[36m";
-    public static final String ANSI_WHITE = "\u001b[37m";
     public static final String ANSI_RESET = "\u001b[0m";
 
-    /*public static final String BLACK_UNDERLINED = "\033[4;30m";
+    /*
+    public static final String BLACK_UNDERLINED = "\033[4;30m";
     public static final String RED_UNDERLINED = "\033[4;31m";
     public static final String GREEN_UNDERLINED = "\033[4;32m";
     public static final String YELLOW_UNDERLINED = "\033[4;33m";
     public static final String BLUE_UNDERLINED = "\033[4;34m";
     public static final String PURPLE_UNDERLINED = "\033[4;35m";
     public static final String CYAN_UNDERLINED = "\033[4;36m";
-    public static final String WHITE_UNDERLINED = "\033[4;37m";*/
+    public static final String WHITE_UNDERLINED = "\033[4;37m";
+     */
 
     // Unicode text
     public static final String PROMPT = "\u25b7 ";
+    public static final String PROMPT_PHASE = "\u007e";
     public static final String CIRCLE_FULL = "\u25cf";
     public static final String CIRCLE_EMPTY = "\u25ef";
     public static final String DIAMOND_FULL = "\u25c6";
@@ -87,8 +89,6 @@ public class Constants {
         return result;
     }
 
-    private static final String SEPARATOR = "\n==================================================================\n\n";
-
     // Message formats CLIENT -> SERVER
     public static final String LOGIN_FORMAT = "login [nickname] [number of players (2 / 3)] [game mode (0 = EASY / 1 = EXPERT)]";
     public static final String PREPARE_FORMAT = "wizard [DRUID / KING / WITCH / SENSEI]";
@@ -118,19 +118,19 @@ public class Constants {
         return gameMode.equals(GameMode.EXPERT) ? "- Ask for characters' info\n\t" + CHARACTER_INFO_FORMAT + "\n" : "";
     }
 
-    private static final String LOGIN_PHASE_INSTRUCTIONS = ANSI_GREEN + "LOGIN PHASE\n" + ANSI_RESET +
+    private static final String LOGIN_PHASE_INSTRUCTIONS = ANSI_YELLOW + PROMPT_PHASE + " LOGIN PHASE " + PROMPT_PHASE + ANSI_RESET + "\n" +
             "The actions you can take are the following:\n" +
             "- Login\n\t" + LOGIN_FORMAT + "\n\n" +
             "You can always quit the game by typing: " + QUIT_FORMAT;
 
     private static final String PREPARE_PHASE_INSTRUCTIONS = SEPARATOR +
-            "PREPARE PHASE\n" +
+            ANSI_YELLOW + PROMPT_PHASE + " PREPARE PHASE " + PROMPT_PHASE + ANSI_RESET + "\n" +
             "The actions you can take are the following:\n" +
             "- Choose a wizard\n\t" + PREPARE_FORMAT + "\n";
 
     private static String planningPhaseInstructions(GameMode gameMode) {
         return SEPARATOR +
-                "PLANNING PHASE\n" +
+                ANSI_YELLOW + PROMPT_PHASE + " PLANNING PHASE " + PROMPT_PHASE + ANSI_RESET + "\n" +
                 "The actions you can take are the following:\n" +
                 "- Play an assistant\n\t" + PLANNING_FORMAT + "\n" +
                 expertCharacterAction(gameMode);
@@ -138,7 +138,7 @@ public class Constants {
 
     private static String moveStudentPhaseInstructions(GameMode gameMode) {
         return SEPARATOR +
-                "MOVE STUDENT PHASE\n" +
+                ANSI_YELLOW + PROMPT_PHASE + " MOVE STUDENT PHASE " + PROMPT_PHASE + ANSI_RESET + "\n" +
                 "The actions you can take are the following:\n" +
                 "- Move a student from your entrance to the hall or one of the islands\n\t" + MOVE_STUDENT_FORMAT + "\n" +
                 expertCharacterAction(gameMode);
@@ -146,7 +146,7 @@ public class Constants {
 
     private static String moveMotherNaturePhaseInstructions(GameMode gameMode) {
         return SEPARATOR +
-                "MOVE MOTHER NATURE PHASE\n" +
+                ANSI_YELLOW + PROMPT_PHASE + " MOVE MOTHER NATURE PHASE " + PROMPT_PHASE + ANSI_RESET + "\n" +
                 "The actions you can take are the following:\n" +
                 "- Move mother nature a certain amount of steps\n\t" + MOVE_MOTHER_NATURE_FORMAT + "\n" +
                 expertCharacterAction(gameMode);
@@ -154,7 +154,7 @@ public class Constants {
 
     private static String pickCloudPhaseInstructions(GameMode gameMode) {
         return SEPARATOR +
-                "PICK CLOUD PHASE\n" +
+                ANSI_YELLOW + PROMPT_PHASE + " PICK CLOUD PHASE " + PROMPT_PHASE + ANSI_RESET + "\n" +
                 "The actions you can take are the following:\n" +
                 "- Choose a cloud from which to get students\n\t" + PICK_CLOUD_FORMAT + "\n" +
                 expertCharacterAction(gameMode);
@@ -264,7 +264,7 @@ public class Constants {
             """;
 
     public static String getCharacterInformation(int characterID) {
-        return switch (characterID) { //todo: add cost
+        return switch (characterID) {
             case 1 -> CHARACTER_ONE_DESCRIPTION;
             case 2 -> CHARACTER_TWO_DESCRIPTION;
             case 3 -> CHARACTER_THREE_DESCRIPTION;
@@ -316,10 +316,4 @@ public class Constants {
     public static final String LOGIN = "login.fxml";
 
     public static final String WIZARD = "wizard.fxml";
-
-
-
-
-
-    public static final String SCENE_LISTENER = "sceneListener";
 }
