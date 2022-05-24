@@ -143,11 +143,14 @@ public class CharacterController {
         int characterID = message.getCharacterID();
         int destination = message.getDestination();
 
+        game.getCharacterByID(characterID).setIslandGroupIndex(destination - 1);
+
+        /*
         if(characterID == CharacterID.CHARACTER_FIVE.getID()) {
             game.getCharacterByID(characterID).setIslandID(destination);
         }else if(characterID == CharacterID.CHARACTER_THREE.getID()) {
             game.getCharacterByID(characterID).setIslandGroupIndex(destination);
-        }
+        }*/
 
         try {
             ((ActionPhase) (game.getCurrentPhase())).playCharacter(characterID);

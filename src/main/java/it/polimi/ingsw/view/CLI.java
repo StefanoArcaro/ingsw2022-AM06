@@ -1,8 +1,6 @@
 package it.polimi.ingsw.view;
 
-import it.polimi.ingsw.model.enumerations.CharacterID;
-import it.polimi.ingsw.model.enumerations.PlayerColor;
-import it.polimi.ingsw.model.enumerations.WizardName;
+import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.gameBoard.*;
 import it.polimi.ingsw.network.client.MessageParser;
 import it.polimi.ingsw.network.client.SocketClient;
@@ -25,6 +23,9 @@ import java.util.concurrent.Executors;
  * This is executed when the client chooses the CLI option at the beginning of the game.
  */
 public class CLI implements View {
+
+    public static final int MAX_TOWERS_2P = 8;
+    public static final int MAX_TOWERS_3P = 6;
 
     private SocketClient socketClient;
     private final ExecutorService keyboardQueue;
@@ -155,8 +156,192 @@ public class CLI implements View {
         showBoard(msg.getNickname());
     }
 
+    /**
+     * Displays the players' boards horizontally.
+     */
     public void showBoards() {
-        // TODO
+        ArrayList<String> players = modelView.getPlayersSorted();
+
+        if(players.size() > 0) {
+            // Names
+            String owners = showOwners(players);
+
+            // Entrances
+            String entrances = showEntrances(players);
+
+            // Halls
+            String halls = showHalls(players);
+
+            // Towers
+            String towers = showTowers(players);
+
+            System.out.println(owners + entrances + halls + towers);
+        }
+    }
+
+    /**
+     * @param players list of the active players.
+     * @return the string of the players' names.
+     */
+    public String showOwners(ArrayList<String> players) {
+        StringBuilder owners = new StringBuilder();
+
+        for(String p : players) {
+            owners.append(p).append("'s board").append("\t\t\t\t\t\t");
+        }
+
+        owners.append("\n");
+
+        return owners.toString();
+    }
+
+    /**
+     * @param players list of the active players.
+     * @return the string of the players' entrances.
+     */
+    public String showEntrances(ArrayList<String> players) {
+        int maxStudents = modelView.getNumberOfPlayers() == 2 ? 7 : 9;
+
+        StringBuilder entrances = new StringBuilder();
+
+        for(String p : players) {
+            Board board = modelView.getBoard(p);
+            entrances.append("Entrance:");
+            int i = 0;
+            for(Student student : board.getEntrance().getStudents()) {
+                entrances.append(" ").append(Constants.getCircleFullByColor(student.getColor()));
+                i++;
+            }
+            while(i < maxStudents) {
+                entrances.append(" ").append(Constants.CIRCLE_EMPTY);
+                i++;
+            }
+            entrances.append("\t\t");
+
+            if(maxStudents < 9) {
+                entrances.append("\t");
+            }
+        }
+
+        entrances.append("\n");
+
+        return entrances.toString();
+    }
+
+    /**
+     * @param players list of the active players.
+     * @return the string of the players' halls.
+     */
+    public String showHalls(ArrayList<String> players) {
+        ArrayList<Board> boards = new ArrayList<>();
+
+        for(String p: players) {
+            boards.add(modelView.getBoard(p));
+        }
+
+        StringBuilder halls = new StringBuilder();
+
+        // "Hall"s
+        for(String ignored : players) {
+            halls.append("Hall:").append("\t\t\t\t\t\t\t");
+        }
+        halls.append("\n");
+
+        // Tables
+        for(CreatureColor color: CreatureColor.values()) {
+            for(Board b : boards) {
+                int i;
+                for(i = 0; i < b.getHall().getTableByColor(color).getLength(); i++) {
+                    halls.append(Constants.getCircleFullByColor(color)).append(" ");
+                }
+                while(i < 10) {
+                    halls.append(Constants.getCircleEmptyByColor(color)).append(" ");
+                    i++;
+                }
+
+                halls.append("| ");
+
+                boolean found = false;
+                for(Professor p : b.getProfessors()) {
+                    if(p.getColor().equals(color)) {
+                        halls.append(Constants.getDiamondFullByColor(color));
+                        found = true;
+                    }
+                }
+                if(!found) {
+                    halls.append(Constants.getDiamondEmptyByColor(color));
+                }
+
+                halls.append("\t\t\t");
+            }
+
+            halls.append("\n");
+        }
+
+        return halls.toString();
+    }
+
+    /**
+     * @param players list of the active players.
+     * @return the string of the players' towers.
+     */
+    public String showTowers(ArrayList<String> players) {
+        StringBuilder towers = new StringBuilder();
+
+        int maxTowers = modelView.getNumberOfPlayers() ==
+                NumberOfPlayers.TWO_PLAYERS.getNum() ? MAX_TOWERS_2P : MAX_TOWERS_3P;
+
+        for(String p : players) {
+            int actualTowers = modelView.getBoard(p).getTowers();
+            int i;
+
+            towers.append("Towers:");
+
+            for(i = 0; i < actualTowers; i++) {
+                towers.append(" ").append(Constants.SQUARE_FULL);
+            }
+
+            for(i = actualTowers; i < maxTowers; i++) {
+                towers.append(" ").append(Constants.SQUARE_EMPTY);
+            }
+
+            if(i < 8) {
+                towers.append("\t");
+            }
+
+            towers.append("\t\t\t");
+        }
+
+        towers.append("\n");
+
+        return towers.toString();
+    }
+
+    /**
+     * Displays the coins of all the active players.
+     * @param players list of the active players.
+     */
+    public void showCoins(ArrayList<String> players) {
+        StringBuilder coins = new StringBuilder();
+
+        for(String p : players) {
+            int numberOfCoins = modelView.getCoinsByNickname(p);
+
+            if(numberOfCoins > 0) {
+                coins.append(p).append("'s coins: ");
+
+                for(int i = 0; i < numberOfCoins; i++) {
+                    coins.append(" ").append(Constants.CIRCLE_FULL);
+                }
+
+            } else {
+                coins.append(p).append(" has no coins");
+            }
+
+            coins.append("\n");
+        }
+
+        System.out.println(coins);
     }
 
     /**
@@ -165,6 +350,8 @@ public class CLI implements View {
      */
     public void showBoard(String nickname) {
         Board board = modelView.getBoard(nickname);
+
+        // Names
         String owner = nickname + "'s board.\n";
 
         // Entrance
@@ -176,7 +363,7 @@ public class CLI implements View {
         // Towers
         String towers = showTowers(board);
 
-        System.out.println(owner + entrance + hall + towers);
+        System.out.println(owner + entrance + hall + towers + "\n");
     }
 
     /**
@@ -236,7 +423,8 @@ public class CLI implements View {
      * @return the formatted string.
      */
     public String showTowers(Board board) {
-        int maxTowers = modelView.getNumberOfPlayers() == 2 ? 8 : 6;
+        int maxTowers = modelView.getNumberOfPlayers() ==
+                NumberOfPlayers.TWO_PLAYERS.getNum() ? MAX_TOWERS_2P : MAX_TOWERS_3P;
         int actualTowers = board.getTowers();
 
         StringBuilder towers = new StringBuilder("Towers:");
@@ -251,6 +439,17 @@ public class CLI implements View {
         towers.append("\n");
 
         return towers.toString();
+    }
+
+    /**
+     * Displays the coins a player has.
+     * @param coins StringBuilder to be modified and returned.
+     * @param numberOfCoins the number of coins the player has.
+     */
+    public void showCoins(StringBuilder coins, int numberOfCoins) {
+        for(int i = 0; i < numberOfCoins; i++) {
+            coins.append(" ").append(Constants.CIRCLE_FULL);
+        }
     }
 
     /**
@@ -284,11 +483,11 @@ public class CLI implements View {
             islands.append("\n");
 
             if(iG.getConquerorColor() != null) {
-                islands.append("\tConquered by -> ").append(modelView.getPlayerByColor(iG.getConquerorColor())).append("\n");
+                islands.append(Constants.ANSI_GREEN).append("Conquered by -> ").append(modelView.getPlayerByColor(iG.getConquerorColor())).append(Constants.ANSI_RESET).append("\n");
             }
 
             if(iG.getNumberOfBanCardPresent() > 0) {
-                islands.append("\tThere are ").append(iG.getNumberOfBanCardPresent()).append(" ban card(s) on this island group.\n");
+                islands.append(Constants.ANSI_YELLOW).append("There are ").append(iG.getNumberOfBanCardPresent()).append(" ban card(s) on this island group.").append(Constants.ANSI_RESET).append("\n");
             }
 
             if(modelView.getMotherNatureIndex() == islandGroupIndex){
@@ -327,7 +526,7 @@ public class CLI implements View {
         message.append("\n");
 
         if(island.getTower() != null) {
-            message.append("\t\tConquered by -> ").append(modelView.getPlayerByColor(island.getTower())).append("\n");
+            message.append(Constants.ANSI_GREEN).append("\t\tConquered by -> ").append(modelView.getPlayerByColor(island.getTower())).append(Constants.ANSI_RESET).append("\n");
         }
 
         System.out.println(message);
@@ -397,16 +596,15 @@ public class CLI implements View {
     @Override
     public void coinsHandler(CoinMessage msg) {
         modelView.setCoins(msg);
-        showCoins(msg.getNickname());
-    }
+        int numberOfCoins = modelView.getCoinsByNickname(msg.getNickname());
 
-    /**
-     * Displays the number of coins the player whose nickname is specified has.
-     * @param nickname of the player whose coins are displayed.
-     */
-    public void showCoins(String nickname) {
-        // TODO personalized messages
-        System.out.println(nickname + " has " + modelView.getCoinsByNickname(nickname) + " coins.");
+        if(numberOfCoins > 0) {
+            StringBuilder coins = new StringBuilder(msg.getNickname() + "'s coins:");
+            showCoins(coins, numberOfCoins);
+            System.out.println(coins);
+        } else {
+            System.out.println(msg.getNickname() + " has no coins left.");
+        }
     }
 
     /**
@@ -475,13 +673,15 @@ public class CLI implements View {
                 if(c.getStudents().size() > 0) {
                     characters.append(", students:");
                     for(Student s : c.getStudents()) {
-                        characters.append(" ").append(s.getColor().getColorName());
+                        characters.append(" ").append(Constants.getCircleFullByColor(s.getColor()));
                     }
                 }
 
                 if(c.getCharacterID() == CharacterID.CHARACTER_FIVE.getID()) {
                     characters.append(", ban cards: ").append(c.getBanCards());
                 }
+
+                characters.append(" (cost: ").append(c.getCost()).append(")");
 
                 characters.append("\n");
 
@@ -508,6 +708,7 @@ public class CLI implements View {
     @Override
     public void characterInfoHandler(CharacterInfoMessage msg) {
         System.out.println(msg.getDescription());
+        System.out.println("Cost: " + modelView.getCharacterViewById(msg.getId()).getCost());
     }
 
     /**
@@ -532,7 +733,7 @@ public class CLI implements View {
     public void showPlayedCharacter(int characterID) {
         CharacterView characterView = modelView.getCharacterViewById(characterID);
 
-        String played = "Character played: " + characterID;
+        String played = "Character played: " + characterID + " (cost: " + characterView.getCost() + ")";
 
         String banCard = "";
         if(characterView.getBanCards() > 0) {
@@ -560,6 +761,9 @@ public class CLI implements View {
 
         // Display the boards and coins (if EXPERT game mode)
         showBoards();
+
+        // Coins
+        showCoins(modelView.getPlayersSorted());
 
         // Display the island groups
         showIslandGroups();
@@ -625,7 +829,6 @@ public class CLI implements View {
     public void errorMessageHandler(ErrorMessage msg) {
         System.out.println(msg.getError());
     }
-
 
     /**
      * Asks for the IP address and port of the server in order to

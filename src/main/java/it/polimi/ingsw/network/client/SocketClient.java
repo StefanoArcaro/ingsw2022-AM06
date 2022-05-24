@@ -5,8 +5,6 @@ import it.polimi.ingsw.network.message.clientToserver.Message;
 import it.polimi.ingsw.network.message.clientToserver.PingMessage;
 import it.polimi.ingsw.network.message.serverToclient.*;
 import it.polimi.ingsw.util.Constants;
-import it.polimi.ingsw.view.CLI;
-import it.polimi.ingsw.view.GUI.GUI;
 import it.polimi.ingsw.view.View;
 
 import java.io.*;
@@ -26,32 +24,11 @@ public class SocketClient extends Client {
     private final ScheduledExecutorService pinger;
 
     /**
-     * Default constructor - CLI.
+     * Default constructor.
      * @param socket the server socket.
      */
-    public SocketClient(CLI cli, Socket socket) {
-        this.view = cli;
-        this.socket = socket;
-
-        try {
-            socket.setSoTimeout(Constants.SOCKET_TIMEOUT);
-            this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            this.writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-        } catch (IOException e) {
-            System.err.println("A problem with I/O streams instantiation occurred.");
-            disconnect();
-        }
-
-        this.readQueue = Executors.newSingleThreadExecutor();
-        this.pinger = Executors.newSingleThreadScheduledExecutor();
-    }
-
-    /**
-     * Default constructor - GUI.
-     * @param socket the server socket.
-     */
-    public SocketClient(GUI gui, Socket socket) {
-        this.view = gui;
+    public SocketClient(View view, Socket socket) {
+        this.view = view;
         this.socket = socket;
 
         try {

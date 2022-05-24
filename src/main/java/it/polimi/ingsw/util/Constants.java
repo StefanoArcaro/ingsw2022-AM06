@@ -107,7 +107,7 @@ public class Constants {
     private static final String CHARACTER_SEVEN_FORMAT = "character 7 [color from character] [color from entrance]";
     private static final String CHARACTER_EIGHT_FORMAT = "character 8";
     private static final String CHARACTER_NINE_FORMAT = "character 9 [color (GREEN / RED / YELLOW / PINK / BLUE)]";
-    private static final String CHARACTER_TEN_FORMAT = "character 10 [color form hall] [color from entrance]";
+    private static final String CHARACTER_TEN_FORMAT = "character 10 [color from hall] [color from entrance]";
     private static final String CHARACTER_ELEVEN_FORMAT = "character 11 [color from character]";
     private static final String CHARACTER_TWELVE_FORMAT = "character 12 [color (GREEN / RED / YELLOW / PINK / BLUE)]";
     
@@ -193,7 +193,7 @@ public class Constants {
     // Characters' descriptions
     private static final String CHARACTER_ONE_DESCRIPTION = """
             Take 1 Student from this card and place it on
-            an Island of your choice
+            an Island of your choice.
             """;
 
     private static final String CHARACTER_TWO_DESCRIPTION = """

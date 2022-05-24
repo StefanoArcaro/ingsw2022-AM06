@@ -154,20 +154,4 @@ public interface View {
      * @param msg the message to handle.
      */
     void errorMessageHandler(ErrorMessage msg);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

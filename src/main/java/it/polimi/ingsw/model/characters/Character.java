@@ -18,6 +18,7 @@ public abstract class Character {
     protected Game game;
     protected int cost;
     protected boolean used;
+    protected boolean payed;
     protected int numberOfStudents;
     protected int numberOfBanCards;
     protected int toDoNow;
@@ -31,9 +32,9 @@ public abstract class Character {
 
     protected int moreSteps;
 
-    protected int islandGroupIndex;
+    protected int islandGroupIndex = -1;
 
-    protected int islandID;
+    protected int islandID = -1;
     protected CreatureColor firstColor;
     protected CreatureColor secondColor;
 
@@ -41,6 +42,19 @@ public abstract class Character {
      * Modify the game setup in order to use this character.
      */
     public void initialPreparation() {}
+
+    /**
+     * Resets the character.
+     */
+    public void reset() {
+        payed = false;
+        numberOfIterations = 0;
+        colorNoPoints = null;
+        islandGroupIndex = -1;
+        islandID = -1;
+        firstColor = null;
+        secondColor = null;
+    }
 
     /**
      * Abstract method which represents the effect of the character.
@@ -68,6 +82,21 @@ public abstract class Character {
      */
     public void setUsed(){
         used = true;
+    }
+
+    /**
+     * @return whether the character has already been payed for.
+     */
+    public boolean isPayed() {
+        return payed;
+    }
+
+    /**
+     * Sets the payed attribute of the character.
+     * @param payed the attribute to set.
+     */
+    public void setPayed(boolean payed) {
+        this.payed = payed;
     }
 
     /**
@@ -127,14 +156,6 @@ public abstract class Character {
     }
 
     /**
-     * Sets the number of times this card's effect was applied during the turn.
-     * @param numberOfIterations number of times this card's effect was applied during the turn.
-     */
-    public void setNumberOfIterations(int numberOfIterations) {
-        this.numberOfIterations = numberOfIterations;
-    }
-
-    /**
      * Increases the number of times this card's effect was applied during the turn.
      */
     public void increaseNumberOfIteration() {
@@ -181,6 +202,7 @@ public abstract class Character {
      * @param islandGroupIndex index of island group.
      */
     public void setIslandGroupIndex(int islandGroupIndex) {
+        // TODO -1 and adjust tests
         this.islandGroupIndex = islandGroupIndex;
     }
 

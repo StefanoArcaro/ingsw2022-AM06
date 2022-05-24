@@ -80,6 +80,23 @@ public class ModelView {
     }
 
     /**
+     * @return the list of the players' nicknames, sorted by their color's index.
+     */
+    public ArrayList<String> getPlayersSorted() {
+        ArrayList<String> playersSorted = new ArrayList<>();
+
+        // TODO improve this
+        playersSorted.add(getPlayerByColor(PlayerColor.BLACK));
+        playersSorted.add(getPlayerByColor(PlayerColor.WHITE));
+
+        if(getNumberOfPlayers() > 2) {
+            playersSorted.add(getPlayerByColor(PlayerColor.GRAY));
+        }
+
+        return playersSorted;
+    }
+
+    /**
      * @return the number of players in the game.
      */
     public int getNumberOfPlayers() {
@@ -199,7 +216,11 @@ public class ModelView {
      * @return the number of coins of the player with the specified nickname.
      */
     public int getCoinsByNickname(String nickname) {
-        return nicknameToCoins.get(nickname);
+        Integer coins = nicknameToCoins.get(nickname);
+        if(coins != null) {
+            return coins;
+        }
+        return 0;
     }
 
     /**
@@ -266,17 +287,17 @@ public class ModelView {
     }
 
     /**
+     * @return the nickname of the winner.
+     */
+    public String getWinner() {
+        return winner;
+    }
+
+    /**
      * Sets the winner of the game.
      * @param winner the nickname of the game's winner.
      */
     public void setWinner(String winner) {
         this.winner = winner;
-    }
-
-    /**
-     * @return the nickname of the winner.
-     */
-    public String getWinner() {
-        return winner;
     }
 }
