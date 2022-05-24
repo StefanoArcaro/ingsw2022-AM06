@@ -483,11 +483,11 @@ public class CLI implements View {
             islands.append("\n");
 
             if(iG.getConquerorColor() != null) {
-                islands.append("\tConquered by -> ").append(modelView.getPlayerByColor(iG.getConquerorColor())).append("\n");
+                islands.append(Constants.ANSI_GREEN).append("Conquered by -> ").append(modelView.getPlayerByColor(iG.getConquerorColor())).append(Constants.ANSI_RESET).append("\n");
             }
 
             if(iG.getNumberOfBanCardPresent() > 0) {
-                islands.append("\tThere are ").append(iG.getNumberOfBanCardPresent()).append(" ban card(s) on this island group.\n");
+                islands.append(Constants.ANSI_YELLOW).append("There are ").append(iG.getNumberOfBanCardPresent()).append(" ban card(s) on this island group.").append(Constants.ANSI_RESET).append("\n");
             }
 
             if(modelView.getMotherNatureIndex() == islandGroupIndex){
@@ -526,7 +526,7 @@ public class CLI implements View {
         message.append("\n");
 
         if(island.getTower() != null) {
-            message.append("\t\tConquered by -> ").append(modelView.getPlayerByColor(island.getTower())).append("\n");
+            message.append(Constants.ANSI_GREEN).append("\t\tConquered by -> ").append(modelView.getPlayerByColor(island.getTower())).append(Constants.ANSI_RESET).append("\n");
         }
 
         System.out.println(message);

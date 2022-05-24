@@ -32,9 +32,9 @@ public abstract class Character {
 
     protected int moreSteps;
 
-    protected int islandGroupIndex;
+    protected int islandGroupIndex = -1;
 
-    protected int islandID;
+    protected int islandID = -1;
     protected CreatureColor firstColor;
     protected CreatureColor secondColor;
 

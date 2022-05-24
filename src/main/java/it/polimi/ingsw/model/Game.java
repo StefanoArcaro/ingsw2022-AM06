@@ -380,6 +380,8 @@ public class Game {
         Player playerOlderConquerorIslandGroup = null;
 
         if(isBanCardPresent(islandGroup)) {
+            int motherNatureIndex = getIndexOfIslandGroup(motherNature.getCurrentIslandGroup());
+            listeners.firePropertyChange(Constants.ISLAND_GROUPS_LISTENER, null, new AbstractMap.SimpleEntry<>(islandGroups, motherNatureIndex));
             return;
         }
 
