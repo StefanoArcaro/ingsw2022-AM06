@@ -1,7 +1,9 @@
 package it.polimi.ingsw.view.GUI.controllers;
 
+
 import it.polimi.ingsw.network.client.MessageParser;
 import it.polimi.ingsw.network.message.clientToserver.LoginRequestMessage;
+import it.polimi.ingsw.util.Constants;
 import it.polimi.ingsw.view.GUI.GUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -54,6 +56,9 @@ public class LoginController implements GUIController {
         messageParser.parseInput(message);
 
         //todo continue
+
+        //gui.changeStage(Constants.WIZARD);
+
 
     }
 

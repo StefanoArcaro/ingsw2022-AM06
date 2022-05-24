@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.GUI;
 
+import it.polimi.ingsw.listeners.SceneListener;
 import it.polimi.ingsw.network.client.SocketClient;
 import it.polimi.ingsw.network.message.serverToclient.*;
 import it.polimi.ingsw.util.Constants;
@@ -7,6 +8,7 @@ import it.polimi.ingsw.view.GUI.controllers.GUIController;
 import it.polimi.ingsw.view.ModelView;
 import it.polimi.ingsw.view.View;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -24,6 +26,7 @@ import java.util.logging.Level;
 
 public class GUI extends Application implements View {
 
+    private GUI gui;
     private SocketClient socketClient;
     private final PropertyChangeSupport listener = new PropertyChangeSupport(this);
     private final ModelView modelView;
@@ -57,9 +60,8 @@ public class GUI extends Application implements View {
         launch();
     }
 
-
     private void setup() {
-        List<String> fxmlList = new ArrayList<>(Arrays.asList(Constants.MENU, Constants.SETUP, Constants.LOGIN));
+        List<String> fxmlList = new ArrayList<>(Arrays.asList(Constants.MENU, Constants.SETUP, Constants.LOGIN, Constants.WIZARD));
         try {
             for (String path : fxmlList) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + path));
@@ -80,11 +82,12 @@ public class GUI extends Application implements View {
 
 
     public void changeStage(String scene) {
-        currentScene = nameToScene.get(scene);
-        stage.setScene(currentScene);
-        stage.show();
+        Platform.runLater(() -> {
+            currentScene = nameToScene.get(scene);
+            stage.setScene(currentScene);
+            stage.show();
+        });
     }
-
 
 
 
@@ -113,6 +116,7 @@ public class GUI extends Application implements View {
     @Override
     public void setSocketClient(SocketClient socketClient) {
         this.socketClient = socketClient;
+        socketClient.readMessage();
         socketClient.enablePinger(true); //todo check
     }
 
@@ -126,7 +130,8 @@ public class GUI extends Application implements View {
      */
     @Override
     public void loginReplyHandler(LoginReplyMessage msg) {
-
+        System.out.println("login reply handler");
+        changeStage(Constants.WIZARD);
     }
 
     /**
@@ -322,6 +327,6 @@ public class GUI extends Application implements View {
      */
     @Override
     public void errorMessageHandler(ErrorMessage msg) {
-
+        AlertBox.display("Error", msg.getError());
     }
 }

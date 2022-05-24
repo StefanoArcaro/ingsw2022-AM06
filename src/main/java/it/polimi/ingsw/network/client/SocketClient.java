@@ -222,7 +222,8 @@ public class SocketClient extends Client {
                 default -> System.out.println(answer.getMessageType()); //should never reach this condition
             }
         } catch (Exception e) {
-            System.err.print("There's been a connection error, application will now close");
+            e.printStackTrace();
+            System.out.print("There's been a connection error, application will now close");
             Constants.countdown(400);
             disconnect();
         }

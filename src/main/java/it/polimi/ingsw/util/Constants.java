@@ -314,4 +314,12 @@ public class Constants {
     public static final String MENU = "MainMenu.fxml";
     public static final String SETUP = "setup.fxml";
     public static final String LOGIN = "login.fxml";
+
+    public static final String WIZARD = "wizard.fxml";
+
+
+
+
+
+    public static final String SCENE_LISTENER = "sceneListener";
 }

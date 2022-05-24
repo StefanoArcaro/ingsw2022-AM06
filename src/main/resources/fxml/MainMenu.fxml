@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
 
-
-<Pane fx:controller="it.polimi.ingsw.view.GUI.controllers.MainMenuController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="726.0" prefWidth="1033.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.MainMenuController">
    <children>
-      <Button fx:id="buttonPlay" layoutX="500.0" layoutY="331.0" mnemonicParsing="false" onAction="#play" text="Play!" />
-      <Button fx:id="buttonQuit" layoutX="501.0" layoutY="401.0" mnemonicParsing="false" onAction="#quit" text="Quit" />
-      <Label layoutX="247.0" layoutY="161.0" text="Welcome to Eriantys!">
-         <font>
-            <Font size="61.0" />
-         </font>
-      </Label>
+      <ImageView fitHeight="826.0" fitWidth="955.0" layoutX="-14.0" layoutY="-25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/Eriantys.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="buttonPlay" layoutX="337.0" layoutY="312.0" mnemonicParsing="false" onAction="#play" prefHeight="41.0" prefWidth="120.0" text="Play!" />
+      <Button fx:id="buttonQuit" layoutX="337.0" layoutY="378.0" mnemonicParsing="false" onAction="#quit" prefHeight="41.0" prefWidth="120.0" text="Quit" />
    </children>
 </Pane>
