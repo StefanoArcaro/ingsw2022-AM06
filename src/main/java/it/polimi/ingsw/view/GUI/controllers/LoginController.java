@@ -57,9 +57,6 @@ public class LoginController implements GUIController {
 
         //todo continue
 
-        //gui.changeStage(Constants.WIZARD);
-
-
     }
 
     /**

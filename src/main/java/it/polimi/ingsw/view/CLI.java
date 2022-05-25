@@ -95,6 +95,14 @@ public class CLI implements View {
     }
 
     /**
+     * Handles the LoginReplyMessage sent by the server.
+     */
+    @Override
+    public void gameStartingHandler() {
+
+    }
+
+    /**
      * Handles the WizardsAvailableMessage sent by the server.
      * @param msg the message to handle.
      */

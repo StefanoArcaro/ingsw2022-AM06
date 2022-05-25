@@ -224,14 +224,21 @@ public class Server {
                 idToNickname.put(clientID, nickname);
 
                 GameManager gameManager = checkGamePreferences(clientID, numberOfPlayers, gameMode);
+                Game game = gameManager.getGame();
                 gameManager.addClient(clientID, clientHandler, nickname);
                 idToGameManager.put(clientID, gameManager);
-                gameManager.getGame().getCurrentPhase().setPlayerNickname(nickname);
+                game.getCurrentPhase().setPlayerNickname(nickname);
 
                 try {
                     clientHandler.sendMessage(new LoginReplyMessage("You logged in!", nickname, numberOfPlayers, gameMode));
                     gameManager.sendAllExcept(new GenericMessage(nickname + " joined the game!"), nickname);
-                    gameManager.getGame().getCurrentPhase().play();
+                    game.getCurrentPhase().play();
+
+                    //TODO check if ok
+                    if(game.getPlayers().size() == game.getNumberOfPlayers().getNum()){
+                        gameManager.sendAll(new GameStartedMessage());
+                    }
+
                     System.out.println(nickname + " logged in!");
                 } catch (Exception e) {
                     System.err.println(e.getMessage());

@@ -38,6 +38,11 @@ public interface View {
     void loginReplyHandler(LoginReplyMessage msg);
 
     /**
+     * Handles the LoginReplyMessage sent by the server.
+     */
+    void gameStartingHandler();
+
+    /**
      * Handles the WizardsAvailableMessage sent by the server.
      * @param msg the message to handle.
      */
@@ -154,4 +159,6 @@ public interface View {
      * @param msg the message to handle.
      */
     void errorMessageHandler(ErrorMessage msg);
+
+
 }

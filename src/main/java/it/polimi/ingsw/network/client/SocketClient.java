@@ -110,6 +110,9 @@ public class SocketClient extends Client {
                     LoginReplyMessage msg = gson.fromJson(message, LoginReplyMessage.class);
                     view.loginReplyHandler(msg);
                 }
+                case GAME_STARTED_MESSAGE -> {
+                    view.gameStartingHandler();
+                }
                 case WIZARDS_AVAILABLE_MESSAGE -> {
                     WizardsAvailableMessage msg = gson.fromJson(message, WizardsAvailableMessage.class);
                     view.wizardsHandler(msg);

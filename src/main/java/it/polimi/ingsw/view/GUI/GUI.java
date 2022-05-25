@@ -1,6 +1,5 @@
 package it.polimi.ingsw.view.GUI;
 
-import it.polimi.ingsw.listeners.SceneListener;
 import it.polimi.ingsw.network.client.SocketClient;
 import it.polimi.ingsw.network.message.serverToclient.*;
 import it.polimi.ingsw.util.Constants;
@@ -10,9 +9,7 @@ import it.polimi.ingsw.view.View;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.beans.PropertyChangeListener;
@@ -22,14 +19,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
 
 public class GUI extends Application implements View {
 
     private GUI gui;
     private SocketClient socketClient;
     private final PropertyChangeSupport listener = new PropertyChangeSupport(this);
-    private final ModelView modelView;
+    private ModelView modelView;
 
     private final HashMap<String, Scene> nameToScene = new HashMap<>();
     private final HashMap<String, GUIController> nameToController = new HashMap<>();
@@ -43,7 +39,7 @@ public class GUI extends Application implements View {
      */
     public GUI() {
         //TODO: thread?
-        this.modelView = new ModelView();
+        //this.modelView = new ModelView();
     }
 
 
@@ -61,7 +57,8 @@ public class GUI extends Application implements View {
     }
 
     private void setup() {
-        List<String> fxmlList = new ArrayList<>(Arrays.asList(Constants.MENU, Constants.SETUP, Constants.LOGIN, Constants.WIZARD));
+        this.modelView = new ModelView();
+        List<String> fxmlList = new ArrayList<>(Arrays.asList(Constants.MENU, Constants.SETUP, Constants.LOGIN, Constants.LOBBY, Constants.WIZARD));
         try {
             for (String path : fxmlList) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + path));
@@ -71,8 +68,10 @@ public class GUI extends Application implements View {
                     this.currentScene = scene;
                 }
                 GUIController controller = loader.getController();
-                controller.setGUI(this);
-                nameToController.put(path, controller);
+                if(controller != null) {
+                    controller.setGUI(this);
+                    nameToController.put(path, controller);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -130,7 +129,19 @@ public class GUI extends Application implements View {
      */
     @Override
     public void loginReplyHandler(LoginReplyMessage msg) {
-        System.out.println("login reply handler");
+        modelView.setNickname(msg.getNickname());
+        modelView.setNumberOfPlayers(msg.getNumberOfPlayers().getNum());
+        modelView.setGameMode(msg.getGameMode());
+
+        changeStage(Constants.LOBBY);
+    }
+
+    /**
+     * Handles the LoginReplyMessage sent by the server.
+     */
+    @Override
+    public void gameStartingHandler() {
+
         changeStage(Constants.WIZARD);
     }
 
@@ -141,7 +152,7 @@ public class GUI extends Application implements View {
      */
     @Override
     public void wizardsHandler(WizardsAvailableMessage msg) {
-
+        //changeState() change scene to the principal one (boards, islands...)
     }
 
     /**
@@ -161,7 +172,8 @@ public class GUI extends Application implements View {
      */
     @Override
     public void activePlayersHandler(ActivePlayersMessage msg) {
-
+        modelView.setPlayers(msg.getActivePlayers());
+        //...
     }
 
     /**
@@ -171,7 +183,8 @@ public class GUI extends Application implements View {
      */
     @Override
     public void boardHandler(BoardMessage msg) {
-
+        modelView.setBoard(msg);
+        //...
     }
 
     /**
@@ -181,7 +194,8 @@ public class GUI extends Application implements View {
      */
     @Override
     public void islandGroupsHandler(IslandGroupsMessage msg) {
-
+        modelView.setIslandGroups(msg.getIslandGroups(), msg.getMotherNatureIndex());
+        //...
     }
 
     /**
@@ -191,7 +205,8 @@ public class GUI extends Application implements View {
      */
     @Override
     public void islandHandler(IslandMessage msg) {
-
+        modelView.setIsland(msg.getIsland());
+        //...
     }
 
     /**
@@ -201,7 +216,8 @@ public class GUI extends Application implements View {
      */
     @Override
     public void cloudsAvailableHandler(CloudsAvailableMessage msg) {
-
+        modelView.setClouds(msg.getClouds());
+        //...
     }
 
     /**
@@ -221,7 +237,8 @@ public class GUI extends Application implements View {
      */
     @Override
     public void coinsHandler(CoinMessage msg) {
-
+        modelView.setCoins(msg);
+        //...
     }
 
     /**
@@ -231,7 +248,8 @@ public class GUI extends Application implements View {
      */
     @Override
     public void currentPlayerHandler(CurrentPlayerMessage msg) {
-
+        modelView.setCurrentPlayer(msg.getCurrentPlayer());
+        //...
     }
 
     /**
@@ -241,7 +259,8 @@ public class GUI extends Application implements View {
      */
     @Override
     public void currentPhaseHandler(CurrentPhaseMessage msg) {
-
+        modelView.setCurrentPhase(msg.getCurrentPhase());
+        //...
     }
 
     /**
@@ -251,7 +270,8 @@ public class GUI extends Application implements View {
      */
     @Override
     public void charactersDrawnHandler(CharacterDrawnMessage msg) {
-
+        modelView.setDrawnCharacter(msg);
+        //...
     }
 
     /**
@@ -271,7 +291,8 @@ public class GUI extends Application implements View {
      */
     @Override
     public void characterPlayedHandler(CharacterPlayedMessage msg) {
-
+        modelView.setPlayedCharacter(msg);
+        //...
     }
 
     /**
@@ -289,7 +310,8 @@ public class GUI extends Application implements View {
      */
     @Override
     public void winnerHandler(WinnerMessage msg) {
-
+        modelView.setWinner(msg.getWinnerNickname());
+        //...
     }
 
     /**
@@ -299,7 +321,8 @@ public class GUI extends Application implements View {
      */
     @Override
     public void loserHandler(LoserMessage msg) {
-
+        modelView.setWinner(msg.getWinnerNickname());
+        //...
     }
 
     /**
@@ -327,6 +350,8 @@ public class GUI extends Application implements View {
      */
     @Override
     public void errorMessageHandler(ErrorMessage msg) {
-        AlertBox.display("Error", msg.getError());
+        Platform.runLater(() -> {
+            AlertBox.display("Error", msg.getError()); //todo: doesn't work
+        });
     }
 }
