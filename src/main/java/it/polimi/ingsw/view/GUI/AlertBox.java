@@ -31,9 +31,9 @@ public class AlertBox {
         // TO ALIGN THE LAYOUT !!!
         layout.setAlignment(Pos.CENTER);
 
-        /*Scene scene = new Scene(layout);
+        Scene scene = new Scene(layout);
         window.setScene(scene);
-        window.showAndWait();*/
+        window.showAndWait();
 
     }
 

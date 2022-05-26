@@ -2,7 +2,10 @@ package it.polimi.ingsw.view.GUI.controllers;
 
 import it.polimi.ingsw.network.client.SocketClient;
 import it.polimi.ingsw.util.Constants;
+import it.polimi.ingsw.view.GUI.AlertBox;
+import it.polimi.ingsw.view.GUI.ConfirmationBox;
 import it.polimi.ingsw.view.GUI.GUI;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
@@ -18,20 +21,11 @@ public class MainMenuController implements GUIController {
     @FXML
     private TextField portNumber_field;
 
-
     public void setGUI(GUI gui) {
         this.gui = gui;
     }
 
 
-
-    /**
-     * Closes the application when the "Quit" button is pressed.
-     **/
-    public void quit() {
-        //todo send message
-        System.exit(0);
-    }
 
     /**
      * Changes the stage scene to the setup one when the button "Play" is pressed.
@@ -70,6 +64,11 @@ public class MainMenuController implements GUIController {
         }
 
         gui.changeStage(Constants.LOGIN);
+    }
+
+    @Override
+    public void quit() {
+        Platform.runLater(() -> ConfirmationBox.display(0, gui.getStage(),"Are you sure you want to quit?"));
     }
 
 

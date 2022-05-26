@@ -22,7 +22,6 @@ import java.util.List;
 
 public class GUI extends Application implements View {
 
-    private GUI gui;
     private SocketClient socketClient;
     private final PropertyChangeSupport listener = new PropertyChangeSupport(this);
     private ModelView modelView;
@@ -49,6 +48,19 @@ public class GUI extends Application implements View {
         setup();
         this.stage = stage;
         stage.setScene(currentScene);
+
+        this.stage.setOnCloseRequest(e -> {
+            e.consume();
+            int exitStatus = 1;
+            if(nameToScene.get(Constants.MENU).equals(currentScene) || nameToScene.get(Constants.SETUP).equals(currentScene)) {
+                exitStatus = 0;
+            }
+            ConfirmationBox.display(exitStatus, this.stage, "Are you sure you want to quit?");
+            if(exitStatus == 1) {
+                System.exit(0);
+            }
+        });
+
         stage.show();
     }
 
@@ -79,6 +91,9 @@ public class GUI extends Application implements View {
 
     }
 
+    public Stage getStage() {
+        return stage;
+    }
 
     public void changeStage(String scene) {
         Platform.runLater(() -> {
@@ -340,7 +355,9 @@ public class GUI extends Application implements View {
      */
     @Override
     public void genericMessageHandler(GenericMessage msg) {
-
+        Platform.runLater(() -> {
+            AlertBox.display("Message", msg.getMessage());
+        });
     }
 
     /**
@@ -351,7 +368,7 @@ public class GUI extends Application implements View {
     @Override
     public void errorMessageHandler(ErrorMessage msg) {
         Platform.runLater(() -> {
-            AlertBox.display("Error", msg.getError()); //todo: doesn't work
+            AlertBox.display("Error", msg.getError());
         });
     }
 }

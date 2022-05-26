@@ -4,7 +4,9 @@ package it.polimi.ingsw.view.GUI.controllers;
 import it.polimi.ingsw.network.client.MessageParser;
 import it.polimi.ingsw.network.message.clientToserver.LoginRequestMessage;
 import it.polimi.ingsw.util.Constants;
+import it.polimi.ingsw.view.GUI.ConfirmationBox;
 import it.polimi.ingsw.view.GUI.GUI;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -59,12 +61,11 @@ public class LoginController implements GUIController {
 
     }
 
-    /**
-     * Closes the application when the "Quit" button is pressed.
-     **/
+    @Override
     public void quit() {
-        messageParser = new MessageParser(gui.getSocketClient()); //todo check
+        Platform.runLater(() -> ConfirmationBox.display(1, gui.getStage(),"Are you sure you want to quit?"));
 
+        messageParser = new MessageParser(gui.getSocketClient());
         String message = "QUIT";
         messageParser.parseInput(message);
     }

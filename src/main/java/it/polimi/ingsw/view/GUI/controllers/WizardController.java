@@ -1,7 +1,9 @@
 package it.polimi.ingsw.view.GUI.controllers;
 
 import it.polimi.ingsw.network.client.MessageParser;
+import it.polimi.ingsw.view.GUI.ConfirmationBox;
 import it.polimi.ingsw.view.GUI.GUI;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
@@ -31,5 +33,14 @@ public class WizardController implements GUIController {
 
         //todo continue
 
+    }
+
+    @Override
+    public void quit() {
+        Platform.runLater(() -> ConfirmationBox.display(1, gui.getStage(),"Are you sure you want to quit?"));
+
+        messageParser = new MessageParser(gui.getSocketClient());
+        String message = "QUIT";
+        messageParser.parseInput(message);
     }
 }
