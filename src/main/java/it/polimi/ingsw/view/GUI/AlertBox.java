@@ -10,6 +10,11 @@ import javafx.stage.Stage;
 
 public class AlertBox {
 
+    /**
+     * Displays a popup with the specified title and message.
+     * @param title the popup's title.
+     * @param message the popup's message.
+     */
     public static void display(String title, String message){
         Stage window = new Stage();
 

@@ -19,16 +19,12 @@ public interface View {
      */
     void setSocketClient(SocketClient socketClient);
 
-
-
-
     /**
      * Adds a listener to the View.
      * @param propertyName name of the observed property of the View.
      * @param listener listener added to the View.
      */
     void addListener(String propertyName, PropertyChangeListener listener);
-
 
     /**
      * Handles the LoginReplyMessage sent by the server.

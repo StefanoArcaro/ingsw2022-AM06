@@ -39,11 +39,7 @@ public class GUI extends Application implements View {
 
         this.stage.setOnCloseRequest(e -> {
             e.consume();
-            int exitStatus = 1;
-            if(nameToScene.get(Constants.MENU).equals(currentScene) || nameToScene.get(Constants.SETUP).equals(currentScene)) {
-                exitStatus = 0;
-            }
-            ConfirmationBox.display(exitStatus, this.stage, "Are you sure you want to quit?");
+            int exitStatus = ConfirmationBox.display(1, this.stage, "Are you sure you want to quit?");
             if(exitStatus == 1) {
                 System.exit(0);
             }
@@ -121,9 +117,6 @@ public class GUI extends Application implements View {
         socketClient.readMessage();
         socketClient.enablePinger(true); //todo check
     }
-
-
-
 
     /**
      * Handles the LoginReplyMessage sent by the server.
@@ -312,7 +305,7 @@ public class GUI extends Application implements View {
      */
     @Override
     public void matchInfoHandler() {
-
+        // TODO remove
     }
 
     /**

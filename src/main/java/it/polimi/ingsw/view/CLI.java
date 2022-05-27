@@ -24,6 +24,8 @@ import java.util.concurrent.Executors;
  */
 public class CLI implements View {
 
+    public static final int ENTRANCE_2P = 7;
+    public static final int ENTRANCE_3P = 9;
     public static final int MAX_TOWERS_2P = 8;
     public static final int MAX_TOWERS_3P = 6;
 
@@ -95,13 +97,16 @@ public class CLI implements View {
     }
 
     /**
-     * Handles the LoginReplyMessage sent by the server.
+     * Handles the GameStartedMessage sent by the server.
      */
     @Override
     public void gameStartingHandler() {
 
     }
 
+    /**
+     * Handles the GameReadyMessage sent by the server.
+     */
     @Override
     public void gameReadyHandler() {
 
@@ -224,7 +229,8 @@ public class CLI implements View {
      * @return the string of the players' entrances.
      */
     public String showEntrances(ArrayList<String> players) {
-        int maxStudents = modelView.getNumberOfPlayers() == 2 ? 7 : 9;
+        int maxStudents = modelView.getNumberOfPlayers() ==
+                NumberOfPlayers.TWO_PLAYERS.getNum() ? ENTRANCE_2P : ENTRANCE_3P;
 
         StringBuilder entrances = new StringBuilder();
 
@@ -242,7 +248,7 @@ public class CLI implements View {
             }
             entrances.append("\t\t");
 
-            if(maxStudents < 9) {
+            if(maxStudents < ENTRANCE_3P) {
                 entrances.append("\t");
             }
         }
@@ -329,7 +335,7 @@ public class CLI implements View {
                 towers.append(" ").append(Constants.SQUARE_EMPTY);
             }
 
-            if(i < 8) {
+            if(i < MAX_TOWERS_2P) {
                 towers.append("\t");
             }
 

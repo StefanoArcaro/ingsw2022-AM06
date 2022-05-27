@@ -1,6 +1,5 @@
 package it.polimi.ingsw.view.GUI.controllers;
 
-
 import it.polimi.ingsw.network.client.MessageParser;
 import it.polimi.ingsw.view.GUI.AlertBox;
 import it.polimi.ingsw.view.GUI.ConfirmationBox;
@@ -12,6 +11,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class LoginController implements GUIController {
 
     private GUI gui;
@@ -19,7 +20,6 @@ public class LoginController implements GUIController {
 
     ObservableList<String> numberOfPlayersList = FXCollections.observableArrayList("2", "3");
     ObservableList<String> gameModeList = FXCollections.observableArrayList("Easy", "Expert");
-
 
     @FXML
     private TextField nickname_field;
@@ -64,11 +64,17 @@ public class LoginController implements GUIController {
 
     @Override
     public void quit() {
-        Platform.runLater(() -> ConfirmationBox.display(1, gui.getStage(),"Are you sure you want to quit?"));
+        AtomicInteger status = new AtomicInteger(0);
 
-        messageParser = new MessageParser(gui.getSocketClient());
-        String message = "QUIT";
-        messageParser.parseInput(message);
+        Platform.runLater(() -> {
+            status.set(ConfirmationBox.display(1, gui.getStage(), "Are you sure you want to quit?"));
+        });
+
+        if(status.get() == 1) {
+            messageParser = new MessageParser(gui.getSocketClient());
+            String message = "QUIT";
+            messageParser.parseInput(message);
+        }
     }
 
 }
