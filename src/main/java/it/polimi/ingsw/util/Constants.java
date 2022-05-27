@@ -4,6 +4,9 @@ import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.enumerations.GameMode;
 import it.polimi.ingsw.model.enumerations.GameState;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Constants {
 
     // Default network constants
@@ -294,7 +297,7 @@ public class Constants {
     public static final String CHARACTER_DRAWN_LISTENER = "characterDrawnListener";
     public static final String CHARACTER_PLAYED_LISTENER = "characterPlayedListener";
     public static final String CLOUD_LISTENER = "cloudListener";
-    public static final String GAME_STARTED_LISTENER = "gameStartedListener";
+    public static final String GAME_READY_LISTENER = "gameReadyListener";
 
     public static void countdown(int milliseconds) {
         for(int i = 3; i > 0; i--) {
@@ -316,4 +319,16 @@ public class Constants {
     public static final String LOGIN = "login.fxml";
     public static final String LOBBY = "lobby.fxml";
     public static final String WIZARD = "wizard.fxml";
+    public static final String EMPTY = "empty.fxml";
+
+    public static final ArrayList<String> SCENES = new ArrayList<>(
+            Arrays.asList(Constants.MENU,
+                    Constants.SETUP,
+                    Constants.LOGIN,
+                    Constants.LOBBY,
+                    Constants.WIZARD,
+                    Constants.EMPTY
+            ));
+
+
 }

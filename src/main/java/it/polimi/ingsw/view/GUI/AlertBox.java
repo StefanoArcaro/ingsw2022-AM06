@@ -13,9 +13,6 @@ public class AlertBox {
     public static void display(String title, String message){
         Stage window = new Stage();
 
-        // IMPORTANT: THIS METHOD IS USED TO AVOID THE USER TO CLICK OTHER WINDOWS,
-        // WHICH MEANS THAT THE USER CANNOT NAVIGATE BETWEEN THEM, IT SIMPLY "BLOCKS"
-        // THE CURRENT WINDOW.
         window.initModality(Modality.APPLICATION_MODAL);
 
         window.setTitle(title);
@@ -26,15 +23,13 @@ public class AlertBox {
         closeButton.setOnAction(event -> window.close());
 
         VBox layout = new VBox(20);
-        layout.getChildren().addAll(label,closeButton);
+        layout.getChildren().addAll(label, closeButton);
 
-        // TO ALIGN THE LAYOUT !!!
         layout.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(layout);
         window.setScene(scene);
         window.showAndWait();
-
     }
 
 }

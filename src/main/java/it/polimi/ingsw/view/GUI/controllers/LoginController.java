@@ -2,8 +2,7 @@ package it.polimi.ingsw.view.GUI.controllers;
 
 
 import it.polimi.ingsw.network.client.MessageParser;
-import it.polimi.ingsw.network.message.clientToserver.LoginRequestMessage;
-import it.polimi.ingsw.util.Constants;
+import it.polimi.ingsw.view.GUI.AlertBox;
 import it.polimi.ingsw.view.GUI.ConfirmationBox;
 import it.polimi.ingsw.view.GUI.GUI;
 import javafx.application.Platform;
@@ -25,9 +24,9 @@ public class LoginController implements GUIController {
     @FXML
     private TextField nickname_field;
     @FXML
-    private ChoiceBox numberPlayers_box;
+    private ChoiceBox<String> numberPlayers_box;
     @FXML
-    private ChoiceBox gameMode_box;
+    private ChoiceBox<String> gameMode_box;
 
     @Override
     public void setGUI(GUI gui) {
@@ -42,23 +41,25 @@ public class LoginController implements GUIController {
         gameMode_box.getSelectionModel().selectFirst();
     }
 
-
+    /**
+     * Takes the information of the login form, performs the necessary checks.
+     * If all is well, formats the login message to send.
+     */
     public void login() {
-        messageParser = new MessageParser(gui.getSocketClient()); //todo check
+        messageParser = new MessageParser(gui.getSocketClient());
 
-        //TODO add error case
         String nickname = nickname_field.getText();
+        if(nickname.length() == 0) {
+            Platform.runLater(() -> AlertBox.display("Error", "Nickname field can't be empty."));
+            return;
+        }
+
         String numberOfPlayers = Integer.toString(numberPlayers_box.getSelectionModel().getSelectedIndex() + 2);
         String gameMode = Integer.toString(gameMode_box.getSelectionModel().getSelectedIndex());
-
-
 
         String message = "LOGIN" + " " + nickname + " " + numberOfPlayers + " " + gameMode;
 
         messageParser.parseInput(message);
-
-        //todo continue
-
     }
 
     @Override

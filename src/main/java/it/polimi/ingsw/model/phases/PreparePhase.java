@@ -69,7 +69,7 @@ public class PreparePhase extends Phase {
 
             String oldPlayer = game.getCurrentPlayer().getNickname();
             drawFirstPlayer();
-            game.getListeners().firePropertyChange(Constants.GAME_STARTED_LISTENER, null, game);
+            game.getListeners().firePropertyChange(Constants.GAME_READY_LISTENER, null, game);
 
             if(game.getGameMode().equals(GameMode.EXPERT)) {
                 distributeCoins();

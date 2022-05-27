@@ -78,7 +78,7 @@ public class Game {
         listeners.addPropertyChangeListener(Constants.CHARACTER_DRAWN_LISTENER, new CharacterDrawnListener(clientView));
         listeners.addPropertyChangeListener(Constants.CHARACTER_PLAYED_LISTENER, new CharacterPlayedListener(clientView));
         listeners.addPropertyChangeListener(Constants.WIN_LISTENER, new WinListener(clientView));
-        listeners.addPropertyChangeListener(Constants.GAME_STARTED_LISTENER, new GameStartedListener(clientView));
+        listeners.addPropertyChangeListener(Constants.GAME_READY_LISTENER, new GameReadyListener(clientView));
     }
 
     /**

@@ -18,10 +18,11 @@ public class WizardController implements GUIController {
         this.gui = gui;
     }
 
-
+    /**
+     * Handles the wizard choice.
+     * @param event event to handle (button).
+     */
     public void chooseWizard(ActionEvent event) {
-        //TODO add error case
-
         messageParser = new MessageParser(gui.getSocketClient());
 
         Button button = (Button) event.getSource();
@@ -30,9 +31,6 @@ public class WizardController implements GUIController {
         String message = "WIZARD " + wizardName;
 
         messageParser.parseInput(message);
-
-        //todo continue
-
     }
 
     @Override

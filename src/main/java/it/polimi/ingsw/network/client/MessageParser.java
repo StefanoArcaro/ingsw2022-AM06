@@ -65,6 +65,13 @@ public class MessageParser implements PropertyChangeListener {
         if(in.length == 4) {
             String nickname = in[1];
 
+            if(nickname.length() == 0) {
+                System.out.println("Correct format for LOGIN message:");
+                System.out.println(Constants.LOGIN_FORMAT);
+
+                return null;
+            }
+
             int numberOfPlayers = 0;
             try {
                 numberOfPlayers = Integer.parseInt(in[2]);

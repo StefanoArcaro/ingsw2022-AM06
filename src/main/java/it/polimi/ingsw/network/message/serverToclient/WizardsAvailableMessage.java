@@ -14,7 +14,7 @@ public class WizardsAvailableMessage extends Answer {
 
     public WizardsAvailableMessage(ArrayList<WizardName> wizards) {
         super(MessageType.WIZARDS_AVAILABLE_MESSAGE);
-        this.wizards= wizards;
+        this.wizards = wizards;
     }
 
     public ArrayList<WizardName> getWizards() {

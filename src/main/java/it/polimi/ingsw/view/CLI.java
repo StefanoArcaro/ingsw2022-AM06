@@ -102,6 +102,11 @@ public class CLI implements View {
 
     }
 
+    @Override
+    public void gameReadyHandler() {
+
+    }
+
     /**
      * Handles the WizardsAvailableMessage sent by the server.
      * @param msg the message to handle.

@@ -8,7 +8,6 @@ import java.beans.PropertyChangeSupport;
 
 public interface View {
 
-
     /**
      * @return the socket attribute of this client.
      */
@@ -41,6 +40,11 @@ public interface View {
      * Handles the LoginReplyMessage sent by the server.
      */
     void gameStartingHandler();
+
+    /**
+     * Handles the GameReadyMessage sent by the server.
+     */
+    void gameReadyHandler();
 
     /**
      * Handles the WizardsAvailableMessage sent by the server.
@@ -159,6 +163,4 @@ public interface View {
      * @param msg the message to handle.
      */
     void errorMessageHandler(ErrorMessage msg);
-
-
 }

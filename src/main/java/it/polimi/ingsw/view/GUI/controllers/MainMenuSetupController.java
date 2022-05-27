@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.net.Socket;
 
-public class MainMenuController implements GUIController {
+public class MainMenuSetupController implements GUIController {
 
     private GUI gui;
 
@@ -21,11 +21,10 @@ public class MainMenuController implements GUIController {
     @FXML
     private TextField portNumber_field;
 
+    @Override
     public void setGUI(GUI gui) {
         this.gui = gui;
     }
-
-
 
     /**
      * Changes the stage scene to the setup one when the button "Play" is pressed.
@@ -39,20 +38,32 @@ public class MainMenuController implements GUIController {
      * and changes the scene to the lobby.
      */
     public void serverInfo() {
-        //todo: add error case
         String address;
         int port;
+
+        String message = "";
 
         if(address_field.getText().matches(Constants.IPV4_PATTERN)) {
             address = address_field.getText();
         } else {
             address = Constants.DEFAULT_IP_ADDRESS;
+            message += "Invalid IP address: set to 'localhost' by default.\n";
         }
 
         try {
             port = Integer.parseInt(portNumber_field.getText());
+
+            if(port < 1024) {
+                throw new NumberFormatException();
+            }
         } catch (NumberFormatException e) {
             port = Constants.DEFAULT_PORT;
+            message += "Invalid port: set to '1234' by default.\n";
+        }
+
+        if(!message.equals("")) {
+            String finalMessage = message;
+            Platform.runLater(() -> AlertBox.display("Warning", finalMessage));
         }
 
         try {

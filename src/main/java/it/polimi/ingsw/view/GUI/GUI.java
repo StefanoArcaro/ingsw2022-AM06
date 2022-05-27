@@ -31,18 +31,6 @@ public class GUI extends Application implements View {
     private Scene currentScene;
     private Stage stage;
 
-
-
-    /**
-     * Default constructor.
-     */
-    public GUI() {
-        //TODO: thread?
-        //this.modelView = new ModelView();
-    }
-
-
-
     @Override
     public void start(Stage stage) {
         setup();
@@ -70,7 +58,7 @@ public class GUI extends Application implements View {
 
     private void setup() {
         this.modelView = new ModelView();
-        List<String> fxmlList = new ArrayList<>(Arrays.asList(Constants.MENU, Constants.SETUP, Constants.LOGIN, Constants.LOBBY, Constants.WIZARD));
+        List<String> fxmlList = Constants.SCENES;
         try {
             for (String path : fxmlList) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + path));
@@ -152,12 +140,20 @@ public class GUI extends Application implements View {
     }
 
     /**
-     * Handles the LoginReplyMessage sent by the server.
+     * Handles the GameStartedMessage sent by the server.
      */
     @Override
     public void gameStartingHandler() {
-
         changeStage(Constants.WIZARD);
+    }
+
+    /**
+     * Handles the GameReadyMessage sent by the server.
+     */
+    @Override
+    public void gameReadyHandler() {
+        // TODO change
+        changeStage(Constants.EMPTY);
     }
 
     /**
@@ -167,7 +163,8 @@ public class GUI extends Application implements View {
      */
     @Override
     public void wizardsHandler(WizardsAvailableMessage msg) {
-        //changeState() change scene to the principal one (boards, islands...)
+        //changeStage(Constants.EMPTY);
+        // TODO modify wizards scene
     }
 
     /**

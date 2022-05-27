@@ -14,14 +14,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GameStartedListener extends Listener {
+public class GameReadyListener extends Listener {
 
     /**
      * Default constructor.
      *
      * @param virtualView virtual representation of the clients' view.
      */
-    public GameStartedListener(VirtualView virtualView) {
+    public GameReadyListener(VirtualView virtualView) {
         super(virtualView);
     }
 
@@ -46,5 +46,7 @@ public class GameStartedListener extends Listener {
         for(Board b : boards) {
             virtualView.sendAll(new BoardMessage(b.getPlayerNickname(), b.getEntrance(), b.getHall(), b.getProfessors(), b.getTowers()));
         }
+
+        virtualView.sendAll(new GameReadyMessage());
     }
 }

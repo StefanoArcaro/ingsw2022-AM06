@@ -113,6 +113,9 @@ public class SocketClient extends Client {
                 case GAME_STARTED_MESSAGE -> {
                     view.gameStartingHandler();
                 }
+                case GAME_READY_MESSAGE -> {
+                    view.gameReadyHandler();
+                }
                 case WIZARDS_AVAILABLE_MESSAGE -> {
                     WizardsAvailableMessage msg = gson.fromJson(message, WizardsAvailableMessage.class);
                     view.wizardsHandler(msg);
