@@ -319,7 +319,8 @@ public class Constants {
     public static final String LOGIN = "login.fxml";
     public static final String LOBBY = "lobby.fxml";
     public static final String WIZARD = "wizard.fxml";
-    public static final String EMPTY = "empty.fxml";
+    public static final String BOARD_AND_ISLANDS = "boardANDislands.fxml";
+    public static final String OPPONENT_BOARD = "opponentBoard";
 
     public static final ArrayList<String> SCENES = new ArrayList<>(
             Arrays.asList(Constants.MENU,
@@ -327,7 +328,7 @@ public class Constants {
                     Constants.LOGIN,
                     Constants.LOBBY,
                     Constants.WIZARD,
-                    Constants.EMPTY
+                    Constants.BOARD_AND_ISLANDS
             ));
 
 

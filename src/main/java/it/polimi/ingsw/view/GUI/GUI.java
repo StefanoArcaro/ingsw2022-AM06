@@ -146,7 +146,7 @@ public class GUI extends Application implements View {
     @Override
     public void gameReadyHandler() {
         // TODO change
-        changeStage(Constants.EMPTY);
+        changeStage(Constants.BOARD_AND_ISLANDS);
     }
 
     /**

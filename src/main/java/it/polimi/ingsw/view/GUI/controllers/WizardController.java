@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.GUI.controllers;
 
 import it.polimi.ingsw.network.client.MessageParser;
+import it.polimi.ingsw.util.Constants;
 import it.polimi.ingsw.view.GUI.ConfirmationBox;
 import it.polimi.ingsw.view.GUI.GUI;
 import javafx.application.Platform;
@@ -31,6 +32,7 @@ public class WizardController implements GUIController {
         String message = "WIZARD " + wizardName;
 
         messageParser.parseInput(message);
+        gui.changeStage(Constants.BOARD_AND_ISLANDS);
     }
 
     @Override
