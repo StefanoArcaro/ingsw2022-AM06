@@ -156,7 +156,6 @@ public class GUI extends Application implements View {
      */
     @Override
     public void wizardsHandler(WizardsAvailableMessage msg) {
-        //changeStage(Constants.EMPTY);
         // TODO modify wizards scene
     }
 
