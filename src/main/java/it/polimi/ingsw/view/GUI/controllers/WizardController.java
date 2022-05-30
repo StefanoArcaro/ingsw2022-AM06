@@ -13,7 +13,6 @@ public class WizardController implements GUIController {
     private GUI gui;
     MessageParser messageParser;
 
-
     @Override
     public void setGUI(GUI gui) {
         this.gui = gui;
@@ -32,7 +31,6 @@ public class WizardController implements GUIController {
         String message = "WIZARD " + wizardName;
 
         messageParser.parseInput(message);
-        gui.changeStage(Constants.BOARD_AND_ISLANDS);
     }
 
     @Override
@@ -42,5 +40,10 @@ public class WizardController implements GUIController {
         messageParser = new MessageParser(gui.getSocketClient());
         String message = "QUIT";
         messageParser.parseInput(message);
+    }
+
+    @Override
+    public GUI getGUI() {
+        return gui;
     }
 }

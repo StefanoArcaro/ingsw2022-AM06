@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -8,20 +9,20 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" style="-fx-background-color: #42b0f5#42b0f5;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" style="-fx-background-color: #42b0f5#42b0f5;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.PlayController">
    <children>
       <ImageView fitHeight="295.0" fitWidth="686.0" layoutX="-1.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Plancia_DEF2.png" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1b79b2" height="328.0" layoutX="732.0" layoutY="230.0" stroke="BLACK" strokeType="INSIDE" width="262.0" />
-      <Button layoutX="124.0" layoutY="341.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="326.0" text="TABLE GREEN" />
-      <Button layoutX="758.0" layoutY="354.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="209.0" text="PLAY ASSISTANT" />
-      <Button layoutX="758.0" layoutY="304.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="209.0" text="GET CHARACTERS' INFO" />
-      <Button layoutX="758.0" layoutY="450.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="209.0" text="MOVE STUDENT TO HALL" />
-      <Button layoutX="758.0" layoutY="499.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="209.0" text="MOVE STUDENT TO ISLAND" />
-      <Button layoutX="758.0" layoutY="401.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="209.0" text="PLAY CHARACTER" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1b79b2" height="369.0" layoutX="732.0" layoutY="214.0" stroke="BLACK" strokeType="INSIDE" width="264.0" />
+      <Button fx:id="table_green" layoutX="124.0" layoutY="341.0" mnemonicParsing="false" onAction="#setColor" prefHeight="29.0" prefWidth="326.0" text="TABLE GREEN" />
+      <Button layoutX="758.0" layoutY="332.0" mnemonicParsing="false" onAction="#playAssistant" prefHeight="33.0" prefWidth="209.0" text="PLAY ASSISTANT" />
+      <Button layoutX="758.0" layoutY="282.0" mnemonicParsing="false" onAction="#getCharactersInfo" prefHeight="33.0" prefWidth="209.0" text="GET CHARACTERS' INFO" />
+      <Button layoutX="758.0" layoutY="428.0" mnemonicParsing="false" onAction="#moveStudentToHall" prefHeight="33.0" prefWidth="209.0" text="MOVE STUDENT TO HALL" />
+      <Button layoutX="758.0" layoutY="477.0" mnemonicParsing="false" onAction="#moveStudentToIsland" prefHeight="33.0" prefWidth="209.0" text="MOVE STUDENT TO ISLAND" />
+      <Button layoutX="758.0" layoutY="379.0" mnemonicParsing="false" onAction="#playCharacter" prefHeight="33.0" prefWidth="209.0" text="PLAY CHARACTER" />
       <Button layoutX="82.0" layoutY="12.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="_" />
       <Button layoutX="20.0" layoutY="56.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="12" />
       <Button layoutX="20.0" layoutY="119.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="_" />
@@ -46,7 +47,7 @@
       <Button layoutX="640.0" layoutY="180.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="6" />
       <Button layoutX="640.0" layoutY="118.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="_" />
       <Button layoutX="640.0" layoutY="55.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="5" />
-      <Button layoutX="758.0" layoutY="256.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="209.0" text="SHOW OPPONENTS' BOARDS">
+      <Button layoutX="758.0" layoutY="234.0" mnemonicParsing="false" onAction="#showOpponents" prefHeight="33.0" prefWidth="209.0" text="SHOW OPPONENTS' BOARDS">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -54,28 +55,35 @@
       <Text fx:id="nickname" layoutX="838.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname" />
       <Text layoutX="754.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CURRENT PLAYER:" />
       <Text fx:id="nickname1" layoutX="877.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname" />
-      <Button layoutX="123.0" layoutY="388.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="326.0" text="TABLE RED" />
-      <Button layoutX="123.0" layoutY="437.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="326.0" text="TABLE YELLOW" />
-      <Button layoutX="123.0" layoutY="486.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="326.0" text="TABLE PINK" />
-      <Button layoutX="122.0" layoutY="532.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="326.0" text="TABLE BLUE" />
-      <Button layoutX="59.0" layoutY="340.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" text="Button" />
-      <Button layoutX="59.0" layoutY="387.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" text="Button" />
-      <Button layoutX="58.0" layoutY="437.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" text="Button" />
-      <Button layoutX="59.0" layoutY="485.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" text="Button" />
-      <Button layoutX="58.0" layoutY="532.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" text="Button" />
-      <Button layoutX="-1.0" layoutY="532.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" text="Button" />
-      <Button layoutX="-1.0" layoutY="485.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" text="Button" />
-      <Button layoutX="-1.0" layoutY="436.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" text="Button" />
-      <Button layoutX="-1.0" layoutY="389.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" text="Button" />
-      <Button layoutX="469.0" layoutY="340.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" text="Button" />
-      <Button layoutX="468.0" layoutY="387.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" text="Button" />
-      <Button layoutX="468.0" layoutY="436.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" text="Button" />
-      <Button layoutX="469.0" layoutY="485.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" text="Button" />
-      <Button layoutX="469.0" layoutY="532.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" text="Button" />
+      <Button fx:id="table_red" layoutX="123.0" layoutY="388.0" mnemonicParsing="false" onAction="#setColor" prefHeight="29.0" prefWidth="326.0" text="TABLE RED" />
+      <Button fx:id="table_yellow" layoutX="123.0" layoutY="437.0" mnemonicParsing="false" onAction="#setColor" prefHeight="29.0" prefWidth="326.0" text="TABLE YELLOW" />
+      <Button fx:id="table_pink" layoutX="123.0" layoutY="486.0" mnemonicParsing="false" onAction="#setColor" prefHeight="29.0" prefWidth="326.0" text="TABLE PINK" />
+      <Button fx:id="table_blue" layoutX="122.0" layoutY="532.0" mnemonicParsing="false" onAction="#setColor" prefHeight="29.0" prefWidth="326.0" text="TABLE BLUE" />
+      <Button fx:id="entrance_1" layoutX="59.0" layoutY="340.0" minWidth="33.0" mnemonicParsing="false" onAction="#setColor" prefHeight="31.0" prefWidth="33.0" text="Button" />
+      <Button fx:id="entrance_3" layoutX="59.0" layoutY="387.0" minWidth="33.0" mnemonicParsing="false" onAction="#setColor" prefHeight="31.0" prefWidth="33.0" text="Button" />
+      <Button fx:id="entrance_5" layoutX="58.0" layoutY="437.0" minWidth="33.0" mnemonicParsing="false" onAction="#setColor" prefHeight="31.0" prefWidth="33.0" text="Button" />
+      <Button fx:id="entrance_7" layoutX="59.0" layoutY="485.0" minWidth="33.0" mnemonicParsing="false" onAction="#setColor" prefHeight="31.0" prefWidth="33.0" text="Button" />
+      <Button fx:id="entrance_9" layoutX="58.0" layoutY="532.0" minWidth="33.0" mnemonicParsing="false" onAction="#setColor" prefHeight="31.0" prefWidth="33.0" text="Button" />
+      <Button fx:id="entrance_8" layoutX="-1.0" layoutY="532.0" minWidth="33.0" mnemonicParsing="false" onAction="#setColor" prefHeight="31.0" prefWidth="33.0" text="Button" />
+      <Button fx:id="entrance_6" layoutX="-1.0" layoutY="485.0" minWidth="33.0" mnemonicParsing="false" onAction="#setColor" prefHeight="31.0" prefWidth="33.0" text="Button" />
+      <Button fx:id="entrance_4" layoutX="-1.0" layoutY="436.0" minWidth="33.0" mnemonicParsing="false" onAction="#setColor" prefHeight="31.0" prefWidth="33.0" text="Button" />
+      <Button fx:id="entrance_2" layoutX="-1.0" layoutY="389.0" minWidth="33.0" mnemonicParsing="false" onAction="#setColor" prefHeight="31.0" prefWidth="33.0" text="Button" />
+      <Button fx:id="professor_green" layoutX="469.0" layoutY="340.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" text="Button" />
+      <Button fx:id="professor_red" layoutX="468.0" layoutY="387.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" text="Button" />
+      <Button fx:id="professor_yellow" layoutX="468.0" layoutY="436.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" text="Button" />
+      <Button fx:id="professor_pink" layoutX="469.0" layoutY="485.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" text="Button" />
+      <Button fx:id="professor_blue" layoutX="469.0" layoutY="532.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" text="Button" />
       <Text layoutX="754.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CURRENT PHASE:" />
       <Text fx:id="nickname11" layoutX="876.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname" />
-      <Button layoutX="243.0" layoutY="121.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="CLOUD1" />
-      <Button layoutX="326.0" layoutY="121.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="CLOUD2" />
-      <Button layoutX="403.0" layoutY="121.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="CLOUD3" />
+      <Button fx:id="cloud_1" layoutX="243.0" layoutY="121.0" mnemonicParsing="false" onAction="#pickCloud" prefHeight="50.0" prefWidth="50.0" text="CLOUD1" />
+      <Button fx:id="cloud_2" layoutX="326.0" layoutY="121.0" mnemonicParsing="false" onAction="#pickCloud" prefHeight="50.0" prefWidth="50.0" text="CLOUD2" />
+      <Button fx:id="cloud_3" layoutX="403.0" layoutY="121.0" mnemonicParsing="false" onAction="#pickCloud" prefHeight="50.0" prefWidth="50.0" text="CLOUD3" />
+      <Button layoutX="758.0" layoutY="524.0" mnemonicParsing="false" onAction="#moveMotherNature" prefHeight="33.0" prefWidth="209.0" text="MOVE MOTHER NATURE" />
+      <Label layoutX="837.0" layoutY="62.0" text="Coins:">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="877.0" layoutY="61.0" text="number of coins" />
    </children>
 </Pane>

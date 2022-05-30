@@ -29,6 +29,11 @@ public class LoginController implements GUIController {
     private ChoiceBox<String> gameMode_box;
 
     @Override
+    public GUI getGUI() {
+        return gui;
+    }
+
+    @Override
     public void setGUI(GUI gui) {
         this.gui = gui;
     }

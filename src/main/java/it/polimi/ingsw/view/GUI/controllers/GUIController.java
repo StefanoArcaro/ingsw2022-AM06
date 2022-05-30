@@ -4,6 +4,8 @@ import it.polimi.ingsw.view.GUI.GUI;
 
 public interface GUIController {
 
+    GUI getGUI();
+
     /**
      * Sets the GUI.
      * @param gui to set.

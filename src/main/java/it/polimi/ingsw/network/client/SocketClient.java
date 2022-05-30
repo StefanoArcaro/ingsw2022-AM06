@@ -1,6 +1,7 @@
 package it.polimi.ingsw.network.client;
 
 import com.google.gson.Gson;
+import it.polimi.ingsw.network.message.MessageType;
 import it.polimi.ingsw.network.message.clientToserver.Message;
 import it.polimi.ingsw.network.message.clientToserver.PingMessage;
 import it.polimi.ingsw.network.message.serverToclient.*;

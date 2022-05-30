@@ -1,9 +1,12 @@
 package it.polimi.ingsw.view.GUI;
 
+import it.polimi.ingsw.model.enumerations.CreatureColor;
+import it.polimi.ingsw.model.gameBoard.StudentDestination;
 import it.polimi.ingsw.network.client.SocketClient;
 import it.polimi.ingsw.network.message.serverToclient.*;
 import it.polimi.ingsw.util.Constants;
 import it.polimi.ingsw.view.GUI.controllers.GUIController;
+import it.polimi.ingsw.view.GUI.controllers.PlayController;
 import it.polimi.ingsw.view.ModelView;
 import it.polimi.ingsw.view.View;
 import javafx.application.Application;
@@ -30,6 +33,10 @@ public class GUI extends Application implements View {
     private final HashMap<String, GUIController> nameToController = new HashMap<>();
     private Scene currentScene;
     private Stage stage;
+
+    private CreatureColor firstColor;
+    private CreatureColor secondColor;
+    private int destinationIsland;
 
     @Override
     public void start(Stage stage) {
@@ -66,7 +73,10 @@ public class GUI extends Application implements View {
                 GUIController controller = loader.getController();
                 if(controller != null) {
                     controller.setGUI(this);
+                    System.out.println(controller + " " + controller.getGUI()); //todo
                     nameToController.put(path, controller);
+                } else {
+                    System.out.println("NULL: " + controller);
                 }
             }
         } catch (IOException e) {
@@ -79,6 +89,10 @@ public class GUI extends Application implements View {
         return stage;
     }
 
+    public Scene getCurrentScene() {
+        return currentScene;
+    }
+
     public void changeStage(String scene) {
         Platform.runLater(() -> {
             currentScene = nameToScene.get(scene);
@@ -87,7 +101,9 @@ public class GUI extends Application implements View {
         });
     }
 
-
+    public ModelView getModelView() {
+        return modelView;
+    }
 
     /**
      * Adds a listener to the GUI.
@@ -116,6 +132,30 @@ public class GUI extends Application implements View {
         this.socketClient = socketClient;
         socketClient.readMessage();
         socketClient.enablePinger(true); //todo check
+    }
+
+    public CreatureColor getFirstColor() {
+        return firstColor;
+    }
+
+    public void setFirstColor(CreatureColor firstColor) {
+        this.firstColor = firstColor;
+    }
+
+    public CreatureColor getSecondColor() {
+        return secondColor;
+    }
+
+    public void setSecondColor(CreatureColor secondColor) {
+        this.secondColor = secondColor;
+    }
+
+    public int getDestinationIsland() {
+        return destinationIsland;
+    }
+
+    public void setDestinationIsland(int destinationIsland) {
+        this.destinationIsland = destinationIsland;
     }
 
     /**
@@ -147,6 +187,7 @@ public class GUI extends Application implements View {
     public void gameReadyHandler() {
         // TODO change
         changeStage(Constants.BOARD_AND_ISLANDS);
+        ((PlayController)nameToController.get(Constants.BOARD_AND_ISLANDS)).abc();
     }
 
     /**

@@ -82,5 +82,9 @@ public class MainMenuSetupController implements GUIController {
         Platform.runLater(() -> ConfirmationBox.display(0, gui.getStage(),"Are you sure you want to quit?"));
     }
 
+    @Override
+    public GUI getGUI() {
+        return gui;
+    }
 
 }
