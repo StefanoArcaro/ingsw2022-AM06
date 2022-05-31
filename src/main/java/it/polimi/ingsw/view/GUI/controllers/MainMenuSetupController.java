@@ -26,6 +26,11 @@ public class MainMenuSetupController implements GUIController {
         this.gui = gui;
     }
 
+    @Override
+    public void init() {
+
+    }
+
     /**
      * Changes the stage scene to the setup one when the button "Play" is pressed.
      **/

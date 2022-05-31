@@ -157,7 +157,7 @@ public class GameManager {
      * @param answer the message to send.
      * @param nickname the nickname of the client to send the message to.
      */
-    public void singleSend(Answer answer, String nickname) {
+    public synchronized void singleSend(Answer answer, String nickname) {
         ClientHandler clientHandler = clients.get(nicknameToId.get(nickname));
         clientHandler.sendMessage(answer);
     }
@@ -166,7 +166,7 @@ public class GameManager {
      * Sends the specified message to all the players in the game.
      * @param answer the message to send.
      */
-    public void sendAll(Answer answer) {
+    public synchronized void sendAll(Answer answer) {
         for(ClientHandler clientHandler : clients.values()) {
             clientHandler.sendMessage(answer);
         }

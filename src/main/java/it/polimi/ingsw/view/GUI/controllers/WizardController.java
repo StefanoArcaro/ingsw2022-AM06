@@ -18,6 +18,11 @@ public class WizardController implements GUIController {
         this.gui = gui;
     }
 
+    @Override
+    public void init() {
+
+    }
+
     /**
      * Handles the wizard choice.
      * @param event event to handle (button).

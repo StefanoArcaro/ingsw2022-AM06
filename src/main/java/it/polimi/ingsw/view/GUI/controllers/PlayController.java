@@ -26,7 +26,7 @@ public class PlayController implements GUIController {
     }
 
     // TODO method to set the game scene up
-    public void abc() {
+    public void init() {
         ModelView modelView = gui.getModelView();
         String nickname = modelView.getNickname();
         Board board = modelView.getBoard(nickname);

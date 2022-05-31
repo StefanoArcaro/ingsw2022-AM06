@@ -46,6 +46,11 @@ public class LoginController implements GUIController {
         gameMode_box.getSelectionModel().selectFirst();
     }
 
+    @Override
+    public void init() {
+
+    }
+
     /**
      * Takes the information of the login form, performs the necessary checks.
      * If all is well, formats the login message to send.

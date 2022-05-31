@@ -13,6 +13,11 @@ public interface GUIController {
     void setGUI(GUI gui);
 
     /**
+     * Updates the scene.
+     */
+    void init();
+
+    /**
      * Closes the application when the "Quit" button is pressed.
      **/
     void quit();

@@ -5,7 +5,6 @@ import it.polimi.ingsw.network.client.SocketClient;
 import it.polimi.ingsw.network.message.serverToclient.*;
 import it.polimi.ingsw.util.Constants;
 import it.polimi.ingsw.view.GUI.controllers.GUIController;
-import it.polimi.ingsw.view.GUI.controllers.PlayController;
 import it.polimi.ingsw.view.ModelView;
 import it.polimi.ingsw.view.View;
 import javafx.application.Application;
@@ -95,6 +94,11 @@ public class GUI extends Application implements View {
             currentScene = nameToScene.get(scene);
             stage.setScene(currentScene);
             stage.show();
+            // TODO check
+            GUIController controller = nameToController.get(scene);
+            if(controller != null) {
+                nameToController.get(scene).init();
+            }
         });
     }
 
@@ -184,7 +188,6 @@ public class GUI extends Application implements View {
     public void gameReadyHandler() {
         // TODO change
         changeStage(Constants.BOARD_AND_ISLANDS);
-        ((PlayController)nameToController.get(Constants.BOARD_AND_ISLANDS)).abc();
     }
 
     /**
