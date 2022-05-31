@@ -20,7 +20,6 @@
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1b79b2" height="369.0" layoutX="732.0" layoutY="214.0" stroke="BLACK" strokeType="INSIDE" width="264.0" />
-      <Button fx:id="table_green" layoutX="255.0" layoutY="187.0" mnemonicParsing="false" onAction="#setColor" prefHeight="29.0" prefWidth="326.0" text="TABLE GREEN" />
       <Button layoutX="758.0" layoutY="332.0" mnemonicParsing="false" onAction="#playAssistant" prefHeight="33.0" prefWidth="209.0" text="PLAY ASSISTANT" />
       <Button layoutX="758.0" layoutY="282.0" mnemonicParsing="false" onAction="#getCharactersInfo" prefHeight="33.0" prefWidth="209.0" text="GET CHARACTERS' INFO" />
       <Button layoutX="758.0" layoutY="428.0" mnemonicParsing="false" onAction="#moveStudentToHall" prefHeight="33.0" prefWidth="209.0" text="MOVE STUDENT TO HALL" />
@@ -58,10 +57,6 @@
       <Text fx:id="nickname" layoutX="838.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname" />
       <Text layoutX="754.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CURRENT PLAYER:" />
       <Text fx:id="nickname1" layoutX="877.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname" />
-      <Button fx:id="table_red" layoutX="266.0" layoutY="171.0" mnemonicParsing="false" onAction="#setColor" prefHeight="29.0" prefWidth="326.0" text="TABLE RED" />
-      <Button fx:id="table_yellow" layoutX="270.0" layoutY="168.0" mnemonicParsing="false" onAction="#setColor" prefHeight="29.0" prefWidth="326.0" text="TABLE YELLOW" />
-      <Button fx:id="table_pink" layoutX="235.0" layoutY="181.0" mnemonicParsing="false" onAction="#setColor" prefHeight="29.0" prefWidth="326.0" text="TABLE PINK" />
-      <Button fx:id="table_blue" layoutX="243.0" layoutY="183.0" mnemonicParsing="false" onAction="#setColor" prefHeight="29.0" prefWidth="326.0" text="TABLE BLUE" />
       <Button id="entrance_1" fx:id="entrance_1" layoutX="58.0" layoutY="340.0" minWidth="33.0" mnemonicParsing="false" onAction="#setColor" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 50;" />
       <Button id="entrance_3" fx:id="entrance_3" layoutX="59.0" layoutY="387.0" minWidth="33.0" mnemonicParsing="false" onAction="#setColor" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 50;" />
       <Button id="entrance_5" fx:id="entrance_5" layoutX="58.0" layoutY="437.0" minWidth="33.0" mnemonicParsing="false" onAction="#setColor" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 50;" />
@@ -108,6 +103,58 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
+         <children>
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #06d132#06d132;" GridPane.columnIndex="4" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #06d132#06d132;" GridPane.columnIndex="1" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #06d132#06d132;" GridPane.columnIndex="3" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #06d132#06d132;" GridPane.columnIndex="2" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #06d132#06d132;" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #06d132#06d132;" GridPane.columnIndex="5" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #06d132#06d132;" GridPane.columnIndex="6" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #06d132#06d132;" GridPane.columnIndex="7" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #06d132#06d132;" GridPane.columnIndex="8" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #06d132#06d132;" GridPane.columnIndex="9" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ed0924#ed0924;" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #e6ed1f#e6ed1f;" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #eb81ce#eb81ce;" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #1b24de#1b24de;" GridPane.rowIndex="4" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ed0924#ed0924;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ed0924#ed0924;" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ed0924#ed0924;" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ed0924#ed0924;" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ed0924#ed0924;" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ed0924#ed0924;" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ed0924#ed0924;" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ed0924#ed0924;" GridPane.columnIndex="9" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ed0924#ed0924;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #e6ed1f#e6ed1f;" GridPane.columnIndex="9" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #e6ed1f#e6ed1f;" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #e6ed1f#e6ed1f;" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #e6ed1f#e6ed1f;" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #e6ed1f#e6ed1f;" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #e6ed1f#e6ed1f;" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #e6ed1f#e6ed1f;" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #e6ed1f#e6ed1f;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #e6ed1f#e6ed1f;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #eb81ce#eb81ce;" GridPane.columnIndex="9" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #eb81ce#eb81ce;" GridPane.columnIndex="8" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #eb81ce#eb81ce;" GridPane.columnIndex="7" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #eb81ce#eb81ce;" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #eb81ce#eb81ce;" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #eb81ce#eb81ce;" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #eb81ce#eb81ce;" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #eb81ce#eb81ce;" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #eb81ce#eb81ce;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #1b24de#1b24de;" GridPane.columnIndex="9" GridPane.rowIndex="4" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #1b24de#1b24de;" GridPane.columnIndex="8" GridPane.rowIndex="4" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #1b24de#1b24de;" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #1b24de#1b24de;" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #1b24de#1b24de;" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #1b24de#1b24de;" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #1b24de#1b24de;" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #1b24de#1b24de;" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #1b24de#1b24de;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+         </children>
       </GridPane>
    </children>
 </Pane>
