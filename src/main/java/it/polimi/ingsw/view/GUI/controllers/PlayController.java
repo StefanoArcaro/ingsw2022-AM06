@@ -25,7 +25,7 @@ public class PlayController implements GUIController {
         this.gui = gui;
     }
 
-
+    // TODO method to set the game scene up
     public void abc() {
         ModelView modelView = gui.getModelView();
         String nickname = modelView.getNickname();
@@ -37,6 +37,7 @@ public class PlayController implements GUIController {
         String currentPhase = modelView.getCurrentPhase();
         String currentPlayer = modelView.getCurrentPlayer();
 
+        // Set entrance buttons' colors to the entrance students' ones
         for(int i = 0; i < entrance.getStudents().size(); i++) {
             String entranceID = "#entrance_" + (i + 1);
             Button entranceButton = (Button) gui.getCurrentScene().lookup(entranceID);
@@ -44,7 +45,7 @@ public class PlayController implements GUIController {
             entranceButton.setStyle("-fx-background-color: " + getHex(color));
         }
 
-
+        // Set towers
 
     }
 

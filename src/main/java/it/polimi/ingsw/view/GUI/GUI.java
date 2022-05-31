@@ -1,7 +1,6 @@
 package it.polimi.ingsw.view.GUI;
 
 import it.polimi.ingsw.model.enumerations.CreatureColor;
-import it.polimi.ingsw.model.gameBoard.StudentDestination;
 import it.polimi.ingsw.network.client.SocketClient;
 import it.polimi.ingsw.network.message.serverToclient.*;
 import it.polimi.ingsw.util.Constants;
@@ -18,8 +17,6 @@ import javafx.stage.Stage;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -385,9 +382,7 @@ public class GUI extends Application implements View {
      */
     @Override
     public void genericMessageHandler(GenericMessage msg) {
-        Platform.runLater(() -> {
-            AlertBox.display("Message", msg.getMessage());
-        });
+        Platform.runLater(() -> AlertBox.display("Message", msg.getMessage()));
     }
 
     /**
@@ -397,8 +392,6 @@ public class GUI extends Application implements View {
      */
     @Override
     public void errorMessageHandler(ErrorMessage msg) {
-        Platform.runLater(() -> {
-            AlertBox.display("Error", msg.getError());
-        });
+        Platform.runLater(() -> AlertBox.display("Error", msg.getError()));
     }
 }
