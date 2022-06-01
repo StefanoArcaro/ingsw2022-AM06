@@ -36,7 +36,7 @@
       <Button layoutX="20.0" layoutY="119.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="_" />
       <Button layoutX="20.0" layoutY="181.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="11" />
       <Button layoutX="82.0" layoutY="225.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="_" />
-      <Button layoutX="144.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="1" />
+      <Button layoutX="144.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-image: island.png;" text="1" />
       <Button layoutX="206.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="_" />
       <Button layoutX="268.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="2" />
       <Button layoutX="330.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="_" />
