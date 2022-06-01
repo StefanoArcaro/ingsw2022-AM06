@@ -62,6 +62,7 @@ class GameControllerTest {
         game.setPlayingOrder(playingOrder);
 
         game.setGameMode(GameMode.EASY);
+        game.setActivatedCharacter(new ConcreteCharacterFactory(game).createCharacter(0));
     }
 
     @AfterEach
