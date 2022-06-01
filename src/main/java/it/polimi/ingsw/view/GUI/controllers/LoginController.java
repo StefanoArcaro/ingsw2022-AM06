@@ -1,6 +1,5 @@
 package it.polimi.ingsw.view.GUI.controllers;
 
-import it.polimi.ingsw.network.client.MessageParser;
 import it.polimi.ingsw.view.GUI.AlertBox;
 import it.polimi.ingsw.view.GUI.ConfirmationBox;
 import it.polimi.ingsw.view.GUI.GUI;
@@ -16,7 +15,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class LoginController implements GUIController {
 
     private GUI gui;
-    MessageParser messageParser;
 
     ObservableList<String> numberOfPlayersList = FXCollections.observableArrayList("2", "3");
     ObservableList<String> gameModeList = FXCollections.observableArrayList("Easy", "Expert");
@@ -56,8 +54,6 @@ public class LoginController implements GUIController {
      * If all is well, formats the login message to send.
      */
     public void login() {
-        messageParser = new MessageParser(gui.getSocketClient());
-
         String nickname = nickname_field.getText();
         if(nickname.length() == 0) {
             Platform.runLater(() -> AlertBox.display("Error", "Nickname field can't be empty."));
@@ -69,21 +65,18 @@ public class LoginController implements GUIController {
 
         String message = "LOGIN" + " " + nickname + " " + numberOfPlayers + " " + gameMode;
 
-        messageParser.parseInput(message);
+        gui.getMessageParser().parseInput(message);
     }
 
     @Override
     public void quit() {
         AtomicInteger status = new AtomicInteger(0);
 
-        Platform.runLater(() -> {
-            status.set(ConfirmationBox.display(1, gui.getStage(), "Are you sure you want to quit?"));
-        });
+        Platform.runLater(() -> status.set(ConfirmationBox.display(1, gui.getStage(), "Are you sure you want to quit?")));
 
         if(status.get() == 1) {
-            messageParser = new MessageParser(gui.getSocketClient());
             String message = "QUIT";
-            messageParser.parseInput(message);
+            gui.getMessageParser().parseInput(message);
         }
     }
 

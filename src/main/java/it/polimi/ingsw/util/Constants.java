@@ -320,6 +320,7 @@ public class Constants {
     public static final String LOBBY = "lobby.fxml";
     public static final String WIZARD = "wizard.fxml";
     public static final String BOARD_AND_ISLANDS = "boardANDislands.fxml";
+    public static final String ASSISTANTS = "playAssistant.fxml";
     public static final String OPPONENT_BOARD = "opponentBoard";
 
     public static final ArrayList<String> SCENES = new ArrayList<>(
@@ -328,7 +329,8 @@ public class Constants {
                     Constants.LOGIN,
                     Constants.LOBBY,
                     Constants.WIZARD,
-                    Constants.BOARD_AND_ISLANDS
+                    Constants.BOARD_AND_ISLANDS,
+                    Constants.ASSISTANTS
             ));
 
 

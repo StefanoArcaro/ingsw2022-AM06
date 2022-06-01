@@ -1,8 +1,10 @@
 package it.polimi.ingsw.view.GUI.controllers;
 
 import it.polimi.ingsw.model.enumerations.CreatureColor;
+import it.polimi.ingsw.model.enumerations.GameMode;
+import it.polimi.ingsw.model.enumerations.PlayerColor;
 import it.polimi.ingsw.model.gameBoard.*;
-import it.polimi.ingsw.network.client.MessageParser;
+import it.polimi.ingsw.util.Constants;
 import it.polimi.ingsw.view.GUI.ConfirmationBox;
 import it.polimi.ingsw.view.GUI.GUI;
 import it.polimi.ingsw.view.ModelView;
@@ -10,17 +12,26 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class PlayController implements GUIController {
 
-    public GUI gui;
-    public MessageParser messageParser;
+    private GUI gui;
+
+    public Text name;
+    public Label coins;
+    public Text numOfCoins;
+    public Text currentNickname;
+    public Text currentPhase;
+
 
     @FXML
     private GridPane gridPane;
@@ -36,6 +47,7 @@ public class PlayController implements GUIController {
     @FXML
     private Button professor_blue;
 
+
     @Override
     public void setGUI(GUI gui) {
         this.gui = gui;
@@ -44,16 +56,44 @@ public class PlayController implements GUIController {
     // TODO method to set the game scene up
     public void init() {
         ModelView modelView = gui.getModelView();
-        String nickname = modelView.getNickname();
-        Board board = modelView.getBoard(nickname);
+        String playerNickname = modelView.getNickname();
+        Board board = modelView.getBoard(playerNickname);
         Entrance entrance = board.getEntrance();
-        Hall hall = board.getHall();
         ArrayList<Cloud> clouds = modelView.getClouds();
         ArrayList<IslandGroup> islands = modelView.getIslandGroups();
-        String currentPhase = modelView.getCurrentPhase();
-        String currentPlayer = modelView.getCurrentPlayer();
+        String phase = modelView.getCurrentPhase();
+        String player = modelView.getCurrentPlayer();
 
-        // Set entrance buttons' colors to the entrance students' ones
+        initInfo(modelView, playerNickname, player, phase);
+
+        initEntrance(entrance);
+
+        initHall();
+
+        initProfessors();
+
+        initTowers(modelView, board, playerNickname);
+
+
+
+        //TODO: set islands and clouds
+    }
+
+    private void initInfo(ModelView modelView, String playerNickname, String player, String phase) {
+        name.setText(playerNickname);
+
+        if(modelView.getGameMode().equals(GameMode.EXPERT)) {
+            numOfCoins.setText(Integer.toString(modelView.getCoinsByNickname(playerNickname)));
+        } else {
+            coins.setOpacity(0);
+            numOfCoins.setText("");
+        }
+
+        currentNickname.setText(player);
+        currentPhase.setText(phase);
+    }
+
+    private void initEntrance(Entrance entrance) {
         for(int i = 0; i < entrance.getStudents().size(); i++) {
             String entranceID = "#entrance_" + (i + 1);
             Button entranceButton = (Button) gui.getCurrentScene().lookup(entranceID);
@@ -61,13 +101,22 @@ public class PlayController implements GUIController {
             entranceButton.setStyle("-fx-background-color: " + getHex(color));
         }
 
-        // Set hall
+        for(int i = entrance.getStudents().size(); i < 9; i++) {
+            String entranceID = "#entrance_" + (i + 1);
+            Button entranceButton = (Button) gui.getCurrentScene().lookup(entranceID);
+            entranceButton.setOpacity(0);
+            entranceButton.setDisable(true);
+        }
+    }
+
+    private void initHall() {
         for(Node node : gridPane.getChildren()) {
             node.setOpacity(0);
             node.setDisable(true);
         }
+    }
 
-        // Set professors
+    private void initProfessors() {
         professor_green.setOpacity(0);
         professor_green.setDisable(true);
 
@@ -82,12 +131,36 @@ public class PlayController implements GUIController {
 
         professor_blue.setOpacity(0);
         professor_blue.setDisable(true);
-
-
-
-        // Set towers
-
     }
+
+    private void initTowers(ModelView modelView, Board board, String playerNickname) {
+        for(int i = 0; i < board.getTowers(); i++) {
+            String towerID = "#tower_" + (i + 1);
+            Pane tower = (Pane) gui.getCurrentScene().lookup(towerID);
+            PlayerColor color = modelView.getPlayers().get(playerNickname);
+            tower.setStyle("-fx-background-color: " + getHex(color));
+        }
+
+        for(int i = board.getTowers(); i < 8; i++) {
+            String towerID = "#tower_" + (i + 1);
+            Pane tower = (Pane) gui.getCurrentScene().lookup(towerID);
+            tower.setOpacity(0);
+        }
+    }
+
+    public void updateCurrentPlayer(String player) {
+        currentNickname.setText(player);
+    }
+
+    public void updateCurrentPhase(String phase) {
+        currentPhase.setText(phase);
+    }
+
+    public void updateCoins(int coins) {
+        numOfCoins.setText(Integer.toString(coins));
+    }
+
+
 
     private String getHex(CreatureColor color) {
         return switch(color) {
@@ -99,10 +172,19 @@ public class PlayController implements GUIController {
         };
     }
 
+    private String getHex(PlayerColor color) {
+        return switch (color) {
+            case BLACK -> "#000";
+            case WHITE -> "#fff";
+            case GRAY -> "#949494";
+        };
+    }
+
 
     public void setColor(ActionEvent event) {
         Button button = (Button) event.getSource();
         CreatureColor color = getColorByButton(button);
+        //todo
 
     }
 
@@ -110,8 +192,23 @@ public class PlayController implements GUIController {
         return null; //todo
     }
 
-    public void playAssistant(ActionEvent event) {
+    public void onOpenPlayAssistants(ActionEvent event) {
+        try {
+            Stage stage = new Stage();
+
+            GUIController controller = gui.getNameToController().get(Constants.ASSISTANTS);
+            Scene scene = gui.getSceneByController(controller);
+
+            stage.setScene(scene);
+            stage.show();
+
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
+
+
 
     public void getCharactersInfo(ActionEvent event) {
     }
@@ -134,13 +231,14 @@ public class PlayController implements GUIController {
     public void moveMotherNature(ActionEvent event) {
     }
 
+
+
     @Override
     public void quit() {
         Platform.runLater(() -> ConfirmationBox.display(1, gui.getStage(),"Are you sure you want to quit?"));
 
-        messageParser = new MessageParser(gui.getSocketClient());
         String message = "QUIT";
-        messageParser.parseInput(message);
+        gui.getMessageParser().parseInput(message);
     }
 
     @Override

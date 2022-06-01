@@ -72,7 +72,9 @@ public class MainMenuSetupController implements GUIController {
         }
 
         try {
-            gui.setSocketClient(new SocketClient(gui, new Socket(address, port)));
+            SocketClient socketClient = new SocketClient(gui, new Socket(address, port));
+            gui.setSocketClient(socketClient);
+            gui.setMessageParser(socketClient);
         } catch (IOException e) {
             System.err.println("A problem occurred while trying to instantiate the connection.");
             System.err.println("The application will now close...");

@@ -1,10 +1,12 @@
 package it.polimi.ingsw.view.GUI;
 
 import it.polimi.ingsw.model.enumerations.CreatureColor;
+import it.polimi.ingsw.network.client.MessageParser;
 import it.polimi.ingsw.network.client.SocketClient;
 import it.polimi.ingsw.network.message.serverToclient.*;
 import it.polimi.ingsw.util.Constants;
 import it.polimi.ingsw.view.GUI.controllers.GUIController;
+import it.polimi.ingsw.view.GUI.controllers.PlayController;
 import it.polimi.ingsw.view.ModelView;
 import it.polimi.ingsw.view.View;
 import javafx.application.Application;
@@ -24,6 +26,7 @@ public class GUI extends Application implements View {
     private SocketClient socketClient;
     private final PropertyChangeSupport listener = new PropertyChangeSupport(this);
     private ModelView modelView;
+    private MessageParser messageParser;
 
     private final HashMap<String, Scene> nameToScene = new HashMap<>();
     private final HashMap<String, GUIController> nameToController = new HashMap<>();
@@ -69,16 +72,26 @@ public class GUI extends Application implements View {
                 GUIController controller = loader.getController();
                 if(controller != null) {
                     controller.setGUI(this);
-                    System.out.println(controller + " " + controller.getGUI()); //todo
                     nameToController.put(path, controller);
-                } else {
-                    System.out.println("NULL: " + controller);
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+    }
+
+    public HashMap<String, GUIController> getNameToController() {
+        return nameToController;
+    }
+
+    public Scene getSceneByController(GUIController controller) {
+        for(String scene : nameToController.keySet()) {
+            if(nameToController.get(scene).equals(controller)) {
+                return nameToScene.get(scene);
+            }
+        }
+        return null;
     }
 
     public Stage getStage() {
@@ -94,7 +107,6 @@ public class GUI extends Application implements View {
             currentScene = nameToScene.get(scene);
             stage.setScene(currentScene);
             stage.show();
-            // TODO check
             GUIController controller = nameToController.get(scene);
             if(controller != null) {
                 nameToController.get(scene).init();
@@ -106,6 +118,14 @@ public class GUI extends Application implements View {
         return modelView;
     }
 
+    public MessageParser getMessageParser() {
+        return messageParser;
+    }
+
+    public void setMessageParser(SocketClient socketClient) {
+        this.messageParser = new MessageParser(socketClient);
+    }
+
     /**
      * Adds a listener to the GUI.
      * @param propertyName name of the observed property of the GUI.
@@ -114,7 +134,7 @@ public class GUI extends Application implements View {
     @Override
     public void addListener(String propertyName, PropertyChangeListener listener) {
         this.listener.addPropertyChangeListener(propertyName, listener);
-    }
+    }//todo needed?
 
     /**
      * @return the socket attribute of this client.
@@ -283,7 +303,7 @@ public class GUI extends Application implements View {
     @Override
     public void coinsHandler(CoinMessage msg) {
         modelView.setCoins(msg);
-        //...
+        ((PlayController)(nameToController.get(Constants.BOARD_AND_ISLANDS))).updateCoins(msg.getCoins());
     }
 
     /**
@@ -293,8 +313,9 @@ public class GUI extends Application implements View {
      */
     @Override
     public void currentPlayerHandler(CurrentPlayerMessage msg) {
-        modelView.setCurrentPlayer(msg.getCurrentPlayer());
-        //...
+        String currentPlayer = msg.getCurrentPlayer();
+        modelView.setCurrentPlayer(currentPlayer);
+        ((PlayController)(nameToController.get(Constants.BOARD_AND_ISLANDS))).updateCurrentPlayer(currentPlayer);
     }
 
     /**
@@ -304,8 +325,9 @@ public class GUI extends Application implements View {
      */
     @Override
     public void currentPhaseHandler(CurrentPhaseMessage msg) {
-        modelView.setCurrentPhase(msg.getCurrentPhase());
-        //...
+        String currentPhase = msg.getCurrentPhase();
+        modelView.setCurrentPhase(currentPhase);
+        ((PlayController)(nameToController.get(Constants.BOARD_AND_ISLANDS))).updateCurrentPhase(currentPhase);
     }
 
     /**
@@ -386,7 +408,13 @@ public class GUI extends Application implements View {
     @Override
     public void genericMessageHandler(GenericMessage msg) {
         Platform.runLater(() -> AlertBox.display("Message", msg.getMessage()));
+
+
+
+
     }
+
+
 
     /**
      * Handles the ErrorMessage sent by the server.
