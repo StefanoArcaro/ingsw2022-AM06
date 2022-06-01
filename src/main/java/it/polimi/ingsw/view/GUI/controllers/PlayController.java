@@ -4,11 +4,13 @@ import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.enumerations.GameMode;
 import it.polimi.ingsw.model.enumerations.PlayerColor;
 import it.polimi.ingsw.model.gameBoard.*;
+import it.polimi.ingsw.network.message.serverToclient.BoardMessage;
 import it.polimi.ingsw.util.Constants;
 import it.polimi.ingsw.view.GUI.ConfirmationBox;
 import it.polimi.ingsw.view.GUI.GUI;
 import it.polimi.ingsw.view.ModelView;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -94,6 +96,7 @@ public class PlayController implements GUIController {
     }
 
     private void initEntrance(Entrance entrance) {
+        //TODO: change to updateEntrance
         for(int i = 0; i < entrance.getStudents().size(); i++) {
             String entranceID = "#entrance_" + (i + 1);
             Button entranceButton = (Button) gui.getCurrentScene().lookup(entranceID);
@@ -158,6 +161,104 @@ public class PlayController implements GUIController {
 
     public void updateCoins(int coins) {
         numOfCoins.setText(Integer.toString(coins));
+    }
+
+    public void updateBoard(BoardMessage msg) {
+        ModelView modelView = gui.getModelView();
+        String nicknameBoard = msg.getNickname();
+        Entrance entrance = msg.getEntrance();
+        Hall hall = msg.getHall();
+        ArrayList< Professor > professors = msg.getProfessors();
+        int towers = msg.getTowers();
+
+        if(nicknameBoard.equals(modelView.getNickname())) {
+            //modify main scene
+            updateEntrance(entrance);
+            updateHall(hall);
+            updateProfessors(professors);
+            updateTowers(towers, modelView.getPlayers().get(modelView.getNickname()));
+        } else {
+            //todo: modify opponent board (nicknameBoard)
+        }
+
+    }
+
+    private void updateEntrance(Entrance entrance) {
+        Scene scene = gui.getSceneByName(Constants.BOARD_AND_ISLANDS);
+
+
+        for(int i = 0; i < entrance.getStudents().size(); i++) {
+            String entranceID = "#entrance_" + (i + 1);
+            Button entranceButton = (Button) scene.lookup(entranceID);
+            CreatureColor color = entrance.getStudents().get(i).getColor();
+            entranceButton.setStyle("-fx-background-color: " + getHex(color));
+        }
+
+        for(int i = entrance.getStudents().size(); i < 9; i++) {
+            String entranceID = "#entrance_" + (i + 1);
+            Button entranceButton = (Button) scene.lookup(entranceID);
+            entranceButton.setOpacity(0);
+            entranceButton.setDisable(true);
+        }
+    }
+
+    //TODO check
+    private void updateHall(Hall hall) {
+        ArrayList<Table> tables = hall.getStudents();
+
+        int row = 0;
+        for(Table table : tables) {
+            for(int column = 0; column < table.getLength(); column++) {
+                Node node = getNodeByRowColumnIndex(row, column, gridPane);
+                node.setOpacity(1);
+                node.setDisable(false);
+            }
+            row++;
+        }
+    }
+
+    private Node getNodeByRowColumnIndex (int row, int column, GridPane gridPane) {
+        Node result = null;
+        ObservableList<Node> childrens = gridPane.getChildren();
+
+        for (Node node : childrens) {
+            if(GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == column) {
+                result = node;
+                break;
+            }
+        }
+
+        return result;
+    }
+
+    //TODO check
+    private void updateProfessors(ArrayList<Professor> professors) {
+        for(Professor professor : professors) {
+            switch (professor.getColor()) {
+                case GREEN -> professor_green.setOpacity(1);
+                case RED -> professor_red.setOpacity(1);
+                case YELLOW -> professor_yellow.setOpacity(1);
+                case PINK -> professor_pink.setOpacity(1);
+                case BLUE -> professor_blue.setOpacity(1);
+            }
+        }
+    }
+
+    //TODO check
+    private void updateTowers(int towers, PlayerColor color) {
+        Scene scene = gui.getSceneByName(Constants.BOARD_AND_ISLANDS);
+
+        for(int i = 0; i < towers; i++) {
+            String towerID = "#tower_" + (i + 1);
+            Pane tower = (Pane) scene.lookup(towerID);
+            tower.setStyle("-fx-background-color: " + getHex(color));
+        }
+
+        for(int i = towers; i < 8; i++) {
+            String towerID = "#tower_" + (i + 1);
+            Pane tower = (Pane) scene.lookup(towerID);
+            tower.setOpacity(0);
+        }
     }
 
 

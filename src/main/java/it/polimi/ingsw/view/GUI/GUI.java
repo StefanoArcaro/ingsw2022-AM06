@@ -1,11 +1,14 @@
 package it.polimi.ingsw.view.GUI;
 
 import it.polimi.ingsw.model.enumerations.CreatureColor;
+import it.polimi.ingsw.model.gameBoard.Hall;
+import it.polimi.ingsw.model.gameBoard.Professor;
 import it.polimi.ingsw.network.client.MessageParser;
 import it.polimi.ingsw.network.client.SocketClient;
 import it.polimi.ingsw.network.message.serverToclient.*;
 import it.polimi.ingsw.util.Constants;
 import it.polimi.ingsw.view.GUI.controllers.GUIController;
+import it.polimi.ingsw.view.GUI.controllers.PlayAssistantController;
 import it.polimi.ingsw.view.GUI.controllers.PlayController;
 import it.polimi.ingsw.view.ModelView;
 import it.polimi.ingsw.view.View;
@@ -83,6 +86,10 @@ public class GUI extends Application implements View {
 
     public HashMap<String, GUIController> getNameToController() {
         return nameToController;
+    }
+
+    public Scene getSceneByName(String name) {
+        return nameToScene.get(name);
     }
 
     public Scene getSceneByController(GUIController controller) {
@@ -206,7 +213,6 @@ public class GUI extends Application implements View {
      */
     @Override
     public void gameReadyHandler() {
-        // TODO change
         changeStage(Constants.BOARD_AND_ISLANDS);
     }
 
@@ -227,7 +233,12 @@ public class GUI extends Application implements View {
      */
     @Override
     public void assistantsHandler(AssistantsMessage msg) {
-
+        //TODO check
+        PlayAssistantController controller = (PlayAssistantController) nameToController.get(Constants.ASSISTANTS);
+        if(msg.getAssistants().size() > 1) {
+            controller.updateAvailable(msg.getAssistants());
+        }
+        //oppure si salvano gli assistenti disponibili nella model view
     }
 
     /**
@@ -249,6 +260,7 @@ public class GUI extends Application implements View {
     @Override
     public void boardHandler(BoardMessage msg) {
         modelView.setBoard(msg);
+        ((PlayController)(nameToController.get(Constants.BOARD_AND_ISLANDS))).updateBoard(msg);
         //...
     }
 
@@ -427,6 +439,10 @@ public class GUI extends Application implements View {
                 System.out.println(message + "  " + option); //todo: error at the beginning prepare -> planning
                 ((PlayController)(nameToController.get(Constants.BOARD_AND_ISLANDS))).updateCurrentPhase(option);
                 System.out.println(option);
+                break;
+            case "ASSISTANTPLAYED":
+                //todo check
+                Platform.runLater(() -> AlertBox.display("Message", modelView.getCurrentPlayer() + " played: " + option));
                 break;
             case "MAXSTEPS":
                 // maxSteps = option;

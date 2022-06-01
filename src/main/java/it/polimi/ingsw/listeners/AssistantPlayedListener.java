@@ -17,7 +17,9 @@ public class AssistantPlayedListener extends Listener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         AssistantsMessage message = new AssistantsMessage((ArrayList<Assistant>) evt.getNewValue());
-        virtualView.sendAllExcept(new GenericMessage("ASSISTANTPLAYED_" + getCurrentPlayer() + " played the following assistant:"), getCurrentPlayer());
+        int priority = message.getAssistants().get(0).getPriority();
+        int steps = message.getAssistants().get(0).getMaxSteps(virtualView.getGameManager().getGame().getActivatedCharacter());
+        virtualView.sendAllExcept(new GenericMessage("ASSISTANTPLAYED_" + getCurrentPlayer() + " played the following assistant:_" + priority + " " + steps), getCurrentPlayer());
         virtualView.sendAll(message);
     }
 }
