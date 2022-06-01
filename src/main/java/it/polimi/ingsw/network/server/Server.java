@@ -63,7 +63,7 @@ public class Server {
         int clientID = getNextClientID();
         idToConnection.put(clientID, clientHandler);
 
-        clientHandler.sendMessage(new GenericMessage(Constants.getPhaseInstructions(GameState.LOBBY_PHASE, GameMode.EASY)));
+        clientHandler.sendMessage(new GenericMessage("NULL_" + Constants.getPhaseInstructions(GameState.LOBBY_PHASE, GameMode.EASY)));
     }
 
     /**
@@ -180,7 +180,7 @@ public class Server {
         // Update other players in the same game as disconnected clientHandler
         if(gameManager != null) {
             System.out.println(nicknameDisconnected + " has disconnected.");
-            gameManager.sendAllExcept(new GenericMessage("\n" + nicknameDisconnected + " has disconnected, the game will end."), nicknameDisconnected);
+            gameManager.sendAllExcept(new GenericMessage("DISCONNECT_\n" + nicknameDisconnected + " has disconnected, the game will end._" + nicknameDisconnected), nicknameDisconnected);
 
             gameManager.removeClient(clientID);
 
@@ -231,7 +231,7 @@ public class Server {
 
                 try {
                     clientHandler.sendMessage(new LoginReplyMessage("You logged in!", nickname, numberOfPlayers, gameMode));
-                    gameManager.sendAllExcept(new GenericMessage(nickname + " joined the game!"), nickname);
+                    gameManager.sendAllExcept(new GenericMessage("JOIN_" + nickname + " joined the game!_" + nickname), nickname);
                     game.getCurrentPhase().play();
 
                     //TODO check if ok

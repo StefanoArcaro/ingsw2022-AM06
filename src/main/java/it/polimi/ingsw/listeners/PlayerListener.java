@@ -19,7 +19,7 @@ public class PlayerListener extends Listener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        virtualView.send(new GenericMessage("It's your turn!"), getCurrentPlayer());
+        virtualView.send(new GenericMessage("PLAYER_It's your turn!"), getCurrentPlayer());
         virtualView.sendAllExcept(new CurrentPlayerMessage((String) evt.getNewValue()), getCurrentPlayer());
 
         Game game = virtualView.getGameManager().getGame();
@@ -30,7 +30,7 @@ public class PlayerListener extends Listener {
         } else if(game.getGameState().equals(GameState.PLANNING_PHASE)) {
             if(game.getFirstPlayerIndex() != game.getPlayers().indexOf(game.getCurrentPlayer())) {
                 virtualView.send(new CurrentPhaseMessage(getCurrentPhaseAction(game.getGameState()), Constants.getPhaseInstructions(game.getGameState(), game.getGameMode())), getCurrentPlayer());
-                virtualView.send(new GenericMessage("Available assistants:"), getCurrentPlayer());
+                virtualView.send(new GenericMessage("ASSISTANTS_Available assistants:"), getCurrentPlayer());
                 virtualView.send(new AssistantsMessage(game.getCurrentPlayer().getWizard().getAssistants()), getCurrentPlayer());
             }
         }

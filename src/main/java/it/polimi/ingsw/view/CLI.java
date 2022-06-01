@@ -867,7 +867,9 @@ public class CLI implements View {
      */
     @Override
     public void genericMessageHandler(GenericMessage msg) {
-        System.out.println(msg.getMessage());
+        String [] message = msg.getMessage().split("_");
+        System.out.println(message[1]);
+        //System.out.println(msg.getMessage());
     }
 
     /**

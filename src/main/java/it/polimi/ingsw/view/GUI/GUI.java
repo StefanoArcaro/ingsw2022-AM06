@@ -407,13 +407,39 @@ public class GUI extends Application implements View {
      */
     @Override
     public void genericMessageHandler(GenericMessage msg) {
-        Platform.runLater(() -> AlertBox.display("Message", msg.getMessage()));
+        //Platform.runLater(() -> AlertBox.display("Message", msg.getMessage()));
 
+        String[] message = msg.getMessage().split("_");
 
-
-
+        if(message.length == 3) {
+            sendGeneric(message[0], message[2]);
+        } else {
+            sendGeneric(message[0], null);
+        }
     }
 
+    private void sendGeneric(String message, String option) {
+        switch (message) {
+            case "PLAYER":
+                ((PlayController)(nameToController.get(Constants.BOARD_AND_ISLANDS))).updateCurrentPlayer(getModelView().getNickname());
+                break;
+            case "PHASE":
+                System.out.println(message + "  " + option); //todo: error at the beginning prepare -> planning
+                ((PlayController)(nameToController.get(Constants.BOARD_AND_ISLANDS))).updateCurrentPhase(option);
+                System.out.println(option);
+                break;
+            case "MAXSTEPS":
+                // maxSteps = option;
+                //todo..
+                break;
+            case "DISCONNECT":
+                Platform.runLater(() -> AlertBox.display("Message", option + " has disconnect, the game will end soon."));
+                break;
+            case "JOIN":
+                Platform.runLater(() -> AlertBox.display("Message", option + " has join the game."));
+                break;
+        }
+    }
 
 
     /**

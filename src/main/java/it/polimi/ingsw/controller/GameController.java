@@ -90,7 +90,7 @@ public class GameController implements PropertyChangeListener {
             default: {
                 // End game states
                 ClientHandler clientHandler = clients.get(msg.getClientID());
-                clientHandler.sendMessage(new GenericMessage("The game is over, you can't send a message."));
+                clientHandler.sendMessage(new GenericMessage("NULL_The game is over, you can't send a message."));
             }
         }
     }

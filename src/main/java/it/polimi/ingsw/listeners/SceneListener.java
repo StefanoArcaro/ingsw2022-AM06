@@ -6,6 +6,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class SceneListener implements PropertyChangeListener {
+    //TODO: delete?
 
     private final GUI gui;
     private String scene;

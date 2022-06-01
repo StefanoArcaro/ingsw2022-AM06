@@ -25,12 +25,12 @@ public class PhaseListener extends Listener {
 
         if(!gameState.equals(GameState.LOBBY_PHASE)) {
             virtualView.send(new CurrentPhaseMessage(getCurrentPhaseAction(gameState), Constants.getPhaseInstructions(gameState, gameMode)), getCurrentPlayer());
-            virtualView.sendAllExcept(new GenericMessage(getCurrentPlayer() + ": " + getCurrentPhaseAction(gameState)), getCurrentPlayer());
+            virtualView.sendAllExcept(new GenericMessage("PHASE_" + getCurrentPlayer() + ": " + getCurrentPhaseAction(gameState) + "_" + getCurrentPhaseAction(gameState)), getCurrentPlayer());
 
             if(gameState.equals(GameState.MOVE_MOTHER_NATURE_PHASE)) {
                 Game game = virtualView.getGameManager().getGame();
                 int maxSteps = game.getPlayerPriority().get(game.getCurrentPlayer()).getMaxSteps(game.getActivatedCharacter());
-                virtualView.send(new GenericMessage("Mother nature can take " + maxSteps + " steps at most."), getCurrentPlayer());
+                virtualView.send(new GenericMessage("MAXSTEPS_Mother nature can take " + maxSteps + " steps at most._" + maxSteps), getCurrentPlayer());
             }
         }
     }
