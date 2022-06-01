@@ -3,22 +3,38 @@ package it.polimi.ingsw.view.GUI.controllers;
 import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.gameBoard.*;
 import it.polimi.ingsw.network.client.MessageParser;
-import it.polimi.ingsw.util.Constants;
 import it.polimi.ingsw.view.GUI.ConfirmationBox;
 import it.polimi.ingsw.view.GUI.GUI;
 import it.polimi.ingsw.view.ModelView;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class PlayController implements GUIController {
 
     public GUI gui;
     public MessageParser messageParser;
+
+    @FXML
+    private GridPane gridPane;
+
+    @FXML
+    private Button professor_green;
+    @FXML
+    private Button professor_red;
+    @FXML
+    private Button professor_yellow;
+    @FXML
+    private Button professor_pink;
+    @FXML
+    private Button professor_blue;
 
     @Override
     public void setGUI(GUI gui) {
@@ -44,6 +60,30 @@ public class PlayController implements GUIController {
             CreatureColor color = entrance.getStudents().get(i).getColor();
             entranceButton.setStyle("-fx-background-color: " + getHex(color));
         }
+
+        // Set hall
+        for(Node node : gridPane.getChildren()) {
+            node.setOpacity(0);
+            node.setDisable(true);
+        }
+
+        // Set professors
+        professor_green.setOpacity(0);
+        professor_green.setDisable(true);
+
+        professor_red.setOpacity(0);
+        professor_red.setDisable(true);
+
+        professor_yellow.setOpacity(0);
+        professor_yellow.setDisable(true);
+
+        professor_pink.setOpacity(0);
+        professor_pink.setDisable(true);
+
+        professor_blue.setOpacity(0);
+        professor_blue.setDisable(true);
+
+
 
         // Set towers
 
