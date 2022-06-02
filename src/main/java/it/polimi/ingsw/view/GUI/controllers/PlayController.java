@@ -25,6 +25,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class PlayController implements GUIController {
 
@@ -39,6 +42,9 @@ public class PlayController implements GUIController {
 
     @FXML
     private GridPane gridPane;
+
+    @FXML
+    private GridPane gridPane_1;
 
     @FXML
     private Button professor_green;
@@ -270,7 +276,31 @@ public class PlayController implements GUIController {
     }
 
 
+    public void updateIsland(Island island) {
+        if(island.getIslandID() == 1) { //TODO REMOVE
 
+            Map<CreatureColor, Integer> islandStudents = new HashMap<>();
+            List<CreatureColor> colors = island.getStudents().stream().map(Student::getColor).toList();
+
+            for(CreatureColor color : CreatureColor.values()) {
+                islandStudents.put(color, 0); //todo: to modify init island students
+            }
+
+            for(CreatureColor color : colors) {
+                int number = islandStudents.get(color);
+                islandStudents.replace(color, number + 1);
+            }
+
+            for(int i = 0; i <= 4; i++) {
+                int students = islandStudents.get(CreatureColor.getColorByIndex(i));
+                System.out.println("Color: " + CreatureColor.getColorByIndex(i).getColorName() + " num: " + students);
+                Text node = (Text)getNodeByRowColumnIndex(i, 0, gridPane_1);
+                if(node != null) {
+                    node.setText(String.valueOf(students));
+                }
+            }
+        }
+    }
 
 
 
@@ -326,7 +356,29 @@ public class PlayController implements GUIController {
         }
     }
 
-    public void onMoveStudentToIsland(ActionEvent event) {
+
+    public void onIslandClicked(ActionEvent event) {
+        Button button = (Button) event.getSource();
+        String island = button.getId();
+        int islandID = Integer.parseInt(island.substring(7));
+
+        gui.setDestinationIsland(islandID);
+    }
+
+    public void onMoveStudentToIsland() {
+        if(gui.getEntranceColor() != null) {
+            if(gui.getDestinationIsland() > 0) {
+                String message = "MOVESTUDENT " + gui.getEntranceColor().getColorName() + " " + gui.getDestinationIsland();
+                System.out.println(message); //TODO remove
+                gui.getMessageParser().parseInput(message);
+                gui.setEntranceColor(null);
+                gui.setDestinationIsland(0);
+            } else {
+                Platform.runLater(() -> AlertBox.display("Wrong move", "Please choose an island."));
+            }
+        } else {
+            Platform.runLater(() -> AlertBox.display("Wrong move", "Please choose a student to move."));
+        }
     }
 
     public void showOpponents(ActionEvent event) {
@@ -351,8 +403,6 @@ public class PlayController implements GUIController {
         }
     }
 
-
-
     @Override
     public void quit() {
         Platform.runLater(() -> ConfirmationBox.display(1, gui.getStage(),"Are you sure you want to quit?"));
@@ -371,4 +421,5 @@ public class PlayController implements GUIController {
 
     public void onOpenPlayCharacter(ActionEvent event) {
     }
+
 }

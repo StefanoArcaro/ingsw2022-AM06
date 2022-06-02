@@ -21,6 +21,16 @@ public enum CreatureColor {
         return index;
     }
 
+    public static CreatureColor getColorByIndex(int index){
+        return switch (index) {
+            case 0 -> GREEN;
+            case 1 -> RED;
+            case 2 -> YELLOW;
+            case 3 -> PINK;
+            case 4 -> BLUE;
+            default -> null;
+        };
+    }
 
     /**
      * @return the string of the color.

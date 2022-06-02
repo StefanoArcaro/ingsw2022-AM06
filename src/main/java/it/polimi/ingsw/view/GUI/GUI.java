@@ -360,6 +360,7 @@ public class GUI extends Application implements View {
     @Override
     public void islandHandler(IslandMessage msg) {
         modelView.setIsland(msg.getIsland());
+        ((PlayController)(nameToController.get(Constants.BOARD_AND_ISLANDS))).updateIsland(msg.getIsland());
         //...
     }
 
