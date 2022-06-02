@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.enumerations.PlayerColor;
 import it.polimi.ingsw.model.gameBoard.*;
 import it.polimi.ingsw.network.message.serverToclient.BoardMessage;
 import it.polimi.ingsw.util.Constants;
+import it.polimi.ingsw.view.GUI.AlertBox;
 import it.polimi.ingsw.view.GUI.ConfirmationBox;
 import it.polimi.ingsw.view.GUI.GUI;
 import it.polimi.ingsw.view.ModelView;
@@ -19,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -101,7 +103,8 @@ public class PlayController implements GUIController {
             String entranceID = "#entrance_" + (i + 1);
             Button entranceButton = (Button) gui.getCurrentScene().lookup(entranceID);
             CreatureColor color = entrance.getStudents().get(i).getColor();
-            entranceButton.setStyle("-fx-background-color: " + getHex(color));
+            String style = "-fx-background-color: " + gui.getHexByFXColor(gui.getFXColorByCreatureColor(color));
+            entranceButton.setStyle(style);
         }
 
         for(int i = entrance.getStudents().size(); i < 9; i++) {
@@ -141,7 +144,8 @@ public class PlayController implements GUIController {
             String towerID = "#tower_" + (i + 1);
             Pane tower = (Pane) gui.getCurrentScene().lookup(towerID);
             PlayerColor color = modelView.getPlayers().get(playerNickname);
-            tower.setStyle("-fx-background-color: " + getHex(color));
+            String style = "-fx-background-color: " + gui.getHexByFXColor(gui.getFXColorByPlayerColor(color));
+            tower.setStyle(style);
         }
 
         for(int i = board.getTowers(); i < 8; i++) {
@@ -186,12 +190,12 @@ public class PlayController implements GUIController {
     private void updateEntrance(Entrance entrance) {
         Scene scene = gui.getSceneByName(Constants.BOARD_AND_ISLANDS);
 
-
         for(int i = 0; i < entrance.getStudents().size(); i++) {
             String entranceID = "#entrance_" + (i + 1);
             Button entranceButton = (Button) scene.lookup(entranceID);
             CreatureColor color = entrance.getStudents().get(i).getColor();
-            entranceButton.setStyle("-fx-background-color: " + getHex(color));
+            String style = "-fx-background-color: " + gui.getHexByFXColor(gui.getFXColorByCreatureColor(color));
+            entranceButton.setStyle(style);
         }
 
         for(int i = entrance.getStudents().size(); i < 9; i++) {
@@ -210,25 +214,28 @@ public class PlayController implements GUIController {
         for(Table table : tables) {
             for(int column = 0; column < table.getLength(); column++) {
                 Node node = getNodeByRowColumnIndex(row, column, gridPane);
-                node.setOpacity(1);
-                node.setDisable(false);
+                if(node != null) {
+                    node.setOpacity(1);
+                    node.setDisable(false);
+                }
             }
             row++;
         }
     }
 
-    private Node getNodeByRowColumnIndex (int row, int column, GridPane gridPane) {
-        Node result = null;
-        ObservableList<Node> childrens = gridPane.getChildren();
+    private Node getNodeByRowColumnIndex(int row, int column, GridPane gridPane) {
+        ObservableList<Node> children = gridPane.getChildren();
 
-        for (Node node : childrens) {
-            if(GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == column) {
-                result = node;
-                break;
+        for(Node node : children) {
+            int rowIndex = GridPane.getRowIndex(node) == null ? 0 : GridPane.getRowIndex(node);
+            int columnIndex = GridPane.getColumnIndex(node) == null ? 0 : GridPane.getColumnIndex(node);
+
+            if(rowIndex == row && columnIndex == column) {
+                return node;
             }
         }
 
-        return result;
+        return null;
     }
 
     //TODO check
@@ -251,7 +258,8 @@ public class PlayController implements GUIController {
         for(int i = 0; i < towers; i++) {
             String towerID = "#tower_" + (i + 1);
             Pane tower = (Pane) scene.lookup(towerID);
-            tower.setStyle("-fx-background-color: " + getHex(color));
+            String style = "-fx-background-color: " + gui.getHexByFXColor(gui.getFXColorByPlayerColor(color));
+            tower.setStyle(style);
         }
 
         for(int i = towers; i < 8; i++) {
@@ -263,35 +271,31 @@ public class PlayController implements GUIController {
 
 
 
-    private String getHex(CreatureColor color) {
-        return switch(color) {
-            case GREEN -> "#06d132";
-            case RED -> "#ed0924";
-            case YELLOW -> "#e6ed1f";
-            case PINK -> "#eb81ce";
-            case BLUE -> "#1b24de";
-        };
-    }
-
-    private String getHex(PlayerColor color) {
-        return switch (color) {
-            case BLACK -> "#000";
-            case WHITE -> "#fff";
-            case GRAY -> "#949494";
-        };
-    }
 
 
-    public void setColor(ActionEvent event) {
+
+
+    public void onEntranceClicked(ActionEvent event) {
         Button button = (Button) event.getSource();
-        CreatureColor color = getColorByButton(button);
-        //todo
+        CreatureColor color = getButtonColor(button);
 
+        gui.setEntranceColor(color);
     }
 
-    private CreatureColor getColorByButton(Button button) {
-        return null; //todo
+    public void onHallClicked(ActionEvent event) {
+        Button button = (Button) event.getSource();
+        CreatureColor color = getButtonColor(button);
+
+        gui.setHallColor(color);
     }
+
+    private CreatureColor getButtonColor(Button button) {
+        Color color = (Color) button.getBackground().getFills().get(0).getFill();
+
+        return gui.getCreatureColorByFXColor(color);
+    }
+
+
 
     public void onOpenPlayAssistants(ActionEvent event) {
         try {
@@ -310,17 +314,19 @@ public class PlayController implements GUIController {
     }
 
 
+    public void onMoveStudentToHall() {
+        CreatureColor entranceColor = gui.getEntranceColor();
 
-    public void getCharactersInfo(ActionEvent event) {
+        if(entranceColor != null) {
+            String message = "MOVESTUDENT " + entranceColor.getColorName() + " 0";
+            gui.getMessageParser().parseInput(message);
+            gui.setEntranceColor(null);
+        } else {
+            Platform.runLater(() -> AlertBox.display("Wrong move", "Please select a student from your entrance."));
+        }
     }
 
-    public void moveStudentToHall(ActionEvent event) {
-    }
-
-    public void moveStudentToIsland(ActionEvent event) {
-    }
-
-    public void playCharacter(ActionEvent event) {
+    public void onMoveStudentToIsland(ActionEvent event) {
     }
 
     public void showOpponents(ActionEvent event) {
@@ -329,7 +335,20 @@ public class PlayController implements GUIController {
     public void pickCloud(ActionEvent event) {
     }
 
-    public void moveMotherNature(ActionEvent event) {
+    public void onOpenMotherNature() {
+        try {
+            Stage stage = new Stage();
+
+            GUIController controller = gui.getNameToController().get(Constants.MOTHER_NATURE);
+            controller.init();
+            Scene scene = gui.getSceneByController(controller);
+
+            stage.setScene(scene);
+            stage.show();
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -347,4 +366,9 @@ public class PlayController implements GUIController {
         return gui;
     }
 
+    public void onOpenCharactersInfo(ActionEvent event) {
+    }
+
+    public void onOpenPlayCharacter(ActionEvent event) {
+    }
 }

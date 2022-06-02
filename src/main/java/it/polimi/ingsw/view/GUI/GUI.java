@@ -1,6 +1,8 @@
 package it.polimi.ingsw.view.GUI;
 
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.CreatureColor;
+import it.polimi.ingsw.model.enumerations.PlayerColor;
 import it.polimi.ingsw.model.gameBoard.Hall;
 import it.polimi.ingsw.model.gameBoard.Professor;
 import it.polimi.ingsw.network.client.MessageParser;
@@ -16,6 +18,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.beans.PropertyChangeListener;
@@ -23,6 +26,7 @@ import java.beans.PropertyChangeSupport;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GUI extends Application implements View {
 
@@ -36,8 +40,12 @@ public class GUI extends Application implements View {
     private Scene currentScene;
     private Stage stage;
 
-    private CreatureColor firstColor;
-    private CreatureColor secondColor;
+    private Map<Color, CreatureColor> colorToCreature = new HashMap<>();
+    private Map<Color, PlayerColor> colorToPlayer = new HashMap<>();
+    private Map<Color, String> colorToHex = new HashMap<>();
+
+    private CreatureColor entranceColor;
+    private CreatureColor hallColor;
     private int destinationIsland;
 
     @Override
@@ -63,6 +71,7 @@ public class GUI extends Application implements View {
 
     private void setup() {
         this.modelView = new ModelView();
+        initMaps();
         List<String> fxmlList = Constants.SCENES;
         try {
             for (String path : fxmlList) {
@@ -162,20 +171,87 @@ public class GUI extends Application implements View {
         socketClient.enablePinger(true); //todo check
     }
 
-    public CreatureColor getFirstColor() {
-        return firstColor;
+
+    private void initMaps() {
+        // Creature color map
+        colorToCreature.put(Color.GREEN, CreatureColor.GREEN);
+        colorToCreature.put(Color.RED, CreatureColor.RED);
+        colorToCreature.put(Color.GOLD, CreatureColor.YELLOW);
+        colorToCreature.put(Color.DEEPPINK, CreatureColor.PINK);
+        colorToCreature.put(Color.BLUE, CreatureColor.BLUE);
+
+        // Player color map
+        colorToPlayer.put(Color.BLACK, PlayerColor.BLACK);
+        colorToPlayer.put(Color.WHITE, PlayerColor.WHITE);
+        colorToPlayer.put(Color.GRAY, PlayerColor.GRAY);
+
+        // Color to Hex map
+        colorToHex.put(Color.GREEN, "#008000");
+        colorToHex.put(Color.RED, "#ff0000");
+        colorToHex.put(Color.GOLD, "#ffd700");
+        colorToHex.put(Color.DEEPPINK, "#ff1493");
+        colorToHex.put(Color.BLUE, "#0000ff");
+
+        colorToHex.put(Color.BLACK, "#000000");
+        colorToHex.put(Color.WHITE, "#ffffff");
+        colorToHex.put(Color.GRAY, "#808080");
     }
 
-    public void setFirstColor(CreatureColor firstColor) {
-        this.firstColor = firstColor;
+    public CreatureColor getCreatureColorByFXColor(Color color) {
+        return colorToCreature.get(color);
     }
 
-    public CreatureColor getSecondColor() {
-        return secondColor;
+    public Color getFXColorByCreatureColor(CreatureColor creatureColor) {
+        for(Color color : colorToCreature.keySet()) {
+            if(colorToCreature.get(color).equals(creatureColor)) {
+                return color;
+            }
+        }
+        return null;
     }
 
-    public void setSecondColor(CreatureColor secondColor) {
-        this.secondColor = secondColor;
+    public PlayerColor getPlayerColorByFXColor(Color color) {
+        return colorToPlayer.get(color);
+    }
+
+    public Color getFXColorByPlayerColor(PlayerColor playerColor) {
+        for(Color color : colorToPlayer.keySet()) {
+            if(colorToPlayer.get(color).equals(playerColor)) {
+                return color;
+            }
+        }
+        return null;
+    }
+
+    public String getHexByFXColor(Color color) {
+        return colorToHex.get(color);
+    }
+
+    public Color getFXColorByHex(String hex) {
+        for(Color color : colorToHex.keySet()) {
+            if(colorToHex.get(color).equals(hex)) {
+                return color;
+            }
+        }
+        return null;
+    }
+
+
+
+    public CreatureColor getEntranceColor() {
+        return entranceColor;
+    }
+
+    public void setEntranceColor(CreatureColor entranceColor) {
+        this.entranceColor = entranceColor;
+    }
+
+    public CreatureColor getHallColor() {
+        return hallColor;
+    }
+
+    public void setHallColor(CreatureColor hallColor) {
+        this.hallColor = hallColor;
     }
 
     public int getDestinationIsland() {
@@ -260,6 +336,7 @@ public class GUI extends Application implements View {
     @Override
     public void boardHandler(BoardMessage msg) {
         modelView.setBoard(msg);
+        //se la board è del proprietario si aggiorna board and island altrimenti opponent
         ((PlayController)(nameToController.get(Constants.BOARD_AND_ISLANDS))).updateBoard(msg);
         //...
     }
@@ -436,23 +513,21 @@ public class GUI extends Application implements View {
                 ((PlayController)(nameToController.get(Constants.BOARD_AND_ISLANDS))).updateCurrentPlayer(getModelView().getNickname());
                 break;
             case "PHASE":
-                System.out.println(message + "  " + option); //todo: error at the beginning prepare -> planning
+                //todo: error at the beginning prepare -> planning
                 ((PlayController)(nameToController.get(Constants.BOARD_AND_ISLANDS))).updateCurrentPhase(option);
-                System.out.println(option);
                 break;
             case "ASSISTANTPLAYED":
                 //todo check
                 Platform.runLater(() -> AlertBox.display("Message", modelView.getCurrentPlayer() + " played: " + option));
                 break;
             case "MAXSTEPS":
-                // maxSteps = option;
-                //todo..
+                modelView.setMaxSteps(Integer.parseInt(option));
                 break;
             case "DISCONNECT":
-                Platform.runLater(() -> AlertBox.display("Message", option + " has disconnect, the game will end soon."));
+                Platform.runLater(() -> AlertBox.display("Message", option + " has disconnected, the game will end soon."));
                 break;
             case "JOIN":
-                Platform.runLater(() -> AlertBox.display("Message", option + " has join the game."));
+                Platform.runLater(() -> AlertBox.display("Message", option + " has joined the game."));
                 break;
         }
     }

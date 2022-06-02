@@ -6,7 +6,6 @@ import it.polimi.ingsw.view.GUI.GUI;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -67,6 +66,6 @@ public class PlayAssistantController implements GUIController {
 
     @Override
     public void quit() {
-        //TODO ?
+
     }
 }

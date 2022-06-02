@@ -24,6 +24,7 @@ public class ModelView {
     private final Map<String, Integer> nicknameToCoins;
     private ArrayList<IslandGroup> islandGroups;
     private int motherNatureIndex;
+    private int maxSteps;
     private final Map<Integer, CharacterView> idToCharacter;
     private int activeCharacterID;
     private ArrayList<Cloud> clouds;
@@ -210,6 +211,21 @@ public class ModelView {
      */
     public int getMotherNatureIndex() {
         return motherNatureIndex;
+    }
+
+    /**
+     * @return the maximum number of steps Mother Nature can take.
+     */
+    public int getMaxSteps() {
+        return maxSteps;
+    }
+
+    /**
+     * Sets the maximum number of steps Mother Nature can take.
+     * @param maxSteps to set.
+     */
+    public void setMaxSteps(int maxSteps) {
+        this.maxSteps = maxSteps;
     }
 
     /**
