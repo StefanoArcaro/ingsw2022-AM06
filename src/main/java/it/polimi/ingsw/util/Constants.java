@@ -321,8 +321,8 @@ public class Constants {
     public static final String WIZARD = "wizard.fxml";
     public static final String BOARD_AND_ISLANDS = "boardANDislands.fxml";
     public static final String ASSISTANTS = "playAssistant.fxml";
-    public static final String OPPONENT_BOARD = "opponentBoard";
-
+    public static final String OPPONENT_BOARD = "opponentBoard.fxml";
+    public static final String CHARACTERS = "playCharacter.fxml";
     public static final ArrayList<String> SCENES = new ArrayList<>(
             Arrays.asList(Constants.MENU,
                     Constants.SETUP,
