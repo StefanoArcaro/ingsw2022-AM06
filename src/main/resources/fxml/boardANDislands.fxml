@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -18,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" style="-fx-background-color: #42b0f5#42b0f5;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.PlayController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" style="-fx-background-color: #42b0f5#42b0f5;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.PlayController">
    <children>
       <ImageView fitHeight="295.0" fitWidth="686.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -31,30 +25,30 @@
       <Button layoutX="758.0" layoutY="428.0" mnemonicParsing="false" onAction="#onMoveStudentToHall" prefHeight="33.0" prefWidth="209.0" text="MOVE STUDENT TO HALL" />
       <Button layoutX="758.0" layoutY="477.0" mnemonicParsing="false" onAction="#onMoveStudentToIsland" prefHeight="33.0" prefWidth="209.0" text="MOVE STUDENT TO ISLAND" />
       <Button layoutX="758.0" layoutY="379.0" mnemonicParsing="false" onAction="#onOpenPlayCharacter" prefHeight="33.0" prefWidth="209.0" text="PLAY CHARACTER" />
-      <Button layoutX="82.0" layoutY="12.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="_" />
-      <Button layoutX="20.0" layoutY="56.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="12" />
-      <Button layoutX="20.0" layoutY="119.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="_" />
-      <Button layoutX="20.0" layoutY="181.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="11" />
-      <Button layoutX="82.0" layoutY="225.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="_" />
-      <Button fx:id="island_1" layoutX="144.0" layoutY="10.0" mnemonicParsing="false" onAction="#onIslandClicked" prefHeight="60.0" prefWidth="60.0" text="1" />
-      <Button layoutX="206.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="_" />
-      <Button layoutX="268.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="2" />
-      <Button layoutX="330.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="_" />
-      <Button layoutX="392.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="3" />
-      <Button layoutX="454.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="_" />
-      <Button layoutX="516.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="4" />
-      <Button layoutX="143.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="10" />
-      <Button layoutX="205.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="_" />
-      <Button layoutX="267.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="9" />
-      <Button layoutX="329.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="_" />
-      <Button layoutX="391.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="8" />
-      <Button layoutX="453.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="_" />
-      <Button layoutX="515.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="7" />
-      <Button layoutX="578.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="_" />
-      <Button layoutX="578.0" layoutY="226.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="_" />
-      <Button layoutX="640.0" layoutY="180.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="6" />
-      <Button layoutX="640.0" layoutY="118.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="_" />
-      <Button layoutX="640.0" layoutY="55.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="5" />
+      <Button layoutX="82.0" layoutY="12.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
+      <Button layoutX="20.0" layoutY="56.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
+      <Button layoutX="20.0" layoutY="119.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
+      <Button layoutX="20.0" layoutY="181.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
+      <Button layoutX="82.0" layoutY="225.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
+      <Button fx:id="island_1" layoutX="144.0" layoutY="10.0" mnemonicParsing="false" onAction="#onIslandClicked" prefHeight="60.0" prefWidth="60.0" />
+      <Button layoutX="206.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
+      <Button layoutX="268.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
+      <Button layoutX="330.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
+      <Button layoutX="392.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
+      <Button layoutX="454.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
+      <Button layoutX="516.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
+      <Button layoutX="143.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
+      <Button layoutX="205.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
+      <Button layoutX="267.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
+      <Button layoutX="329.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
+      <Button layoutX="391.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
+      <Button layoutX="453.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
+      <Button layoutX="515.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
+      <Button layoutX="578.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
+      <Button layoutX="578.0" layoutY="226.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
+      <Button layoutX="640.0" layoutY="180.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
+      <Button layoutX="640.0" layoutY="118.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
+      <Button layoutX="640.0" layoutY="55.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
       <Button layoutX="758.0" layoutY="234.0" mnemonicParsing="false" onAction="#showOpponents" prefHeight="33.0" prefWidth="209.0" text="SHOW OPPONENTS' BOARDS">
          <font>
             <Font name="System Bold" size="13.0" />
@@ -62,7 +56,7 @@
       </Button>
       <Text fx:id="name" layoutX="934.0" layoutY="27.0" text="Label" />
       <Label fx:id="coins" layoutX="839.0" layoutY="59.0" text="Coins:" />
-      <Text fx:id="numOfCoins" layoutX="891.0" layoutY="59.0" text="number of coins" />
+      <Text fx:id="numOfCoins" layoutX="885.0" layoutY="75.0" text="number of coins" />
       <Text layoutX="754.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CURRENT PLAYER:" />
       <Text fx:id="currentNickname" layoutX="906.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname" />
       <Text layoutX="754.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CURRENT PHASE:" />
@@ -82,9 +76,9 @@
       <Button id="professor_yellow" fx:id="professor_yellow" layoutX="480.0" layoutY="437.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 10; -fx-background-color: #ffd700;" />
       <Button id="professor_pink" fx:id="professor_pink" layoutX="480.0" layoutY="485.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 10; -fx-background-color: #ff1493;" />
       <Button id="professor_blue" fx:id="professor_blue" layoutX="480.0" layoutY="532.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 10; -fx-background-color: #0000ff;" />
-      <Button fx:id="cloud_1" layoutX="243.0" layoutY="121.0" mnemonicParsing="false" onAction="#pickCloud" prefHeight="50.0" prefWidth="50.0" text="CLOUD1" />
-      <Button fx:id="cloud_2" layoutX="326.0" layoutY="121.0" mnemonicParsing="false" onAction="#pickCloud" prefHeight="50.0" prefWidth="50.0" text="CLOUD2" />
-      <Button fx:id="cloud_3" layoutX="403.0" layoutY="121.0" mnemonicParsing="false" onAction="#pickCloud" prefHeight="50.0" prefWidth="50.0" text="CLOUD3" />
+      <Button fx:id="cloud_1" layoutX="213.0" layoutY="100.0" mnemonicParsing="false" onAction="#pickCloud" prefHeight="89.0" prefWidth="89.0" />
+      <Button fx:id="cloud_2" layoutX="315.0" layoutY="99.0" mnemonicParsing="false" onAction="#pickCloud" prefHeight="89.0" prefWidth="89.0" />
+      <Button fx:id="cloud_3" layoutX="417.0" layoutY="99.0" mnemonicParsing="false" onAction="#pickCloud" prefHeight="89.0" prefWidth="89.0" />
       <Button layoutX="758.0" layoutY="524.0" mnemonicParsing="false" onAction="#onOpenMotherNature" prefHeight="33.0" prefWidth="209.0" text="MOVE MOTHER NATURE" />
       <GridPane fx:id="gridPane" layoutX="126.0" layoutY="329.0" prefHeight="246.0" prefWidth="319.0">
         <columnConstraints>
@@ -180,57 +174,1441 @@
             <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #0000ff;" GridPane.columnIndex="9" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Pane id="tower_1" fx:id="tower_1" layoutX="555.0" layoutY="359.0" prefHeight="41.0" prefWidth="32.0" style="-fx-background-color: red;" />
+      <Pane id="tower_1" fx:id="tower_1" layoutX="554.0" layoutY="359.0" prefHeight="41.0" prefWidth="32.0" style="-fx-background-color: red;" />
       <Pane id="tower_3" fx:id="tower_3" layoutX="554.0" layoutY="407.0" prefHeight="41.0" prefWidth="32.0" style="-fx-background-color: red;" />
-      <Pane id="tower_6" fx:id="tower_6" layoutX="607.0" layoutY="455.0" prefHeight="41.0" prefWidth="32.0" style="-fx-background-color: red;" />
+      <Pane id="tower_6" fx:id="tower_6" layoutX="608.0" layoutY="455.0" prefHeight="41.0" prefWidth="32.0" style="-fx-background-color: red;" />
       <Pane id="tower_5" fx:id="tower_5" layoutX="554.0" layoutY="457.0" prefHeight="41.0" prefWidth="32.0" style="-fx-background-color: red;" />
       <Pane id="tower_8" fx:id="tower_8" layoutX="608.0" layoutY="504.0" prefHeight="41.0" prefWidth="32.0" style="-fx-background-color: red;" />
       <Pane id="tower_7" fx:id="tower_7" layoutX="554.0" layoutY="504.0" prefHeight="41.0" prefWidth="32.0" style="-fx-background-color: red;" />
-      <Pane id="tower_2" fx:id="tower_2" layoutX="607.0" layoutY="359.0" prefHeight="41.0" prefWidth="32.0" style="-fx-background-color: red;" />
-      <Pane id="tower_4" fx:id="tower_4" layoutX="607.0" layoutY="408.0" prefHeight="41.0" prefWidth="32.0" style="-fx-background-color: red;" />
-      <GridPane fx:id="gridPane_1" layoutX="149.0" layoutY="10.0" prefHeight="60.0" prefWidth="18.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
+      <Pane id="tower_2" fx:id="tower_2" layoutX="608.0" layoutY="359.0" prefHeight="41.0" prefWidth="32.0" style="-fx-background-color: red;" />
+      <Pane id="tower_4" fx:id="tower_4" layoutX="608.0" layoutY="408.0" prefHeight="41.0" prefWidth="32.0" style="-fx-background-color: red;" />
+      <ImageView fitHeight="16.0" fitWidth="14.0" layoutX="188.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/mother_nature_pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="14.0" layoutX="250.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/mother_nature_pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="14.0" layoutX="312.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/mother_nature_pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="14.0" layoutX="374.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/mother_nature_pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="14.0" layoutX="436.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/mother_nature_pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="14.0" layoutX="498.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/mother_nature_pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="14.0" layoutX="560.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/mother_nature_pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="14.0" layoutX="622.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/mother_nature_pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="14.0" layoutX="684.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/mother_nature_pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="14.0" layoutX="684.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/mother_nature_pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="14.0" layoutX="684.0" layoutY="221.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/mother_nature_pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="14.0" layoutX="622.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/mother_nature_pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="14.0" layoutX="559.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/mother_nature_pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="14.0" layoutX="497.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/mother_nature_pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="14.0" layoutX="435.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/mother_nature_pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="14.0" layoutX="373.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/mother_nature_pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="14.0" layoutX="311.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/mother_nature_pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="14.0" layoutX="249.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/mother_nature_pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="14.0" layoutX="187.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/mother_nature_pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="14.0" layoutX="126.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/mother_nature_pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="14.0" layoutX="64.0" layoutY="222.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/mother_nature_pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="14.0" layoutX="64.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/mother_nature_pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="14.0" layoutX="64.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/mother_nature_pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="14.0" layoutX="126.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/mother_nature_pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="13.0" layoutX="126.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_white.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="13.0" layoutX="188.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_white.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="13.0" layoutX="250.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_white.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="13.0" layoutX="312.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_white.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="13.0" layoutX="374.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_white.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="13.0" layoutX="436.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_white.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="13.0" layoutX="498.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_white.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="13.0" layoutX="560.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_white.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="13.0" layoutX="622.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_gray.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="13.0" layoutX="684.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_gray.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="13.0" layoutX="684.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_gray.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="13.0" layoutX="684.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_gray.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="13.0" layoutX="622.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_gray.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="13.0" layoutX="559.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_gray.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="13.0" layoutX="497.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_gray.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="13.0" layoutX="435.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_gray.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="13.0" layoutX="373.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_black.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="13.0" layoutX="311.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_black.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="13.0" layoutX="249.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_black.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="13.0" layoutX="187.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_black.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="13.0" layoutX="126.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_black.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="13.0" layoutX="64.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_black.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="13.0" layoutX="64.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_black.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="13.0" layoutX="64.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_black.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="124.0" layoutY="12.0" prefHeight="18.0" prefWidth="19.0" text="/">
+         <font>
+            <Font name="Rockwell" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="186.0" layoutY="10.0" prefHeight="18.0" prefWidth="19.0" text="1">
+         <font>
+            <Font name="Rockwell" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="248.0" layoutY="10.0" prefHeight="18.0" prefWidth="19.0" text="/">
+         <font>
+            <Font name="Rockwell" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="310.0" layoutY="10.0" prefHeight="18.0" prefWidth="19.0" text="2">
+         <font>
+            <Font name="Rockwell" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="372.0" layoutY="10.0" prefHeight="18.0" prefWidth="19.0" text="/">
+         <font>
+            <Font name="Rockwell" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="434.0" layoutY="10.0" prefHeight="18.0" prefWidth="19.0" text="3">
+         <font>
+            <Font name="Rockwell" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="496.0" layoutY="10.0" prefHeight="18.0" prefWidth="19.0" text="/">
+         <font>
+            <Font name="Rockwell" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="558.0" layoutY="10.0" prefHeight="18.0" prefWidth="19.0" text="4">
+         <font>
+            <Font name="Rockwell" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="620.0" layoutY="10.0" prefHeight="18.0" prefWidth="19.0" text="/">
+         <font>
+            <Font name="Rockwell" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="682.0" layoutY="55.0" prefHeight="18.0" prefWidth="19.0" text="5">
+         <font>
+            <Font name="Rockwell" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="682.0" layoutY="118.0" prefHeight="18.0" prefWidth="19.0" text="/">
+         <font>
+            <Font name="Rockwell" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="682.0" layoutY="180.0" prefHeight="18.0" prefWidth="19.0" text="6">
+         <font>
+            <Font name="Rockwell" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="620.0" layoutY="226.0" prefHeight="18.0" prefWidth="19.0" text="/">
+         <font>
+            <Font name="Rockwell" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="557.0" layoutY="227.0" prefHeight="18.0" prefWidth="19.0" text="7">
+         <font>
+            <Font name="Rockwell" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="495.0" layoutY="227.0" prefHeight="18.0" prefWidth="19.0" text="/">
+         <font>
+            <Font name="Rockwell" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="433.0" layoutY="227.0" prefHeight="18.0" prefWidth="19.0" text="8">
+         <font>
+            <Font name="Rockwell" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="371.0" layoutY="227.0" prefHeight="18.0" prefWidth="19.0" text="/">
+         <font>
+            <Font name="Rockwell" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="309.0" layoutY="227.0" prefHeight="18.0" prefWidth="19.0" text="9">
+         <font>
+            <Font name="Rockwell" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="247.0" layoutY="227.0" prefHeight="18.0" prefWidth="19.0" text="/">
+         <font>
+            <Font name="Rockwell" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="185.0" layoutY="227.0" prefHeight="18.0" prefWidth="19.0" text="10">
+         <font>
+            <Font name="Rockwell" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="124.0" layoutY="225.0" prefHeight="18.0" prefWidth="19.0" text="/">
+         <font>
+            <Font name="Rockwell" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="62.0" layoutY="181.0" prefHeight="18.0" prefWidth="19.0" text="11">
+         <font>
+            <Font name="Rockwell" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="62.0" layoutY="119.0" prefHeight="18.0" prefWidth="19.0" text="/">
+         <font>
+            <Font name="Rockwell" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="62.0" layoutY="56.0" prefHeight="18.0" prefWidth="19.0" text="12">
+         <font>
+            <Font name="Rockwell" size="13.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="columncolors_1" fitHeight="58.0" fitWidth="19.0" layoutX="147.0" layoutY="13.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/column_colors.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="columncolors_2" fitHeight="58.0" fitWidth="19.0" layoutX="209.0" layoutY="13.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/column_colors.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="columncolors_3" fitHeight="58.0" fitWidth="19.0" layoutX="271.0" layoutY="13.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/column_colors.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="columncolors_4" fitHeight="58.0" fitWidth="19.0" layoutX="333.0" layoutY="13.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/column_colors.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="columncolors_5" fitHeight="58.0" fitWidth="19.0" layoutX="395.0" layoutY="13.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/column_colors.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="columncolors_6" fitHeight="58.0" fitWidth="19.0" layoutX="457.0" layoutY="13.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/column_colors.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="columncolors_7" fitHeight="58.0" fitWidth="19.0" layoutX="519.0" layoutY="13.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/column_colors.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="columncolors_8" fitHeight="58.0" fitWidth="19.0" layoutX="581.0" layoutY="13.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/column_colors.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="columncolors_9" fitHeight="58.0" fitWidth="19.0" layoutX="643.0" layoutY="58.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/column_colors.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="columncolors_10" fitHeight="58.0" fitWidth="19.0" layoutX="643.0" layoutY="121.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/column_colors.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="columncolors_11" fitHeight="58.0" fitWidth="19.0" layoutX="643.0" layoutY="183.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/column_colors.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="columncolors_12" fitHeight="58.0" fitWidth="19.0" layoutX="582.0" layoutY="229.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/column_colors.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="columncolors_13" fitHeight="58.0" fitWidth="19.0" layoutX="518.0" layoutY="230.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/column_colors.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="columncolors_14" fitHeight="58.0" fitWidth="19.0" layoutX="456.0" layoutY="230.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/column_colors.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="columncolors_15" fitHeight="58.0" fitWidth="19.0" layoutX="394.0" layoutY="230.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/column_colors.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="columncolors_16" fitHeight="58.0" fitWidth="19.0" layoutX="332.0" layoutY="230.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/column_colors.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="columncolors_17" fitHeight="58.0" fitWidth="19.0" layoutX="270.0" layoutY="230.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/column_colors.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="columncolors_18" fitHeight="58.0" fitWidth="19.0" layoutX="208.0" layoutY="230.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/column_colors.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="columncolors_19" fitHeight="58.0" fitWidth="19.0" layoutX="146.0" layoutY="230.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/column_colors.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="columncolors_20" fitHeight="58.0" fitWidth="19.0" layoutX="85.0" layoutY="228.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/column_colors.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="columncolors_21" fitHeight="58.0" fitWidth="19.0" layoutX="23.0" layoutY="184.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/column_colors.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="columncolors_22" fitHeight="58.0" fitWidth="19.0" layoutX="23.0" layoutY="122.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/column_colors.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="columncolors_23" fitHeight="58.0" fitWidth="19.0" layoutX="23.0" layoutY="59.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/column_colors.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="columncolors_24" fitHeight="58.0" fitWidth="19.0" layoutX="85.0" layoutY="15.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/column_colors.png" />
+         </image>
+      </ImageView>
+      <GridPane fx:id="gridPane_1" layoutX="147.0" layoutY="13.0" prefHeight="54.0" prefWidth="18.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
-            <Text fx:id="number_green" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
                <font>
                   <Font size="12.0" />
                </font>
             </Text>
-            <Text fx:id="number_red" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
                <font>
                   <Font size="12.0" />
                </font>
             </Text>
-            <Text fx:id="number_yellow" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
                <font>
                   <Font size="12.0" />
                </font>
             </Text>
-            <Text fx:id="number_pink" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
                <font>
                   <Font size="12.0" />
                </font>
             </Text>
-            <Text fx:id="number_blue" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
                <font>
                   <Font size="12.0" />
                </font>
             </Text>
          </children>
       </GridPane>
-      <Text layoutX="183.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MN" wrappingWidth="20.91015625">
-         <font>
-            <Font size="12.0" />
-         </font>
-      </Text>
+      <GridPane fx:id="gridPane_2" layoutX="209.0" layoutY="13.0" prefHeight="54.0" prefWidth="18.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+      <GridPane fx:id="gridPane_3" layoutX="271.0" layoutY="13.0" prefHeight="54.0" prefWidth="18.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+      <GridPane fx:id="gridPane_4" layoutX="332.0" layoutY="13.0" prefHeight="54.0" prefWidth="18.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+      <GridPane fx:id="gridPane_5" layoutX="395.0" layoutY="13.0" prefHeight="54.0" prefWidth="18.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+      <GridPane fx:id="gridPane_6" layoutX="457.0" layoutY="13.0" prefHeight="54.0" prefWidth="18.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+      <GridPane fx:id="gridPane_7" layoutX="519.0" layoutY="13.0" prefHeight="54.0" prefWidth="18.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+      <GridPane fx:id="gridPane_8" layoutX="581.0" layoutY="13.0" prefHeight="54.0" prefWidth="18.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+      <GridPane fx:id="gridPane_9" layoutX="643.0" layoutY="58.0" prefHeight="54.0" prefWidth="18.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+      <GridPane fx:id="gridPane_10" layoutX="643.0" layoutY="121.0" prefHeight="54.0" prefWidth="18.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+      <GridPane fx:id="gridPane_11" layoutX="643.0" layoutY="183.0" prefHeight="54.0" prefWidth="18.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+      <GridPane fx:id="gridPane_12" layoutX="582.0" layoutY="229.0" prefHeight="54.0" prefWidth="18.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+      <GridPane fx:id="gridPane_13" layoutX="518.0" layoutY="230.0" prefHeight="54.0" prefWidth="18.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+      <GridPane fx:id="gridPane_14" layoutX="456.0" layoutY="230.0" prefHeight="54.0" prefWidth="18.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+      <GridPane fx:id="gridPane_15" layoutX="394.0" layoutY="230.0" prefHeight="54.0" prefWidth="18.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+      <GridPane fx:id="gridPane_16" layoutX="332.0" layoutY="230.0" prefHeight="54.0" prefWidth="18.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+      <GridPane fx:id="gridPane_17" layoutX="270.0" layoutY="230.0" prefHeight="54.0" prefWidth="18.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+      <GridPane fx:id="gridPane_18" layoutX="208.0" layoutY="230.0" prefHeight="54.0" prefWidth="18.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+      <GridPane fx:id="gridPane_19" layoutX="146.0" layoutY="230.0" prefHeight="54.0" prefWidth="18.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+      <GridPane fx:id="gridPane_20" layoutX="85.0" layoutY="228.0" prefHeight="54.0" prefWidth="18.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+      <GridPane fx:id="gridPane_21" layoutX="23.0" layoutY="184.0" prefHeight="54.0" prefWidth="18.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+      <GridPane fx:id="gridPane_22" layoutX="23.0" layoutY="122.0" prefHeight="54.0" prefWidth="18.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+      <GridPane fx:id="gridPane_24" layoutX="85.0" layoutY="15.0" prefHeight="54.0" prefWidth="18.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+      <GridPane fx:id="gridPane_23" layoutX="23.0" layoutY="59.0" prefHeight="54.0" prefWidth="18.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+      <Button fx:id="cloud1_s1" layoutX="217.0" layoutY="102.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ff0000 #ff0000; -fx-background-radius: 50;" />
+      <Button fx:id="cloud1_s2" layoutX="237.0" layoutY="121.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #008000 #008000; -fx-background-radius: 50;" />
+      <Button fx:id="cloud1_s3" layoutX="217.0" layoutY="141.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #008000 #008000; -fx-background-radius: 50;" />
+      <Button fx:id="cloud1_s4" layoutX="237.0" layoutY="160.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ff0000 #ff0000; -fx-background-radius: 50;" />
+      <Button fx:id="cloud2_s1" layoutX="319.0" layoutY="101.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ffd700 #ffd700; -fx-background-radius: 50;" />
+      <Button fx:id="cloud2_s3" layoutX="319.0" layoutY="140.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ff0000 #ff0000; -fx-background-radius: 50;" />
+      <Button fx:id="cloud2_s2" layoutX="339.0" layoutY="120.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ffd700 #ffd700; -fx-background-radius: 50;" />
+      <Button fx:id="cloud2_s4" layoutX="339.0" layoutY="159.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #0000ff #0000ff; -fx-background-radius: 50;" />
+      <Button fx:id="cloud3_s1" layoutX="421.0" layoutY="102.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ff0000 #ff0000; -fx-background-radius: 50;" />
+      <Button fx:id="cloud3_s2" layoutX="441.0" layoutY="121.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #0000ff #0000ff; -fx-background-radius: 50;" />
+      <Button fx:id="cloud3_s3" layoutX="421.0" layoutY="141.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #0000ff #0000ff; -fx-background-radius: 50;" />
+      <Button fx:id="cloud3_s4" layoutX="441.0" layoutY="160.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ffd700 #ffd700 #ffd700 #ffd700; -fx-background-radius: 50;" />
    </children>
 </Pane>
