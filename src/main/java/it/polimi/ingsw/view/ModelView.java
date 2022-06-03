@@ -160,6 +160,15 @@ public class ModelView {
     }
 
     /**
+     * @return the list of opponents.
+     */
+    public ArrayList<String> getOpponents() {
+        ArrayList<String> opponents = new ArrayList<>(players.keySet());
+        opponents.remove(nickname);
+        return opponents;
+    }
+
+    /**
      * @param nickname the nickname of the board's owner.
      * @return the board owned by the player with the specified nickname.
      */
