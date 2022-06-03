@@ -25,30 +25,30 @@
       <Button layoutX="758.0" layoutY="428.0" mnemonicParsing="false" onAction="#onMoveStudentToHall" prefHeight="33.0" prefWidth="209.0" text="MOVE STUDENT TO HALL" />
       <Button layoutX="758.0" layoutY="477.0" mnemonicParsing="false" onAction="#onMoveStudentToIsland" prefHeight="33.0" prefWidth="209.0" text="MOVE STUDENT TO ISLAND" />
       <Button layoutX="758.0" layoutY="379.0" mnemonicParsing="false" onAction="#onOpenPlayCharacter" prefHeight="33.0" prefWidth="209.0" text="PLAY CHARACTER" />
-      <Button layoutX="82.0" layoutY="12.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
-      <Button layoutX="20.0" layoutY="56.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
-      <Button layoutX="20.0" layoutY="119.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
-      <Button layoutX="20.0" layoutY="181.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
-      <Button layoutX="82.0" layoutY="225.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
-      <Button fx:id="island_1" layoutX="144.0" layoutY="10.0" mnemonicParsing="false" onAction="#onIslandClicked" prefHeight="60.0" prefWidth="60.0" />
-      <Button layoutX="206.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
-      <Button layoutX="268.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
-      <Button layoutX="330.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
-      <Button layoutX="392.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
-      <Button layoutX="454.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
-      <Button layoutX="516.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
-      <Button layoutX="143.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
-      <Button layoutX="205.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
-      <Button layoutX="267.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
-      <Button layoutX="329.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
-      <Button layoutX="391.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
-      <Button layoutX="453.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
-      <Button layoutX="515.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
-      <Button layoutX="578.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
-      <Button layoutX="578.0" layoutY="226.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
-      <Button layoutX="640.0" layoutY="180.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
-      <Button layoutX="640.0" layoutY="118.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
-      <Button layoutX="640.0" layoutY="55.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" />
+      <Button layoutX="82.0" layoutY="12.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
+      <Button layoutX="20.0" layoutY="56.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
+      <Button layoutX="20.0" layoutY="119.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
+      <Button layoutX="20.0" layoutY="181.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
+      <Button layoutX="82.0" layoutY="225.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
+      <Button fx:id="island_1" layoutX="144.0" layoutY="10.0" mnemonicParsing="false" onAction="#onIslandClicked" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32;" />
+      <Button layoutX="206.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
+      <Button layoutX="268.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32;" />
+      <Button layoutX="330.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
+      <Button layoutX="392.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32;" />
+      <Button layoutX="454.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
+      <Button layoutX="516.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32;" />
+      <Button layoutX="143.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
+      <Button layoutX="205.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
+      <Button layoutX="267.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
+      <Button layoutX="329.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
+      <Button layoutX="391.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
+      <Button layoutX="453.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
+      <Button layoutX="515.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
+      <Button layoutX="578.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
+      <Button layoutX="578.0" layoutY="226.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
+      <Button layoutX="640.0" layoutY="180.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
+      <Button layoutX="640.0" layoutY="118.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
+      <Button layoutX="640.0" layoutY="55.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32;" />
       <Button layoutX="758.0" layoutY="234.0" mnemonicParsing="false" onAction="#showOpponents" prefHeight="33.0" prefWidth="209.0" text="SHOW OPPONENTS' BOARDS">
          <font>
             <Font name="System Bold" size="13.0" />
@@ -76,9 +76,9 @@
       <Button id="professor_yellow" fx:id="professor_yellow" layoutX="480.0" layoutY="437.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 10; -fx-background-color: #ffd700;" />
       <Button id="professor_pink" fx:id="professor_pink" layoutX="480.0" layoutY="485.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 10; -fx-background-color: #ff1493;" />
       <Button id="professor_blue" fx:id="professor_blue" layoutX="480.0" layoutY="532.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 10; -fx-background-color: #0000ff;" />
-      <Button fx:id="cloud_1" layoutX="213.0" layoutY="100.0" mnemonicParsing="false" onAction="#pickCloud" prefHeight="89.0" prefWidth="89.0" />
-      <Button fx:id="cloud_2" layoutX="315.0" layoutY="99.0" mnemonicParsing="false" onAction="#pickCloud" prefHeight="89.0" prefWidth="89.0" />
-      <Button fx:id="cloud_3" layoutX="417.0" layoutY="99.0" mnemonicParsing="false" onAction="#pickCloud" prefHeight="89.0" prefWidth="89.0" />
+      <Button fx:id="cloud_1" layoutX="213.0" layoutY="100.0" mnemonicParsing="false" onAction="#pickCloud" prefHeight="89.0" prefWidth="89.0" style="-fx-background-color: #4682b4#4682b4 #4682b4#4682b4;" />
+      <Button fx:id="cloud_2" layoutX="315.0" layoutY="99.0" mnemonicParsing="false" onAction="#pickCloud" prefHeight="89.0" prefWidth="89.0" style="-fx-background-color: #4682b4#4682b4 #4682b4#4682b4;" />
+      <Button fx:id="cloud_3" layoutX="417.0" layoutY="99.0" mnemonicParsing="false" onAction="#pickCloud" prefHeight="89.0" prefWidth="89.0" style="-fx-background-color: #4682b4#4682b4;" />
       <Button layoutX="758.0" layoutY="524.0" mnemonicParsing="false" onAction="#onOpenMotherNature" prefHeight="33.0" prefWidth="209.0" text="MOVE MOTHER NATURE" />
       <GridPane fx:id="gridPane" layoutX="126.0" layoutY="329.0" prefHeight="246.0" prefWidth="319.0">
         <columnConstraints>
