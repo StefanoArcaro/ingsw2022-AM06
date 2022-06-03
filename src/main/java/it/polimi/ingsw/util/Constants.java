@@ -299,6 +299,8 @@ public class Constants {
     public static final String CLOUD_LISTENER = "cloudListener";
     public static final String GAME_READY_LISTENER = "gameReadyListener";
 
+    public static final String FX_CLOUD_LISTENER = "fxCloudListener";
+
     public static void countdown(int milliseconds) {
         for(int i = 3; i > 0; i--) {
             System.out.print(".");
@@ -322,7 +324,8 @@ public class Constants {
     public static final String BOARD_AND_ISLANDS = "boardANDislands.fxml";
     public static final String ASSISTANTS = "playAssistant.fxml";
     public static final String MOTHER_NATURE = "moveMotherNature.fxml";
-    public static final String OPPONENT_BOARD = "opponentBoard.fxml";
+    public static final String OPPONENT_BOARD_1 = "opponentBoard1.fxml";
+    public static final String OPPONENT_BOARD_2 = "opponentBoard2.fxml";
     public static final String CHARACTERS = "playCharacter.fxml";
     public static final ArrayList<String> SCENES = new ArrayList<>(
             Arrays.asList(Constants.MENU,
@@ -332,7 +335,9 @@ public class Constants {
                     Constants.WIZARD,
                     Constants.BOARD_AND_ISLANDS,
                     Constants.ASSISTANTS,
-                    Constants.MOTHER_NATURE
+                    Constants.MOTHER_NATURE,
+                    Constants.OPPONENT_BOARD_1,
+                    Constants.OPPONENT_BOARD_2
             ));
 
 

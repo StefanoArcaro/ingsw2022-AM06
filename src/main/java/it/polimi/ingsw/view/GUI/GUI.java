@@ -1,10 +1,7 @@
 package it.polimi.ingsw.view.GUI;
 
-import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.enumerations.PlayerColor;
-import it.polimi.ingsw.model.gameBoard.Hall;
-import it.polimi.ingsw.model.gameBoard.Professor;
 import it.polimi.ingsw.network.client.MessageParser;
 import it.polimi.ingsw.network.client.SocketClient;
 import it.polimi.ingsw.network.message.serverToclient.*;
@@ -40,9 +37,9 @@ public class GUI extends Application implements View {
     private Scene currentScene;
     private Stage stage;
 
-    private Map<Color, CreatureColor> colorToCreature = new HashMap<>();
-    private Map<Color, PlayerColor> colorToPlayer = new HashMap<>();
-    private Map<Color, String> colorToHex = new HashMap<>();
+    private final Map<Color, CreatureColor> colorToCreature = new HashMap<>();
+    private final Map<Color, PlayerColor> colorToPlayer = new HashMap<>();
+    private final Map<Color, String> colorToHex = new HashMap<>();
 
     private CreatureColor entranceColor;
     private CreatureColor hallColor;
@@ -61,7 +58,6 @@ public class GUI extends Application implements View {
                 System.exit(0);
             }
         });
-
         stage.show();
     }
 
@@ -90,7 +86,6 @@ public class GUI extends Application implements View {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public HashMap<String, GUIController> getNameToController() {
@@ -130,6 +125,21 @@ public class GUI extends Application implements View {
         });
     }
 
+    public void createWindow(String sceneName) {
+        try {
+            Stage stage = new Stage();
+
+            GUIController controller = getNameToController().get(sceneName);
+            controller.init();
+            Scene scene = getSceneByController(controller);
+
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public ModelView getModelView() {
         return modelView;
     }
@@ -141,16 +151,6 @@ public class GUI extends Application implements View {
     public void setMessageParser(SocketClient socketClient) {
         this.messageParser = new MessageParser(socketClient);
     }
-
-    /**
-     * Adds a listener to the GUI.
-     * @param propertyName name of the observed property of the GUI.
-     * @param listener listener added to the CLI.
-     */
-    @Override
-    public void addListener(String propertyName, PropertyChangeListener listener) {
-        this.listener.addPropertyChangeListener(propertyName, listener);
-    }//todo needed?
 
     /**
      * @return the socket attribute of this client.
@@ -168,7 +168,18 @@ public class GUI extends Application implements View {
     public void setSocketClient(SocketClient socketClient) {
         this.socketClient = socketClient;
         socketClient.readMessage();
-        socketClient.enablePinger(true); //todo check
+        socketClient.enablePinger(true);
+    }
+
+    /**
+     * Adds a listener to the View.
+     *
+     * @param propertyName name of the observed property of the View.
+     * @param listener listener added to the View.
+     */
+    @Override
+    public void addListener(String propertyName, PropertyChangeListener listener) {
+
     }
 
 
@@ -235,7 +246,6 @@ public class GUI extends Application implements View {
         }
         return null;
     }
-
 
 
     public CreatureColor getEntranceColor() {
@@ -338,7 +348,7 @@ public class GUI extends Application implements View {
         modelView.setBoard(msg);
         //se la board è del proprietario si aggiorna board and island altrimenti opponent
         ((PlayController)(nameToController.get(Constants.BOARD_AND_ISLANDS))).updateBoard(msg);
-        //...
+        //todo
     }
 
     /**
@@ -371,8 +381,7 @@ public class GUI extends Application implements View {
      */
     @Override
     public void cloudsAvailableHandler(CloudsAvailableMessage msg) {
-        modelView.setClouds(msg.getClouds());
-        //...
+
     }
 
     /**
@@ -383,6 +392,17 @@ public class GUI extends Application implements View {
     @Override
     public void cloudChosenHandler(CloudChosenMessage msg) {
 
+    }
+
+    /**
+     * Handles the FXCloudMessage sent by the server.
+     *
+     * @param msg the message to handle.
+     */
+    @Override
+    public void fxCloudsHandler(FXCloudMessage msg) {
+        modelView.setClouds(msg.getClouds());
+        ((PlayController)(nameToController.get(Constants.BOARD_AND_ISLANDS))).updateClouds(msg.getClouds());
     }
 
     /**
@@ -523,6 +543,7 @@ public class GUI extends Application implements View {
                 break;
             case "MAXSTEPS":
                 modelView.setMaxSteps(Integer.parseInt(option));
+                System.out.println(option); //todo remove
                 break;
             case "DISCONNECT":
                 Platform.runLater(() -> AlertBox.display("Message", option + " has disconnected, the game will end soon."));

@@ -33,6 +33,9 @@ public enum MessageType {
     COIN_MESSAGE,
     GAME_ENDED_MESSAGE,
 
+    //FX
+    FX_CLOUD_MESSAGE,
+
     //utility
     PING_MESSAGE, PONG_MESSAGE,
     ERROR_MESSAGE,

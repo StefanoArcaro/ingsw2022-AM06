@@ -91,6 +91,12 @@ public interface View {
     void cloudChosenHandler(CloudChosenMessage msg);
 
     /**
+     * Handles the FXCloudMessage sent by the server.
+     * @param msg the message to handle.
+     */
+    void fxCloudsHandler(FXCloudMessage msg);
+
+    /**
      * Handles the CoinMessage sent by the server.
      * @param msg the message to handle.
      */

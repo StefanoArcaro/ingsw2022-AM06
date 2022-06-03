@@ -79,6 +79,7 @@ public class Game {
         listeners.addPropertyChangeListener(Constants.CHARACTER_PLAYED_LISTENER, new CharacterPlayedListener(clientView));
         listeners.addPropertyChangeListener(Constants.WIN_LISTENER, new WinListener(clientView));
         listeners.addPropertyChangeListener(Constants.GAME_READY_LISTENER, new GameReadyListener(clientView));
+        listeners.addPropertyChangeListener(Constants.FX_CLOUD_LISTENER, new FXCloudListener(clientView));
     }
 
     /**
