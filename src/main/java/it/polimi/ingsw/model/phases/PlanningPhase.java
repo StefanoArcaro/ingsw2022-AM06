@@ -51,6 +51,7 @@ public class PlanningPhase extends Phase {
         if(turns == game.getNumberOfPlayers().getNum()) {
             fillClouds();
             game.getListeners().firePropertyChange(Constants.CLOUD_LISTENER, null, game.getClouds());
+            game.getListeners().firePropertyChange(Constants.FX_CLOUD_LISTENER, null, game.getClouds());
             calculatePlayingOrder();
 
             game.setPlayingOrder(playingOrder);

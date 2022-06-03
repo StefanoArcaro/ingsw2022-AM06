@@ -24,10 +24,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PlayController implements GUIController {
 
@@ -56,6 +53,13 @@ public class PlayController implements GUIController {
     private Button professor_pink;
     @FXML
     private Button professor_blue;
+
+    @FXML
+    private Button cloud_1;
+    @FXML
+    private Button cloud_2;
+    @FXML
+    private Button cloud_3;
 
 
     @Override
@@ -255,6 +259,26 @@ public class PlayController implements GUIController {
                 case BLUE -> professor_blue.setOpacity(1);
             }
         }
+
+        List<CreatureColor> missingProfessors = getMissingProfessors(professors);
+        for(CreatureColor color : missingProfessors) {
+            switch (color) {
+                case GREEN -> professor_green.setOpacity(0);
+                case RED -> professor_red.setOpacity(0);
+                case YELLOW -> professor_yellow.setOpacity(0);
+                case PINK -> professor_pink.setOpacity(0);
+                case BLUE -> professor_blue.setOpacity(0);
+            }
+        }
+    }
+
+    private List<CreatureColor> getMissingProfessors(ArrayList<Professor> professors) {
+        List<CreatureColor> missing = new ArrayList<>(Arrays.asList(CreatureColor.values()));
+        List<CreatureColor> colors = professors.stream().map(Creature::getColor).toList();
+
+        missing.removeAll(colors);
+
+        return missing;
     }
 
     //TODO check
@@ -293,7 +317,6 @@ public class PlayController implements GUIController {
 
             for(int i = 0; i <= 4; i++) {
                 int students = islandStudents.get(CreatureColor.getColorByIndex(i));
-                System.out.println("Color: " + CreatureColor.getColorByIndex(i).getColorName() + " num: " + students);
                 Text node = (Text)getNodeByRowColumnIndex(i, 0, gridPane_1);
                 if(node != null) {
                     node.setText(String.valueOf(students));
@@ -302,6 +325,31 @@ public class PlayController implements GUIController {
         }
     }
 
+
+    public void updateClouds(ArrayList<Cloud> clouds) {
+
+        for(Cloud cloud : clouds) {
+            Button cloudButton = getCloudButtonByID(cloud.getCloudID());
+            if(cloud.isEmpty()) {
+                cloudButton.setOpacity(0.7);
+                cloudButton.setDisable(true);
+                //todo: svuotare
+            } else {
+                cloudButton.setOpacity(1);
+                cloudButton.setDisable(false);
+            }
+        }
+
+    }
+
+    private Button getCloudButtonByID(int id) {
+        return switch (id) {
+            case 1 -> cloud_1;
+            case 2 -> cloud_2;
+            case 3 -> cloud_3;
+            default -> null;
+        };
+    }
 
 
 
@@ -336,8 +384,6 @@ public class PlayController implements GUIController {
 
             stage.setScene(scene);
             stage.show();
-
-
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -369,7 +415,6 @@ public class PlayController implements GUIController {
         if(gui.getEntranceColor() != null) {
             if(gui.getDestinationIsland() > 0) {
                 String message = "MOVESTUDENT " + gui.getEntranceColor().getColorName() + " " + gui.getDestinationIsland();
-                System.out.println(message); //TODO remove
                 gui.getMessageParser().parseInput(message);
                 gui.setEntranceColor(null);
                 gui.setDestinationIsland(0);
@@ -382,9 +427,6 @@ public class PlayController implements GUIController {
     }
 
     public void showOpponents(ActionEvent event) {
-    }
-
-    public void pickCloud(ActionEvent event) {
     }
 
     public void onOpenMotherNature() {
@@ -401,6 +443,15 @@ public class PlayController implements GUIController {
         } catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void onPickCloud(ActionEvent event) {
+        Button cloud = (Button) event.getSource();
+        String cloudID = cloud.getId().substring(6);
+
+        String message = "PICKCLOUD " + cloudID;
+        gui.getMessageParser().parseInput(message);
+
     }
 
     @Override

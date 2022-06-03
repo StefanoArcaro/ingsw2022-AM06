@@ -149,6 +149,10 @@ public class SocketClient extends Client {
                     CloudChosenMessage msg = gson.fromJson(message, CloudChosenMessage.class);
                     view.cloudChosenHandler(msg);
                 }
+                case FX_CLOUD_MESSAGE -> {
+                    FXCloudMessage msg = gson.fromJson(message, FXCloudMessage.class);
+                    view.fxCloudsHandler(msg);
+                }
                 case COIN_MESSAGE -> {
                     CoinMessage msg = gson.fromJson(message, CoinMessage.class);
                     view.coinsHandler(msg);

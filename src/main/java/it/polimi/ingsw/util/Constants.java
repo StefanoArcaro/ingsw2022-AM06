@@ -299,6 +299,8 @@ public class Constants {
     public static final String CLOUD_LISTENER = "cloudListener";
     public static final String GAME_READY_LISTENER = "gameReadyListener";
 
+    public static final String FX_CLOUD_LISTENER = "fxCloudListener";
+
     public static void countdown(int milliseconds) {
         for(int i = 3; i > 0; i--) {
             System.out.print(".");

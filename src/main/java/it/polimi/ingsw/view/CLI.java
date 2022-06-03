@@ -628,6 +628,15 @@ public class CLI implements View {
     }
 
     /**
+     * Handles the FXCloudMessage sent by the server.
+     * @param msg the message to handle.
+     */
+    @Override
+    public void fxCloudsHandler(FXCloudMessage msg) {
+
+    }
+
+    /**
      * Handles the CoinMessage sent by the server.
      * @param msg the message to handle.
      */

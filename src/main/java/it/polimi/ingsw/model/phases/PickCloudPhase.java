@@ -51,6 +51,8 @@ public class PickCloudPhase extends ActionPhase {
 
         cloudChosen.empty();
 
+        game.getListeners().firePropertyChange(Constants.FX_CLOUD_LISTENER, null, game.getClouds());
+
         // Restore
         game.getActivatedCharacter().reset();
         game.setActivatedCharacter(game.getCharacterByID(CharacterID.CHARACTER_NONE.getID()));

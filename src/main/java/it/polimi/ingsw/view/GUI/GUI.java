@@ -371,8 +371,7 @@ public class GUI extends Application implements View {
      */
     @Override
     public void cloudsAvailableHandler(CloudsAvailableMessage msg) {
-        modelView.setClouds(msg.getClouds());
-        //...
+
     }
 
     /**
@@ -383,6 +382,17 @@ public class GUI extends Application implements View {
     @Override
     public void cloudChosenHandler(CloudChosenMessage msg) {
 
+    }
+
+    /**
+     * Handles the FXCloudMessage sent by the server.
+     *
+     * @param msg the message to handle.
+     */
+    @Override
+    public void fxCloudsHandler(FXCloudMessage msg) {
+        modelView.setClouds(msg.getClouds());
+        ((PlayController)(nameToController.get(Constants.BOARD_AND_ISLANDS))).updateClouds(msg.getClouds());
     }
 
     /**
