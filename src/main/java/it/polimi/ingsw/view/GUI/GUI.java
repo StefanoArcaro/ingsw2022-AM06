@@ -359,7 +359,8 @@ public class GUI extends Application implements View {
     @Override
     public void islandGroupsHandler(IslandGroupsMessage msg) {
         modelView.setIslandGroups(msg.getIslandGroups(), msg.getMotherNatureIndex());
-        //...
+        Scene scene = getSceneByName(Constants.BOARD_AND_ISLANDS);
+        ((PlayController)(nameToController.get(Constants.BOARD_AND_ISLANDS))).updateIslandGroups(scene, msg.getIslandGroups());
     }
 
     /**
@@ -370,8 +371,8 @@ public class GUI extends Application implements View {
     @Override
     public void islandHandler(IslandMessage msg) {
         modelView.setIsland(msg.getIsland());
-        ((PlayController)(nameToController.get(Constants.BOARD_AND_ISLANDS))).updateIsland(msg.getIsland());
-        //...
+        Scene scene = getSceneByName(Constants.BOARD_AND_ISLANDS);
+        ((PlayController)(nameToController.get(Constants.BOARD_AND_ISLANDS))).updateIsland(scene, msg.getIsland());
     }
 
     /**
@@ -402,7 +403,8 @@ public class GUI extends Application implements View {
     @Override
     public void fxCloudsHandler(FXCloudMessage msg) {
         modelView.setClouds(msg.getClouds());
-        ((PlayController)(nameToController.get(Constants.BOARD_AND_ISLANDS))).updateClouds(msg.getClouds());
+        Scene scene = getSceneByName(Constants.BOARD_AND_ISLANDS);
+        ((PlayController)(nameToController.get(Constants.BOARD_AND_ISLANDS))).updateClouds(scene, msg.getClouds());
     }
 
     /**
@@ -543,7 +545,6 @@ public class GUI extends Application implements View {
                 break;
             case "MAXSTEPS":
                 modelView.setMaxSteps(Integer.parseInt(option));
-                System.out.println(option); //todo remove
                 break;
             case "DISCONNECT":
                 Platform.runLater(() -> AlertBox.display("Message", option + " has disconnected, the game will end soon."));

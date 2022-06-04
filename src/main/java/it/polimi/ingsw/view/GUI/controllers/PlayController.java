@@ -18,6 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -25,6 +26,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.net.URL;
 import java.util.*;
 
 public class PlayController extends BoardController implements GUIController {
@@ -51,27 +53,20 @@ public class PlayController extends BoardController implements GUIController {
     public GridPane gridPane_11;
     public GridPane gridPane_12;
 
-    @FXML
-    private Button cloud_1;
-    @FXML
-    private Button cloud_2;
-    @FXML
-    private Button cloud_3;
+    // clouds
+    public Button cloud_1;
+    public Button cloud_2;
+    public Button cloud_3;
 
-    @FXML
-    private GridPane gridPane; //hall
+    // hall
+    public GridPane gridPane;
 
     // client's professors
-    @FXML
-    private Button professor_green;
-    @FXML
-    private Button professor_red;
-    @FXML
-    private Button professor_yellow;
-    @FXML
-    private Button professor_pink;
-    @FXML
-    private Button professor_blue;
+    public Button professor_green;
+    public Button professor_red;
+    public Button professor_yellow;
+    public Button professor_pink;
+    public Button professor_blue;
 
     private final Map<String, String> nicknameToSceneName = new HashMap<>(); //todo opponents?
 
@@ -79,6 +74,13 @@ public class PlayController extends BoardController implements GUIController {
     public void setGUI(GUI gui) {
         this.gui = gui;
     }
+
+    @Override
+    public GUI getGUI() {
+        return gui;
+    }
+
+    // INIT
 
     public void init() {
         ModelView modelView = gui.getModelView();
@@ -137,15 +139,7 @@ public class PlayController extends BoardController implements GUIController {
                 }
 
                 // set mother nature
-                String mn = "#mn_" + islandGroupIndex;
-                ImageView mnImage = (ImageView) scene.lookup(mn);
-
-                int motherNatureIndex = gui.getModelView().getMotherNatureIndex();
-                if(motherNatureIndex == islandGroupIndex - 1) {
-                    mnImage.setOpacity(1);
-                } else {
-                    mnImage.setOpacity(0);
-                }
+                updateMotherNature(scene, islandGroupIndex);
 
                 // set tower
                 String t = "#t_" + islandGroupIndex;
@@ -154,24 +148,6 @@ public class PlayController extends BoardController implements GUIController {
                 tImage.setOpacity(0);
             }
         }
-    }
-
-    private GridPane getIslandGridPaneByIslandID(int islandID) {
-        return switch (islandID) {
-            case 1 -> gridPane_1;
-            case 2 -> gridPane_2;
-            case 3 -> gridPane_3;
-            case 4 -> gridPane_4;
-            case 5 -> gridPane_5;
-            case 6 -> gridPane_6;
-            case 7 -> gridPane_7;
-            case 8 -> gridPane_8;
-            case 9 -> gridPane_9;
-            case 10 -> gridPane_10;
-            case 11 -> gridPane_11;
-            case 12 -> gridPane_12;
-            default -> null;
-        };
     }
 
     private void initClouds(Scene scene) {
@@ -193,45 +169,8 @@ public class PlayController extends BoardController implements GUIController {
         cloud_3.setDisable(true);
     }
 
-    public void updateClouds(Scene scene, ArrayList<Cloud> clouds) {
-        int numberOfClouds = clouds.size();
-        int i;
 
-        for(Cloud cloud : clouds) {
-            int students = cloud.getStudents().size();
-            String student = "cloud" + cloud.getCloudID() + "_s";
-            System.out.println("qui -> " + student + " " + students);
-
-            for(i = 1; i <= students; i++) {
-                Button buttonStudent = (Button)scene.lookup(student + i);
-                System.out.println(student + i + " " + buttonStudent);
-                CreatureColor color = cloud.getStudents().get(i - 1).getColor();
-                String style = "-fx-background-color: " + gui.getHexByFXColor(gui.getFXColorByCreatureColor(color));
-                buttonStudent.setStyle(style);
-            }
-
-            /*if(numberOfClouds == 2) {
-                Button buttonStudent = (Button)scene.lookup(student + "4");
-                buttonStudent.setOpacity(0);
-                buttonStudent.setDisable(true);
-            }*/
-        }
-
-        /*if(numberOfClouds == 2) {
-            String student = "cloud3_s";
-
-            for(i = 1; i <= 4; i++) {
-                Button buttonStudent = (Button)scene.lookup(student + i);
-                buttonStudent.setOpacity(0);
-                buttonStudent.setDisable(true);
-            }
-
-            cloud_3.setOpacity(0);
-            cloud_3.setDisable(true);
-        }*/
-    }
-
-
+    // UPDATES
 
     public void updateCurrentPlayer(String player) {
         currentNickname.setText(player);
@@ -245,6 +184,116 @@ public class PlayController extends BoardController implements GUIController {
         numOfCoins.setText(Integer.toString(coins));
     }
 
+    public void updateIslandGroups(Scene scene, ArrayList<IslandGroup> islandGroups) {
+        int islandGroupIndex = 0;
+
+        for(IslandGroup islandGroup : islandGroups) {
+            islandGroupIndex += 1;
+
+            for(Island island : islandGroup.getIslands()) {
+                updateIsland(scene, island);
+            }
+
+            // set mother nature
+            updateMotherNature(scene, islandGroupIndex);
+        }
+
+        // todo union
+    }
+
+    public void updateIsland(Scene scene, Island island) {
+        Map<CreatureColor, Integer> islandStudents = new HashMap<>();
+        ArrayList<Student> students = island.getStudents();
+
+        if(students != null) {
+            List<CreatureColor> colors = students.stream().map(Student::getColor).toList();
+
+            for (CreatureColor color : CreatureColor.values()) {
+                islandStudents.put(color, 0);
+            }
+
+            for (CreatureColor color : colors) {
+                int number = islandStudents.get(color);
+                islandStudents.replace(color, number + 1);
+            }
+
+            for (int i = 0; i <= 4; i++) {
+                int colorStudents = islandStudents.get(CreatureColor.getColorByIndex(i));
+                GridPane islandGridPane = getIslandGridPaneByIslandID(island.getIslandID());
+                Text node = (Text) getNodeByRowColumnIndex(i, 0, islandGridPane);
+                if (node != null) {
+                    node.setText(String.valueOf(colorStudents));
+                }
+            }
+        }
+
+        PlayerColor tower = island.getTower();
+        String t = "#t_" + island.getIslandID();
+        ImageView tImage = (ImageView) scene.lookup(t);
+
+        if(tower != null) {
+            URL url = getClass().getResource(getTowerPathByColor(tower));
+            if(url != null) {
+                tImage.setImage(new Image(url.toString()));
+                tImage.setOpacity(1);
+            }
+        } else {
+            tImage.setOpacity(0);
+        }
+
+    }
+
+    private void updateMotherNature(Scene scene, int islandGroupIndex) {
+        String mn = "#mn_" + islandGroupIndex;
+        ImageView mnImage = (ImageView) scene.lookup(mn);
+
+        int motherNatureIndex = gui.getModelView().getMotherNatureIndex();
+        if(motherNatureIndex == islandGroupIndex - 1) {
+            mnImage.setOpacity(1);
+        } else {
+            mnImage.setOpacity(0);
+        }
+    }
+
+    public void updateClouds(Scene scene, ArrayList<Cloud> clouds) {
+        int i;
+
+        for(Cloud cloud : clouds) {
+            Button cloudButton = getCloudButtonByID(cloud.getCloudID());
+            if(cloud.isEmpty()) {
+                cloudButton.setOpacity(0.3);
+                cloudButton.setDisable(true);
+
+                int numberOfStudents = gui.getModelView().getNumberOfPlayers() + 1;
+                String student = "#cloud" + cloud.getCloudID() + "_s";
+
+                for(i = 1; i <= numberOfStudents; i++) {
+                    Button buttonStudent = (Button)scene.lookup(student + i);
+                    buttonStudent.setOpacity(0);
+                    buttonStudent.setDisable(true);
+                }
+
+            } else {
+                cloudButton.setOpacity(0.3);
+                cloudButton.setDisable(false);
+
+                int numberOfStudents = cloud.getStudents().size();
+                String student = "#cloud" + cloud.getCloudID() + "_s";
+
+                for(i = 1; i <= numberOfStudents; i++) {
+                    Button buttonStudent = (Button)scene.lookup(student + i);
+                    CreatureColor color = cloud.getStudents().get(i - 1).getColor();
+                    String style = "-fx-background-color: " + gui.getHexByFXColor(gui.getFXColorByCreatureColor(color));
+                    buttonStudent.setOpacity(1);
+                    buttonStudent.setDisable(false);
+                    buttonStudent.setStyle(style);
+                }
+
+            }
+        }
+    }
+
+    //todo: modify opponent board (nicknameBoard)
     public void updateBoard(BoardMessage msg) {
         ModelView modelView = gui.getModelView();
         String nicknameBoard = msg.getNickname();
@@ -255,18 +304,18 @@ public class PlayController extends BoardController implements GUIController {
 
         if(nicknameBoard.equals(modelView.getNickname())) {
             //modify main scene
-            updateEntrance(entrance);
+            Scene scene = gui.getSceneByName(Constants.BOARD_AND_ISLANDS);
+            updateEntrance(scene, entrance);
             updateHall(hall);
             updateProfessors(professors);
-            updateTowers(towers, modelView.getPlayers().get(modelView.getNickname()));
+            updateTowersBoard(towers, modelView.getPlayers().get(modelView.getNickname()));
         } else {
             //todo: modify opponent board (nicknameBoard)
         }
 
     }
 
-    private void updateEntrance(Entrance entrance) {
-        Scene scene = gui.getSceneByName(Constants.BOARD_AND_ISLANDS);
+    private void updateEntrance(Scene scene, Entrance entrance) {
 
         for(int i = 0; i < entrance.getStudents().size(); i++) {
             String entranceID = "#entrance_" + (i + 1);
@@ -274,6 +323,8 @@ public class PlayController extends BoardController implements GUIController {
             CreatureColor color = entrance.getStudents().get(i).getColor();
             String style = "-fx-background-color: " + gui.getHexByFXColor(gui.getFXColorByCreatureColor(color));
             entranceButton.setStyle(style);
+            entranceButton.setOpacity(1);
+            entranceButton.setDisable(false);
         }
 
         for(int i = entrance.getStudents().size(); i < 9; i++) {
@@ -284,39 +335,33 @@ public class PlayController extends BoardController implements GUIController {
         }
     }
 
-    //TODO check
     private void updateHall(Hall hall) {
         ArrayList<Table> tables = hall.getStudents();
 
         int row = 0;
         for(Table table : tables) {
-            for(int column = 0; column < table.getLength(); column++) {
+            int column;
+            for(column = 0; column < table.getLength(); column++) {
                 Node node = getNodeByRowColumnIndex(row, column, gridPane);
                 if(node != null) {
                     node.setOpacity(1);
                     node.setDisable(false);
                 }
             }
+
+            //todo check
+            while(column < 10) {
+                Node node = getNodeByRowColumnIndex(row, column, gridPane);
+                if(node != null) {
+                    node.setOpacity(0);
+                    node.setDisable(true);
+                }
+                column++;
+            }
             row++;
         }
     }
 
-    private Node getNodeByRowColumnIndex(int row, int column, GridPane gridPane) {
-        ObservableList<Node> children = gridPane.getChildren();
-
-        for(Node node : children) {
-            int rowIndex = GridPane.getRowIndex(node) == null ? 0 : GridPane.getRowIndex(node);
-            int columnIndex = GridPane.getColumnIndex(node) == null ? 0 : GridPane.getColumnIndex(node);
-
-            if(rowIndex == row && columnIndex == column) {
-                return node;
-            }
-        }
-
-        return null;
-    }
-
-    //TODO check
     private void updateProfessors(ArrayList<Professor> professors) {
         for(Professor professor : professors) {
             switch (professor.getColor()) {
@@ -340,17 +385,7 @@ public class PlayController extends BoardController implements GUIController {
         }
     }
 
-    private List<CreatureColor> getMissingProfessors(ArrayList<Professor> professors) {
-        List<CreatureColor> missing = new ArrayList<>(Arrays.asList(CreatureColor.values()));
-        List<CreatureColor> colors = professors.stream().map(Creature::getColor).toList();
-
-        missing.removeAll(colors);
-
-        return missing;
-    }
-
-    //TODO check
-    private void updateTowers(int towers, PlayerColor color) {
+    private void updateTowersBoard(int towers, PlayerColor color) {
         Scene scene = gui.getSceneByName(Constants.BOARD_AND_ISLANDS);
 
         for(int i = 0; i < towers; i++) {
@@ -358,6 +393,7 @@ public class PlayController extends BoardController implements GUIController {
             Pane tower = (Pane) scene.lookup(towerID);
             String style = "-fx-background-color: " + gui.getHexByFXColor(gui.getFXColorByPlayerColor(color));
             tower.setStyle(style);
+            tower.setOpacity(1);
         }
 
         for(int i = towers; i < 8; i++) {
@@ -367,56 +403,8 @@ public class PlayController extends BoardController implements GUIController {
         }
     }
 
-    public void updateIsland(Island island) {
-        if(island.getIslandID() == 1) { //TODO REMOVE
 
-            Map<CreatureColor, Integer> islandStudents = new HashMap<>();
-            List<CreatureColor> colors = island.getStudents().stream().map(Student::getColor).toList();
-
-            for(CreatureColor color : CreatureColor.values()) {
-                islandStudents.put(color, 0); //todo: to modify init island students
-            }
-
-            for(CreatureColor color : colors) {
-                int number = islandStudents.get(color);
-                islandStudents.replace(color, number + 1);
-            }
-
-            for(int i = 0; i <= 4; i++) {
-                int students = islandStudents.get(CreatureColor.getColorByIndex(i));
-                Text node = (Text)getNodeByRowColumnIndex(i, 0, gridPane_1);
-                if(node != null) {
-                    node.setText(String.valueOf(students));
-                }
-            }
-        }
-    }
-
-    public void updateClouds(ArrayList<Cloud> clouds) {
-
-        for(Cloud cloud : clouds) {
-            Button cloudButton = getCloudButtonByID(cloud.getCloudID());
-            if(cloud.isEmpty()) {
-                cloudButton.setOpacity(0.7);
-                cloudButton.setDisable(true);
-                //todo: svuotare
-            } else {
-                cloudButton.setOpacity(1);
-                cloudButton.setDisable(false);
-            }
-        }
-
-    }
-
-    private Button getCloudButtonByID(int id) {
-        return switch (id) {
-            case 1 -> cloud_1;
-            case 2 -> cloud_2;
-            case 3 -> cloud_3;
-            default -> null;
-        };
-    }
-
+    // ACTIONS
 
     public void onEntranceClicked(ActionEvent event) {
         Button button = (Button) event.getSource();
@@ -432,12 +420,6 @@ public class PlayController extends BoardController implements GUIController {
         gui.setHallColor(color);
     }
 
-    private CreatureColor getButtonColor(Button button) {
-        Color color = (Color) button.getBackground().getFills().get(0).getFill();
-
-        return gui.getCreatureColorByFXColor(color);
-    }
-
     public void onOpenPlayAssistants() {
         gui.createWindow(Constants.ASSISTANTS);
     }
@@ -449,6 +431,7 @@ public class PlayController extends BoardController implements GUIController {
             String message = "MOVESTUDENT " + entranceColor.getColorName() + " 0";
             gui.getMessageParser().parseInput(message);
             gui.setEntranceColor(null);
+            gui.setDestinationIsland(0);
         } else {
             Platform.runLater(() -> AlertBox.display("Wrong move", "Please select a student from your entrance."));
         }
@@ -490,7 +473,6 @@ public class PlayController extends BoardController implements GUIController {
         }
     }
 
-
     public void onOpenMotherNature() {
         gui.createWindow(Constants.MOTHER_NATURE);
     }
@@ -503,6 +485,80 @@ public class PlayController extends BoardController implements GUIController {
         gui.getMessageParser().parseInput(message);
     }
 
+    public void onOpenCharactersInfo(ActionEvent event) {
+    }
+
+    public void onOpenPlayCharacter(ActionEvent event) {
+    }
+
+
+    // UTILITY
+
+    private GridPane getIslandGridPaneByIslandID(int islandID) {
+        return switch (islandID) {
+            case 1 -> gridPane_1;
+            case 2 -> gridPane_2;
+            case 3 -> gridPane_3;
+            case 4 -> gridPane_4;
+            case 5 -> gridPane_5;
+            case 6 -> gridPane_6;
+            case 7 -> gridPane_7;
+            case 8 -> gridPane_8;
+            case 9 -> gridPane_9;
+            case 10 -> gridPane_10;
+            case 11 -> gridPane_11;
+            case 12 -> gridPane_12;
+            default -> null;
+        };
+    }
+
+    private Node getNodeByRowColumnIndex(int row, int column, GridPane gridPane) {
+        ObservableList<Node> children = gridPane.getChildren();
+
+        for(Node node : children) {
+            int rowIndex = GridPane.getRowIndex(node) == null ? 0 : GridPane.getRowIndex(node);
+            int columnIndex = GridPane.getColumnIndex(node) == null ? 0 : GridPane.getColumnIndex(node);
+
+            if(rowIndex == row && columnIndex == column) {
+                return node;
+            }
+        }
+
+        return null;
+    }
+
+    private List<CreatureColor> getMissingProfessors(ArrayList<Professor> professors) {
+        List<CreatureColor> missing = new ArrayList<>(Arrays.asList(CreatureColor.values()));
+        List<CreatureColor> colors = professors.stream().map(Creature::getColor).toList();
+
+        missing.removeAll(colors);
+
+        return missing;
+    }
+
+    private Button getCloudButtonByID(int id) {
+        return switch (id) {
+            case 1 -> cloud_1;
+            case 2 -> cloud_2;
+            case 3 -> cloud_3;
+            default -> null;
+        };
+    }
+
+    private CreatureColor getButtonColor(Button button) {
+        Color color = (Color) button.getBackground().getFills().get(0).getFill();
+
+        return gui.getCreatureColorByFXColor(color);
+    }
+
+    private String getTowerPathByColor(PlayerColor color) {
+        return switch (color) {
+            case BLACK -> "/images/tower_black.png";
+            case WHITE -> "/images/tower_white.png";
+            case GRAY -> "/images/tower_gray.png";
+        };
+    }
+
     @Override
     public void quit() {
         Platform.runLater(() -> ConfirmationBox.display(1, gui.getStage(),"Are you sure you want to quit?"));
@@ -511,14 +567,4 @@ public class PlayController extends BoardController implements GUIController {
         gui.getMessageParser().parseInput(message);
     }
 
-    @Override
-    public GUI getGUI() {
-        return gui;
-    }
-
-    public void onOpenCharactersInfo(ActionEvent event) {
-    }
-
-    public void onOpenPlayCharacter(ActionEvent event) {
-    }
 }

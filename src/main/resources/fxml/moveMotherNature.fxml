@@ -9,13 +9,13 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="274.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.MoveMotherNatureController">
    <children>
-      <ImageView fitHeight="407.0" fitWidth="366.0" opacity="0.58" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="407.0" fitWidth="366.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/MotherNature.png" />
          </image>
       </ImageView>
       <Text layoutX="23.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose the number of steps:" />
-      <ChoiceBox fx:id="numberOfSteps" layoutX="94.0" layoutY="281.0" opacity="0.85" prefHeight="39.0" prefWidth="87.0" />
+      <ChoiceBox fx:id="numberOfSteps" layoutX="94.0" layoutY="281.0" prefHeight="39.0" prefWidth="87.0" />
       <Button layoutX="211.0" layoutY="347.0" mnemonicParsing="false" onAction="#onSubmitSteps" text="OK" />
    </children>
 </Pane>

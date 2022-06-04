@@ -583,6 +583,7 @@ public class Game {
             if(owner != null) {
                 if(!players.get(maxInfluenceIndex).equals(owner)) {
                     Professor professorToUpdate = owner.getBoard().loseProfessorByColor(color);
+                    listeners.firePropertyChange(Constants.BOARD_LISTENER, owner.getNickname(), owner.getBoard());
                     players.get(maxInfluenceIndex).getBoard().winProfessor(professorToUpdate);
                 }
             } else if(maxInfluenceIndex != -1) {

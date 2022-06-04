@@ -59,16 +59,16 @@
       <!-- ISLANDS -->
       <Button fx:id="island_1" layoutX="144.0" layoutY="10.0" mnemonicParsing="false" onAction="#onIslandClicked" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32;" />
       <Button fx:id="island_2" layoutX="268.0" layoutY="10.0" mnemonicParsing="false" onAction="#onIslandClicked" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32;" />
-      <Button fx:id="island_3" layoutX="392.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32;" />
-      <Button fx:id="island_4" layoutX="516.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32;" />
-      <Button fx:id="island_5" layoutX="640.0" layoutY="55.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32;" />
-      <Button fx:id="island_6" layoutX="640.0" layoutY="180.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
-      <Button fx:id="island_7" layoutX="515.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
-      <Button fx:id="island_8" layoutX="391.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
-      <Button fx:id="island_9" layoutX="267.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
-      <Button fx:id="island_10" layoutX="143.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
-      <Button fx:id="island_11" layoutX="20.0" layoutY="181.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
-      <Button fx:id="island_12" layoutX="20.0" layoutY="56.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
+      <Button fx:id="island_3" layoutX="392.0" layoutY="10.0" mnemonicParsing="false" onAction="#onIslandClicked" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32;" />
+      <Button fx:id="island_4" layoutX="516.0" layoutY="10.0" mnemonicParsing="false" onAction="#onIslandClicked" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32;" />
+      <Button fx:id="island_5" layoutX="640.0" layoutY="55.0" mnemonicParsing="false" onAction="#onIslandClicked" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32;" />
+      <Button fx:id="island_6" layoutX="640.0" layoutY="180.0" mnemonicParsing="false" onAction="#onIslandClicked" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
+      <Button fx:id="island_7" layoutX="515.0" layoutY="227.0" mnemonicParsing="false" onAction="#onIslandClicked" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
+      <Button fx:id="island_8" layoutX="391.0" layoutY="227.0" mnemonicParsing="false" onAction="#onIslandClicked" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
+      <Button fx:id="island_9" layoutX="267.0" layoutY="227.0" mnemonicParsing="false" onAction="#onIslandClicked" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
+      <Button fx:id="island_10" layoutX="143.0" layoutY="227.0" mnemonicParsing="false" onAction="#onIslandClicked" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
+      <Button fx:id="island_11" layoutX="20.0" layoutY="181.0" mnemonicParsing="false" onAction="#onIslandClicked" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
+      <Button fx:id="island_12" layoutX="20.0" layoutY="56.0" mnemonicParsing="false" onAction="#onIslandClicked" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
 
       <!-- CLOUDS -->
       <Button fx:id="cloud_1" layoutX="213.0" layoutY="100.0" mnemonicParsing="false" onAction="#onPickCloud" prefHeight="89.0" prefWidth="89.0" style="-fx-background-color: #4682b4#4682b4 #4682b4#4682b4;" />
