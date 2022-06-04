@@ -6,6 +6,9 @@ import it.polimi.ingsw.view.GUI.GUI;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -56,9 +59,16 @@ public class PlayAssistantController implements GUIController {
         priorities.removeAll(prioritiesAvailable);
 
         for(Integer priority : priorities) {
-            String assistantID = "#assistant_" + (priority);
+            String assistantID = "#assistant_" + priority;
             Button assistantButton = (Button) scene.lookup(assistantID);
             assistantButton.setDisable(true);
+
+            String assistant = "#a_" + priority;
+            ImageView image = (ImageView) scene.lookup(assistant);
+            ColorAdjust colorAdjust = new ColorAdjust();
+            colorAdjust.setContrast(-0.2);
+            colorAdjust.setSaturation(-1.0);
+            image.setEffect(colorAdjust);
         }
 
 

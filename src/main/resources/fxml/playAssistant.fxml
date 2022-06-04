@@ -24,52 +24,52 @@
             <Font name="PT Mono Bold" size="15.0" />
          </font>
       </Label>
-      <ImageView fitHeight="114.0" fitWidth="71.0" layoutX="96.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="a_1" fitHeight="114.0" fitWidth="71.0" layoutX="96.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Assistente_1.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="114.0" fitWidth="71.0" layoutX="197.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="a_2" fitHeight="114.0" fitWidth="71.0" layoutX="197.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Assistente_2.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="114.0" fitWidth="71.0" layoutX="297.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="a_3" fitHeight="114.0" fitWidth="71.0" layoutX="297.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Assistente_3.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="114.0" fitWidth="71.0" layoutX="399.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="a_4" fitHeight="114.0" fitWidth="71.0" layoutX="399.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Assistente_4.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="114.0" fitWidth="71.0" layoutX="505.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="a_5" fitHeight="114.0" fitWidth="71.0" layoutX="505.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Assistente_5.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="114.0" fitWidth="71.0" layoutX="97.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="a_6" fitHeight="114.0" fitWidth="71.0" layoutX="97.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Assistente_6.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="114.0" fitWidth="71.0" layoutX="197.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="a_7" fitHeight="114.0" fitWidth="71.0" layoutX="197.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Assistente_7.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="114.0" fitWidth="71.0" layoutX="298.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="a_8" fitHeight="114.0" fitWidth="71.0" layoutX="298.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Assistente_8.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="114.0" fitWidth="71.0" layoutX="400.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="a_9" fitHeight="114.0" fitWidth="71.0" layoutX="400.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Assistente_9.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="114.0" fitWidth="71.0" layoutX="504.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="a_10" fitHeight="114.0" fitWidth="71.0" layoutX="504.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Assistente_10.png" />
          </image>
