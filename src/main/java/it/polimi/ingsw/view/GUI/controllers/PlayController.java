@@ -18,6 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -36,8 +37,19 @@ public class PlayController extends BoardController implements GUIController {
     public Text currentNickname;
     public Text currentPhase;
 
-    @FXML
-    private GridPane gridPane_1; //island
+    //islands
+    public GridPane gridPane_1;
+    public GridPane gridPane_2;
+    public GridPane gridPane_3;
+    public GridPane gridPane_4;
+    public GridPane gridPane_5;
+    public GridPane gridPane_6;
+    public GridPane gridPane_7;
+    public GridPane gridPane_8;
+    public GridPane gridPane_9;
+    public GridPane gridPane_10;
+    public GridPane gridPane_11;
+    public GridPane gridPane_12;
 
     @FXML
     private Button cloud_1;
@@ -45,7 +57,6 @@ public class PlayController extends BoardController implements GUIController {
     private Button cloud_2;
     @FXML
     private Button cloud_3;
-
 
     @FXML
     private GridPane gridPane; //hall
@@ -76,7 +87,6 @@ public class PlayController extends BoardController implements GUIController {
         Entrance entrance = board.getEntrance();
         ArrayList<Button> professors = new ArrayList<>(Arrays.asList(professor_green, professor_red, professor_yellow, professor_pink, professor_blue));
         ArrayList<IslandGroup> islands = modelView.getIslandGroups();
-        ArrayList<Cloud> clouds = modelView.getClouds();
         String phase = modelView.getCurrentPhase();
         String player = modelView.getCurrentPlayer();
 
@@ -87,10 +97,9 @@ public class PlayController extends BoardController implements GUIController {
         initProfessors(professors);
         initTowers(gui, gui.getCurrentScene(), modelView, playerNickname);
 
-        // TODO ISLANDS
+        initIslands(gui.getCurrentScene(), islands);
 
-        // TODO CLOUDS
-
+        initClouds(gui.getCurrentScene());
     }
 
     private void initInfo(ModelView modelView, String playerNickname, String player, String phase) {
@@ -106,6 +115,123 @@ public class PlayController extends BoardController implements GUIController {
         currentNickname.setText(player);
         currentPhase.setText(phase);
     }
+
+    private void initIslands(Scene scene, ArrayList<IslandGroup> islandGroups) {
+        int islandGroupIndex = 0;
+
+        for(IslandGroup islandGroup : islandGroups) {
+            islandGroupIndex += 1;
+
+            for(Island island : islandGroup.getIslands()) {
+                int islandID = island.getIslandID();
+                GridPane islandGridPane = getIslandGridPaneByIslandID(islandID);
+
+                // set students
+                ArrayList<Student> students = island.getStudents();
+                if(students.size() > 0) {
+                    int indexColor = students.get(0).getColor().getIndex();
+                    Node node = getNodeByRowColumnIndex(indexColor, 0, islandGridPane);
+                    if(node != null) {
+                        ((Text)node).setText("1");
+                    }
+                }
+
+                // set mother nature
+                String mn = "#mn_" + islandGroupIndex;
+                ImageView mnImage = (ImageView) scene.lookup(mn);
+
+                int motherNatureIndex = gui.getModelView().getMotherNatureIndex();
+                if(motherNatureIndex == islandGroupIndex - 1) {
+                    mnImage.setOpacity(1);
+                } else {
+                    mnImage.setOpacity(0);
+                }
+
+                // set tower
+                String t = "#t_" + islandGroupIndex;
+                ImageView tImage = (ImageView) scene.lookup(t);
+
+                tImage.setOpacity(0);
+            }
+        }
+    }
+
+    private GridPane getIslandGridPaneByIslandID(int islandID) {
+        return switch (islandID) {
+            case 1 -> gridPane_1;
+            case 2 -> gridPane_2;
+            case 3 -> gridPane_3;
+            case 4 -> gridPane_4;
+            case 5 -> gridPane_5;
+            case 6 -> gridPane_6;
+            case 7 -> gridPane_7;
+            case 8 -> gridPane_8;
+            case 9 -> gridPane_9;
+            case 10 -> gridPane_10;
+            case 11 -> gridPane_11;
+            case 12 -> gridPane_12;
+            default -> null;
+        };
+    }
+
+    private void initClouds(Scene scene) {
+        for(int i = 1; i <= 3; i++) {
+            String student = "#cloud" + i + "_s";
+
+            for(int j = 1; j <= 4; j++) {
+                Button buttonStudent = (Button)scene.lookup(student + j);
+                buttonStudent.setOpacity(0);
+                buttonStudent.setDisable(true);
+            }
+        }
+
+        cloud_1.setOpacity(0);
+        cloud_1.setDisable(true);
+        cloud_2.setOpacity(0);
+        cloud_2.setDisable(true);
+        cloud_3.setOpacity(0);
+        cloud_3.setDisable(true);
+    }
+
+    public void updateClouds(Scene scene, ArrayList<Cloud> clouds) {
+        int numberOfClouds = clouds.size();
+        int i;
+
+        for(Cloud cloud : clouds) {
+            int students = cloud.getStudents().size();
+            String student = "cloud" + cloud.getCloudID() + "_s";
+            System.out.println("qui -> " + student + " " + students);
+
+            for(i = 1; i <= students; i++) {
+                Button buttonStudent = (Button)scene.lookup(student + i);
+                System.out.println(student + i + " " + buttonStudent);
+                CreatureColor color = cloud.getStudents().get(i - 1).getColor();
+                String style = "-fx-background-color: " + gui.getHexByFXColor(gui.getFXColorByCreatureColor(color));
+                buttonStudent.setStyle(style);
+            }
+
+            /*if(numberOfClouds == 2) {
+                Button buttonStudent = (Button)scene.lookup(student + "4");
+                buttonStudent.setOpacity(0);
+                buttonStudent.setDisable(true);
+            }*/
+        }
+
+        /*if(numberOfClouds == 2) {
+            String student = "cloud3_s";
+
+            for(i = 1; i <= 4; i++) {
+                Button buttonStudent = (Button)scene.lookup(student + i);
+                buttonStudent.setOpacity(0);
+                buttonStudent.setDisable(true);
+            }
+
+            cloud_3.setOpacity(0);
+            cloud_3.setDisable(true);
+        }*/
+    }
+
+
 
     public void updateCurrentPlayer(String player) {
         currentNickname.setText(player);
@@ -366,7 +492,7 @@ public class PlayController extends BoardController implements GUIController {
 
 
     public void onOpenMotherNature() {
-        gui.createWindow(Constants.MOTHER_NATURE); //todo check
+        gui.createWindow(Constants.MOTHER_NATURE);
     }
 
     public void onPickCloud(ActionEvent event) {
@@ -394,11 +520,5 @@ public class PlayController extends BoardController implements GUIController {
     }
 
     public void onOpenPlayCharacter(ActionEvent event) {
-    }
-
-    public void showOpponents(ActionEvent event) {
-    }
-
-    public void pickCloud(ActionEvent event) {
     }
 }
