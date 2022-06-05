@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.GUI.controllers;
 
 import it.polimi.ingsw.view.GUI.GUI;
+import javafx.event.ActionEvent;
 
 public class PlayCharacterController implements GUIController{
 
@@ -26,4 +27,9 @@ public class PlayCharacterController implements GUIController{
 
     }
 
+    public void onPlayCharacter(ActionEvent event) {
+    }
+
+    public void onCharacterInfo(ActionEvent event) {
+    }
 }

@@ -19,35 +19,83 @@
             <Font name="PT Mono Bold" size="15.0" />
          </font>
       </Label>
-      <ImageView fitHeight="123.0" fitWidth="97.0" layoutX="78.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Ch_1" fitHeight="123.0" fitWidth="97.0" layoutX="78.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/character_1.png" />
          </image></ImageView>
-      <ImageView fitHeight="123.0" fitWidth="97.0" layoutX="185.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Ch_2" fitHeight="123.0" fitWidth="97.0" layoutX="185.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/character_2.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="123.0" fitWidth="97.0" layoutX="292.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Ch_3" fitHeight="123.0" fitWidth="97.0" layoutX="292.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/character_3.png" />
          </image>
       </ImageView>
-      <Button layoutX="91.0" layoutY="180.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="52.0" style="-fx-background-color: blue;" text="PLAY" textFill="WHITE">
+      <Button fx:id="Play_Ch_1" layoutX="89.0" layoutY="238.0" mnemonicParsing="false" onAction="#onPlayCharacter" prefHeight="29.0" prefWidth="60.0" style="-fx-background-color: blue;" text="PLAY" textFill="WHITE">
          <font>
             <Font name="Songti SC Black" size="13.0" />
          </font>
       </Button>
-      <Button layoutX="199.0" layoutY="180.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="52.0" style="-fx-background-color: blue;" text="PLAY" textFill="WHITE">
+      <Button fx:id="Play_Ch_2" layoutX="196.0" layoutY="237.0" mnemonicParsing="false" onAction="#onPlayCharacter" prefHeight="29.0" prefWidth="60.0" style="-fx-background-color: blue;" text="PLAY" textFill="WHITE">
          <font>
             <Font name="Songti SC Black" size="13.0" />
          </font>
       </Button>
-      <Button layoutX="306.0" layoutY="180.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="52.0" style="-fx-background-color: blue;" text="PLAY" textFill="WHITE">
+      <Button fx:id="Play_Ch_3" layoutX="304.0" layoutY="235.0" mnemonicParsing="false" onAction="#onPlayCharacter" prefHeight="29.0" prefWidth="60.0" style="-fx-background-color: blue;" text="PLAY" textFill="WHITE">
          <font>
             <Font name="Songti SC Black" size="13.0" />
          </font>
       </Button>
-      <Button layoutX="363.0" layoutY="239.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="72.0" text="GO BACK" />
+      <Button layoutX="391.0" layoutY="251.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="53.0" text="GO BACK">
+         <font>
+            <Font size="8.0" />
+         </font></Button>
+      <Button fx:id="Info_1" layoutX="89.0" layoutY="202.0" mnemonicParsing="false" onAction="#onCharacterInfo" prefHeight="29.0" prefWidth="60.0" text="INFO">
+         <font>
+            <Font name="Songti SC Black" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="Info_2" layoutX="196.0" layoutY="201.0" mnemonicParsing="false" onAction="#onCharacterInfo" prefHeight="29.0" prefWidth="60.0" text="INFO">
+         <font>
+            <Font name="Songti SC Black" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="Info_3" layoutX="304.0" layoutY="201.0" mnemonicParsing="false" onAction="#onCharacterInfo" prefHeight="29.0" prefWidth="60.0" text="INFO">
+         <font>
+            <Font name="Songti SC Black" size="13.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="120.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="227.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="335.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/coin.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="Cost_1" layoutX="94.0" layoutY="173.0" prefHeight="23.0" prefWidth="25.0" text="1">
+         <font>
+            <Font name="Hiragino Sans W6" size="23.0" />
+         </font>
+      </Label>
+      <Label fx:id="Cost_2" layoutX="201.0" layoutY="172.0" prefHeight="23.0" prefWidth="25.0" text="2">
+         <font>
+            <Font name="Hiragino Sans W6" size="23.0" />
+         </font>
+      </Label>
+      <Label fx:id="Cost_3" layoutX="309.0" layoutY="173.0" prefHeight="23.0" prefWidth="25.0" text="3">
+         <font>
+            <Font name="Hiragino Sans W6" size="23.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
