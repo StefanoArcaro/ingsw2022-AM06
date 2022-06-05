@@ -9,6 +9,7 @@ import it.polimi.ingsw.util.Constants;
 import it.polimi.ingsw.view.GUI.controllers.GUIController;
 import it.polimi.ingsw.view.GUI.controllers.PlayAssistantController;
 import it.polimi.ingsw.view.GUI.controllers.PlayController;
+import it.polimi.ingsw.view.GUI.controllers.WizardController;
 import it.polimi.ingsw.view.ModelView;
 import it.polimi.ingsw.view.View;
 import javafx.application.Application;
@@ -19,7 +20,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -28,14 +28,14 @@ import java.util.Map;
 public class GUI extends Application implements View {
 
     private SocketClient socketClient;
-    private final PropertyChangeSupport listener = new PropertyChangeSupport(this);
     private ModelView modelView;
     private MessageParser messageParser;
 
+    private Stage stage;
+    private Scene currentScene;
     private final HashMap<String, Scene> nameToScene = new HashMap<>();
     private final HashMap<String, GUIController> nameToController = new HashMap<>();
-    private Scene currentScene;
-    private Stage stage;
+    private final Map<String, String> nicknameToSceneName = new HashMap<>();
 
     private final Map<Color, CreatureColor> colorToCreature = new HashMap<>();
     private final Map<Color, PlayerColor> colorToPlayer = new HashMap<>();
@@ -44,6 +44,11 @@ public class GUI extends Application implements View {
     private CreatureColor entranceColor;
     private CreatureColor hallColor;
     private int destinationIsland;
+
+
+    public static void main(String[] args) {
+        launch();
+    }
 
     @Override
     public void start(Stage stage) {
@@ -59,10 +64,6 @@ public class GUI extends Application implements View {
             }
         });
         stage.show();
-    }
-
-    public static void main(String[] args) {
-        launch();
     }
 
     private void setup() {
@@ -88,12 +89,46 @@ public class GUI extends Application implements View {
         }
     }
 
-    public HashMap<String, GUIController> getNameToController() {
-        return nameToController;
+
+    @Override
+    public SocketClient getSocketClient() {
+        return this.socketClient;
+    }
+
+    @Override
+    public void setSocketClient(SocketClient socketClient) {
+        this.socketClient = socketClient;
+        socketClient.readMessage();
+        socketClient.enablePinger(true);
+    }
+
+    public ModelView getModelView() {
+        return modelView;
+    }
+
+    public MessageParser getMessageParser() {
+        return messageParser;
+    }
+
+    public void setMessageParser(SocketClient socketClient) {
+        this.messageParser = new MessageParser(socketClient);
+    }
+
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public Scene getCurrentScene() {
+        return currentScene;
     }
 
     public Scene getSceneByName(String name) {
         return nameToScene.get(name);
+    }
+
+    public HashMap<String, GUIController> getNameToController() {
+        return nameToController;
     }
 
     public Scene getSceneByController(GUIController controller) {
@@ -105,12 +140,8 @@ public class GUI extends Application implements View {
         return null;
     }
 
-    public Stage getStage() {
-        return stage;
-    }
-
-    public Scene getCurrentScene() {
-        return currentScene;
+    public Map<String, String> getNicknameToSceneName() {
+        return nicknameToSceneName;
     }
 
     public void changeStage(String scene) {
@@ -138,48 +169,6 @@ public class GUI extends Application implements View {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public ModelView getModelView() {
-        return modelView;
-    }
-
-    public MessageParser getMessageParser() {
-        return messageParser;
-    }
-
-    public void setMessageParser(SocketClient socketClient) {
-        this.messageParser = new MessageParser(socketClient);
-    }
-
-    /**
-     * @return the socket attribute of this client.
-     */
-    @Override
-    public SocketClient getSocketClient() {
-        return this.socketClient;
-    }
-
-    /**
-     * Sets the socket attribute of this client to the specified one.
-     * @param socketClient socket to set.
-     */
-    @Override
-    public void setSocketClient(SocketClient socketClient) {
-        this.socketClient = socketClient;
-        socketClient.readMessage();
-        socketClient.enablePinger(true);
-    }
-
-    /**
-     * Adds a listener to the View.
-     *
-     * @param propertyName name of the observed property of the View.
-     * @param listener listener added to the View.
-     */
-    @Override
-    public void addListener(String propertyName, PropertyChangeListener listener) {
-
     }
 
 
@@ -248,6 +237,7 @@ public class GUI extends Application implements View {
     }
 
 
+
     public CreatureColor getEntranceColor() {
         return entranceColor;
     }
@@ -271,6 +261,9 @@ public class GUI extends Application implements View {
     public void setDestinationIsland(int destinationIsland) {
         this.destinationIsland = destinationIsland;
     }
+
+
+    // HANDLERS
 
     /**
      * Handles the LoginReplyMessage sent by the server.
@@ -309,7 +302,20 @@ public class GUI extends Application implements View {
      */
     @Override
     public void wizardsHandler(WizardsAvailableMessage msg) {
-        // TODO modify wizards scene
+        WizardController controller = (WizardController) nameToController.get(Constants.WIZARD);
+        controller.updateAvailableWizards(msg.getWizards().get(0));
+
+    }
+
+    /**
+     * Handles the FXWizardChoiceMessage sent by the server.
+     *
+     * @param msg the message to handle.
+     */
+    @Override
+    public void fxWizardsHandler(FXWizardChoiceMessage msg) {
+        WizardController controller = (WizardController) nameToController.get(Constants.WIZARD);
+        controller.updateWizardChoice(msg.getWizardName());
     }
 
     /**
@@ -319,12 +325,10 @@ public class GUI extends Application implements View {
      */
     @Override
     public void assistantsHandler(AssistantsMessage msg) {
-        //TODO check
         PlayAssistantController controller = (PlayAssistantController) nameToController.get(Constants.ASSISTANTS);
         if(msg.getAssistants().size() > 1) {
-            controller.updateAvailable(msg.getAssistants());
+            controller.updateAvailableAssistants(msg.getAssistants());
         }
-        //oppure si salvano gli assistenti disponibili nella model view
     }
 
     /**
@@ -335,7 +339,12 @@ public class GUI extends Application implements View {
     @Override
     public void activePlayersHandler(ActivePlayersMessage msg) {
         modelView.setPlayers(msg.getActivePlayers());
-        //...
+
+        List<String> opponents = modelView.getOpponents();
+        nicknameToSceneName.put(opponents.get(0), Constants.OPPONENT_BOARD_1);
+        if(opponents.size() == 2) {
+            nicknameToSceneName.put(opponents.get(1), Constants.OPPONENT_BOARD_2);
+        }
     }
 
     /**
@@ -346,9 +355,7 @@ public class GUI extends Application implements View {
     @Override
     public void boardHandler(BoardMessage msg) {
         modelView.setBoard(msg);
-        //se la board è del proprietario si aggiorna board and island altrimenti opponent
-        ((PlayController)(nameToController.get(Constants.BOARD_AND_ISLANDS))).updateBoard(msg);
-        //todo
+        ((PlayController)(nameToController.get(Constants.BOARD_AND_ISLANDS))).updateBoards(msg);
     }
 
     /**
@@ -450,7 +457,7 @@ public class GUI extends Application implements View {
     @Override
     public void charactersDrawnHandler(CharacterDrawnMessage msg) {
         modelView.setDrawnCharacter(msg);
-        //...
+        //TODO
     }
 
     /**
@@ -460,7 +467,7 @@ public class GUI extends Application implements View {
      */
     @Override
     public void characterInfoHandler(CharacterInfoMessage msg) {
-
+        //TODO
     }
 
     /**
@@ -471,7 +478,7 @@ public class GUI extends Application implements View {
     @Override
     public void characterPlayedHandler(CharacterPlayedMessage msg) {
         modelView.setPlayedCharacter(msg);
-        //...
+        //TODO
     }
 
     /**
@@ -479,7 +486,6 @@ public class GUI extends Application implements View {
      */
     @Override
     public void matchInfoHandler() {
-        // TODO remove
     }
 
     /**
@@ -490,7 +496,7 @@ public class GUI extends Application implements View {
     @Override
     public void winnerHandler(WinnerMessage msg) {
         modelView.setWinner(msg.getWinnerNickname());
-        //...
+        //TODO
     }
 
     /**
@@ -501,7 +507,7 @@ public class GUI extends Application implements View {
     @Override
     public void loserHandler(LoserMessage msg) {
         modelView.setWinner(msg.getWinnerNickname());
-        //...
+        //TODO
     }
 
     /**
@@ -509,7 +515,7 @@ public class GUI extends Application implements View {
      */
     @Override
     public void gameEndedHandler() {
-
+        //TODO
     }
 
     /**
@@ -519,8 +525,6 @@ public class GUI extends Application implements View {
      */
     @Override
     public void genericMessageHandler(GenericMessage msg) {
-        //Platform.runLater(() -> AlertBox.display("Message", msg.getMessage()));
-
         String[] message = msg.getMessage().split("_");
 
         if(message.length == 3) {
@@ -532,29 +536,20 @@ public class GUI extends Application implements View {
 
     private void sendGeneric(String message, String option) {
         switch (message) {
-            case "PLAYER":
-                ((PlayController)(nameToController.get(Constants.BOARD_AND_ISLANDS))).updateCurrentPlayer(getModelView().getNickname());
-                break;
-            case "PHASE":
-                //todo: error at the beginning prepare -> planning
-                ((PlayController)(nameToController.get(Constants.BOARD_AND_ISLANDS))).updateCurrentPhase(option);
-                break;
-            case "ASSISTANTPLAYED":
-                //todo check
-                Platform.runLater(() -> AlertBox.display("Message", modelView.getCurrentPlayer() + " played: " + option));
-                break;
-            case "MAXSTEPS":
-                modelView.setMaxSteps(Integer.parseInt(option));
-                break;
-            case "DISCONNECT":
-                Platform.runLater(() -> AlertBox.display("Message", option + " has disconnected, the game will end soon."));
-                break;
-            case "JOIN":
-                Platform.runLater(() -> AlertBox.display("Message", option + " has joined the game."));
-                break;
+            case "PLAYER" -> ((PlayController) (nameToController.get(Constants.BOARD_AND_ISLANDS))).updateCurrentPlayer(getModelView().getNickname());
+            case "PHASE" -> ((PlayController) (nameToController.get(Constants.BOARD_AND_ISLANDS))).updateCurrentPhase(option);
+            case "ASSISTANTPLAYED" -> {
+                String[] split = option.split(" ");
+                String priority = split[0];
+                String steps = split[1];
+                String msg = modelView.getCurrentPlayer() + " played the assistant with PRIORITY = " + priority + " and NUMBER OF STEPS = " + steps;
+                Platform.runLater(() -> AlertBox.display("Message", msg));
+            }
+            case "MAXSTEPS" -> modelView.setMaxSteps(Integer.parseInt(option));
+            case "DISCONNECT" -> Platform.runLater(() -> AlertBox.display("Message", option + " has disconnected, the game will end soon."));
+            case "JOIN" -> Platform.runLater(() -> AlertBox.display("Message", option + " has joined the game."));
         }
     }
-
 
     /**
      * Handles the ErrorMessage sent by the server.
@@ -564,5 +559,17 @@ public class GUI extends Application implements View {
     @Override
     public void errorMessageHandler(ErrorMessage msg) {
         Platform.runLater(() -> AlertBox.display("Error", msg.getError()));
+    }
+
+
+    /**
+     * Adds a listener to the View.
+     *
+     * @param propertyName name of the observed property of the View.
+     * @param listener listener added to the View.
+     */
+    @Override
+    public void addListener(String propertyName, PropertyChangeListener listener) {
+
     }
 }

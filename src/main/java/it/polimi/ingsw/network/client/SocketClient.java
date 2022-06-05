@@ -1,7 +1,6 @@
 package it.polimi.ingsw.network.client;
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.network.message.MessageType;
 import it.polimi.ingsw.network.message.clientToserver.Message;
 import it.polimi.ingsw.network.message.clientToserver.PingMessage;
 import it.polimi.ingsw.network.message.serverToclient.*;
@@ -111,15 +110,15 @@ public class SocketClient extends Client {
                     LoginReplyMessage msg = gson.fromJson(message, LoginReplyMessage.class);
                     view.loginReplyHandler(msg);
                 }
-                case GAME_STARTED_MESSAGE -> {
-                    view.gameStartingHandler();
-                }
-                case GAME_READY_MESSAGE -> {
-                    view.gameReadyHandler();
-                }
+                case GAME_STARTED_MESSAGE -> view.gameStartingHandler();
+                case GAME_READY_MESSAGE -> view.gameReadyHandler();
                 case WIZARDS_AVAILABLE_MESSAGE -> {
                     WizardsAvailableMessage msg = gson.fromJson(message, WizardsAvailableMessage.class);
                     view.wizardsHandler(msg);
+                }
+                case FX_WIZARD_CHOICE_MESSAGE -> {
+                    FXWizardChoiceMessage msg = gson.fromJson(message, FXWizardChoiceMessage.class);
+                    view.fxWizardsHandler(msg);
                 }
                 case ASSISTANTS_MESSAGE -> {
                     AssistantsMessage msg = gson.fromJson(message, AssistantsMessage.class);

@@ -4,7 +4,6 @@ import it.polimi.ingsw.network.client.SocketClient;
 import it.polimi.ingsw.network.message.serverToclient.*;
 
 import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 
 public interface View {
 
@@ -47,6 +46,12 @@ public interface View {
      * @param msg the message to handle.
      */
     void wizardsHandler(WizardsAvailableMessage msg);
+
+    /**
+     * Handles the FXWizardChoiceMessage sent by the server.
+     * @param msg the message to handle.
+     */
+    void fxWizardsHandler(FXWizardChoiceMessage msg);
 
     /**
      * Handles the AssistantsMessage sent by the server.

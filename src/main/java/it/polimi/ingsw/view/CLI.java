@@ -129,6 +129,16 @@ public class CLI implements View {
     }
 
     /**
+     * Handles the FXWizardChoiceMessage sent by the server.
+     *
+     * @param msg the message to handle.
+     */
+    @Override
+    public void fxWizardsHandler(FXWizardChoiceMessage msg) {
+
+    }
+
+    /**
      * Handles the AssistantsMessage sent by the server.
      * @param msg the message to handle.
      */

@@ -9,10 +9,7 @@ import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.gameBoard.*;
 import it.polimi.ingsw.util.Constants;
 
-import java.util.AbstractMap;
-import java.util.Collections;
-import java.util.Random;
-import java.util.Stack;
+import java.util.*;
 
 public class PreparePhase extends Phase {
 
@@ -98,6 +95,10 @@ public class PreparePhase extends Phase {
                 turns += 1;
                 wizardName = getWizardNameByID(wizardID);
                 game.getCurrentPlayer().setWizard(wizardName);
+
+                if(wizardName != null) {
+                    game.getListeners().firePropertyChange(Constants.FX_WIZARD_LISTENER, null, new ArrayList<>(List.of(wizardName)));
+                }
 
                 if(turns < game.getNumberOfPlayers().getNum()) {
                     game.setCurrentPlayer(game.getNextPlayer());

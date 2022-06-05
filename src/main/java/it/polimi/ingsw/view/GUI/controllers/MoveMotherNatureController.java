@@ -39,11 +39,6 @@ public class MoveMotherNatureController implements GUIController {
         numberOfSteps.getSelectionModel().selectFirst();
     }
 
-    @Override
-    public void quit() {
-
-    }
-
     public void onSubmitSteps(ActionEvent event) {
         Button button = (Button) event.getSource();
         int steps = numberOfSteps.getSelectionModel().getSelectedItem();
@@ -53,5 +48,10 @@ public class MoveMotherNatureController implements GUIController {
 
         Stage stage = (Stage)(button.getScene().getWindow());
         stage.close();
+    }
+
+    @Override
+    public void quit() {
+
     }
 }
