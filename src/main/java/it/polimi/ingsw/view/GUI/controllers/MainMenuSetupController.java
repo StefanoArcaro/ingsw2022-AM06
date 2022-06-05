@@ -6,7 +6,6 @@ import it.polimi.ingsw.view.GUI.AlertBox;
 import it.polimi.ingsw.view.GUI.ConfirmationBox;
 import it.polimi.ingsw.view.GUI.GUI;
 import javafx.application.Platform;
-import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
@@ -16,10 +15,13 @@ public class MainMenuSetupController implements GUIController {
 
     private GUI gui;
 
-    @FXML
-    private TextField address_field;
-    @FXML
-    private TextField portNumber_field;
+    public TextField address_field;
+    public TextField portNumber_field;
+
+    @Override
+    public GUI getGUI() {
+        return gui;
+    }
 
     @Override
     public void setGUI(GUI gui) {
@@ -87,11 +89,6 @@ public class MainMenuSetupController implements GUIController {
     @Override
     public void quit() {
         Platform.runLater(() -> ConfirmationBox.display(0, gui.getStage(),"Are you sure you want to quit?"));
-    }
-
-    @Override
-    public GUI getGUI() {
-        return gui;
     }
 
 }

@@ -4,6 +4,9 @@ import it.polimi.ingsw.view.GUI.GUI;
 
 public interface GUIController {
 
+    /**
+     * @return the GUI.
+     */
     GUI getGUI();
 
     /**

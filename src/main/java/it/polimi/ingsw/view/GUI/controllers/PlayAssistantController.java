@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.ColorAdjust;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
@@ -45,8 +44,7 @@ public class PlayAssistantController implements GUIController {
         stage.close();
     }
 
-    //TODO check
-    public void updateAvailable(ArrayList<Assistant> assistants) {
+    public void updateAvailableAssistants(ArrayList<Assistant> assistants) {
         Scene scene = gui.getSceneByName(Constants.ASSISTANTS);
 
         ArrayList<Integer> priorities = new ArrayList<>();
@@ -78,4 +76,5 @@ public class PlayAssistantController implements GUIController {
     public void quit() {
 
     }
+
 }

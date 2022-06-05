@@ -80,6 +80,7 @@ public class Game {
         listeners.addPropertyChangeListener(Constants.WIN_LISTENER, new WinListener(clientView));
         listeners.addPropertyChangeListener(Constants.GAME_READY_LISTENER, new GameReadyListener(clientView));
         listeners.addPropertyChangeListener(Constants.FX_CLOUD_LISTENER, new FXCloudListener(clientView));
+        listeners.addPropertyChangeListener(Constants.FX_WIZARD_LISTENER, new FXWizardListener(clientView));
     }
 
     /**
@@ -583,7 +584,7 @@ public class Game {
             if(owner != null) {
                 if(!players.get(maxInfluenceIndex).equals(owner)) {
                     Professor professorToUpdate = owner.getBoard().loseProfessorByColor(color);
-                    listeners.firePropertyChange(Constants.BOARD_LISTENER, owner.getNickname(), owner.getBoard());
+                    listeners.firePropertyChange(Constants.BOARD_LISTENER, null, owner.getBoard());
                     players.get(maxInfluenceIndex).getBoard().winProfessor(professorToUpdate);
                 }
             } else if(maxInfluenceIndex != -1) {

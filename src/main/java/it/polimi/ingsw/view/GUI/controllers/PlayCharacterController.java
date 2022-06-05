@@ -25,4 +25,5 @@ public class PlayCharacterController implements GUIController{
     public void quit() {
 
     }
+
 }
