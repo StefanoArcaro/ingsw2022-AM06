@@ -19,11 +19,6 @@
             <Image url="@../images/Plancia_DEF2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="arrow_1and2" fitHeight="34.0" fitWidth="68.0" layoutX="205.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/red_arrow.png" />
-         </image>
-      </ImageView>
 
       <!-- ACTION BUTTONS -->
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1b79b2" height="369.0" layoutX="732.0" layoutY="214.0" stroke="BLACK" strokeType="INSIDE" width="264.0" />
@@ -937,59 +932,64 @@
       <Button id="cloud3_s2" layoutX="441.0" layoutY="121.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #0000ff #0000ff; -fx-background-radius: 50;" />
       <Button id="cloud3_s3" layoutX="421.0" layoutY="141.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #0000ff #0000ff; -fx-background-radius: 50;" />
       <Button id="cloud3_s4" layoutX="441.0" layoutY="160.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ffd700 #ffd700 #ffd700 #ffd700; -fx-background-radius: 50;" />
-      <ImageView fx:id="arrow_2and3" fitHeight="34.0" fitWidth="68.0" layoutX="329.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="linker1and2" fitHeight="15.0" fitWidth="63.0" layoutX="206.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/red_arrow.png" />
+            <Image url="@../images/linker.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="arrow_3and4" fitHeight="34.0" fitWidth="68.0" layoutX="453.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="linker2and3" fitHeight="15.0" fitWidth="63.0" layoutX="330.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/red_arrow.png" />
+            <Image url="@../images/linker.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="arrow_4and5" fitHeight="34.0" fitWidth="68.0" layoutX="581.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" rotate="24.8" y="-21.0">
+      <ImageView fx:id="linker3and4" fitHeight="15.0" fitWidth="63.0" layoutX="454.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/red_arrow.png" />
+            <Image url="@../images/linker.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="arrow_5and6" fitHeight="34.0" fitWidth="68.0" layoutX="640.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView fx:id="linker9and10" fitHeight="15.0" fitWidth="63.0" layoutX="205.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/red_arrow.png" />
+            <Image url="@../images/linker.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="arrow_11and12" fitHeight="34.0" fitWidth="68.0" layoutX="19.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView fx:id="linker8and9" fitHeight="15.0" fitWidth="63.0" layoutX="329.0" layoutY="249.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/red_arrow.png" />
+            <Image url="@../images/linker.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="arrow_9and10" fitHeight="34.0" fitWidth="68.0" layoutX="204.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="linker7and8" fitHeight="15.0" fitWidth="63.0" layoutX="453.0" layoutY="249.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/red_arrow.png" />
+            <Image url="@../images/linker.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="arrow_8and9" fitHeight="34.0" fitWidth="68.0" layoutX="328.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="linker5and6" fitHeight="15.0" fitWidth="63.0" layoutX="641.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
-            <Image url="@../images/red_arrow.png" />
+            <Image url="@../images/linker.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="arrow_7and8" fitHeight="34.0" fitWidth="68.0" layoutX="452.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="linker11and12" fitHeight="15.0" fitWidth="63.0" layoutX="21.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
-            <Image url="@../images/red_arrow.png" />
+            <Image url="@../images/linker.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="arrow_10and11" fitHeight="34.0" fitWidth="68.0" layoutX="76.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true" rotate="24.8" y="-21.0">
+      <ImageView fx:id="linker10and11" fitHeight="15.0" fitWidth="63.0" layoutX="82.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true" rotate="25.2">
          <image>
-            <Image url="@../images/red_arrow.png" />
+            <Image url="@../images/linker.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="arrow_12and1" fitHeight="34.0" fitWidth="68.0" layoutX="78.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" rotate="155.2">
+      <ImageView fx:id="linker4and5" fitHeight="15.0" fitWidth="63.0" layoutX="578.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true" rotate="25.2">
          <image>
-            <Image url="@../images/red_arrow.png" />
+            <Image url="@../images/linker.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="arrow_6and7" fitHeight="34.0" fitWidth="68.0" layoutX="581.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true" rotate="155.2">
+      <ImageView fx:id="linker6and7" fitHeight="15.0" fitWidth="63.0" layoutX="577.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true" rotate="154.8">
          <image>
-            <Image url="@../images/red_arrow.png" />
+            <Image url="@../images/linker.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="linker12and1" fitHeight="15.0" fitWidth="63.0" layoutX="82.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true" rotate="154.8">
+         <image>
+            <Image url="@../images/linker.png" />
          </image>
       </ImageView>
    </children>
