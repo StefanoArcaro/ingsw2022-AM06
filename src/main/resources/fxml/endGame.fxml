@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="606.0" fitWidth="736.0" layoutX="-5.0" layoutY="-78.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/podium.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="WinOrLose_Label" layoutX="170.0" layoutY="13.0" prefHeight="62.0" prefWidth="279.0" text="YOU WIN!!!" textAlignment="CENTER">
+         <font>
+            <Font name="Silom" size="45.0" />
+         </font>
+      </Label>
+      <Label fx:id="Loser2_Label" layoutX="387.0" layoutY="290.0" prefHeight="57.0" prefWidth="105.0" text="nicholas">
+         <font>
+            <Font name="Tahoma Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="Loser1_Label" layoutX="92.0" layoutY="291.0" prefHeight="57.0" prefWidth="123.0" text="chiaraaa">
+         <font>
+            <Font name="Tahoma Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="Winner_Label" layoutX="226.0" layoutY="264.0" prefHeight="57.0" prefWidth="144.0" text="stefanuccio">
+         <font>
+            <Font name="Tahoma Bold" size="25.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="Loser1_Wizard" fitHeight="86.0" fitWidth="63.0" layoutX="125.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/king.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="Winner_Wizard" fitHeight="86.0" fitWidth="63.0" layoutX="266.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/mother_nature_pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="Loser2_Wizard" fitHeight="86.0" fitWidth="63.0" layoutX="411.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/witch.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>
