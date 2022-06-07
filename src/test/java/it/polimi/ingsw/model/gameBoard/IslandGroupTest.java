@@ -94,32 +94,6 @@ class IslandGroupTest {
     }
 
     @Test
-    void addIsland_KO() {
-        Player player = new Player(game, "Chiara", PlayerColor.BLACK);
-        game.addPlayer(player);
-        player.getBoard().setTowers(5);
-        Player player1 = new Player(game, "X", PlayerColor.GRAY);
-        game.addPlayer(player1);
-        player1.getBoard().setTowers(5);
-
-        Island islandToAdd = new Island(2);
-        islandToAdd.addTower(game, PlayerColor.BLACK);
-        Island islandToAdd2 = new Island(1);
-        islandToAdd2.addTower(game, PlayerColor.GRAY);
-
-        island4 = new Island(4);
-        island4.addTower(game, PlayerColor.GRAY);
-        island3 = new Island(3);
-        island3.addTower(game, PlayerColor.GRAY);
-
-        assertTrue(islandGroup.addIsland(island3));
-        assertTrue(islandGroup.addIsland(island4));
-
-        assertFalse(islandGroup.addIsland(islandToAdd));
-        assertFalse(islandGroup.addIsland(islandToAdd2));
-    }
-
-    @Test
     void addIsland_Boundary() {
         Player player = new Player(game, "Chiara", PlayerColor.BLACK);
         game.addPlayer(player);

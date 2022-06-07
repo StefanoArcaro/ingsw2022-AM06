@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.enumerations.PlayerColor;
 import it.polimi.ingsw.model.characters.Character;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class IslandGroup {
 
@@ -83,7 +84,7 @@ public class IslandGroup {
      * @return the number of islands that belong to the island group.
      */
     public int getNumberOfIslands() {
-        return getIslands().size();
+        return islands.size();
     }
 
     /**
@@ -111,7 +112,7 @@ public class IslandGroup {
             return false;
         }
 
-        for(int i = 0; i < this.getNumberOfIslands(); i++) {
+        /*for(int i = 0; i < this.getNumberOfIslands(); i++) {
             if((this.getIslands().get(i).getIslandID() % 12) + 1 == IDIslandToAdd) {
                 if(this.getIslands().get(i).getIslandID() < IDIslandToAdd) {
                     islands.add(i + 1, island);
@@ -129,8 +130,15 @@ public class IslandGroup {
                     return true;
                 }
             }
-        }
-        return false;
+        }*/
+
+        islands.add(island);
+        ArrayList<Island> toSort = islands;
+        toSort.sort(Comparator.comparingInt(Island::getIslandID));
+        this.setIslands(toSort);
+
+
+        return true;
     }
 
     /**
@@ -142,7 +150,6 @@ public class IslandGroup {
         ArrayList<Island> islandsInGroupToAdd;
         int lenGroupToAdd;
         PlayerColor playerColorIslandGroupToAdd;
-        int islandsAdded = 0;
 
         islandsInGroupToAdd = islandGroup.getIslands();
         lenGroupToAdd = islandGroup.getNumberOfIslands();
@@ -152,40 +159,21 @@ public class IslandGroup {
             return null;
         }
 
-        for(int j = 0; j < lenGroupToAdd; j++) {
-            for(int i = 0; i < this.getNumberOfIslands(); i++) {
+        for(int i = 0; i < lenGroupToAdd; i++) {
+            int islandIdToAdd = islandsInGroupToAdd.get(i).getIslandID();
 
-                int next;
-                if(this.getIslands().get(i).getIslandID() + 1 < 13) {
-                    next = this.getIslands().get(i).getIslandID() + 1;
-                }else{
-                    next = 1;
-                }
+            for(int j = 0; j < islands.size(); j++) {
+                int currentId = islands.get(j).getIslandID();
 
-                if(next == islandsInGroupToAdd.get(j).getIslandID()) {
-                    this.addIsland(islandsInGroupToAdd.get(j));
-                    islandsAdded++;
-                    break;
-                }
-            }
-        }
+                boolean unionCondition = ((islandIdToAdd % 12) + 1 == currentId) ||
+                        ((islandIdToAdd - 1) == currentId % 12);
 
-        if(islandsAdded == lenGroupToAdd) {
-            return this;
-        }
-
-        for(int j = lenGroupToAdd - 1; j >= 0; j--) {
-            for(int i = 0; i < this.getNumberOfIslands(); i++) {
-                if(this.getIslands().get(i).getIslandID() - 1 == (islandsInGroupToAdd.get(j).getIslandID() % 12)) {
-                    this.addIsland(islandsInGroupToAdd.get(j));
-                    islandsAdded++;
-                    break;
+                if(unionCondition) {
+                    islands.addAll(islandsInGroupToAdd);
+                    islands.sort(Comparator.comparingInt(Island::getIslandID));
+                    return this;
                 }
             }
-        }
-
-        if(islandsAdded == lenGroupToAdd) {
-            return this;
         }
 
         return null;

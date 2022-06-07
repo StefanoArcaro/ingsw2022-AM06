@@ -419,6 +419,7 @@ class GameTest {
         assertEquals(3, newIndexMotherNature);
     }
 
+
     @Test
     void calculateInfluence_connectIslandGroups2() {
         int newIndexMotherNature;
@@ -609,4 +610,5 @@ class GameTest {
         expectedIDIslands = new ArrayList<>(Arrays.asList(1, 11, 12));
         assertEquals(expectedIDIslands, game.getIslandGroups().get(9).getIslands().stream().map(Island::getIslandID).toList());
     }
+
 }

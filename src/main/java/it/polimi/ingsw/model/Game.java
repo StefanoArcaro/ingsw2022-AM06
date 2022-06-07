@@ -470,12 +470,6 @@ public class Game {
                 if(nextIslandGroup != null) {
                     connectIslandGroups(islandGroup, nextIslandGroup);
                 }
-
-                //reorder islandGroup
-                ArrayList<Island> toSort = islandGroup.getIslands();
-                toSort.sort(Comparator.comparingInt(Island::getIslandID));
-                islandGroup.setIslands(toSort);
-
             }
         }
 
