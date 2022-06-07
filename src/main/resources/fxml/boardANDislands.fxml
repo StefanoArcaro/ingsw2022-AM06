@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" style="-fx-background-color: #42b0f5#42b0f5;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.PlayController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" style="-fx-background-color: #42b0f5#42b0f5;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.PlayController">
    <children>
       <ImageView fitHeight="295.0" fitWidth="686.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -33,23 +28,6 @@
       <Button fx:id="motherNatureAction" layoutX="758.0" layoutY="524.0" mnemonicParsing="false" onAction="#onOpenMotherNature" prefHeight="33.0" prefWidth="209.0" text="MOVE MOTHER NATURE" />
       <Button fx:id="characterInfoAction" layoutX="758.0" layoutY="282.0" mnemonicParsing="false" onAction="#onOpenCharactersInfo" prefHeight="33.0" prefWidth="209.0" text="GET CHARACTERS' INFO" />
       <Button fx:id="characterAction" layoutX="758.0" layoutY="379.0" mnemonicParsing="false" onAction="#onOpenPlayCharacter" prefHeight="33.0" prefWidth="209.0" text="PLAY CHARACTER" />
-
-
-      <!-- EMPTY ISLANDS -->
-      <!--
-      <Button layoutX="82.0" layoutY="12.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
-      <Button layoutX="20.0" layoutY="119.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
-      <Button layoutX="82.0" layoutY="225.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
-      <Button layoutX="206.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
-      <Button layoutX="330.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
-      <Button layoutX="454.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
-      <Button layoutX="205.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
-      <Button layoutX="329.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
-      <Button layoutX="453.0" layoutY="227.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
-      <Button layoutX="578.0" layoutY="226.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
-      <Button layoutX="578.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
-      <Button layoutX="640.0" layoutY="118.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32 #32cd32#32cd32;" />
-      -->
 
       <!-- ISLANDS -->
       <Button fx:id="island_1" layoutX="144.0" layoutY="10.0" mnemonicParsing="false" onAction="#onIslandClicked" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #32cd32#32cd32;" />
@@ -193,17 +171,50 @@
       <Button id="professor_pink" fx:id="professor_pink" layoutX="480.0" layoutY="485.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 10; -fx-background-color: #ff1493;" />
       <Button id="professor_blue" fx:id="professor_blue" layoutX="480.0" layoutY="532.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 10; -fx-background-color: #0000ff;" />
 
-      <!-- TOWERS -->
-      <Pane id="tower_1" fx:id="tower_1" layoutX="554.0" layoutY="359.0" prefHeight="41.0" prefWidth="32.0" style="-fx-background-color: red;" />
-      <Pane id="tower_2" fx:id="tower_2" layoutX="608.0" layoutY="359.0" prefHeight="41.0" prefWidth="32.0" style="-fx-background-color: red;" />
-      <Pane id="tower_3" fx:id="tower_3" layoutX="554.0" layoutY="407.0" prefHeight="41.0" prefWidth="32.0" style="-fx-background-color: red;" />
-      <Pane id="tower_4" fx:id="tower_4" layoutX="608.0" layoutY="408.0" prefHeight="41.0" prefWidth="32.0" style="-fx-background-color: red;" />
-      <Pane id="tower_5" fx:id="tower_5" layoutX="554.0" layoutY="457.0" prefHeight="41.0" prefWidth="32.0" style="-fx-background-color: red;" />
-      <Pane id="tower_6" fx:id="tower_6" layoutX="608.0" layoutY="455.0" prefHeight="41.0" prefWidth="32.0" style="-fx-background-color: red;" />
-      <Pane id="tower_7" fx:id="tower_7" layoutX="554.0" layoutY="504.0" prefHeight="41.0" prefWidth="32.0" style="-fx-background-color: red;" />
-      <Pane id="tower_8" fx:id="tower_8" layoutX="608.0" layoutY="504.0" prefHeight="41.0" prefWidth="32.0" style="-fx-background-color: red;" />
 
-   <!-- MOTHER NATURE IMAGES -->
+      <!-- TOWERS -->
+      <ImageView id="tower_1" fitHeight="48.0" fitWidth="38.0" layoutX="557.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_black.png" />
+         </image>
+      </ImageView>
+      <ImageView id="tower_2" fitHeight="48.0" fitWidth="38.0" layoutX="609.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_black.png" />
+         </image>
+      </ImageView>
+      <ImageView id="tower_3" fitHeight="48.0" fitWidth="38.0" layoutX="557.0" layoutY="398.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_black.png" />
+         </image>
+      </ImageView>
+      <ImageView id="tower_4" fitHeight="48.0" fitWidth="38.0" layoutX="609.0" layoutY="398.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_black.png" />
+         </image>
+      </ImageView>
+      <ImageView id="tower_5" fitHeight="48.0" fitWidth="38.0" layoutX="557.0" layoutY="446.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_black.png" />
+         </image>
+      </ImageView>
+      <ImageView id="tower_6" fitHeight="48.0" fitWidth="38.0" layoutX="609.0" layoutY="446.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_black.png" />
+         </image>
+      </ImageView>
+      <ImageView id="tower_7" fitHeight="48.0" fitWidth="38.0" layoutX="557.0" layoutY="494.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_black.png" />
+         </image>
+      </ImageView>
+      <ImageView id="tower_8" fitHeight="48.0" fitWidth="38.0" layoutX="609.0" layoutY="494.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tower_black.png" />
+         </image>
+      </ImageView>
+
+      <!-- MOTHER NATURE IMAGES -->
       <ImageView id="mn_1" fitHeight="16.0" fitWidth="14.0" layoutX="188.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/mother_nature_pawn.png" />
@@ -932,62 +943,64 @@
       <Button id="cloud3_s2" layoutX="441.0" layoutY="121.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #0000ff #0000ff; -fx-background-radius: 50;" />
       <Button id="cloud3_s3" layoutX="421.0" layoutY="141.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #0000ff #0000ff; -fx-background-radius: 50;" />
       <Button id="cloud3_s4" layoutX="441.0" layoutY="160.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ffd700 #ffd700 #ffd700 #ffd700; -fx-background-radius: 50;" />
-      <ImageView fx:id="linker1and2" fitHeight="15.0" fitWidth="63.0" layoutX="206.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+
+      <!-- ISLAND LINKS -->
+      <ImageView id="link1" fitHeight="15.0" fitWidth="63.0" layoutX="206.0" layoutY="33.0" opacity="0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/linker.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="linker2and3" fitHeight="15.0" fitWidth="63.0" layoutX="330.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="link2" fitHeight="15.0" fitWidth="63.0" layoutX="330.0" layoutY="33.0" opacity="0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/linker.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="linker3and4" fitHeight="15.0" fitWidth="63.0" layoutX="454.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="link3" fitHeight="15.0" fitWidth="63.0" layoutX="454.0" layoutY="33.0" opacity="0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/linker.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="linker9and10" fitHeight="15.0" fitWidth="63.0" layoutX="205.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="link4" fitHeight="15.0" fitWidth="63.0" layoutX="578.0" layoutY="48.0" opacity="0" pickOnBounds="true" preserveRatio="true" rotate="25.2">
          <image>
             <Image url="@../images/linker.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="linker8and9" fitHeight="15.0" fitWidth="63.0" layoutX="329.0" layoutY="249.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="link5" fitHeight="15.0" fitWidth="63.0" layoutX="641.0" layoutY="140.0" opacity="0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
             <Image url="@../images/linker.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="linker7and8" fitHeight="15.0" fitWidth="63.0" layoutX="453.0" layoutY="249.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="link6" fitHeight="15.0" fitWidth="63.0" layoutX="577.0" layoutY="235.0" opacity="0" pickOnBounds="true" preserveRatio="true" rotate="154.8">
          <image>
             <Image url="@../images/linker.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="linker5and6" fitHeight="15.0" fitWidth="63.0" layoutX="641.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView id="link7" fitHeight="15.0" fitWidth="63.0" layoutX="453.0" layoutY="249.0" opacity="0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/linker.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="linker11and12" fitHeight="15.0" fitWidth="63.0" layoutX="21.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView id="link8" fitHeight="15.0" fitWidth="63.0" layoutX="329.0" layoutY="249.0" opacity="0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/linker.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="linker10and11" fitHeight="15.0" fitWidth="63.0" layoutX="82.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true" rotate="25.2">
+      <ImageView id="link9" fitHeight="15.0" fitWidth="63.0" layoutX="205.0" layoutY="250.0" opacity="0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/linker.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="linker4and5" fitHeight="15.0" fitWidth="63.0" layoutX="578.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true" rotate="25.2">
+      <ImageView id="link10" fitHeight="15.0" fitWidth="63.0" layoutX="82.0" layoutY="235.0" opacity="0" pickOnBounds="true" preserveRatio="true" rotate="25.2">
          <image>
             <Image url="@../images/linker.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="linker6and7" fitHeight="15.0" fitWidth="63.0" layoutX="577.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true" rotate="154.8">
+      <ImageView id="link11" fitHeight="15.0" fitWidth="63.0" layoutX="21.0" layoutY="142.0" opacity="0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
             <Image url="@../images/linker.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="linker12and1" fitHeight="15.0" fitWidth="63.0" layoutX="82.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true" rotate="154.8">
+      <ImageView id="link12" fitHeight="15.0" fitWidth="63.0" layoutX="82.0" layoutY="48.0" opacity="0" pickOnBounds="true" preserveRatio="true" rotate="154.8">
          <image>
             <Image url="@../images/linker.png" />
          </image>

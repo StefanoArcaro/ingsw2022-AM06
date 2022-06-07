@@ -8,7 +8,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="631.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text layoutX="42.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waiting for other players to join.." wrappingWidth="563.205078125">
+      <Text layoutX="42.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waiting for other players to join..." wrappingWidth="563.205078125">
          <font>
             <Font name="Tw Cen MT" size="40.0" />
          </font>

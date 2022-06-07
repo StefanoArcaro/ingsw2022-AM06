@@ -10,9 +10,11 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -58,15 +60,20 @@ public abstract class BoardController {
 
         for(int i = 0; i < board.getTowers(); i++) {
             String towerID = "#tower_" + (i + 1);
-            Pane tower = (Pane) scene.lookup(towerID);
+            ImageView tower = (ImageView) scene.lookup(towerID);
             PlayerColor color = modelView.getPlayers().get(playerNickname);
-            String style = "-fx-background-color: " + gui.getHexByFXColor(gui.getFXColorByPlayerColor(color));
-            tower.setStyle(style);
+
+
+            URL url = getClass().getResource(gui.getTowerPathByPlayerColor(color));
+            if(url != null) {
+                tower.setImage(new Image(url.toString()));
+                tower.setOpacity(1);
+            }
         }
 
         for(int i = board.getTowers(); i < 8; i++) {
             String towerID = "#tower_" + (i + 1);
-            Pane tower = (Pane) scene.lookup(towerID);
+            ImageView tower = (ImageView) scene.lookup(towerID);
             tower.setOpacity(0);
         }
     }
@@ -76,12 +83,10 @@ public abstract class BoardController {
     // UPDATE
 
     protected void updateBoard(GUI gui, Scene scene, BoardMessage message, GridPane gridPane, ArrayList<Button> FXProfessors) {
-        ModelView modelView = gui.getModelView();
-
         updateEntrance(gui, scene, message.getEntrance());
         updateHall(message.getHall(), gridPane);
         updateProfessors(FXProfessors, message.getProfessors());
-        updateTowersBoard(scene, gui, message.getTowers(), modelView.getPlayers().get(message.getNickname()));
+        updateTowersBoard(scene, message.getTowers());
 
     }
 
@@ -157,19 +162,17 @@ public abstract class BoardController {
         }
     }
 
-    protected void updateTowersBoard(Scene scene, GUI gui, int towers, PlayerColor color) {
+    protected void updateTowersBoard(Scene scene, int towers) {
 
         for(int i = 0; i < towers; i++) {
             String towerID = "#tower_" + (i + 1);
-            Pane tower = (Pane) scene.lookup(towerID);
-            String style = "-fx-background-color: " + gui.getHexByFXColor(gui.getFXColorByPlayerColor(color));
-            tower.setStyle(style);
+            ImageView tower = (ImageView) scene.lookup(towerID);
             tower.setOpacity(1);
         }
 
         for(int i = towers; i < 8; i++) {
             String towerID = "#tower_" + (i + 1);
-            Pane tower = (Pane) scene.lookup(towerID);
+            ImageView tower = (ImageView) scene.lookup(towerID);
             tower.setOpacity(0);
         }
     }

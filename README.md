@@ -6,16 +6,14 @@ Group participants:
 - Nicholas Beltramini
 - Stefano Arcaro
 
-| Functionality     |                       State                        |
-|:------------------|:--------------------------------------------------:|
-| Basic rules       | 🟢 |
-| Complete rules    | 🟢 |
-| Socket            | 🟢 |
-| CLI               | 🟡 |
-| GUI               | 🔴 |
-| All 12 characters | 🟢 |
-| Multiple games    | 🟡 |
+| Functionality     | State |
+|:------------------|:-----:|
+| Basic rules       |  🟢   |
+| Complete rules    |  🟢   |
+| Socket            |  🟢   |
+| CLI               |  🟢   |
+| GUI               |  🟡   |
+| All 12 characters |  🟢   |
+| Multiple games    |  🟡   |
 
-🔴
-🟡
-🟢
+

@@ -214,13 +214,12 @@ public class GUI extends Application implements View {
         return colorToPlayer.get(color);
     }
 
-    public Color getFXColorByPlayerColor(PlayerColor playerColor) {
-        for(Color color : colorToPlayer.keySet()) {
-            if(colorToPlayer.get(color).equals(playerColor)) {
-                return color;
-            }
-        }
-        return null;
+    public String getTowerPathByPlayerColor(PlayerColor color) {
+        return switch (color) {
+            case BLACK -> "/images/tower_black.png";
+            case WHITE -> "/images/tower_white.png";
+            case GRAY -> "/images/tower_gray.png";
+        };
     }
 
     public String getHexByFXColor(Color color) {
@@ -496,7 +495,8 @@ public class GUI extends Application implements View {
     @Override
     public void winnerHandler(WinnerMessage msg) {
         modelView.setWinner(msg.getWinnerNickname());
-        //TODO
+        //todo update
+        Platform.runLater(() -> AlertBox.display("Message", "You won!"));
     }
 
     /**
@@ -507,7 +507,8 @@ public class GUI extends Application implements View {
     @Override
     public void loserHandler(LoserMessage msg) {
         modelView.setWinner(msg.getWinnerNickname());
-        //TODO
+        //todo update
+        Platform.runLater(() -> AlertBox.display("Message", msg.getWinnerNickname() + " won!"));
     }
 
     /**
@@ -516,6 +517,8 @@ public class GUI extends Application implements View {
     @Override
     public void gameEndedHandler() {
         //TODO
+
+        Platform.runLater(() -> AlertBox.display("Message", "The game has ended, the application will close soon..."));
     }
 
     /**

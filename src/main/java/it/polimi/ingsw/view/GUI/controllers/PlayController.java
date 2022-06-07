@@ -144,15 +144,16 @@ public class PlayController extends BoardController implements GUIController {
                     }
                 }
 
-                // set mother nature
-                updateMotherNature(scene, islandGroupIndex);
-
                 // set tower
                 String t = "#t_" + islandGroupIndex;
                 ImageView tImage = (ImageView) scene.lookup(t);
 
                 tImage.setOpacity(0);
             }
+
+            // set mother nature
+            List<Integer> islandsID = islandGroup.getIslands().stream().map(Island::getIslandID).toList();
+            updateMotherNature(scene, islandGroupIndex, islandsID);
         }
     }
 
@@ -213,12 +214,24 @@ public class PlayController extends BoardController implements GUIController {
         for(IslandGroup islandGroup : islandGroups) {
             islandGroupIndex += 1;
 
-            for(Island island : islandGroup.getIslands()) {
+            ArrayList<Island> islands = islandGroup.getIslands();
+            List<Integer> islandsID = islands.stream().map(Island::getIslandID).toList();
+
+            for(Island island : islands) {
                 updateIsland(scene, island);
+
+                // union
+                boolean unionCondition = islandsID.contains((island.getIslandID() % 12) + 1);
+                if(unionCondition) {
+                    ImageView arrow = (ImageView) scene.lookup("#link" + island.getIslandID());
+                    arrow.setOpacity(1);
+                }
+
             }
 
             // set mother nature
-            updateMotherNature(scene, islandGroupIndex);
+            updateMotherNature(scene, islandGroupIndex, islandsID);
+
         }
     }
 
@@ -253,7 +266,7 @@ public class PlayController extends BoardController implements GUIController {
         ImageView tImage = (ImageView) scene.lookup(t);
 
         if(tower != null) {
-            URL url = getClass().getResource(getTowerPathByColor(tower));
+            URL url = getClass().getResource(gui.getTowerPathByPlayerColor(tower));
             if(url != null) {
                 tImage.setImage(new Image(url.toString()));
                 tImage.setOpacity(1);
@@ -264,15 +277,21 @@ public class PlayController extends BoardController implements GUIController {
 
     }
 
-    private void updateMotherNature(Scene scene, int islandGroupIndex) {
-        String mn = "#mn_" + islandGroupIndex;
-        ImageView mnImage = (ImageView) scene.lookup(mn);
+    private void updateMotherNature(Scene scene, int islandGroupIndex, List<Integer> islandsID) {
+        List<Integer> IDs = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12));
+        String mn = "#mn_";
 
         int motherNatureIndex = gui.getModelView().getMotherNatureIndex();
         if(motherNatureIndex == islandGroupIndex - 1) {
-            mnImage.setOpacity(1);
-        } else {
-            mnImage.setOpacity(0);
+            for(int id : IDs) {
+                ImageView mnImage = (ImageView) scene.lookup(mn + id);
+
+                if(islandsID.contains(id)) {
+                    mnImage.setOpacity(1);
+                } else {
+                    mnImage.setOpacity(0);
+                }
+            }
         }
     }
 
@@ -465,13 +484,7 @@ public class PlayController extends BoardController implements GUIController {
         return gui.getCreatureColorByFXColor(color);
     }
 
-    private String getTowerPathByColor(PlayerColor color) {
-        return switch (color) {
-            case BLACK -> "/images/tower_black.png";
-            case WHITE -> "/images/tower_white.png";
-            case GRAY -> "/images/tower_gray.png";
-        };
-    }
+
 
     @Override
     public void quit() {
