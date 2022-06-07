@@ -37,7 +37,7 @@ public class MainMenuSetupController implements GUIController {
      * Changes the stage scene to the setup one when the button "Play" is pressed.
      **/
     public void play() {
-        gui.changeStage(Constants.SETUP);
+        gui.changeStage(gui.getPrimaryStage(), Constants.SETUP);
     }
 
     /**
@@ -83,12 +83,12 @@ public class MainMenuSetupController implements GUIController {
             System.exit(0);
         }
 
-        gui.changeStage(Constants.LOGIN);
+        gui.changeStage(gui.getPrimaryStage(), Constants.LOGIN);
     }
 
     @Override
     public void quit() {
-        Platform.runLater(() -> ConfirmationBox.display(0, gui.getStage(),"Are you sure you want to quit?"));
+        Platform.runLater(() -> ConfirmationBox.display(0, gui.getPrimaryStage(),"Are you sure you want to quit?"));
     }
 
 }

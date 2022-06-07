@@ -94,7 +94,7 @@ public class WizardController implements GUIController {
 
     @Override
     public void quit() {
-        Platform.runLater(() -> ConfirmationBox.display(1, gui.getStage(),"Are you sure you want to quit?"));
+        Platform.runLater(() -> ConfirmationBox.display(1, gui.getPrimaryStage(),"Are you sure you want to quit?"));
 
         String message = "QUIT";
         gui.getMessageParser().parseInput(message);

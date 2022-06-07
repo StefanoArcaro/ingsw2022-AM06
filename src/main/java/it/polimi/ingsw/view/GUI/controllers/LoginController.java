@@ -69,7 +69,7 @@ public class LoginController implements GUIController {
     public void quit() {
         AtomicInteger status = new AtomicInteger(0);
 
-        Platform.runLater(() -> status.set(ConfirmationBox.display(1, gui.getStage(), "Are you sure you want to quit?")));
+        Platform.runLater(() -> status.set(ConfirmationBox.display(1, gui.getPrimaryStage(), "Are you sure you want to quit?")));
 
         if(status.get() == 1) {
             String message = "QUIT";

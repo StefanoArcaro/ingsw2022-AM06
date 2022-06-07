@@ -7,6 +7,7 @@ import it.polimi.ingsw.network.message.serverToclient.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -135,7 +136,6 @@ public class ModelView {
     public ArrayList<String> getPlayersSorted() {
         ArrayList<String> playersSorted = new ArrayList<>();
 
-        // TODO improve this
         playersSorted.add(getPlayerByColor(PlayerColor.BLACK));
         playersSorted.add(getPlayerByColor(PlayerColor.WHITE));
 
@@ -329,6 +329,20 @@ public class ModelView {
      */
     public Map<Integer, CharacterView> getIdToCharacter() {
         return new HashMap<>(idToCharacter);
+    }
+
+    /**
+     * @return an ArrayList of the characters, sorted by ID.
+     */
+    public ArrayList<CharacterView> getCharactersSorted() {
+        List<Integer> sortedIDs = idToCharacter.keySet().stream().sorted().toList();
+        ArrayList<CharacterView> charactersSorted = new ArrayList<>();
+
+        for(int id : sortedIDs) {
+            charactersSorted.add(idToCharacter.get(id));
+        }
+
+        return charactersSorted;
     }
 
     /**

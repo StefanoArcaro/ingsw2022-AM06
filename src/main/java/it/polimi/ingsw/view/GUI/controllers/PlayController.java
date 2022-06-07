@@ -40,8 +40,7 @@ public class PlayController extends BoardController implements GUIController {
     public Button hallAction;
     public Button islandAction;
     public Button motherNatureAction;
-    public Button characterInfoAction;
-    public Button characterAction;
+    public Button charactersAction;
 
     // islands
     public GridPane gridPane_1;
@@ -195,10 +194,10 @@ public class PlayController extends BoardController implements GUIController {
         currentPhase.setText(phase);
 
         switch (phase) {
-            case "Planning phase" -> updateActionButtons(new ArrayList<>(Arrays.asList(false, true, true, true, false, true)));
-            case "Move student phase" -> updateActionButtons(new ArrayList<>(Arrays.asList(true, false, false, true, false, false)));
-            case "Move mother nature phase" -> updateActionButtons(new ArrayList<>(Arrays.asList(true, true, true, false, false, false)));
-            case "Pick cloud phase" -> updateActionButtons(new ArrayList<>(Arrays.asList(true, true, true, true, false, false)));
+            case "Planning phase" -> updateActionButtons(new ArrayList<>(Arrays.asList(false, true, true, true, false)));
+            case "Move student phase" -> updateActionButtons(new ArrayList<>(Arrays.asList(true, false, false, true, false)));
+            case "Move mother nature phase" -> updateActionButtons(new ArrayList<>(Arrays.asList(true, true, true, false, false)));
+            case "Pick cloud phase" -> updateActionButtons(new ArrayList<>(Arrays.asList(true, true, true, true, false)));
         }
 
     }
@@ -207,7 +206,6 @@ public class PlayController extends BoardController implements GUIController {
         numOfCoins.setText(Integer.toString(coins));
     }
 
-    // TODO UNION
     public void updateIslandGroups(Scene scene, ArrayList<IslandGroup> islandGroups) {
         int islandGroupIndex = 0;
 
@@ -355,12 +353,10 @@ public class PlayController extends BoardController implements GUIController {
         hallAction.setDisable(actions.get(1));
         islandAction.setDisable(actions.get(2));
         motherNatureAction.setDisable(actions.get(3));
-        characterInfoAction.setDisable(actions.get(4));
-        characterAction.setDisable(actions.get(5));
+        charactersAction.setDisable(actions.get(4));
 
         if(gui.getModelView().getGameMode().equals(GameMode.EASY)) {
-            characterInfoAction.setDisable(true);
-            characterAction.setDisable(true);
+            charactersAction.setDisable(true);
         }
     }
 
@@ -442,12 +438,9 @@ public class PlayController extends BoardController implements GUIController {
         gui.createWindow(Constants.MOTHER_NATURE);
     }
 
-    public void onOpenCharactersInfo(ActionEvent event) {
+    public void onOpenCharacters() {
+        gui.createWindow(Constants.CHARACTERS);
     }
-
-    public void onOpenPlayCharacter(ActionEvent event) {
-    }
-
 
     // UTILITY
 
@@ -485,13 +478,13 @@ public class PlayController extends BoardController implements GUIController {
     }
 
 
-
     @Override
     public void quit() {
-        Platform.runLater(() -> ConfirmationBox.display(1, gui.getStage(),"Are you sure you want to quit?"));
+        Platform.runLater(() -> ConfirmationBox.display(1, gui.getPrimaryStage(),"Are you sure you want to quit?"));
 
         String message = "QUIT";
         gui.getMessageParser().parseInput(message);
     }
+
 
 }

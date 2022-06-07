@@ -6,10 +6,7 @@ import it.polimi.ingsw.network.client.MessageParser;
 import it.polimi.ingsw.network.client.SocketClient;
 import it.polimi.ingsw.network.message.serverToclient.*;
 import it.polimi.ingsw.util.Constants;
-import it.polimi.ingsw.view.GUI.controllers.GUIController;
-import it.polimi.ingsw.view.GUI.controllers.PlayAssistantController;
-import it.polimi.ingsw.view.GUI.controllers.PlayController;
-import it.polimi.ingsw.view.GUI.controllers.WizardController;
+import it.polimi.ingsw.view.GUI.controllers.*;
 import it.polimi.ingsw.view.ModelView;
 import it.polimi.ingsw.view.View;
 import javafx.application.Application;
@@ -31,7 +28,8 @@ public class GUI extends Application implements View {
     private ModelView modelView;
     private MessageParser messageParser;
 
-    private Stage stage;
+    private Stage primaryStage;
+    private Stage secondaryStage;
     private Scene currentScene;
     private final HashMap<String, Scene> nameToScene = new HashMap<>();
     private final HashMap<String, GUIController> nameToController = new HashMap<>();
@@ -44,6 +42,7 @@ public class GUI extends Application implements View {
     private CreatureColor entranceColor;
     private CreatureColor hallColor;
     private int destinationIsland;
+    private int characterID;
 
 
     public static void main(String[] args) {
@@ -53,12 +52,12 @@ public class GUI extends Application implements View {
     @Override
     public void start(Stage stage) {
         setup();
-        this.stage = stage;
+        this.primaryStage = stage;
         stage.setScene(currentScene);
 
-        this.stage.setOnCloseRequest(e -> {
+        this.primaryStage.setOnCloseRequest(e -> {
             e.consume();
-            int exitStatus = ConfirmationBox.display(1, this.stage, "Are you sure you want to quit?");
+            int exitStatus = ConfirmationBox.display(1, this.primaryStage, "Are you sure you want to quit?");
             if(exitStatus == 1) {
                 System.exit(0);
             }
@@ -115,8 +114,12 @@ public class GUI extends Application implements View {
     }
 
 
-    public Stage getStage() {
-        return stage;
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public Stage getSecondaryStage() {
+        return secondaryStage;
     }
 
     public Scene getCurrentScene() {
@@ -144,7 +147,7 @@ public class GUI extends Application implements View {
         return nicknameToSceneName;
     }
 
-    public void changeStage(String scene) {
+    public void changeStage(Stage stage, String scene) {
         Platform.runLater(() -> {
             currentScene = nameToScene.get(scene);
             stage.setScene(currentScene);
@@ -158,14 +161,14 @@ public class GUI extends Application implements View {
 
     public void createWindow(String sceneName) {
         try {
-            Stage stage = new Stage();
+            secondaryStage = new Stage();
 
             GUIController controller = getNameToController().get(sceneName);
             controller.init();
             Scene scene = getSceneByController(controller);
 
-            stage.setScene(scene);
-            stage.show();
+            secondaryStage.setScene(scene);
+            secondaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -235,6 +238,10 @@ public class GUI extends Application implements View {
         return null;
     }
 
+    public String getCharacterPathByCharacterID(int characterID) {
+        return "/images/character_" + characterID + ".png";
+    }
+
 
 
     public CreatureColor getEntranceColor() {
@@ -261,6 +268,13 @@ public class GUI extends Application implements View {
         this.destinationIsland = destinationIsland;
     }
 
+    public int getCharacterID() {
+        return characterID;
+    }
+
+    public void setCharacterID(int characterID) {
+        this.characterID = characterID;
+    }
 
     // HANDLERS
 
@@ -275,7 +289,7 @@ public class GUI extends Application implements View {
         modelView.setNumberOfPlayers(msg.getNumberOfPlayers().getNum());
         modelView.setGameMode(msg.getGameMode());
 
-        changeStage(Constants.LOBBY);
+        changeStage(primaryStage, Constants.LOBBY);
     }
 
     /**
@@ -283,7 +297,7 @@ public class GUI extends Application implements View {
      */
     @Override
     public void gameStartingHandler() {
-        changeStage(Constants.WIZARD);
+        changeStage(primaryStage, Constants.WIZARD);
     }
 
     /**
@@ -291,7 +305,7 @@ public class GUI extends Application implements View {
      */
     @Override
     public void gameReadyHandler() {
-        changeStage(Constants.BOARD_AND_ISLANDS);
+        changeStage(primaryStage, Constants.BOARD_AND_ISLANDS);
     }
 
     /**
@@ -456,7 +470,6 @@ public class GUI extends Application implements View {
     @Override
     public void charactersDrawnHandler(CharacterDrawnMessage msg) {
         modelView.setDrawnCharacter(msg);
-        //TODO
     }
 
     /**

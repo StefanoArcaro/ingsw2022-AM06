@@ -63,7 +63,6 @@ public abstract class BoardController {
             ImageView tower = (ImageView) scene.lookup(towerID);
             PlayerColor color = modelView.getPlayers().get(playerNickname);
 
-
             URL url = getClass().getResource(gui.getTowerPathByPlayerColor(color));
             if(url != null) {
                 tower.setImage(new Image(url.toString()));

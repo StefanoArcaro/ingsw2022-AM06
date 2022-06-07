@@ -328,6 +328,8 @@ public class Constants {
     public static final String OPPONENT_BOARD_1 = "opponentBoard1.fxml";
     public static final String OPPONENT_BOARD_2 = "opponentBoard2.fxml";
     public static final String CHARACTERS = "playCharacter.fxml";
+    public static final String CHARACTER_DETAILS = "empty_ch_details.fxml";
+
     public static final ArrayList<String> SCENES = new ArrayList<>(
             Arrays.asList(Constants.MENU,
                     Constants.SETUP,
@@ -338,7 +340,9 @@ public class Constants {
                     Constants.ASSISTANTS,
                     Constants.MOTHER_NATURE,
                     Constants.OPPONENT_BOARD_1,
-                    Constants.OPPONENT_BOARD_2
+                    Constants.OPPONENT_BOARD_2,
+                    Constants.CHARACTERS,
+                    Constants.CHARACTER_DETAILS
             ));
 
 
