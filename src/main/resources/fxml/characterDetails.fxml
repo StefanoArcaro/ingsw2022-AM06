@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.CharacterDetailsController">
+   <children>
+      <ImageView fx:id="ch_image" fitHeight="290.0" fitWidth="188.0" layoutX="19.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true" />
+
+      <Text fx:id="ch_description" layoutX="281.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="249.205078125" />
+
+      <Label layoutX="287.0" layoutY="102.0" text="Students:" />
+
+      <Button id="ch_student_1" layoutX="256.0" layoutY="129.0" mnemonicParsing="false" onAction="#onSelectStudent" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 100;" />
+      <Button id="ch_student_2" layoutX="298.0" layoutY="132.0" mnemonicParsing="false" onAction="#onSelectStudent" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 100;" />
+      <Button id="ch_student_3" layoutX="338.0" layoutY="132.0" mnemonicParsing="false" onAction="#onSelectStudent" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 100;" />
+      <Button id="ch_student_4" layoutX="382.0" layoutY="130.0" mnemonicParsing="false" onAction="#onSelectStudent" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 100;" />
+      <Button id="ch_student_5" layoutX="432.0" layoutY="132.0" mnemonicParsing="false" onAction="#onSelectStudent" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 100;" />
+      <Button id="ch_student_6" layoutX="469.0" layoutY="131.0" mnemonicParsing="false" onAction="#onSelectStudent" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 100;" />
+
+
+      <Label layoutX="282.0" layoutY="194.0" text="Ban cards:" />
+
+      <ImageView id="ch_banCard_1" fitHeight="54.0" fitWidth="39.0" layoutX="274.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/banCard.png.png" />
+         </image>
+      </ImageView>
+      <ImageView id="ch_banCard_2" fitHeight="54.0" fitWidth="39.0" layoutX="311.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/banCard.png.png" />
+         </image>
+      </ImageView>
+      <ImageView id="ch_banCard_3" fitHeight="54.0" fitWidth="39.0" layoutX="355.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/banCard.png.png" />
+         </image>
+      </ImageView>
+      <ImageView id="ch_banCard_4" fitHeight="54.0" fitWidth="39.0" layoutX="394.0" layoutY="228.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/banCard.png.png" />
+         </image>
+      </ImageView>
+
+      <Label layoutX="265.0" layoutY="285.0" text="Colors:" />
+
+      <Button id="ch_color_1" layoutX="256.0" layoutY="310.0" mnemonicParsing="false" onAction="#onSelectColor" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 100; -fx-background-color: #008000;" />
+      <Button id="ch_color_2" layoutX="298.0" layoutY="313.0" mnemonicParsing="false" onAction="#onSelectColor" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 100; -fx-background-color: #ff0000;" />
+      <Button id="ch_color_3" layoutX="338.0" layoutY="313.0" mnemonicParsing="false" onAction="#onSelectColor" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 100; -fx-background-color: #ffd700;" />
+      <Button id="ch_color_4" layoutX="382.0" layoutY="311.0" mnemonicParsing="false" onAction="#onSelectColor" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 100; -fx-background-color: #ff1493;" />
+      <Button id="ch_color_5" layoutX="432.0" layoutY="313.0" mnemonicParsing="false" onAction="#onSelectColor" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 100; -fx-background-color: #0000ff;" />
+
+
+      <Button layoutX="483.0" layoutY="333.0" mnemonicParsing="false" onAction="#onPlayCharacter" text="Play" />
+   </children>
+</Pane>
