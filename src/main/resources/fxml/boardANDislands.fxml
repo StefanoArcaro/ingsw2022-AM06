@@ -1010,5 +1010,65 @@
             <Image url="@../images/linker_green.png" />
          </image>
       </ImageView>
+      <ImageView id="bancard_1" fitHeight="30.0" fitWidth="28.0" layoutX="160.0" layoutY="68.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/banCard.png" />
+         </image>
+      </ImageView>
+      <ImageView id="bancard_2" fitHeight="30.0" fitWidth="28.0" layoutX="284.0" layoutY="68.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/banCard.png" />
+         </image>
+      </ImageView>
+      <ImageView id="bancard_3" fitHeight="30.0" fitWidth="28.0" layoutX="409.0" layoutY="68.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/banCard.png" />
+         </image>
+      </ImageView>
+      <ImageView id="bancard_4" fitHeight="30.0" fitWidth="28.0" layoutX="532.0" layoutY="68.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/banCard.png" />
+         </image>
+      </ImageView>
+      <ImageView id="bancard_5" fitHeight="30.0" fitWidth="28.0" layoutX="609.0" layoutY="87.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/banCard.png" />
+         </image>
+      </ImageView>
+      <ImageView id="bancard_6" fitHeight="30.0" fitWidth="28.0" layoutX="610.0" layoutY="181.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/banCard.png" />
+         </image>
+      </ImageView>
+      <ImageView id="bancard_7" fitHeight="30.0" fitWidth="28.0" layoutX="532.0" layoutY="198.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/banCard.png" />
+         </image>
+      </ImageView>
+      <ImageView id="bancard_8" fitHeight="30.0" fitWidth="28.0" layoutX="407.0" layoutY="198.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/banCard.png" />
+         </image>
+      </ImageView>
+      <ImageView id="bancard_9" fitHeight="30.0" fitWidth="28.0" layoutX="283.0" layoutY="198.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/banCard.png" />
+         </image>
+      </ImageView>
+      <ImageView id="bancard_10" fitHeight="30.0" fitWidth="28.0" layoutX="160.0" layoutY="198.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/banCard.png" />
+         </image>
+      </ImageView>
+      <ImageView id="bancard_11" fitHeight="30.0" fitWidth="28.0" layoutX="83.0" layoutY="182.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/banCard.png" />
+         </image>
+      </ImageView>
+      <ImageView id="bancard_12" fitHeight="30.0" fitWidth="28.0" layoutX="83.0" layoutY="89.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/banCard.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
