@@ -210,4 +210,6 @@ public class CharacterDetailsController implements GUIController {
     }
 
 
+    public void onGoBack(ActionEvent event) {
+    }
 }

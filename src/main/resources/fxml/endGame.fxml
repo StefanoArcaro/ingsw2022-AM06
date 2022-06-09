@@ -33,19 +33,19 @@
             <Font name="Tahoma Bold" size="25.0" />
          </font>
       </Label>
-      <ImageView fx:id="Loser1_Wizard" fitHeight="86.0" fitWidth="63.0" layoutX="125.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Loser1_Wizard" fitHeight="105.0" fitWidth="105.0" layoutX="102.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/king.png" />
+            <Image url="@../images/loserV2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="Winner_Wizard" fitHeight="86.0" fitWidth="63.0" layoutX="266.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Winner_Wizard" fitHeight="164.0" fitWidth="163.0" layoutX="217.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/mother_nature_pawn.png" />
+            <Image url="@../images/winner.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="Loser2_Wizard" fitHeight="86.0" fitWidth="63.0" layoutX="411.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Loser2_Wizard" fitHeight="98.0" fitWidth="99.0" layoutX="391.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/witch.png" />
+            <Image url="@../images/loser.png" />
          </image>
       </ImageView>
    </children>
