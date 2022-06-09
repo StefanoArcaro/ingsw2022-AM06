@@ -67,7 +67,7 @@
          </font>
       </Label>
       <Button layoutX="19.0" layoutY="351.0" mnemonicParsing="false" onAction="#onGoBack" prefHeight="32.0" prefWidth="96.0" text="GO BACK" />
-      <TextArea fx:id="ch_description" layoutX="247.0" layoutY="40.0" prefHeight="97.0" prefWidth="329.0" text="In Setup, put the 4 Ban Cards on this card.&#10;Place a Ban Card on an Island Group of your choice.&#10;The first time Mother Nature ends her movement there, the Ban Card is removed &#10;and the influence is not calculated in that Island Group.&#10;&#10;&#10;&#10;SCEMO CHI LEGGE :)&#10;&#10;" />
+      <TextArea layoutX="247.0" layoutY="40.0" prefHeight="97.0" prefWidth="329.0" text="In Setup, put the 4 Ban Cards on this card.&#10;Place a Ban Card on an Island Group of your choice.&#10;The first time Mother Nature ends her movement there, the Ban Card is removed &#10;and the influence is not calculated in that Island Group.&#10;&#10;&#10;&#10;SCEMO CHI LEGGE :)&#10;&#10;" />
       <Label layoutX="257.0" layoutY="20.0" text="Character Description:" textFill="WHITE">
          <font>
             <Font name="Kefa Regular" size="16.0" />
