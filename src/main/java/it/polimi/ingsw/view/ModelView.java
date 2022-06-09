@@ -7,6 +7,7 @@ import it.polimi.ingsw.network.message.serverToclient.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -135,7 +136,6 @@ public class ModelView {
     public ArrayList<String> getPlayersSorted() {
         ArrayList<String> playersSorted = new ArrayList<>();
 
-        // TODO improve this
         playersSorted.add(getPlayerByColor(PlayerColor.BLACK));
         playersSorted.add(getPlayerByColor(PlayerColor.WHITE));
 
@@ -213,6 +213,23 @@ public class ModelView {
     public void setIslandGroups(ArrayList<IslandGroup> islandGroups, int motherNatureIndex) {
         this.islandGroups = islandGroups;
         this.motherNatureIndex = motherNatureIndex;
+    }
+
+    /**
+     * @param islandID the ID of the island to search the island group of.
+     * @return the island group if it's found, null otherwise.
+     */
+    public IslandGroup getIslandGroupByIslandID(int islandID) {
+
+        for(IslandGroup islandGroup : islandGroups) {
+            for(Island island : islandGroup.getIslands()) {
+                if(island.getIslandID() == islandID) {
+                    return islandGroup;
+                }
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -316,11 +333,15 @@ public class ModelView {
 
     /**
      * Sets the played character to the one specified in the CharacterPlayedMessage passed.
-     * @param msg the message containing the played character's information.
+     * @param characterID id of the character.
+     * @param cost cost of the character.
+     * @param used whether the character has been used once.
+     * @param students list of students on the character.
+     * @param banCards number of ban cards on the character.
      */
-    public void setPlayedCharacter(CharacterPlayedMessage msg) {
-        this.activeCharacterID = msg.getCharacterID();
-        CharacterView characterView = new CharacterView(msg.getCharacterID(), msg.getCost(), msg.isUsed(), msg.getStudents(), msg.getBanCards());
+    public void setPlayedCharacter(int characterID, int cost, boolean used, ArrayList<Student> students, int banCards) {
+        this.activeCharacterID = characterID;
+        CharacterView characterView = new CharacterView(characterID, cost, used, students, banCards);
         idToCharacter.replace(characterView.getCharacterID(), characterView);
     }
 
@@ -329,6 +350,20 @@ public class ModelView {
      */
     public Map<Integer, CharacterView> getIdToCharacter() {
         return new HashMap<>(idToCharacter);
+    }
+
+    /**
+     * @return an ArrayList of the characters, sorted by ID.
+     */
+    public ArrayList<CharacterView> getCharactersSorted() {
+        List<Integer> sortedIDs = idToCharacter.keySet().stream().sorted().toList();
+        ArrayList<CharacterView> charactersSorted = new ArrayList<>();
+
+        for(int id : sortedIDs) {
+            charactersSorted.add(idToCharacter.get(id));
+        }
+
+        return charactersSorted;
     }
 
     /**

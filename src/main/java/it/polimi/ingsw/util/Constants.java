@@ -301,6 +301,7 @@ public class Constants {
 
     public static final String FX_CLOUD_LISTENER = "fxCloudListener";
     public static final String FX_WIZARD_LISTENER = "fxWizardListener";
+    public static final String FX_BAN_CARD_LISTENER = "fxBanCardListener";
 
     public static void countdown(int milliseconds) {
         for(int i = 3; i > 0; i--) {
@@ -328,6 +329,8 @@ public class Constants {
     public static final String OPPONENT_BOARD_1 = "opponentBoard1.fxml";
     public static final String OPPONENT_BOARD_2 = "opponentBoard2.fxml";
     public static final String CHARACTERS = "playCharacter.fxml";
+    public static final String CHARACTER_DETAILS = "characterDetails.fxml";
+
     public static final ArrayList<String> SCENES = new ArrayList<>(
             Arrays.asList(Constants.MENU,
                     Constants.SETUP,
@@ -338,7 +341,9 @@ public class Constants {
                     Constants.ASSISTANTS,
                     Constants.MOTHER_NATURE,
                     Constants.OPPONENT_BOARD_1,
-                    Constants.OPPONENT_BOARD_2
+                    Constants.OPPONENT_BOARD_2,
+                    Constants.CHARACTERS,
+                    Constants.CHARACTER_DETAILS
             ));
 
 

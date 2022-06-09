@@ -36,6 +36,7 @@ public enum MessageType {
     //FX
     FX_CLOUD_MESSAGE,
     FX_WIZARD_CHOICE_MESSAGE,
+    FX_BAN_CARD_MESSAGE,
 
     //utility
     PING_MESSAGE, PONG_MESSAGE,

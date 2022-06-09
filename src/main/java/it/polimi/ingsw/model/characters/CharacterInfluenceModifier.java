@@ -82,7 +82,6 @@ public class CharacterInfluenceModifier extends Character {
                 islandGroupChosen.addBanCard();
                 int motherNatureIndex = game.getIndexOfIslandGroup(game.getMotherNature().getCurrentIslandGroup());
                 removeBanCard();
-                game.getListeners().firePropertyChange(Constants.CHARACTER_PLAYED_LISTENER, null, this);
                 game.getListeners().firePropertyChange(Constants.ISLAND_GROUPS_LISTENER, null, new AbstractMap.SimpleEntry<>(game.getIslandGroups(), motherNatureIndex));
             } else {
                 throw new NoAvailableBanCardsException();

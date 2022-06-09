@@ -81,6 +81,7 @@ public class Game {
         listeners.addPropertyChangeListener(Constants.GAME_READY_LISTENER, new GameReadyListener(clientView));
         listeners.addPropertyChangeListener(Constants.FX_CLOUD_LISTENER, new FXCloudListener(clientView));
         listeners.addPropertyChangeListener(Constants.FX_WIZARD_LISTENER, new FXWizardListener(clientView));
+        listeners.addPropertyChangeListener(Constants.FX_BAN_CARD_LISTENER, new FXBanCardListener(clientView));
     }
 
     /**
@@ -420,6 +421,7 @@ public class Game {
             Character character= getCharacterByID(5);
             if(character != null) {
                 character.addBanCard();
+                listeners.firePropertyChange(Constants.FX_BAN_CARD_LISTENER, null, character);
             }
             return true;
         }

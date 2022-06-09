@@ -202,7 +202,6 @@ public abstract class Character {
      * @param islandGroupIndex index of island group.
      */
     public void setIslandGroupIndex(int islandGroupIndex) {
-        // TODO -1 and adjust tests
         this.islandGroupIndex = islandGroupIndex;
     }
 
