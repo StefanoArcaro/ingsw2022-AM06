@@ -1108,7 +1108,7 @@
                   <Font name="DIN Condensed Bold" size="22.0" />
                </font>
             </Label>
-            <Text fx:id="currentPhase" strokeType="OUTSIDE" strokeWidth="0.0" text="Phase" wrappingWidth="83.31559963702227" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Text fx:id="currentPhase" strokeType="OUTSIDE" strokeWidth="0.0" text="Phase" wrappingWidth="158.31559963702227" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font name="Charter Roman" size="17.0" />
                </font>
