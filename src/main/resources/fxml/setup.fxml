@@ -1,26 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="545.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.MainMenuSetupController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="342.0" prefWidth="500.0" style="-fx-background-color: #EAE4D4#EAE4D4 #EAE4D4#EAE4D4;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.MainMenuSetupController">
    <children>
-      <TextField fx:id="address_field" focusTraversable="false" layoutX="78.0" layoutY="163.0" promptText="localhost">
+      <TextField fx:id="address_field" focusTraversable="false" layoutX="160.0" layoutY="130.0" prefHeight="35.0" prefWidth="180.0" promptText="localhost">
          <font>
             <Font name="Cambria" size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="portNumber_field" focusTraversable="false" layoutX="81.0" layoutY="253.0" prefHeight="34.0" prefWidth="224.0" promptText="1234" />
-      <Label layoutX="81.0" layoutY="136.0" text="IP address" />
-      <Label layoutX="81.0" layoutY="226.0" text="Port number" />
-      <Label layoutX="81.0" layoutY="73.0" text="Server info">
+      <TextField fx:id="portNumber_field" focusTraversable="false" layoutX="160.0" layoutY="213.0" prefHeight="35.0" prefWidth="180.0" promptText="1234" />
+      <Label layoutX="205.0" layoutY="104.0" text="IP address">
          <font>
-            <Font name="System Italic" size="35.0" />
+            <Font name="Comic Sans MS Bold" size="17.0" />
+         </font></Label>
+      <Label layoutX="200.0" layoutY="187.0" text="Port number">
+         <font>
+            <Font name="Comic Sans MS Bold" size="17.0" />
+         </font></Label>
+      <Label layoutX="125.0" layoutY="29.0" text="SERVER INFO">
+         <font>
+            <Font name="Chalkduster" size="33.0" />
          </font>
       </Label>
-      <Button fx:id="submit_serverInfo" layoutX="141.0" layoutY="317.0" mnemonicParsing="false" onAction="#serverInfo" text="Submit" />
-      <Button fx:id="quit_button" layoutX="454.0" layoutY="414.0" mnemonicParsing="false" onAction="#quit" text="Quit" />
+      <Button fx:id="submit_serverInfo" layoutX="364.0" layoutY="279.0" mnemonicParsing="false" onAction="#serverInfo" prefHeight="34.0" prefWidth="106.0" text="Submit">
+         <font>
+            <Font name="Futura Medium" size="16.0" />
+         </font></Button>
+      <Button fx:id="quit_button" layoutX="247.0" layoutY="279.0" mnemonicParsing="false" onAction="#quit" prefHeight="34.0" prefWidth="106.0" text="Quit">
+         <font>
+            <Font name="Futura Medium" size="16.0" />
+         </font></Button>
    </children>
 </Pane>

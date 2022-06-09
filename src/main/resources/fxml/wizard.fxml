@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.WizardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="372.0" prefWidth="600.0" style="-fx-background-color: #EAE4D4#EAE4D4 #EAE4D4#EAE4D4;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.WizardController">
    <children>
-      <Label layoutX="120.0" layoutY="53.0" prefHeight="52.0" prefWidth="361.0" text="Choose your wizard:">
+      <Label layoutX="136.0" layoutY="38.0" prefHeight="66.0" prefWidth="326.0" text="Choose your wizard:">
          <font>
-            <Font size="42.0" />
+            <Font name="DIN Condensed Bold" size="50.0" />
          </font>
       </Label>
       <ImageView id="DRUID" fitHeight="144.0" fitWidth="83.0" layoutX="72.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
@@ -44,7 +40,7 @@
       <Button fx:id="WITCH" layoutX="324.0" layoutY="260.0" mnemonicParsing="false" onAction="#chooseWizard" text="WITCH" />
       <Button fx:id="SENSEI" layoutX="442.0" layoutY="260.0" mnemonicParsing="false" onAction="#chooseWizard" text="SENSEI" />
 
-      <Text fx:id="wizardChosen" opacity="0" layoutX="105.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waiting for other players to choose their wizards..." wrappingWidth="411.205078125">
+      <Text fx:id="wizardChosen" layoutX="105.0" layoutY="343.0" opacity="0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waiting for other players to choose their wizards..." wrappingWidth="411.205078125">
          <font>
             <Font name="System Italic" size="19.0" />
          </font>
