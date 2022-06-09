@@ -1,6 +1,5 @@
 package it.polimi.ingsw.view.GUI.controllers;
 
-import it.polimi.ingsw.model.gameBoard.Student;
 import it.polimi.ingsw.util.Constants;
 import it.polimi.ingsw.view.CharacterView;
 import it.polimi.ingsw.view.GUI.GUI;
@@ -10,9 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.text.Text;
 
-import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -56,25 +53,20 @@ public class PlayCharacterController implements GUIController{
         }
     }
 
-
-    public void onPlayCharacter(ActionEvent event) {
-    }
-
     public void onOpenCharacterDetails(ActionEvent event) {
         Button button = (Button) event.getSource();
         String buttonId = button.getId();
         int id = Integer.parseInt(buttonId.substring(11));
-        gui.setCharacterID(id);
+
+        CharacterView characterView = gui.getModelView().getCharactersSorted().get(id - 1);
+
+        gui.setCharacterID(characterView.getCharacterID());
 
         gui.changeStage(gui.getSecondaryStage(), Constants.CHARACTER_DETAILS);
     }
 
-
     @Override
     public void quit() {
 
-    }
-
-    public void onCharacterInfo(ActionEvent event) {
     }
 }

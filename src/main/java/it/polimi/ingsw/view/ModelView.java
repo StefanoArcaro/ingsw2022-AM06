@@ -216,6 +216,23 @@ public class ModelView {
     }
 
     /**
+     * @param islandID the ID of the island to search the island group of.
+     * @return the island group if it's found, null otherwise.
+     */
+    public IslandGroup getIslandGroupByIslandID(int islandID) {
+
+        for(IslandGroup islandGroup : islandGroups) {
+            for(Island island : islandGroup.getIslands()) {
+                if(island.getIslandID() == islandID) {
+                    return islandGroup;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * @return the position of Mother Nature.
      */
     public int getMotherNatureIndex() {
@@ -316,11 +333,15 @@ public class ModelView {
 
     /**
      * Sets the played character to the one specified in the CharacterPlayedMessage passed.
-     * @param msg the message containing the played character's information.
+     * @param characterID id of the character.
+     * @param cost cost of the character.
+     * @param used whether the character has been used once.
+     * @param students list of students on the character.
+     * @param banCards number of ban cards on the character.
      */
-    public void setPlayedCharacter(CharacterPlayedMessage msg) {
-        this.activeCharacterID = msg.getCharacterID();
-        CharacterView characterView = new CharacterView(msg.getCharacterID(), msg.getCost(), msg.isUsed(), msg.getStudents(), msg.getBanCards());
+    public void setPlayedCharacter(int characterID, int cost, boolean used, ArrayList<Student> students, int banCards) {
+        this.activeCharacterID = characterID;
+        CharacterView characterView = new CharacterView(characterID, cost, used, students, banCards);
         idToCharacter.replace(characterView.getCharacterID(), characterView);
     }
 

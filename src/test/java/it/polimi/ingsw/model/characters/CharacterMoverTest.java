@@ -263,6 +263,7 @@ class CharacterMoverTest {
         assertTrue(game.getCurrentPlayer().getBoard().getEntrance().getStudents()
                 .stream().map(Creature::getColor).toList().containsAll(expectedEntrance));
         assertEquals(expectedHall, game.getCurrentPlayer().getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
+
     }
 
     @Test

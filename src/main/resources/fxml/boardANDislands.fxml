@@ -44,8 +44,8 @@
 
       <!-- CLOUDS -->
       <Button fx:id="cloud_1" layoutX="213.0" layoutY="100.0" mnemonicParsing="false" onAction="#onPickCloud" prefHeight="89.0" prefWidth="89.0" style="-fx-background-color: #4682b4#4682b4 #4682b4#4682b4;" />
-      <Button fx:id="cloud_2" layoutX="315.0" layoutY="99.0" mnemonicParsing="false" onAction="#onPickCloud" prefHeight="89.0" prefWidth="89.0" style="-fx-background-color: #4682b4#4682b4 #4682b4#4682b4;" />
-      <Button fx:id="cloud_3" layoutX="417.0" layoutY="99.0" mnemonicParsing="false" onAction="#onPickCloud" prefHeight="89.0" prefWidth="89.0" style="-fx-background-color: #4682b4#4682b4;" />
+      <Button fx:id="cloud_2" layoutX="417.0" layoutY="99.0" mnemonicParsing="false" onAction="#onPickCloud" prefHeight="89.0" prefWidth="89.0" style="-fx-background-color: #4682b4#4682b4;" />
+      <Button fx:id="cloud_3" layoutX="315.0" layoutY="99.0" mnemonicParsing="false" onAction="#onPickCloud" prefHeight="89.0" prefWidth="89.0" style="-fx-background-color: #4682b4#4682b4 #4682b4#4682b4;" />
 
       <!-- INFO -->
       <Text fx:id="name" layoutX="934.0" layoutY="27.0" text="Label" />
@@ -934,14 +934,14 @@
       <Button id="cloud1_s2" layoutX="237.0" layoutY="121.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #008000 #008000; -fx-background-radius: 50;" />
       <Button id="cloud1_s3" layoutX="217.0" layoutY="141.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #008000 #008000; -fx-background-radius: 50;" />
       <Button id="cloud1_s4" layoutX="237.0" layoutY="160.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ff0000 #ff0000; -fx-background-radius: 50;" />
-      <Button id="cloud2_s1" layoutX="319.0" layoutY="101.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ffd700 #ffd700; -fx-background-radius: 50;" />
-      <Button id="cloud2_s2" layoutX="339.0" layoutY="120.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ffd700 #ffd700; -fx-background-radius: 50;" />
-      <Button id="cloud2_s3" layoutX="319.0" layoutY="140.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ff0000 #ff0000; -fx-background-radius: 50;" />
-      <Button id="cloud2_s4" layoutX="339.0" layoutY="159.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #0000ff #0000ff; -fx-background-radius: 50;" />
-      <Button id="cloud3_s1" layoutX="421.0" layoutY="102.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ff0000 #ff0000; -fx-background-radius: 50;" />
-      <Button id="cloud3_s2" layoutX="441.0" layoutY="121.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #0000ff #0000ff; -fx-background-radius: 50;" />
-      <Button id="cloud3_s3" layoutX="421.0" layoutY="141.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #0000ff #0000ff; -fx-background-radius: 50;" />
-      <Button id="cloud3_s4" layoutX="441.0" layoutY="160.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ffd700 #ffd700 #ffd700 #ffd700; -fx-background-radius: 50;" />
+      <Button id="cloud2_s1" layoutX="421.0" layoutY="102.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ff0000 #ff0000; -fx-background-radius: 50;" />
+      <Button id="cloud2_s2" layoutX="441.0" layoutY="121.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #0000ff #0000ff; -fx-background-radius: 50;" />
+      <Button id="cloud2_s3" layoutX="421.0" layoutY="141.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #0000ff #0000ff; -fx-background-radius: 50;" />
+      <Button id="cloud2_s4" layoutX="441.0" layoutY="160.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ffd700 #ffd700 #ffd700 #ffd700; -fx-background-radius: 50;" />
+      <Button id="cloud3_s1" layoutX="319.0" layoutY="101.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ffd700 #ffd700; -fx-background-radius: 50;" />
+      <Button id="cloud3_s2" layoutX="339.0" layoutY="120.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ffd700 #ffd700; -fx-background-radius: 50;" />
+      <Button id="cloud3_s3" layoutX="319.0" layoutY="140.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ff0000 #ff0000; -fx-background-radius: 50;" />
+      <Button id="cloud3_s4" layoutX="339.0" layoutY="159.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #0000ff #0000ff; -fx-background-radius: 50;" />
 
       <!-- ISLAND LINKS -->
       <ImageView id="link1" fitHeight="15.0" fitWidth="63.0" layoutX="206.0" layoutY="33.0" opacity="0" pickOnBounds="true" preserveRatio="true">

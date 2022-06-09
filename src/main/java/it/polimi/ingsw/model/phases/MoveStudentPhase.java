@@ -70,7 +70,7 @@ public class MoveStudentPhase extends ActionPhase {
                         currentPlayer.getBoard().removeStudentFromEntrance(creatureColor);
                         game.updateProfessors();
 
-                        if(studentDestinationIndex != 0){
+                        if(studentDestinationIndex != 0) {
                             game.getListeners().firePropertyChange(Constants.ISLAND_LISTENER, null, game.getIslandByID(studentDestinationIndex));
                         } else {
                             checkCoins(creatureColor, studentDestination);

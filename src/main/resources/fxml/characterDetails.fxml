@@ -25,22 +25,22 @@
 
       <ImageView id="ch_banCard_1" fitHeight="54.0" fitWidth="39.0" layoutX="274.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/banCard.png.png" />
+            <Image url="@../images/banCard.png" />
          </image>
       </ImageView>
       <ImageView id="ch_banCard_2" fitHeight="54.0" fitWidth="39.0" layoutX="311.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/banCard.png.png" />
+            <Image url="@../images/banCard.png" />
          </image>
       </ImageView>
       <ImageView id="ch_banCard_3" fitHeight="54.0" fitWidth="39.0" layoutX="355.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/banCard.png.png" />
+            <Image url="@../images/banCard.png" />
          </image>
       </ImageView>
       <ImageView id="ch_banCard_4" fitHeight="54.0" fitWidth="39.0" layoutX="394.0" layoutY="228.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/banCard.png.png" />
+            <Image url="@../images/banCard.png" />
          </image>
       </ImageView>
 

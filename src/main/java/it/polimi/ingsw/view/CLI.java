@@ -783,13 +783,22 @@ public class CLI implements View {
      */
     @Override
     public void characterPlayedHandler(CharacterPlayedMessage msg) {
-        modelView.setPlayedCharacter(msg);
+        modelView.setPlayedCharacter(msg.getCharacterID(), msg.getCost(), msg.isUsed(), msg.getStudents(), msg.getBanCards());
 
         int characterID = msg.getCharacterID();
 
         if(characterID > 0) {
             showPlayedCharacter(characterID);
         }
+    }
+
+    /**
+     * Handles the FXBanCardMessage sent by the server.
+     *
+     * @param msg the message to handle.
+     */
+    @Override
+    public void banCardHandler(FXBanCardMessage msg) {
     }
 
     /**

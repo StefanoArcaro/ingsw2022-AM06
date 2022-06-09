@@ -138,6 +138,12 @@ public interface View {
     void characterPlayedHandler(CharacterPlayedMessage msg);
 
     /**
+     * Handles the FXBanCardMessage sent by the server.
+     * @param msg the message to handle.
+     */
+    void banCardHandler(FXBanCardMessage msg);
+
+    /**
      * Displays the match's current state.
      */
     void matchInfoHandler();
@@ -170,4 +176,5 @@ public interface View {
      * @param msg the message to handle.
      */
     void errorMessageHandler(ErrorMessage msg);
+
 }

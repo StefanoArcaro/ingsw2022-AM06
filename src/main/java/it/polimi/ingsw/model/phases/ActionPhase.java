@@ -4,6 +4,7 @@ import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.enumerations.CharacterID;
+import it.polimi.ingsw.util.Constants;
 
 public abstract class ActionPhase extends Phase {
 
@@ -45,6 +46,9 @@ public abstract class ActionPhase extends Phase {
                         currentPlayer.spendCoins(price);
                         characterToActivate.setPayed(true);
                     }
+
+                    game.getListeners().firePropertyChange(Constants.CHARACTER_PLAYED_LISTENER, null, characterToActivate);
+
                 } else {
                     throw new NotEnoughMoneyException();
                 }

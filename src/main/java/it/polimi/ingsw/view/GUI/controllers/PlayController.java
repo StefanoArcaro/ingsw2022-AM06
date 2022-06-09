@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.enumerations.GameMode;
 import it.polimi.ingsw.model.enumerations.PlayerColor;
 import it.polimi.ingsw.model.gameBoard.*;
 import it.polimi.ingsw.network.message.serverToclient.BoardMessage;
+import it.polimi.ingsw.network.message.serverToclient.CoinMessage;
 import it.polimi.ingsw.util.Constants;
 import it.polimi.ingsw.view.GUI.AlertBox;
 import it.polimi.ingsw.view.GUI.ConfirmationBox;
@@ -19,7 +20,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -202,10 +202,13 @@ public class PlayController extends BoardController implements GUIController {
 
     }
 
-    public void updateCoins(int coins) {
-        numOfCoins.setText(Integer.toString(coins));
+    public void updateCoins(CoinMessage msg) {
+        if(msg.getNickname().equals(gui.getModelView().getNickname())) {
+            numOfCoins.setText(Integer.toString(msg.getCoins()));
+        }
     }
 
+    //todo banCards
     public void updateIslandGroups(Scene scene, ArrayList<IslandGroup> islandGroups) {
         int islandGroupIndex = 0;
 
@@ -365,14 +368,14 @@ public class PlayController extends BoardController implements GUIController {
 
     public void onEntranceClicked(ActionEvent event) {
         Button button = (Button) event.getSource();
-        CreatureColor color = getButtonColor(button);
+        CreatureColor color = gui.getButtonColor(button);
 
         gui.setEntranceColor(color);
     }
 
     public void onHallClicked(ActionEvent event) {
         Button button = (Button) event.getSource();
-        CreatureColor color = getButtonColor(button);
+        CreatureColor color = gui.getButtonColor(button);
 
         gui.setHallColor(color);
     }
@@ -470,13 +473,6 @@ public class PlayController extends BoardController implements GUIController {
             default -> null;
         };
     }
-
-    private CreatureColor getButtonColor(Button button) {
-        Color color = (Color) button.getBackground().getFills().get(0).getFill();
-
-        return gui.getCreatureColorByFXColor(color);
-    }
-
 
     @Override
     public void quit() {

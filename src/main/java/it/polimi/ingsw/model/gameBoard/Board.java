@@ -129,7 +129,6 @@ public class Board {
         try {
             studentReceived = hall.receiveStudent(color);
         } catch (TableFullException e) {
-            System.out.println(e.getMessage());
             return;
         }
 

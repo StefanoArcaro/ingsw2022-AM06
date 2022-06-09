@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.GUI;
 
 import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.enumerations.PlayerColor;
+import it.polimi.ingsw.model.gameBoard.Professor;
 import it.polimi.ingsw.network.client.MessageParser;
 import it.polimi.ingsw.network.client.SocketClient;
 import it.polimi.ingsw.network.message.serverToclient.*;
@@ -13,6 +14,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -43,6 +45,8 @@ public class GUI extends Application implements View {
     private CreatureColor hallColor;
     private int destinationIsland;
     private int characterID;
+    private CreatureColor characterStudent;
+    private CreatureColor characterColor;
 
 
     public static void main(String[] args) {
@@ -238,6 +242,13 @@ public class GUI extends Application implements View {
         return null;
     }
 
+
+    public CreatureColor getButtonColor(Button button) {
+        Color color = (Color) button.getBackground().getFills().get(0).getFill();
+
+        return getCreatureColorByFXColor(color);
+    }
+
     public String getCharacterPathByCharacterID(int characterID) {
         return "/images/character_" + characterID + ".png";
     }
@@ -274,6 +285,22 @@ public class GUI extends Application implements View {
 
     public void setCharacterID(int characterID) {
         this.characterID = characterID;
+    }
+
+    public CreatureColor getCharacterStudent() {
+        return characterStudent;
+    }
+
+    public void setCharacterStudent(CreatureColor characterStudent) {
+        this.characterStudent = characterStudent;
+    }
+
+    public CreatureColor getCharacterColor() {
+        return characterColor;
+    }
+
+    public void setCharacterColor(CreatureColor characterColor) {
+        this.characterColor = characterColor;
     }
 
     // HANDLERS
@@ -435,7 +462,7 @@ public class GUI extends Application implements View {
     @Override
     public void coinsHandler(CoinMessage msg) {
         modelView.setCoins(msg);
-        ((PlayController)(nameToController.get(Constants.BOARD_AND_ISLANDS))).updateCoins(msg.getCoins());
+        ((PlayController)(nameToController.get(Constants.BOARD_AND_ISLANDS))).updateCoins(msg);
     }
 
     /**
@@ -479,7 +506,6 @@ public class GUI extends Application implements View {
      */
     @Override
     public void characterInfoHandler(CharacterInfoMessage msg) {
-        //TODO
     }
 
     /**
@@ -489,8 +515,17 @@ public class GUI extends Application implements View {
      */
     @Override
     public void characterPlayedHandler(CharacterPlayedMessage msg) {
-        modelView.setPlayedCharacter(msg);
-        //TODO
+        modelView.setPlayedCharacter(msg.getCharacterID(), msg.getCost(), msg.isUsed(), msg.getStudents(), msg.getBanCards());
+    }
+
+    /**
+     * Handles the FXBanCardMessage sent by the server.
+     *
+     * @param msg the message to handle.
+     */
+    @Override
+    public void banCardHandler(FXBanCardMessage msg) {
+        modelView.setPlayedCharacter(msg.getCharacterID(), msg.getCost(), msg.isUsed(), msg.getStudents(), msg.getBanCards());
     }
 
     /**

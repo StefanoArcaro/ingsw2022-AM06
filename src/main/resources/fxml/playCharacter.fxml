@@ -53,36 +53,7 @@
             <Image url="@../images/coin.png" />
          </image>
       </ImageView>
-      <Button fx:id="info_1" layoutX="87.0" layoutY="205.0" mnemonicParsing="false" onAction="#onCharacterInfo" prefHeight="29.0" prefWidth="60.0" text="INFO">
-         <font>
-            <Font name="Songti SC Black" size="13.0" />
-         </font>
-      </Button>
-      <Button fx:id="info_2" layoutX="197.0" layoutY="205.0" mnemonicParsing="false" onAction="#onCharacterInfo" prefHeight="29.0" prefWidth="60.0" text="INFO">
-         <font>
-            <Font name="Songti SC Black" size="13.0" />
-         </font>
-      </Button>
-      <Button fx:id="info_3" layoutX="307.0" layoutY="205.0" mnemonicParsing="false" onAction="#onCharacterInfo" prefHeight="29.0" prefWidth="60.0" text="INFO">
-         <font>
-            <Font name="Songti SC Black" size="13.0" />
-         </font>
-      </Button>
-      <Button fx:id="play_ch_1" layoutX="87.0" layoutY="240.0" mnemonicParsing="false" onAction="#onPlayCharacter" prefHeight="29.0" prefWidth="60.0" style="-fx-background-color: blue;" text="PLAY" textFill="WHITE">
-         <font>
-            <Font name="Songti SC Black" size="13.0" />
-         </font>
-      </Button>
-      <Button fx:id="play_ch_2" layoutX="197.0" layoutY="240.0" mnemonicParsing="false" onAction="#onPlayCharacter" prefHeight="29.0" prefWidth="60.0" style="-fx-background-color: blue;" text="PLAY" textFill="WHITE">
-         <font>
-            <Font name="Songti SC Black" size="13.0" />
-         </font>
-      </Button>
-      <Button fx:id="play_ch_3" layoutX="307.0" layoutY="240.0" mnemonicParsing="false" onAction="#onPlayCharacter" prefHeight="29.0" prefWidth="60.0" style="-fx-background-color: blue;" text="PLAY" textFill="WHITE">
-         <font>
-            <Font name="Songti SC Black" size="13.0" />
-         </font>
-      </Button>
+      
       <Button fx:id="ch_details_1" layoutX="75.0" layoutY="45.0" mnemonicParsing="false" onAction="#onOpenCharacterDetails" opacity="0.0" prefHeight="123.0" prefWidth="82.0" />
       <Button fx:id="ch_details_2" layoutX="185.0" layoutY="45.0" mnemonicParsing="false" onAction="#onOpenCharacterDetails" opacity="0.0" prefHeight="123.0" prefWidth="82.0" />
       <Button fx:id="ch_details_3" layoutX="295.0" layoutY="45.0" mnemonicParsing="false" onAction="#onOpenCharacterDetails" opacity="0.0" prefHeight="123.0" prefWidth="82.0" />

@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.gameBoard.Professor;
 import it.polimi.ingsw.util.Constants;
 
 public class CharacterProfessorUpdater extends Character {
@@ -29,6 +30,7 @@ public class CharacterProfessorUpdater extends Character {
     @Override
     public void effect() {
         game.getListeners().firePropertyChange(Constants.CHARACTER_PLAYED_LISTENER, null, this);
+        game.setActivatedCharacter(this);
 
         game.updateProfessors();
 

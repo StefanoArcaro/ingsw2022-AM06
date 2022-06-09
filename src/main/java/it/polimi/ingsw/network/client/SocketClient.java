@@ -176,6 +176,10 @@ public class SocketClient extends Client {
                     CharacterPlayedMessage msg = gson.fromJson(message, CharacterPlayedMessage.class);
                     view.characterPlayedHandler(msg);
                 }
+                case FX_BAN_CARD_MESSAGE -> {
+                    FXBanCardMessage msg = gson.fromJson(message, FXBanCardMessage.class);
+                    view.banCardHandler(msg);
+                }
                 case WINNER_MESSAGE -> {
                     WinnerMessage msg = gson.fromJson(message, WinnerMessage.class);
                     view.winnerHandler(msg);
