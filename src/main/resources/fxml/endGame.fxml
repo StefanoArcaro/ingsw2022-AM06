@@ -1,43 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.EndGameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.EndGameController">
    <children>
       <ImageView fitHeight="606.0" fitWidth="736.0" layoutX="-5.0" layoutY="-78.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/podium.png" />
          </image>
       </ImageView>
-      <Label fx:id="message" layoutX="217.0" layoutY="14.0" prefHeight="66.0" prefWidth="163.0" text="You win" textAlignment="CENTER">
-         <font>
-            <Font size="45.0" />
-         </font>
-      </Label>
-      <Label fx:id="loser_2" layoutX="387.0" layoutY="290.0" prefHeight="57.0" prefWidth="105.0" text="loser2">
-         <font>
-            <Font name="Tahoma Bold" size="25.0" />
-         </font>
-      </Label>
-      <Label fx:id="loser_1" layoutX="92.0" layoutY="291.0" prefHeight="57.0" prefWidth="123.0" text="loser1">
-         <font>
-            <Font name="Tahoma Bold" size="25.0" />
-         </font>
-      </Label>
-      <Label fx:id="winner" layoutX="236.0" layoutY="249.0" prefHeight="57.0" prefWidth="144.0" text="winner">
-         <font>
-            <Font name="Tahoma Bold" size="25.0" />
-         </font>
-      </Label>
       <ImageView fx:id="Loser1_Wizard" fitHeight="105.0" fitWidth="105.0" layoutX="102.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/loserV2.png" />
@@ -54,5 +29,25 @@
          </image>
       </ImageView>
       <Text fx:id="reason" layoutX="75.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="445.205078125" />
+      <Text fx:id="loser1" layoutX="127.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="loser1">
+         <font>
+            <Font name="Tahoma Bold" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="loser2" layoutX="412.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="loser2">
+         <font>
+            <Font name="Tahoma Bold" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="message" layoutX="217.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You Win">
+         <font>
+            <Font name="Tahoma Bold" size="38.0" />
+         </font>
+      </Text>
+      <Text fx:id="winner" layoutX="269.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="winner">
+         <font>
+            <Font name="Tahoma Bold" size="18.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

@@ -12,10 +12,10 @@ public class EndGameController implements GUIController {
 
     GUI gui;
 
-    public Label message;
-    public Label winner;
-    public Label loser_1;
-    public Label loser_2;
+    public Text message;
+    public Text winner;
+    public Text loser_1;
+    public Text loser_2;
     public ImageView loser_image_2;
     public Text reason;
 
