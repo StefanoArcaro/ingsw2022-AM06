@@ -79,7 +79,7 @@ public class PreparePhase extends Phase {
             game.setCurrentPhase(phaseFactory.createPhase(game.getGameState()));
             game.getListeners().firePropertyChange(Constants.PHASE_LISTENER, null, new AbstractMap.SimpleEntry<>(game.getGameState(), game.getGameMode()));
 
-            game.getListeners().firePropertyChange(Constants.ASSISTANTS_AVAILABLE_LISTENER, null, game.getCurrentPlayer().getWizard().getAssistants()); //todo fix other players
+            game.getListeners().firePropertyChange(Constants.ASSISTANTS_AVAILABLE_LISTENER, null, game.getCurrentPlayer().getWizard().getAssistants());
         }
     }
 

@@ -5,6 +5,8 @@ import it.polimi.ingsw.model.enumerations.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.util.Constants;
 
+import java.util.AbstractMap;
+
 public class EndgamePhase extends Phase {
 
     private final static int MAX_TOWERS = 8;
@@ -24,13 +26,19 @@ public class EndgamePhase extends Phase {
     @Override
     public void play() {
         if(game.getGameState().equals(GameState.ENDED_TOWER)) {
-            winner = game.getCurrentPlayer();
+
+            for(Player player : game.getPlayers()) {
+                if(player.getBoard().checkNoTowers()) {
+                    winner = player;
+                    break;
+                }
+            }
+
         } else {
             winner = calculateWinner();
         }
 
-        //TODO: probably no need: end game checked in game controller
-        //game.getListeners().firePropertyChange(Constants.WIN_LISTENER, null, winner.getNickname());
+        game.getListeners().firePropertyChange(Constants.PHASE_LISTENER, null, new AbstractMap.SimpleEntry<>(game.getGameState(), game.getGameMode()));
     }
 
     /**

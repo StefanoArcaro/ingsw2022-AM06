@@ -208,7 +208,6 @@ public class PlayController extends BoardController implements GUIController {
         }
     }
 
-    //todo banCards
     public void updateIslandGroups(Scene scene, ArrayList<IslandGroup> islandGroups) {
         int islandGroupIndex = 0;
 
@@ -226,6 +225,14 @@ public class PlayController extends BoardController implements GUIController {
                 if(unionCondition) {
                     ImageView arrow = (ImageView) scene.lookup("#link" + island.getIslandID());
                     arrow.setOpacity(1);
+                }
+
+                // set ban card
+                ImageView banCard = (ImageView) scene.lookup("#bancard_" + island.getIslandID());
+                if(islandGroup.getNumberOfBanCardPresent() > 0) {
+                    banCard.setOpacity(1);
+                } else {
+                    banCard.setOpacity(0);
                 }
 
             }

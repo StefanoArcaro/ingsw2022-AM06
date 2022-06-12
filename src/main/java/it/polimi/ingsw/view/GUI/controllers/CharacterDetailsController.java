@@ -124,6 +124,10 @@ public class CharacterDetailsController implements GUIController {
         stage.close();
     }
 
+    public void onGoBack() {
+        gui.changeStage(gui.getSecondaryStage(), Constants.CHARACTERS);
+    }
+
     private void getCharacterMessage(int id) {
         CharacterID enumValue = CharacterID.values()[id];
         CreatureColor hallStudent = gui.getHallColor();
@@ -209,7 +213,4 @@ public class CharacterDetailsController implements GUIController {
 
     }
 
-
-    public void onGoBack(ActionEvent event) {
-    }
 }

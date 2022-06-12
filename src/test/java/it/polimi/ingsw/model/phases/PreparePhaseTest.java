@@ -149,8 +149,7 @@ class PreparePhaseTest {
             assertEquals(0, game.getPlayers().get(1).getBoard().getHall().getTableByColor(color).getLength());
         }
 
-        // TODO change comment
-        // Check that no characters were drawn
+        // Check that only the default character was drawn
         assertEquals(1, game.getDrawnCharacters().size());
 
         // Check that no coins were distributed
@@ -302,8 +301,7 @@ class PreparePhaseTest {
             assertEquals(0, game.getPlayers().get(2).getBoard().getHall().getTableByColor(color).getLength());
         }
 
-        // TODO change comment
-        // Check that no characters were drawn
+        // Check that only the default character was drawn
         assertEquals(1, game.getDrawnCharacters().size());
 
         // Check that no coins were distributed

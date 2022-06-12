@@ -125,7 +125,6 @@ public abstract class BoardController {
                 }
             }
 
-            //todo check - (character effect)
             while(column < 10) {
                 Node node = getNodeByRowColumnIndex(row, column, gridPane);
                 if(node != null) {

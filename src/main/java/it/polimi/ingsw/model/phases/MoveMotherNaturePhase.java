@@ -72,6 +72,14 @@ public class MoveMotherNaturePhase extends ActionPhase {
      */
     private void calculateNextPhase() {
         boolean endedTower = currentPlayer.getBoard().checkNoTowers();
+
+        for(Player player : game.getPlayers()) {
+            if(player.getBoard().checkNoTowers()) {
+                endedTower = true;
+                break;
+            }
+        }
+
         boolean endedIsland = game.checkEndDueToIslandGroup();
         boolean skipPickCloudPhase = game.getSkipPickCloudPhase();
 

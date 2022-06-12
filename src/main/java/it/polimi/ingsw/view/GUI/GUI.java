@@ -2,7 +2,6 @@ package it.polimi.ingsw.view.GUI;
 
 import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.enumerations.PlayerColor;
-import it.polimi.ingsw.model.gameBoard.Professor;
 import it.polimi.ingsw.network.client.MessageParser;
 import it.polimi.ingsw.network.client.SocketClient;
 import it.polimi.ingsw.network.message.serverToclient.*;
@@ -38,7 +37,6 @@ public class GUI extends Application implements View {
     private final Map<String, String> nicknameToSceneName = new HashMap<>();
 
     private final Map<Color, CreatureColor> colorToCreature = new HashMap<>();
-    private final Map<Color, PlayerColor> colorToPlayer = new HashMap<>();
     private final Map<Color, String> colorToHex = new HashMap<>();
 
     private CreatureColor entranceColor;
@@ -187,11 +185,6 @@ public class GUI extends Application implements View {
         colorToCreature.put(Color.DEEPPINK, CreatureColor.PINK);
         colorToCreature.put(Color.BLUE, CreatureColor.BLUE);
 
-        // Player color map
-        colorToPlayer.put(Color.BLACK, PlayerColor.BLACK);
-        colorToPlayer.put(Color.WHITE, PlayerColor.WHITE);
-        colorToPlayer.put(Color.GRAY, PlayerColor.GRAY);
-
         // Color to Hex map
         colorToHex.put(Color.GREEN, "#008000");
         colorToHex.put(Color.RED, "#ff0000");
@@ -217,10 +210,6 @@ public class GUI extends Application implements View {
         return null;
     }
 
-    public PlayerColor getPlayerColorByFXColor(Color color) {
-        return colorToPlayer.get(color);
-    }
-
     public String getTowerPathByPlayerColor(PlayerColor color) {
         return switch (color) {
             case BLACK -> "/images/tower_black.png";
@@ -232,16 +221,6 @@ public class GUI extends Application implements View {
     public String getHexByFXColor(Color color) {
         return colorToHex.get(color);
     }
-
-    public Color getFXColorByHex(String hex) {
-        for(Color color : colorToHex.keySet()) {
-            if(colorToHex.get(color).equals(hex)) {
-                return color;
-            }
-        }
-        return null;
-    }
-
 
     public CreatureColor getButtonColor(Button button) {
         Color color = (Color) button.getBackground().getFills().get(0).getFill();
@@ -344,7 +323,6 @@ public class GUI extends Application implements View {
     public void wizardsHandler(WizardsAvailableMessage msg) {
         WizardController controller = (WizardController) nameToController.get(Constants.WIZARD);
         controller.updateAvailableWizards(msg.getWizards().get(0));
-
     }
 
     /**
@@ -543,8 +521,7 @@ public class GUI extends Application implements View {
     @Override
     public void winnerHandler(WinnerMessage msg) {
         modelView.setWinner(msg.getWinnerNickname());
-        //todo update
-        Platform.runLater(() -> AlertBox.display("Message", "You won!"));
+        changeStage(primaryStage, Constants.ENDGAME);
     }
 
     /**
@@ -555,8 +532,7 @@ public class GUI extends Application implements View {
     @Override
     public void loserHandler(LoserMessage msg) {
         modelView.setWinner(msg.getWinnerNickname());
-        //todo update
-        Platform.runLater(() -> AlertBox.display("Message", msg.getWinnerNickname() + " won!"));
+        changeStage(primaryStage, Constants.ENDGAME);
     }
 
     /**
@@ -564,9 +540,6 @@ public class GUI extends Application implements View {
      */
     @Override
     public void gameEndedHandler() {
-        //TODO
-
-        Platform.runLater(() -> AlertBox.display("Message", "The game has ended, the application will close soon..."));
     }
 
     /**
@@ -588,7 +561,10 @@ public class GUI extends Application implements View {
     private void sendGeneric(String message, String option) {
         switch (message) {
             case "PLAYER" -> ((PlayController) (nameToController.get(Constants.BOARD_AND_ISLANDS))).updateCurrentPlayer(getModelView().getNickname());
-            case "PHASE" -> ((PlayController) (nameToController.get(Constants.BOARD_AND_ISLANDS))).updateCurrentPhase(option);
+            case "PHASE" -> {
+                modelView.setCurrentPhase(option);
+                ((PlayController) (nameToController.get(Constants.BOARD_AND_ISLANDS))).updateCurrentPhase(option);
+            }
             case "ASSISTANTPLAYED" -> {
                 String[] split = option.split(" ");
                 String priority = split[0];

@@ -42,7 +42,7 @@ public class Eriantys {
 
         switch(launchInput) {
             case 0 -> {
-                System.out.println("\n=============================================================\n");
+                System.out.println(Constants.SEPARATOR);
                 Server.main(null);
             }
             case 1 -> {
@@ -52,13 +52,11 @@ public class Eriantys {
                 CLI.main(null);
             }
             case 2 -> {
-                // TODO
                 System.out.println("You selected the GUI, have fun!");
                 System.out.print("Starting");
                 Constants.countdown(400);
-                System.out.println("\n=============================================================\n");
+                System.out.println(Constants.SEPARATOR);
                 System.out.println("GUI main running!");
-                //GUI.main(null);
                 new GUIMain().callGUI();
             }
             default -> System.err.println("Invalid argument, please run the executable again and select one of the available options.");

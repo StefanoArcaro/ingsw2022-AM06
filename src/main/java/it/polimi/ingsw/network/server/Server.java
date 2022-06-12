@@ -234,7 +234,6 @@ public class Server {
                     gameManager.sendAllExcept(new GenericMessage("JOIN_" + nickname + " joined the game!_" + nickname), nickname);
                     game.getCurrentPhase().play();
 
-                    //TODO check if ok
                     if(game.getPlayers().size() == game.getNumberOfPlayers().getNum()){
                         gameManager.sendAll(new GameStartedMessage());
                     }

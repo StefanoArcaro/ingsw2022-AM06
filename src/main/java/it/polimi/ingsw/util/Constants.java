@@ -31,7 +31,7 @@ public class Constants {
 
     private static final String BOX_TOP = "╔═════════════════════════════════════════════════════════════════╗";
     private static final String BOX_BOTTOM = "╚═════════════════════════════════════════════════════════════════╝";
-    private static final String SEPARATOR = "\n━━━━━━━━━━━━━━━━━━ ✦ ━━━━━━━━━━━━━━━━━━\n\n";
+    public static final String SEPARATOR = "\n━━━━━━━━━━━━━━━━━━ ✦ ━━━━━━━━━━━━━━━━━━\n\n";
 
     public static final String ANSI_RED = "\u001b[31m";
     public static final String ANSI_GREEN = "\u001b[32m";
@@ -330,20 +330,22 @@ public class Constants {
     public static final String OPPONENT_BOARD_2 = "opponentBoard2.fxml";
     public static final String CHARACTERS = "playCharacter.fxml";
     public static final String CHARACTER_DETAILS = "characterDetails.fxml";
+    public static final String ENDGAME = "endGame.fxml";
 
     public static final ArrayList<String> SCENES = new ArrayList<>(
-            Arrays.asList(Constants.MENU,
-                    Constants.SETUP,
-                    Constants.LOGIN,
-                    Constants.LOBBY,
-                    Constants.WIZARD,
-                    Constants.BOARD_AND_ISLANDS,
-                    Constants.ASSISTANTS,
-                    Constants.MOTHER_NATURE,
-                    Constants.OPPONENT_BOARD_1,
-                    Constants.OPPONENT_BOARD_2,
-                    Constants.CHARACTERS,
-                    Constants.CHARACTER_DETAILS
+            Arrays.asList(MENU,
+                    SETUP,
+                    LOGIN,
+                    LOBBY,
+                    WIZARD,
+                    BOARD_AND_ISLANDS,
+                    ASSISTANTS,
+                    MOTHER_NATURE,
+                    OPPONENT_BOARD_1,
+                    OPPONENT_BOARD_2,
+                    CHARACTERS,
+                    CHARACTER_DETAILS,
+                    ENDGAME
             ));
 
 

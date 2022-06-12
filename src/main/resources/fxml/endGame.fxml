@@ -1,34 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.EndGameController">
    <children>
       <ImageView fitHeight="606.0" fitWidth="736.0" layoutX="-5.0" layoutY="-78.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/podium.png" />
          </image>
       </ImageView>
-      <Label fx:id="WinOrLose_Label" layoutX="170.0" layoutY="13.0" prefHeight="62.0" prefWidth="279.0" text="YOU WIN!!!" textAlignment="CENTER">
+      <Label fx:id="message" layoutX="217.0" layoutY="14.0" prefHeight="66.0" prefWidth="163.0" text="You win" textAlignment="CENTER">
          <font>
-            <Font name="Silom" size="45.0" />
+            <Font size="45.0" />
          </font>
       </Label>
-      <Label fx:id="Loser2_Label" layoutX="387.0" layoutY="290.0" prefHeight="57.0" prefWidth="105.0" text="nicholas">
-         <font>
-            <Font name="Tahoma Bold" size="25.0" />
-         </font>
-      </Label>
-      <Label fx:id="Loser1_Label" layoutX="92.0" layoutY="291.0" prefHeight="57.0" prefWidth="123.0" text="chiaraaa">
+      <Label fx:id="loser_2" layoutX="387.0" layoutY="290.0" prefHeight="57.0" prefWidth="105.0" text="loser2">
          <font>
             <Font name="Tahoma Bold" size="25.0" />
          </font>
       </Label>
-      <Label fx:id="Winner_Label" layoutX="226.0" layoutY="264.0" prefHeight="57.0" prefWidth="144.0" text="stefanuccio">
+      <Label fx:id="loser_1" layoutX="92.0" layoutY="291.0" prefHeight="57.0" prefWidth="123.0" text="loser1">
+         <font>
+            <Font name="Tahoma Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="winner" layoutX="236.0" layoutY="249.0" prefHeight="57.0" prefWidth="144.0" text="winner">
          <font>
             <Font name="Tahoma Bold" size="25.0" />
          </font>
@@ -43,10 +48,11 @@
             <Image url="@../images/winner.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="Loser2_Wizard" fitHeight="98.0" fitWidth="99.0" layoutX="391.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="loser_image_2" fitHeight="98.0" fitWidth="99.0" layoutX="391.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/loser.png" />
          </image>
       </ImageView>
+      <Text fx:id="reason" layoutX="75.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="445.205078125" />
    </children>
 </Pane>
