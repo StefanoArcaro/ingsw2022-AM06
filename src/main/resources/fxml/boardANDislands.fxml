@@ -1168,34 +1168,34 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CURRENT PLAYER:">
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="CURRENT PLAYER:">
                <font>
                   <Font name="DIN Condensed Bold" size="22.0" />
                </font>
             </Text>
-            <Text fx:id="currentNickname" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname" wrappingWidth="83.31559963702227" GridPane.columnIndex="1">
+            <Text fx:id="currentNickname" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname" wrappingWidth="152.31517239092852" GridPane.columnIndex="1">
                <font>
-                  <Font name="Charter Roman" size="18.0" />
+                  <Font name="Charter Roman" size="20.0" />
                </font>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CURRENT PHASE:" GridPane.rowIndex="1">
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="CURRENT PHASE:" GridPane.rowIndex="1">
                <font>
                   <Font name="DIN Condensed Bold" size="22.0" />
                </font>
             </Text>
-            <Label fx:id="coins" text="COINS:" GridPane.rowIndex="2">
+            <Label fx:id="coins" text="COINS:" textFill="WHITE" GridPane.rowIndex="2">
                <font>
                   <Font name="DIN Condensed Bold" size="22.0" />
                </font>
             </Label>
-            <Text fx:id="currentPhase" strokeType="OUTSIDE" strokeWidth="0.0" text="Phase" wrappingWidth="158.31559963702227" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Text fx:id="currentPhase" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Phase" wrappingWidth="158.31559963702227" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
-                  <Font name="Charter Roman" size="17.0" />
+                  <Font name="Charter Roman" size="18.0" />
                </font>
             </Text>
-            <Text fx:id="numOfCoins" text="number of coins" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Text fx:id="numOfCoins" fill="WHITE" text="number of coins" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
-                  <Font name="Charter Roman" size="17.0" />
+                  <Font name="Charter Roman" size="20.0" />
                </font>
             </Text>
          </children>
