@@ -24,6 +24,6 @@ public class AssistantsAvailableListener extends Listener {
     public void propertyChange(PropertyChangeEvent evt) {
         ArrayList<Assistant> assistants = (ArrayList<Assistant>) evt.getNewValue();
         virtualView.send(new GenericMessage("ASSISTANTS_Available assistants:"), getCurrentPlayer());
-        virtualView.send(new AssistantsMessage(assistants), getCurrentPlayer());
+        virtualView.send(new AssistantsMessage(assistants, false), getCurrentPlayer());
     }
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.GUI;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,6 +25,7 @@ public class AlertBox {
         window.setMinWidth(250);
 
         Label label = new Label(message);
+        label.setPadding(new Insets(20));
         Button closeButton = new Button("OK");
         closeButton.setOnAction(event -> window.close());
 

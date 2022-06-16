@@ -344,7 +344,7 @@ public class GUI extends Application implements View {
     @Override
     public void assistantsHandler(AssistantsMessage msg) {
         PlayAssistantController controller = (PlayAssistantController) nameToController.get(Constants.ASSISTANTS);
-        if(msg.getAssistants().size() > 1) {
+        if(!msg.isPlayed()) {
             controller.updateAvailableAssistants(msg.getAssistants());
         }
     }

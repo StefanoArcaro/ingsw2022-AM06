@@ -61,6 +61,8 @@ public class PlayController extends BoardController implements GUIController {
     public Button cloud_2;
     public Button cloud_3;
 
+    public ImageView cloud_image_3;
+
     // hall
     public GridPane gridPane;
 
@@ -173,6 +175,10 @@ public class PlayController extends BoardController implements GUIController {
         cloud_2.setDisable(true);
         cloud_3.setOpacity(0);
         cloud_3.setDisable(true);
+
+        if(gui.getModelView().getNumberOfPlayers() == 2) {
+            cloud_image_3.setOpacity(0);
+        }
     }
 
     private void initOpponents() {
@@ -309,7 +315,6 @@ public class PlayController extends BoardController implements GUIController {
         for(Cloud cloud : clouds) {
             Button cloudButton = getCloudButtonByID(cloud.getCloudID());
             if(cloud.isEmpty()) {
-                cloudButton.setOpacity(0.3);
                 cloudButton.setDisable(true);
 
                 int numberOfStudents = gui.getModelView().getNumberOfPlayers() + 1;
@@ -322,7 +327,6 @@ public class PlayController extends BoardController implements GUIController {
                 }
 
             } else {
-                cloudButton.setOpacity(0.3);
                 cloudButton.setDisable(false);
 
                 int numberOfStudents = cloud.getStudents().size();

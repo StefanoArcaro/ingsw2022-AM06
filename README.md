@@ -12,7 +12,7 @@ Group participants:
 | Complete rules    |  🟢   |
 | Socket            |  🟢   |
 | CLI               |  🟢   |
-| GUI               |  🟡   |
+| GUI               |  🟢   |
 | All 12 characters |  🟢   |
 | Multiple games    |  🟡   |
 

@@ -2,7 +2,6 @@ package it.polimi.ingsw.view.GUI.controllers;
 
 import it.polimi.ingsw.view.GUI.GUI;
 import it.polimi.ingsw.view.ModelView;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
@@ -37,9 +36,9 @@ public class EndGameController implements GUIController {
         String winnerNickname = modelView.getWinner();
 
         if(winnerNickname.equals(modelView.getNickname())) {
-            message.setText("You win!");
+            message.setText("YOU WIN!");
         } else {
-            message.setText("You lost!");
+            message.setText("YOU LOST!");
         }
 
         winner.setText(winnerNickname);

@@ -11,10 +11,12 @@ import java.util.ArrayList;
 public class AssistantsMessage extends Answer {
 
     private final ArrayList<Assistant> assistants;
+    private final boolean played;
 
-    public AssistantsMessage(ArrayList<Assistant> assistants) {
+    public AssistantsMessage(ArrayList<Assistant> assistants, boolean played) {
         super(MessageType.ASSISTANTS_MESSAGE);
         this.assistants = assistants;
+        this.played = played;
     }
 
     @Override
@@ -30,5 +32,9 @@ public class AssistantsMessage extends Answer {
 
     public ArrayList<Assistant> getAssistants() {
         return assistants;
+    }
+
+    public boolean isPlayed() {
+        return played;
     }
 }

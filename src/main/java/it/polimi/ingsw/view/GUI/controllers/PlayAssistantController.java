@@ -68,8 +68,6 @@ public class PlayAssistantController implements GUIController {
             colorAdjust.setSaturation(-1.0);
             image.setEffect(colorAdjust);
         }
-
-
     }
 
     @Override

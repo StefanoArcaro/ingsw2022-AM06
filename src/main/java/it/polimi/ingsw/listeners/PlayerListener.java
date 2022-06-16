@@ -31,7 +31,7 @@ public class PlayerListener extends Listener {
             if(game.getFirstPlayerIndex() != game.getPlayers().indexOf(game.getCurrentPlayer())) {
                 virtualView.send(new CurrentPhaseMessage(getCurrentPhaseAction(game.getGameState()), Constants.getPhaseInstructions(game.getGameState(), game.getGameMode())), getCurrentPlayer());
                 virtualView.send(new GenericMessage("ASSISTANTS_Available assistants:"), getCurrentPlayer());
-                virtualView.send(new AssistantsMessage(game.getCurrentPlayer().getWizard().getAssistants()), getCurrentPlayer());
+                virtualView.send(new AssistantsMessage(game.getCurrentPlayer().getWizard().getAssistants(), false), getCurrentPlayer());
             }
         }
     }
