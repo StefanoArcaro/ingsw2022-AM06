@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -16,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" style="-fx-background-color: #EAE4D4#EAE4D4 #EAE4D4#EAE4D4;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.PlayController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" style="-fx-background-color: #EAE4D4#EAE4D4 #EAE4D4#EAE4D4;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.PlayController">
    <children>
       <ImageView fitHeight="694.0" fitWidth="1065.0" layoutX="-9.0" layoutY="-87.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -43,126 +38,126 @@
             <Image url="@../images/cloud.png" />
          </image>
       </ImageView>
+      <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="123.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/island_v1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="498.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/island_v1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="247.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/island_v2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="498.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/island_v1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="122.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/island_v1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="619.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/island_v2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="371.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/island_v2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="3.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/island_v2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="110.0" fitWidth="110.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/island_v3.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="372.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/island_v3.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="616.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/island_v3.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="251.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/island_v3.png" />
+         </image>
+      </ImageView>
 
       <!-- ISLAND LINKS -->
-      <ImageView id="link1" fitHeight="65.0" fitWidth="15.0" layoutX="229.0" layoutY="9.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView id="link1" fitHeight="75.0" fitWidth="75.0" layoutX="200.0" layoutY="2.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="25.0">
          <image>
-            <Image url="@../images/linker_green.png" />
+            <Image url="@../images/ponteV2.png" />
          </image>
       </ImageView>
-      <ImageView id="link2" fitHeight="65.0" fitWidth="15.0" layoutX="352.0" layoutY="9.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView id="link2" fitHeight="75.0" fitWidth="75.0" layoutX="326.0" layoutY="1.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="25.0">
          <image>
-            <Image url="@../images/linker_green.png" />
+            <Image url="@../images/ponteV2.png" />
          </image>
       </ImageView>
-      <ImageView id="link3" fitHeight="65.0" fitWidth="15.0" layoutX="477.0" layoutY="9.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView id="link3" fitHeight="75.0" fitWidth="75.0" layoutX="451.0" layoutY="1.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="25.0">
          <image>
-            <Image url="@../images/linker_green.png" />
+            <Image url="@../images/ponteV2.png" />
          </image>
       </ImageView>
-      <ImageView id="link4" fitHeight="65.0" fitWidth="15.0" layoutX="602.0" layoutY="26.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="115.2">
+      <ImageView id="link4" fitHeight="75.0" fitWidth="75.0" layoutX="582.0" layoutY="13.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="55.5">
          <image>
-            <Image url="@../images/linker_green.png" />
+            <Image url="@../images/ponteV2.png" />
          </image>
       </ImageView>
-      <ImageView id="link5" fitHeight="65.0" fitWidth="15.0" layoutX="663.0" layoutY="117.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="link5" fitHeight="75.0" fitWidth="75.0" layoutX="646.0" layoutY="115.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="118.8">
          <image>
-            <Image url="@../images/linker_green.png" />
+            <Image url="@../images/ponteV2.png" />
          </image>
       </ImageView>
-      <ImageView id="link6" fitHeight="65.0" fitWidth="15.0" layoutX="604.0" layoutY="207.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="64.8">
+      <ImageView id="link6" fitHeight="75.0" fitWidth="75.0" layoutX="579.0" layoutY="208.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="13.2">
          <image>
-            <Image url="@../images/linker_green.png" />
+            <Image url="@../images/ponteV2.png" />
          </image>
       </ImageView>
-      <ImageView id="link7" fitHeight="65.0" fitWidth="15.0" layoutX="475.0" layoutY="226.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView id="link7" fitHeight="75.0" fitWidth="75.0" layoutX="449.0" layoutY="216.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="25.0">
          <image>
-            <Image url="@../images/linker_green.png" />
+            <Image url="@../images/ponteV2.png" />
          </image>
       </ImageView>
-      <ImageView id="link8" fitHeight="65.0" fitWidth="15.0" layoutX="351.0" layoutY="226.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView id="link8" fitHeight="75.0" fitWidth="75.0" layoutX="326.0" layoutY="217.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="25.0">
          <image>
-            <Image url="@../images/linker_green.png" />
+            <Image url="@../images/ponteV2.png" />
          </image>
       </ImageView>
-      <ImageView id="link9" fitHeight="65.0" fitWidth="15.0" layoutX="230.0" layoutY="225.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView id="link9" fitHeight="75.0" fitWidth="75.0" layoutX="200.0" layoutY="216.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="25.0">
          <image>
-            <Image url="@../images/linker_green.png" />
+            <Image url="@../images/ponteV2.png" />
          </image>
       </ImageView>
-      <ImageView id="link10" fitHeight="65.0" fitWidth="15.0" layoutX="102.0" layoutY="206.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="115.2">
+      <ImageView id="link10" fitHeight="75.0" fitWidth="75.0" layoutX="76.0" layoutY="199.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="56.6">
          <image>
-            <Image url="@../images/linker_green.png" />
+            <Image url="@../images/ponteV2.png" />
          </image>
       </ImageView>
-      <ImageView id="link11" fitHeight="65.0" fitWidth="15.0" layoutX="43.0" layoutY="118.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="link11" fitHeight="75.0" fitWidth="75.0" layoutX="20.0" layoutY="112.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="-58.6">
          <image>
-            <Image url="@../images/linker_green.png" />
+            <Image url="@../images/ponteV2.png" />
          </image>
       </ImageView>
-      <ImageView id="link12" fitHeight="65.0" fitWidth="15.0" layoutX="104.0" layoutY="28.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="64.8">
+      <ImageView id="link12" fitHeight="75.0" fitWidth="75.0" layoutX="76.0" layoutY="18.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/linker_green.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="104.0" layoutX="123.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/island_v1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="104.0" layoutX="498.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/island_v1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="104.0" layoutX="247.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/island_v2.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="104.0" layoutX="498.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/island_v1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="104.0" layoutX="122.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/island_v1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="104.0" layoutX="619.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/island_v2.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="104.0" layoutX="371.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/island_v2.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="104.0" layoutX="3.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/island_v2.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="104.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/island_v3.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="104.0" layoutX="372.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/island_v3.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="104.0" layoutX="616.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/island_v3.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="104.0" layoutX="251.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/island_v3.png" />
+            <Image url="@../images/ponteV2.png" />
          </image>
       </ImageView>
 
@@ -491,66 +486,71 @@
             <Image url="@../images/tower_black.png" />
          </image>
       </ImageView>
-      <Label layoutX="186.0" layoutY="10.0" prefHeight="18.0" prefWidth="19.0" text="1">
+      <Label layoutX="188.0" layoutY="6.0" prefHeight="18.0" prefWidth="32.0" text="1">
          <font>
-            <Font name="Rockwell" size="13.0" />
+            <Font name="Rockwell" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="310.0" layoutY="10.0" prefHeight="18.0" prefWidth="19.0" text="2">
+      <Label layoutX="313.0" layoutY="7.0" prefHeight="18.0" prefWidth="19.0" text="2">
          <font>
-            <Font name="Rockwell" size="13.0" />
+            <Font name="Rockwell" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="434.0" layoutY="10.0" prefHeight="18.0" prefWidth="19.0" text="3">
+      <Label layoutX="437.0" layoutY="7.0" prefHeight="18.0" prefWidth="19.0" text="3">
          <font>
-            <Font name="Rockwell" size="13.0" />
+            <Font name="Rockwell" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="558.0" layoutY="10.0" prefHeight="18.0" prefWidth="19.0" text="4">
+      <Label layoutX="560.0" layoutY="7.0" prefHeight="18.0" prefWidth="19.0" text="4">
          <font>
-            <Font name="Rockwell" size="13.0" />
+            <Font name="Rockwell" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="682.0" layoutY="55.0" prefHeight="18.0" prefWidth="19.0" text="5">
+      <Label layoutX="684.0" layoutY="53.0" prefHeight="18.0" prefWidth="19.0" text="5">
          <font>
-            <Font name="Rockwell" size="13.0" />
+            <Font name="Rockwell" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="682.0" layoutY="180.0" prefHeight="18.0" prefWidth="19.0" text="6">
+      <Label layoutX="683.0" layoutY="177.0" prefHeight="18.0" prefWidth="19.0" text="6">
          <font>
-            <Font name="Rockwell" size="13.0" />
+            <Font name="Rockwell" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="557.0" layoutY="227.0" prefHeight="18.0" prefWidth="19.0" text="7">
+      <Label layoutX="559.0" layoutY="224.0" prefHeight="18.0" prefWidth="19.0" text="7">
          <font>
-            <Font name="Rockwell" size="13.0" />
+            <Font name="Rockwell" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="433.0" layoutY="227.0" prefHeight="18.0" prefWidth="19.0" text="8">
+      <Label layoutX="435.0" layoutY="224.0" prefHeight="18.0" prefWidth="19.0" text="8">
          <font>
-            <Font name="Rockwell" size="13.0" />
+            <Font name="Rockwell" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="309.0" layoutY="227.0" prefHeight="18.0" prefWidth="19.0" text="9">
+      <Label layoutX="311.0" layoutY="224.0" prefHeight="18.0" prefWidth="19.0" text="9">
          <font>
-            <Font name="Rockwell" size="13.0" />
+            <Font name="Rockwell" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="185.0" layoutY="227.0" prefHeight="18.0" prefWidth="19.0" text="10">
+      <Label layoutX="183.0" layoutY="224.0" prefHeight="25.0" prefWidth="27.0" text="10">
          <font>
-            <Font name="Rockwell" size="13.0" />
+            <Font name="Rockwell" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="62.0" layoutY="181.0" prefHeight="18.0" prefWidth="19.0" text="11">
+      <Label layoutX="60.0" layoutY="178.0" prefHeight="25.0" prefWidth="27.0" text="11">
          <font>
-            <Font name="Rockwell" size="13.0" />
+            <Font name="Rockwell" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="62.0" layoutY="56.0" prefHeight="18.0" prefWidth="19.0" text="12">
+      <Label layoutX="60.0" layoutY="52.0" prefHeight="18.0" prefWidth="27.0" text="12">
          <font>
-            <Font name="Rockwell" size="13.0" />
+            <Font name="Rockwell" size="18.0" />
          </font>
       </Label>
+      <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="523.0" layoutY="14.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/column_colors.png" />
+         </image>
+      </ImageView>
 
       <!-- ISLAND STUDENTS COLOR IMAGES -->
       <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="147.0" layoutY="13.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
@@ -564,11 +564,6 @@
          </image>
       </ImageView>
       <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="395.0" layoutY="13.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/column_colors.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="519.0" layoutY="13.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/column_colors.png" />
          </image>
@@ -732,8 +727,9 @@
             </Text>
          </children>
       </GridPane>
-      <GridPane fx:id="gridPane_4" layoutX="519.0" layoutY="13.0" prefHeight="54.0" prefWidth="18.0">
+      <GridPane fx:id="gridPane_4" layoutX="523.0" layoutY="14.0" prefHeight="54.0" prefWidth="18.0">
          <columnConstraints>
+            <ColumnConstraints />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
          <rowConstraints>
@@ -744,27 +740,27 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.columnIndex="1">
                <font>
                   <Font size="12.0" />
                </font>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="12.0" />
                </font>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="12.0" />
                </font>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font size="12.0" />
                </font>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <font>
                   <Font size="12.0" />
                </font>
@@ -1098,12 +1094,12 @@
             <Image url="@../images/banCard.png" />
          </image>
       </ImageView>
-      <ImageView id="bancard_4" fitHeight="30.0" fitWidth="28.0" layoutX="532.0" layoutY="68.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="bancard_4" fitHeight="30.0" fitWidth="28.0" layoutX="538.0" layoutY="68.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/banCard.png" />
          </image>
       </ImageView>
-      <ImageView id="bancard_5" fitHeight="30.0" fitWidth="28.0" layoutX="609.0" layoutY="87.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="bancard_5" fitHeight="30.0" fitWidth="28.0" layoutX="613.0" layoutY="98.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/banCard.png" />
          </image>
@@ -1123,7 +1119,7 @@
             <Image url="@../images/banCard.png" />
          </image>
       </ImageView>
-      <ImageView id="bancard_9" fitHeight="30.0" fitWidth="28.0" layoutX="283.0" layoutY="198.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="bancard_9" fitHeight="30.0" fitWidth="28.0" layoutX="290.0" layoutY="198.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/banCard.png" />
          </image>
@@ -1133,30 +1129,30 @@
             <Image url="@../images/banCard.png" />
          </image>
       </ImageView>
-      <ImageView id="bancard_11" fitHeight="30.0" fitWidth="28.0" layoutX="83.0" layoutY="182.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="bancard_11" fitHeight="30.0" fitWidth="28.0" layoutX="83.0" layoutY="176.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/banCard.png" />
          </image>
       </ImageView>
-      <ImageView id="bancard_12" fitHeight="30.0" fitWidth="28.0" layoutX="83.0" layoutY="89.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="bancard_12" fitHeight="30.0" fitWidth="28.0" layoutX="83.0" layoutY="83.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/banCard.png" />
          </image>
       </ImageView>
 
       <!-- ISLANDS -->
-      <Button fx:id="island_1" layoutX="144.0" layoutY="9.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="60.0" prefWidth="60.0" />
-      <Button fx:id="island_2" layoutX="268.0" layoutY="9.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="60.0" prefWidth="60.0" />
-      <Button fx:id="island_3" layoutX="392.0" layoutY="9.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="60.0" prefWidth="60.0" />
-      <Button fx:id="island_4" layoutX="518.0" layoutY="9.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="60.0" prefWidth="60.0" />
-      <Button fx:id="island_5" layoutX="640.0" layoutY="55.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="60.0" prefWidth="60.0" />
-      <Button fx:id="island_6" layoutX="637.0" layoutY="181.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="60.0" prefWidth="60.0" />
-      <Button fx:id="island_7" layoutX="518.0" layoutY="226.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="60.0" prefWidth="60.0" />
-      <Button fx:id="island_8" layoutX="391.0" layoutY="227.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="60.0" prefWidth="60.0" />
-      <Button fx:id="island_9" layoutX="270.0" layoutY="227.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="60.0" prefWidth="60.0" />
-      <Button fx:id="island_10" layoutX="143.0" layoutY="227.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="60.0" prefWidth="60.0" />
-      <Button fx:id="island_11" layoutX="24.0" layoutY="180.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="60.0" prefWidth="60.0" />
-      <Button fx:id="island_12" layoutX="20.0" layoutY="56.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="60.0" prefWidth="60.0" />
+      <Button fx:id="island_1" layoutX="143.0" layoutY="10.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="73.0" prefWidth="73.0" />
+      <Button fx:id="island_2" layoutX="268.0" layoutY="10.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="70.0" prefWidth="73.0" />
+      <Button fx:id="island_3" layoutX="392.0" layoutY="9.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="73.0" prefWidth="73.0" />
+      <Button fx:id="island_4" layoutX="518.0" layoutY="9.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="73.0" prefWidth="70.0" />
+      <Button fx:id="island_5" layoutX="638.0" layoutY="53.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="70.0" prefWidth="73.0" />
+      <Button fx:id="island_6" layoutX="639.0" layoutY="180.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="73.0" prefWidth="73.0" />
+      <Button fx:id="island_7" layoutX="515.0" layoutY="218.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="73.0" prefWidth="73.0" />
+      <Button fx:id="island_8" layoutX="389.0" layoutY="217.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="73.0" prefWidth="73.0" />
+      <Button fx:id="island_9" layoutX="270.0" layoutY="220.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="70.0" prefWidth="73.0" />
+      <Button fx:id="island_10" layoutX="143.0" layoutY="222.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="70.0" prefWidth="73.0" />
+      <Button fx:id="island_11" layoutX="23.0" layoutY="181.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="70.0" prefWidth="70.0" />
+      <Button fx:id="island_12" layoutX="19.0" layoutY="53.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="73.0" prefWidth="73.0" />
 
       <!-- CLOUDS -->
       <Button fx:id="cloud_1" layoutX="213.0" layoutY="100.0" mnemonicParsing="false" onAction="#onPickCloud" opacity="0.0" prefHeight="89.0" prefWidth="89.0" style="-fx-background-radius: 140;" />
