@@ -32,12 +32,12 @@
          <font>
             <Font name="Bodoni 72 Smallcaps Book" size="26.0" />
          </font></Text>
-      <Text fx:id="loser_1" layoutX="127.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="loser1" textAlignment="CENTER">
+      <Text fx:id="loser_1" layoutX="79.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="loser1" textAlignment="CENTER" wrappingWidth="143.0">
          <font>
             <Font name="Tahoma Bold" size="18.0" />
          </font>
       </Text>
-      <Text fx:id="loser_2" layoutX="419.0" layoutY="336.0" strokeType="OUTSIDE" strokeWidth="0.0" text="loser2" textAlignment="CENTER">
+      <Text fx:id="loser_2" layoutX="372.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="loser2" textAlignment="CENTER" wrappingWidth="143.0">
          <font>
             <Font name="Tahoma Bold" size="18.0" />
          </font>
@@ -47,7 +47,7 @@
             <Font name="Tahoma Bold" size="38.0" />
          </font>
       </Text>
-      <Text fx:id="winner" layoutX="267.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="winner" textAlignment="CENTER">
+      <Text fx:id="winner" layoutX="225.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="winner" textAlignment="CENTER" wrappingWidth="143.0">
          <font>
             <Font name="Tahoma Bold" size="18.0" />
          </font>

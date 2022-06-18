@@ -13,7 +13,7 @@
             <Image url="@../images/Eriantys.png" />
          </image>
       </ImageView>
-      <Button fx:id="buttonPlay" layoutX="221.0" layoutY="304.0" mnemonicParsing="false" onAction="#play" prefHeight="56.0" prefWidth="219.0" text="PLAY">
+      <Button fx:id="buttonPlay" layoutX="240.0" layoutY="304.0" mnemonicParsing="false" onAction="#play" prefHeight="56.0" prefWidth="220.0" text="PLAY">
          <font>
             <Font name="Chalkduster" size="30.0" />
          </font></Button>

@@ -13,9 +13,9 @@
             <Image url="@../images/lobby.png" />
          </image>
       </ImageView>
-      <Text layoutX="41.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waiting for other players to join..." wrappingWidth="655.2744750976562">
+      <Text layoutX="2.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waiting for other players to join..." textAlignment="CENTER" wrappingWidth="696.5522875785828">
          <font>
-            <Font name="Silom" size="35.0" />
+            <Font name="Silom" size="31.0" />
          </font>
       </Text>
    </children>
