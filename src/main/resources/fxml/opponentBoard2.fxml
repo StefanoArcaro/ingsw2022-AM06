@@ -170,7 +170,7 @@
         <Button id="entrance_8" layoutX="36.0" layoutY="290.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 50;" />
         <Button id="entrance_9" layoutX="80.0" layoutY="290.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 50;" />
 
-        <Label fx:id="opponentNickname_2" layoutX="394.0" layoutY="5.0" prefHeight="30.0" prefWidth="93.0" text="nickname">
+        <Label fx:id="opponentNickname_2" layoutX="394.0" layoutY="5.0" prefHeight="30.0" prefWidth="200.0" text="nickname">
             <font>
                 <Font name="Songti SC Black" size="20.0" />
             </font>

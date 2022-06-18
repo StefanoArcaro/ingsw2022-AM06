@@ -201,7 +201,7 @@
          </font></Button>
 
       <!-- INFO -->
-      <Text fx:id="name" layoutX="828.0" layoutY="39.0" text="Label" wrappingWidth="90.40548706054688">
+      <Text fx:id="name" layoutX="815.0" layoutY="40.0" text="Label" wrappingWidth="220.40548706054688">
          <font>
             <Font name="Bodoni 72 Oldstyle Book" size="28.0" />
          </font></Text>
@@ -1173,7 +1173,7 @@
                   <Font name="DIN Condensed Bold" size="22.0" />
                </font>
             </Text>
-            <Text fx:id="currentNickname" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname" wrappingWidth="129.31517239092852" GridPane.columnIndex="1">
+            <Text fx:id="currentNickname" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname" wrappingWidth="139.31517239092852" GridPane.columnIndex="1">
                <font>
                   <Font name="Charter Roman" size="20.0" />
                </font>
@@ -1188,9 +1188,9 @@
                   <Font name="DIN Condensed Bold" size="22.0" />
                </font>
             </Label>
-            <Text fx:id="currentPhase" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Phase" wrappingWidth="158.31559963702227" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Text fx:id="currentPhase" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="move student phase" wrappingWidth="158.31559963702227" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
-                  <Font name="Charter Roman" size="18.0" />
+                  <Font name="Charter Roman" size="19.0" />
                </font>
             </Text>
             <Text fx:id="numOfCoins" fill="WHITE" text="number of coins" GridPane.columnIndex="1" GridPane.rowIndex="2">

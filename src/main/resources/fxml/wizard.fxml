@@ -8,41 +8,53 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="372.0" prefWidth="600.0" style="-fx-background-color: #EAE4D4#EAE4D4 #EAE4D4#EAE4D4;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.WizardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #EAE4D4#EAE4D4 #EAE4D4#EAE4D4;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.WizardController">
    <children>
-      <Label layoutX="136.0" layoutY="38.0" prefHeight="66.0" prefWidth="326.0" text="Choose your wizard:">
+      <Label layoutX="157.0" layoutY="73.0" prefHeight="71.0" prefWidth="426.0" text="CHOOSE YOUR WIZARD:">
          <font>
-            <Font name="DIN Condensed Bold" size="50.0" />
+            <Font name="DIN Condensed Bold" size="55.0" />
          </font>
       </Label>
-      <ImageView id="DRUID" fitHeight="144.0" fitWidth="83.0" layoutX="72.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="DRUID" fitHeight="177.0" fitWidth="140.0" layoutX="97.0" layoutY="221.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/druid.png" />
          </image>
       </ImageView>
-      <ImageView id="KING" fitHeight="144.0" fitWidth="83.0" layoutX="191.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="KING" fitHeight="177.0" fitWidth="140.0" layoutX="232.0" layoutY="220.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/king.png" />
          </image>
       </ImageView>
-      <ImageView id="WITCH" fitHeight="144.0" fitWidth="83.0" layoutX="311.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="WITCH" fitHeight="177.0" fitWidth="140.0" layoutX="367.0" layoutY="220.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/witch.png" />
          </image>
       </ImageView>
-      <ImageView id="SENSEI" fitHeight="144.0" fitWidth="83.0" layoutX="430.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="SENSEI" fitHeight="177.0" fitWidth="140.0" layoutX="503.0" layoutY="220.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/sensei.png" />
          </image>
       </ImageView>
-      <Button fx:id="DRUID" layoutX="86.0" layoutY="260.0" mnemonicParsing="false" onAction="#chooseWizard" text="DRUID" />
-      <Button fx:id="KING" layoutX="209.0" layoutY="260.0" mnemonicParsing="false" onAction="#chooseWizard" text="KING" />
-      <Button fx:id="WITCH" layoutX="324.0" layoutY="260.0" mnemonicParsing="false" onAction="#chooseWizard" text="WITCH" />
-      <Button fx:id="SENSEI" layoutX="442.0" layoutY="260.0" mnemonicParsing="false" onAction="#chooseWizard" text="SENSEI" />
-
-      <Text fx:id="wizardChosen" layoutX="105.0" layoutY="343.0" opacity="0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waiting for other players to choose their wizards..." wrappingWidth="411.205078125">
+      <Button fx:id="DRUID" layoutX="101.0" layoutY="415.0" mnemonicParsing="false" onAction="#chooseWizard" prefWidth="111.0" text="DRUID">
          <font>
-            <Font name="System Italic" size="19.0" />
+            <Font name="Futura Medium" size="23.0" />
+         </font></Button>
+      <Button fx:id="KING" layoutX="236.0" layoutY="416.0" mnemonicParsing="false" onAction="#chooseWizard" prefWidth="111.0" text="KING">
+         <font>
+            <Font name="Futura Medium" size="23.0" />
+         </font></Button>
+      <Button fx:id="WITCH" layoutX="370.0" layoutY="416.0" mnemonicParsing="false" onAction="#chooseWizard" prefWidth="111.0" text="WITCH">
+         <font>
+            <Font name="Futura Medium" size="23.0" />
+         </font></Button>
+      <Button fx:id="SENSEI" layoutX="506.0" layoutY="416.0" mnemonicParsing="false" onAction="#chooseWizard" prefWidth="111.0" text="SENSEI">
+         <font>
+            <Font name="Futura Medium" size="23.0" />
+         </font></Button>
+
+      <Text fx:id="wizardChosen" layoutX="53.0" layoutY="549.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waiting for other players to choose their wizards..." wrappingWidth="633.6166381835938">
+         <font>
+            <Font name="Hiragino Sans W9" size="19.0" />
          </font>
       </Text>
    </children>
