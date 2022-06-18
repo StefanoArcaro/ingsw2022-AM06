@@ -265,7 +265,10 @@ public class Game {
      * @return the player that comes after the current player.
      */
     public Player getNextPlayer() {
-        return players.get((players.indexOf(currentPlayer) + 1) % numberOfPlayers.getNum());
+        if(playingOrder.isEmpty()) {
+            return players.get((players.indexOf(currentPlayer) + 1) % numberOfPlayers.getNum());
+        }
+        return playingOrder.get((playingOrder.indexOf(currentPlayer) + 1) % numberOfPlayers.getNum());
     }
 
     /**
@@ -392,17 +395,25 @@ public class Game {
             playerOlderConquerorIslandGroup = getPlayerByColor(towerColorOnIslandGroup);
         }
 
+        System.out.println(islandGroupIndex);
+
         for(Player player : players) {
             influence = islandGroup.calculateInfluence(this, player, activatedCharacter);
+
+            System.out.println(player.getNickname() + " " + influence);
 
             if(influence > maxInfluence) {
                 maxInfluence = influence;
                 playerMaxInfluence = player;
-            } else if(influence == maxInfluence) {
-                if(!player.equals(playerOlderConquerorIslandGroup)) {
+            }
+        }
+
+        for(Player player : players) {
+            if(!player.equals(playerMaxInfluence)) {
+                int challenger = islandGroup.calculateInfluence(this, player, activatedCharacter);
+
+                if(challenger == maxInfluence) {
                     draw = true;
-                } else {
-                    playerMaxInfluence = player;
                 }
             }
         }
