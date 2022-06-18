@@ -16,8 +16,8 @@ public class LoginController implements GUIController {
 
     private GUI gui;
 
-    ObservableList<String> numberOfPlayersList = FXCollections.observableArrayList("2", "3");
-    ObservableList<String> gameModeList = FXCollections.observableArrayList("Easy", "Expert");
+    final ObservableList<String> numberOfPlayersList = FXCollections.observableArrayList("2", "3");
+    final ObservableList<String> gameModeList = FXCollections.observableArrayList("Easy", "Expert");
 
     public TextField nickname_field;
     public ChoiceBox<String> numberPlayers_box;

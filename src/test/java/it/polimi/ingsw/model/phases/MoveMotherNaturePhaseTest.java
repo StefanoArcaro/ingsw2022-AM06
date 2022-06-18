@@ -3,7 +3,6 @@ package it.polimi.ingsw.model.phases;
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.characters.Character;
-import it.polimi.ingsw.model.characters.CharacterInfluenceModifier;
 import it.polimi.ingsw.model.characters.ConcreteCharacterFactory;
 import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.enumerations.GameMode;

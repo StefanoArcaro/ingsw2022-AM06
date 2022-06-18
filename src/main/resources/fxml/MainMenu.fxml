@@ -6,20 +6,23 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.MainMenuSetupController">
-   <children>
-      <ImageView fitHeight="774.0" fitWidth="772.0" layoutX="-60.0" layoutY="-31.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Eriantys.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="buttonPlay" layoutX="240.0" layoutY="304.0" mnemonicParsing="false" onAction="#play" prefHeight="56.0" prefWidth="220.0" text="PLAY">
-         <font>
-            <Font name="Chalkduster" size="30.0" />
-         </font></Button>
-      <Button fx:id="buttonQuit" layoutX="565.0" layoutY="515.0" mnemonicParsing="false" onAction="#quit" prefHeight="42.0" prefWidth="88.0" text="QUIT">
-         <font>
-            <Font name="Chalkduster" size="21.0" />
-         </font></Button>
-   </children>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+      prefWidth="700.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="it.polimi.ingsw.view.GUI.controllers.MainMenuSetupController">
+   <ImageView fitHeight="774.0" fitWidth="772.0" layoutX="-60.0" layoutY="-31.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/Eriantys.png"/>
+   </ImageView>
+   <Button fx:id="buttonPlay" layoutX="240.0" layoutY="304.0" mnemonicParsing="false" onAction="#play" prefHeight="56.0"
+           prefWidth="220.0" text="PLAY">
+      <font>
+         <Font name="Chalkduster" size="30.0"/>
+      </font>
+   </Button>
+   <Button fx:id="buttonQuit" layoutX="565.0" layoutY="515.0" mnemonicParsing="false" onAction="#quit" prefHeight="42.0"
+           prefWidth="88.0" text="QUIT">
+      <font>
+         <Font name="Chalkduster" size="21.0"/>
+      </font>
+   </Button>
 </Pane>

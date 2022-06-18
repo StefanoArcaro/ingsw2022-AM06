@@ -2,7 +2,6 @@ package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.exceptions.OutOfBoundException;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.util.Constants;
 
 public class CharacterInfluenceCalculator extends Character {
 

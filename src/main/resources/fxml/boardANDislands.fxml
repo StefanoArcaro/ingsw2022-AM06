@@ -11,1199 +11,1311 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" style="-fx-background-color: #EAE4D4#EAE4D4 #EAE4D4#EAE4D4;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.PlayController">
-   <children>
-      <ImageView fitHeight="694.0" fitWidth="1065.0" layoutX="-9.0" layoutY="-87.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/sea.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="295.0" fitWidth="686.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Plancia_DEF2.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="115.0" layoutX="406.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/cloud.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cloud_image_3" fitHeight="110.0" fitWidth="115.0" layoutX="304.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/cloud.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="115.0" layoutX="202.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/cloud.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="123.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/island_v1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="498.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/island_v1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="247.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/island_v2.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="498.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/island_v1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="122.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/island_v1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="619.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/island_v2.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="371.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/island_v2.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="3.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/island_v2.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="110.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/island_v3.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="372.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/island_v3.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="616.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/island_v3.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="251.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/island_v3.png" />
-         </image>
-      </ImageView>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+      prefWidth="1050.0" style="-fx-background-color: #EAE4D4#EAE4D4 #EAE4D4#EAE4D4;"
+      xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="it.polimi.ingsw.view.GUI.controllers.PlayController">
+   <ImageView fitHeight="694.0" fitWidth="1065.0" layoutX="-9.0" layoutY="-87.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/sea.png"/>
+   </ImageView>
+   <ImageView fitHeight="295.0" fitWidth="686.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/Plancia_DEF2.png"/>
+   </ImageView>
+   <ImageView fitHeight="110.0" fitWidth="115.0" layoutX="406.0" layoutY="87.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/cloud.png"/>
+   </ImageView>
+   <ImageView fx:id="cloud_image_3" fitHeight="110.0" fitWidth="115.0" layoutX="304.0" layoutY="87.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/cloud.png"/>
+   </ImageView>
+   <ImageView fitHeight="110.0" fitWidth="115.0" layoutX="202.0" layoutY="89.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/cloud.png"/>
+   </ImageView>
+   <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="123.0" layoutY="-10.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/island_v1.png"/>
+   </ImageView>
+   <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="498.0" layoutY="-10.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/island_v1.png"/>
+   </ImageView>
+   <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="247.0" layoutY="-10.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/island_v2.png"/>
+   </ImageView>
+   <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="498.0" layoutY="202.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/island_v1.png"/>
+   </ImageView>
+   <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="122.0" layoutY="201.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/island_v1.png"/>
+   </ImageView>
+   <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="619.0" layoutY="36.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/island_v2.png"/>
+   </ImageView>
+   <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="371.0" layoutY="202.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/island_v2.png"/>
+   </ImageView>
+   <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="3.0" layoutY="162.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/island_v2.png"/>
+   </ImageView>
+   <ImageView fitHeight="110.0" fitWidth="110.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/island_v3.png"/>
+   </ImageView>
+   <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="372.0" layoutY="-10.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/island_v3.png"/>
+   </ImageView>
+   <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="616.0" layoutY="161.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/island_v3.png"/>
+   </ImageView>
+   <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="251.0" layoutY="200.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/island_v3.png"/>
+   </ImageView>
 
-      <!-- ISLAND LINKS -->
-      <ImageView id="link1" fitHeight="75.0" fitWidth="75.0" layoutX="200.0" layoutY="2.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="25.0">
-         <image>
-            <Image url="@../images/ponteV2.png" />
-         </image>
-      </ImageView>
-      <ImageView id="link2" fitHeight="75.0" fitWidth="75.0" layoutX="326.0" layoutY="1.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="25.0">
-         <image>
-            <Image url="@../images/ponteV2.png" />
-         </image>
-      </ImageView>
-      <ImageView id="link3" fitHeight="75.0" fitWidth="75.0" layoutX="451.0" layoutY="1.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="25.0">
-         <image>
-            <Image url="@../images/ponteV2.png" />
-         </image>
-      </ImageView>
-      <ImageView id="link4" fitHeight="75.0" fitWidth="75.0" layoutX="582.0" layoutY="13.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="55.5">
-         <image>
-            <Image url="@../images/ponteV2.png" />
-         </image>
-      </ImageView>
-      <ImageView id="link5" fitHeight="75.0" fitWidth="75.0" layoutX="646.0" layoutY="115.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="118.8">
-         <image>
-            <Image url="@../images/ponteV2.png" />
-         </image>
-      </ImageView>
-      <ImageView id="link6" fitHeight="75.0" fitWidth="75.0" layoutX="579.0" layoutY="208.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="13.2">
-         <image>
-            <Image url="@../images/ponteV2.png" />
-         </image>
-      </ImageView>
-      <ImageView id="link7" fitHeight="75.0" fitWidth="75.0" layoutX="449.0" layoutY="216.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="25.0">
-         <image>
-            <Image url="@../images/ponteV2.png" />
-         </image>
-      </ImageView>
-      <ImageView id="link8" fitHeight="75.0" fitWidth="75.0" layoutX="326.0" layoutY="217.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="25.0">
-         <image>
-            <Image url="@../images/ponteV2.png" />
-         </image>
-      </ImageView>
-      <ImageView id="link9" fitHeight="75.0" fitWidth="75.0" layoutX="200.0" layoutY="216.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="25.0">
-         <image>
-            <Image url="@../images/ponteV2.png" />
-         </image>
-      </ImageView>
-      <ImageView id="link10" fitHeight="75.0" fitWidth="75.0" layoutX="76.0" layoutY="199.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="56.6">
-         <image>
-            <Image url="@../images/ponteV2.png" />
-         </image>
-      </ImageView>
-      <ImageView id="link11" fitHeight="75.0" fitWidth="75.0" layoutX="20.0" layoutY="112.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="-58.6">
-         <image>
-            <Image url="@../images/ponteV2.png" />
-         </image>
-      </ImageView>
-      <ImageView id="link12" fitHeight="75.0" fitWidth="75.0" layoutX="76.0" layoutY="18.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/ponteV2.png" />
-         </image>
-      </ImageView>
+   <!-- ISLAND LINKS -->
+   <ImageView id="link1" fitHeight="75.0" fitWidth="75.0" layoutX="200.0" layoutY="2.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true" rotate="25.0">
+      <Image url="@../images/ponteV2.png"/>
+   </ImageView>
+   <ImageView id="link2" fitHeight="75.0" fitWidth="75.0" layoutX="326.0" layoutY="1.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true" rotate="25.0">
+      <Image url="@../images/ponteV2.png"/>
+   </ImageView>
+   <ImageView id="link3" fitHeight="75.0" fitWidth="75.0" layoutX="451.0" layoutY="1.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true" rotate="25.0">
+      <Image url="@../images/ponteV2.png"/>
+   </ImageView>
+   <ImageView id="link4" fitHeight="75.0" fitWidth="75.0" layoutX="582.0" layoutY="13.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true" rotate="55.5">
+      <Image url="@../images/ponteV2.png"/>
+   </ImageView>
+   <ImageView id="link5" fitHeight="75.0" fitWidth="75.0" layoutX="646.0" layoutY="115.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true" rotate="118.8">
+      <Image url="@../images/ponteV2.png"/>
+   </ImageView>
+   <ImageView id="link6" fitHeight="75.0" fitWidth="75.0" layoutX="579.0" layoutY="208.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true" rotate="13.2">
+      <Image url="@../images/ponteV2.png"/>
+   </ImageView>
+   <ImageView id="link7" fitHeight="75.0" fitWidth="75.0" layoutX="449.0" layoutY="216.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true" rotate="25.0">
+      <Image url="@../images/ponteV2.png"/>
+   </ImageView>
+   <ImageView id="link8" fitHeight="75.0" fitWidth="75.0" layoutX="326.0" layoutY="217.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true" rotate="25.0">
+      <Image url="@../images/ponteV2.png"/>
+   </ImageView>
+   <ImageView id="link9" fitHeight="75.0" fitWidth="75.0" layoutX="200.0" layoutY="216.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true" rotate="25.0">
+      <Image url="@../images/ponteV2.png"/>
+   </ImageView>
+   <ImageView id="link10" fitHeight="75.0" fitWidth="75.0" layoutX="76.0" layoutY="199.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true" rotate="56.6">
+      <Image url="@../images/ponteV2.png"/>
+   </ImageView>
+   <ImageView id="link11" fitHeight="75.0" fitWidth="75.0" layoutX="20.0" layoutY="112.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true" rotate="-58.6">
+      <Image url="@../images/ponteV2.png"/>
+   </ImageView>
+   <ImageView id="link12" fitHeight="75.0" fitWidth="75.0" layoutX="76.0" layoutY="18.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/ponteV2.png"/>
+   </ImageView>
 
-      <!-- STUDENTS IN CLOUDS -->
-      <Button id="cloud1_s1" layoutX="224.0" layoutY="106.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ff0000 #ff0000; -fx-background-radius: 50;" />
-      <Button id="cloud1_s2" layoutX="244.0" layoutY="125.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #008000 #008000; -fx-background-radius: 50;" />
-      <Button id="cloud1_s3" layoutX="224.0" layoutY="145.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #008000 #008000; -fx-background-radius: 50;" />
-      <Button id="cloud1_s4" layoutX="244.0" layoutY="164.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ff0000 #ff0000; -fx-background-radius: 50;" />
-      <Button id="cloud2_s1" layoutX="428.0" layoutY="106.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ff0000 #ff0000; -fx-background-radius: 50;" />
-      <Button id="cloud2_s2" layoutX="448.0" layoutY="125.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #0000ff #0000ff; -fx-background-radius: 50;" />
-      <Button id="cloud2_s3" layoutX="428.0" layoutY="145.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #0000ff #0000ff; -fx-background-radius: 50;" />
-      <Button id="cloud2_s4" layoutX="448.0" layoutY="164.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ffd700 #ffd700 #ffd700 #ffd700; -fx-background-radius: 50;" />
-      <Button id="cloud3_s1" layoutX="326.0" layoutY="105.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ffd700 #ffd700; -fx-background-radius: 50;" />
-      <Button id="cloud3_s2" layoutX="346.0" layoutY="124.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ffd700 #ffd700; -fx-background-radius: 50;" />
-      <Button id="cloud3_s3" layoutX="326.0" layoutY="144.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #ff0000 #ff0000; -fx-background-radius: 50;" />
-      <Button id="cloud3_s4" layoutX="346.0" layoutY="163.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #0000ff #0000ff; -fx-background-radius: 50;" />
-      <Button layoutX="727.0" layoutY="530.0" mnemonicParsing="false" onAction="#onShowOpponents" prefHeight="30.0" prefWidth="281.0" text="SHOW OPPONENTS' BOARDS">
+   <!-- STUDENTS IN CLOUDS -->
+   <Button id="cloud1_s1" layoutX="224.0" layoutY="106.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0"
+           style="-fx-background-color: #ff0000 #ff0000; -fx-background-radius: 50;"/>
+   <Button id="cloud1_s2" layoutX="244.0" layoutY="125.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0"
+           style="-fx-background-color: #008000 #008000; -fx-background-radius: 50;"/>
+   <Button id="cloud1_s3" layoutX="224.0" layoutY="145.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0"
+           style="-fx-background-color: #008000 #008000; -fx-background-radius: 50;"/>
+   <Button id="cloud1_s4" layoutX="244.0" layoutY="164.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0"
+           style="-fx-background-color: #ff0000 #ff0000; -fx-background-radius: 50;"/>
+   <Button id="cloud2_s1" layoutX="428.0" layoutY="106.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0"
+           style="-fx-background-color: #ff0000 #ff0000; -fx-background-radius: 50;"/>
+   <Button id="cloud2_s2" layoutX="448.0" layoutY="125.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0"
+           style="-fx-background-color: #0000ff #0000ff; -fx-background-radius: 50;"/>
+   <Button id="cloud2_s3" layoutX="428.0" layoutY="145.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0"
+           style="-fx-background-color: #0000ff #0000ff; -fx-background-radius: 50;"/>
+   <Button id="cloud2_s4" layoutX="448.0" layoutY="164.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0"
+           style="-fx-background-color: #ffd700 #ffd700 #ffd700 #ffd700; -fx-background-radius: 50;"/>
+   <Button id="cloud3_s1" layoutX="326.0" layoutY="105.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0"
+           style="-fx-background-color: #ffd700 #ffd700; -fx-background-radius: 50;"/>
+   <Button id="cloud3_s2" layoutX="346.0" layoutY="124.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0"
+           style="-fx-background-color: #ffd700 #ffd700; -fx-background-radius: 50;"/>
+   <Button id="cloud3_s3" layoutX="326.0" layoutY="144.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0"
+           style="-fx-background-color: #ff0000 #ff0000; -fx-background-radius: 50;"/>
+   <Button id="cloud3_s4" layoutX="346.0" layoutY="163.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0"
+           style="-fx-background-color: #0000ff #0000ff; -fx-background-radius: 50;"/>
+   <Button layoutX="727.0" layoutY="530.0" mnemonicParsing="false" onAction="#onShowOpponents" prefHeight="30.0"
+           prefWidth="281.0" text="SHOW OPPONENTS' BOARDS">
+      <font>
+         <Font name="Comic Sans MS Bold" size="14.0"/>
+      </font>
+   </Button>
+   <Button fx:id="assistantAction" layoutX="757.0" layoutY="73.0" mnemonicParsing="false"
+           onAction="#onOpenPlayAssistants" prefHeight="50.0" prefWidth="246.0" style="-fx-background-radius: 20;"
+           text="PLAY ASSISTANT">
+      <font>
+         <Font name="Comic Sans MS Bold" size="14.0"/>
+      </font>
+   </Button>
+   <Button fx:id="hallAction" layoutX="757.0" layoutY="128.0" mnemonicParsing="false" onAction="#onMoveStudentToHall"
+           prefHeight="50.0" prefWidth="246.0" style="-fx-background-radius: 20;" text="MOVE STUDENT TO HALL">
+      <font>
+         <Font name="Comic Sans MS Bold" size="14.0"/>
+      </font>
+   </Button>
+   <Button fx:id="islandAction" layoutX="757.0" layoutY="183.0" mnemonicParsing="false"
+           onAction="#onMoveStudentToIsland" prefHeight="50.0" prefWidth="246.0" style="-fx-background-radius: 20;"
+           text="MOVE STUDENT TO ISLAND">
+      <font>
+         <Font name="Comic Sans MS Bold" size="14.0"/>
+      </font>
+   </Button>
+   <Button fx:id="motherNatureAction" layoutX="757.0" layoutY="238.0" mnemonicParsing="false"
+           onAction="#onOpenMotherNature" prefHeight="50.0" prefWidth="246.0" style="-fx-background-radius: 20;"
+           text="MOVE MOTHER NATURE">
+      <font>
+         <Font name="Comic Sans MS Bold" size="14.0"/>
+      </font>
+   </Button>
+   <Button fx:id="charactersAction" layoutX="757.0" layoutY="293.0" mnemonicParsing="false" onAction="#onOpenCharacters"
+           prefHeight="50.0" prefWidth="246.0" style="-fx-background-radius: 20;" text="CHARACTERS">
+      <font>
+         <Font name="Comic Sans MS Bold" size="14.0"/>
+      </font>
+   </Button>
+
+   <!-- INFO -->
+   <Text fx:id="name" layoutX="815.0" layoutY="40.0" text="Label" wrappingWidth="220.40548706054688">
+      <font>
+         <Font name="Bodoni 72 Oldstyle Book" size="28.0"/>
+      </font>
+   </Text>
+
+   <!-- ENTRANCE BUTTONS -->
+   <Button id="entrance_1" fx:id="entrance_1" layoutX="59.0" layoutY="340.0" minWidth="33.0" mnemonicParsing="false"
+           onAction="#onEntranceClicked" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 50;"/>
+   <Button id="entrance_2" fx:id="entrance_2" layoutX="19.0" layoutY="389.0" minWidth="33.0" mnemonicParsing="false"
+           onAction="#onEntranceClicked" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 50;"/>
+   <Button id="entrance_3" fx:id="entrance_3" layoutX="60.0" layoutY="388.0" minWidth="33.0" mnemonicParsing="false"
+           onAction="#onEntranceClicked" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 50;"/>
+   <Button id="entrance_4" fx:id="entrance_4" layoutX="20.0" layoutY="437.0" minWidth="33.0" mnemonicParsing="false"
+           onAction="#onEntranceClicked" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 50;"/>
+   <Button id="entrance_5" fx:id="entrance_5" layoutX="60.0" layoutY="437.0" minWidth="33.0" mnemonicParsing="false"
+           onAction="#onEntranceClicked" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 50;"/>
+   <Button id="entrance_6" fx:id="entrance_6" layoutX="20.0" layoutY="485.0" minWidth="33.0" mnemonicParsing="false"
+           onAction="#onEntranceClicked" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 50;"/>
+   <Button id="entrance_7" fx:id="entrance_7" layoutX="60.0" layoutY="485.0" minWidth="33.0" mnemonicParsing="false"
+           onAction="#onEntranceClicked" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 50;"/>
+   <Button id="entrance_8" fx:id="entrance_8" layoutX="20.0" layoutY="533.0" minWidth="33.0" mnemonicParsing="false"
+           onAction="#onEntranceClicked" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 50;"/>
+   <Button id="entrance_9" fx:id="entrance_9" layoutX="60.0" layoutY="533.0" minWidth="33.0" mnemonicParsing="false"
+           onAction="#onEntranceClicked" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 50;"/>
+
+   <!-- HALL -->
+   <GridPane fx:id="gridPane" layoutX="126.0" layoutY="329.0" prefHeight="246.0" prefWidth="319.0">
+      <columnConstraints>
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+      </rowConstraints>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="0"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="1"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="2"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="3"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="4"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="5"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="6"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="7"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="8"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="9"/>
+
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.rowIndex="0"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ff0000;" GridPane.rowIndex="1"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ffd700;" GridPane.rowIndex="2"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ff1493;" GridPane.rowIndex="3"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #0000ff;" GridPane.rowIndex="4"/>
+
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="0"
+              GridPane.rowIndex="0"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="1"
+              GridPane.rowIndex="0"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="2"
+              GridPane.rowIndex="0"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="3"
+              GridPane.rowIndex="0"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="4"
+              GridPane.rowIndex="0"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="5"
+              GridPane.rowIndex="0"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="6"
+              GridPane.rowIndex="0"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="7"
+              GridPane.rowIndex="0"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="8"
+              GridPane.rowIndex="0"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="9"
+              GridPane.rowIndex="0"/>
+
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ff0000;" GridPane.columnIndex="0"
+              GridPane.rowIndex="1"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ff0000;" GridPane.columnIndex="1"
+              GridPane.rowIndex="1"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ff0000;" GridPane.columnIndex="2"
+              GridPane.rowIndex="1"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ff0000;" GridPane.columnIndex="3"
+              GridPane.rowIndex="1"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ff0000;" GridPane.columnIndex="4"
+              GridPane.rowIndex="1"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ff0000;" GridPane.columnIndex="5"
+              GridPane.rowIndex="1"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ff0000;" GridPane.columnIndex="6"
+              GridPane.rowIndex="1"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ff0000;" GridPane.columnIndex="7"
+              GridPane.rowIndex="1"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ff0000;" GridPane.columnIndex="8"
+              GridPane.rowIndex="1"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ff0000;" GridPane.columnIndex="9"
+              GridPane.rowIndex="1"/>
+
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ffd700;" GridPane.columnIndex="0"
+              GridPane.rowIndex="2"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ffd700;" GridPane.columnIndex="1"
+              GridPane.rowIndex="2"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ffd700;" GridPane.columnIndex="2"
+              GridPane.rowIndex="2"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ffd700;" GridPane.columnIndex="3"
+              GridPane.rowIndex="2"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ffd700;" GridPane.columnIndex="4"
+              GridPane.rowIndex="2"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ffd700;" GridPane.columnIndex="5"
+              GridPane.rowIndex="2"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ffd700;" GridPane.columnIndex="6"
+              GridPane.rowIndex="2"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ffd700;" GridPane.columnIndex="7"
+              GridPane.rowIndex="2"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ffd700;" GridPane.columnIndex="8"
+              GridPane.rowIndex="2"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ffd700;" GridPane.columnIndex="9"
+              GridPane.rowIndex="2"/>
+
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ff1493;" GridPane.columnIndex="0"
+              GridPane.rowIndex="3"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ff1493;" GridPane.columnIndex="1"
+              GridPane.rowIndex="3"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ff1493;" GridPane.columnIndex="2"
+              GridPane.rowIndex="3"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ff1493;" GridPane.columnIndex="3"
+              GridPane.rowIndex="3"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ff1493;" GridPane.columnIndex="4"
+              GridPane.rowIndex="3"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ff1493;" GridPane.columnIndex="5"
+              GridPane.rowIndex="3"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ff1493;" GridPane.columnIndex="6"
+              GridPane.rowIndex="3"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ff1493;" GridPane.columnIndex="7"
+              GridPane.rowIndex="3"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ff1493;" GridPane.columnIndex="8"
+              GridPane.rowIndex="3"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #ff1493;" GridPane.columnIndex="9"
+              GridPane.rowIndex="3"/>
+
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #0000ff;" GridPane.columnIndex="0"
+              GridPane.rowIndex="4"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #0000ff;" GridPane.columnIndex="1"
+              GridPane.rowIndex="4"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #0000ff;" GridPane.columnIndex="2"
+              GridPane.rowIndex="4"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #0000ff;" GridPane.columnIndex="3"
+              GridPane.rowIndex="4"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #0000ff;" GridPane.columnIndex="4"
+              GridPane.rowIndex="4"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #0000ff;" GridPane.columnIndex="5"
+              GridPane.rowIndex="4"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #0000ff;" GridPane.columnIndex="6"
+              GridPane.rowIndex="4"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #0000ff;" GridPane.columnIndex="7"
+              GridPane.rowIndex="4"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #0000ff;" GridPane.columnIndex="8"
+              GridPane.rowIndex="4"/>
+      <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0"
+              style="-fx-background-radius: 50; -fx-background-color: #0000ff;" GridPane.columnIndex="9"
+              GridPane.rowIndex="4"/>
+   </GridPane>
+
+   <!-- PROFESSORS -->
+   <Button id="professor_green" fx:id="professor_green" layoutX="480.0" layoutY="340.0" minWidth="33.0"
+           mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0"
+           style="-fx-background-radius: 10; -fx-background-color: #008000;"/>
+   <Button id="professor_red" fx:id="professor_red" layoutX="481.0" layoutY="387.0" minWidth="33.0"
+           mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0"
+           style="-fx-background-radius: 10; -fx-background-color: #ff0000;"/>
+   <Button id="professor_yellow" fx:id="professor_yellow" layoutX="480.0" layoutY="437.0" minWidth="33.0"
+           mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0"
+           style="-fx-background-radius: 10; -fx-background-color: #ffd700;"/>
+   <Button id="professor_pink" fx:id="professor_pink" layoutX="480.0" layoutY="485.0" minWidth="33.0"
+           mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0"
+           style="-fx-background-radius: 10; -fx-background-color: #ff1493;"/>
+   <Button id="professor_blue" fx:id="professor_blue" layoutX="480.0" layoutY="532.0" minWidth="33.0"
+           mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0"
+           style="-fx-background-radius: 10; -fx-background-color: #0000ff;"/>
+
+
+   <!-- TOWERS -->
+   <ImageView id="tower_1" fitHeight="48.0" fitWidth="38.0" layoutX="557.0" layoutY="350.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/tower_black.png"/>
+   </ImageView>
+   <ImageView id="tower_2" fitHeight="48.0" fitWidth="38.0" layoutX="609.0" layoutY="350.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/tower_black.png"/>
+   </ImageView>
+   <ImageView id="tower_3" fitHeight="48.0" fitWidth="38.0" layoutX="557.0" layoutY="398.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/tower_black.png"/>
+   </ImageView>
+   <ImageView id="tower_4" fitHeight="48.0" fitWidth="38.0" layoutX="609.0" layoutY="398.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/tower_black.png"/>
+   </ImageView>
+   <ImageView id="tower_5" fitHeight="48.0" fitWidth="38.0" layoutX="557.0" layoutY="446.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/tower_black.png"/>
+   </ImageView>
+   <ImageView id="tower_6" fitHeight="48.0" fitWidth="38.0" layoutX="609.0" layoutY="446.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/tower_black.png"/>
+   </ImageView>
+   <ImageView id="tower_7" fitHeight="48.0" fitWidth="38.0" layoutX="557.0" layoutY="494.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/tower_black.png"/>
+   </ImageView>
+   <ImageView id="tower_8" fitHeight="48.0" fitWidth="38.0" layoutX="609.0" layoutY="494.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/tower_black.png"/>
+   </ImageView>
+
+   <!-- MOTHER NATURE IMAGES -->
+   <ImageView id="mn_1" fitHeight="16.0" fitWidth="14.0" layoutX="188.0" layoutY="51.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/mother_nature_pawn.png"/>
+   </ImageView>
+   <ImageView id="mn_2" fitHeight="16.0" fitWidth="14.0" layoutX="312.0" layoutY="51.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/mother_nature_pawn.png"/>
+   </ImageView>
+   <ImageView id="mn_3" fitHeight="16.0" fitWidth="14.0" layoutX="436.0" layoutY="51.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/mother_nature_pawn.png"/>
+   </ImageView>
+   <ImageView id="mn_4" fitHeight="16.0" fitWidth="14.0" layoutX="560.0" layoutY="51.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/mother_nature_pawn.png"/>
+   </ImageView>
+   <ImageView id="mn_5" fitHeight="16.0" fitWidth="14.0" layoutX="684.0" layoutY="96.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/mother_nature_pawn.png"/>
+   </ImageView>
+   <ImageView id="mn_6" fitHeight="16.0" fitWidth="14.0" layoutX="684.0" layoutY="221.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/mother_nature_pawn.png"/>
+   </ImageView>
+   <ImageView id="mn_7" fitHeight="16.0" fitWidth="14.0" layoutX="559.0" layoutY="268.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/mother_nature_pawn.png"/>
+   </ImageView>
+   <ImageView id="mn_8" fitHeight="16.0" fitWidth="14.0" layoutX="435.0" layoutY="268.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/mother_nature_pawn.png"/>
+   </ImageView>
+   <ImageView id="mn_9" fitHeight="16.0" fitWidth="14.0" layoutX="311.0" layoutY="268.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/mother_nature_pawn.png"/>
+   </ImageView>
+   <ImageView id="mn_10" fitHeight="16.0" fitWidth="14.0" layoutX="187.0" layoutY="268.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/mother_nature_pawn.png"/>
+   </ImageView>
+   <ImageView id="mn_11" fitHeight="16.0" fitWidth="14.0" layoutX="64.0" layoutY="222.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/mother_nature_pawn.png"/>
+   </ImageView>
+   <ImageView id="mn_12" fitHeight="16.0" fitWidth="14.0" layoutX="64.0" layoutY="97.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/mother_nature_pawn.png"/>
+   </ImageView>
+
+   <!-- TOWER IMAGES -->
+   <ImageView id="t_1" fitHeight="21.0" fitWidth="13.0" layoutX="188.0" layoutY="29.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/tower_white.png"/>
+   </ImageView>
+   <ImageView id="t_2" fitHeight="21.0" fitWidth="13.0" layoutX="312.0" layoutY="29.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/tower_white.png"/>
+   </ImageView>
+   <ImageView id="t_3" fitHeight="21.0" fitWidth="13.0" layoutX="436.0" layoutY="29.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/tower_white.png"/>
+   </ImageView>
+   <ImageView id="t_4" fitHeight="21.0" fitWidth="13.0" layoutX="560.0" layoutY="29.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/tower_white.png"/>
+   </ImageView>
+   <ImageView id="t_5" fitHeight="21.0" fitWidth="13.0" layoutX="684.0" layoutY="74.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/tower_gray.png"/>
+   </ImageView>
+   <ImageView id="t_6" fitHeight="21.0" fitWidth="13.0" layoutX="684.0" layoutY="199.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/tower_gray.png"/>
+   </ImageView>
+   <ImageView id="t_7" fitHeight="21.0" fitWidth="13.0" layoutX="559.0" layoutY="246.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/tower_gray.png"/>
+   </ImageView>
+   <ImageView id="t_8" fitHeight="21.0" fitWidth="13.0" layoutX="435.0" layoutY="246.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/tower_gray.png"/>
+   </ImageView>
+   <ImageView id="t_9" fitHeight="21.0" fitWidth="13.0" layoutX="311.0" layoutY="246.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/tower_black.png"/>
+   </ImageView>
+   <ImageView id="t_10" fitHeight="21.0" fitWidth="13.0" layoutX="187.0" layoutY="246.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/tower_black.png"/>
+   </ImageView>
+   <ImageView id="t_11" fitHeight="21.0" fitWidth="13.0" layoutX="64.0" layoutY="200.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/tower_black.png"/>
+   </ImageView>
+   <ImageView id="t_12" fitHeight="21.0" fitWidth="13.0" layoutX="64.0" layoutY="75.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/tower_black.png"/>
+   </ImageView>
+   <Label layoutX="188.0" layoutY="6.0" prefHeight="18.0" prefWidth="32.0" text="1">
+      <font>
+         <Font name="Rockwell" size="18.0"/>
+      </font>
+   </Label>
+   <Label layoutX="313.0" layoutY="7.0" prefHeight="18.0" prefWidth="19.0" text="2">
+      <font>
+         <Font name="Rockwell" size="18.0"/>
+      </font>
+   </Label>
+   <Label layoutX="437.0" layoutY="7.0" prefHeight="18.0" prefWidth="19.0" text="3">
+      <font>
+         <Font name="Rockwell" size="18.0"/>
+      </font>
+   </Label>
+   <Label layoutX="560.0" layoutY="7.0" prefHeight="18.0" prefWidth="19.0" text="4">
+      <font>
+         <Font name="Rockwell" size="18.0"/>
+      </font>
+   </Label>
+   <Label layoutX="684.0" layoutY="53.0" prefHeight="18.0" prefWidth="19.0" text="5">
+      <font>
+         <Font name="Rockwell" size="18.0"/>
+      </font>
+   </Label>
+   <Label layoutX="683.0" layoutY="177.0" prefHeight="18.0" prefWidth="19.0" text="6">
+      <font>
+         <Font name="Rockwell" size="18.0"/>
+      </font>
+   </Label>
+   <Label layoutX="559.0" layoutY="224.0" prefHeight="18.0" prefWidth="19.0" text="7">
+      <font>
+         <Font name="Rockwell" size="18.0"/>
+      </font>
+   </Label>
+   <Label layoutX="435.0" layoutY="224.0" prefHeight="18.0" prefWidth="19.0" text="8">
+      <font>
+         <Font name="Rockwell" size="18.0"/>
+      </font>
+   </Label>
+   <Label layoutX="311.0" layoutY="224.0" prefHeight="18.0" prefWidth="19.0" text="9">
+      <font>
+         <Font name="Rockwell" size="18.0"/>
+      </font>
+   </Label>
+   <Label layoutX="183.0" layoutY="224.0" prefHeight="25.0" prefWidth="27.0" text="10">
+      <font>
+         <Font name="Rockwell" size="18.0"/>
+      </font>
+   </Label>
+   <Label layoutX="60.0" layoutY="178.0" prefHeight="25.0" prefWidth="27.0" text="11">
+      <font>
+         <Font name="Rockwell" size="18.0"/>
+      </font>
+   </Label>
+   <Label layoutX="60.0" layoutY="52.0" prefHeight="18.0" prefWidth="27.0" text="12">
+      <font>
+         <Font name="Rockwell" size="18.0"/>
+      </font>
+   </Label>
+   <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="523.0" layoutY="14.0" opacity="0.7" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/column_colors.png"/>
+   </ImageView>
+
+   <!-- ISLAND STUDENTS COLOR IMAGES -->
+   <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="147.0" layoutY="13.0" opacity="0.7" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/column_colors.png"/>
+   </ImageView>
+   <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="271.0" layoutY="13.0" opacity="0.7" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/column_colors.png"/>
+   </ImageView>
+   <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="395.0" layoutY="13.0" opacity="0.7" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/column_colors.png"/>
+   </ImageView>
+   <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="643.0" layoutY="58.0" opacity="0.7" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/column_colors.png"/>
+   </ImageView>
+   <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="643.0" layoutY="183.0" opacity="0.7" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/column_colors.png"/>
+   </ImageView>
+   <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="518.0" layoutY="230.0" opacity="0.7" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/column_colors.png"/>
+   </ImageView>
+   <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="394.0" layoutY="230.0" opacity="0.7" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/column_colors.png"/>
+   </ImageView>
+   <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="270.0" layoutY="230.0" opacity="0.7" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/column_colors.png"/>
+   </ImageView>
+   <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="146.0" layoutY="230.0" opacity="0.7" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/column_colors.png"/>
+   </ImageView>
+   <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="23.0" layoutY="184.0" opacity="0.7" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/column_colors.png"/>
+   </ImageView>
+   <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="23.0" layoutY="59.0" opacity="0.7" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/column_colors.png"/>
+   </ImageView>
+
+   <!-- ISLAND STUDENTS NUMBERS -->
+   <GridPane fx:id="gridPane_1" layoutX="147.0" layoutY="13.0" prefHeight="54.0" prefWidth="18.0">
+      <columnConstraints>
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+      </rowConstraints>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="0">
          <font>
-            <Font name="Comic Sans MS Bold" size="14.0" />
+            <Font size="12.0"/>
          </font>
-      </Button>
-      <Button fx:id="assistantAction" layoutX="757.0" layoutY="73.0" mnemonicParsing="false" onAction="#onOpenPlayAssistants" prefHeight="50.0" prefWidth="246.0" style="-fx-background-radius: 20;" text="PLAY ASSISTANT">
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="1">
          <font>
-            <Font name="Comic Sans MS Bold" size="14.0" />
-         </font></Button>
-      <Button fx:id="hallAction" layoutX="757.0" layoutY="128.0" mnemonicParsing="false" onAction="#onMoveStudentToHall" prefHeight="50.0" prefWidth="246.0" style="-fx-background-radius: 20;" text="MOVE STUDENT TO HALL">
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="3">
          <font>
-            <Font name="Comic Sans MS Bold" size="14.0" />
-         </font></Button>
-      <Button fx:id="islandAction" layoutX="757.0" layoutY="183.0" mnemonicParsing="false" onAction="#onMoveStudentToIsland" prefHeight="50.0" prefWidth="246.0" style="-fx-background-radius: 20;" text="MOVE STUDENT TO ISLAND">
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="4">
          <font>
-            <Font name="Comic Sans MS Bold" size="14.0" />
-         </font></Button>
-      <Button fx:id="motherNatureAction" layoutX="757.0" layoutY="238.0" mnemonicParsing="false" onAction="#onOpenMotherNature" prefHeight="50.0" prefWidth="246.0" style="-fx-background-radius: 20;" text="MOVE MOTHER NATURE">
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="2">
          <font>
-            <Font name="Comic Sans MS Bold" size="14.0" />
-         </font></Button>
-      <Button fx:id="charactersAction" layoutX="757.0" layoutY="293.0" mnemonicParsing="false" onAction="#onOpenCharacters" prefHeight="50.0" prefWidth="246.0" style="-fx-background-radius: 20;" text="CHARACTERS">
+            <Font size="12.0"/>
+         </font>
+      </Text>
+   </GridPane>
+   <GridPane fx:id="gridPane_2" layoutX="271.0" layoutY="13.0" prefHeight="54.0" prefWidth="18.0">
+      <columnConstraints>
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+      </rowConstraints>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
          <font>
-            <Font name="Comic Sans MS Bold" size="14.0" />
-         </font></Button>
-
-      <!-- INFO -->
-      <Text fx:id="name" layoutX="815.0" layoutY="40.0" text="Label" wrappingWidth="220.40548706054688">
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="1">
          <font>
-            <Font name="Bodoni 72 Oldstyle Book" size="28.0" />
-         </font></Text>
-
-      <!-- ENTRANCE BUTTONS -->
-      <Button id="entrance_1" fx:id="entrance_1" layoutX="59.0" layoutY="340.0" minWidth="33.0" mnemonicParsing="false" onAction="#onEntranceClicked" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 50;" />
-      <Button id="entrance_2" fx:id="entrance_2" layoutX="19.0" layoutY="389.0" minWidth="33.0" mnemonicParsing="false" onAction="#onEntranceClicked" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 50;" />
-      <Button id="entrance_3" fx:id="entrance_3" layoutX="60.0" layoutY="388.0" minWidth="33.0" mnemonicParsing="false" onAction="#onEntranceClicked" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 50;" />
-      <Button id="entrance_4" fx:id="entrance_4" layoutX="20.0" layoutY="437.0" minWidth="33.0" mnemonicParsing="false" onAction="#onEntranceClicked" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 50;" />
-      <Button id="entrance_5" fx:id="entrance_5" layoutX="60.0" layoutY="437.0" minWidth="33.0" mnemonicParsing="false" onAction="#onEntranceClicked" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 50;" />
-      <Button id="entrance_6" fx:id="entrance_6" layoutX="20.0" layoutY="485.0" minWidth="33.0" mnemonicParsing="false" onAction="#onEntranceClicked" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 50;" />
-      <Button id="entrance_7" fx:id="entrance_7" layoutX="60.0" layoutY="485.0" minWidth="33.0" mnemonicParsing="false" onAction="#onEntranceClicked" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 50;" />
-      <Button id="entrance_8" fx:id="entrance_8" layoutX="20.0" layoutY="533.0" minWidth="33.0" mnemonicParsing="false" onAction="#onEntranceClicked" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 50;" />
-      <Button id="entrance_9" fx:id="entrance_9" layoutX="60.0" layoutY="533.0" minWidth="33.0" mnemonicParsing="false" onAction="#onEntranceClicked" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 50;" />
-
-      <!-- HALL -->
-      <GridPane fx:id="gridPane" layoutX="126.0" layoutY="329.0" prefHeight="246.0" prefWidth="319.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="0" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="1" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="2" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="3" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="4" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="5" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="6" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="7" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="8" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="9" />
-
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.rowIndex="0" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ff0000;" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ffd700;" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ff1493;" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #0000ff;" GridPane.rowIndex="4" />
-
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="3" GridPane.rowIndex="0" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="4" GridPane.rowIndex="0" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="5" GridPane.rowIndex="0" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="6" GridPane.rowIndex="0" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="7" GridPane.rowIndex="0" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="8" GridPane.rowIndex="0" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #008000;" GridPane.columnIndex="9" GridPane.rowIndex="0" />
-
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ff0000;" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ff0000;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ff0000;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ff0000;" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ff0000;" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ff0000;" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ff0000;" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ff0000;" GridPane.columnIndex="7" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ff0000;" GridPane.columnIndex="8" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ff0000;" GridPane.columnIndex="9" GridPane.rowIndex="1" />
-
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ffd700;" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ffd700;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ffd700;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ffd700;" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ffd700;" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ffd700;" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ffd700;" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ffd700;" GridPane.columnIndex="7" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ffd700;" GridPane.columnIndex="8" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ffd700;" GridPane.columnIndex="9" GridPane.rowIndex="2" />
-
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ff1493;" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ff1493;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ff1493;" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ff1493;" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ff1493;" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ff1493;" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ff1493;" GridPane.columnIndex="6" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ff1493;" GridPane.columnIndex="7" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ff1493;" GridPane.columnIndex="8" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #ff1493;" GridPane.columnIndex="9" GridPane.rowIndex="3" />
-
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #0000ff;" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #0000ff;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #0000ff;" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #0000ff;" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #0000ff;" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #0000ff;" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #0000ff;" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #0000ff;" GridPane.columnIndex="7" GridPane.rowIndex="4" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #0000ff;" GridPane.columnIndex="8" GridPane.rowIndex="4" />
-            <Button mnemonicParsing="false" onAction="#onHallClicked" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-background-color: #0000ff;" GridPane.columnIndex="9" GridPane.rowIndex="4" />
-         </children>
-      </GridPane>
-
-      <!-- PROFESSORS -->
-      <Button id="professor_green" fx:id="professor_green" layoutX="480.0" layoutY="340.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 10; -fx-background-color: #008000;" />
-      <Button id="professor_red" fx:id="professor_red" layoutX="481.0" layoutY="387.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 10; -fx-background-color: #ff0000;" />
-      <Button id="professor_yellow" fx:id="professor_yellow" layoutX="480.0" layoutY="437.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 10; -fx-background-color: #ffd700;" />
-      <Button id="professor_pink" fx:id="professor_pink" layoutX="480.0" layoutY="485.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 10; -fx-background-color: #ff1493;" />
-      <Button id="professor_blue" fx:id="professor_blue" layoutX="480.0" layoutY="532.0" minWidth="33.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="33.0" style="-fx-background-radius: 10; -fx-background-color: #0000ff;" />
-
-
-      <!-- TOWERS -->
-      <ImageView id="tower_1" fitHeight="48.0" fitWidth="38.0" layoutX="557.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/tower_black.png" />
-         </image>
-      </ImageView>
-      <ImageView id="tower_2" fitHeight="48.0" fitWidth="38.0" layoutX="609.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/tower_black.png" />
-         </image>
-      </ImageView>
-      <ImageView id="tower_3" fitHeight="48.0" fitWidth="38.0" layoutX="557.0" layoutY="398.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/tower_black.png" />
-         </image>
-      </ImageView>
-      <ImageView id="tower_4" fitHeight="48.0" fitWidth="38.0" layoutX="609.0" layoutY="398.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/tower_black.png" />
-         </image>
-      </ImageView>
-      <ImageView id="tower_5" fitHeight="48.0" fitWidth="38.0" layoutX="557.0" layoutY="446.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/tower_black.png" />
-         </image>
-      </ImageView>
-      <ImageView id="tower_6" fitHeight="48.0" fitWidth="38.0" layoutX="609.0" layoutY="446.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/tower_black.png" />
-         </image>
-      </ImageView>
-      <ImageView id="tower_7" fitHeight="48.0" fitWidth="38.0" layoutX="557.0" layoutY="494.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/tower_black.png" />
-         </image>
-      </ImageView>
-      <ImageView id="tower_8" fitHeight="48.0" fitWidth="38.0" layoutX="609.0" layoutY="494.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/tower_black.png" />
-         </image>
-      </ImageView>
-
-      <!-- MOTHER NATURE IMAGES -->
-      <ImageView id="mn_1" fitHeight="16.0" fitWidth="14.0" layoutX="188.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/mother_nature_pawn.png" />
-         </image>
-      </ImageView>
-      <ImageView id="mn_2" fitHeight="16.0" fitWidth="14.0" layoutX="312.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/mother_nature_pawn.png" />
-         </image>
-      </ImageView>
-      <ImageView id="mn_3" fitHeight="16.0" fitWidth="14.0" layoutX="436.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/mother_nature_pawn.png" />
-         </image>
-      </ImageView>
-      <ImageView id="mn_4" fitHeight="16.0" fitWidth="14.0" layoutX="560.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/mother_nature_pawn.png" />
-         </image>
-      </ImageView>
-      <ImageView id="mn_5" fitHeight="16.0" fitWidth="14.0" layoutX="684.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/mother_nature_pawn.png" />
-         </image>
-      </ImageView>
-      <ImageView id="mn_6" fitHeight="16.0" fitWidth="14.0" layoutX="684.0" layoutY="221.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/mother_nature_pawn.png" />
-         </image>
-      </ImageView>
-      <ImageView id="mn_7" fitHeight="16.0" fitWidth="14.0" layoutX="559.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/mother_nature_pawn.png" />
-         </image>
-      </ImageView>
-      <ImageView id="mn_8" fitHeight="16.0" fitWidth="14.0" layoutX="435.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/mother_nature_pawn.png" />
-         </image>
-      </ImageView>
-      <ImageView id="mn_9" fitHeight="16.0" fitWidth="14.0" layoutX="311.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/mother_nature_pawn.png" />
-         </image>
-      </ImageView>
-      <ImageView id="mn_10" fitHeight="16.0" fitWidth="14.0" layoutX="187.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/mother_nature_pawn.png" />
-         </image>
-      </ImageView>
-      <ImageView id="mn_11" fitHeight="16.0" fitWidth="14.0" layoutX="64.0" layoutY="222.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/mother_nature_pawn.png" />
-         </image>
-      </ImageView>
-      <ImageView id="mn_12" fitHeight="16.0" fitWidth="14.0" layoutX="64.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/mother_nature_pawn.png" />
-         </image>
-      </ImageView>
-
-      <!-- TOWER IMAGES -->
-      <ImageView id="t_1" fitHeight="21.0" fitWidth="13.0" layoutX="188.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/tower_white.png" />
-         </image>
-      </ImageView>
-      <ImageView id="t_2" fitHeight="21.0" fitWidth="13.0" layoutX="312.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/tower_white.png" />
-         </image>
-      </ImageView>
-      <ImageView id="t_3" fitHeight="21.0" fitWidth="13.0" layoutX="436.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/tower_white.png" />
-         </image>
-      </ImageView>
-      <ImageView id="t_4" fitHeight="21.0" fitWidth="13.0" layoutX="560.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/tower_white.png" />
-         </image>
-      </ImageView>
-      <ImageView id="t_5" fitHeight="21.0" fitWidth="13.0" layoutX="684.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/tower_gray.png" />
-         </image>
-      </ImageView>
-      <ImageView id="t_6" fitHeight="21.0" fitWidth="13.0" layoutX="684.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/tower_gray.png" />
-         </image>
-      </ImageView>
-      <ImageView id="t_7" fitHeight="21.0" fitWidth="13.0" layoutX="559.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/tower_gray.png" />
-         </image>
-      </ImageView>
-      <ImageView id="t_8" fitHeight="21.0" fitWidth="13.0" layoutX="435.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/tower_gray.png" />
-         </image>
-      </ImageView>
-      <ImageView id="t_9" fitHeight="21.0" fitWidth="13.0" layoutX="311.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/tower_black.png" />
-         </image>
-      </ImageView>
-      <ImageView id="t_10" fitHeight="21.0" fitWidth="13.0" layoutX="187.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/tower_black.png" />
-         </image>
-      </ImageView>
-      <ImageView id="t_11" fitHeight="21.0" fitWidth="13.0" layoutX="64.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/tower_black.png" />
-         </image>
-      </ImageView>
-      <ImageView id="t_12" fitHeight="21.0" fitWidth="13.0" layoutX="64.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/tower_black.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="188.0" layoutY="6.0" prefHeight="18.0" prefWidth="32.0" text="1">
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="3">
          <font>
-            <Font name="Rockwell" size="18.0" />
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="4">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="2">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+   </GridPane>
+   <GridPane fx:id="gridPane_3" layoutX="395.0" layoutY="13.0" prefHeight="54.0" prefWidth="18.0">
+      <columnConstraints>
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+      </rowConstraints>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="1">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="3">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="4">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="2">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+   </GridPane>
+   <GridPane fx:id="gridPane_4" layoutX="523.0" layoutY="14.0" prefHeight="54.0" prefWidth="18.0">
+      <columnConstraints>
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+      </rowConstraints>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="1">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="2">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="3">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="4">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+   </GridPane>
+   <GridPane fx:id="gridPane_5" layoutX="643.0" layoutY="58.0" prefHeight="54.0" prefWidth="18.0">
+      <columnConstraints>
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+      </rowConstraints>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="1">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="3">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="4">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="2">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+   </GridPane>
+   <GridPane fx:id="gridPane_6" layoutX="643.0" layoutY="183.0" prefHeight="54.0" prefWidth="18.0">
+      <columnConstraints>
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+      </rowConstraints>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="1">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="3">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="4">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="2">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+   </GridPane>
+   <GridPane fx:id="gridPane_7" layoutX="518.0" layoutY="230.0" prefHeight="54.0" prefWidth="18.0">
+      <columnConstraints>
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+      </rowConstraints>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="1">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="3">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="4">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="2">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+   </GridPane>
+   <GridPane fx:id="gridPane_8" layoutX="394.0" layoutY="230.0" prefHeight="54.0" prefWidth="18.0">
+      <columnConstraints>
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+      </rowConstraints>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="1">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="2">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="3">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="4">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+   </GridPane>
+   <GridPane fx:id="gridPane_9" layoutX="270.0" layoutY="230.0" prefHeight="54.0" prefWidth="18.0">
+      <columnConstraints>
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+      </rowConstraints>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="1">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="2">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="3">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="4">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+   </GridPane>
+   <GridPane fx:id="gridPane_10" layoutX="146.0" layoutY="230.0" prefHeight="54.0" prefWidth="18.0">
+      <columnConstraints>
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+      </rowConstraints>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="1">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="2">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="3">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="4">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+   </GridPane>
+   <GridPane fx:id="gridPane_11" layoutX="23.0" layoutY="184.0" prefHeight="54.0" prefWidth="18.0">
+      <columnConstraints>
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+      </rowConstraints>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="1">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="2">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="3">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="4">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+   </GridPane>
+   <GridPane fx:id="gridPane_12" layoutX="23.0" layoutY="59.0" prefHeight="54.0" prefWidth="18.0">
+      <columnConstraints>
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+      </rowConstraints>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="1">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="2">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="3">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125"
+            GridPane.rowIndex="4">
+         <font>
+            <Font size="12.0"/>
+         </font>
+      </Text>
+   </GridPane>
+   <ImageView id="bancard_1" fitHeight="30.0" fitWidth="28.0" layoutX="160.0" layoutY="68.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/banCard.png"/>
+   </ImageView>
+   <ImageView id="bancard_2" fitHeight="30.0" fitWidth="28.0" layoutX="284.0" layoutY="68.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/banCard.png"/>
+   </ImageView>
+   <ImageView id="bancard_3" fitHeight="30.0" fitWidth="28.0" layoutX="409.0" layoutY="68.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/banCard.png"/>
+   </ImageView>
+   <ImageView id="bancard_4" fitHeight="30.0" fitWidth="28.0" layoutX="538.0" layoutY="68.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/banCard.png"/>
+   </ImageView>
+   <ImageView id="bancard_5" fitHeight="30.0" fitWidth="28.0" layoutX="613.0" layoutY="98.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/banCard.png"/>
+   </ImageView>
+   <ImageView id="bancard_6" fitHeight="30.0" fitWidth="28.0" layoutX="610.0" layoutY="181.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/banCard.png"/>
+   </ImageView>
+   <ImageView id="bancard_7" fitHeight="30.0" fitWidth="28.0" layoutX="532.0" layoutY="198.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/banCard.png"/>
+   </ImageView>
+   <ImageView id="bancard_8" fitHeight="30.0" fitWidth="28.0" layoutX="407.0" layoutY="198.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/banCard.png"/>
+   </ImageView>
+   <ImageView id="bancard_9" fitHeight="30.0" fitWidth="28.0" layoutX="290.0" layoutY="198.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/banCard.png"/>
+   </ImageView>
+   <ImageView id="bancard_10" fitHeight="30.0" fitWidth="28.0" layoutX="160.0" layoutY="198.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/banCard.png"/>
+   </ImageView>
+   <ImageView id="bancard_11" fitHeight="30.0" fitWidth="28.0" layoutX="83.0" layoutY="176.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/banCard.png"/>
+   </ImageView>
+   <ImageView id="bancard_12" fitHeight="30.0" fitWidth="28.0" layoutX="83.0" layoutY="83.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/banCard.png"/>
+   </ImageView>
+
+   <!-- ISLANDS -->
+   <Button fx:id="island_1" layoutX="143.0" layoutY="10.0" mnemonicParsing="false" onAction="#onIslandClicked"
+           opacity="0.0" prefHeight="73.0" prefWidth="73.0"/>
+   <Button fx:id="island_2" layoutX="268.0" layoutY="10.0" mnemonicParsing="false" onAction="#onIslandClicked"
+           opacity="0.0" prefHeight="70.0" prefWidth="73.0"/>
+   <Button fx:id="island_3" layoutX="392.0" layoutY="9.0" mnemonicParsing="false" onAction="#onIslandClicked"
+           opacity="0.0" prefHeight="73.0" prefWidth="73.0"/>
+   <Button fx:id="island_4" layoutX="518.0" layoutY="9.0" mnemonicParsing="false" onAction="#onIslandClicked"
+           opacity="0.0" prefHeight="73.0" prefWidth="70.0"/>
+   <Button fx:id="island_5" layoutX="638.0" layoutY="53.0" mnemonicParsing="false" onAction="#onIslandClicked"
+           opacity="0.0" prefHeight="70.0" prefWidth="73.0"/>
+   <Button fx:id="island_6" layoutX="639.0" layoutY="180.0" mnemonicParsing="false" onAction="#onIslandClicked"
+           opacity="0.0" prefHeight="73.0" prefWidth="73.0"/>
+   <Button fx:id="island_7" layoutX="515.0" layoutY="218.0" mnemonicParsing="false" onAction="#onIslandClicked"
+           opacity="0.0" prefHeight="73.0" prefWidth="73.0"/>
+   <Button fx:id="island_8" layoutX="389.0" layoutY="217.0" mnemonicParsing="false" onAction="#onIslandClicked"
+           opacity="0.0" prefHeight="73.0" prefWidth="73.0"/>
+   <Button fx:id="island_9" layoutX="270.0" layoutY="220.0" mnemonicParsing="false" onAction="#onIslandClicked"
+           opacity="0.0" prefHeight="70.0" prefWidth="73.0"/>
+   <Button fx:id="island_10" layoutX="143.0" layoutY="222.0" mnemonicParsing="false" onAction="#onIslandClicked"
+           opacity="0.0" prefHeight="70.0" prefWidth="73.0"/>
+   <Button fx:id="island_11" layoutX="23.0" layoutY="181.0" mnemonicParsing="false" onAction="#onIslandClicked"
+           opacity="0.0" prefHeight="70.0" prefWidth="70.0"/>
+   <Button fx:id="island_12" layoutX="19.0" layoutY="53.0" mnemonicParsing="false" onAction="#onIslandClicked"
+           opacity="0.0" prefHeight="73.0" prefWidth="73.0"/>
+
+   <!-- CLOUDS -->
+   <Button fx:id="cloud_1" layoutX="213.0" layoutY="100.0" mnemonicParsing="false" onAction="#onPickCloud" opacity="0.0"
+           prefHeight="89.0" prefWidth="89.0" style="-fx-background-radius: 140;"/>
+   <Button fx:id="cloud_2" layoutX="417.0" layoutY="99.0" mnemonicParsing="false" onAction="#onPickCloud" opacity="0.0"
+           prefHeight="89.0" prefWidth="89.0" style="-fx-background-radius: 100;"/>
+   <Button fx:id="cloud_3" layoutX="315.0" layoutY="99.0" mnemonicParsing="false" onAction="#onPickCloud" opacity="0.0"
+           prefHeight="89.0" prefWidth="89.0" style="-fx-background-radius: 100;"/>
+   <GridPane layoutX="726.0" layoutY="394.0" prefHeight="124.0" prefWidth="320.0">
+      <columnConstraints>
+         <ColumnConstraints hgrow="SOMETIMES" maxWidth="182.0" minWidth="10.0" prefWidth="179.0"/>
+         <ColumnConstraints hgrow="SOMETIMES" maxWidth="155.0" minWidth="10.0" prefWidth="141.0"/>
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+      </rowConstraints>
+      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="CURRENT PLAYER:">
+         <font>
+            <Font name="DIN Condensed Bold" size="22.0"/>
+         </font>
+      </Text>
+      <Text fx:id="currentNickname" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname"
+            wrappingWidth="139.31517239092852" GridPane.columnIndex="1">
+         <font>
+            <Font name="Charter Roman" size="20.0"/>
+         </font>
+      </Text>
+      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="CURRENT PHASE:" GridPane.rowIndex="1">
+         <font>
+            <Font name="DIN Condensed Bold" size="22.0"/>
+         </font>
+      </Text>
+      <Label fx:id="coins" text="COINS:" textFill="WHITE" GridPane.rowIndex="2">
+         <font>
+            <Font name="DIN Condensed Bold" size="22.0"/>
          </font>
       </Label>
-      <Label layoutX="313.0" layoutY="7.0" prefHeight="18.0" prefWidth="19.0" text="2">
+      <Text fx:id="currentPhase" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="move student phase"
+            wrappingWidth="158.31559963702227" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <font>
-            <Font name="Rockwell" size="18.0" />
+            <Font name="Charter Roman" size="19.0"/>
          </font>
-      </Label>
-      <Label layoutX="437.0" layoutY="7.0" prefHeight="18.0" prefWidth="19.0" text="3">
+      </Text>
+      <Text fx:id="numOfCoins" fill="WHITE" text="number of coins" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <font>
-            <Font name="Rockwell" size="18.0" />
+            <Font name="Charter Roman" size="20.0"/>
          </font>
-      </Label>
-      <Label layoutX="560.0" layoutY="7.0" prefHeight="18.0" prefWidth="19.0" text="4">
-         <font>
-            <Font name="Rockwell" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="684.0" layoutY="53.0" prefHeight="18.0" prefWidth="19.0" text="5">
-         <font>
-            <Font name="Rockwell" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="683.0" layoutY="177.0" prefHeight="18.0" prefWidth="19.0" text="6">
-         <font>
-            <Font name="Rockwell" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="559.0" layoutY="224.0" prefHeight="18.0" prefWidth="19.0" text="7">
-         <font>
-            <Font name="Rockwell" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="435.0" layoutY="224.0" prefHeight="18.0" prefWidth="19.0" text="8">
-         <font>
-            <Font name="Rockwell" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="311.0" layoutY="224.0" prefHeight="18.0" prefWidth="19.0" text="9">
-         <font>
-            <Font name="Rockwell" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="183.0" layoutY="224.0" prefHeight="25.0" prefWidth="27.0" text="10">
-         <font>
-            <Font name="Rockwell" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="60.0" layoutY="178.0" prefHeight="25.0" prefWidth="27.0" text="11">
-         <font>
-            <Font name="Rockwell" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="60.0" layoutY="52.0" prefHeight="18.0" prefWidth="27.0" text="12">
-         <font>
-            <Font name="Rockwell" size="18.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="523.0" layoutY="14.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/column_colors.png" />
-         </image>
-      </ImageView>
-
-      <!-- ISLAND STUDENTS COLOR IMAGES -->
-      <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="147.0" layoutY="13.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/column_colors.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="271.0" layoutY="13.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/column_colors.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="395.0" layoutY="13.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/column_colors.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="643.0" layoutY="58.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/column_colors.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="643.0" layoutY="183.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/column_colors.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="518.0" layoutY="230.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/column_colors.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="394.0" layoutY="230.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/column_colors.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="270.0" layoutY="230.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/column_colors.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="146.0" layoutY="230.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/column_colors.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="23.0" layoutY="184.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/column_colors.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="58.0" fitWidth="19.0" layoutX="23.0" layoutY="59.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/column_colors.png" />
-         </image>
-      </ImageView>
-
-      <!-- ISLAND STUDENTS NUMBERS -->
-      <GridPane fx:id="gridPane_1" layoutX="147.0" layoutY="13.0" prefHeight="54.0" prefWidth="18.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="0">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-         </children>
-      </GridPane>
-      <GridPane fx:id="gridPane_2" layoutX="271.0" layoutY="13.0" prefHeight="54.0" prefWidth="18.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-         </children>
-      </GridPane>
-      <GridPane fx:id="gridPane_3" layoutX="395.0" layoutY="13.0" prefHeight="54.0" prefWidth="18.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-         </children>
-      </GridPane>
-      <GridPane fx:id="gridPane_4" layoutX="523.0" layoutY="14.0" prefHeight="54.0" prefWidth="18.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-         </children>
-      </GridPane>
-      <GridPane fx:id="gridPane_5" layoutX="643.0" layoutY="58.0" prefHeight="54.0" prefWidth="18.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-         </children>
-      </GridPane>
-      <GridPane fx:id="gridPane_6" layoutX="643.0" layoutY="183.0" prefHeight="54.0" prefWidth="18.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-         </children>
-      </GridPane>
-      <GridPane fx:id="gridPane_7" layoutX="518.0" layoutY="230.0" prefHeight="54.0" prefWidth="18.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-         </children>
-      </GridPane>
-      <GridPane fx:id="gridPane_8" layoutX="394.0" layoutY="230.0" prefHeight="54.0" prefWidth="18.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-         </children>
-      </GridPane>
-      <GridPane fx:id="gridPane_9" layoutX="270.0" layoutY="230.0" prefHeight="54.0" prefWidth="18.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-         </children>
-      </GridPane>
-      <GridPane fx:id="gridPane_10" layoutX="146.0" layoutY="230.0" prefHeight="54.0" prefWidth="18.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-         </children>
-      </GridPane>
-      <GridPane fx:id="gridPane_11" layoutX="23.0" layoutY="184.0" prefHeight="54.0" prefWidth="18.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-         </children>
-      </GridPane>
-      <GridPane fx:id="gridPane_12" layoutX="23.0" layoutY="59.0" prefHeight="54.0" prefWidth="18.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="1">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="2">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="3">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="19.205078125" GridPane.rowIndex="4">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-         </children>
-      </GridPane>
-      <ImageView id="bancard_1" fitHeight="30.0" fitWidth="28.0" layoutX="160.0" layoutY="68.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/banCard.png" />
-         </image>
-      </ImageView>
-      <ImageView id="bancard_2" fitHeight="30.0" fitWidth="28.0" layoutX="284.0" layoutY="68.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/banCard.png" />
-         </image>
-      </ImageView>
-      <ImageView id="bancard_3" fitHeight="30.0" fitWidth="28.0" layoutX="409.0" layoutY="68.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/banCard.png" />
-         </image>
-      </ImageView>
-      <ImageView id="bancard_4" fitHeight="30.0" fitWidth="28.0" layoutX="538.0" layoutY="68.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/banCard.png" />
-         </image>
-      </ImageView>
-      <ImageView id="bancard_5" fitHeight="30.0" fitWidth="28.0" layoutX="613.0" layoutY="98.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/banCard.png" />
-         </image>
-      </ImageView>
-      <ImageView id="bancard_6" fitHeight="30.0" fitWidth="28.0" layoutX="610.0" layoutY="181.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/banCard.png" />
-         </image>
-      </ImageView>
-      <ImageView id="bancard_7" fitHeight="30.0" fitWidth="28.0" layoutX="532.0" layoutY="198.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/banCard.png" />
-         </image>
-      </ImageView>
-      <ImageView id="bancard_8" fitHeight="30.0" fitWidth="28.0" layoutX="407.0" layoutY="198.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/banCard.png" />
-         </image>
-      </ImageView>
-      <ImageView id="bancard_9" fitHeight="30.0" fitWidth="28.0" layoutX="290.0" layoutY="198.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/banCard.png" />
-         </image>
-      </ImageView>
-      <ImageView id="bancard_10" fitHeight="30.0" fitWidth="28.0" layoutX="160.0" layoutY="198.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/banCard.png" />
-         </image>
-      </ImageView>
-      <ImageView id="bancard_11" fitHeight="30.0" fitWidth="28.0" layoutX="83.0" layoutY="176.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/banCard.png" />
-         </image>
-      </ImageView>
-      <ImageView id="bancard_12" fitHeight="30.0" fitWidth="28.0" layoutX="83.0" layoutY="83.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/banCard.png" />
-         </image>
-      </ImageView>
-
-      <!-- ISLANDS -->
-      <Button fx:id="island_1" layoutX="143.0" layoutY="10.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="73.0" prefWidth="73.0" />
-      <Button fx:id="island_2" layoutX="268.0" layoutY="10.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="70.0" prefWidth="73.0" />
-      <Button fx:id="island_3" layoutX="392.0" layoutY="9.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="73.0" prefWidth="73.0" />
-      <Button fx:id="island_4" layoutX="518.0" layoutY="9.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="73.0" prefWidth="70.0" />
-      <Button fx:id="island_5" layoutX="638.0" layoutY="53.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="70.0" prefWidth="73.0" />
-      <Button fx:id="island_6" layoutX="639.0" layoutY="180.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="73.0" prefWidth="73.0" />
-      <Button fx:id="island_7" layoutX="515.0" layoutY="218.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="73.0" prefWidth="73.0" />
-      <Button fx:id="island_8" layoutX="389.0" layoutY="217.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="73.0" prefWidth="73.0" />
-      <Button fx:id="island_9" layoutX="270.0" layoutY="220.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="70.0" prefWidth="73.0" />
-      <Button fx:id="island_10" layoutX="143.0" layoutY="222.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="70.0" prefWidth="73.0" />
-      <Button fx:id="island_11" layoutX="23.0" layoutY="181.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="70.0" prefWidth="70.0" />
-      <Button fx:id="island_12" layoutX="19.0" layoutY="53.0" mnemonicParsing="false" onAction="#onIslandClicked" opacity="0.0" prefHeight="73.0" prefWidth="73.0" />
-
-      <!-- CLOUDS -->
-      <Button fx:id="cloud_1" layoutX="213.0" layoutY="100.0" mnemonicParsing="false" onAction="#onPickCloud" opacity="0.0" prefHeight="89.0" prefWidth="89.0" style="-fx-background-radius: 140;" />
-      <Button fx:id="cloud_2" layoutX="417.0" layoutY="99.0" mnemonicParsing="false" onAction="#onPickCloud" opacity="0.0" prefHeight="89.0" prefWidth="89.0" style="-fx-background-radius: 100;" />
-      <Button fx:id="cloud_3" layoutX="315.0" layoutY="99.0" mnemonicParsing="false" onAction="#onPickCloud" opacity="0.0" prefHeight="89.0" prefWidth="89.0" style="-fx-background-radius: 100;" />
-      <GridPane layoutX="726.0" layoutY="394.0" prefHeight="124.0" prefWidth="320.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="182.0" minWidth="10.0" prefWidth="179.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="155.0" minWidth="10.0" prefWidth="141.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="CURRENT PLAYER:">
-               <font>
-                  <Font name="DIN Condensed Bold" size="22.0" />
-               </font>
-            </Text>
-            <Text fx:id="currentNickname" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname" wrappingWidth="139.31517239092852" GridPane.columnIndex="1">
-               <font>
-                  <Font name="Charter Roman" size="20.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="CURRENT PHASE:" GridPane.rowIndex="1">
-               <font>
-                  <Font name="DIN Condensed Bold" size="22.0" />
-               </font>
-            </Text>
-            <Label fx:id="coins" text="COINS:" textFill="WHITE" GridPane.rowIndex="2">
-               <font>
-                  <Font name="DIN Condensed Bold" size="22.0" />
-               </font>
-            </Label>
-            <Text fx:id="currentPhase" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="move student phase" wrappingWidth="158.31559963702227" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <font>
-                  <Font name="Charter Roman" size="19.0" />
-               </font>
-            </Text>
-            <Text fx:id="numOfCoins" fill="WHITE" text="number of coins" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <font>
-                  <Font name="Charter Roman" size="20.0" />
-               </font>
-            </Text>
-         </children>
-      </GridPane>
-      <ImageView fitHeight="48.0" fitWidth="56.0" layoutX="765.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/user.png" />
-         </image>
-      </ImageView>
-   </children>
+      </Text>
+   </GridPane>
+   <ImageView fitHeight="48.0" fitWidth="56.0" layoutX="765.0" layoutY="6.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/user.png"/>
+   </ImageView>
 </Pane>

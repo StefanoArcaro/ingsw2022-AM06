@@ -178,7 +178,6 @@ public class GameManager {
      * @param answer the message to send.
      * @param nickname the nickname of the client to not send the message to.
      */
-    // TODO check synchronized
     public synchronized void sendAllExcept(Answer answer, String nickname) {
         for(String name : nicknameToId.keySet()) {
             if(!name.equals(nickname)) {

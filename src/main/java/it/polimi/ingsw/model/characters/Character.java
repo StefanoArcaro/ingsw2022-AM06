@@ -85,14 +85,14 @@ public abstract class Character {
     }
 
     /**
-     * @return whether the character has already been payed for.
+     * @return whether the character has already been paid for.
      */
     public boolean isPayed() {
         return payed;
     }
 
     /**
-     * Sets the payed attribute of the character.
+     * Sets the paid attribute of the character.
      * @param payed the attribute to set.
      */
     public void setPayed(boolean payed) {

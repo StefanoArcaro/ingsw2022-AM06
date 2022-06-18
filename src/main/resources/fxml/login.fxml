@@ -7,38 +7,46 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #EAE4D4#EAE4D4;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.LoginController">
-   <children>
-      <Label layoutX="235.0" layoutY="36.0" prefHeight="76.0" prefWidth="414.0" text="LOGIN">
-         <font>
-            <Font name="Chalkduster" size="55.0" />
-         </font>
-      </Label>
-      <Label layoutX="130.0" layoutY="171.0" text="Nickname">
-         <font>
-            <Font name="Comic Sans MS Bold" size="27.0" />
-         </font></Label>
-      <Label layoutX="129.0" layoutY="259.0" text="Number of players">
-         <font>
-            <Font name="Comic Sans MS Bold" size="27.0" />
-         </font></Label>
-      <Label layoutX="129.0" layoutY="344.0" text="Game mode">
-         <font>
-            <Font name="Comic Sans MS Bold" size="27.0" />
-         </font></Label>
-      <TextField fx:id="nickname_field" layoutX="312.0" layoutY="173.0" prefHeight="32.0" prefWidth="263.0">
-         <font>
-            <Font size="22.0" />
-         </font></TextField>
-      <ChoiceBox fx:id="numberPlayers_box" layoutX="399.0" layoutY="253.0" prefHeight="40.0" prefWidth="176.0" />
-      <ChoiceBox fx:id="gameMode_box" layoutX="399.0" layoutY="340.0" prefHeight="40.0" prefWidth="176.0" />
-      <Button layoutX="379.0" layoutY="433.0" mnemonicParsing="false" onAction="#login" prefHeight="48.0" prefWidth="124.0" text="LOGIN">
-         <font>
-            <Font name="Futura Medium" size="23.0" />
-         </font></Button>
-      <Button layoutX="223.0" layoutY="433.0" mnemonicParsing="false" onAction="#quit" prefHeight="48.0" prefWidth="124.0" text="QUIT">
-         <font>
-            <Font name="Futura Medium" size="23.0" />
-         </font></Button>
-   </children>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+      prefWidth="700.0" style="-fx-background-color: #EAE4D4#EAE4D4;" xmlns="http://javafx.com/javafx/18"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.LoginController">
+   <Label layoutX="235.0" layoutY="36.0" prefHeight="76.0" prefWidth="414.0" text="LOGIN">
+      <font>
+         <Font name="Chalkduster" size="55.0"/>
+      </font>
+   </Label>
+   <Label layoutX="130.0" layoutY="171.0" text="Nickname">
+      <font>
+         <Font name="Comic Sans MS Bold" size="27.0"/>
+      </font>
+   </Label>
+   <Label layoutX="129.0" layoutY="259.0" text="Number of players">
+      <font>
+         <Font name="Comic Sans MS Bold" size="27.0"/>
+      </font>
+   </Label>
+   <Label layoutX="129.0" layoutY="344.0" text="Game mode">
+      <font>
+         <Font name="Comic Sans MS Bold" size="27.0"/>
+      </font>
+   </Label>
+   <TextField fx:id="nickname_field" layoutX="312.0" layoutY="173.0" prefHeight="32.0" prefWidth="263.0">
+      <font>
+         <Font size="22.0"/>
+      </font>
+   </TextField>
+   <ChoiceBox fx:id="numberPlayers_box" layoutX="399.0" layoutY="253.0" prefHeight="40.0" prefWidth="176.0"/>
+   <ChoiceBox fx:id="gameMode_box" layoutX="399.0" layoutY="340.0" prefHeight="40.0" prefWidth="176.0"/>
+   <Button layoutX="379.0" layoutY="433.0" mnemonicParsing="false" onAction="#login" prefHeight="48.0" prefWidth="124.0"
+           text="LOGIN">
+      <font>
+         <Font name="Futura Medium" size="23.0"/>
+      </font>
+   </Button>
+   <Button layoutX="223.0" layoutY="433.0" mnemonicParsing="false" onAction="#quit" prefHeight="48.0" prefWidth="124.0"
+           text="QUIT">
+      <font>
+         <Font name="Futura Medium" size="23.0"/>
+      </font>
+   </Button>
 </Pane>

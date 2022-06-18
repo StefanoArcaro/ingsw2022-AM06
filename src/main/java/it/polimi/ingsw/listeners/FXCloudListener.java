@@ -1,8 +1,6 @@
 package it.polimi.ingsw.listeners;
 
 import it.polimi.ingsw.model.gameBoard.Cloud;
-import it.polimi.ingsw.network.message.serverToclient.CloudChosenMessage;
-import it.polimi.ingsw.network.message.serverToclient.CloudsAvailableMessage;
 import it.polimi.ingsw.network.message.serverToclient.FXCloudMessage;
 import it.polimi.ingsw.view.VirtualView;
 

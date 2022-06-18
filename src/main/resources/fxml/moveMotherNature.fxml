@@ -13,21 +13,24 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="274.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.MoveMotherNatureController">
-   <children>
-      <ImageView fitHeight="410.0" fitWidth="277.0" layoutX="-2.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/MotherNature.png" />
-         </image>
-      </ImageView>
-      <Text layoutX="40.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose the number of steps:" textAlignment="CENTER" wrappingWidth="200.02734375">
-         <font>
-            <Font size="26.0" />
-         </font></Text>
-      <ChoiceBox fx:id="numberOfSteps" layoutX="94.0" layoutY="272.0" prefHeight="39.0" prefWidth="92.0" />
-      <Button layoutX="203.0" layoutY="346.0" mnemonicParsing="false" onAction="#onSubmitSteps" prefHeight="31.0" prefWidth="51.0" text="OK">
-         <font>
-            <Font name="DIN Condensed Bold" size="15.0" />
-         </font></Button>
-   </children>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+      prefWidth="274.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="it.polimi.ingsw.view.GUI.controllers.MoveMotherNatureController">
+   <ImageView fitHeight="410.0" fitWidth="277.0" layoutX="-2.0" layoutY="-3.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/MotherNature.png"/>
+   </ImageView>
+   <Text layoutX="40.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose the number of steps:"
+         textAlignment="CENTER" wrappingWidth="200.02734375">
+      <font>
+         <Font size="26.0"/>
+      </font>
+   </Text>
+   <ChoiceBox fx:id="numberOfSteps" layoutX="94.0" layoutY="272.0" prefHeight="39.0" prefWidth="92.0"/>
+   <Button layoutX="203.0" layoutY="346.0" mnemonicParsing="false" onAction="#onSubmitSteps" prefHeight="31.0"
+           prefWidth="51.0" text="OK">
+      <font>
+         <Font name="DIN Condensed Bold" size="15.0"/>
+      </font>
+   </Button>
 </Pane>

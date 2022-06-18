@@ -1,10 +1,8 @@
 package it.polimi.ingsw.network.message.serverToclient;
 
-import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.PlayerColor;
 import it.polimi.ingsw.network.message.MessageType;
 
-import java.util.List;
 import java.util.Map;
 
 /**

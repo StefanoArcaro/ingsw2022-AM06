@@ -88,7 +88,7 @@ public class Board {
     }
 
     /**
-     * Sets the this board's professors' list to the specified one.
+     * Sets the board's professors' list to the specified one.
      * @param professors to set.
      */
     public void setProfessors(ArrayList<Professor> professors) {

@@ -5,77 +5,76 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.PlayAssistantController">
-   <children>
-      <ImageView fitHeight="682.0" fitWidth="776.0" layoutX="-18.0" layoutY="-81.0" opacity="0.44" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/island.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="211.0" layoutY="23.0" prefHeight="19.0" prefWidth="257.0" text="PLAY ONE AVAILABLE ASSISTANT">
-         <font>
-            <Font name="PT Mono Bold" size="15.0" />
-         </font>
-      </Label>
-      <ImageView id="a_1" fitHeight="114.0" fitWidth="71.0" layoutX="96.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Assistente_1.png" />
-         </image>
-      </ImageView>
-      <ImageView id="a_2" fitHeight="114.0" fitWidth="71.0" layoutX="197.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Assistente_2.png" />
-         </image>
-      </ImageView>
-      <ImageView id="a_3" fitHeight="114.0" fitWidth="71.0" layoutX="297.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Assistente_3.png" />
-         </image>
-      </ImageView>
-      <ImageView id="a_4" fitHeight="114.0" fitWidth="71.0" layoutX="399.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Assistente_4.png" />
-         </image>
-      </ImageView>
-      <ImageView id="a_5" fitHeight="114.0" fitWidth="71.0" layoutX="505.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Assistente_5.png" />
-         </image>
-      </ImageView>
-      <ImageView id="a_6" fitHeight="114.0" fitWidth="71.0" layoutX="97.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Assistente_6.png" />
-         </image>
-      </ImageView>
-      <ImageView id="a_7" fitHeight="114.0" fitWidth="71.0" layoutX="197.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Assistente_7.png" />
-         </image>
-      </ImageView>
-      <ImageView id="a_8" fitHeight="114.0" fitWidth="71.0" layoutX="298.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Assistente_8.png" />
-         </image>
-      </ImageView>
-      <ImageView id="a_9" fitHeight="114.0" fitWidth="71.0" layoutX="400.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Assistente_9.png" />
-         </image>
-      </ImageView>
-      <ImageView id="a_10" fitHeight="114.0" fitWidth="71.0" layoutX="504.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Assistente_10.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="assistant_1" layoutX="108.0" layoutY="157.0" mnemonicParsing="false" onAction="#onPlayAssistant" text="PLAY" />
-      <Button fx:id="assistant_2" layoutX="209.0" layoutY="157.0" mnemonicParsing="false" onAction="#onPlayAssistant" text="PLAY" />
-      <Button fx:id="assistant_3" layoutX="308.0" layoutY="157.0" mnemonicParsing="false" onAction="#onPlayAssistant" text="PLAY" />
-      <Button fx:id="assistant_4" layoutX="412.0" layoutY="157.0" mnemonicParsing="false" onAction="#onPlayAssistant" text="PLAY" />
-      <Button fx:id="assistant_5" layoutX="516.0" layoutY="157.0" mnemonicParsing="false" onAction="#onPlayAssistant" text="PLAY" />
-      <Button fx:id="assistant_6" layoutX="108.0" layoutY="305.0" mnemonicParsing="false" onAction="#onPlayAssistant" text="PLAY" />
-      <Button fx:id="assistant_7" layoutX="209.0" layoutY="305.0" mnemonicParsing="false" onAction="#onPlayAssistant" text="PLAY" />
-      <Button fx:id="assistant_8" layoutX="310.0" layoutY="305.0" mnemonicParsing="false" onAction="#onPlayAssistant" text="PLAY" />
-      <Button fx:id="assistant_9" layoutX="410.0" layoutY="305.0" mnemonicParsing="false" onAction="#onPlayAssistant" text="PLAY" />
-      <Button fx:id="assistant_10" layoutX="515.0" layoutY="305.0" mnemonicParsing="false" onAction="#onPlayAssistant" text="PLAY" />
-   </children>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+      prefWidth="680.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="it.polimi.ingsw.view.GUI.controllers.PlayAssistantController">
+   <ImageView fitHeight="682.0" fitWidth="776.0" layoutX="-18.0" layoutY="-81.0" opacity="0.44" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/island.png"/>
+   </ImageView>
+   <Label layoutX="211.0" layoutY="23.0" prefHeight="19.0" prefWidth="257.0" text="PLAY ONE AVAILABLE ASSISTANT">
+      <font>
+         <Font name="PT Mono Bold" size="15.0"/>
+      </font>
+   </Label>
+   <ImageView id="a_1" fitHeight="114.0" fitWidth="71.0" layoutX="96.0" layoutY="66.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/Assistente_1.png"/>
+   </ImageView>
+   <ImageView id="a_2" fitHeight="114.0" fitWidth="71.0" layoutX="197.0" layoutY="66.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/Assistente_2.png"/>
+   </ImageView>
+   <ImageView id="a_3" fitHeight="114.0" fitWidth="71.0" layoutX="297.0" layoutY="66.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/Assistente_3.png"/>
+   </ImageView>
+   <ImageView id="a_4" fitHeight="114.0" fitWidth="71.0" layoutX="399.0" layoutY="66.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/Assistente_4.png"/>
+   </ImageView>
+   <ImageView id="a_5" fitHeight="114.0" fitWidth="71.0" layoutX="505.0" layoutY="66.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/Assistente_5.png"/>
+   </ImageView>
+   <ImageView id="a_6" fitHeight="114.0" fitWidth="71.0" layoutX="97.0" layoutY="214.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/Assistente_6.png"/>
+   </ImageView>
+   <ImageView id="a_7" fitHeight="114.0" fitWidth="71.0" layoutX="197.0" layoutY="214.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/Assistente_7.png"/>
+   </ImageView>
+   <ImageView id="a_8" fitHeight="114.0" fitWidth="71.0" layoutX="298.0" layoutY="214.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/Assistente_8.png"/>
+   </ImageView>
+   <ImageView id="a_9" fitHeight="114.0" fitWidth="71.0" layoutX="400.0" layoutY="214.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/Assistente_9.png"/>
+   </ImageView>
+   <ImageView id="a_10" fitHeight="114.0" fitWidth="71.0" layoutX="504.0" layoutY="214.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/Assistente_10.png"/>
+   </ImageView>
+   <Button fx:id="assistant_1" layoutX="108.0" layoutY="157.0" mnemonicParsing="false" onAction="#onPlayAssistant"
+           text="PLAY"/>
+   <Button fx:id="assistant_2" layoutX="209.0" layoutY="157.0" mnemonicParsing="false" onAction="#onPlayAssistant"
+           text="PLAY"/>
+   <Button fx:id="assistant_3" layoutX="308.0" layoutY="157.0" mnemonicParsing="false" onAction="#onPlayAssistant"
+           text="PLAY"/>
+   <Button fx:id="assistant_4" layoutX="412.0" layoutY="157.0" mnemonicParsing="false" onAction="#onPlayAssistant"
+           text="PLAY"/>
+   <Button fx:id="assistant_5" layoutX="516.0" layoutY="157.0" mnemonicParsing="false" onAction="#onPlayAssistant"
+           text="PLAY"/>
+   <Button fx:id="assistant_6" layoutX="108.0" layoutY="305.0" mnemonicParsing="false" onAction="#onPlayAssistant"
+           text="PLAY"/>
+   <Button fx:id="assistant_7" layoutX="209.0" layoutY="305.0" mnemonicParsing="false" onAction="#onPlayAssistant"
+           text="PLAY"/>
+   <Button fx:id="assistant_8" layoutX="310.0" layoutY="305.0" mnemonicParsing="false" onAction="#onPlayAssistant"
+           text="PLAY"/>
+   <Button fx:id="assistant_9" layoutX="410.0" layoutY="305.0" mnemonicParsing="false" onAction="#onPlayAssistant"
+           text="PLAY"/>
+   <Button fx:id="assistant_10" layoutX="515.0" layoutY="305.0" mnemonicParsing="false" onAction="#onPlayAssistant"
+           text="PLAY"/>
 </Pane>

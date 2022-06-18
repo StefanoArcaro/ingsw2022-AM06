@@ -4,7 +4,6 @@ import it.polimi.ingsw.model.gameBoard.Student;
 import it.polimi.ingsw.network.message.MessageType;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Message used by the server to display the available characters.

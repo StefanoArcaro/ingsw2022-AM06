@@ -6,51 +6,53 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.EndGameController">
-   <children>
-      <ImageView fitHeight="606.0" fitWidth="736.0" layoutX="-5.0" layoutY="-78.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/podium.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="105.0" fitWidth="105.0" layoutX="102.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/loserV2.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="164.0" fitWidth="163.0" layoutX="217.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/winner.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="loser_image_2" fitHeight="98.0" fitWidth="99.0" layoutX="391.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/loser.png" />
-         </image>
-      </ImageView>
-      <Text fx:id="reason" layoutX="75.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="445.205078125">
-         <font>
-            <Font name="Bodoni 72 Smallcaps Book" size="26.0" />
-         </font></Text>
-      <Text fx:id="loser_1" layoutX="79.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="loser1" textAlignment="CENTER" wrappingWidth="143.0">
-         <font>
-            <Font name="Tahoma Bold" size="18.0" />
-         </font>
-      </Text>
-      <Text fx:id="loser_2" layoutX="372.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="loser2" textAlignment="CENTER" wrappingWidth="143.0">
-         <font>
-            <Font name="Tahoma Bold" size="18.0" />
-         </font>
-      </Text>
-      <Text fx:id="message" layoutX="181.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You Win" textAlignment="CENTER" wrappingWidth="233.236328125">
-         <font>
-            <Font name="Tahoma Bold" size="38.0" />
-         </font>
-      </Text>
-      <Text fx:id="winner" layoutX="225.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="winner" textAlignment="CENTER" wrappingWidth="143.0">
-         <font>
-            <Font name="Tahoma Bold" size="18.0" />
-         </font>
-      </Text>
-   </children>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0"
+      prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="it.polimi.ingsw.view.GUI.controllers.EndGameController">
+   <ImageView fitHeight="606.0" fitWidth="736.0" layoutX="-5.0" layoutY="-78.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/podium.png"/>
+   </ImageView>
+   <ImageView fitHeight="105.0" fitWidth="105.0" layoutX="102.0" layoutY="196.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/loserV2.png"/>
+   </ImageView>
+   <ImageView fitHeight="164.0" fitWidth="163.0" layoutX="217.0" layoutY="83.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/winner.png"/>
+   </ImageView>
+   <ImageView fx:id="loser_image_2" fitHeight="98.0" fitWidth="99.0" layoutX="391.0" layoutY="208.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/loser.png"/>
+   </ImageView>
+   <Text fx:id="reason" layoutX="75.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text"
+         textAlignment="CENTER" wrappingWidth="445.205078125">
+      <font>
+         <Font name="Bodoni 72 Smallcaps Book" size="26.0"/>
+      </font>
+   </Text>
+   <Text fx:id="loser_1" layoutX="79.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="loser1"
+         textAlignment="CENTER" wrappingWidth="143.0">
+      <font>
+         <Font name="Tahoma Bold" size="18.0"/>
+      </font>
+   </Text>
+   <Text fx:id="loser_2" layoutX="372.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="loser2"
+         textAlignment="CENTER" wrappingWidth="143.0">
+      <font>
+         <Font name="Tahoma Bold" size="18.0"/>
+      </font>
+   </Text>
+   <Text fx:id="message" layoutX="181.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You Win"
+         textAlignment="CENTER" wrappingWidth="233.236328125">
+      <font>
+         <Font name="Tahoma Bold" size="38.0"/>
+      </font>
+   </Text>
+   <Text fx:id="winner" layoutX="225.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="winner"
+         textAlignment="CENTER" wrappingWidth="143.0">
+      <font>
+         <Font name="Tahoma Bold" size="18.0"/>
+      </font>
+   </Text>
 </Pane>

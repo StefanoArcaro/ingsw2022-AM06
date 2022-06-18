@@ -15,7 +15,7 @@ import java.beans.PropertyChangeListener;
  */
 public class MessageParser implements PropertyChangeListener {
 
-    SocketClient client;
+    final SocketClient client;
 
     /**
      * Default constructor.

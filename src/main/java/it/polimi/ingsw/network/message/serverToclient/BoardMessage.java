@@ -4,7 +4,6 @@ import it.polimi.ingsw.model.gameBoard.*;
 import it.polimi.ingsw.network.message.MessageType;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Message used by the server to display a player's board.

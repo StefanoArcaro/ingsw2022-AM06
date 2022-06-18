@@ -1,6 +1,5 @@
 package it.polimi.ingsw.network.message.serverToclient;
 
-import it.polimi.ingsw.model.characters.Character;
 import it.polimi.ingsw.model.gameBoard.Student;
 import it.polimi.ingsw.network.message.MessageType;
 

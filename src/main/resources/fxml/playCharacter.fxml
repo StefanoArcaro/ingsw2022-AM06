@@ -12,50 +12,47 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="280.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.PlayCharacterController">
-   <children>
-      <ImageView fitHeight="462.0" fitWidth="493.0" layoutX="-28.0" layoutY="-28.0" opacity="0.29" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/island.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="110.0" layoutY="12.0" text="PLAY ONE AVAILABLE CHARACTER">
-         <font>
-            <Font name="PT Mono Bold" size="15.0" />
-         </font>
-      </Label>
-      <ImageView id="ch_1" fitHeight="151.0" fitWidth="100.0" layoutX="50.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/character_1.png" />
-         </image></ImageView>
-      <ImageView id="ch_2" fitHeight="151.0" fitWidth="100.0" layoutX="175.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/character_2.png" />
-         </image>
-      </ImageView>
-      <ImageView id="ch_3" fitHeight="151.0" fitWidth="100.0" layoutX="300.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/character_3.png" />
-         </image>
-      </ImageView>
-      <ImageView id="cost_1" fitHeight="35.0" fitWidth="30.0" layoutX="85.0" layoutY="170.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/coin.png" />
-         </image>
-      </ImageView>
-      <ImageView id="cost_2" fitHeight="30.0" fitWidth="30.0" layoutX="210.0" layoutY="170.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/coin.png" />
-         </image>
-      </ImageView>
-      <ImageView id="cost_3" fitHeight="29.0" fitWidth="33.0" layoutX="335.0" layoutY="170.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/coin.png" />
-         </image>
-      </ImageView>
-      
-      <Button fx:id="ch_details_1" layoutX="50.0" layoutY="70.0" mnemonicParsing="false" onAction="#onOpenCharacterDetails" opacity="0.0" prefHeight="151.0" prefWidth="100.0" />
-      <Button fx:id="ch_details_2" layoutX="175.0" layoutY="70.0" mnemonicParsing="false" onAction="#onOpenCharacterDetails" opacity="0.0" prefHeight="151.0" prefWidth="100.0" />
-      <Button fx:id="ch_details_3" layoutX="300.0" layoutY="70.0" mnemonicParsing="false" onAction="#onOpenCharacterDetails" opacity="0.0" prefHeight="151.0" prefWidth="100.0" />
-   </children>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="280.0"
+      prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="it.polimi.ingsw.view.GUI.controllers.PlayCharacterController">
+   <ImageView fitHeight="462.0" fitWidth="493.0" layoutX="-28.0" layoutY="-28.0" opacity="0.29" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/island.png"/>
+   </ImageView>
+   <Label layoutX="110.0" layoutY="12.0" text="PLAY ONE AVAILABLE CHARACTER">
+      <font>
+         <Font name="PT Mono Bold" size="15.0"/>
+      </font>
+   </Label>
+   <ImageView id="ch_1" fitHeight="151.0" fitWidth="100.0" layoutX="50.0" layoutY="70.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/character_1.png"/>
+   </ImageView>
+   <ImageView id="ch_2" fitHeight="151.0" fitWidth="100.0" layoutX="175.0" layoutY="70.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/character_2.png"/>
+   </ImageView>
+   <ImageView id="ch_3" fitHeight="151.0" fitWidth="100.0" layoutX="300.0" layoutY="70.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/character_3.png"/>
+   </ImageView>
+   <ImageView id="cost_1" fitHeight="35.0" fitWidth="30.0" layoutX="85.0" layoutY="170.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/coin.png"/>
+   </ImageView>
+   <ImageView id="cost_2" fitHeight="30.0" fitWidth="30.0" layoutX="210.0" layoutY="170.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/coin.png"/>
+   </ImageView>
+   <ImageView id="cost_3" fitHeight="29.0" fitWidth="33.0" layoutX="335.0" layoutY="170.0" opacity="0.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/coin.png"/>
+   </ImageView>
+
+   <Button fx:id="ch_details_1" layoutX="50.0" layoutY="70.0" mnemonicParsing="false" onAction="#onOpenCharacterDetails"
+           opacity="0.0" prefHeight="151.0" prefWidth="100.0"/>
+   <Button fx:id="ch_details_2" layoutX="175.0" layoutY="70.0" mnemonicParsing="false"
+           onAction="#onOpenCharacterDetails" opacity="0.0" prefHeight="151.0" prefWidth="100.0"/>
+   <Button fx:id="ch_details_3" layoutX="300.0" layoutY="70.0" mnemonicParsing="false"
+           onAction="#onOpenCharacterDetails" opacity="0.0" prefHeight="151.0" prefWidth="100.0"/>
 </Pane>

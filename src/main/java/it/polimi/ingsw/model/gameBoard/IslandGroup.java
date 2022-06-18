@@ -92,11 +92,9 @@ public class IslandGroup {
      * @param island to add to the island group.
      */
     public boolean addIsland(Island island) {
-        int IDIslandToAdd;
         PlayerColor playerColorIslandToAdd;
 
         try {
-            IDIslandToAdd = island.getIslandID();
             playerColorIslandToAdd = island.getTower();
         } catch (NullPointerException e) {
             return false;
@@ -111,26 +109,6 @@ public class IslandGroup {
         if(playerColorIslandToAdd != this.conquerorColor) {
             return false;
         }
-
-        /*for(int i = 0; i < this.getNumberOfIslands(); i++) {
-            if((this.getIslands().get(i).getIslandID() % 12) + 1 == IDIslandToAdd) {
-                if(this.getIslands().get(i).getIslandID() < IDIslandToAdd) {
-                    islands.add(i + 1, island);
-                } else {
-                    islands.add(i, island);
-                }
-                return true;
-            } else {
-                if (this.getIslands().get(i).getIslandID() - 1 == IDIslandToAdd % 12) {
-                    if (this.getIslands().get(i).getIslandID() < IDIslandToAdd) {
-                        islands.add(i + this.getNumberOfIslands(), island);
-                    } else {
-                        islands.add(i, island);
-                    }
-                    return true;
-                }
-            }
-        }*/
 
         islands.add(island);
         ArrayList<Island> toSort = islands;

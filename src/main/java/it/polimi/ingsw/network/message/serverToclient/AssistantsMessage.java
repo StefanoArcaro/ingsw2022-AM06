@@ -21,13 +21,13 @@ public class AssistantsMessage extends Answer {
 
     @Override
     public String getMessage() {
-        String assistantString = "";
+        StringBuilder assistantString = new StringBuilder();
 
         for(Assistant assistant : assistants) {
-            assistantString = assistantString + "Priority = " + assistant.getPriority() + "- Number of steps = " + assistant.getNumberOfSteps() + "\n";
+            assistantString.append("Priority = ").append(assistant.getPriority()).append("- Number of steps = ").append(assistant.getNumberOfSteps()).append("\n");
         }
 
-        return assistantString;
+        return assistantString.toString();
     }
 
     public ArrayList<Assistant> getAssistants() {
