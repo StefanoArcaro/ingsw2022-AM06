@@ -240,9 +240,9 @@ class PlanningPhaseTest {
 
         // Check number of assistants remaining
         assertEquals(9, game.getCurrentPlayer().getWizard().getAssistants().size());
-        assertEquals(9, game.getNextPlayer().getWizard().getAssistants().size());
-        game.setCurrentPlayer(game.getNextPlayer());
         assertEquals(8, game.getNextPlayer().getWizard().getAssistants().size());
+        game.setCurrentPlayer(game.getNextPlayer());
+        assertEquals(9, game.getNextPlayer().getWizard().getAssistants().size());
 
         // Check clouds full
         for(Cloud cloud : game.getClouds()) {
