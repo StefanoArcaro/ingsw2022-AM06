@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class InputControllerTest {
 
+    /** Class ClientHandlerTest defines a stub for ClientHandler class. */
     static class ClientHandlerTest implements ClientHandler {
 
         @Override
@@ -39,9 +40,9 @@ class InputControllerTest {
     Player chiara;
     Player stefano;
 
+    /** Initializes values. */
     @BeforeEach
     void setUp() {
-
         Map<Integer, ClientHandler> clients = new HashMap<>();
         clients.put(0, new InputControllerTest.ClientHandlerTest());
         clients.put(1, new InputControllerTest.ClientHandlerTest());
@@ -69,6 +70,8 @@ class InputControllerTest {
         inputController = null;
     }
 
+    /** Tests the reception of a message to choose a wizard
+     * but the message is not consistent with the current phase (pick cloud) */
     @Test
     void checkOnMessageReceived_WrongPhaseWizard() {
         game.setGameState(GameState.PICK_CLOUD_PHASE);
@@ -83,6 +86,8 @@ class InputControllerTest {
         assertFalse(inputController.checkOnMessageReceived(pair));
     }
 
+    /** Tests the reception of a message to play an assistant
+     * but the message is not consistent with the current phase (pick cloud) */
     @Test
     void checkOnMessageReceived_WrongPhaseAssistant() {
         game.setGameState(GameState.PICK_CLOUD_PHASE);
@@ -97,6 +102,8 @@ class InputControllerTest {
         assertFalse(inputController.checkOnMessageReceived(pair));
     }
 
+    /** Tests the reception of a message to move a student
+     * but the message is not consistent with the current phase (pick cloud) */
     @Test
     void checkOnMessageReceived_WrongPhaseMoveStudent() {
         game.setGameState(GameState.PICK_CLOUD_PHASE);
@@ -111,6 +118,8 @@ class InputControllerTest {
         assertFalse(inputController.checkOnMessageReceived(pair));
     }
 
+    /** Tests the reception of a message to move mother nature
+     * but the message is not consistent with the current phase (pick cloud) */
     @Test
     void checkOnMessageReceived_WrongPhaseMoveMotherNature() {
         game.setGameState(GameState.PICK_CLOUD_PHASE);
@@ -125,6 +134,8 @@ class InputControllerTest {
         assertFalse(inputController.checkOnMessageReceived(pair));
     }
 
+    /** Tests the reception of a message to pick a cloud
+     * but the message is not consistent with the current phase (move student) */
     @Test
     void checkOnMessageReceived_WrongPhasePickCloud() {
         game.setGameState(GameState.MOVE_STUDENT_PHASE);
@@ -139,6 +150,8 @@ class InputControllerTest {
         assertFalse(inputController.checkOnMessageReceived(pair));
     }
 
+    /** Tests the reception of a message to play a character
+     * but the message is not consistent with the current phase (prepare phase) */
     @Test
     void checkOnMessageReceived_WrongPhaseCharacter() {
         game.setGameState(GameState.PREPARE_PHASE);
@@ -153,6 +166,8 @@ class InputControllerTest {
         assertFalse(inputController.checkOnMessageReceived(pair));
     }
 
+    /** Tests the reception of a message to get character's info
+     * but the game has no such character */
     @Test
     void checkOnMessageReceived_CharacterInfoNoCharacter() {
         game.setGameState(GameState.PREPARE_PHASE);
@@ -167,6 +182,8 @@ class InputControllerTest {
         assertFalse(inputController.checkOnMessageReceived(pair));
     }
 
+    /** Tests the reception of a message to get character's info
+     * but the game has no characters (easy mode) */
     @Test
     void checkOnMessageReceived_CharacterInfoEasyMode() {
         game.setGameMode(GameMode.EASY);
@@ -182,6 +199,8 @@ class InputControllerTest {
         assertFalse(inputController.checkOnMessageReceived(pair));
     }
 
+    /** Tests the reception of a message to get character's info
+     * but the message is not consistent with the current phase (lobby phase) */
     @Test
     void checkOnMessageReceived_CharacterInfoWrongPhase() {
         game.setGameState(GameState.LOBBY_PHASE);
@@ -196,6 +215,8 @@ class InputControllerTest {
         assertFalse(inputController.checkOnMessageReceived(pair));
     }
 
+    /** Tests the reception of a message to login
+     * but the user is already logged */
     @Test
     void checkOnMessageReceived_WrongMessageReceivedByServer() {
         game.setGameState(GameState.PREPARE_PHASE);
@@ -210,6 +231,8 @@ class InputControllerTest {
         assertFalse(inputController.checkOnMessageReceived(pair));
     }
 
+    /** Tests the reception of a message to play a character
+     * but the game has no characters (easy mode) */
     @Test
     void checkOnMessageReceived_CharacterToPlayEasyMode() {
         game.setGameMode(GameMode.EASY);
@@ -224,11 +247,5 @@ class InputControllerTest {
 
         assertFalse(inputController.checkOnMessageReceived(pair));
     }
-
-
-
-
-
-
 
 }

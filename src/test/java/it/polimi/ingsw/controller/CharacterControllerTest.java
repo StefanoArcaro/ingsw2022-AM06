@@ -26,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CharacterControllerTest {
 
+    /** Class ClientHandlerTest defines a stub for ClientHandler class. */
     static class ClientHandlerTest implements ClientHandler {
 
         @Override
@@ -45,6 +46,7 @@ class CharacterControllerTest {
     Player chiara;
     Player stefano;
 
+    /** Initializes values */
     @BeforeEach
     void setUp() {
         gameManager = new GameManager();
@@ -97,6 +99,7 @@ class CharacterControllerTest {
         game = null;
     }
 
+    /** Tests the reception of a message to play a character */
     @Test
     void onMessageReceived_CharacterMessage() {
         Map<Player, Assistant> playerPriority = new HashMap<>();
@@ -138,6 +141,7 @@ class CharacterControllerTest {
         assertEquals(9,motherNatureNewIndex);
     }
 
+    /** Tests the reception of a message to play a character when the character needs a destination as parameter */
     @Test
     void onMessageReceived_CharacterDestinationMessage() {
         Map<Player, Assistant> playerPriority = new HashMap<>();
@@ -168,6 +172,7 @@ class CharacterControllerTest {
         assertEquals(1, game.getIslandGroupByIndex(0).getNumberOfBanCardPresent());
     }
 
+    /** Tests the reception of a message to play a character when the character needs a color as parameter */
     @Test
     void onMessageReceived_CharacterColorMessage() {
         game.setGameState(GameState.MOVE_STUDENT_PHASE);
@@ -191,6 +196,7 @@ class CharacterControllerTest {
         assertEquals(1, chiara.getBoard().getHall().getTableByColor(colorChosen).getLength());
     }
 
+    /** Tests the reception of a message to play a character when the character needs color and destination as parameters */
     @Test
     void onMessageReceived_CharacterColorDestinationMessage() {
         game.setGameState(GameState.MOVE_STUDENT_PHASE);
@@ -216,6 +222,7 @@ class CharacterControllerTest {
         assertTrue(game.getIslandByID(3).getStudents().stream().map(Creature::getColor).toList().contains(colorChosen));
     }
 
+    /** Tests the reception of a message to play a character when the character needs two colors as parameters */
     @Test
     void onMessageReceived_CharacterDoubleColorMessage() {
         game.setGameState(GameState.MOVE_STUDENT_PHASE);
@@ -241,6 +248,8 @@ class CharacterControllerTest {
         assertTrue(game.getCharacterByID(7).getStudents().stream().map(Creature::getColor).toList().contains(colorChosenFromEntrance));
     }
 
+    /** Tests the reception of a message to play a character when the character needs two colors as parameters
+     * but the player has not enough money */
     @Test
     void onMessageReceived_CharacterDoubleColorMessage_NoMoney() {
         game.setGameState(GameState.MOVE_STUDENT_PHASE);
@@ -268,6 +277,8 @@ class CharacterControllerTest {
         assertFalse(chiara.getBoard().getEntrance().getStudents().stream().map(Creature::getColor).toList().contains(colorChosenFromCard));
     }
 
+    /** Tests the reception of a message to play a character when the character needs destination as parameter
+     * but the player has not enough money */
     @Test
     void onMessageReceived_CharacterDestinationMessage_NoMoney() {
         game.setGameState(GameState.MOVE_MOTHER_NATURE_PHASE);
@@ -288,6 +299,8 @@ class CharacterControllerTest {
         assertEquals(game.getCharacterByID(0), game.getActivatedCharacter());
     }
 
+    /** Tests the reception of a message to play a character when the character needs color and destination as parameters
+     * but the player has inserted a wrong destination */
     @Test
     void onMessageReceived_CharacterColorDestinationMessage_WrongDestination() {
         game.setGameState(GameState.MOVE_STUDENT_PHASE);
@@ -312,6 +325,7 @@ class CharacterControllerTest {
         assertEquals(game.getCharacterByID(0), game.getActivatedCharacter());
     }
 
+    /** Tests the reception of a message to get character's info */
     @Test
     void onMessageReceived_CharacterInfoMessage() {
         game.setGameState(GameState.PREPARE_PHASE);
@@ -329,6 +343,8 @@ class CharacterControllerTest {
         assertEquals(game.getCharacterByID(0), game.getActivatedCharacter());
     }
 
+    /** Tests the reception of a message to play a character
+     * but the player has not enough money */
     @Test
     void onMessageReceived_CharacterMessage_NoMoney() {
         game.setGameState(GameState.MOVE_MOTHER_NATURE_PHASE);
@@ -349,6 +365,8 @@ class CharacterControllerTest {
         assertEquals(game.getCharacterByID(0), game.getActivatedCharacter());
     }
 
+    /** Tests the reception of a message to play a character when the character needs a color as parameter
+     * but the player has not enough money */
     @Test
     void onMessageReceived_CharacterColorMessage_NoMoney() {
         game.setGameState(GameState.MOVE_MOTHER_NATURE_PHASE);
@@ -368,7 +386,5 @@ class CharacterControllerTest {
 
         assertEquals(game.getCharacterByID(0), game.getActivatedCharacter());
     }
-
-
 
 }

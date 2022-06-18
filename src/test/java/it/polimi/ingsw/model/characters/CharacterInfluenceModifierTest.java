@@ -27,6 +27,7 @@ class CharacterInfluenceModifierTest {
     Phase phase;
     PhaseFactory phaseFactory;
 
+    /** Initializes values */
     @BeforeEach
     void setUp() {
         game = new Game();
@@ -95,7 +96,7 @@ class CharacterInfluenceModifierTest {
         priority = null;
     }
 
-
+    /** Tests the correct effect of a character: place a ban card on the island group chosen */
     @Test
     void effect() {
         Player p1 = game.getPlayingOrder().get(0);
@@ -111,10 +112,9 @@ class CharacterInfluenceModifierTest {
         game.setCurrentPhase(phase);
 
         character = cf.createCharacter(5);
-
         game.addDrawnCharacter(character);
 
-        ((CharacterInfluenceModifier)character).setIslandGroupIndex(1);
+        character.setIslandGroupIndex(1);
 
         try {
             ((ActionPhase)game.getCurrentPhase()).playCharacter(5);
@@ -126,7 +126,7 @@ class CharacterInfluenceModifierTest {
         assertEquals(3, game.getActivatedCharacter().getNumberOfBanCards());
         assertEquals(1, game.getIslandGroupByIndex(1).getNumberOfBanCardPresent());
 
-        ((CharacterInfluenceModifier)character).setIslandGroupIndex(2);
+        character.setIslandGroupIndex(2);
 
         assertThrows(TooManyIterationsException.class, ()->((ActionPhase)game.getCurrentPhase()).playCharacter(5));
 
@@ -135,6 +135,8 @@ class CharacterInfluenceModifierTest {
         assertEquals(0, game.getIslandGroupByIndex(2).getNumberOfBanCardPresent());
     }
 
+    /** Tests the correct effect of a character: place a ban card on the island group chosen
+     * but the character chosen has placed all his ban cards */
     @Test
     void effect_noBanCardsLeft_OutOfBound() {
         Player p1 = game.getPlayingOrder().get(0);
@@ -154,10 +156,9 @@ class CharacterInfluenceModifierTest {
         character.removeBanCard();
         character.removeBanCard();
         character.removeBanCard();
-
         game.addDrawnCharacter(character);
 
-        ((CharacterInfluenceModifier)character).setIslandGroupIndex(1);
+        character.setIslandGroupIndex(1);
 
         assertThrows(NoAvailableBanCardsException.class, ()-> ((ActionPhase)game.getCurrentPhase()).playCharacter(5));
 
@@ -165,7 +166,7 @@ class CharacterInfluenceModifierTest {
         assertEquals(0, game.getActivatedCharacter().getNumberOfBanCards());
         assertEquals(0, game.getIslandGroupByIndex(1).getNumberOfBanCardPresent());
 
-        ((CharacterInfluenceModifier)character).setIslandGroupIndex(13);
+        character.setIslandGroupIndex(13);
 
         assertThrows(OutOfBoundException.class, ()->((ActionPhase)game.getCurrentPhase()).playCharacter(5));
         assertEquals(5, p1.getCoins());

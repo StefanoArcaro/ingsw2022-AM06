@@ -13,6 +13,7 @@ class CharacterTest {
     ConcreteCharacterFactory cf;
     Character character;
 
+    /** Initializes values */
     @BeforeEach
     void setUp() {
         game = new Game();
@@ -26,6 +27,7 @@ class CharacterTest {
         character = null;
     }
 
+    /** Tests the correct cost of a character */
     @Test
     void getCost() {
         assertEquals(2, character.getCost());
@@ -35,6 +37,7 @@ class CharacterTest {
         assertEquals(3, character.getCost());
     }
 
+    /** Tests the correct id of a character */
     @Test
     void getCharacterID() {
         assertEquals(8, character.getCharacterID());

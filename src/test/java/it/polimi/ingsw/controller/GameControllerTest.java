@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GameControllerTest {
 
-
+    /** Class ClientHandlerTest defines a stub for ClientHandler class. */
     static class ClientHandlerTest implements ClientHandler {
 
         @Override
@@ -42,6 +42,7 @@ class GameControllerTest {
     Player chiara;
     Player stefano;
 
+    /** Initializes values. */
     @BeforeEach
     void setUp() {
         gameManager = new GameManager();
@@ -90,6 +91,7 @@ class GameControllerTest {
         assertEquals(WizardName.DRUID, chiara.getWizard().getName());
     }
 
+    /** Tests the message received to choose an assistant */
     @Test
     void propertyChange_PlanningPhase() {
         chiara.setWizard(WizardName.DRUID);
@@ -117,6 +119,7 @@ class GameControllerTest {
         assertEquals(7, game.getPlayerPriority().get(stefano).getPriority());
     }
 
+    /** Tests the message received to move a student from entrance to hall */
     @Test
     void propertyChange_MoveStudentPhase() {
         game.setGameState(GameState.MOVE_STUDENT_PHASE);
@@ -139,6 +142,7 @@ class GameControllerTest {
         assertEquals(1, chiara.getBoard().getHall().getTableByColor(colorChosen).getLength());
     }
 
+    /** Tests the message received to move mother nature */
     @Test
     void propertyChange_MoveMotherNaturePhase() {
         Map<Player, Assistant> playerPriority = new HashMap<>();
@@ -159,7 +163,6 @@ class GameControllerTest {
 
         game.getMotherNature().setCurrentIslandGroup(game.getIslandGroupByIndex(5));
 
-
         MoveMotherNatureMessage message = new MoveMotherNatureMessage(3);
         Gson gson = new Gson();
         String inputSer = gson.toJson(message);
@@ -174,6 +177,7 @@ class GameControllerTest {
         assertEquals(8,motherNatureNewIndex);
     }
 
+    /** Tests the message received to pick a cloud */
     @Test
     void propertyChange_PickCloudPhase() {
         game.setGameState(GameState.PICK_CLOUD_PHASE);
@@ -210,6 +214,7 @@ class GameControllerTest {
         assertTrue(chiara.getBoard().getEntrance().getStudents().stream().map(Creature::getColor).toList().containsAll(studentsOnCloudOne));
     }
 
+    /** Tests the end of the game due to the end of a player's towers */
     @Test
     void propertyChange_EndGamePhase() {
         Map<Player, Assistant> playerPriority = new HashMap<>();
@@ -243,6 +248,7 @@ class GameControllerTest {
         assertEquals(chiara, game.getCurrentPhase().getWinner());
     }
 
+    /** Tests the reception of a message sent by a player who is not the current one */
     @Test
     void propertyChange_WrongUser() {
         game.setGameState(GameState.PICK_CLOUD_PHASE);
@@ -261,6 +267,7 @@ class GameControllerTest {
         assertEquals(chiara, game.getCurrentPlayer());
     }
 
+    /** Tests the reception of a message to choose a wizard which is not available */
     @Test
     void propertyChange_PreparePhase_WrongWizard() {
         stefano.setWizard(WizardName.DRUID);
@@ -280,6 +287,7 @@ class GameControllerTest {
         assertNull(chiara.getWizard());
     }
 
+    /** Tests the reception of a message to choose an assistant which is not available */
     @Test
     void propertyChange_PlanningPhase_WrongAssistant() {
         chiara.setWizard(WizardName.DRUID);
@@ -311,11 +319,11 @@ class GameControllerTest {
         PropertyChangeEvent evtS2 = new PropertyChangeEvent(this, null, null, new AbstractMap.SimpleEntry<>(inputSerS2, messageS2));
         gameController.propertyChange(evtS2);
 
-
         assertEquals(3, game.getPlayerPriority().get(chiara).getPriority());
         assertEquals(7, game.getPlayerPriority().get(stefano).getPriority());
     }
 
+    /** Test receiving a message to move mother nature more steps than allowed */
     @Test
     void propertyChange_MoveMotherNaturePhase_TooManySteps() {
         Map<Player, Assistant> playerPriority = new HashMap<>();
@@ -336,7 +344,6 @@ class GameControllerTest {
 
         game.getMotherNature().setCurrentIslandGroup(game.getIslandGroupByIndex(5));
 
-
         MoveMotherNatureMessage message = new MoveMotherNatureMessage(3);
         Gson gson = new Gson();
         String inputSer = gson.toJson(message);
@@ -351,6 +358,7 @@ class GameControllerTest {
         assertEquals(5,motherNatureNewIndex);
     }
 
+    /** Test receiving a message to choose a cloud which is not available */
     @Test
     void propertyChange_PickCloudPhase_WrongCloud() {
         game.setGameState(GameState.PICK_CLOUD_PHASE);

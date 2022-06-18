@@ -28,6 +28,7 @@ class CharacterMoverTest {
     private Character character;
     private ConcreteCharacterFactory cf;
 
+    /** Initializes values */
     @BeforeEach
     void setUp() {
         game = new Game();
@@ -95,6 +96,7 @@ class CharacterMoverTest {
         cf = null;
     }
 
+    /** Tests the correct initial preparation for characters: put some students on the cards */
     @Test
     void initialPreparation() {
         character = cf.createCharacter(1);
@@ -105,6 +107,7 @@ class CharacterMoverTest {
         assertEquals(6, character.getStudents().size());
     }
 
+    /** Tests the correct effect of a character: move a student from the character to an island chosen */
     @Test
     void effect1_OK() {
         character = cf.createCharacter(1);
@@ -119,8 +122,8 @@ class CharacterMoverTest {
         game.getIslandByID(1).receiveStudent(CreatureColor.GREEN);
         game.getIslandByID(1).receiveStudent(CreatureColor.PINK);
 
-        ((CharacterMover) character).setFirstColor(CreatureColor.RED);
-        ((CharacterMover) character).setIslandID(1);
+        character.setFirstColor(CreatureColor.RED);
+        character.setIslandID(1);
         try {
             character.effect();
         } catch (Exception e) {
@@ -135,6 +138,8 @@ class CharacterMoverTest {
         assertEquals(4, character.getStudents().size());
     }
 
+    /** Tests the correct effect of a character: move a student from the character to an island chosen
+     * when the destination given is wrong */
     @Test
     void effect1_KO() {
         character = cf.createCharacter(1);
@@ -150,8 +155,8 @@ class CharacterMoverTest {
         island.receiveStudent(CreatureColor.GREEN);
         island.receiveStudent(CreatureColor.PINK);
 
-        ((CharacterMover) character).setFirstColor(CreatureColor.YELLOW);
-        ((CharacterMover) character).setIslandID(1);
+        character.setFirstColor(CreatureColor.YELLOW);
+        character.setIslandID(1);
 
         assertThrows(NoAvailableColorException.class, ()->character.effect());
 
@@ -166,8 +171,8 @@ class CharacterMoverTest {
         assertTrue(island.getStudents().stream().map(Creature::getColor).toList().containsAll(expectedColor));
         assertEquals(2, island.getStudents().size());
 
-        ((CharacterMover) character).setFirstColor(CreatureColor.RED);
-        ((CharacterMover) character).setIslandID(13);
+        character.setFirstColor(CreatureColor.RED);
+        character.setIslandID(13);
 
         assertThrows(OutOfBoundException.class, ()->character.effect());
 
@@ -176,14 +181,12 @@ class CharacterMoverTest {
         assertEquals(CreatureColor.GREEN, character.getStudents().get(2).getColor());
         assertEquals(CreatureColor.BLUE, character.getStudents().get(3).getColor());
         assertEquals(4, character.getStudents().size());
-
     }
 
+    /** Tests the correct effect of a character: move up to three students from the character to player's entrance */
     @Test
     void effect7_OK() {
         character = cf.createCharacter(7);
-        //game.setActivatedCharacter(character);
-
         game.addDrawnCharacter(character);
 
         character.students.add(new Student(CreatureColor.RED));
@@ -196,8 +199,8 @@ class CharacterMoverTest {
         game.getCurrentPlayer().getBoard().addStudentToEntrance(CreatureColor.BLUE);
         game.getCurrentPlayer().getBoard().addStudentToEntrance(CreatureColor.PINK);
 
-        ((CharacterMover) character).setFirstColor(CreatureColor.RED);
-        ((CharacterMover) character).setSecondColor(CreatureColor.BLUE);
+        character.setFirstColor(CreatureColor.RED);
+        character.setSecondColor(CreatureColor.BLUE);
 
         try{
             ((ActionPhase)(game.getCurrentPhase())).playCharacter(character.getCharacterID());
@@ -209,6 +212,8 @@ class CharacterMoverTest {
         assertEquals(9, game.getCurrentPlayer().getBoard().getEntrance().getStudents().size());
     }
 
+    /** Tests the correct effect of a character: move up to three students from the character to player's entrance
+     * when the student chosen is not one of those on the card  */
     @Test
     void effect7_KO() {
         character = cf.createCharacter(7);
@@ -224,8 +229,8 @@ class CharacterMoverTest {
         game.getCurrentPlayer().getBoard().addStudentToEntrance(CreatureColor.BLUE);
         game.getCurrentPlayer().getBoard().addStudentToEntrance(CreatureColor.PINK);
 
-        ((CharacterMover) character).setFirstColor(CreatureColor.PINK);
-        ((CharacterMover) character).setSecondColor(CreatureColor.BLUE);
+        character.setFirstColor(CreatureColor.PINK);
+        character.setSecondColor(CreatureColor.BLUE);
 
         ArrayList<CreatureColor> expectedStudents = new ArrayList<>(Arrays.asList(CreatureColor.RED, CreatureColor.RED,
                 CreatureColor.GREEN,CreatureColor.BLUE, CreatureColor.GREEN, CreatureColor.BLUE));
@@ -237,6 +242,7 @@ class CharacterMoverTest {
         assertEquals(9, game.getCurrentPlayer().getBoard().getEntrance().getStudents().size());
     }
 
+    /** Tests the correct effect of a character: switch up to two students between entrance and hall */
     @Test
     void effect10_OK() {
         character = cf.createCharacter(10);
@@ -247,8 +253,8 @@ class CharacterMoverTest {
         game.getCurrentPlayer().getBoard().addStudentToHall(CreatureColor.PINK);
         game.getCurrentPlayer().getBoard().addStudentToHall(CreatureColor.RED);
 
-        ((CharacterMover) character).setFirstColor(CreatureColor.PINK);
-        ((CharacterMover) character).setSecondColor(CreatureColor.BLUE);
+        character.setFirstColor(CreatureColor.PINK);
+        character.setSecondColor(CreatureColor.BLUE);
 
         ArrayList<Integer> expectedHall = new ArrayList<>(Arrays.asList(0,1,0,0,1));
 
@@ -266,6 +272,8 @@ class CharacterMoverTest {
 
     }
 
+    /** Tests the correct effect of a character: switch up to two students between entrance and hall
+     * when the students chosen are not in player's board */
     @Test
     void effect10_KO() {
         character = cf.createCharacter(10);
@@ -277,8 +285,8 @@ class CharacterMoverTest {
         game.getCurrentPlayer().getBoard().addStudentToHall(CreatureColor.PINK);
         game.getCurrentPlayer().getBoard().addStudentToHall(CreatureColor.RED);
 
-        ((CharacterMover) character).setFirstColor(CreatureColor.GREEN);
-        ((CharacterMover) character).setSecondColor(CreatureColor.BLUE);
+        character.setFirstColor(CreatureColor.GREEN);
+        character.setSecondColor(CreatureColor.BLUE);
 
         ArrayList<Integer> expectedHall = new ArrayList<>(Arrays.asList(0,1,0,1,0));
 
@@ -291,6 +299,7 @@ class CharacterMoverTest {
         assertEquals(expectedHall, game.getCurrentPlayer().getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
     }
 
+    /** Tests the correct effect of a character: move a student from the card to the player's hall */
     @Test
     void effect11_OK() {
         character = cf.createCharacter(11);
@@ -305,7 +314,7 @@ class CharacterMoverTest {
         game.getCurrentPlayer().getBoard().addStudentToHall(CreatureColor.RED);
         game.getCurrentPlayer().getBoard().addStudentToHall(CreatureColor.PINK);
 
-        ((CharacterMover)character).setFirstColor(CreatureColor.RED);
+        character.setFirstColor(CreatureColor.RED);
 
         ArrayList<Integer> expectedHall = new ArrayList<>(Arrays.asList(0, 2, 0, 1, 0));
 
@@ -319,7 +328,8 @@ class CharacterMoverTest {
         assertEquals(4, character.getStudents().size());
     }
 
-
+    /** Tests the correct effect of a character: move a student from the card to the player's hall
+     * when the student chosen is not one of those on the card */
     @Test
     void effect11_KO() {
         character = cf.createCharacter(11);
@@ -334,7 +344,7 @@ class CharacterMoverTest {
         game.getCurrentPlayer().getBoard().addStudentToHall(CreatureColor.RED);
         game.getCurrentPlayer().getBoard().addStudentToHall(CreatureColor.PINK);
 
-        ((CharacterMover)character).setFirstColor(CreatureColor.PINK);
+        character.setFirstColor(CreatureColor.PINK);
 
         ArrayList<Integer> expectedHall = new ArrayList<>(Arrays.asList(0,1,0,1,0));
 
@@ -344,6 +354,7 @@ class CharacterMoverTest {
         assertEquals(4, character.getStudents().size());
     }
 
+    /** Tests the correct effect of a character: remove three student of a color from every player's hall */
     @Test
     void effect12_OK() {
         Player p1 = game.getPlayingOrder().get(0);
@@ -364,7 +375,7 @@ class CharacterMoverTest {
 
         ArrayList<Integer> expectedHall2 = new ArrayList<>(Arrays.asList(0, 1, 0, 0, 0));
 
-        ((CharacterMover)character).setFirstColor(CreatureColor.RED);
+        character.setFirstColor(CreatureColor.RED);
         try {
             character.effect();
         } catch (Exception e) {
@@ -375,6 +386,8 @@ class CharacterMoverTest {
         assertEquals(expectedHall2, p2.getBoard().getHall().getStudents().stream().map(Table::getLength).collect(Collectors.toList()));
     }
 
+    /** Tests the correct effect of a character: remove three student of a color from every player's hall
+     * when no player has three students of the chosen color in his hall */
     @Test
     void effect12_KO() {
         Player p1 = game.getPlayingOrder().get(0);
@@ -394,7 +407,7 @@ class CharacterMoverTest {
 
         ArrayList<Integer> expectedHall2 = new ArrayList<>(Arrays.asList(2, 0, 0, 0, 0));
 
-        ((CharacterMover)character).setFirstColor(CreatureColor.RED);
+        character.setFirstColor(CreatureColor.RED);
 
         try {
             character.effect();

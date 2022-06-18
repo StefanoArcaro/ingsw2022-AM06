@@ -24,6 +24,7 @@ class CharacterInfluenceCalculatorTest {
     private Character character;
     private ConcreteCharacterFactory cf;
 
+    /** Initializes values */
     @BeforeEach
     void setUp() {
         game = new Game();
@@ -89,6 +90,7 @@ class CharacterInfluenceCalculatorTest {
         priority = null;
     }
 
+    /** Tests the correct effect of a character: calculate the influence on the island group chosen */
     @Test
     void effect(){
         Player p1 = game.getPlayingOrder().get(0);
@@ -97,6 +99,7 @@ class CharacterInfluenceCalculatorTest {
         character = cf.createCharacter(3);
         game.setActivatedCharacter(character);
 
+        // initialize boards
         p1.getBoard().addStudentToHall(CreatureColor.RED);
         p1.getBoard().addStudentToHall(CreatureColor.RED);
         p1.getBoard().winProfessor(new Professor(CreatureColor.RED));
@@ -109,6 +112,7 @@ class CharacterInfluenceCalculatorTest {
         p2.getBoard().addStudentToHall(CreatureColor.GREEN);
         p2.getBoard().winProfessor(new Professor(CreatureColor.GREEN));
 
+        // initialize island groups
         IslandGroup islandGroup1 = game.getIslandGroups().get(1);
         IslandGroup islandGroup2 = game.getIslandGroups().get(2);
 
@@ -125,10 +129,10 @@ class CharacterInfluenceCalculatorTest {
         islandGroup2.getIslands().get(0).addTower(game, p1.getColor());
         islandGroup2.setConquerorColor(p1.getColor());
 
-        ((CharacterInfluenceCalculator)character).setIslandGroupIndex(12);
+        character.setIslandGroupIndex(12);
         assertThrows(OutOfBoundException.class, ()->character.effect());
 
-        ((CharacterInfluenceCalculator)character).setIslandGroupIndex(1);
+        character.setIslandGroupIndex(1);
 
         try {
             character.effect();
