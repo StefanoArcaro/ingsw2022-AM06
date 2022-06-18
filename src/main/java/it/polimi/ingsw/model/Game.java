@@ -395,12 +395,8 @@ public class Game {
             playerOlderConquerorIslandGroup = getPlayerByColor(towerColorOnIslandGroup);
         }
 
-        System.out.println(islandGroupIndex);
-
         for(Player player : players) {
             influence = islandGroup.calculateInfluence(this, player, activatedCharacter);
-
-            System.out.println(player.getNickname() + " " + influence);
 
             if(influence > maxInfluence) {
                 maxInfluence = influence;

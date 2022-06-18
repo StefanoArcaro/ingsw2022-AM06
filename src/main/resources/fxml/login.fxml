@@ -26,7 +26,7 @@
          <font>
             <Font name="Comic Sans MS Bold" size="27.0" />
          </font></Label>
-      <TextField fx:id="nickname_field" layoutX="312.0" layoutY="173.0" prefHeight="32.0" prefWidth="263.0" text="nico">
+      <TextField fx:id="nickname_field" layoutX="312.0" layoutY="173.0" prefHeight="32.0" prefWidth="263.0">
          <font>
             <Font size="22.0" />
          </font></TextField>

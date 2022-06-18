@@ -322,6 +322,7 @@ public class PlayController extends BoardController implements GUIController {
 
                 for(i = 1; i <= numberOfStudents; i++) {
                     Button buttonStudent = (Button)scene.lookup(student + i);
+
                     buttonStudent.setOpacity(0);
                     buttonStudent.setDisable(true);
                 }
@@ -334,6 +335,7 @@ public class PlayController extends BoardController implements GUIController {
 
                 for(i = 1; i <= numberOfStudents; i++) {
                     Button buttonStudent = (Button)scene.lookup(student + i);
+
                     CreatureColor color = cloud.getStudents().get(i - 1).getColor();
                     String style = "-fx-background-color: " + gui.getHexByFXColor(gui.getFXColorByCreatureColor(color));
                     buttonStudent.setOpacity(1);
