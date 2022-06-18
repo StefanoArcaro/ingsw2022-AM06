@@ -62,4 +62,5 @@ public class EndGameController implements GUIController {
     public void quit() {
 
     }
+
 }

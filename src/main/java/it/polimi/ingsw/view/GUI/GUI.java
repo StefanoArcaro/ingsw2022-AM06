@@ -51,6 +51,10 @@ public class GUI extends Application implements View {
         launch();
     }
 
+    /**
+     * Starts the application up.
+     * @param stage the stage where the application is displayed.
+     */
     @Override
     public void start(Stage stage) {
         setup();
@@ -67,6 +71,10 @@ public class GUI extends Application implements View {
         stage.show();
     }
 
+    /**
+     * Setup method for the start of the application.
+     * It loads the .fxml files and maps them to their respective controllers and scenes.
+     */
     private void setup() {
         this.modelView = new ModelView();
         initMaps();
@@ -91,11 +99,18 @@ public class GUI extends Application implements View {
     }
 
 
+    /**
+     * @return this instance's SocketClient.
+     */
     @Override
     public SocketClient getSocketClient() {
         return this.socketClient;
     }
 
+    /**
+     * Sets the SocketClient of this instance to the specified one.
+     * @param socketClient socket to set.
+     */
     @Override
     public void setSocketClient(SocketClient socketClient) {
         this.socketClient = socketClient;
@@ -103,39 +118,69 @@ public class GUI extends Application implements View {
         socketClient.enablePinger(true);
     }
 
+    /**
+     * @return this instance's ModelView.
+     */
     public ModelView getModelView() {
         return modelView;
     }
 
+    /**
+     * @return this instance's MessageParser.
+     */
     public MessageParser getMessageParser() {
         return messageParser;
     }
 
+    /**
+     * Sets this instance's SocketClient to the specified one.
+     * @param socketClient to set.
+     */
     public void setMessageParser(SocketClient socketClient) {
         this.messageParser = new MessageParser(socketClient);
     }
 
 
+    /**
+     * @return the primary stage.
+     */
     public Stage getPrimaryStage() {
         return primaryStage;
     }
 
+    /**
+     * @return the secondary stage.
+     */
     public Stage getSecondaryStage() {
         return secondaryStage;
     }
 
+    /**
+     * @return the current scene.
+     */
     public Scene getCurrentScene() {
         return currentScene;
     }
 
+    /**
+     * @param name the name of the scene to return.
+     * @return the scene that is mapped to the specified scene name.
+     */
     public Scene getSceneByName(String name) {
         return nameToScene.get(name);
     }
 
+    /**
+     * @return the nameToController map.
+     */
     public HashMap<String, GUIController> getNameToController() {
         return nameToController;
     }
 
+    /**
+     * @param controller the controller mapped to the scene to return.
+     * @return the scene mapped to the specified controller.
+     */
     public Scene getSceneByController(GUIController controller) {
         for(String scene : nameToController.keySet()) {
             if(nameToController.get(scene).equals(controller)) {
@@ -145,10 +190,18 @@ public class GUI extends Application implements View {
         return null;
     }
 
+    /**
+     * @return the nicknameToScene map.
+     */
     public Map<String, String> getNicknameToSceneName() {
         return nicknameToSceneName;
     }
 
+    /**
+     * Changes the displayed scene to the specified one.
+     * @param stage the stage where the scene is displayed.
+     * @param scene the scene to display.
+     */
     public void changeStage(Stage stage, String scene) {
         Platform.runLater(() -> {
             currentScene = nameToScene.get(scene);
@@ -161,6 +214,10 @@ public class GUI extends Application implements View {
         });
     }
 
+    /**
+     * Displays a scene on the secondary stage.
+     * @param sceneName the scene to display.
+     */
     public void createWindow(String sceneName) {
         try {
             secondaryStage = new Stage();
@@ -177,6 +234,9 @@ public class GUI extends Application implements View {
     }
 
 
+    /**
+     * Put initial values into the GUI's attribute maps.
+     */
     private void initMaps() {
         // Creature color map
         colorToCreature.put(Color.GREEN, CreatureColor.GREEN);
@@ -197,10 +257,18 @@ public class GUI extends Application implements View {
         colorToHex.put(Color.GRAY, "#808080");
     }
 
+    /**
+     * @param color to get the mapped value of.
+     * @return the CreatureColor value mapped to the specified color.
+     */
     public CreatureColor getCreatureColorByFXColor(Color color) {
         return colorToCreature.get(color);
     }
 
+    /**
+     * @param creatureColor to get the mapped value of.
+     * @return the color mapped to the specified CreatureColor.
+     */
     public Color getFXColorByCreatureColor(CreatureColor creatureColor) {
         for(Color color : colorToCreature.keySet()) {
             if(colorToCreature.get(color).equals(creatureColor)) {
@@ -210,6 +278,10 @@ public class GUI extends Application implements View {
         return null;
     }
 
+    /**
+     * @param color the PlayerColor to get the mapped image of.
+     * @return the path to the image of the specified PlayerColor's tower.
+     */
     public String getTowerPathByPlayerColor(PlayerColor color) {
         return switch (color) {
             case BLACK -> "/images/tower_black.png";
@@ -218,66 +290,118 @@ public class GUI extends Application implements View {
         };
     }
 
+    /**
+     * @param color the color to get the mapped value of.
+     * @return the Hex value of the specified color.
+     */
     public String getHexByFXColor(Color color) {
         return colorToHex.get(color);
     }
 
+    /**
+     * @param button the button to get the color of.
+     * @return the specified button's color.
+     */
     public CreatureColor getButtonColor(Button button) {
         Color color = (Color) button.getBackground().getFills().get(0).getFill();
 
         return getCreatureColorByFXColor(color);
     }
 
+    /**
+     * @param characterID the ID of the character to get the image of.
+     * @return the path to the image of the specified character.
+     */
     public String getCharacterPathByCharacterID(int characterID) {
         return "/images/character_" + characterID + ".png";
     }
 
-
-
+    /**
+     * @return the selected entrance color.
+     */
     public CreatureColor getEntranceColor() {
         return entranceColor;
     }
 
+    /**
+     * Sets the entrance color to the specified one.
+     * @param entranceColor to set.
+     */
     public void setEntranceColor(CreatureColor entranceColor) {
         this.entranceColor = entranceColor;
     }
 
+    /**
+     * @return the selected hall color.
+     */
     public CreatureColor getHallColor() {
         return hallColor;
     }
 
+    /**
+     * Sets the hall color to the specified one.
+     * @param hallColor to set.
+     */
     public void setHallColor(CreatureColor hallColor) {
         this.hallColor = hallColor;
     }
 
+    /**
+     * @return the selected destination island.
+     */
     public int getDestinationIsland() {
         return destinationIsland;
     }
 
+    /**
+     * Sets the destination island to the specified one.
+     * @param destinationIsland to set.
+     */
     public void setDestinationIsland(int destinationIsland) {
         this.destinationIsland = destinationIsland;
     }
 
+    /**
+     * @return the selected character ID.
+     */
     public int getCharacterID() {
         return characterID;
     }
 
+    /**
+     * Sets the selected character ID to the specified one.
+     * @param characterID to set.
+     */
     public void setCharacterID(int characterID) {
         this.characterID = characterID;
     }
 
+    /**
+     * @return the selected character student.
+     */
     public CreatureColor getCharacterStudent() {
         return characterStudent;
     }
 
+    /**
+     * Sets the selected character student to the specified one.
+     * @param characterStudent to set.
+     */
     public void setCharacterStudent(CreatureColor characterStudent) {
         this.characterStudent = characterStudent;
     }
 
+    /**
+     * @return the selected character color.
+     */
     public CreatureColor getCharacterColor() {
         return characterColor;
     }
 
+    /**
+     * Sets the selected character color to the specified one.
+     * @param characterColor to set.
+     */
     public void setCharacterColor(CreatureColor characterColor) {
         this.characterColor = characterColor;
     }
@@ -316,7 +440,6 @@ public class GUI extends Application implements View {
 
     /**
      * Handles the WizardsAvailableMessage sent by the server.
-     *
      * @param msg the message to handle.
      */
     @Override
@@ -327,7 +450,6 @@ public class GUI extends Application implements View {
 
     /**
      * Handles the FXWizardChoiceMessage sent by the server.
-     *
      * @param msg the message to handle.
      */
     @Override
@@ -338,7 +460,6 @@ public class GUI extends Application implements View {
 
     /**
      * Handles the AssistantsMessage sent by the server.
-     *
      * @param msg the message to handle.
      */
     @Override
@@ -351,7 +472,6 @@ public class GUI extends Application implements View {
 
     /**
      * Handles the ActivePlayersMessage sent by the server.
-     *
      * @param msg the message to handle.
      */
     @Override
@@ -367,7 +487,6 @@ public class GUI extends Application implements View {
 
     /**
      * Handles the BoardMessage sent by the server.
-     *
      * @param msg the message to handle.
      */
     @Override
@@ -378,7 +497,6 @@ public class GUI extends Application implements View {
 
     /**
      * Handles the IslandGroupsMessage sent by the server.
-     *
      * @param msg the message to handle.
      */
     @Override
@@ -390,7 +508,6 @@ public class GUI extends Application implements View {
 
     /**
      * Handles the IslandMessage sent by the server.
-     *
      * @param msg the message to handle.
      */
     @Override
@@ -402,7 +519,6 @@ public class GUI extends Application implements View {
 
     /**
      * Handles the CloudsAvailableMessage sent by the server.
-     *
      * @param msg the message to handle.
      */
     @Override
@@ -412,7 +528,6 @@ public class GUI extends Application implements View {
 
     /**
      * Handles the CloudChosenMessage sent by the server.
-     *
      * @param msg the message to handle.
      */
     @Override
@@ -422,7 +537,6 @@ public class GUI extends Application implements View {
 
     /**
      * Handles the FXCloudMessage sent by the server.
-     *
      * @param msg the message to handle.
      */
     @Override
@@ -434,7 +548,6 @@ public class GUI extends Application implements View {
 
     /**
      * Handles the CoinMessage sent by the server.
-     *
      * @param msg the message to handle.
      */
     @Override
@@ -445,7 +558,6 @@ public class GUI extends Application implements View {
 
     /**
      * Handles the CurrentPlayerMessage sent by the server.
-     *
      * @param msg the message to handle.
      */
     @Override
@@ -457,7 +569,6 @@ public class GUI extends Application implements View {
 
     /**
      * Handles the CurrentPhaseMessage sent by the server.
-     *
      * @param msg the message to handle.
      */
     @Override
@@ -469,7 +580,6 @@ public class GUI extends Application implements View {
 
     /**
      * Handles the CharacterDrawnMessage sent by the server.
-     *
      * @param msg the message to handle.
      */
     @Override
@@ -479,7 +589,6 @@ public class GUI extends Application implements View {
 
     /**
      * Handles the CharacterInfoMessage sent by the server.
-     *
      * @param msg the message to handle.
      */
     @Override
@@ -488,7 +597,6 @@ public class GUI extends Application implements View {
 
     /**
      * Handles the CharacterPlayedMessage sent by the server.
-     *
      * @param msg the message to handle.
      */
     @Override
@@ -498,7 +606,6 @@ public class GUI extends Application implements View {
 
     /**
      * Handles the FXBanCardMessage sent by the server.
-     *
      * @param msg the message to handle.
      */
     @Override
@@ -515,7 +622,6 @@ public class GUI extends Application implements View {
 
     /**
      * Handles the WinnerMessage sent by the server.
-     *
      * @param msg the message to handle.
      */
     @Override
@@ -526,7 +632,6 @@ public class GUI extends Application implements View {
 
     /**
      * Handles the LoserMessage sent by the server.
-     *
      * @param msg the message to handle.
      */
     @Override
@@ -544,7 +649,6 @@ public class GUI extends Application implements View {
 
     /**
      * Handles the GenericMessage sent by the server.
-     *
      * @param msg the message to handle.
      */
     @Override
@@ -558,6 +662,11 @@ public class GUI extends Application implements View {
         }
     }
 
+    /**
+     * Handles the generic message based on the type of information contained in it.
+     * @param message determines the type of information in the generic message.
+     * @param option the content of the generic message.
+     */
     private void sendGeneric(String message, String option) {
         switch (message) {
             case "PLAYER" -> ((PlayController) (nameToController.get(Constants.BOARD_AND_ISLANDS))).updateCurrentPlayer(getModelView().getNickname());
@@ -580,7 +689,6 @@ public class GUI extends Application implements View {
 
     /**
      * Handles the ErrorMessage sent by the server.
-     *
      * @param msg the message to handle.
      */
     @Override
@@ -591,7 +699,6 @@ public class GUI extends Application implements View {
 
     /**
      * Adds a listener to the View.
-     *
      * @param propertyName name of the observed property of the View.
      * @param listener listener added to the View.
      */

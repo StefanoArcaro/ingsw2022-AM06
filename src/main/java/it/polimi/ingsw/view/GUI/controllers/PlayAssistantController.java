@@ -32,6 +32,10 @@ public class PlayAssistantController implements GUIController {
 
     }
 
+    /**
+     * Creates the AssistantRequestMessage to send to the server.
+     * @param actionEvent the event fired by the Play button.
+     */
     public void onPlayAssistant(ActionEvent actionEvent) {
         Button button = (Button) actionEvent.getSource();
         String assistantIDString = button.getId();
@@ -44,6 +48,11 @@ public class PlayAssistantController implements GUIController {
         stage.close();
     }
 
+    /**
+     * Updates the assistants' scene by disabling the option to select
+     * an assistant that was already played.
+     * @param assistants the list of available assistants.
+     */
     public void updateAvailableAssistants(ArrayList<Assistant> assistants) {
         Scene scene = gui.getSceneByName(Constants.ASSISTANTS);
 

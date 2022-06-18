@@ -33,17 +33,17 @@ public class LoginController implements GUIController {
         this.gui = gui;
     }
 
+    @Override
+    public void init() {
+
+    }
+
     @FXML
     private void initialize() {
         numberPlayers_box.setItems(numberOfPlayersList);
         numberPlayers_box.getSelectionModel().selectFirst();
         gameMode_box.setItems(gameModeList);
         gameMode_box.getSelectionModel().selectFirst();
-    }
-
-    @Override
-    public void init() {
-
     }
 
     /**

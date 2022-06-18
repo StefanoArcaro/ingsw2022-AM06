@@ -39,8 +39,8 @@ public class WizardController implements GUIController {
     }
 
     /**
-     * Handles the wizard choice.
-     * @param event event to handle (button).
+     * Creates the WizardRequestMessage to send to the server..
+     * @param event event fired by the wizard button.
      */
     public void chooseWizard(ActionEvent event) {
         Button button = (Button) event.getSource();
@@ -51,6 +51,10 @@ public class WizardController implements GUIController {
         gui.getMessageParser().parseInput(message);
     }
 
+    /**
+     * Updates the available wizards.
+     * @param wizardName the name of the wizard to remove from the available wizards.
+     */
     public void updateAvailableWizards(WizardName wizardName) {
         Scene scene = gui.getSceneByName(Constants.WIZARD);
 
@@ -66,6 +70,10 @@ public class WizardController implements GUIController {
         wizardButton.setDisable(true);
     }
 
+    /**
+     * Updates the wizards' scene after the client's choice.
+     * @param wizardName the name of the chosen wizard.
+     */
     public void updateWizardChoice(WizardName wizardName) {
         Scene scene = gui.getSceneByName(Constants.WIZARD);
         wizardChosen.setOpacity(1);
@@ -79,10 +87,15 @@ public class WizardController implements GUIController {
                 colorAdjust.setSaturation(-1.0);
                 wizardImage.setEffect(colorAdjust);
             }
+
             getWizardButtonByName(name).setDisable(true);
         }
     }
 
+    /**
+     * @param wizardName the name of the wizard to return the button of.
+     * @return the button relative to the specified wizard.
+     */
     private Button getWizardButtonByName(WizardName wizardName) {
         return switch (wizardName) {
             case DRUID -> DRUID;

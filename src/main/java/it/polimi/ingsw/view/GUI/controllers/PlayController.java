@@ -86,6 +86,9 @@ public class PlayController extends BoardController implements GUIController {
 
     // INIT
 
+    /**
+     * Initializes the scene.
+     */
     public void init() {
         ModelView modelView = gui.getModelView();
         String playerNickname = modelView.getNickname();
@@ -111,6 +114,13 @@ public class PlayController extends BoardController implements GUIController {
         initOpponents();
     }
 
+    /**
+     * Initializes the scenes' textual information.
+     * @param modelView a reference to the ModelView.
+     * @param playerNickname the nickname of the client.
+     * @param player the current player' nickname.
+     * @param phase the current phase's name.
+     */
     private void initInfo(ModelView modelView, String playerNickname, String player, String phase) {
         name.setText(playerNickname);
 
@@ -125,6 +135,11 @@ public class PlayController extends BoardController implements GUIController {
         currentPhase.setText(phase);
     }
 
+    /**
+     * Initializes the islands.
+     * @param scene the scene containing the islands.
+     * @param islandGroups the list of island groups.
+     */
     private void initIslands(Scene scene, ArrayList<IslandGroup> islandGroups) {
         int islandGroupIndex = 0;
 
@@ -158,6 +173,10 @@ public class PlayController extends BoardController implements GUIController {
         }
     }
 
+    /**
+     * Initializes the clouds.
+     * @param scene the scene containing the clouds.
+     */
     private void initClouds(Scene scene) {
         for(int i = 1; i <= 3; i++) {
             String student = "#cloud" + i + "_s";
@@ -181,6 +200,9 @@ public class PlayController extends BoardController implements GUIController {
         }
     }
 
+    /**
+     * Initializes the opponents' boards in their own scenes.
+     */
     private void initOpponents() {
         for(String name : gui.getNicknameToSceneName().keySet()) {
             String sceneName = gui.getNicknameToSceneName().get(name);
@@ -192,10 +214,18 @@ public class PlayController extends BoardController implements GUIController {
 
     // UPDATES
 
+    /**
+     * Updates the current player.
+     * @param player to set the Text's content to.
+     */
     public void updateCurrentPlayer(String player) {
         currentNickname.setText(player);
     }
 
+    /**
+     * Updates the current phase.
+     * @param phase to set the Text's content to.
+     */
     public void updateCurrentPhase(String phase) {
         currentPhase.setText(phase);
 
@@ -205,15 +235,24 @@ public class PlayController extends BoardController implements GUIController {
             case "Move mother nature phase" -> updateActionButtons(new ArrayList<>(Arrays.asList(true, true, true, false, false)));
             case "Pick cloud phase" -> updateActionButtons(new ArrayList<>(Arrays.asList(true, true, true, true, false)));
         }
-
     }
 
+    /**
+     * Updates the coins owned by the client.
+     * @param msg the CoinMessage sent by the server.
+     */
     public void updateCoins(CoinMessage msg) {
         if(msg.getNickname().equals(gui.getModelView().getNickname())) {
             numOfCoins.setText(Integer.toString(msg.getCoins()));
         }
     }
 
+    /**
+     * Updates the island groups by connecting the islands in the
+     * same island group.
+     * @param scene the scene containing the islands.
+     * @param islandGroups the list of island groups.
+     */
     public void updateIslandGroups(Scene scene, ArrayList<IslandGroup> islandGroups) {
         int islandGroupIndex = 0;
 
@@ -226,29 +265,32 @@ public class PlayController extends BoardController implements GUIController {
             for(Island island : islands) {
                 updateIsland(scene, island);
 
-                // union
+                // Union
                 boolean unionCondition = islandsID.contains((island.getIslandID() % 12) + 1);
                 if(unionCondition) {
                     ImageView arrow = (ImageView) scene.lookup("#link" + island.getIslandID());
                     arrow.setOpacity(1);
                 }
 
-                // set ban card
+                // Set ban card
                 ImageView banCard = (ImageView) scene.lookup("#bancard_" + island.getIslandID());
                 if(islandGroup.getNumberOfBanCardPresent() > 0) {
                     banCard.setOpacity(1);
                 } else {
                     banCard.setOpacity(0);
                 }
-
             }
 
-            // set mother nature
+            // Set mother nature
             updateMotherNature(scene, islandGroupIndex, islandsID);
-
         }
     }
 
+    /**
+     * Update the specified island.
+     * @param scene the scene containing the island.
+     * @param island the island to update.
+     */
     public void updateIsland(Scene scene, Island island) {
         Map<CreatureColor, Integer> islandStudents = new HashMap<>();
         ArrayList<Student> students = island.getStudents();
@@ -291,6 +333,12 @@ public class PlayController extends BoardController implements GUIController {
 
     }
 
+    /**
+     * Updates Mother Nature's position.
+     * @param scene the scene containing Mother Nature.
+     * @param islandGroupIndex the index of the island group Mother Nature ended up at.
+     * @param islandsID the list of IDs of the islands that belong to the specified island group.
+     */
     private void updateMotherNature(Scene scene, int islandGroupIndex, List<Integer> islandsID) {
         List<Integer> IDs = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12));
         String mn = "#mn_";
@@ -309,11 +357,17 @@ public class PlayController extends BoardController implements GUIController {
         }
     }
 
+    /**
+     * Update the clouds.
+     * @param scene the scene containing the clouds.
+     * @param clouds the list of clouds to update.
+     */
     public void updateClouds(Scene scene, ArrayList<Cloud> clouds) {
         int i;
 
         for(Cloud cloud : clouds) {
             Button cloudButton = getCloudButtonByID(cloud.getCloudID());
+
             if(cloud.isEmpty()) {
                 cloudButton.setDisable(true);
 
@@ -342,11 +396,14 @@ public class PlayController extends BoardController implements GUIController {
                     buttonStudent.setDisable(false);
                     buttonStudent.setStyle(style);
                 }
-
             }
         }
     }
 
+    /**
+     * Update the board of the client or an opponent's.
+     * @param msg the BoardMessage, that also specifies which board to update.
+     */
     public void updateBoards(BoardMessage msg) {
         ModelView modelView = gui.getModelView();
         String nicknameBoard = msg.getNickname();
@@ -361,9 +418,12 @@ public class PlayController extends BoardController implements GUIController {
             GUIController controller = gui.getNameToController().get(sceneName);
             ((BoardController) controller).updateOpponent(msg);
         }
-
     }
 
+    /**
+     * Update the action buttons by enabling or disabling them based on the specified list.
+     * @param actions a list of boolean values that specifies which action buttons to enable/disable.
+     */
     private void updateActionButtons(ArrayList<Boolean> actions) {
         assistantAction.setDisable(actions.get(0));
         hallAction.setDisable(actions.get(1));
@@ -379,6 +439,10 @@ public class PlayController extends BoardController implements GUIController {
 
     // ACTIONS
 
+    /**
+     * Sets the selected entrance color in the GUI.
+     * @param event the event fired by an entrance student button.
+     */
     public void onEntranceClicked(ActionEvent event) {
         Button button = (Button) event.getSource();
         CreatureColor color = gui.getButtonColor(button);
@@ -386,6 +450,10 @@ public class PlayController extends BoardController implements GUIController {
         gui.setEntranceColor(color);
     }
 
+    /**
+     * Sets the selected hall color in the GUI.
+     * @param event the event fired by a hall button.
+     */
     public void onHallClicked(ActionEvent event) {
         Button button = (Button) event.getSource();
         CreatureColor color = gui.getButtonColor(button);
@@ -393,6 +461,10 @@ public class PlayController extends BoardController implements GUIController {
         gui.setHallColor(color);
     }
 
+    /**
+     * Sets the selected destination island in the GUI.
+     * @param event the event fired by an island button.
+     */
     public void onIslandClicked(ActionEvent event) {
         Button button = (Button) event.getSource();
         String island = button.getId();
@@ -401,6 +473,10 @@ public class PlayController extends BoardController implements GUIController {
         gui.setDestinationIsland(islandID);
     }
 
+    /**
+     * Creates a PickCloudMessage to send to the server.
+     * @param event the event fired by a cloud button.
+     */
     public void onPickCloud(ActionEvent event) {
         Button cloud = (Button) event.getSource();
         String cloudID = cloud.getId().substring(6);
@@ -410,18 +486,25 @@ public class PlayController extends BoardController implements GUIController {
     }
 
 
+    /**
+     * Displays the opponents' boards in a new window (the GUI's secondary stage).
+     */
     public void onShowOpponents() {
-
         for(String name : gui.getNicknameToSceneName().keySet()) {
             gui.createWindow(gui.getNicknameToSceneName().get(name));
         }
-
     }
 
+    /**
+     * Displays the assistants' scene in a new window (the GUI's secondary stage).
+     */
     public void onOpenPlayAssistants() {
         gui.createWindow(Constants.ASSISTANTS);
     }
 
+    /**
+     * Creates the MoveStudentMessage to send to the server (student goes to hall).
+     */
     public void onMoveStudentToHall() {
         CreatureColor entranceColor = gui.getEntranceColor();
 
@@ -435,6 +518,9 @@ public class PlayController extends BoardController implements GUIController {
         }
     }
 
+    /**
+     * Creates the MoveStudentMessage to send to the server (student goes to the selected island).
+     */
     public void onMoveStudentToIsland() {
         if(gui.getEntranceColor() != null) {
             if(gui.getDestinationIsland() > 0) {
@@ -450,16 +536,26 @@ public class PlayController extends BoardController implements GUIController {
         }
     }
 
+    /**
+     * Displays the Mother Nature scene in a new window (the GUI's secondary stage).
+     */
     public void onOpenMotherNature() {
         gui.createWindow(Constants.MOTHER_NATURE);
     }
 
+    /**
+     * Displays the characters' scene in a new window (the GUI's secondary stage).
+     */
     public void onOpenCharacters() {
         gui.createWindow(Constants.CHARACTERS);
     }
 
     // UTILITY
 
+    /**
+     * @param islandID the ID of the island to return the students' grid of.
+     * @return the island's students' grid pane.
+     */
     private GridPane getIslandGridPaneByIslandID(int islandID) {
         return switch (islandID) {
             case 1 -> gridPane_1;
@@ -478,6 +574,10 @@ public class PlayController extends BoardController implements GUIController {
         };
     }
 
+    /**
+     * @param id the ID of the cloud to return the button of.
+     * @return the cloud's button.
+     */
     private Button getCloudButtonByID(int id) {
         return switch (id) {
             case 1 -> cloud_1;
@@ -494,6 +594,5 @@ public class PlayController extends BoardController implements GUIController {
         String message = "QUIT";
         gui.getMessageParser().parseInput(message);
     }
-
 
 }

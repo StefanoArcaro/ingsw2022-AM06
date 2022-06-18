@@ -19,7 +19,7 @@ public class ConfirmationBox {
      * @param mainStage reference to the application's main window.
      * @param message the message to display in the popup.
      */
-    public static int display(int exitStatus, Stage mainStage, String message){
+    public static int display(int exitStatus, Stage mainStage, String message) {
         Stage window = new Stage();
         AtomicInteger status = new AtomicInteger(exitStatus);
 

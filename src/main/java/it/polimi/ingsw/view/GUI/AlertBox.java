@@ -16,7 +16,7 @@ public class AlertBox {
      * @param title the popup's title.
      * @param message the popup's message.
      */
-    public static void display(String title, String message){
+    public static void display(String title, String message) {
         Stage window = new Stage();
 
         window.initModality(Modality.APPLICATION_MODAL);

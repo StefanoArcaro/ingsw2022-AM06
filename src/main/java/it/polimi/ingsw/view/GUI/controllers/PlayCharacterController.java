@@ -53,6 +53,10 @@ public class PlayCharacterController implements GUIController{
         }
     }
 
+    /**
+     * Opens the character details scene.
+     * @param event the event fired by clicking on one of the available characters.
+     */
     public void onOpenCharacterDetails(ActionEvent event) {
         Button button = (Button) event.getSource();
         String buttonId = button.getId();
@@ -69,4 +73,5 @@ public class PlayCharacterController implements GUIController{
     public void quit() {
 
     }
+
 }

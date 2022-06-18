@@ -39,6 +39,10 @@ public class MoveMotherNatureController implements GUIController {
         numberOfSteps.getSelectionModel().selectFirst();
     }
 
+    /**
+     * Creates the MoveMotherNatureMessage to send to the server.
+     * @param event the event fired by the OK button.
+     */
     public void onSubmitSteps(ActionEvent event) {
         Button button = (Button) event.getSource();
         int steps = numberOfSteps.getSelectionModel().getSelectedItem();
@@ -54,4 +58,5 @@ public class MoveMotherNatureController implements GUIController {
     public void quit() {
 
     }
+
 }

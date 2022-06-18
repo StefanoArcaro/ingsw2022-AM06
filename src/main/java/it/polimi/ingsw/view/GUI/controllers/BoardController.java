@@ -23,8 +23,13 @@ public abstract class BoardController {
 
     // INIT
 
+    /**
+     * Initializes the entrance.
+     * @param gui the GUI the entrance is relative to.
+     * @param scene the scene containing the board.
+     * @param entrance the entrance to initialize.
+     */
     protected void initEntrance(GUI gui, Scene scene, Entrance entrance) {
-
         for(int i = 0; i < entrance.getStudents().size(); i++) {
             String entranceID = "#entrance_" + (i + 1);
             Button entranceButton = (Button) scene.lookup(entranceID);
@@ -41,6 +46,10 @@ public abstract class BoardController {
         }
     }
 
+    /**
+     * Initializes the hall.
+     * @param gridPane the grid containing all the students in the hall.
+     */
     protected void initHall(GridPane gridPane) {
         for(Node node : gridPane.getChildren()) {
             node.setOpacity(0);
@@ -48,6 +57,10 @@ public abstract class BoardController {
         }
     }
 
+    /**
+     * Initializes the professors.
+     * @param professors the list of professors.
+     */
     protected void initProfessors(ArrayList<Button> professors) {
         for(Button professor : professors) {
             professor.setOpacity(0);
@@ -55,6 +68,13 @@ public abstract class BoardController {
         }
     }
 
+    /**
+     * Initializes the towers.
+     * @param gui the GUI the towers are relative to.
+     * @param scene the scene containing the board.
+     * @param modelView a reference to the ModelView.
+     * @param playerNickname the nickname of the owner of the towers to initialize.
+     */
     protected void initTowers(GUI gui, Scene scene, ModelView modelView, String playerNickname) {
         Board board = modelView.getBoard(playerNickname);
 
@@ -77,10 +97,22 @@ public abstract class BoardController {
         }
     }
 
+    /**
+     * Initializes the opponents board.
+     * @param opponentNickname nickname of the opponent to initialize.
+     */
     protected void initOpponent(String opponentNickname) {}
 
     // UPDATE
 
+    /**
+     * Updates a board.
+     * @param gui the GUI the board is relative to.
+     * @param scene the scene containing the board.
+     * @param message the BoardMessage containing the updated board information.
+     * @param gridPane the hall students' grid.
+     * @param FXProfessors the list of all the professors.
+     */
     protected void updateBoard(GUI gui, Scene scene, BoardMessage message, GridPane gridPane, ArrayList<Button> FXProfessors) {
         updateEntrance(gui, scene, message.getEntrance());
         updateHall(message.getHall(), gridPane);
@@ -89,10 +121,21 @@ public abstract class BoardController {
 
     }
 
-    protected void updateOpponent(BoardMessage message) {    }
+    /**
+     * Updates an opponent's board.
+     * @param message the message containing the updated board information.
+     */
+    protected void updateOpponent(BoardMessage message) {
 
+    }
+
+    /**
+     * Updates the specified entrance.
+     * @param gui the GUI the entrance is relative to.
+     * @param scene the scene containing the entrance.
+     * @param entrance the entrance to update.
+     */
     protected void updateEntrance(GUI gui, Scene scene, Entrance entrance) {
-
         for(int i = 0; i < entrance.getStudents().size(); i++) {
             String entranceID = "#entrance_" + (i + 1);
             Button entranceButton = (Button) scene.lookup(entranceID);
@@ -111,6 +154,11 @@ public abstract class BoardController {
         }
     }
 
+    /**
+     * Updates the specified hall.
+     * @param hall the hall to update.
+     * @param gridPane the specified hall's students' grid.
+     */
     protected void updateHall(Hall hall, GridPane gridPane) {
         ArrayList<Table> tables = hall.getStudents();
 
@@ -137,6 +185,11 @@ public abstract class BoardController {
         }
     }
 
+    /**
+     * Updates the professors.
+     * @param FXProfessors the list of all the professors.
+     * @param professors the list of owned professors.
+     */
     protected void updateProfessors(ArrayList<Button> FXProfessors, ArrayList<Professor> professors) {
         for(Professor professor : professors) {
             switch (professor.getColor()) {
@@ -160,8 +213,12 @@ public abstract class BoardController {
         }
     }
 
+    /**
+     * Updates the towers of a board.
+     * @param scene the scene containing the board.
+     * @param towers the number of towers still on the board.
+     */
     protected void updateTowersBoard(Scene scene, int towers) {
-
         for(int i = 0; i < towers; i++) {
             String towerID = "#tower_" + (i + 1);
             ImageView tower = (ImageView) scene.lookup(towerID);
@@ -177,6 +234,12 @@ public abstract class BoardController {
 
     // UTILITY
 
+    /**
+     * @param row the row of the node to return.
+     * @param column the column of the node to return.
+     * @param gridPane the grid pane to get the node from.
+     * @return the node at the specified row and column indices.
+     */
     protected Node getNodeByRowColumnIndex(int row, int column, GridPane gridPane) {
         ObservableList<Node> children = gridPane.getChildren();
 
@@ -192,6 +255,10 @@ public abstract class BoardController {
         return null;
     }
 
+    /**
+     * @param professors the list of owned professors.
+     * @return the list of professors that are not owned.
+     */
     private List<CreatureColor> getMissingProfessors(ArrayList<Professor> professors) {
         List<CreatureColor> missing = new ArrayList<>(Arrays.asList(CreatureColor.values()));
         List<CreatureColor> colors = professors.stream().map(Creature::getColor).toList();

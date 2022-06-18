@@ -102,18 +102,30 @@ public class CharacterDetailsController implements GUIController {
 
     }
 
+    /**
+     * Sets the selected character student in the GUI.
+     * @param event the event fired by the student button.
+     */
     public void onSelectStudent(ActionEvent event) {
         Button studentButton = (Button) event.getSource();
         CreatureColor color = gui.getButtonColor(studentButton);
         gui.setCharacterStudent(color);
     }
 
+    /**
+     * Sets the selected character color in the GUI.
+     * @param event the event fired by the color button.
+     */
     public void onSelectColor(ActionEvent event) {
         Button colorButton = (Button) event.getSource();
         CreatureColor color = gui.getButtonColor(colorButton);
         gui.setCharacterColor(color);
     }
 
+    /**
+     * Handles the play character action.
+     * @param actionEvent the event fired by the play button.
+     */
     public void onPlayCharacter(ActionEvent actionEvent) {
         Button button = (Button) actionEvent.getSource();
         int id = gui.getCharacterID();
@@ -124,10 +136,17 @@ public class CharacterDetailsController implements GUIController {
         stage.close();
     }
 
+    /**
+     * Goes back from the character details scene to the characters' scene.
+     */
     public void onGoBack() {
         gui.changeStage(gui.getSecondaryStage(), Constants.CHARACTERS);
     }
 
+    /**
+     * Creates the message to send to the server based on the specified character ID.
+     * @param id the ID of the character for which to create the message.
+     */
     private void getCharacterMessage(int id) {
         CharacterID enumValue = CharacterID.values()[id];
         CreatureColor hallStudent = gui.getHallColor();
@@ -148,7 +167,7 @@ public class CharacterDetailsController implements GUIController {
             default -> result = "";
         }
 
-        // reset
+        // Reset
         gui.setEntranceColor(null);
         gui.setHallColor(null);
         gui.setDestinationIsland(0);
@@ -159,10 +178,13 @@ public class CharacterDetailsController implements GUIController {
             message = message + result;
             gui.getMessageParser().parseInput(message);
         }
-
-
     }
 
+    /**
+     * Creates part of the character message, adding the specified destination.
+     * @param destination the destination to add to the message.
+     * @return the partial message.
+     */
     private String createCharacterMessage(int destination) {
         if(destination == 0) {
             Platform.runLater(() -> AlertBox.display("Error", "Please select an island."));
@@ -174,6 +196,12 @@ public class CharacterDetailsController implements GUIController {
         }
     }
 
+    /**
+     * Creates part of the character message, adding the specified color.
+     * @param color the color to add to the message.
+     * @param error the message to display in case of missing parameters.
+     * @return the partial message.
+     */
     private String createCharacterMessage(CreatureColor color, String error) {
         if(color == null) {
             Platform.runLater(() -> AlertBox.display("Error", error));
@@ -183,6 +211,12 @@ public class CharacterDetailsController implements GUIController {
         }
     }
 
+    /**
+     * Creates part of the character message, adding the specified color and destination.
+     * @param color the color to add to the message.
+     * @param destination the destination to add to the message.
+     * @return the partial message.
+     */
     private String createCharacterMessage(CreatureColor color, int destination) {
         if(color == null) {
             Platform.runLater(() -> AlertBox.display("Error", "Please select a student from this character."));
@@ -195,6 +229,13 @@ public class CharacterDetailsController implements GUIController {
         }
     }
 
+    /**
+     * Creates part of the character message, adding the specified colors.
+     * @param firstColor the first color to add to the message.
+     * @param secondColor the second color to add to the message.
+     * @param firstError the message to display in case of missing parameters.
+     * @return the partial message.
+     */
     private String createCharacterMessage(CreatureColor firstColor, CreatureColor secondColor, String firstError) {
         if(firstColor == null) {
             Platform.runLater(() -> AlertBox.display("Error", firstError));

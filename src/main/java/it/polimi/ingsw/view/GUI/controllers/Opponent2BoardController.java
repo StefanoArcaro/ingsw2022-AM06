@@ -72,4 +72,5 @@ public class Opponent2BoardController extends BoardController implements GUICont
     public void quit() {
 
     }
+
 }
