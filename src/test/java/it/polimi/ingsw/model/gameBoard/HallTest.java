@@ -26,6 +26,7 @@ class HallTest {
         game = null;
     }
 
+    /** Tests the return of the table of a specific color */
     @Test
     void getTableByColor() {
         Player player = new Player(game, "nick", PlayerColor.BLACK);
@@ -33,6 +34,7 @@ class HallTest {
         assertEquals(board.getHall().getTableByColor(CreatureColor.GREEN), board.getHall().getStudents().get(0));
     }
 
+    /** Tests whether there's at least one student in the table of a specific color */
     @Test
     void studentInTable() {
         Player player = new Player(game, "Chiara", PlayerColor.BLACK);

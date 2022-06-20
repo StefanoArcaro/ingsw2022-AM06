@@ -25,6 +25,7 @@ class MoveMotherNaturePhaseTest {
     private ArrayList<Integer> wizardIDs;
     private ArrayList<Integer> priority;
 
+    /** Tests the setup of the phase */
     @BeforeEach
     void setUp() {
         game = new Game();
@@ -89,6 +90,13 @@ class MoveMotherNaturePhaseTest {
         priority = null;
     }
 
+    /**
+     * Tests:
+     * the movement of mother nature;
+     * the calculation of the influence on the island where mother nature arrives;
+     * the replacement of the towers;
+     * whether adjacent islands need to be merged.
+     */
     @Test
     void play() {
         game.setGameState(GameState.MOVE_MOTHER_NATURE_PHASE);
@@ -132,6 +140,7 @@ class MoveMotherNaturePhaseTest {
         assertEquals(GameState.PICK_CLOUD_PHASE, game.getGameState());
     }
 
+    /** Tests the play method ending with no tower left */
     @Test
     void play_EndTower() {
         game.setGameState(GameState.MOVE_MOTHER_NATURE_PHASE);
@@ -201,6 +210,7 @@ class MoveMotherNaturePhaseTest {
         assertEquals(p1, game.getCurrentPhase().getWinner());
     }
 
+    /** Tests the play method ending with three island groups left */
     @Test
     void play_EndIsland() {
         game = new Game();
@@ -327,6 +337,7 @@ class MoveMotherNaturePhaseTest {
         assertEquals(p1, game.getCurrentPhase().getWinner());
     }
 
+    /** Tests the play method in case of an island with a ban card */
     @Test
     void play_islandWithBanCard() {
         game = new Game();
@@ -416,6 +427,7 @@ class MoveMotherNaturePhaseTest {
         assertEquals(GameState.PICK_CLOUD_PHASE, game.getGameState());
     }
 
+    /** Tests the play method ending with no students left */
     @Test
     void play_skipPickCloud() {
         game = new Game();

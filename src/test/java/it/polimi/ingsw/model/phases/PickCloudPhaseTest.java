@@ -27,6 +27,7 @@ class PickCloudPhaseTest {
     private ArrayList<Integer> wizardIDs;
     private ArrayList<Integer> priority;
 
+    /** Tests the setup of the phase */
     @BeforeEach
     void setUp() {
         game = new Game();
@@ -91,6 +92,7 @@ class PickCloudPhaseTest {
         priority = null;
     }
 
+    /** Tests the shift of the students from a specific cloud to the player's entrance */
     @Test
     void play() {
         Player player = game.getCurrentPlayer();
@@ -115,6 +117,7 @@ class PickCloudPhaseTest {
         assertEquals(1, game.getClouds().stream().filter(cloud -> !cloud.isEmpty()).toList().size());
     }
 
+    /** Tests the play method in case of no cloud left */
     @Test
     void play_noCloud() {
         game.setGameState(GameState.PICK_CLOUD_PHASE);
@@ -125,6 +128,7 @@ class PickCloudPhaseTest {
         assertThrows(NoAvailableCloudException.class, ()-> phase.play());
     }
 
+    /** Tests the play method in case of no student left */
     @Test
     void play_endStudent() {
         Player lastPlayer = game.getPlayingOrder().get(game.getNumberOfPlayers().getNum() - 1);
@@ -156,6 +160,7 @@ class PickCloudPhaseTest {
         assertEquals(GameState.ENDED_STUDENTS, game.getGameState());
     }
 
+    /** Tests the play method in case of no assistant left */
     @Test
     void play_endAssistant() {
         Player lastPlayer = game.getPlayingOrder().get(game.getNumberOfPlayers().getNum() - 1);
@@ -187,6 +192,7 @@ class PickCloudPhaseTest {
 
         assertEquals(GameState.ENDED_ASSISTANTS, game.getGameState());
     }
+
 
     @Test
     void play_lastPlayer() {

@@ -87,6 +87,7 @@ class EndgamePhaseTest {
         assertEquals(player2, phase.getWinner());
     }
 
+    /** Tests how the game ended and the calculation of the winner */
     @Test
     void play() {
         Player player1 = new Player(game, "x", PlayerColor.BLACK);
@@ -112,6 +113,7 @@ class EndgamePhaseTest {
         assertEquals(player1, phase.getWinner());
     }
 
+    /** Tests the end of the game caused by a player with no tower left */
     @Test
     void play_noTower() {
         Player player1 = new Player(game, "x", PlayerColor.BLACK);

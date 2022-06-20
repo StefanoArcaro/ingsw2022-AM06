@@ -22,6 +22,7 @@ class PreparePhaseTest {
     private ArrayList<String> nicknames;
     private int wizardID;
 
+    /** Tests the setup of the phase */
     @BeforeEach
     void setUp() {
         game = new Game();
@@ -38,6 +39,7 @@ class PreparePhaseTest {
         nicknames = null;
     }
 
+    /** Tests the prepare-phase of the game with easy mode and two players */
     @Test
     void play_easy_2P() {
         game.setNumberOfPlayers(2);
@@ -162,6 +164,7 @@ class PreparePhaseTest {
         assertEquals(GameState.PLANNING_PHASE, game.getGameState());
     }
 
+    /** Tests the prepare-phase of the game with easy mode and three players */
     @Test
     void play_easy_3P() {
         game.setNumberOfPlayers(3);
@@ -314,6 +317,7 @@ class PreparePhaseTest {
         assertEquals(GameState.PLANNING_PHASE, game.getGameState());
     }
 
+    /** Tests the prepare-phase of the game with expert mode and two players */
     @Test
     void play_expert_2P() {
         game.setNumberOfPlayers(2);
@@ -441,6 +445,7 @@ class PreparePhaseTest {
         assertEquals(GameState.PLANNING_PHASE, game.getGameState());
     }
 
+    /** Tests the prepare-phase of the game with expert mode and three players */
     @Test
     void play_expert_3P() {
         game.setNumberOfPlayers(3);

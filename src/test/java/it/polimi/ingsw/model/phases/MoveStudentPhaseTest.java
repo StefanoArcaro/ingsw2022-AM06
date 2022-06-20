@@ -23,6 +23,7 @@ class MoveStudentPhaseTest {
     private ArrayList<Integer> priorities;
     int color;
 
+    /** Tests the setup of the phase */
     @BeforeEach
     void setUp() {
         game = new Game();
@@ -50,6 +51,7 @@ class MoveStudentPhaseTest {
         wizardIDs = null;
     }
 
+    /** Tests the first part of the action phase in case of two players */
     @Test
     void play_2P() {
         game.setNumberOfPlayers(2);
@@ -199,6 +201,7 @@ class MoveStudentPhaseTest {
         assertEquals(GameState.MOVE_MOTHER_NATURE_PHASE, game.getGameState());
     }
 
+    /** Tests the first part of the action phase in case of three players */
     @Test
     void play_3P() {
         game.setNumberOfPlayers(3);

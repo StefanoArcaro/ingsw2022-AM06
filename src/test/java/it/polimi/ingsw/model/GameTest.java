@@ -22,6 +22,7 @@ class GameTest {
 
     Game game;
 
+    /** Tests the creation of the game */
     @BeforeEach
     void setUp() {
         game = new Game();
@@ -39,6 +40,7 @@ class GameTest {
         game = null;
     }
 
+    /** Tests the calculation of the influence of all the players on a specified island group ended up with a conquest */
     @Test
     void calculateInfluence_Conquer() {
         ConcreteCharacterFactory cf = new ConcreteCharacterFactory(game);
@@ -102,6 +104,7 @@ class GameTest {
         assertEquals(4, player2.getBoard().getTowers());
     }
 
+
     @Test
     void calculateInfluence_WithCharacterNoTower() {
         ConcreteCharacterFactory cf = new ConcreteCharacterFactory(game);
@@ -144,6 +147,9 @@ class GameTest {
         assertEquals(4, player2.getBoard().getTowers());
     }
 
+    /** Tests the calculation of the influence of all the players on a specified island group ended up
+     * with the connection of island groups
+     */
     @Test
     void calculateInfluence_connectIslandGroups() {
         int newIndexMotherNature;

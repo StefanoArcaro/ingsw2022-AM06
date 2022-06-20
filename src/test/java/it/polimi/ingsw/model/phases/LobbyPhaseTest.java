@@ -30,6 +30,7 @@ class LobbyPhaseTest {
         game = null;
     }
 
+    /** Tests the handling of the entry of two new players */
     @Test
     void play_2P() {
         game.setNumberOfPlayers(2);
@@ -102,6 +103,7 @@ class LobbyPhaseTest {
         assertEquals(PlayerColor.WHITE, game.getPlayers().get(1).getColor());
     }
 
+    /** Tests the handling of the entry of three new players */
     @Test
     void play_3P() {
         game.setNumberOfPlayers(3);

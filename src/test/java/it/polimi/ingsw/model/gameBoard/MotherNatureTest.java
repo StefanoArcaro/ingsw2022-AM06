@@ -20,6 +20,8 @@ class MotherNatureTest {
         motherNature = null;
     }
 
+
+    /** Tests the setting of the island group Mother Nature ends up at */
     @Test
     void setCurrentIslandGroup() {
         assertNull(motherNature.getCurrentIslandGroup());

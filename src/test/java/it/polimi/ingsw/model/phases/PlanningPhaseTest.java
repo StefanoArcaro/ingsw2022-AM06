@@ -23,6 +23,7 @@ class PlanningPhaseTest {
     private ArrayList<Integer> wizardIDs;
     private int priority;
 
+    /** Tests the setup of the phase */
     @BeforeEach
     void setUp() {
         game = new Game();
@@ -45,6 +46,7 @@ class PlanningPhaseTest {
         wizardIDs = null;
     }
 
+    /** Tests the planning phase of the game in case of two players */
     @Test
     void play_2P() {
         game.setNumberOfPlayers(2);
@@ -144,6 +146,7 @@ class PlanningPhaseTest {
         assertEquals(GameState.MOVE_STUDENT_PHASE, game.getGameState());
     }
 
+    /** Tests the planning phase of the game in case of three players */
     @Test
     void play_3P() {
         game.setNumberOfPlayers(3);
@@ -256,6 +259,7 @@ class PlanningPhaseTest {
         assertEquals(GameState.MOVE_STUDENT_PHASE, game.getGameState());
     }
 
+    /** Tests the planning phase of the game when there are not enough students for the clouds */
     @Test
     void play_notEnoughStudentsForClouds() {
         game.setNumberOfPlayers(2);

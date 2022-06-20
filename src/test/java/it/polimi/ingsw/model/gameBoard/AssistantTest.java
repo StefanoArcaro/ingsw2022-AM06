@@ -14,6 +14,7 @@ class AssistantTest {
     Game game;
     Assistant assistant;
 
+    /** Initializes values */
     @BeforeEach
     void setUp() {
         game = new Game();
@@ -33,6 +34,7 @@ class AssistantTest {
         assertEquals(1, assistant.getMaxSteps(character));
     }
 
+    /** Tests the maximum number of steps Mother Nature will be allowed to take */
     @Test
     void getMaxSteps_Character() {
         ConcreteCharacterFactory cf = new ConcreteCharacterFactory(game);

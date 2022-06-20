@@ -27,6 +27,7 @@ class IslandTest {
         game = null;
     }
 
+    /** Tests the removal of a tower from the island */
     @Test
     void removeTower() {
         Player player = new Player(game, "Chiara", PlayerColor.BLACK);
@@ -43,6 +44,7 @@ class IslandTest {
         assertEquals(5, player.getBoard().getTowers());
     }
 
+    /** Tests the addition of a tower to the island */
     @Test
     void addTower() {
         Player player = new Player(game, "Chiara", PlayerColor.BLACK);
@@ -59,6 +61,7 @@ class IslandTest {
         assertEquals(5, player.getBoard().getTowers());
     }
 
+    /** Tests the return of the list of students on the island */
     @Test
     void getStudents() {
         Island island = new Island(1);
@@ -80,6 +83,7 @@ class IslandTest {
         assertEquals(expectedStudents.stream().map(Creature::getColor).collect(Collectors.toList()), island.getStudents().stream().map(Creature::getColor).collect(Collectors.toList()));
     }
 
+    /** Tests the addition of a student to the island */
     @Test
     void addStudent() {
         Island island = new Island(1);

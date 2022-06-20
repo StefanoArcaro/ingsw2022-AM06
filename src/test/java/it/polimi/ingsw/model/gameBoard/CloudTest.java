@@ -37,6 +37,10 @@ class CloudTest {
         assertEquals(0, cloud.getStudents().size());
     }
 
+    /**
+     Tests the filling of the cloud card with the correct number of student
+     based on two players for the game
+     */
     @Test
     void fill_two_players() {
         cloud.fill(bag, 2);
@@ -46,6 +50,10 @@ class CloudTest {
         assertEquals(3, students.size());
     }
 
+    /**
+     Tests the filling of the cloud card with the correct number of student
+     based on three players for the game
+     */
     @Test
     void fill_three_players() {
         cloud.fill(bag, 3);
@@ -55,6 +63,10 @@ class CloudTest {
         assertEquals(4, students.size());
     }
 
+    /**
+     Tests the emptying of the cloud card's students' list
+     based on two players for the game
+     */
     @Test
     void empty_two_players() {
         cloud.fill(bag, 2);
@@ -64,6 +76,10 @@ class CloudTest {
         assertEquals(0, cloud.getStudents().size());
     }
 
+    /**
+     Tests the emptying of the cloud card's students' list
+     based on three players for the game
+     */
     @Test
     void empty_three_players() {
         cloud.fill(bag, 3);

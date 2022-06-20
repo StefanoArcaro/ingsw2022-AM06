@@ -10,11 +10,13 @@ class BagTest {
 
     Bag bag;
 
+    /** Initializes values */
     @BeforeEach
     void setUp() {
         bag = new Bag();
     }
 
+    /** Tests the addition of students in the bag */
     @Test
     void addStudent() {
         bag.receiveStudent(CreatureColor.GREEN);
@@ -27,6 +29,7 @@ class BagTest {
     }
 
 
+    /** Tests the drawing of students from the bag */
     @Test
     void drawStudent() {
         bag.receiveStudent(CreatureColor.GREEN);
@@ -48,6 +51,7 @@ class BagTest {
         assertNull(bag.drawStudent());
     }
 
+    /** Tests if the bag is empty */
     @Test
     void isEmpty() {
         bag.receiveStudent(CreatureColor.GREEN);

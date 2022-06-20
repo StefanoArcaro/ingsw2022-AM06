@@ -26,6 +26,7 @@ class BoardTest {
         game = null;
     }
 
+    /** Tests the removal of a student from the board's entrance */
     @Test
     void removeStudentFromEntrance() {
         Player player = new Player(game, "nick", PlayerColor.BLACK);
@@ -38,6 +39,7 @@ class BoardTest {
         assertFalse(board.removeStudentFromEntrance(CreatureColor.BLUE));
     }
 
+    /** Tests the removal of a student from the hall */
     @Test
     void removeStudentFromHall() {
         Player player = new Player(game, "nick", PlayerColor.BLACK);
@@ -52,6 +54,7 @@ class BoardTest {
         assertFalse(board.removeStudentFromHall(CreatureColor.PINK));
     }
 
+    /** Tests the addition of a professor to the board */
     @Test
     void winProfessor() {
         Player player = new Player(game, "nick", PlayerColor.BLACK);
@@ -64,6 +67,7 @@ class BoardTest {
         assertEquals(1, board.getProfessors().size());
     }
 
+    /** Tests the removal of a professor from the board */
     @Test
     void loseProfessor() {
         Player player = new Player(game, "nick", PlayerColor.BLACK);
@@ -80,6 +84,7 @@ class BoardTest {
         assertTrue(board.getProfessors().isEmpty());
     }
 
+    /** Tests the removal of a professor with a specific color from the board */
     @Test
     void loseProfessorByColor() {
         Player player = new Player(game, "nick", PlayerColor.BLACK);
@@ -92,6 +97,7 @@ class BoardTest {
         assertNull(board.loseProfessorByColor(CreatureColor.RED));
     }
 
+    /** Tests if a professor with a specific color is on the board */
     @Test
     void containsProfessor() {
         Player player = new Player(game, "nick", PlayerColor.BLACK);
@@ -108,6 +114,7 @@ class BoardTest {
         assertTrue(board.containsProfessor(CreatureColor.YELLOW));
     }
 
+    /** Tests the addition of a student to the board's hall */
     @Test
     void addStudentToHall() {
         Player player = new Player(game, "nick", PlayerColor.BLACK);
@@ -170,6 +177,7 @@ class BoardTest {
         // I expect two error messages
     }
 
+    /** Tests the removal of a certain amount of towers from the board */
     @Test
     void removeTower() {
         Player player = new Player(game, "x", PlayerColor.BLACK);

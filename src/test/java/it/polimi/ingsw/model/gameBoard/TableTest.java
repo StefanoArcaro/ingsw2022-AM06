@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TableTest {
 
+    /** Tests the addition of a student to the table */
     @Test
     void addStudent() {
         Table table = new Table(CreatureColor.RED);
@@ -23,6 +24,7 @@ class TableTest {
         assertThrows(TableFullException.class, table::addStudent);
     }
 
+    /** Tests the removal of a student from the table */
     @Test
     void removeStudent() {
         Table table = new Table(CreatureColor.RED);

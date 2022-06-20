@@ -37,6 +37,7 @@ class IslandGroupTest {
         islandGroup = null;
     }
 
+    /** Tests the return of the islands that make up the island group */
     @Test
     void getIslands() {
         ArrayList<Island> expectedIslands = new ArrayList<>();
@@ -56,6 +57,7 @@ class IslandGroupTest {
         assertEquals(expectedIslands, islandGroup.getIslands());
     }
 
+    /** Tests the return of the number of islands that belong to the island group */
     @Test
     void getNumberOfIsland() {
         assertEquals(0, islandGroup.getNumberOfIslands());
@@ -69,6 +71,7 @@ class IslandGroupTest {
         assertEquals(2, islandGroup.getNumberOfIslands());
     }
 
+    /** Tests the right addition of an island to the island group */
     @Test
     void addIsland_OK() {
         Player player = new Player(game, "Chiara", PlayerColor.BLACK);
@@ -172,6 +175,7 @@ class IslandGroupTest {
         assertEquals(12, islandGroup.getIslands().get(3).getIslandID());
     }
 
+    /** Tests the number of ban cards present */
     @Test
     void getNumberOfBanCardPresent() {
         assertEquals(0, islandGroup.getNumberOfBanCardPresent());
@@ -183,6 +187,7 @@ class IslandGroupTest {
         assertEquals(2, islandGroup.getNumberOfBanCardPresent());
     }
 
+    /** Tests the removal of a ban card */
     @Test
     void removeBanCard() {
         assertFalse(islandGroup.removeBanCard());
@@ -191,6 +196,7 @@ class IslandGroupTest {
         assertTrue(islandGroup.removeBanCard());
     }
 
+    /** Tests the connection of island groups */
     @Test
     void connectIslandGroupOK() {
         Player player = new Player(game, "Chiara", PlayerColor.BLACK);
@@ -253,6 +259,7 @@ class IslandGroupTest {
         assertEquals(4, islandGroup.getNumberOfIslands());
     }
 
+    /** Tests the failure of connecting island groups */
     @Test
     void connectIslandGroupKO() {
         Player player = new Player(game, "Chiara", PlayerColor.BLACK);
@@ -336,6 +343,7 @@ class IslandGroupTest {
         assertEquals(4, islandGroup.getNumberOfIslands());
     }
 
+    /** Tests the calculation of the influence with no character involved */
     @Test
     void calculateInfluenceNoCharacter() {
         Player player = new Player(game, "Chiara", PlayerColor.BLACK);
@@ -368,6 +376,7 @@ class IslandGroupTest {
         assertEquals(7, islandGroup.calculateInfluence(game, player, character));
     }
 
+    /** Tests the calculation of the influence with character 6 involved */
     @Test
     void calculateInfluenceCharacter6() {
         Player player = new Player(game, "Chiara", PlayerColor.BLACK);
@@ -401,6 +410,7 @@ class IslandGroupTest {
         assertEquals(4, islandGroup.calculateInfluence(game, player, character));
     }
 
+    /** Tests the calculation of the influence with character 8 involved */
     @Test
     void calculateInfluenceCharacter8() {
         Player player = new Player(game, "Chiara", PlayerColor.BLACK);
@@ -434,6 +444,7 @@ class IslandGroupTest {
         assertEquals(9, islandGroup.calculateInfluence(game, player, character1));
     }
 
+    /** Tests the calculation of the influence with character 9 involved */
     @Test
     void calculateInfluenceCharacter9() {
         Player player = new Player(game, "Chiara", PlayerColor.BLACK);

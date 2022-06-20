@@ -32,11 +32,13 @@ class WizardTest {
         wizard = null;
     }
 
+    /** Tests the return of the player who chose the wizard */
     @Test
     void getPlayer() {
         assertEquals(player, wizard.getPlayer());
     }
 
+    /** Tests the constructor */
     @Test
     void wizard() {
         ConcreteCharacterFactory cf = new ConcreteCharacterFactory(game);
@@ -49,24 +51,28 @@ class WizardTest {
         assertEquals(5, wizard.getAssistants().get(8).getMaxSteps(character));
     }
 
+    /** Tests the play of an assistant with an available priority number */
     @Test
     void playAssistant_OK() {
         assertEquals(4, wizard.playAssistant(4).getPriority());
         assertEquals(10, wizard.getAssistants().size());
     }
 
+    /** Tests the play of an assistant with a not available priority number */
     @Test
     void playAssistant_KO() {
         wizard.removeAssistant(5);
         assertNull(wizard.playAssistant(5));
     }
 
+    /** Tests the removal of an assistant from the deck */
     @Test
     void removeAssistant() {
         assertTrue(wizard.removeAssistant(3));
         assertFalse(wizard.removeAssistant(3));
     }
 
+    /** Tests if no Assistants to be played remain */
     @Test
     void checkIfNoAssistant(){
         for(int i=1; i<11; i++){
