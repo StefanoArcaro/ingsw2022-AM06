@@ -18,6 +18,7 @@ class LobbyPhaseTest {
     private Phase phase;
     private String nickname;
 
+    /** Initialized values */
     @BeforeEach
     void setUp() {
         game = new Game();

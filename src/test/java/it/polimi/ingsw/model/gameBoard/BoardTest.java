@@ -188,7 +188,4 @@ class BoardTest {
         board.addTowers(3);
         assertTrue(board.removeTower());
     }
-
-
-
 }

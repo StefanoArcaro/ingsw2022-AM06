@@ -27,7 +27,6 @@ class BagTest {
         assertEquals(5,bag.size());
     }
 
-
     /** Tests the drawing of students from the bag */
     @Test
     void drawStudent() {

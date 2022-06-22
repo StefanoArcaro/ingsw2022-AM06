@@ -21,6 +21,7 @@ class EndgamePhaseTest {
     PhaseFactory phaseFactory;
     Phase phase;
 
+    /** Initializes values */
     @BeforeEach
     void setUp() {
         game = new Game();
@@ -28,7 +29,8 @@ class EndgamePhaseTest {
         game.setGameMode(GameMode.EXPERT);
     }
 
-
+    /** Tests the calculation of the winner when all the players have the same number of towers left,
+     * and the first one has more professors */
     @Test
     void play_equity() {
         Player player1 = new Player(game, "x", PlayerColor.BLACK);
@@ -57,6 +59,8 @@ class EndgamePhaseTest {
         assertEquals(player1, phase.getWinner());
     }
 
+    /** Tests the calculation of the winner when all the players have the same number of towers left,
+     * and the second one has more professors */
     @Test
     void play_equity_2() {
         Player player1 = new Player(game, "x", PlayerColor.BLACK);

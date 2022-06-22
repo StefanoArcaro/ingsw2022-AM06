@@ -96,6 +96,7 @@ class IslandGroupTest {
         assertFalse(islandGroup.addIsland(island1));
     }
 
+    /** Tests that islands on the border (12, 11) are correctly added to an island group (1, 2) */
     @Test
     void addIsland_Boundary() {
         Player player = new Player(game, "Chiara", PlayerColor.BLACK);
@@ -119,6 +120,7 @@ class IslandGroupTest {
         assertTrue(islandGroup.addIsland(islandToAdd2));
     }
 
+    /** Tests that islands on the border (11) are correctly added to an island group (1, 2, 12) */
     @Test
     void addIsland_Boundary2() {
         Player player = new Player(game, "Chiara", PlayerColor.BLACK);
@@ -148,6 +150,7 @@ class IslandGroupTest {
         assertEquals(4, islandGroup.getNumberOfIslands());
     }
 
+    /** Tests that islands on the border (3) are correctly added to an island group (1, 2, 12) */
     @Test
     void addIsland_Boundary3() {
         Player player = new Player(game, "Chiara", PlayerColor.BLACK);
@@ -196,7 +199,7 @@ class IslandGroupTest {
         assertTrue(islandGroup.removeBanCard());
     }
 
-    /** Tests the connection of island groups */
+    /** Tests the connection of island groups (1, 2) & (3, 4) */
     @Test
     void connectIslandGroupOK() {
         Player player = new Player(game, "Chiara", PlayerColor.BLACK);
@@ -228,7 +231,7 @@ class IslandGroupTest {
         assertEquals(4, islandGroup.getNumberOfIslands());
     }
 
-    /** Tests the connection of island groups, Version 2 */
+    /** Tests the connection of island groups (3, 4) & (1, 2) */
     @Test
     void connectIslandGroupOK2() {
         Player player = new Player(game, "Chiara", PlayerColor.BLACK);
@@ -260,7 +263,7 @@ class IslandGroupTest {
         assertEquals(4, islandGroup.getNumberOfIslands());
     }
 
-    /** Tests the failure of connecting island groups */
+    /** Tests the failure of connecting island groups (4) & (1, 2) */
     @Test
     void connectIslandGroupKO() {
         Player player = new Player(game, "Chiara", PlayerColor.BLACK);
@@ -286,7 +289,7 @@ class IslandGroupTest {
         assertEquals(1, islandGroup.getNumberOfIslands());
     }
 
-    /** Tests the failure of connecting island groups, Version 2 */
+    /** Tests the failure of connecting island groups (3) & (1, 2) with different conqueror */
     @Test
     void connectIslandGroupKO2() {
         Player player = new Player(game, "Chiara", PlayerColor.BLACK);
@@ -298,23 +301,24 @@ class IslandGroupTest {
         IslandGroup islandGroupToAdd = new IslandGroup();
         island1 = new Island(1);
         island2 = new Island(2);
-        island4 = new Island(4);
+        island3 = new Island(3);
 
         island1.addTower(game, PlayerColor.BLACK);
         island2.addTower(game, PlayerColor.BLACK);
-        island4.addTower(game, PlayerColor.GRAY);
+        island3.addTower(game, PlayerColor.GRAY);
 
         islandGroupToAdd.addIsland(island1);
         islandGroupToAdd.addIsland(island2);
 
-        islandGroup.addIsland(island4);
+        islandGroup.addIsland(island3);
 
         assertNull(islandGroup.connectIslandGroup(islandGroupToAdd));
 
-        assertEquals(4, islandGroup.getIslands().get(0).getIslandID());
+        assertEquals(3, islandGroup.getIslands().get(0).getIslandID());
         assertEquals(1, islandGroup.getNumberOfIslands());
     }
 
+    /** Tests if two island groups are properly joined (2, 3) & (1, 12) when the islands that compose them are on the border */
     @Test
     void connectIslandGroup_Boundary() {
         Player player = new Player(game, "Chiara", PlayerColor.BLACK);

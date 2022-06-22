@@ -25,7 +25,7 @@ class MoveMotherNaturePhaseTest {
     private ArrayList<Integer> wizardIDs;
     private ArrayList<Integer> priority;
 
-
+    /** Initializes values */
     @BeforeEach
     void setUp() {
         game = new Game();
@@ -116,6 +116,7 @@ class MoveMotherNaturePhaseTest {
         assertEquals(GameState.PICK_CLOUD_PHASE, game.getGameState());
     }
 
+    /** Tests the play method when, in move mother nature phase, the user tries to take more steps than allowed */
     @Test
     void play_exceededSteps() {
         game.setGameState(GameState.MOVE_MOTHER_NATURE_PHASE);
@@ -504,7 +505,5 @@ class MoveMotherNaturePhaseTest {
         }
 
         assertEquals(GameState.ENDED_STUDENTS, game.getGameState());
-
-
     }
 }

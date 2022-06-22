@@ -27,7 +27,7 @@ class PickCloudPhaseTest {
     private ArrayList<Integer> wizardIDs;
     private ArrayList<Integer> priority;
 
-
+    /** Initializes values */
     @BeforeEach
     void setUp() {
         game = new Game();
@@ -193,7 +193,7 @@ class PickCloudPhaseTest {
         assertEquals(GameState.ENDED_ASSISTANTS, game.getGameState());
     }
 
-
+    /** Tests the correct alternation of phases (after pick cloud phase, if the player is the last one, go to planning phase) */
     @Test
     void play_lastPlayer() {
         Player lastPlayer = game.getPlayingOrder().get(game.getNumberOfPlayers().getNum() - 1);
@@ -220,7 +220,8 @@ class PickCloudPhaseTest {
         assertEquals(GameState.PLANNING_PHASE, game.getGameState());
     }
 
-
+    /** Tests that it is not possible to play a character if you do not have enough coins
+     * or if the character chosen is not among those extracted */
     @Test
     void play_errorsMoneyAndIdCharacter() {
         game.setGameState(GameState.MOVE_MOTHER_NATURE_PHASE);

@@ -23,7 +23,7 @@ class MoveStudentPhaseTest {
     private ArrayList<Integer> priorities;
     int color;
 
-
+    /** Initializes values */
     @BeforeEach
     void setUp() {
         game = new Game();
