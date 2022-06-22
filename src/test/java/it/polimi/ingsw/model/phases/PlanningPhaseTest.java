@@ -23,7 +23,6 @@ class PlanningPhaseTest {
     private ArrayList<Integer> wizardIDs;
     private int priority;
 
-    /** Tests the setup of the phase */
     @BeforeEach
     void setUp() {
         game = new Game();

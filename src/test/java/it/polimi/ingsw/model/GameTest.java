@@ -22,7 +22,6 @@ class GameTest {
 
     Game game;
 
-    /** Tests the creation of the game */
     @BeforeEach
     void setUp() {
         game = new Game();

@@ -23,7 +23,7 @@ class MoveStudentPhaseTest {
     private ArrayList<Integer> priorities;
     int color;
 
-    /** Tests the setup of the phase */
+
     @BeforeEach
     void setUp() {
         game = new Game();

@@ -22,7 +22,6 @@ class PreparePhaseTest {
     private ArrayList<String> nicknames;
     private int wizardID;
 
-    /** Tests the setup of the phase */
     @BeforeEach
     void setUp() {
         game = new Game();

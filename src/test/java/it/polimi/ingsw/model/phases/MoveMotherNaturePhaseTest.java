@@ -25,7 +25,7 @@ class MoveMotherNaturePhaseTest {
     private ArrayList<Integer> wizardIDs;
     private ArrayList<Integer> priority;
 
-    /** Tests the setup of the phase */
+
     @BeforeEach
     void setUp() {
         game = new Game();
