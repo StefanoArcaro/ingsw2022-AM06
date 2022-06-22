@@ -95,7 +95,7 @@
    <ImageView id="link10" fitHeight="34.0" fitWidth="89.0" layoutX="81.0" layoutY="217.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="29.7">
       <Image url="@../images/wooden_bridge.png" />
    </ImageView>
-   <ImageView id="link11" fitHeight="34.0" fitWidth="89.0" layoutX="20.0" layoutY="137.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+   <ImageView id="link11" fitHeight="34.0" fitWidth="89.0" layoutX="20.0" layoutY="135.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
       <Image url="@../images/wooden_bridge.png" />
    </ImageView>
    <ImageView id="link12" fitHeight="34.0" fitWidth="89.0" layoutX="79.0" layoutY="49.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="154.4">
@@ -397,7 +397,7 @@
          <Font name="Rockwell" size="18.0" />
       </font>
    </Label>
-   <Label layoutX="559.0" layoutY="224.0" prefHeight="18.0" prefWidth="19.0" text="7">
+   <Label layoutX="565.0" layoutY="224.0" prefHeight="18.0" prefWidth="19.0" text="7">
       <font>
          <Font name="Rockwell" size="18.0" />
       </font>
@@ -407,7 +407,7 @@
          <Font name="Rockwell" size="18.0" />
       </font>
    </Label>
-   <Label layoutX="311.0" layoutY="224.0" prefHeight="18.0" prefWidth="19.0" text="9">
+   <Label layoutX="320.0" layoutY="224.0" prefHeight="18.0" prefWidth="19.0" text="9">
       <font>
          <Font name="Rockwell" size="18.0" />
       </font>

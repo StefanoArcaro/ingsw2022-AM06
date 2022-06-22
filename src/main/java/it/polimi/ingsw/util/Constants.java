@@ -207,28 +207,30 @@ public class Constants {
             """;
 
     private static final String CHARACTER_THREE_DESCRIPTION = """
-            Choose an Island and resolve the Island as if
-            Mother Nature had ended her movement there. Mother
-            Nature will still move and the Island where she ends
-            her movement will also be resolved.
+            Choose an Island Group to calculate the players' influence
+            on as if Mother Nature had ended her movement there.
+            Mother Nature will still move normally during this turn and
+            the players' influence will be calculated on the Island
+            where she ends her movement as well.
             """;
 
     private static final String CHARACTER_FOUR_DESCRIPTION = """
-            You may move Mother Nature up to 2
-            additional Islands than is indicated by the Assistant
-            card you've played.
+            Mother Nature will be able to take up to 2
+            additional steps than the number indicated by
+            the Assistant card you've played.
             """;
 
     private static final String CHARACTER_FIVE_DESCRIPTION = """
-            In Setup, put the 4 Ban Cards on this card.
+            This card initially has 4 Ban Cards.
             Place a Ban Card on an Island Group of your choice.
             The first time Mother Nature ends her movement
-            there, the Ban Card is removed and the influence is not calculated in that Island Group.
+            there, the Ban Card is sent back to this card and the
+            players' influence on that Island Group is not calculated.
             """;
 
     private static final String CHARACTER_SIX_DESCRIPTION = """
-            When resolving a Conquering on an Island,
-            Towers do not count towards influence.
+            During this turn, when calculating the players' influence
+            on an Island Group, Towers will not be considered.
             """;
 
     private static final String CHARACTER_SEVEN_DESCRIPTION = """
@@ -238,32 +240,30 @@ public class Constants {
             """;
 
     private static final String CHARACTER_EIGHT_DESCRIPTION = """
-            During the influence calculation this turn, you
-            count as having 2 more influence.
+            During this turn, when calculating the players' influence
+            on an Island Group, you get 2 additional points.
             """;
 
     private static final String CHARACTER_NINE_DESCRIPTION = """
-            Choose a color of Student: during the influence
-            calculation this turn, that color adds no influence.
+            Choose a color: when calculating the players' influence
+            on an Island Group, this color will not be considered.
             """;
 
     private static final String CHARACTER_TEN_DESCRIPTION = """
-            You may exchange up to 2 Students between
-            your Entrance and your Hall.
+            You may exchange up to 2 Students
+            between your Hall and your Entrance.
             """;
 
     private static final String CHARACTER_ELEVEN_DESCRIPTION = """
-            Take 1 Student from this card and place it in
-            your Dining Room. Then, draw a new Student from the
-            Bag and place it on this card.
+            Take 1 Student from this card
+            and place it in your Hall.
             """;
 
     private static final String CHARACTER_TWELVE_DESCRIPTION = """
-            Choose a type of Student: every player
-            (including yourself) must return 3 Students of that type
-            from their Dining Room to the bag. If any player has
-            fewer than 3 Students of that type, return as many
-            Students as they have.
+            Choose a color: every player (including yourself)
+            must remove 3 Students of this color from their Hall.
+            If a player has fewer than 3 Students of that color in
+            their Hall, they have to remove the ones they have.
             """;
 
     public static String getCharacterInformation(int characterID) {
@@ -317,7 +317,7 @@ public class Constants {
         System.out.println("\n");
     }
 
-    //GUI
+    // GUI
     public static final String MENU = "MainMenu.fxml";
     public static final String SETUP = "setup.fxml";
     public static final String LOGIN = "login.fxml";
@@ -347,6 +347,4 @@ public class Constants {
                     CHARACTER_DETAILS,
                     ENDGAME
             ));
-
-
 }
