@@ -228,6 +228,7 @@ class IslandGroupTest {
         assertEquals(4, islandGroup.getNumberOfIslands());
     }
 
+    /** Tests the connection of island groups, Version 2 */
     @Test
     void connectIslandGroupOK2() {
         Player player = new Player(game, "Chiara", PlayerColor.BLACK);
@@ -285,6 +286,7 @@ class IslandGroupTest {
         assertEquals(1, islandGroup.getNumberOfIslands());
     }
 
+    /** Tests the failure of connecting island groups, Version 2 */
     @Test
     void connectIslandGroupKO2() {
         Player player = new Player(game, "Chiara", PlayerColor.BLACK);

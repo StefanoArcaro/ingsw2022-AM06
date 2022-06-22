@@ -10,7 +10,6 @@ class BagTest {
 
     Bag bag;
 
-    /** Initializes values */
     @BeforeEach
     void setUp() {
         bag = new Bag();

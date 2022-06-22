@@ -31,6 +31,7 @@ class CloudTest {
         bag = null;
     }
 
+    /** Tests the constructor */
     @Test
     void constructorTest() {
         assertEquals(1, cloud.getCloudID());
