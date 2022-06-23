@@ -18,4 +18,7 @@ public class Answer {
         return messageType;
     }
 
+    public String getMessage() {
+        return "Server to client";
+    }
 }
