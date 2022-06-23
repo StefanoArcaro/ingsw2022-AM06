@@ -42,7 +42,7 @@ All tests in model and controller has a classes' coverage at 100%.
 | Controller | InputController     |  67/67 (100%)   |
 
 ## Launch
-This project's jar file can be found [here](https://github.com/StefanoArc/ingsw2022-AM06).
+This project's jar file can be found [here](https://github.com/StefanoArc/ingsw2022-AM06/tree/master/deliveries/jar).
 
 Once the jar has been downloaded, in order to launch the application
 you need to navigate to where the file was saved and run the following command:
