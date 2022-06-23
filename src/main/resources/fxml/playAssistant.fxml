@@ -7,7 +7,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
       prefWidth="680.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="it.polimi.ingsw.view.GUI.controllers.PlayAssistantController">
+      fx:controller="it.polimi.ingsw.view.gui.controllers.PlayAssistantController">
    <ImageView fitHeight="682.0" fitWidth="776.0" layoutX="-18.0" layoutY="-81.0" opacity="0.44" pickOnBounds="true"
               preserveRatio="true">
       <Image url="@../images/island.png"/>

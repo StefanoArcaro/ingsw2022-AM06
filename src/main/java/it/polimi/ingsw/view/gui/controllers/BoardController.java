@@ -1,10 +1,10 @@
-package it.polimi.ingsw.view.GUI.controllers;
+package it.polimi.ingsw.view.gui.controllers;
 
 import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.enumerations.PlayerColor;
 import it.polimi.ingsw.model.gameBoard.*;
 import it.polimi.ingsw.network.message.serverToclient.BoardMessage;
-import it.polimi.ingsw.view.GUI.GUI;
+import it.polimi.ingsw.view.gui.GUI;
 import it.polimi.ingsw.view.ModelView;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;

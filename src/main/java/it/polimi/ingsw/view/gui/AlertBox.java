@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view.GUI;
+package it.polimi.ingsw.view.gui;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

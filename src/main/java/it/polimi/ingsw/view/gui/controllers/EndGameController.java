@@ -1,6 +1,6 @@
-package it.polimi.ingsw.view.GUI.controllers;
+package it.polimi.ingsw.view.gui.controllers;
 
-import it.polimi.ingsw.view.GUI.GUI;
+import it.polimi.ingsw.view.gui.GUI;
 import it.polimi.ingsw.view.ModelView;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;

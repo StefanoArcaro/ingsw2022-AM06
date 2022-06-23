@@ -8,7 +8,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0"
       prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="it.polimi.ingsw.view.GUI.controllers.EndGameController">
+      fx:controller="it.polimi.ingsw.view.gui.controllers.EndGameController">
    <ImageView fitHeight="606.0" fitWidth="736.0" layoutX="-5.0" layoutY="-78.0" pickOnBounds="true"
               preserveRatio="true">
       <Image url="@../images/podium.png"/>

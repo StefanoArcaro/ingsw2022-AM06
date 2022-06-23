@@ -5,7 +5,7 @@ import it.polimi.ingsw.view.VirtualView;
 
 import java.beans.PropertyChangeListener;
 
-//interface used to communicate to View from Model.
+/** Interface used to communicate to View from Model. */
 
 public abstract class Listener implements PropertyChangeListener {
 
@@ -22,14 +22,14 @@ public abstract class Listener implements PropertyChangeListener {
     /**
      * @return the nickname of the current player.
      */
-    public String getCurrentPlayer() {
+    protected String getCurrentPlayer() {
         return virtualView.getGameManager().getGame().getCurrentPlayer().getNickname();
     }
 
     /**
      * @return the name of the phase.
      */
-    public String getCurrentPhaseAction(GameState gameState) {
+    protected String getCurrentPhaseAction(GameState gameState) {
         return switch(gameState) {
             case LOBBY_PHASE -> "Lobby phase";
             case PREPARE_PHASE -> "Prepare phase";

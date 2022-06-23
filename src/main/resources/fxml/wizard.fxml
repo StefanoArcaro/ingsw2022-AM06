@@ -11,7 +11,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
             prefWidth="700.0" style="-fx-background-color: #EAE4D4#EAE4D4 #EAE4D4#EAE4D4;"
             xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="it.polimi.ingsw.view.GUI.controllers.WizardController">
+            fx:controller="it.polimi.ingsw.view.gui.controllers.WizardController">
    <Label layoutX="157.0" layoutY="73.0" prefHeight="71.0" prefWidth="426.0" text="CHOOSE YOUR WIZARD:">
       <font>
          <Font name="DIN Condensed Bold" size="55.0"/>

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view.GUI.controllers;
+package it.polimi.ingsw.view.gui.controllers;
 
 import it.polimi.ingsw.model.enumerations.CharacterID;
 import it.polimi.ingsw.model.enumerations.CreatureColor;
@@ -6,8 +6,8 @@ import it.polimi.ingsw.model.gameBoard.IslandGroup;
 import it.polimi.ingsw.model.gameBoard.Student;
 import it.polimi.ingsw.util.Constants;
 import it.polimi.ingsw.view.CharacterView;
-import it.polimi.ingsw.view.GUI.AlertBox;
-import it.polimi.ingsw.view.GUI.GUI;
+import it.polimi.ingsw.view.gui.AlertBox;
+import it.polimi.ingsw.view.gui.GUI;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
@@ -250,7 +250,6 @@ public class CharacterDetailsController implements GUIController {
             return " " + firstColor.getColorName() + " " + secondColor.getColorName();
         }
     }
-
 
     @Override
     public void quit() {

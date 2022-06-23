@@ -15,10 +15,6 @@ public enum PlayerColor {
         this.index = index;
     }
 
-    public int getIndex() {
-        return index;
-    }
-
     /**
      * @return the string of the color.
      */

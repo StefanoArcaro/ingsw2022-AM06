@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view.GUI;
+package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.model.enumerations.CreatureColor;
 import it.polimi.ingsw.model.enumerations.PlayerColor;
@@ -6,7 +6,7 @@ import it.polimi.ingsw.network.client.MessageParser;
 import it.polimi.ingsw.network.client.SocketClient;
 import it.polimi.ingsw.network.message.serverToclient.*;
 import it.polimi.ingsw.util.Constants;
-import it.polimi.ingsw.view.GUI.controllers.*;
+import it.polimi.ingsw.view.gui.controllers.*;
 import it.polimi.ingsw.view.ModelView;
 import it.polimi.ingsw.view.View;
 import javafx.application.Application;

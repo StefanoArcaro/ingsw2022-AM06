@@ -7,10 +7,10 @@ import java.util.ArrayList;
 public class CharacterView {
 
     private final int characterID;
-    private int cost;
-    private boolean used;
-    private ArrayList<Student> students;
-    private int banCards;
+    private final int cost;
+    private final boolean used;
+    private final ArrayList<Student> students;
+    private final int banCards;
 
     /**
      * Default constructor.
@@ -43,26 +43,10 @@ public class CharacterView {
     }
 
     /**
-     * Sets the cost of this character to the specified one.
-     * @param cost to set.
-     */
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
-
-    /**
      * @return whether this character has been used at least once.
      */
     public boolean isUsed() {
         return used;
-    }
-
-    /**
-     * Sets the 'used' attribute of this character.
-     * @param used to set.
-     */
-    public void setUsed(boolean used) {
-        this.used = used;
     }
 
     /**
@@ -73,25 +57,10 @@ public class CharacterView {
     }
 
     /**
-     * Sets this character's list of students to the specified one.
-     * @param students to set.
-     */
-    public void setStudents(ArrayList<Student> students) {
-        this.students = students;
-    }
-
-    /**
      * @return the number of ban cards on this character.
      */
     public int getBanCards() {
         return banCards;
     }
 
-    /**
-     * Sets the number of ban cards on this character to the specified one.
-     * @param banCards to set.
-     */
-    public void setBanCards(int banCards) {
-        this.banCards = banCards;
-    }
 }

@@ -12,7 +12,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0"
       prefWidth="760.0" style="-fx-background-color: #EAE4D4#EAE4D4 #EAE4D4#EAE4D4;" xmlns="http://javafx.com/javafx/18"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.Opponent2BoardController">
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.Opponent2BoardController">
     <ImageView fitHeight="319.0" fitWidth="760.0" layoutX="13.0" layoutY="41.0" pickOnBounds="true"
                preserveRatio="true">
         <Image url="@../images/Plancia_DEF2.png"/>

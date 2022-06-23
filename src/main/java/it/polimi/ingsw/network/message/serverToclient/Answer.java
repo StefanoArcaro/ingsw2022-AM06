@@ -18,8 +18,4 @@ public class Answer {
         return messageType;
     }
 
-    public String getMessage() {
-        return "Answer from server";
-    }
-
 }

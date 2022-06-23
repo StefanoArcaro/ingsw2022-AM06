@@ -1,9 +1,9 @@
-package it.polimi.ingsw.view.GUI.controllers;
+package it.polimi.ingsw.view.gui.controllers;
 
 import it.polimi.ingsw.model.enumerations.WizardName;
 import it.polimi.ingsw.util.Constants;
-import it.polimi.ingsw.view.GUI.ConfirmationBox;
-import it.polimi.ingsw.view.GUI.GUI;
+import it.polimi.ingsw.view.gui.ConfirmationBox;
+import it.polimi.ingsw.view.gui.GUI;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
@@ -39,7 +39,7 @@ public class WizardController implements GUIController {
     }
 
     /**
-     * Creates the WizardRequestMessage to send to the server..
+     * Creates the WizardRequestMessage to send to the server.
      * @param event event fired by the wizard button.
      */
     public void chooseWizard(ActionEvent event) {

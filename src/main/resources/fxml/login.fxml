@@ -9,7 +9,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
       prefWidth="700.0" style="-fx-background-color: #EAE4D4#EAE4D4;" xmlns="http://javafx.com/javafx/18"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controllers.LoginController">
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.LoginController">
    <Label layoutX="235.0" layoutY="36.0" prefHeight="76.0" prefWidth="414.0" text="LOGIN">
       <font>
          <Font name="Chalkduster" size="55.0"/>

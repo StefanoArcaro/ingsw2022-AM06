@@ -1,8 +1,8 @@
-package it.polimi.ingsw.view.GUI.controllers;
+package it.polimi.ingsw.view.gui.controllers;
 
-import it.polimi.ingsw.view.GUI.AlertBox;
-import it.polimi.ingsw.view.GUI.ConfirmationBox;
-import it.polimi.ingsw.view.GUI.GUI;
+import it.polimi.ingsw.view.gui.AlertBox;
+import it.polimi.ingsw.view.gui.ConfirmationBox;
+import it.polimi.ingsw.view.gui.GUI;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

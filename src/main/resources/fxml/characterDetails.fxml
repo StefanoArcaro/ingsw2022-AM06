@@ -11,7 +11,7 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
       prefWidth="600.0" style="-fx-background-color: #EAE4D4#EAE4D4;" xmlns="http://javafx.com/javafx/18"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="it.polimi.ingsw.view.GUI.controllers.CharacterDetailsController">
+      fx:controller="it.polimi.ingsw.view.gui.controllers.CharacterDetailsController">
     <ImageView fx:id="ch_image" fitHeight="311.0" fitWidth="249.0" layoutX="19.0" layoutY="19.0" pickOnBounds="true"
                preserveRatio="true">
         <Image url="@../images/character_1.png"/>

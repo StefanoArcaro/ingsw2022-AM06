@@ -1,9 +1,9 @@
-package it.polimi.ingsw.view.GUI.controllers;
+package it.polimi.ingsw.view.gui.controllers;
 
 import it.polimi.ingsw.model.gameBoard.Entrance;
 import it.polimi.ingsw.network.message.serverToclient.BoardMessage;
 import it.polimi.ingsw.util.Constants;
-import it.polimi.ingsw.view.GUI.GUI;
+import it.polimi.ingsw.view.gui.GUI;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

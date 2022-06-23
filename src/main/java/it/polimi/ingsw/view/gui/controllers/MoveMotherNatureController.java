@@ -1,6 +1,6 @@
-package it.polimi.ingsw.view.GUI.controllers;
+package it.polimi.ingsw.view.gui.controllers;
 
-import it.polimi.ingsw.view.GUI.GUI;
+import it.polimi.ingsw.view.gui.GUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
