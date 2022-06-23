@@ -199,8 +199,7 @@ public class SocketClient extends Client {
                     view.errorMessageHandler(msg);
                 }
                 case DISCONNECTION_REPLY_MESSAGE -> {
-                    System.out.print("\nClosing the application");
-                    Constants.countdown(400);
+                    System.out.print("\nClosing the application...");
                     disconnect();
                 }
                 case SERVER_QUIT_MESSAGE -> {
@@ -214,8 +213,7 @@ public class SocketClient extends Client {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.print("There's been a connection error, application will now close");
-            Constants.countdown(400);
+            System.out.print("There's been a connection error, application will now close...");
             disconnect();
         }
     }
