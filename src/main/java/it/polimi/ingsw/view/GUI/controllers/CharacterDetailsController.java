@@ -61,18 +61,21 @@ public class CharacterDetailsController implements GUIController {
 
         // set students
         String studentID = "#ch_student_";
+        String style;
         int studentSize = students.size();
 
         for(int i = 0; i < studentSize; i++) {
             Button studentButton = (Button) scene.lookup(studentID + (i + 1));
             CreatureColor color = students.get(i).getColor();
-            String style = "-fx-background-color: " + gui.getHexByFXColor(gui.getFXColorByCreatureColor(color));
+            style = "-fx-background-color: " + gui.getHexByFXColor(gui.getFXColorByCreatureColor(color));
             studentButton.setStyle(style);
             studentButton.setDisable(false);
         }
 
         for(int i = studentSize; i < 6; i++) {
             Button studentButton = (Button) scene.lookup(studentID + (i + 1));
+            style = "-fx-background-color: white;-fx-background-radius: 50";
+            studentButton.setStyle(style);
             studentButton.setDisable(true);
         }
 
