@@ -2,7 +2,7 @@ package it.polimi.ingsw.view.gui;
 
 public class GUIMain {
 
-    public void callGUI() {
+    public static void callGUI() {
         GUI.main(null);
     }
 

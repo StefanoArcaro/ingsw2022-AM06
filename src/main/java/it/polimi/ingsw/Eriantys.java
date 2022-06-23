@@ -57,7 +57,7 @@ public class Eriantys {
                 Constants.countdown(400);
                 System.out.println(Constants.SEPARATOR);
                 System.out.println("GUI main running!");
-                new GUIMain().callGUI();
+                GUIMain.callGUI();
             }
             default -> System.err.println("Invalid argument, please run the executable again and select one of the available options.");
         }
