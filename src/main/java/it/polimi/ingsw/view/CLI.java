@@ -909,6 +909,24 @@ public class CLI implements View {
     }
 
     /**
+     * Handles the DisconnectionReplyMessage sent by the server.
+     */
+    @Override
+    public void disconnectionHandler() {
+        System.out.println("\nClosing the application...");
+        socketClient.disconnect();
+    }
+
+    /**
+     * Handles the ServerQuitMessage sent by the server.
+     */
+    @Override
+    public void serverQuitHandler() {
+        System.out.println("\nThe server was quit. Closing the application...");
+        socketClient.disconnect();
+    }
+
+    /**
      * Asks for the IP address and port of the server in order to
      * establish a connection with it.
      * @return the Socket instantiated for the connection with the server.

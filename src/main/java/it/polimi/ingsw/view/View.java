@@ -177,4 +177,14 @@ public interface View {
      */
     void errorMessageHandler(ErrorMessage msg);
 
+    /**
+     * Handles the DisconnectionReplyMessage sent by the server.
+     */
+    void disconnectionHandler();
+
+    /**
+     * Handles the ServerQuitMessage sent by the server.
+     */
+    void serverQuitHandler();
+
 }

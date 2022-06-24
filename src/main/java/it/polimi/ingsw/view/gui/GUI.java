@@ -205,12 +205,12 @@ public class GUI extends Application implements View {
     public void changeStage(Stage stage, String scene) {
         Platform.runLater(() -> {
             currentScene = nameToScene.get(scene);
-            stage.setScene(currentScene);
-            stage.show();
             GUIController controller = nameToController.get(scene);
             if(controller != null) {
                 nameToController.get(scene).init();
             }
+            stage.setScene(currentScene);
+            stage.show();
         });
     }
 
@@ -224,8 +224,8 @@ public class GUI extends Application implements View {
 
             GUIController controller = getNameToController().get(sceneName);
             controller.init();
-            Scene scene = getSceneByController(controller);
 
+            Scene scene = getSceneByController(controller);
             secondaryStage.setScene(scene);
             secondaryStage.show();
         } catch (Exception e) {
@@ -682,7 +682,13 @@ public class GUI extends Application implements View {
                 Platform.runLater(() -> AlertBox.display("Message", msg));
             }
             case "MAXSTEPS" -> modelView.setMaxSteps(Integer.parseInt(option));
-            case "DISCONNECT" -> Platform.runLater(() -> AlertBox.display("Message", option + " has disconnected, the game will end soon."));
+            case "DISCONNECT" -> {
+                // Popup message
+                Platform.runLater(() -> AlertBox.display("Message", option + " has disconnected, the game will end soon."));
+
+                // Log message in the console as well
+                System.out.println(option + " has disconnected, the game has ended.");
+            }
             case "JOIN" -> Platform.runLater(() -> AlertBox.display("Message", option + " has joined the game."));
         }
     }
@@ -694,6 +700,36 @@ public class GUI extends Application implements View {
     @Override
     public void errorMessageHandler(ErrorMessage msg) {
         Platform.runLater(() -> AlertBox.display("Error", msg.getError()));
+    }
+
+    /**
+     * Handles the DisconnectionReplyMessage sent by the server.
+     */
+    @Override
+    public void disconnectionHandler() {
+        System.out.println("\nClosing the application...");
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ignored) {}
+
+        socketClient.disconnect();
+    }
+
+    /**
+     * Handles the ServerQuitMessage sent by the server.
+     */
+    @Override
+    public void serverQuitHandler() {
+        // Popup message
+        Platform.runLater(() -> AlertBox.display("Server quit", "The server was quit, the game will end soon."));
+
+        // Log message in the console as well
+        System.out.println("\nThe server was quit. Closing the application...");
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ignored) {}
+
+        socketClient.disconnect();
     }
 
 

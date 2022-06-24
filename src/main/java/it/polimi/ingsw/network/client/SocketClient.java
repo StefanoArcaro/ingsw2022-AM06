@@ -198,18 +198,11 @@ public class SocketClient extends Client {
                     ErrorMessage msg = gson.fromJson(message, ErrorMessage.class);
                     view.errorMessageHandler(msg);
                 }
-                case DISCONNECTION_REPLY_MESSAGE -> {
-                    System.out.print("\nClosing the application...");
-                    disconnect();
-                }
-                case SERVER_QUIT_MESSAGE -> {
-                    System.err.println("\nThe server was quit. Closing the application...");
-                    disconnect();
-                }
-                case PONG_MESSAGE -> {
-                }
+                case DISCONNECTION_REPLY_MESSAGE -> view.disconnectionHandler();
+                case SERVER_QUIT_MESSAGE -> view.serverQuitHandler();
+                case PONG_MESSAGE -> {}
 
-                default -> System.out.println(answer.getMessageType()); //should never reach this condition
+                default -> System.out.println(answer.getMessageType()); // Should never reach this condition
             }
         } catch (Exception e) {
             e.printStackTrace();
