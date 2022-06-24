@@ -25,13 +25,13 @@
    <ImageView id="ch_3" fitHeight="225.0" fitWidth="150.0" layoutX="410.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../images/character_3.png" />
    </ImageView>
-   <ImageView id="cost_1" fitHeight="88.0" fitWidth="88.0" layoutX="70.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView id="cost_1" fitHeight="88.0" fitWidth="88.0" layoutX="70.0" layoutY="230.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../images/coin.png" />
    </ImageView>
-   <ImageView id="cost_2" fitHeight="88.0" fitWidth="88.0" layoutX="256.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView id="cost_2" fitHeight="88.0" fitWidth="88.0" layoutX="256.0" layoutY="230.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../images/coin.png" />
    </ImageView>
-   <ImageView id="cost_3" fitHeight="88.0" fitWidth="88.0" layoutX="440.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView id="cost_3" fitHeight="88.0" fitWidth="88.0" layoutX="440.0" layoutY="230.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../images/coin.png" />
    </ImageView>
 
