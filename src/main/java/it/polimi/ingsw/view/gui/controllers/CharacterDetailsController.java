@@ -49,17 +49,17 @@ public class CharacterDetailsController implements GUIController {
         ArrayList<Student> students = characterView.getStudents();
         int banCards = characterView.getBanCards();
 
-        // set ch_image
+        // Set ch_image
         String characterPath = gui.getCharacterPathByCharacterID(id);
         URL url = getClass().getResource(characterPath);
         if(url != null) {
             ch_image.setImage(new Image(url.toString()));
         }
 
-        // set description
+        // Set description
         ch_description.setText(info);
 
-        // set students
+        // Set students
         String studentID = "#ch_student_";
         String style;
         int studentSize = students.size();
@@ -67,7 +67,8 @@ public class CharacterDetailsController implements GUIController {
         for(int i = 0; i < studentSize; i++) {
             Button studentButton = (Button) scene.lookup(studentID + (i + 1));
             CreatureColor color = students.get(i).getColor();
-            style = "-fx-background-color: " + gui.getHexByFXColor(gui.getFXColorByCreatureColor(color));
+            style = "-fx-background-color: " + gui.getHexByFXColor(gui.getFXColorByCreatureColor(color)) +
+                    ";-fx-background-radius: 50";
             studentButton.setStyle(style);
             studentButton.setDisable(false);
         }
@@ -79,7 +80,7 @@ public class CharacterDetailsController implements GUIController {
             studentButton.setDisable(true);
         }
 
-        // set ban cards
+        // Set ban cards
         String banCardID = "#ch_banCard_";
         ColorAdjust colorAdjust = new ColorAdjust();
 
@@ -95,14 +96,13 @@ public class CharacterDetailsController implements GUIController {
             banCardImage.setEffect(colorAdjust);
         }
 
-        // set colors
+        // Set colors
         String colorID = "#ch_color_";
 
         for(int i = 1; i <= 5; i++) {
             Button colorButton = (Button) scene.lookup(colorID + i);
             colorButton.setDisable(id != 9 && id != 12);
         }
-
     }
 
     /**

@@ -34,7 +34,8 @@ public abstract class BoardController {
             String entranceID = "#entrance_" + (i + 1);
             Button entranceButton = (Button) scene.lookup(entranceID);
             CreatureColor color = entrance.getStudents().get(i).getColor();
-            String style = "-fx-background-color: " + gui.getHexByFXColor(gui.getFXColorByCreatureColor(color));
+            String style = "-fx-background-color: " + gui.getHexByFXColor(gui.getFXColorByCreatureColor(color)) +
+                           ";-fx-background-radius: 50";
             entranceButton.setStyle(style);
         }
 
@@ -140,7 +141,8 @@ public abstract class BoardController {
             String entranceID = "#entrance_" + (i + 1);
             Button entranceButton = (Button) scene.lookup(entranceID);
             CreatureColor color = entrance.getStudents().get(i).getColor();
-            String style = "-fx-background-color: " + gui.getHexByFXColor(gui.getFXColorByCreatureColor(color));
+            String style = "-fx-background-color: " + gui.getHexByFXColor(gui.getFXColorByCreatureColor(color)) +
+                           ";-fx-background-radius: 50";
             entranceButton.setStyle(style);
             entranceButton.setOpacity(1);
             entranceButton.setDisable(false);
